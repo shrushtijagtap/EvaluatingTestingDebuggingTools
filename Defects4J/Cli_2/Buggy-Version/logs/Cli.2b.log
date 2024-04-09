@@ -1,17 +1,17 @@
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 11:38:09  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 09:12:04  ######
 Mode: regression
 Parameters:
- -g randoop
+ -g evosuite
  -p Cli
  -v 2b
  -n 1
  -b 240
  -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Cli/modified_classes/2.src
  -s 1002
-Created test suite archive: Cli-2b-randoop.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/Cli_2/Buggy-Version/Cli/randoop/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 11:42:20  ######
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:43:27  ######
+Created test suite archive: Cli-2b-evosuite.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/sejal/Cli_2/Buggy-Version/Cli/evosuite/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 09:14:13  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 09:14:17  ######
 Mode: error-revealing
 Parameters:
  -g randoop
@@ -22,5 +22,5 @@ Parameters:
  -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Cli/modified_classes/2.src
  -s 1002
 Created test suite archive: Cli-2b-randoop.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/Cli_2/Buggy-Version/Cli/randoop/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:47:32  ######
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/sejal/Cli_2/Buggy-Version/Cli/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 09:18:22  ######

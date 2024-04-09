@@ -1,4 +1,4 @@
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 19:11:45  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 06:40:34  ######
 Mode: regression
 Parameters:
  -g evosuite
@@ -9,22 +9,9 @@ Parameters:
  -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonDatabind/modified_classes/2.src
  -s 1002
 Created test suite archive: JacksonDatabind-2b-evosuite.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J-Pending/JacksonDatabind_2/Buggy-Version/JacksonDatabind/evosuite/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 19:16:52  ######
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 19:04:56  ######
-Mode: regression
-Parameters:
- -g randoop
- -p JacksonDatabind
- -v 2b
- -n 1
- -b 240
- -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonDatabind/modified_classes/2.src
- -s 1002
-Created test suite archive: JacksonDatabind-2b-randoop.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/JacksonDatabind_2/Buggy-Version/JacksonDatabind/randoop/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 19:09:10  ######
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 10:54:41  ######
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/Defects4J/JacksonDatabind_2/Buggy-Version/JacksonDatabind/evosuite/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 06:45:44  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 06:45:53  ######
 Mode: error-revealing
 Parameters:
  -g randoop
@@ -35,17 +22,4 @@ Parameters:
  -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonDatabind/modified_classes/2.src
  -s 1002
 Test generator (randoop) did not generate any tests!
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 10:58:50  ######
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 10:58:58  ######
-Mode: regression
-Parameters:
- -g randoop
- -p JacksonDatabind
- -v 2b
- -n 1
- -b 240
- -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonDatabind/modified_classes/2.src
- -s 1002
-Created test suite archive: JacksonDatabind-2b-randoop.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/JacksonDatabind_2/Buggy-Version/JacksonDatabind/randoop/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 11:03:09  ######
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 06:50:03  ######

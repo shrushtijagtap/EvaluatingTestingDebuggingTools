@@ -1,2 +1,2 @@
 TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
-org.jfree.data.general.DatasetUtilities,LINE;BRANCH;EXCEPTION;WEAKMUTATION;OUTPUT;METHOD;METHODNOEXCEPTION;CBRANCH,0.812897716202663,3377,2663
+org.jfree.data.general.DatasetUtilities,BRANCH,0.925,560,518

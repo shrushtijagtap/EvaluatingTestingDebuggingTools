@@ -13,1638 +13,6 @@ public class RegressionTest4 {
     public void test2001() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest4.test2001");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float10 = categoryAxis9.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color15 = java.awt.Color.BLUE;
-        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
-        boolean boolean25 = categoryPlot21.isRangeCrosshairVisible();
-        org.jfree.chart.util.RectangleEdge rectangleEdge26 = categoryPlot21.getDomainAxisEdge();
-        org.jfree.chart.axis.CategoryAxis categoryAxis28 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float29 = categoryAxis28.getTickMarkInsideLength();
-        categoryAxis28.setMaximumCategoryLabelLines((int) (byte) 1);
-        boolean boolean32 = categoryAxis28.isVisible();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer36 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator37 = null;
-        lineAndShapeRenderer36.setBaseURLGenerator(categoryURLGenerator37);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator40 = null;
-        lineAndShapeRenderer36.setSeriesToolTipGenerator(10, categoryToolTipGenerator40);
-        boolean boolean42 = lineAndShapeRenderer36.getBaseSeriesVisibleInLegend();
-        java.awt.Stroke stroke44 = null;
-        lineAndShapeRenderer36.setSeriesStroke((int) 'a', stroke44, true);
-        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor48 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
-        java.awt.Color color49 = java.awt.Color.yellow;
-        boolean boolean50 = itemLabelAnchor48.equals((java.lang.Object) color49);
-        lineAndShapeRenderer36.setSeriesFillPaint((int) ' ', (java.awt.Paint) color49);
-        categoryAxis28.setTickLabelPaint((java.lang.Comparable) false, (java.awt.Paint) color49);
-        categoryPlot21.setDomainAxis(categoryAxis28);
-        org.jfree.chart.plot.PlotOrientation plotOrientation54 = categoryPlot21.getOrientation();
-        org.jfree.chart.plot.DatasetRenderingOrder datasetRenderingOrder55 = org.jfree.chart.plot.DatasetRenderingOrder.FORWARD;
-        categoryPlot21.setDatasetRenderingOrder(datasetRenderingOrder55);
-        java.lang.String str57 = datasetRenderingOrder55.toString();
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNull(stroke6);
-        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
-        org.junit.Assert.assertNotNull(color15);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
-        org.junit.Assert.assertNotNull(categoryItemRenderer22);
-        org.junit.Assert.assertNull(valueAxis24);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertNotNull(rectangleEdge26);
-        org.junit.Assert.assertTrue("'" + float29 + "' != '" + 0.0f + "'", float29 == 0.0f);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + true + "'", boolean32 == true);
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + true + "'", boolean42 == true);
-        org.junit.Assert.assertNotNull(itemLabelAnchor48);
-        org.junit.Assert.assertNotNull(color49);
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
-        org.junit.Assert.assertNotNull(plotOrientation54);
-        org.junit.Assert.assertNotNull(datasetRenderingOrder55);
-        org.junit.Assert.assertEquals("'" + str57 + "' != '" + "DatasetRenderingOrder.FORWARD" + "'", str57, "DatasetRenderingOrder.FORWARD");
-    }
-
-    @Test
-    public void test2002() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2002");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Graphics2D graphics2D3 = null;
-        org.jfree.data.category.CategoryDataset categoryDataset4 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis6 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float7 = categoryAxis6.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis8 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer11 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color12 = java.awt.Color.BLUE;
-        lineAndShapeRenderer11.setBaseItemLabelPaint((java.awt.Paint) color12);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator17 = lineAndShapeRenderer11.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot18 = new org.jfree.chart.plot.CategoryPlot(categoryDataset4, categoryAxis6, valueAxis8, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer11);
-        org.jfree.chart.axis.CategoryAxis categoryAxis19 = categoryPlot18.getDomainAxis();
-        org.jfree.chart.axis.ValueAxis valueAxis20 = null;
-        org.jfree.data.Range range21 = categoryPlot18.getDataRange(valueAxis20);
-        org.jfree.chart.axis.ValueAxis valueAxis22 = null;
-        org.jfree.chart.plot.Marker marker23 = null;
-        java.awt.geom.Rectangle2D rectangle2D24 = null;
-        lineAndShapeRenderer2.drawRangeMarker(graphics2D3, categoryPlot18, valueAxis22, marker23, rectangle2D24);
-        org.jfree.chart.util.RectangleEdge rectangleEdge26 = categoryPlot18.getRangeAxisEdge();
-        boolean boolean27 = categoryPlot18.canSelectByPoint();
-        org.junit.Assert.assertTrue("'" + float7 + "' != '" + 0.0f + "'", float7 == 0.0f);
-        org.junit.Assert.assertNotNull(color12);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator17);
-        org.junit.Assert.assertNotNull(categoryAxis19);
-        org.junit.Assert.assertNull(range21);
-        org.junit.Assert.assertNotNull(rectangleEdge26);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
-    }
-
-    @Test
-    public void test2003() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2003");
-        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
-        boolean boolean1 = barRenderer0.isDrawBarOutline();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color5 = java.awt.Color.BLUE;
-        lineAndShapeRenderer4.setBaseItemLabelPaint((java.awt.Paint) color5);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator10 = lineAndShapeRenderer4.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition11 = lineAndShapeRenderer4.getBaseNegativeItemLabelPosition();
-        barRenderer0.setNegativeItemLabelPositionFallback(itemLabelPosition11);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator16 = null;
-        lineAndShapeRenderer15.setBaseURLGenerator(categoryURLGenerator16);
-        java.awt.Shape shape19 = lineAndShapeRenderer15.getLegendShape(0);
-        lineAndShapeRenderer15.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font23 = lineAndShapeRenderer15.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer15.setUseSeriesOffset(true);
-        java.awt.Shape shape27 = null;
-        lineAndShapeRenderer15.setSeriesShape((int) (short) 10, shape27, true);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition30 = lineAndShapeRenderer15.getBasePositiveItemLabelPosition();
-        org.jfree.chart.text.TextAnchor textAnchor31 = itemLabelPosition30.getTextAnchor();
-        barRenderer0.setPositiveItemLabelPositionFallback(itemLabelPosition30);
-        boolean boolean33 = barRenderer0.getShadowsVisible();
-        org.jfree.chart.renderer.category.BarPainter barPainter34 = barRenderer0.getBarPainter();
-        barRenderer0.setShadowVisible(false);
-        barRenderer0.setSeriesVisible(0, (java.lang.Boolean) true);
-        org.jfree.data.category.CategoryDataset categoryDataset40 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis42 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float43 = categoryAxis42.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis44 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer47 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color48 = java.awt.Color.BLUE;
-        lineAndShapeRenderer47.setBaseItemLabelPaint((java.awt.Paint) color48);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator53 = lineAndShapeRenderer47.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot54 = new org.jfree.chart.plot.CategoryPlot(categoryDataset40, categoryAxis42, valueAxis44, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer47);
-        org.jfree.chart.axis.CategoryAxis categoryAxis55 = categoryPlot54.getDomainAxis();
-        org.jfree.chart.axis.ValueAxis valueAxis56 = null;
-        org.jfree.data.Range range57 = categoryPlot54.getDataRange(valueAxis56);
-        org.jfree.chart.axis.AxisLocation axisLocation58 = categoryPlot54.getRangeAxisLocation();
-        categoryPlot54.clearRangeMarkers(0);
-        org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset61 = new org.jfree.data.category.DefaultCategoryDataset();
-        int int63 = defaultCategoryDataset61.getColumnIndex((java.lang.Comparable) 3.0d);
-        int int65 = defaultCategoryDataset61.getRowIndex((java.lang.Comparable) (byte) 10);
-        defaultCategoryDataset61.clearSelection();
-        int int67 = categoryPlot54.indexOf((org.jfree.data.category.CategoryDataset) defaultCategoryDataset61);
-        defaultCategoryDataset61.validateObject();
-        defaultCategoryDataset61.clear();
-        org.jfree.data.category.CategoryDatasetSelectionState categoryDatasetSelectionState70 = defaultCategoryDataset61.getSelectionState();
-        org.jfree.data.Range range72 = barRenderer0.findRangeBounds((org.jfree.data.category.CategoryDataset) defaultCategoryDataset61, false);
-        boolean boolean73 = barRenderer0.isDrawBarOutline();
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(color5);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator10);
-        org.junit.Assert.assertNotNull(itemLabelPosition11);
-        org.junit.Assert.assertNull(shape19);
-        org.junit.Assert.assertNull(font23);
-        org.junit.Assert.assertNotNull(itemLabelPosition30);
-        org.junit.Assert.assertNotNull(textAnchor31);
-// flaky:         org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-        org.junit.Assert.assertNotNull(barPainter34);
-        org.junit.Assert.assertTrue("'" + float43 + "' != '" + 0.0f + "'", float43 == 0.0f);
-        org.junit.Assert.assertNotNull(color48);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator53);
-        org.junit.Assert.assertNotNull(categoryAxis55);
-        org.junit.Assert.assertNull(range57);
-        org.junit.Assert.assertNotNull(axisLocation58);
-        org.junit.Assert.assertTrue("'" + int63 + "' != '" + (-1) + "'", int63 == (-1));
-        org.junit.Assert.assertTrue("'" + int65 + "' != '" + (-1) + "'", int65 == (-1));
-        org.junit.Assert.assertTrue("'" + int67 + "' != '" + (-1) + "'", int67 == (-1));
-        org.junit.Assert.assertNotNull(categoryDatasetSelectionState70);
-        org.junit.Assert.assertNull(range72);
-        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + false + "'", boolean73 == false);
-    }
-
-    @Test
-    public void test2004() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2004");
-        org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
-        java.lang.Object obj1 = keyedObjects0.clone();
-        org.jfree.chart.axis.CategoryAxis categoryAxis3 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float4 = categoryAxis3.getTickMarkInsideLength();
-        categoryAxis3.setMaximumCategoryLabelLines((int) (byte) 1);
-        categoryAxis3.setMaximumCategoryLabelLines(10);
-        java.lang.Object obj9 = categoryAxis3.clone();
-        java.awt.Paint paint10 = categoryAxis3.getLabelPaint();
-        java.awt.Paint paint11 = categoryAxis3.getAxisLinePaint();
-        boolean boolean12 = keyedObjects0.equals((java.lang.Object) categoryAxis3);
-        java.util.List list13 = keyedObjects0.getKeys();
-        org.junit.Assert.assertNotNull(obj1);
-        org.junit.Assert.assertTrue("'" + float4 + "' != '" + 0.0f + "'", float4 == 0.0f);
-        org.junit.Assert.assertNotNull(obj9);
-        org.junit.Assert.assertNotNull(paint10);
-        org.junit.Assert.assertNotNull(paint11);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertNotNull(list13);
-    }
-
-    @Test
-    public void test2005() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2005");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color4 = java.awt.Color.BLUE;
-        lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
-        java.awt.Shape shape6 = lineAndShapeRenderer3.getBaseShape();
-        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
-        org.jfree.data.Range range8 = lineAndShapeRenderer3.findRangeBounds(categoryDataset7);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator9 = lineAndShapeRenderer3.getBaseURLGenerator();
-        org.jfree.chart.LegendItem legendItem11 = new org.jfree.chart.LegendItem("hi!");
-        java.text.AttributedString attributedString12 = legendItem11.getAttributedLabel();
-        java.lang.String str13 = legendItem11.getDescription();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer16 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator17 = null;
-        lineAndShapeRenderer16.setBaseURLGenerator(categoryURLGenerator17);
-        java.awt.Shape shape20 = lineAndShapeRenderer16.getLegendShape(0);
-        lineAndShapeRenderer16.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font24 = lineAndShapeRenderer16.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer16.setUseSeriesOffset(true);
-        java.awt.Shape shape28 = null;
-        lineAndShapeRenderer16.setSeriesShape((int) (short) 10, shape28, true);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer33 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color34 = java.awt.Color.BLUE;
-        lineAndShapeRenderer33.setBaseItemLabelPaint((java.awt.Paint) color34);
-        java.awt.Stroke stroke37 = lineAndShapeRenderer33.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset38 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis40 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float41 = categoryAxis40.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis42 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer45 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color46 = java.awt.Color.BLUE;
-        lineAndShapeRenderer45.setBaseItemLabelPaint((java.awt.Paint) color46);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator51 = lineAndShapeRenderer45.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot52 = new org.jfree.chart.plot.CategoryPlot(categoryDataset38, categoryAxis40, valueAxis42, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer45);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer53 = categoryPlot52.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis55 = lineAndShapeRenderer33.getRangeAxis(categoryPlot52, (int) '4');
-        double double56 = categoryPlot52.getRangeCrosshairValue();
-        lineAndShapeRenderer16.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot52);
-        org.jfree.chart.axis.CategoryAxis[] categoryAxisArray58 = new org.jfree.chart.axis.CategoryAxis[] {};
-        categoryPlot52.setDomainAxes(categoryAxisArray58);
-        categoryPlot52.setDomainGridlinesVisible(true);
-        java.awt.Color color62 = java.awt.Color.BLUE;
-        int int63 = color62.getRed();
-        categoryPlot52.setRangeCrosshairPaint((java.awt.Paint) color62);
-        legendItem11.setOutlinePaint((java.awt.Paint) color62);
-        java.awt.Color color66 = org.jfree.chart.ChartColor.LIGHT_GREEN;
-        legendItem11.setLinePaint((java.awt.Paint) color66);
-        java.awt.Font font68 = legendItem11.getLabelFont();
-        org.jfree.chart.LegendItem legendItem70 = new org.jfree.chart.LegendItem("hi!");
-        org.jfree.chart.ChartColor chartColor74 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
-        legendItem70.setFillPaint((java.awt.Paint) chartColor74);
-        legendItem11.setLabelPaint((java.awt.Paint) chartColor74);
-        lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) chartColor74);
-        org.jfree.chart.LegendItem legendItem78 = new org.jfree.chart.LegendItem("AxisLocation.BOTTOM_OR_RIGHT", (java.awt.Paint) chartColor74);
-        legendItem78.setDatasetIndex((int) (short) 1);
-        org.junit.Assert.assertNotNull(color4);
-        org.junit.Assert.assertNotNull(shape6);
-        org.junit.Assert.assertNull(range8);
-        org.junit.Assert.assertNull(categoryURLGenerator9);
-        org.junit.Assert.assertNull(attributedString12);
-        org.junit.Assert.assertNull(str13);
-        org.junit.Assert.assertNull(shape20);
-        org.junit.Assert.assertNull(font24);
-        org.junit.Assert.assertNotNull(color34);
-        org.junit.Assert.assertNull(stroke37);
-        org.junit.Assert.assertTrue("'" + float41 + "' != '" + 0.0f + "'", float41 == 0.0f);
-        org.junit.Assert.assertNotNull(color46);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator51);
-        org.junit.Assert.assertNotNull(categoryItemRenderer53);
-        org.junit.Assert.assertNull(valueAxis55);
-        org.junit.Assert.assertTrue("'" + double56 + "' != '" + 0.0d + "'", double56 == 0.0d);
-        org.junit.Assert.assertNotNull(categoryAxisArray58);
-        org.junit.Assert.assertNotNull(color62);
-        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
-        org.junit.Assert.assertNotNull(color66);
-        org.junit.Assert.assertNull(font68);
-    }
-
-    @Test
-    public void test2006() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2006");
-        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float3 = categoryAxis2.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
-        java.lang.Object obj15 = categoryPlot14.clone();
-        org.jfree.chart.util.RectangleInsets rectangleInsets16 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
-        double double18 = rectangleInsets16.extendWidth((double) 10L);
-        double double20 = rectangleInsets16.extendWidth((double) (short) -1);
-        double double21 = rectangleInsets16.getRight();
-        categoryPlot14.setInsets(rectangleInsets16, false);
-        categoryPlot14.clearDomainAxes();
-        org.jfree.chart.axis.AxisSpace axisSpace25 = null;
-        categoryPlot14.setFixedDomainAxisSpace(axisSpace25, false);
-        org.jfree.chart.plot.Marker marker29 = null;
-        org.jfree.chart.util.Layer layer30 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean31 = categoryPlot14.removeRangeMarker((int) (byte) 10, marker29, layer30);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Null 'marker' argument.");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
-        org.junit.Assert.assertNotNull(obj15);
-        org.junit.Assert.assertNotNull(rectangleInsets16);
-        org.junit.Assert.assertTrue("'" + double18 + "' != '" + 16.0d + "'", double18 == 16.0d);
-        org.junit.Assert.assertTrue("'" + double20 + "' != '" + 5.0d + "'", double20 == 5.0d);
-        org.junit.Assert.assertTrue("'" + double21 + "' != '" + 3.0d + "'", double21 == 3.0d);
-    }
-
-    @Test
-    public void test2007() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2007");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
-        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
-        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
-        java.awt.Paint paint16 = lineAndShapeRenderer2.getItemFillPaint((-1), (int) (short) 100, false);
-        java.awt.Shape shape18 = lineAndShapeRenderer2.lookupLegendShape(4);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer21 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator22 = null;
-        lineAndShapeRenderer21.setBaseURLGenerator(categoryURLGenerator22);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator25 = null;
-        lineAndShapeRenderer21.setSeriesToolTipGenerator(10, categoryToolTipGenerator25);
-        boolean boolean27 = lineAndShapeRenderer21.getBaseSeriesVisibleInLegend();
-        java.awt.Stroke stroke29 = null;
-        lineAndShapeRenderer21.setSeriesStroke((int) 'a', stroke29, true);
-        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor33 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
-        java.awt.Color color34 = java.awt.Color.yellow;
-        boolean boolean35 = itemLabelAnchor33.equals((java.lang.Object) color34);
-        lineAndShapeRenderer21.setSeriesFillPaint((int) ' ', (java.awt.Paint) color34);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer39 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color40 = java.awt.Color.BLUE;
-        lineAndShapeRenderer39.setBaseItemLabelPaint((java.awt.Paint) color40);
-        java.awt.Stroke stroke43 = lineAndShapeRenderer39.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset44 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis46 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float47 = categoryAxis46.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis48 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer51 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color52 = java.awt.Color.BLUE;
-        lineAndShapeRenderer51.setBaseItemLabelPaint((java.awt.Paint) color52);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator57 = lineAndShapeRenderer51.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot58 = new org.jfree.chart.plot.CategoryPlot(categoryDataset44, categoryAxis46, valueAxis48, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer51);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer59 = categoryPlot58.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis61 = lineAndShapeRenderer39.getRangeAxis(categoryPlot58, (int) '4');
-        boolean boolean62 = categoryPlot58.isRangeCrosshairVisible();
-        lineAndShapeRenderer21.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot58);
-        org.jfree.chart.entity.PlotEntity plotEntity64 = new org.jfree.chart.entity.PlotEntity(shape18, (org.jfree.chart.plot.Plot) categoryPlot58);
-        boolean boolean65 = categoryPlot58.isDomainPannable();
-        java.awt.Paint paint66 = categoryPlot58.getDomainGridlinePaint();
-        int int67 = categoryPlot58.getRangeAxisCount();
-        org.jfree.data.category.CategoryDataset categoryDataset68 = categoryPlot58.getDataset();
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
-        org.junit.Assert.assertNull(paint12);
-        org.junit.Assert.assertNotNull(paint16);
-        org.junit.Assert.assertNotNull(shape18);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
-        org.junit.Assert.assertNotNull(itemLabelAnchor33);
-        org.junit.Assert.assertNotNull(color34);
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
-        org.junit.Assert.assertNotNull(color40);
-        org.junit.Assert.assertNull(stroke43);
-        org.junit.Assert.assertTrue("'" + float47 + "' != '" + 0.0f + "'", float47 == 0.0f);
-        org.junit.Assert.assertNotNull(color52);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator57);
-        org.junit.Assert.assertNotNull(categoryItemRenderer59);
-        org.junit.Assert.assertNull(valueAxis61);
-        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-        org.junit.Assert.assertNotNull(paint66);
-        org.junit.Assert.assertTrue("'" + int67 + "' != '" + 1 + "'", int67 == 1);
-        org.junit.Assert.assertNull(categoryDataset68);
-    }
-
-    @Test
-    public void test2008() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2008");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float10 = categoryAxis9.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color15 = java.awt.Color.BLUE;
-        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
-        boolean boolean25 = categoryPlot21.isRangeCrosshairVisible();
-        org.jfree.chart.util.RectangleEdge rectangleEdge26 = categoryPlot21.getDomainAxisEdge();
-        org.jfree.chart.axis.CategoryAxis categoryAxis28 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float29 = categoryAxis28.getTickMarkInsideLength();
-        categoryAxis28.setMaximumCategoryLabelLines((int) (byte) 1);
-        boolean boolean32 = categoryAxis28.isVisible();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer36 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator37 = null;
-        lineAndShapeRenderer36.setBaseURLGenerator(categoryURLGenerator37);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator40 = null;
-        lineAndShapeRenderer36.setSeriesToolTipGenerator(10, categoryToolTipGenerator40);
-        boolean boolean42 = lineAndShapeRenderer36.getBaseSeriesVisibleInLegend();
-        java.awt.Stroke stroke44 = null;
-        lineAndShapeRenderer36.setSeriesStroke((int) 'a', stroke44, true);
-        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor48 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
-        java.awt.Color color49 = java.awt.Color.yellow;
-        boolean boolean50 = itemLabelAnchor48.equals((java.lang.Object) color49);
-        lineAndShapeRenderer36.setSeriesFillPaint((int) ' ', (java.awt.Paint) color49);
-        categoryAxis28.setTickLabelPaint((java.lang.Comparable) false, (java.awt.Paint) color49);
-        categoryPlot21.setDomainAxis(categoryAxis28);
-        java.awt.Paint paint54 = categoryAxis28.getTickLabelPaint();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer57 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color58 = java.awt.Color.BLUE;
-        lineAndShapeRenderer57.setBaseItemLabelPaint((java.awt.Paint) color58);
-        java.awt.Stroke stroke61 = lineAndShapeRenderer57.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset62 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis64 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float65 = categoryAxis64.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis66 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer69 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color70 = java.awt.Color.BLUE;
-        lineAndShapeRenderer69.setBaseItemLabelPaint((java.awt.Paint) color70);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator75 = lineAndShapeRenderer69.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot76 = new org.jfree.chart.plot.CategoryPlot(categoryDataset62, categoryAxis64, valueAxis66, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer69);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer77 = categoryPlot76.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis79 = lineAndShapeRenderer57.getRangeAxis(categoryPlot76, (int) '4');
-        boolean boolean80 = categoryPlot76.isRangeCrosshairVisible();
-        org.jfree.chart.plot.DatasetRenderingOrder datasetRenderingOrder81 = categoryPlot76.getDatasetRenderingOrder();
-        org.jfree.chart.plot.PlotRenderingInfo plotRenderingInfo84 = null;
-        java.awt.geom.Point2D point2D85 = null;
-        categoryPlot76.zoomDomainAxes(1.0d, (double) (-1L), plotRenderingInfo84, point2D85);
-        categoryPlot76.setDomainCrosshairVisible(false);
-        float float89 = categoryPlot76.getForegroundAlpha();
-        org.jfree.chart.axis.CategoryAxis categoryAxis91 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        java.lang.Object obj92 = categoryAxis91.clone();
-        java.util.List list93 = categoryPlot76.getCategoriesForAxis(categoryAxis91);
-        java.awt.Stroke stroke94 = categoryPlot76.getRangeMinorGridlineStroke();
-        categoryAxis28.setAxisLineStroke(stroke94);
-        boolean boolean96 = categoryAxis28.isTickMarksVisible();
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNull(stroke6);
-        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
-        org.junit.Assert.assertNotNull(color15);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
-        org.junit.Assert.assertNotNull(categoryItemRenderer22);
-        org.junit.Assert.assertNull(valueAxis24);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertNotNull(rectangleEdge26);
-        org.junit.Assert.assertTrue("'" + float29 + "' != '" + 0.0f + "'", float29 == 0.0f);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + true + "'", boolean32 == true);
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + true + "'", boolean42 == true);
-        org.junit.Assert.assertNotNull(itemLabelAnchor48);
-        org.junit.Assert.assertNotNull(color49);
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
-        org.junit.Assert.assertNotNull(paint54);
-        org.junit.Assert.assertNotNull(color58);
-        org.junit.Assert.assertNull(stroke61);
-        org.junit.Assert.assertTrue("'" + float65 + "' != '" + 0.0f + "'", float65 == 0.0f);
-        org.junit.Assert.assertNotNull(color70);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator75);
-        org.junit.Assert.assertNotNull(categoryItemRenderer77);
-        org.junit.Assert.assertNull(valueAxis79);
-        org.junit.Assert.assertTrue("'" + boolean80 + "' != '" + false + "'", boolean80 == false);
-        org.junit.Assert.assertNotNull(datasetRenderingOrder81);
-        org.junit.Assert.assertTrue("'" + float89 + "' != '" + 1.0f + "'", float89 == 1.0f);
-        org.junit.Assert.assertNotNull(obj92);
-        org.junit.Assert.assertNotNull(list93);
-        org.junit.Assert.assertNotNull(stroke94);
-        org.junit.Assert.assertTrue("'" + boolean96 + "' != '" + true + "'", boolean96 == true);
-    }
-
-    @Test
-    public void test2009() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2009");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
-        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator6 = null;
-        lineAndShapeRenderer2.setSeriesToolTipGenerator(10, categoryToolTipGenerator6);
-        boolean boolean8 = lineAndShapeRenderer2.getBaseSeriesVisibleInLegend();
-        java.awt.Stroke stroke10 = null;
-        lineAndShapeRenderer2.setSeriesStroke((int) 'a', stroke10, true);
-        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor14 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
-        java.awt.Color color15 = java.awt.Color.yellow;
-        boolean boolean16 = itemLabelAnchor14.equals((java.lang.Object) color15);
-        lineAndShapeRenderer2.setSeriesFillPaint((int) ' ', (java.awt.Paint) color15);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer20 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color21 = java.awt.Color.BLUE;
-        lineAndShapeRenderer20.setBaseItemLabelPaint((java.awt.Paint) color21);
-        java.awt.Stroke stroke24 = lineAndShapeRenderer20.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset25 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis27 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float28 = categoryAxis27.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis29 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer32 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color33 = java.awt.Color.BLUE;
-        lineAndShapeRenderer32.setBaseItemLabelPaint((java.awt.Paint) color33);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator38 = lineAndShapeRenderer32.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot39 = new org.jfree.chart.plot.CategoryPlot(categoryDataset25, categoryAxis27, valueAxis29, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer32);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer40 = categoryPlot39.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis42 = lineAndShapeRenderer20.getRangeAxis(categoryPlot39, (int) '4');
-        boolean boolean43 = categoryPlot39.isRangeCrosshairVisible();
-        lineAndShapeRenderer2.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot39);
-        lineAndShapeRenderer2.setSeriesItemLabelsVisible(0, (java.lang.Boolean) false, false);
-        java.awt.Stroke stroke49 = lineAndShapeRenderer2.getBaseStroke();
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator51 = null;
-        lineAndShapeRenderer2.setSeriesItemLabelGenerator(1, categoryItemLabelGenerator51);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer55 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator56 = null;
-        lineAndShapeRenderer55.setBaseURLGenerator(categoryURLGenerator56);
-        java.awt.Shape shape59 = lineAndShapeRenderer55.getLegendShape(0);
-        lineAndShapeRenderer55.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font63 = lineAndShapeRenderer55.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer55.setUseSeriesOffset(true);
-        org.jfree.chart.plot.DrawingSupplier drawingSupplier66 = lineAndShapeRenderer55.getDrawingSupplier();
-        lineAndShapeRenderer55.setBaseCreateEntities(false);
-        java.awt.Font font72 = lineAndShapeRenderer55.getItemLabelFont((int) (short) 0, 0, false);
-        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator standardCategorySeriesLabelGenerator74 = new org.jfree.chart.labels.StandardCategorySeriesLabelGenerator("{0}");
-        lineAndShapeRenderer55.setLegendItemToolTipGenerator((org.jfree.chart.labels.CategorySeriesLabelGenerator) standardCategorySeriesLabelGenerator74);
-        lineAndShapeRenderer2.setLegendItemToolTipGenerator((org.jfree.chart.labels.CategorySeriesLabelGenerator) standardCategorySeriesLabelGenerator74);
-        boolean boolean77 = lineAndShapeRenderer2.getBaseLinesVisible();
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertNotNull(itemLabelAnchor14);
-        org.junit.Assert.assertNotNull(color15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(color21);
-        org.junit.Assert.assertNull(stroke24);
-        org.junit.Assert.assertTrue("'" + float28 + "' != '" + 0.0f + "'", float28 == 0.0f);
-        org.junit.Assert.assertNotNull(color33);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator38);
-        org.junit.Assert.assertNotNull(categoryItemRenderer40);
-        org.junit.Assert.assertNull(valueAxis42);
-        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
-        org.junit.Assert.assertNotNull(stroke49);
-        org.junit.Assert.assertNull(shape59);
-        org.junit.Assert.assertNull(font63);
-        org.junit.Assert.assertNull(drawingSupplier66);
-        org.junit.Assert.assertNotNull(font72);
-        org.junit.Assert.assertTrue("'" + boolean77 + "' != '" + false + "'", boolean77 == false);
-    }
-
-    @Test
-    public void test2010() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2010");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
-        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
-        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
-        lineAndShapeRenderer2.setAutoPopulateSeriesFillPaint(false);
-        boolean boolean10 = lineAndShapeRenderer2.isSeriesVisibleInLegend((int) (short) 0);
-        org.jfree.chart.plot.CategoryPlot categoryPlot11 = lineAndShapeRenderer2.getPlot();
-        org.junit.Assert.assertNull(shape6);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertNull(categoryPlot11);
-    }
-
-    @Test
-    public void test2011() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2011");
-        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float3 = categoryAxis2.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
-        java.lang.Object obj15 = categoryPlot14.clone();
-        org.jfree.chart.util.RectangleEdge rectangleEdge17 = categoryPlot14.getDomainAxisEdge((int) ' ');
-        categoryPlot14.setNotify(false);
-        org.jfree.chart.axis.AxisLocation axisLocation21 = categoryPlot14.getDomainAxisLocation((int) '4');
-        categoryPlot14.clearDomainMarkers(0);
-        categoryPlot14.setCrosshairDatasetIndex(2);
-        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
-        org.junit.Assert.assertNotNull(obj15);
-        org.junit.Assert.assertNotNull(rectangleEdge17);
-        org.junit.Assert.assertNotNull(axisLocation21);
-    }
-
-    @Test
-    public void test2012() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2012");
-        org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
-        int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
-        int int4 = defaultCategoryDataset0.getRowIndex((java.lang.Comparable) (byte) 10);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        java.awt.Stroke stroke11 = lineAndShapeRenderer7.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset12 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis14 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float15 = categoryAxis14.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis16 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color20 = java.awt.Color.BLUE;
-        lineAndShapeRenderer19.setBaseItemLabelPaint((java.awt.Paint) color20);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator25 = lineAndShapeRenderer19.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot26 = new org.jfree.chart.plot.CategoryPlot(categoryDataset12, categoryAxis14, valueAxis16, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer19);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer27 = categoryPlot26.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis29 = lineAndShapeRenderer7.getRangeAxis(categoryPlot26, (int) '4');
-        double double30 = categoryPlot26.getRangeCrosshairValue();
-        java.awt.Paint paint31 = categoryPlot26.getRangeZeroBaselinePaint();
-        int int32 = categoryPlot26.getRangeAxisCount();
-        java.awt.Color color33 = java.awt.Color.BLUE;
-        categoryPlot26.setRangeMinorGridlinePaint((java.awt.Paint) color33);
-        java.awt.Stroke stroke35 = categoryPlot26.getRangeMinorGridlineStroke();
-        float float36 = categoryPlot26.getBackgroundAlpha();
-        defaultCategoryDataset0.addChangeListener((org.jfree.data.event.DatasetChangeListener) categoryPlot26);
-        org.jfree.data.category.CategoryDatasetSelectionState categoryDatasetSelectionState38 = defaultCategoryDataset0.getSelectionState();
-        defaultCategoryDataset0.fireSelectionEvent();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer42 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color43 = java.awt.Color.BLUE;
-        lineAndShapeRenderer42.setBaseItemLabelPaint((java.awt.Paint) color43);
-        java.awt.Stroke stroke46 = lineAndShapeRenderer42.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset47 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis49 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float50 = categoryAxis49.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis51 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer54 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color55 = java.awt.Color.BLUE;
-        lineAndShapeRenderer54.setBaseItemLabelPaint((java.awt.Paint) color55);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator60 = lineAndShapeRenderer54.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot61 = new org.jfree.chart.plot.CategoryPlot(categoryDataset47, categoryAxis49, valueAxis51, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer54);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer62 = categoryPlot61.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis64 = lineAndShapeRenderer42.getRangeAxis(categoryPlot61, (int) '4');
-        boolean boolean65 = categoryPlot61.isRangeCrosshairVisible();
-        org.jfree.chart.plot.DatasetRenderingOrder datasetRenderingOrder66 = categoryPlot61.getDatasetRenderingOrder();
-        boolean boolean67 = categoryPlot61.getDrawSharedDomainAxis();
-        org.jfree.chart.axis.ValueAxis valueAxis68 = null;
-        org.jfree.data.Range range69 = categoryPlot61.getDataRange(valueAxis68);
-        org.jfree.chart.axis.AxisLocation axisLocation71 = org.jfree.chart.axis.AxisLocation.BOTTOM_OR_LEFT;
-        categoryPlot61.setRangeAxisLocation(255, axisLocation71, true);
-        defaultCategoryDataset0.removeChangeListener((org.jfree.data.event.DatasetChangeListener) categoryPlot61);
-        java.awt.Color color75 = org.jfree.chart.ChartColor.VERY_LIGHT_YELLOW;
-        categoryPlot61.setDomainCrosshairPaint((java.awt.Paint) color75);
-        org.junit.Assert.assertTrue("'" + int2 + "' != '" + (-1) + "'", int2 == (-1));
-        org.junit.Assert.assertTrue("'" + int4 + "' != '" + (-1) + "'", int4 == (-1));
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(stroke11);
-        org.junit.Assert.assertTrue("'" + float15 + "' != '" + 0.0f + "'", float15 == 0.0f);
-        org.junit.Assert.assertNotNull(color20);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator25);
-        org.junit.Assert.assertNotNull(categoryItemRenderer27);
-        org.junit.Assert.assertNull(valueAxis29);
-        org.junit.Assert.assertTrue("'" + double30 + "' != '" + 0.0d + "'", double30 == 0.0d);
-        org.junit.Assert.assertNotNull(paint31);
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 1 + "'", int32 == 1);
-        org.junit.Assert.assertNotNull(color33);
-        org.junit.Assert.assertNotNull(stroke35);
-        org.junit.Assert.assertTrue("'" + float36 + "' != '" + 1.0f + "'", float36 == 1.0f);
-        org.junit.Assert.assertNotNull(categoryDatasetSelectionState38);
-        org.junit.Assert.assertNotNull(color43);
-        org.junit.Assert.assertNull(stroke46);
-        org.junit.Assert.assertTrue("'" + float50 + "' != '" + 0.0f + "'", float50 == 0.0f);
-        org.junit.Assert.assertNotNull(color55);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator60);
-        org.junit.Assert.assertNotNull(categoryItemRenderer62);
-        org.junit.Assert.assertNull(valueAxis64);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-        org.junit.Assert.assertNotNull(datasetRenderingOrder66);
-        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + false + "'", boolean67 == false);
-        org.junit.Assert.assertNull(range69);
-        org.junit.Assert.assertNotNull(axisLocation71);
-        org.junit.Assert.assertNotNull(color75);
-    }
-
-    @Test
-    public void test2013() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2013");
-        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float3 = categoryAxis2.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
-        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
-        org.jfree.chart.util.RectangleInsets rectangleInsets16 = categoryPlot14.getInsets();
-        org.jfree.chart.plot.PlotRenderingInfo plotRenderingInfo19 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            categoryPlot14.handleClick(0, (int) '#', plotRenderingInfo19);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
-        org.junit.Assert.assertNotNull(categoryAxis15);
-        org.junit.Assert.assertNotNull(rectangleInsets16);
-    }
-
-    @Test
-    public void test2014() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2014");
-        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
-        barRenderer0.setShadowVisible(true);
-        barRenderer0.setSeriesVisible(0, (java.lang.Boolean) true, true);
-        org.jfree.chart.renderer.category.BarPainter barPainter7 = barRenderer0.getBarPainter();
-        org.junit.Assert.assertNotNull(barPainter7);
-    }
-
-    @Test
-    public void test2015() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2015");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = null;
-        lineAndShapeRenderer2.setSeriesItemLabelGenerator((int) (short) 100, categoryItemLabelGenerator8);
-        lineAndShapeRenderer2.setDrawOutlines(true);
-        java.awt.Shape shape12 = lineAndShapeRenderer2.getBaseShape();
-        boolean boolean13 = lineAndShapeRenderer2.getBaseSeriesVisible();
-        lineAndShapeRenderer2.setSeriesShapesVisible((int) (byte) 10, true);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator20 = null;
-        lineAndShapeRenderer19.setBaseURLGenerator(categoryURLGenerator20);
-        java.awt.Shape shape23 = lineAndShapeRenderer19.getLegendShape(0);
-        lineAndShapeRenderer19.setAutoPopulateSeriesStroke(false);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer29 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color30 = java.awt.Color.BLUE;
-        lineAndShapeRenderer29.setBaseItemLabelPaint((java.awt.Paint) color30);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator35 = lineAndShapeRenderer29.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator36 = null;
-        lineAndShapeRenderer29.setLegendItemURLGenerator(categorySeriesLabelGenerator36);
-        java.awt.Paint paint39 = lineAndShapeRenderer29.getSeriesPaint(1);
-        org.jfree.chart.renderer.RenderAttributes renderAttributes40 = lineAndShapeRenderer29.getSelectedItemAttributes();
-        java.awt.Color color42 = java.awt.Color.BLUE;
-        renderAttributes40.setSeriesFillPaint((int) 'a', (java.awt.Paint) color42);
-        org.jfree.chart.axis.CategoryAxis categoryAxis45 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float46 = categoryAxis45.getTickMarkInsideLength();
-        categoryAxis45.setMaximumCategoryLabelLines((int) (byte) 1);
-        boolean boolean49 = categoryAxis45.isVisible();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer53 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator54 = null;
-        lineAndShapeRenderer53.setBaseURLGenerator(categoryURLGenerator54);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator57 = null;
-        lineAndShapeRenderer53.setSeriesToolTipGenerator(10, categoryToolTipGenerator57);
-        boolean boolean59 = lineAndShapeRenderer53.getBaseSeriesVisibleInLegend();
-        java.awt.Stroke stroke61 = null;
-        lineAndShapeRenderer53.setSeriesStroke((int) 'a', stroke61, true);
-        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor65 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
-        java.awt.Color color66 = java.awt.Color.yellow;
-        boolean boolean67 = itemLabelAnchor65.equals((java.lang.Object) color66);
-        lineAndShapeRenderer53.setSeriesFillPaint((int) ' ', (java.awt.Paint) color66);
-        categoryAxis45.setTickLabelPaint((java.lang.Comparable) false, (java.awt.Paint) color66);
-        renderAttributes40.setDefaultOutlinePaint((java.awt.Paint) color66);
-        java.awt.Color color72 = org.jfree.chart.ChartColor.DARK_YELLOW;
-        renderAttributes40.setSeriesFillPaint((int) (byte) 0, (java.awt.Paint) color72);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer77 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator78 = null;
-        lineAndShapeRenderer77.setBaseURLGenerator(categoryURLGenerator78);
-        java.awt.Shape shape81 = lineAndShapeRenderer77.getLegendShape(0);
-        lineAndShapeRenderer77.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font85 = lineAndShapeRenderer77.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer77.setUseSeriesOffset(true);
-        java.awt.Font font89 = null;
-        lineAndShapeRenderer77.setSeriesItemLabelFont((int) (short) 1, font89, false);
-        java.awt.Stroke stroke95 = lineAndShapeRenderer77.getItemOutlineStroke(0, 1, false);
-        renderAttributes40.setSeriesStroke(10, stroke95);
-        lineAndShapeRenderer19.setSeriesOutlineStroke((int) (short) 1, stroke95);
-        lineAndShapeRenderer2.setBaseStroke(stroke95, false);
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNull(stroke6);
-        org.junit.Assert.assertNotNull(shape12);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertNull(shape23);
-        org.junit.Assert.assertNotNull(color30);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator35);
-        org.junit.Assert.assertNull(paint39);
-        org.junit.Assert.assertNotNull(renderAttributes40);
-        org.junit.Assert.assertNotNull(color42);
-        org.junit.Assert.assertTrue("'" + float46 + "' != '" + 0.0f + "'", float46 == 0.0f);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + true + "'", boolean49 == true);
-        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + true + "'", boolean59 == true);
-        org.junit.Assert.assertNotNull(itemLabelAnchor65);
-        org.junit.Assert.assertNotNull(color66);
-        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + false + "'", boolean67 == false);
-        org.junit.Assert.assertNotNull(color72);
-        org.junit.Assert.assertNull(shape81);
-        org.junit.Assert.assertNull(font85);
-        org.junit.Assert.assertNotNull(stroke95);
-    }
-
-    @Test
-    public void test2016() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2016");
-        org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float2 = categoryAxis1.getTickMarkInsideLength();
-        categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
-        categoryAxis1.setMaximumCategoryLabelLines(10);
-        int int7 = categoryAxis1.getCategoryLabelPositionOffset();
-        float float8 = categoryAxis1.getMinorTickMarkOutsideLength();
-        java.awt.Font font9 = org.jfree.chart.renderer.AbstractRenderer.DEFAULT_VALUE_LABEL_FONT;
-        categoryAxis1.setLabelFont(font9);
-        org.junit.Assert.assertTrue("'" + float2 + "' != '" + 0.0f + "'", float2 == 0.0f);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 4 + "'", int7 == 4);
-        org.junit.Assert.assertTrue("'" + float8 + "' != '" + 2.0f + "'", float8 == 2.0f);
-        org.junit.Assert.assertNotNull(font9);
-    }
-
-    @Test
-    public void test2017() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2017");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
-        lineAndShapeRenderer2.setSeriesURLGenerator(0, categoryURLGenerator6, false);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator10 = lineAndShapeRenderer2.getSeriesToolTipGenerator((int) '#');
-        lineAndShapeRenderer2.setSeriesVisible(192, (java.lang.Boolean) false);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator15 = lineAndShapeRenderer2.getSeriesItemLabelGenerator((-1));
-        lineAndShapeRenderer2.setBaseItemLabelsVisible(false, true);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNull(categoryToolTipGenerator10);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator15);
-    }
-
-    @Test
-    public void test2018() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2018");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        java.awt.Shape shape5 = lineAndShapeRenderer2.getBaseShape();
-        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getBaseOutlineStroke();
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator7 = null;
-        lineAndShapeRenderer2.setBaseItemLabelGenerator(categoryItemLabelGenerator7, false);
-        java.awt.Font font11 = lineAndShapeRenderer2.getLegendTextFont((-1));
-        org.jfree.data.category.CategoryDataset categoryDataset12 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis14 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float15 = categoryAxis14.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis16 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color20 = java.awt.Color.BLUE;
-        lineAndShapeRenderer19.setBaseItemLabelPaint((java.awt.Paint) color20);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator25 = lineAndShapeRenderer19.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot26 = new org.jfree.chart.plot.CategoryPlot(categoryDataset12, categoryAxis14, valueAxis16, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer19);
-        lineAndShapeRenderer19.setSeriesVisibleInLegend(3, (java.lang.Boolean) false, false);
-        org.jfree.chart.axis.CategoryAxis categoryAxis33 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        java.lang.Object obj34 = categoryAxis33.clone();
-        java.awt.Font font35 = categoryAxis33.getTickLabelFont();
-        lineAndShapeRenderer19.setSeriesItemLabelFont((int) '#', font35);
-        lineAndShapeRenderer2.setBaseItemLabelFont(font35);
-        java.awt.Paint paint41 = lineAndShapeRenderer2.getItemFillPaint((-16776961), (-1), false);
-        java.awt.Font font42 = lineAndShapeRenderer2.getBaseLegendTextFont();
-        java.awt.Color color44 = org.jfree.chart.ChartColor.DARK_YELLOW;
-        java.awt.Color color45 = color44.darker();
-        lineAndShapeRenderer2.setSeriesOutlinePaint((int) (short) 10, (java.awt.Paint) color44);
-        org.jfree.chart.util.ObjectList objectList47 = new org.jfree.chart.util.ObjectList();
-        boolean boolean48 = lineAndShapeRenderer2.equals((java.lang.Object) objectList47);
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNotNull(shape5);
-        org.junit.Assert.assertNotNull(stroke6);
-        org.junit.Assert.assertNull(font11);
-        org.junit.Assert.assertTrue("'" + float15 + "' != '" + 0.0f + "'", float15 == 0.0f);
-        org.junit.Assert.assertNotNull(color20);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator25);
-        org.junit.Assert.assertNotNull(obj34);
-        org.junit.Assert.assertNotNull(font35);
-        org.junit.Assert.assertNotNull(paint41);
-        org.junit.Assert.assertNull(font42);
-        org.junit.Assert.assertNotNull(color44);
-        org.junit.Assert.assertNotNull(color45);
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
-    }
-
-    @Test
-    public void test2019() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2019");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
-        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
-        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
-        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer2.setUseSeriesOffset(true);
-        java.awt.Font font14 = null;
-        lineAndShapeRenderer2.setSeriesItemLabelFont((int) (short) 1, font14, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition18 = lineAndShapeRenderer2.getSeriesPositiveItemLabelPosition((int) (byte) 100);
-        lineAndShapeRenderer2.setAutoPopulateSeriesOutlinePaint(false);
-        lineAndShapeRenderer2.setBaseCreateEntities(false, true);
-        org.junit.Assert.assertNull(shape6);
-        org.junit.Assert.assertNull(font10);
-        org.junit.Assert.assertNotNull(itemLabelPosition18);
-    }
-
-    @Test
-    public void test2020() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2020");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        java.awt.Shape shape5 = lineAndShapeRenderer2.getBaseShape();
-        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getBaseOutlineStroke();
-        boolean boolean7 = lineAndShapeRenderer2.getBaseItemLabelsVisible();
-        int int8 = lineAndShapeRenderer2.getPassCount();
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNotNull(shape5);
-        org.junit.Assert.assertNotNull(stroke6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 2 + "'", int8 == 2);
-    }
-
-    @Test
-    public void test2021() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2021");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
-        java.awt.Font font5 = lineAndShapeRenderer2.getBaseItemLabelFont();
-        java.awt.Stroke stroke9 = lineAndShapeRenderer2.getItemStroke(100, 0, true);
-        boolean boolean11 = lineAndShapeRenderer2.isSeriesVisible(4);
-        java.awt.Paint paint12 = lineAndShapeRenderer2.getBasePaint();
-        java.lang.Boolean boolean14 = lineAndShapeRenderer2.getSeriesCreateEntities((int) ' ');
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(font5);
-        org.junit.Assert.assertNotNull(stroke9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(paint12);
-        org.junit.Assert.assertNull(boolean14);
-    }
-
-    @Test
-    public void test2022() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2022");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
-        lineAndShapeRenderer2.setSeriesURLGenerator(0, categoryURLGenerator6, false);
-        java.awt.Color color9 = org.jfree.chart.ChartColor.LIGHT_GREEN;
-        java.awt.color.ColorSpace colorSpace10 = color9.getColorSpace();
-        lineAndShapeRenderer2.setBaseFillPaint((java.awt.Paint) color9);
-        boolean boolean12 = lineAndShapeRenderer2.getBaseShapesVisible();
-        java.lang.Boolean boolean14 = lineAndShapeRenderer2.getSeriesLinesVisible(0);
-        org.jfree.chart.ChartColor chartColor18 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
-        lineAndShapeRenderer2.setBasePaint((java.awt.Paint) chartColor18);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer23 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color24 = java.awt.Color.BLUE;
-        lineAndShapeRenderer23.setBaseItemLabelPaint((java.awt.Paint) color24);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator29 = lineAndShapeRenderer23.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator30 = null;
-        lineAndShapeRenderer23.setLegendItemURLGenerator(categorySeriesLabelGenerator30);
-        java.awt.Paint paint33 = lineAndShapeRenderer23.getSeriesPaint(1);
-        org.jfree.chart.renderer.RenderAttributes renderAttributes34 = lineAndShapeRenderer23.getSelectedItemAttributes();
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator35 = null;
-        lineAndShapeRenderer23.setLegendItemURLGenerator(categorySeriesLabelGenerator35);
-        java.awt.Font font40 = lineAndShapeRenderer23.getItemLabelFont((int) '4', (int) 'a', false);
-        lineAndShapeRenderer2.setSeriesItemLabelFont(11, font40, false);
-        lineAndShapeRenderer2.setBaseSeriesVisibleInLegend(true);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(color9);
-        org.junit.Assert.assertNotNull(colorSpace10);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertNull(boolean14);
-        org.junit.Assert.assertNotNull(color24);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator29);
-        org.junit.Assert.assertNull(paint33);
-        org.junit.Assert.assertNotNull(renderAttributes34);
-        org.junit.Assert.assertNotNull(font40);
-    }
-
-    @Test
-    public void test2023() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2023");
-        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
-        boolean boolean1 = barRenderer0.isDrawBarOutline();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color5 = java.awt.Color.BLUE;
-        lineAndShapeRenderer4.setBaseItemLabelPaint((java.awt.Paint) color5);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator10 = lineAndShapeRenderer4.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition11 = lineAndShapeRenderer4.getBaseNegativeItemLabelPosition();
-        barRenderer0.setNegativeItemLabelPositionFallback(itemLabelPosition11);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition13 = barRenderer0.getPositiveItemLabelPositionFallback();
-        double double14 = barRenderer0.getMaximumBarWidth();
-        org.jfree.chart.util.StandardGradientPaintTransformer standardGradientPaintTransformer15 = new org.jfree.chart.util.StandardGradientPaintTransformer();
-        java.lang.Object obj16 = standardGradientPaintTransformer15.clone();
-        barRenderer0.setGradientPaintTransformer((org.jfree.chart.util.GradientPaintTransformer) standardGradientPaintTransformer15);
-        double double18 = barRenderer0.getBase();
-        java.awt.Stroke stroke20 = barRenderer0.getSeriesOutlineStroke(0);
-        org.jfree.chart.plot.CategoryPlot categoryPlot21 = null;
-        java.awt.geom.Rectangle2D rectangle2D22 = null;
-        org.jfree.data.category.CategoryDataset categoryDataset23 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer26 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Graphics2D graphics2D27 = null;
-        org.jfree.data.category.CategoryDataset categoryDataset28 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis30 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float31 = categoryAxis30.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis32 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer35 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color36 = java.awt.Color.BLUE;
-        lineAndShapeRenderer35.setBaseItemLabelPaint((java.awt.Paint) color36);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator41 = lineAndShapeRenderer35.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot42 = new org.jfree.chart.plot.CategoryPlot(categoryDataset28, categoryAxis30, valueAxis32, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer35);
-        org.jfree.chart.axis.CategoryAxis categoryAxis43 = categoryPlot42.getDomainAxis();
-        org.jfree.chart.axis.ValueAxis valueAxis44 = null;
-        org.jfree.data.Range range45 = categoryPlot42.getDataRange(valueAxis44);
-        org.jfree.chart.axis.ValueAxis valueAxis46 = null;
-        org.jfree.chart.plot.Marker marker47 = null;
-        java.awt.geom.Rectangle2D rectangle2D48 = null;
-        lineAndShapeRenderer26.drawRangeMarker(graphics2D27, categoryPlot42, valueAxis46, marker47, rectangle2D48);
-        java.awt.Color color51 = java.awt.Color.GRAY;
-        lineAndShapeRenderer26.setSeriesFillPaint(100, (java.awt.Paint) color51, false);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer57 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color58 = java.awt.Color.BLUE;
-        lineAndShapeRenderer57.setBaseItemLabelPaint((java.awt.Paint) color58);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator63 = lineAndShapeRenderer57.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition64 = lineAndShapeRenderer57.getBaseNegativeItemLabelPosition();
-        lineAndShapeRenderer26.setSeriesNegativeItemLabelPosition((int) (short) 100, itemLabelPosition64, true);
-        lineAndShapeRenderer26.setSeriesVisible((int) (byte) 10, (java.lang.Boolean) true, false);
-        java.awt.Paint paint72 = lineAndShapeRenderer26.getSeriesOutlinePaint(5);
-        org.jfree.chart.plot.PlotRenderingInfo plotRenderingInfo73 = null;
-        org.jfree.chart.renderer.category.CategoryItemRendererState categoryItemRendererState74 = lineAndShapeRenderer26.createState(plotRenderingInfo73);
-        // The following exception was thrown during execution in test generation
-        try {
-            barRenderer0.calculateBarWidth(categoryPlot21, rectangle2D22, categoryDataset23, categoryItemRendererState74);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(color5);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator10);
-        org.junit.Assert.assertNotNull(itemLabelPosition11);
-        org.junit.Assert.assertNull(itemLabelPosition13);
-        org.junit.Assert.assertTrue("'" + double14 + "' != '" + 1.0d + "'", double14 == 1.0d);
-        org.junit.Assert.assertNotNull(obj16);
-        org.junit.Assert.assertTrue("'" + double18 + "' != '" + 0.0d + "'", double18 == 0.0d);
-        org.junit.Assert.assertNull(stroke20);
-        org.junit.Assert.assertTrue("'" + float31 + "' != '" + 0.0f + "'", float31 == 0.0f);
-        org.junit.Assert.assertNotNull(color36);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator41);
-        org.junit.Assert.assertNotNull(categoryAxis43);
-        org.junit.Assert.assertNull(range45);
-        org.junit.Assert.assertNotNull(color51);
-        org.junit.Assert.assertNotNull(color58);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator63);
-        org.junit.Assert.assertNotNull(itemLabelPosition64);
-        org.junit.Assert.assertNull(paint72);
-        org.junit.Assert.assertNotNull(categoryItemRendererState74);
-    }
-
-    @Test
-    public void test2024() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2024");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
-        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
-        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
-        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
-        java.awt.Graphics2D graphics2D9 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer12 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color13 = java.awt.Color.BLUE;
-        lineAndShapeRenderer12.setBaseItemLabelPaint((java.awt.Paint) color13);
-        java.awt.Stroke stroke16 = lineAndShapeRenderer12.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset17 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis19 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float20 = categoryAxis19.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis21 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer24 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color25 = java.awt.Color.BLUE;
-        lineAndShapeRenderer24.setBaseItemLabelPaint((java.awt.Paint) color25);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator30 = lineAndShapeRenderer24.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot31 = new org.jfree.chart.plot.CategoryPlot(categoryDataset17, categoryAxis19, valueAxis21, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer24);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer32 = categoryPlot31.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis34 = lineAndShapeRenderer12.getRangeAxis(categoryPlot31, (int) '4');
-        boolean boolean35 = categoryPlot31.isRangeCrosshairVisible();
-        java.awt.Paint paint36 = categoryPlot31.getRangeZeroBaselinePaint();
-        categoryPlot31.mapDatasetToDomainAxis((int) (byte) 1, (int) (short) 10);
-        org.jfree.chart.axis.ValueAxis valueAxis40 = null;
-        org.jfree.chart.plot.Marker marker41 = null;
-        java.awt.geom.Rectangle2D rectangle2D42 = null;
-        lineAndShapeRenderer2.drawRangeMarker(graphics2D9, categoryPlot31, valueAxis40, marker41, rectangle2D42);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition44 = lineAndShapeRenderer2.getBaseNegativeItemLabelPosition();
-        lineAndShapeRenderer2.setSeriesVisible(1, (java.lang.Boolean) false, true);
-        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
-        int int51 = lineAndShapeRenderer2.getPassCount();
-        org.junit.Assert.assertNull(shape6);
-        org.junit.Assert.assertNotNull(color13);
-        org.junit.Assert.assertNull(stroke16);
-        org.junit.Assert.assertTrue("'" + float20 + "' != '" + 0.0f + "'", float20 == 0.0f);
-        org.junit.Assert.assertNotNull(color25);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator30);
-        org.junit.Assert.assertNotNull(categoryItemRenderer32);
-        org.junit.Assert.assertNull(valueAxis34);
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
-        org.junit.Assert.assertNotNull(paint36);
-        org.junit.Assert.assertNotNull(itemLabelPosition44);
-        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 2 + "'", int51 == 2);
-    }
-
-    @Test
-    public void test2025() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2025");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
-        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
-        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
-        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer2.setUseSeriesOffset(true);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator13 = null;
-        lineAndShapeRenderer2.setBaseToolTipGenerator(categoryToolTipGenerator13);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator15 = lineAndShapeRenderer2.getLegendItemLabelGenerator();
-        java.awt.Paint paint16 = lineAndShapeRenderer2.getBaseItemLabelPaint();
-        java.awt.Font font17 = lineAndShapeRenderer2.getBaseItemLabelFont();
-        java.awt.Paint paint21 = lineAndShapeRenderer2.getItemOutlinePaint((int) (short) -1, 0, false);
-        java.lang.Object obj22 = lineAndShapeRenderer2.clone();
-        org.junit.Assert.assertNull(shape6);
-        org.junit.Assert.assertNull(font10);
-        org.junit.Assert.assertNotNull(categorySeriesLabelGenerator15);
-        org.junit.Assert.assertNotNull(paint16);
-        org.junit.Assert.assertNotNull(font17);
-        org.junit.Assert.assertNotNull(paint21);
-        org.junit.Assert.assertNotNull(obj22);
-    }
-
-    @Test
-    public void test2026() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2026");
-        org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float2 = categoryAxis1.getTickMarkInsideLength();
-        categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
-        categoryAxis1.setLabelToolTip("java.awt.Color[r=255,g=255,b=255]");
-        categoryAxis1.setUpperMargin((double) '#');
-        int int9 = categoryAxis1.getMaximumCategoryLabelLines();
-        java.awt.Paint[] paintArray10 = org.jfree.chart.plot.DefaultDrawingSupplier.DEFAULT_OUTLINE_PAINT_SEQUENCE;
-        java.awt.Paint[] paintArray11 = org.jfree.chart.ChartColor.createDefaultPaintArray();
-        java.awt.Stroke[] strokeArray12 = null;
-        java.awt.Stroke[] strokeArray13 = org.jfree.chart.plot.DefaultDrawingSupplier.DEFAULT_OUTLINE_STROKE_SEQUENCE;
-        java.awt.Shape[] shapeArray14 = null;
-        org.jfree.chart.plot.DefaultDrawingSupplier defaultDrawingSupplier15 = new org.jfree.chart.plot.DefaultDrawingSupplier(paintArray10, paintArray11, strokeArray12, strokeArray13, shapeArray14);
-        java.awt.Stroke stroke16 = defaultDrawingSupplier15.getNextOutlineStroke();
-        categoryAxis1.setTickMarkStroke(stroke16);
-        java.lang.String str18 = categoryAxis1.getLabel();
-        org.junit.Assert.assertTrue("'" + float2 + "' != '" + 0.0f + "'", float2 == 0.0f);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 1 + "'", int9 == 1);
-        org.junit.Assert.assertNotNull(paintArray10);
-        org.junit.Assert.assertNotNull(paintArray11);
-        org.junit.Assert.assertNotNull(strokeArray13);
-        org.junit.Assert.assertNotNull(stroke16);
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "hi!" + "'", str18, "hi!");
-    }
-
-    @Test
-    public void test2027() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2027");
-        org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float2 = categoryAxis1.getTickMarkInsideLength();
-        categoryAxis1.setTickLabelsVisible(false);
-        double double5 = categoryAxis1.getLowerMargin();
-        categoryAxis1.configure();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer9 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color10 = java.awt.Color.BLUE;
-        lineAndShapeRenderer9.setBaseItemLabelPaint((java.awt.Paint) color10);
-        java.awt.Stroke stroke13 = lineAndShapeRenderer9.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset14 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis16 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float17 = categoryAxis16.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis18 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer21 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color22 = java.awt.Color.BLUE;
-        lineAndShapeRenderer21.setBaseItemLabelPaint((java.awt.Paint) color22);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator27 = lineAndShapeRenderer21.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot28 = new org.jfree.chart.plot.CategoryPlot(categoryDataset14, categoryAxis16, valueAxis18, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer21);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer29 = categoryPlot28.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis31 = lineAndShapeRenderer9.getRangeAxis(categoryPlot28, (int) '4');
-        boolean boolean32 = categoryPlot28.isRangeCrosshairVisible();
-        org.jfree.chart.plot.DatasetRenderingOrder datasetRenderingOrder33 = categoryPlot28.getDatasetRenderingOrder();
-        categoryPlot28.setBackgroundImageAlignment(3);
-        java.awt.Stroke stroke36 = categoryPlot28.getRangeGridlineStroke();
-        categoryAxis1.setTickMarkStroke(stroke36);
-        categoryAxis1.setFixedDimension(6.0d);
-        java.awt.Graphics2D graphics2D40 = null;
-        java.awt.geom.Rectangle2D rectangle2D42 = null;
-        org.jfree.data.category.CategoryDataset categoryDataset43 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis45 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float46 = categoryAxis45.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis47 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer50 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color51 = java.awt.Color.BLUE;
-        lineAndShapeRenderer50.setBaseItemLabelPaint((java.awt.Paint) color51);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator56 = lineAndShapeRenderer50.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot57 = new org.jfree.chart.plot.CategoryPlot(categoryDataset43, categoryAxis45, valueAxis47, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer50);
-        org.jfree.chart.axis.CategoryAxis categoryAxis58 = categoryPlot57.getDomainAxis();
-        org.jfree.chart.axis.ValueAxis valueAxis59 = null;
-        org.jfree.data.Range range60 = categoryPlot57.getDataRange(valueAxis59);
-        java.awt.Graphics2D graphics2D61 = null;
-        java.awt.geom.Rectangle2D rectangle2D62 = null;
-        categoryPlot57.drawBackgroundImage(graphics2D61, rectangle2D62);
-        categoryPlot57.clearAnnotations();
-        org.jfree.chart.util.RectangleEdge rectangleEdge65 = categoryPlot57.getDomainAxisEdge();
-        org.jfree.chart.axis.AxisState axisState66 = null;
-        categoryAxis1.drawTickMarks(graphics2D40, 29.0d, rectangle2D42, rectangleEdge65, axisState66);
-        categoryAxis1.setTickLabelsVisible(true);
-        org.junit.Assert.assertTrue("'" + float2 + "' != '" + 0.0f + "'", float2 == 0.0f);
-        org.junit.Assert.assertTrue("'" + double5 + "' != '" + 0.05d + "'", double5 == 0.05d);
-        org.junit.Assert.assertNotNull(color10);
-        org.junit.Assert.assertNull(stroke13);
-        org.junit.Assert.assertTrue("'" + float17 + "' != '" + 0.0f + "'", float17 == 0.0f);
-        org.junit.Assert.assertNotNull(color22);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator27);
-        org.junit.Assert.assertNotNull(categoryItemRenderer29);
-        org.junit.Assert.assertNull(valueAxis31);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertNotNull(datasetRenderingOrder33);
-        org.junit.Assert.assertNotNull(stroke36);
-        org.junit.Assert.assertTrue("'" + float46 + "' != '" + 0.0f + "'", float46 == 0.0f);
-        org.junit.Assert.assertNotNull(color51);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator56);
-        org.junit.Assert.assertNotNull(categoryAxis58);
-        org.junit.Assert.assertNull(range60);
-        org.junit.Assert.assertNotNull(rectangleEdge65);
-    }
-
-    @Test
-    public void test2028() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2028");
-        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
-        boolean boolean1 = barRenderer0.isDrawBarOutline();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color5 = java.awt.Color.BLUE;
-        lineAndShapeRenderer4.setBaseItemLabelPaint((java.awt.Paint) color5);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator10 = lineAndShapeRenderer4.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition11 = lineAndShapeRenderer4.getBaseNegativeItemLabelPosition();
-        barRenderer0.setNegativeItemLabelPositionFallback(itemLabelPosition11);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator16 = null;
-        lineAndShapeRenderer15.setBaseURLGenerator(categoryURLGenerator16);
-        java.awt.Shape shape19 = lineAndShapeRenderer15.getLegendShape(0);
-        lineAndShapeRenderer15.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font23 = lineAndShapeRenderer15.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer15.setUseSeriesOffset(true);
-        java.awt.Shape shape27 = null;
-        lineAndShapeRenderer15.setSeriesShape((int) (short) 10, shape27, true);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition30 = lineAndShapeRenderer15.getBasePositiveItemLabelPosition();
-        org.jfree.chart.text.TextAnchor textAnchor31 = itemLabelPosition30.getTextAnchor();
-        barRenderer0.setPositiveItemLabelPositionFallback(itemLabelPosition30);
-        boolean boolean33 = barRenderer0.getShadowsVisible();
-        org.jfree.chart.renderer.category.BarPainter barPainter34 = barRenderer0.getBarPainter();
-        barRenderer0.setShadowVisible(false);
-        barRenderer0.setSeriesVisible(0, (java.lang.Boolean) true);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator40 = null;
-        barRenderer0.setBaseItemLabelGenerator(categoryItemLabelGenerator40, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition43 = barRenderer0.getPositiveItemLabelPositionFallback();
-        org.jfree.chart.LegendItem legendItem46 = barRenderer0.getLegendItem((-16776961), (int) (short) 0);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(color5);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator10);
-        org.junit.Assert.assertNotNull(itemLabelPosition11);
-        org.junit.Assert.assertNull(shape19);
-        org.junit.Assert.assertNull(font23);
-        org.junit.Assert.assertNotNull(itemLabelPosition30);
-        org.junit.Assert.assertNotNull(textAnchor31);
-// flaky:         org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-        org.junit.Assert.assertNotNull(barPainter34);
-        org.junit.Assert.assertNotNull(itemLabelPosition43);
-        org.junit.Assert.assertNull(legendItem46);
-    }
-
-    @Test
-    public void test2029() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2029");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
-        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator6 = null;
-        lineAndShapeRenderer2.setSeriesToolTipGenerator(10, categoryToolTipGenerator6);
-        boolean boolean8 = lineAndShapeRenderer2.getBaseSeriesVisibleInLegend();
-        java.awt.Stroke stroke10 = null;
-        lineAndShapeRenderer2.setSeriesStroke((int) 'a', stroke10, true);
-        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor14 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
-        java.awt.Color color15 = java.awt.Color.yellow;
-        boolean boolean16 = itemLabelAnchor14.equals((java.lang.Object) color15);
-        lineAndShapeRenderer2.setSeriesFillPaint((int) ' ', (java.awt.Paint) color15);
-        java.awt.Stroke stroke21 = lineAndShapeRenderer2.getItemStroke(0, (-12517568), true);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertNotNull(itemLabelAnchor14);
-        org.junit.Assert.assertNotNull(color15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(stroke21);
-    }
-
-    @Test
-    public void test2030() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2030");
-        org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
-        double double2 = rectangleInsets0.calculateBottomInset(0.0d);
-        double double4 = rectangleInsets0.trimWidth((double) '#');
-        double double6 = rectangleInsets0.calculateTopInset((double) (byte) 100);
-        java.lang.String str7 = rectangleInsets0.toString();
-        double double9 = rectangleInsets0.calculateLeftInset((-5.0d));
-        org.jfree.data.category.CategoryDataset categoryDataset10 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis12 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float13 = categoryAxis12.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis14 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer17 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color18 = java.awt.Color.BLUE;
-        lineAndShapeRenderer17.setBaseItemLabelPaint((java.awt.Paint) color18);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator23 = lineAndShapeRenderer17.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot24 = new org.jfree.chart.plot.CategoryPlot(categoryDataset10, categoryAxis12, valueAxis14, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer17);
-        org.jfree.chart.axis.CategoryAxis categoryAxis25 = categoryPlot24.getDomainAxis();
-        org.jfree.chart.axis.ValueAxis valueAxis26 = null;
-        org.jfree.data.Range range27 = categoryPlot24.getDataRange(valueAxis26);
-        org.jfree.chart.axis.AxisLocation axisLocation28 = categoryPlot24.getRangeAxisLocation();
-        categoryPlot24.clearRangeMarkers(0);
-        org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset31 = new org.jfree.data.category.DefaultCategoryDataset();
-        int int33 = defaultCategoryDataset31.getColumnIndex((java.lang.Comparable) 3.0d);
-        int int35 = defaultCategoryDataset31.getRowIndex((java.lang.Comparable) (byte) 10);
-        defaultCategoryDataset31.clearSelection();
-        int int37 = categoryPlot24.indexOf((org.jfree.data.category.CategoryDataset) defaultCategoryDataset31);
-        defaultCategoryDataset31.validateObject();
-        defaultCategoryDataset31.clear();
-        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo40 = new org.jfree.chart.event.DatasetChangeInfo();
-        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent41 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-5.0d), (org.jfree.data.general.Dataset) defaultCategoryDataset31, datasetChangeInfo40);
-        int int42 = defaultCategoryDataset31.getRowCount();
-        org.junit.Assert.assertNotNull(rectangleInsets0);
-        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 3.0d + "'", double2 == 3.0d);
-        org.junit.Assert.assertTrue("'" + double4 + "' != '" + 29.0d + "'", double4 == 29.0d);
-        org.junit.Assert.assertTrue("'" + double6 + "' != '" + 3.0d + "'", double6 == 3.0d);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "RectangleInsets[t=3.0,l=3.0,b=3.0,r=3.0]" + "'", str7, "RectangleInsets[t=3.0,l=3.0,b=3.0,r=3.0]");
-        org.junit.Assert.assertTrue("'" + double9 + "' != '" + 3.0d + "'", double9 == 3.0d);
-        org.junit.Assert.assertTrue("'" + float13 + "' != '" + 0.0f + "'", float13 == 0.0f);
-        org.junit.Assert.assertNotNull(color18);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator23);
-        org.junit.Assert.assertNotNull(categoryAxis25);
-        org.junit.Assert.assertNull(range27);
-        org.junit.Assert.assertNotNull(axisLocation28);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + (-1) + "'", int33 == (-1));
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + (-1) + "'", int35 == (-1));
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + (-1) + "'", int37 == (-1));
-        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
-    }
-
-    @Test
-    public void test2031() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2031");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
-        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
-        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
-        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer2.setUseSeriesOffset(true);
-        int int13 = lineAndShapeRenderer2.getColumnCount();
-        lineAndShapeRenderer2.setBaseSeriesVisibleInLegend(true);
-        boolean boolean17 = lineAndShapeRenderer2.isSeriesVisibleInLegend(3);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator19 = lineAndShapeRenderer2.getSeriesToolTipGenerator((int) (byte) 0);
-        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator standardCategorySeriesLabelGenerator21 = new org.jfree.chart.labels.StandardCategorySeriesLabelGenerator("{0}");
-        lineAndShapeRenderer2.setLegendItemURLGenerator((org.jfree.chart.labels.CategorySeriesLabelGenerator) standardCategorySeriesLabelGenerator21);
-        java.lang.Boolean boolean24 = lineAndShapeRenderer2.getSeriesCreateEntities(255);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator25 = lineAndShapeRenderer2.getBaseToolTipGenerator();
-        org.jfree.chart.annotations.CategoryAnnotation categoryAnnotation26 = null;
-        boolean boolean27 = lineAndShapeRenderer2.removeAnnotation(categoryAnnotation26);
-        boolean boolean30 = lineAndShapeRenderer2.getItemVisible((int) (short) -1, (int) (short) -1);
-        org.junit.Assert.assertNull(shape6);
-        org.junit.Assert.assertNull(font10);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
-        org.junit.Assert.assertNull(categoryToolTipGenerator19);
-        org.junit.Assert.assertNull(boolean24);
-        org.junit.Assert.assertNull(categoryToolTipGenerator25);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
-    }
-
-    @Test
-    public void test2032() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2032");
-        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float3 = categoryAxis2.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
-        boolean boolean15 = categoryPlot14.canSelectByPoint();
-        org.jfree.chart.axis.AxisLocation axisLocation17 = categoryPlot14.getDomainAxisLocation((int) (byte) 0);
-        org.jfree.chart.util.RectangleEdge rectangleEdge19 = categoryPlot14.getRangeAxisEdge((int) (short) 10);
-        categoryPlot14.setRangeGridlinesVisible(false);
-        java.awt.Paint[] paintArray22 = org.jfree.chart.plot.DefaultDrawingSupplier.DEFAULT_OUTLINE_PAINT_SEQUENCE;
-        java.awt.Paint[] paintArray23 = org.jfree.chart.ChartColor.createDefaultPaintArray();
-        java.awt.Stroke[] strokeArray24 = null;
-        java.awt.Stroke[] strokeArray25 = org.jfree.chart.plot.DefaultDrawingSupplier.DEFAULT_OUTLINE_STROKE_SEQUENCE;
-        java.awt.Shape[] shapeArray26 = null;
-        org.jfree.chart.plot.DefaultDrawingSupplier defaultDrawingSupplier27 = new org.jfree.chart.plot.DefaultDrawingSupplier(paintArray22, paintArray23, strokeArray24, strokeArray25, shapeArray26);
-        categoryPlot14.setDrawingSupplier((org.jfree.chart.plot.DrawingSupplier) defaultDrawingSupplier27, true);
-        java.awt.Paint paint30 = categoryPlot14.getNoDataMessagePaint();
-        org.jfree.chart.axis.ValueAxis valueAxis32 = categoryPlot14.getRangeAxis(4);
-        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
-        org.junit.Assert.assertNotNull(axisLocation17);
-        org.junit.Assert.assertNotNull(rectangleEdge19);
-        org.junit.Assert.assertNotNull(paintArray22);
-        org.junit.Assert.assertNotNull(paintArray23);
-        org.junit.Assert.assertNotNull(strokeArray25);
-        org.junit.Assert.assertNotNull(paint30);
-        org.junit.Assert.assertNull(valueAxis32);
-    }
-
-    @Test
-    public void test2033() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2033");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer0 = new org.jfree.chart.renderer.category.LineAndShapeRenderer();
-        lineAndShapeRenderer0.setSeriesCreateEntities(192, (java.lang.Boolean) true, false);
-        lineAndShapeRenderer0.setBaseSeriesVisibleInLegend(false, false);
-        java.awt.Color color8 = org.jfree.chart.ChartColor.VERY_DARK_MAGENTA;
-        lineAndShapeRenderer0.setBaseOutlinePaint((java.awt.Paint) color8);
-        org.junit.Assert.assertNotNull(color8);
-    }
-
-    @Test
-    public void test2034() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2034");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
-        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
-        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer16 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color17 = java.awt.Color.BLUE;
-        lineAndShapeRenderer16.setBaseItemLabelPaint((java.awt.Paint) color17);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator22 = lineAndShapeRenderer16.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator23 = null;
-        lineAndShapeRenderer16.setLegendItemURLGenerator(categorySeriesLabelGenerator23);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator28 = lineAndShapeRenderer16.getToolTipGenerator((int) '#', (int) (byte) 10, false);
-        lineAndShapeRenderer16.setBaseSeriesVisible(true, true);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition33 = lineAndShapeRenderer16.getSeriesNegativeItemLabelPosition((int) (byte) -1);
-        lineAndShapeRenderer2.setSeriesPositiveItemLabelPosition(100, itemLabelPosition33, false);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer39 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color40 = java.awt.Color.BLUE;
-        lineAndShapeRenderer39.setBaseItemLabelPaint((java.awt.Paint) color40);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator45 = lineAndShapeRenderer39.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition47 = lineAndShapeRenderer39.getSeriesPositiveItemLabelPosition((int) 'a');
-        boolean boolean48 = lineAndShapeRenderer39.getBaseItemLabelsVisible();
-        java.awt.Stroke stroke52 = lineAndShapeRenderer39.getItemOutlineStroke((int) (byte) 100, (int) (short) -1, false);
-        lineAndShapeRenderer2.setSeriesStroke((int) ' ', stroke52);
-        lineAndShapeRenderer2.setBaseItemLabelsVisible(false, true);
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
-        org.junit.Assert.assertNull(paint12);
-        org.junit.Assert.assertNotNull(color17);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator22);
-        org.junit.Assert.assertNull(categoryToolTipGenerator28);
-        org.junit.Assert.assertNotNull(itemLabelPosition33);
-        org.junit.Assert.assertNotNull(color40);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator45);
-        org.junit.Assert.assertNotNull(itemLabelPosition47);
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
-        org.junit.Assert.assertNotNull(stroke52);
-    }
-
-    @Test
-    public void test2035() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2035");
-        org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
-        double double2 = rectangleInsets0.calculateBottomInset(0.0d);
-        org.jfree.chart.util.UnitType unitType3 = rectangleInsets0.getUnitType();
-        org.jfree.data.category.CategoryDataset categoryDataset4 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis6 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float7 = categoryAxis6.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis8 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer11 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color12 = java.awt.Color.BLUE;
-        lineAndShapeRenderer11.setBaseItemLabelPaint((java.awt.Paint) color12);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator17 = lineAndShapeRenderer11.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot18 = new org.jfree.chart.plot.CategoryPlot(categoryDataset4, categoryAxis6, valueAxis8, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer11);
-        org.jfree.chart.event.PlotChangeEvent plotChangeEvent19 = new org.jfree.chart.event.PlotChangeEvent((org.jfree.chart.plot.Plot) categoryPlot18);
-        java.awt.Stroke stroke20 = categoryPlot18.getRangeMinorGridlineStroke();
-        java.awt.Paint paint21 = categoryPlot18.getDomainGridlinePaint();
-        boolean boolean22 = unitType3.equals((java.lang.Object) categoryPlot18);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer25 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        boolean boolean27 = lineAndShapeRenderer25.isSeriesVisibleInLegend(1);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator29 = null;
-        lineAndShapeRenderer25.setSeriesURLGenerator(0, categoryURLGenerator29, false);
-        java.awt.Color color32 = org.jfree.chart.ChartColor.LIGHT_GREEN;
-        java.awt.color.ColorSpace colorSpace33 = color32.getColorSpace();
-        lineAndShapeRenderer25.setBaseFillPaint((java.awt.Paint) color32);
-        boolean boolean35 = lineAndShapeRenderer25.getBaseShapesVisible();
-        java.awt.Graphics2D graphics2D36 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer39 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color40 = java.awt.Color.BLUE;
-        lineAndShapeRenderer39.setBaseItemLabelPaint((java.awt.Paint) color40);
-        java.awt.Stroke stroke43 = lineAndShapeRenderer39.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset44 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis46 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float47 = categoryAxis46.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis48 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer51 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color52 = java.awt.Color.BLUE;
-        lineAndShapeRenderer51.setBaseItemLabelPaint((java.awt.Paint) color52);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator57 = lineAndShapeRenderer51.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot58 = new org.jfree.chart.plot.CategoryPlot(categoryDataset44, categoryAxis46, valueAxis48, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer51);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer59 = categoryPlot58.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis61 = lineAndShapeRenderer39.getRangeAxis(categoryPlot58, (int) '4');
-        boolean boolean62 = categoryPlot58.isRangeCrosshairVisible();
-        java.awt.Paint paint63 = categoryPlot58.getRangeZeroBaselinePaint();
-        categoryPlot58.mapDatasetToDomainAxis((int) (byte) 1, (int) (short) 10);
-        org.jfree.chart.plot.PlotOrientation plotOrientation67 = categoryPlot58.getOrientation();
-        org.jfree.data.category.CategoryDataset categoryDataset68 = null;
-        lineAndShapeRenderer25.drawItemLabel(graphics2D36, plotOrientation67, categoryDataset68, 2, (-1), true, 1.0d, (double) 'a', false);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer78 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator79 = null;
-        lineAndShapeRenderer78.setBaseURLGenerator(categoryURLGenerator79);
-        java.awt.Font font84 = lineAndShapeRenderer78.getItemLabelFont(3, (int) ' ', true);
-        lineAndShapeRenderer25.setBaseItemLabelFont(font84);
-        categoryPlot18.setNoDataMessageFont(font84);
-        org.junit.Assert.assertNotNull(rectangleInsets0);
-        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 3.0d + "'", double2 == 3.0d);
-        org.junit.Assert.assertNotNull(unitType3);
-        org.junit.Assert.assertTrue("'" + float7 + "' != '" + 0.0f + "'", float7 == 0.0f);
-        org.junit.Assert.assertNotNull(color12);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator17);
-        org.junit.Assert.assertNotNull(stroke20);
-        org.junit.Assert.assertNotNull(paint21);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
-        org.junit.Assert.assertNotNull(color32);
-        org.junit.Assert.assertNotNull(colorSpace33);
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
-        org.junit.Assert.assertNotNull(color40);
-        org.junit.Assert.assertNull(stroke43);
-        org.junit.Assert.assertTrue("'" + float47 + "' != '" + 0.0f + "'", float47 == 0.0f);
-        org.junit.Assert.assertNotNull(color52);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator57);
-        org.junit.Assert.assertNotNull(categoryItemRenderer59);
-        org.junit.Assert.assertNull(valueAxis61);
-        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
-        org.junit.Assert.assertNotNull(paint63);
-        org.junit.Assert.assertNotNull(plotOrientation67);
-        org.junit.Assert.assertNotNull(font84);
-    }
-
-    @Test
-    public void test2036() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2036");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        java.awt.Shape shape5 = lineAndShapeRenderer2.getBaseShape();
-        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getBaseOutlineStroke();
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator7 = null;
-        lineAndShapeRenderer2.setBaseItemLabelGenerator(categoryItemLabelGenerator7, false);
-        java.awt.Font font11 = lineAndShapeRenderer2.getLegendTextFont((-1));
-        org.jfree.data.category.CategoryDataset categoryDataset12 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis14 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float15 = categoryAxis14.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis16 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color20 = java.awt.Color.BLUE;
-        lineAndShapeRenderer19.setBaseItemLabelPaint((java.awt.Paint) color20);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator25 = lineAndShapeRenderer19.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot26 = new org.jfree.chart.plot.CategoryPlot(categoryDataset12, categoryAxis14, valueAxis16, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer19);
-        lineAndShapeRenderer19.setSeriesVisibleInLegend(3, (java.lang.Boolean) false, false);
-        org.jfree.chart.axis.CategoryAxis categoryAxis33 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        java.lang.Object obj34 = categoryAxis33.clone();
-        java.awt.Font font35 = categoryAxis33.getTickLabelFont();
-        lineAndShapeRenderer19.setSeriesItemLabelFont((int) '#', font35);
-        lineAndShapeRenderer2.setBaseItemLabelFont(font35);
-        lineAndShapeRenderer2.setBaseSeriesVisibleInLegend(false, false);
-        int int41 = lineAndShapeRenderer2.getDefaultEntityRadius();
-        java.awt.Stroke stroke42 = lineAndShapeRenderer2.getBaseStroke();
-        java.lang.Boolean boolean44 = lineAndShapeRenderer2.getSeriesLinesVisible(0);
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNotNull(shape5);
-        org.junit.Assert.assertNotNull(stroke6);
-        org.junit.Assert.assertNull(font11);
-        org.junit.Assert.assertTrue("'" + float15 + "' != '" + 0.0f + "'", float15 == 0.0f);
-        org.junit.Assert.assertNotNull(color20);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator25);
-        org.junit.Assert.assertNotNull(obj34);
-        org.junit.Assert.assertNotNull(font35);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 3 + "'", int41 == 3);
-        org.junit.Assert.assertNotNull(stroke42);
-        org.junit.Assert.assertNull(boolean44);
-    }
-
-    @Test
-    public void test2037() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2037");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("TextAnchor.BOTTOM_CENTER");
         java.lang.Object obj2 = null;
         boolean boolean3 = categoryAxis1.equals(obj2);
@@ -1652,9 +20,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2038() throws Throwable {
+    public void test2002() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2038");
+            System.out.format("%n%s%n", "RegressionTest4.test2002");
         org.jfree.chart.labels.StandardCategorySeriesLabelGenerator standardCategorySeriesLabelGenerator1 = new org.jfree.chart.labels.StandardCategorySeriesLabelGenerator("GradientPaintTransformType.HORIZONTAL");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset2 = new org.jfree.data.category.DefaultCategoryDataset();
         int int4 = defaultCategoryDataset2.getColumnIndex((java.lang.Comparable) 3.0d);
@@ -1712,9 +80,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2039() throws Throwable {
+    public void test2003() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2039");
+            System.out.format("%n%s%n", "RegressionTest4.test2003");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -1734,9 +102,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2040() throws Throwable {
+    public void test2004() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2040");
+            System.out.format("%n%s%n", "RegressionTest4.test2004");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1774,9 +142,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2041() throws Throwable {
+    public void test2005() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2041");
+            System.out.format("%n%s%n", "RegressionTest4.test2005");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1797,9 +165,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2042() throws Throwable {
+    public void test2006() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2042");
+            System.out.format("%n%s%n", "RegressionTest4.test2006");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1864,9 +232,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2043() throws Throwable {
+    public void test2007() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2043");
+            System.out.format("%n%s%n", "RegressionTest4.test2007");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -1904,9 +272,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2044() throws Throwable {
+    public void test2008() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2044");
+            System.out.format("%n%s%n", "RegressionTest4.test2008");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setTickLabelsVisible(false);
@@ -1950,9 +318,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2045() throws Throwable {
+    public void test2009() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2045");
+            System.out.format("%n%s%n", "RegressionTest4.test2009");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2001,9 +369,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2046() throws Throwable {
+    public void test2010() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2046");
+            System.out.format("%n%s%n", "RegressionTest4.test2010");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -2027,9 +395,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2047() throws Throwable {
+    public void test2011() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2047");
+            System.out.format("%n%s%n", "RegressionTest4.test2011");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -2093,9 +461,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2048() throws Throwable {
+    public void test2012() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2048");
+            System.out.format("%n%s%n", "RegressionTest4.test2012");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         java.lang.Object obj2 = categoryAxis1.clone();
         categoryAxis1.setMaximumCategoryLabelWidthRatio(0.0f);
@@ -2108,9 +476,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2049() throws Throwable {
+    public void test2013() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2049");
+            System.out.format("%n%s%n", "RegressionTest4.test2013");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -2204,9 +572,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2050() throws Throwable {
+    public void test2014() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2050");
+            System.out.format("%n%s%n", "RegressionTest4.test2014");
         org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor0 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE12;
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator4 = null;
@@ -2293,9 +661,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2051() throws Throwable {
+    public void test2015() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2051");
+            System.out.format("%n%s%n", "RegressionTest4.test2015");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -2361,9 +729,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2052() throws Throwable {
+    public void test2016() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2052");
+            System.out.format("%n%s%n", "RegressionTest4.test2016");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition2 = barRenderer0.getBasePositiveItemLabelPosition();
@@ -2427,9 +795,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2053() throws Throwable {
+    public void test2017() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2053");
+            System.out.format("%n%s%n", "RegressionTest4.test2017");
         org.jfree.chart.axis.CategoryAxis categoryAxis0 = new org.jfree.chart.axis.CategoryAxis();
         float float1 = categoryAxis0.getMinorTickMarkInsideLength();
         boolean boolean2 = categoryAxis0.isTickLabelsVisible();
@@ -2441,9 +809,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2054() throws Throwable {
+    public void test2018() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2054");
+            System.out.format("%n%s%n", "RegressionTest4.test2018");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -2538,9 +906,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2055() throws Throwable {
+    public void test2019() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2055");
+            System.out.format("%n%s%n", "RegressionTest4.test2019");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -2568,9 +936,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2056() throws Throwable {
+    public void test2020() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2056");
+            System.out.format("%n%s%n", "RegressionTest4.test2020");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2597,9 +965,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2057() throws Throwable {
+    public void test2021() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2057");
+            System.out.format("%n%s%n", "RegressionTest4.test2021");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -2623,9 +991,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2058() throws Throwable {
+    public void test2022() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2058");
+            System.out.format("%n%s%n", "RegressionTest4.test2022");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -2647,9 +1015,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2059() throws Throwable {
+    public void test2023() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2059");
+            System.out.format("%n%s%n", "RegressionTest4.test2023");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         keyedObjects2D0.clear();
         java.util.List list2 = keyedObjects2D0.getRowKeys();
@@ -2671,9 +1039,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2060() throws Throwable {
+    public void test2024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2060");
+            System.out.format("%n%s%n", "RegressionTest4.test2024");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -2716,9 +1084,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2061() throws Throwable {
+    public void test2025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2061");
+            System.out.format("%n%s%n", "RegressionTest4.test2025");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         java.lang.Object obj2 = categoryAxis1.clone();
         java.awt.Font font3 = categoryAxis1.getTickLabelFont();
@@ -2732,9 +1100,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2062() throws Throwable {
+    public void test2026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2062");
+            System.out.format("%n%s%n", "RegressionTest4.test2026");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2822,9 +1190,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2063() throws Throwable {
+    public void test2027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2063");
+            System.out.format("%n%s%n", "RegressionTest4.test2027");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         keyedObjects2D0.clear();
         java.lang.Object obj2 = null;
@@ -2839,9 +1207,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2064() throws Throwable {
+    public void test2028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2064");
+            System.out.format("%n%s%n", "RegressionTest4.test2028");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -2882,9 +1250,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2065() throws Throwable {
+    public void test2029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2065");
+            System.out.format("%n%s%n", "RegressionTest4.test2029");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2929,9 +1297,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2066() throws Throwable {
+    public void test2030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2066");
+            System.out.format("%n%s%n", "RegressionTest4.test2030");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -2964,9 +1332,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2067() throws Throwable {
+    public void test2031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2067");
+            System.out.format("%n%s%n", "RegressionTest4.test2031");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -2981,9 +1349,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2068() throws Throwable {
+    public void test2032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2068");
+            System.out.format("%n%s%n", "RegressionTest4.test2032");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3026,9 +1394,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2069() throws Throwable {
+    public void test2033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2069");
+            System.out.format("%n%s%n", "RegressionTest4.test2033");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -3057,9 +1425,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2070() throws Throwable {
+    public void test2034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2070");
+            System.out.format("%n%s%n", "RegressionTest4.test2034");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -3082,9 +1450,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2071() throws Throwable {
+    public void test2035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2071");
+            System.out.format("%n%s%n", "RegressionTest4.test2035");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3177,9 +1545,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2072() throws Throwable {
+    public void test2036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2072");
+            System.out.format("%n%s%n", "RegressionTest4.test2036");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3191,9 +1559,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2073() throws Throwable {
+    public void test2037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2073");
+            System.out.format("%n%s%n", "RegressionTest4.test2037");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -3216,9 +1584,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2074() throws Throwable {
+    public void test2038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2074");
+            System.out.format("%n%s%n", "RegressionTest4.test2038");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3308,9 +1676,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2075() throws Throwable {
+    public void test2039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2075");
+            System.out.format("%n%s%n", "RegressionTest4.test2039");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -3384,9 +1752,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2076() throws Throwable {
+    public void test2040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2076");
+            System.out.format("%n%s%n", "RegressionTest4.test2040");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3420,9 +1788,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2077() throws Throwable {
+    public void test2041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2077");
+            System.out.format("%n%s%n", "RegressionTest4.test2041");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -3455,9 +1823,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2078() throws Throwable {
+    public void test2042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2078");
+            System.out.format("%n%s%n", "RegressionTest4.test2042");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -3530,9 +1898,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2079() throws Throwable {
+    public void test2043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2079");
+            System.out.format("%n%s%n", "RegressionTest4.test2043");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3595,9 +1963,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2080() throws Throwable {
+    public void test2044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2080");
+            System.out.format("%n%s%n", "RegressionTest4.test2044");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -3677,9 +2045,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2081() throws Throwable {
+    public void test2045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2081");
+            System.out.format("%n%s%n", "RegressionTest4.test2045");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3699,9 +2067,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2082() throws Throwable {
+    public void test2046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2082");
+            System.out.format("%n%s%n", "RegressionTest4.test2046");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3746,9 +2114,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2083() throws Throwable {
+    public void test2047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2083");
+            System.out.format("%n%s%n", "RegressionTest4.test2047");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -3815,9 +2183,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2084() throws Throwable {
+    public void test2048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2084");
+            System.out.format("%n%s%n", "RegressionTest4.test2048");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -3847,9 +2215,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2085() throws Throwable {
+    public void test2049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2085");
+            System.out.format("%n%s%n", "RegressionTest4.test2049");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -3886,9 +2254,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2086() throws Throwable {
+    public void test2050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2086");
+            System.out.format("%n%s%n", "RegressionTest4.test2050");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
@@ -3955,9 +2323,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2087() throws Throwable {
+    public void test2051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2087");
+            System.out.format("%n%s%n", "RegressionTest4.test2051");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4028,9 +2396,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2088() throws Throwable {
+    public void test2052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2088");
+            System.out.format("%n%s%n", "RegressionTest4.test2052");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4089,9 +2457,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2089() throws Throwable {
+    public void test2053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2089");
+            System.out.format("%n%s%n", "RegressionTest4.test2053");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4142,9 +2510,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2090() throws Throwable {
+    public void test2054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2090");
+            System.out.format("%n%s%n", "RegressionTest4.test2054");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -4167,9 +2535,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2091() throws Throwable {
+    public void test2055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2091");
+            System.out.format("%n%s%n", "RegressionTest4.test2055");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -4180,9 +2548,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2092() throws Throwable {
+    public void test2056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2092");
+            System.out.format("%n%s%n", "RegressionTest4.test2056");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -4217,9 +2585,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2093() throws Throwable {
+    public void test2057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2093");
+            System.out.format("%n%s%n", "RegressionTest4.test2057");
         org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
         double double2 = rectangleInsets0.calculateBottomInset(0.0d);
         java.lang.String str3 = rectangleInsets0.toString();
@@ -4233,9 +2601,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2094() throws Throwable {
+    public void test2058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2094");
+            System.out.format("%n%s%n", "RegressionTest4.test2058");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4310,9 +2678,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2095() throws Throwable {
+    public void test2059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2095");
+            System.out.format("%n%s%n", "RegressionTest4.test2059");
         java.awt.Paint[] paintArray0 = org.jfree.chart.plot.DefaultDrawingSupplier.DEFAULT_OUTLINE_PAINT_SEQUENCE;
         java.awt.Paint[] paintArray1 = org.jfree.chart.ChartColor.createDefaultPaintArray();
         java.awt.Stroke[] strokeArray2 = null;
@@ -4329,9 +2697,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2096() throws Throwable {
+    public void test2060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2096");
+            System.out.format("%n%s%n", "RegressionTest4.test2060");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4361,9 +2729,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2097() throws Throwable {
+    public void test2061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2097");
+            System.out.format("%n%s%n", "RegressionTest4.test2061");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -4460,9 +2828,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2098() throws Throwable {
+    public void test2062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2098");
+            System.out.format("%n%s%n", "RegressionTest4.test2062");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4506,9 +2874,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2099() throws Throwable {
+    public void test2063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2099");
+            System.out.format("%n%s%n", "RegressionTest4.test2063");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -4550,9 +2918,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2100() throws Throwable {
+    public void test2064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2100");
+            System.out.format("%n%s%n", "RegressionTest4.test2064");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -4572,9 +2940,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2101() throws Throwable {
+    public void test2065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2101");
+            System.out.format("%n%s%n", "RegressionTest4.test2065");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         keyedObjects0.clear();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -4622,9 +2990,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2102() throws Throwable {
+    public void test2066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2102");
+            System.out.format("%n%s%n", "RegressionTest4.test2066");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator6 = null;
@@ -4638,9 +3006,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2103() throws Throwable {
+    public void test2067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2103");
+            System.out.format("%n%s%n", "RegressionTest4.test2067");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4741,9 +3109,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2104() throws Throwable {
+    public void test2068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2104");
+            System.out.format("%n%s%n", "RegressionTest4.test2068");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setTickLabelsVisible(false);
@@ -4794,9 +3162,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2105() throws Throwable {
+    public void test2069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2105");
+            System.out.format("%n%s%n", "RegressionTest4.test2069");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -4880,9 +3248,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2106() throws Throwable {
+    public void test2070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2106");
+            System.out.format("%n%s%n", "RegressionTest4.test2070");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -4911,9 +3279,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2107() throws Throwable {
+    public void test2071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2107");
+            System.out.format("%n%s%n", "RegressionTest4.test2071");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -4941,9 +3309,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2108() throws Throwable {
+    public void test2072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2108");
+            System.out.format("%n%s%n", "RegressionTest4.test2072");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -5006,82 +3374,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2109() throws Throwable {
+    public void test2073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2109");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
-        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
-        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
-        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer2.setUseSeriesOffset(true);
-        org.jfree.chart.plot.DrawingSupplier drawingSupplier13 = lineAndShapeRenderer2.getDrawingSupplier();
-        lineAndShapeRenderer2.setBaseCreateEntities(false);
-        java.awt.Font font19 = lineAndShapeRenderer2.getItemLabelFont((int) (short) 0, 0, false);
-        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator standardCategorySeriesLabelGenerator21 = new org.jfree.chart.labels.StandardCategorySeriesLabelGenerator("{0}");
-        lineAndShapeRenderer2.setLegendItemToolTipGenerator((org.jfree.chart.labels.CategorySeriesLabelGenerator) standardCategorySeriesLabelGenerator21);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer25 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color26 = java.awt.Color.BLUE;
-        lineAndShapeRenderer25.setBaseItemLabelPaint((java.awt.Paint) color26);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator31 = lineAndShapeRenderer25.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator32 = null;
-        lineAndShapeRenderer25.setLegendItemURLGenerator(categorySeriesLabelGenerator32);
-        java.awt.Paint paint35 = lineAndShapeRenderer25.getSeriesPaint(1);
-        java.awt.Paint paint39 = lineAndShapeRenderer25.getItemFillPaint((-1), (int) (short) 100, false);
-        java.awt.Shape shape41 = lineAndShapeRenderer25.lookupLegendShape(4);
-        lineAndShapeRenderer2.setBaseShape(shape41, true);
-        lineAndShapeRenderer2.setSeriesItemLabelsVisible((int) (short) 1, true);
-        org.jfree.data.KeyedObjects keyedObjects48 = new org.jfree.data.KeyedObjects();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer52 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color53 = java.awt.Color.BLUE;
-        lineAndShapeRenderer52.setBaseItemLabelPaint((java.awt.Paint) color53);
-        java.awt.Stroke stroke56 = lineAndShapeRenderer52.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset57 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis59 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float60 = categoryAxis59.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis61 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer64 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color65 = java.awt.Color.BLUE;
-        lineAndShapeRenderer64.setBaseItemLabelPaint((java.awt.Paint) color65);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator70 = lineAndShapeRenderer64.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot71 = new org.jfree.chart.plot.CategoryPlot(categoryDataset57, categoryAxis59, valueAxis61, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer64);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer72 = categoryPlot71.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis74 = lineAndShapeRenderer52.getRangeAxis(categoryPlot71, (int) '4');
-        boolean boolean75 = categoryPlot71.isRangeCrosshairVisible();
-        org.jfree.chart.util.RectangleEdge rectangleEdge76 = categoryPlot71.getDomainAxisEdge();
-        boolean boolean77 = categoryPlot71.isRangeZeroBaselineVisible();
-        boolean boolean78 = categoryPlot71.isDomainGridlinesVisible();
-        keyedObjects48.addObject((java.lang.Comparable) (short) 100, (java.lang.Object) categoryPlot71);
-        java.awt.Stroke stroke80 = categoryPlot71.getDomainGridlineStroke();
-        lineAndShapeRenderer2.setSeriesStroke(11, stroke80, true);
-        org.junit.Assert.assertNull(shape6);
-        org.junit.Assert.assertNull(font10);
-        org.junit.Assert.assertNull(drawingSupplier13);
-        org.junit.Assert.assertNotNull(font19);
-        org.junit.Assert.assertNotNull(color26);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator31);
-        org.junit.Assert.assertNull(paint35);
-        org.junit.Assert.assertNotNull(paint39);
-        org.junit.Assert.assertNotNull(shape41);
-        org.junit.Assert.assertNotNull(color53);
-        org.junit.Assert.assertNull(stroke56);
-        org.junit.Assert.assertTrue("'" + float60 + "' != '" + 0.0f + "'", float60 == 0.0f);
-        org.junit.Assert.assertNotNull(color65);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator70);
-        org.junit.Assert.assertNotNull(categoryItemRenderer72);
-        org.junit.Assert.assertNull(valueAxis74);
-        org.junit.Assert.assertTrue("'" + boolean75 + "' != '" + false + "'", boolean75 == false);
-        org.junit.Assert.assertNotNull(rectangleEdge76);
-        org.junit.Assert.assertTrue("'" + boolean77 + "' != '" + false + "'", boolean77 == false);
-        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + false + "'", boolean78 == false);
-        org.junit.Assert.assertNotNull(stroke80);
-    }
-
-    @Test
-    public void test2110() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2110");
+            System.out.format("%n%s%n", "RegressionTest4.test2073");
         org.jfree.chart.util.StrokeList strokeList0 = new org.jfree.chart.util.StrokeList();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
@@ -5119,55 +3414,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2111() throws Throwable {
+    public void test2074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2111");
-        org.jfree.chart.renderer.category.BarRenderer barRenderer1 = new org.jfree.chart.renderer.category.BarRenderer();
-        boolean boolean2 = barRenderer1.isDrawBarOutline();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer5 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color6 = java.awt.Color.BLUE;
-        lineAndShapeRenderer5.setBaseItemLabelPaint((java.awt.Paint) color6);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator11 = lineAndShapeRenderer5.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition12 = lineAndShapeRenderer5.getBaseNegativeItemLabelPosition();
-        barRenderer1.setNegativeItemLabelPositionFallback(itemLabelPosition12);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer16 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator17 = null;
-        lineAndShapeRenderer16.setBaseURLGenerator(categoryURLGenerator17);
-        java.awt.Shape shape20 = lineAndShapeRenderer16.getLegendShape(0);
-        lineAndShapeRenderer16.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font24 = lineAndShapeRenderer16.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer16.setUseSeriesOffset(true);
-        java.awt.Shape shape28 = null;
-        lineAndShapeRenderer16.setSeriesShape((int) (short) 10, shape28, true);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition31 = lineAndShapeRenderer16.getBasePositiveItemLabelPosition();
-        org.jfree.chart.text.TextAnchor textAnchor32 = itemLabelPosition31.getTextAnchor();
-        barRenderer1.setPositiveItemLabelPositionFallback(itemLabelPosition31);
-        boolean boolean34 = barRenderer1.getShadowsVisible();
-        org.jfree.chart.renderer.category.BarPainter barPainter35 = barRenderer1.getBarPainter();
-        java.awt.Color color36 = org.jfree.chart.ChartColor.DARK_MAGENTA;
-        barRenderer1.setShadowPaint((java.awt.Paint) color36);
-        barRenderer1.setBaseItemLabelsVisible(false, false);
-        barRenderer1.setItemMargin((double) 'a');
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition43 = barRenderer1.getPositiveItemLabelPositionFallback();
-        org.jfree.data.KeyedObject keyedObject44 = new org.jfree.data.KeyedObject((java.lang.Comparable) "ItemLabelAnchor.OUTSIDE6", (java.lang.Object) itemLabelPosition43);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(color6);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator11);
-        org.junit.Assert.assertNotNull(itemLabelPosition12);
-        org.junit.Assert.assertNull(shape20);
-        org.junit.Assert.assertNull(font24);
-        org.junit.Assert.assertNotNull(itemLabelPosition31);
-        org.junit.Assert.assertNotNull(textAnchor32);
-// flaky:         org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(barPainter35);
-        org.junit.Assert.assertNotNull(color36);
-        org.junit.Assert.assertNotNull(itemLabelPosition43);
-    }
-
-    @Test
-    public void test2112() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2112");
+            System.out.format("%n%s%n", "RegressionTest4.test2074");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -5211,9 +3460,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2113() throws Throwable {
+    public void test2075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2113");
+            System.out.format("%n%s%n", "RegressionTest4.test2075");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -5238,9 +3487,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2114() throws Throwable {
+    public void test2076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2114");
+            System.out.format("%n%s%n", "RegressionTest4.test2076");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         keyedObjects0.clear();
         int int2 = keyedObjects0.getItemCount();
@@ -5267,9 +3516,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2115() throws Throwable {
+    public void test2077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2115");
+            System.out.format("%n%s%n", "RegressionTest4.test2077");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -5293,9 +3542,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2116() throws Throwable {
+    public void test2078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2116");
+            System.out.format("%n%s%n", "RegressionTest4.test2078");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -5372,9 +3621,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2117() throws Throwable {
+    public void test2079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2117");
+            System.out.format("%n%s%n", "RegressionTest4.test2079");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -5442,9 +3691,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2118() throws Throwable {
+    public void test2080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2118");
+            System.out.format("%n%s%n", "RegressionTest4.test2080");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -5467,9 +3716,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2119() throws Throwable {
+    public void test2081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2119");
+            System.out.format("%n%s%n", "RegressionTest4.test2081");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5522,9 +3771,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2120() throws Throwable {
+    public void test2082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2120");
+            System.out.format("%n%s%n", "RegressionTest4.test2082");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.text.AttributedString attributedString2 = legendItem1.getAttributedLabel();
         java.lang.String str3 = legendItem1.getDescription();
@@ -5538,9 +3787,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2121() throws Throwable {
+    public void test2083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2121");
+            System.out.format("%n%s%n", "RegressionTest4.test2083");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         org.jfree.chart.ChartColor chartColor5 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
         legendItem1.setFillPaint((java.awt.Paint) chartColor5);
@@ -5592,9 +3841,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2122() throws Throwable {
+    public void test2084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2122");
+            System.out.format("%n%s%n", "RegressionTest4.test2084");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -5640,9 +3889,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2123() throws Throwable {
+    public void test2085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2123");
+            System.out.format("%n%s%n", "RegressionTest4.test2085");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5723,9 +3972,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2124() throws Throwable {
+    public void test2086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2124");
+            System.out.format("%n%s%n", "RegressionTest4.test2086");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5780,9 +4029,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2125() throws Throwable {
+    public void test2087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2125");
+            System.out.format("%n%s%n", "RegressionTest4.test2087");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -5859,9 +4108,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2126() throws Throwable {
+    public void test2088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2126");
+            System.out.format("%n%s%n", "RegressionTest4.test2088");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -5893,9 +4142,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2127() throws Throwable {
+    public void test2089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2127");
+            System.out.format("%n%s%n", "RegressionTest4.test2089");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5950,9 +4199,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2128() throws Throwable {
+    public void test2090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2128");
+            System.out.format("%n%s%n", "RegressionTest4.test2090");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5969,9 +4218,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2129() throws Throwable {
+    public void test2091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2129");
+            System.out.format("%n%s%n", "RegressionTest4.test2091");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -6067,9 +4316,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2130() throws Throwable {
+    public void test2092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2130");
+            System.out.format("%n%s%n", "RegressionTest4.test2092");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -6128,9 +4377,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2131() throws Throwable {
+    public void test2093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2131");
+            System.out.format("%n%s%n", "RegressionTest4.test2093");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -6159,9 +4408,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2132() throws Throwable {
+    public void test2094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2132");
+            System.out.format("%n%s%n", "RegressionTest4.test2094");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         categoryAxis1.setLowerMargin((double) 10L);
         float float4 = categoryAxis1.getMaximumCategoryLabelWidthRatio();
@@ -6170,9 +4419,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2133() throws Throwable {
+    public void test2095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2133");
+            System.out.format("%n%s%n", "RegressionTest4.test2095");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         java.lang.Object obj2 = categoryAxis1.clone();
         java.awt.Font font3 = categoryAxis1.getTickLabelFont();
@@ -6222,9 +4471,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2134() throws Throwable {
+    public void test2096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2134");
+            System.out.format("%n%s%n", "RegressionTest4.test2096");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6290,9 +4539,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2135() throws Throwable {
+    public void test2097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2135");
+            System.out.format("%n%s%n", "RegressionTest4.test2097");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6358,38 +4607,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2136() throws Throwable {
+    public void test2098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2136");
-        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float3 = categoryAxis2.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
-        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
-        org.jfree.chart.util.RectangleInsets rectangleInsets16 = categoryPlot14.getInsets();
-        org.jfree.chart.axis.AxisSpace axisSpace17 = null;
-        categoryPlot14.setFixedRangeAxisSpace(axisSpace17);
-        org.jfree.chart.axis.ValueAxis valueAxis19 = null;
-        categoryPlot14.setRangeAxis(valueAxis19);
-        categoryPlot14.setDomainCrosshairRowKey((java.lang.Comparable) 192, true);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer24 = categoryPlot14.getRenderer();
-        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
-        org.junit.Assert.assertNotNull(categoryAxis15);
-        org.junit.Assert.assertNotNull(rectangleInsets16);
-        org.junit.Assert.assertNotNull(categoryItemRenderer24);
-    }
-
-    @Test
-    public void test2137() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2137");
+            System.out.format("%n%s%n", "RegressionTest4.test2098");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -6457,9 +4677,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2138() throws Throwable {
+    public void test2099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2138");
+            System.out.format("%n%s%n", "RegressionTest4.test2099");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         keyedObjects2D0.clear();
         java.util.List list2 = keyedObjects2D0.getRowKeys();
@@ -6471,9 +4691,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2139() throws Throwable {
+    public void test2100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2139");
+            System.out.format("%n%s%n", "RegressionTest4.test2100");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6514,9 +4734,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2140() throws Throwable {
+    public void test2101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2140");
+            System.out.format("%n%s%n", "RegressionTest4.test2101");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -6573,9 +4793,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2141() throws Throwable {
+    public void test2102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2141");
+            System.out.format("%n%s%n", "RegressionTest4.test2102");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6649,9 +4869,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2142() throws Throwable {
+    public void test2103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2142");
+            System.out.format("%n%s%n", "RegressionTest4.test2103");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -6756,9 +4976,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2143() throws Throwable {
+    public void test2104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2143");
+            System.out.format("%n%s%n", "RegressionTest4.test2104");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -6827,9 +5047,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2144() throws Throwable {
+    public void test2105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2144");
+            System.out.format("%n%s%n", "RegressionTest4.test2105");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Graphics2D graphics2D3 = null;
         org.jfree.data.category.CategoryDataset categoryDataset4 = null;
@@ -6861,9 +5081,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2145() throws Throwable {
+    public void test2106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2145");
+            System.out.format("%n%s%n", "RegressionTest4.test2106");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -6891,9 +5111,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2146() throws Throwable {
+    public void test2107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2146");
+            System.out.format("%n%s%n", "RegressionTest4.test2107");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition2 = barRenderer0.getBasePositiveItemLabelPosition();
@@ -6908,9 +5128,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2147() throws Throwable {
+    public void test2108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2147");
+            System.out.format("%n%s%n", "RegressionTest4.test2108");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -6947,9 +5167,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2148() throws Throwable {
+    public void test2109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2148");
+            System.out.format("%n%s%n", "RegressionTest4.test2109");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -6991,9 +5211,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2149() throws Throwable {
+    public void test2110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2149");
+            System.out.format("%n%s%n", "RegressionTest4.test2110");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -7040,9 +5260,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2150() throws Throwable {
+    public void test2111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2150");
+            System.out.format("%n%s%n", "RegressionTest4.test2111");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -7060,9 +5280,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2151() throws Throwable {
+    public void test2112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2151");
+            System.out.format("%n%s%n", "RegressionTest4.test2112");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -7118,9 +5338,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2152() throws Throwable {
+    public void test2113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2152");
+            System.out.format("%n%s%n", "RegressionTest4.test2113");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -7200,109 +5420,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2153() throws Throwable {
+    public void test2114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2153");
-        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float3 = categoryAxis2.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
-        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
-        org.jfree.chart.axis.ValueAxis valueAxis16 = null;
-        org.jfree.data.Range range17 = categoryPlot14.getDataRange(valueAxis16);
-        java.awt.Graphics2D graphics2D18 = null;
-        java.awt.geom.Rectangle2D rectangle2D19 = null;
-        categoryPlot14.drawBackgroundImage(graphics2D18, rectangle2D19);
-        org.jfree.chart.plot.Marker marker22 = null;
-        org.jfree.chart.util.Layer layer23 = null;
-        boolean boolean25 = categoryPlot14.removeDomainMarker((int) ' ', marker22, layer23, false);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer28 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color29 = java.awt.Color.BLUE;
-        lineAndShapeRenderer28.setBaseItemLabelPaint((java.awt.Paint) color29);
-        java.awt.Stroke stroke32 = lineAndShapeRenderer28.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.data.category.CategoryDataset categoryDataset33 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis35 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float36 = categoryAxis35.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis37 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer40 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color41 = java.awt.Color.BLUE;
-        lineAndShapeRenderer40.setBaseItemLabelPaint((java.awt.Paint) color41);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator46 = lineAndShapeRenderer40.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot47 = new org.jfree.chart.plot.CategoryPlot(categoryDataset33, categoryAxis35, valueAxis37, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer40);
-        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer48 = categoryPlot47.getRenderer();
-        org.jfree.chart.axis.ValueAxis valueAxis50 = lineAndShapeRenderer28.getRangeAxis(categoryPlot47, (int) '4');
-        double double51 = categoryPlot47.getRangeCrosshairValue();
-        java.awt.Paint paint52 = categoryPlot47.getRangeZeroBaselinePaint();
-        int int53 = categoryPlot47.getRangeAxisCount();
-        java.awt.Color color54 = java.awt.Color.BLUE;
-        categoryPlot47.setRangeMinorGridlinePaint((java.awt.Paint) color54);
-        java.awt.Stroke stroke56 = categoryPlot47.getRangeMinorGridlineStroke();
-        categoryPlot47.clearRangeMarkers();
-        org.jfree.chart.event.AnnotationChangeEvent annotationChangeEvent58 = null;
-        categoryPlot47.annotationChanged(annotationChangeEvent58);
-        org.jfree.chart.util.GradientPaintTransformType gradientPaintTransformType61 = org.jfree.chart.util.GradientPaintTransformType.HORIZONTAL;
-        org.jfree.chart.util.StandardGradientPaintTransformer standardGradientPaintTransformer62 = new org.jfree.chart.util.StandardGradientPaintTransformer(gradientPaintTransformType61);
-        org.jfree.chart.axis.CategoryAxis categoryAxis64 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float65 = categoryAxis64.getTickMarkInsideLength();
-        categoryAxis64.setMaximumCategoryLabelLines((int) (byte) 1);
-        boolean boolean68 = categoryAxis64.isVisible();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer72 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator73 = null;
-        lineAndShapeRenderer72.setBaseURLGenerator(categoryURLGenerator73);
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator76 = null;
-        lineAndShapeRenderer72.setSeriesToolTipGenerator(10, categoryToolTipGenerator76);
-        boolean boolean78 = lineAndShapeRenderer72.getBaseSeriesVisibleInLegend();
-        java.awt.Stroke stroke80 = null;
-        lineAndShapeRenderer72.setSeriesStroke((int) 'a', stroke80, true);
-        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor84 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
-        java.awt.Color color85 = java.awt.Color.yellow;
-        boolean boolean86 = itemLabelAnchor84.equals((java.lang.Object) color85);
-        lineAndShapeRenderer72.setSeriesFillPaint((int) ' ', (java.awt.Paint) color85);
-        categoryAxis64.setTickLabelPaint((java.lang.Comparable) false, (java.awt.Paint) color85);
-        boolean boolean89 = standardGradientPaintTransformer62.equals((java.lang.Object) color85);
-        org.jfree.chart.util.DefaultShadowGenerator defaultShadowGenerator93 = new org.jfree.chart.util.DefaultShadowGenerator(0, color85, (float) 2, 100, (double) (short) 100);
-        categoryPlot47.setShadowGenerator((org.jfree.chart.util.ShadowGenerator) defaultShadowGenerator93);
-        categoryPlot14.setShadowGenerator((org.jfree.chart.util.ShadowGenerator) defaultShadowGenerator93);
-        boolean boolean96 = categoryPlot14.isRangeZoomable();
-        categoryPlot14.setRangeCrosshairVisible(false);
-        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
-        org.junit.Assert.assertNotNull(categoryAxis15);
-        org.junit.Assert.assertNull(range17);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertNotNull(color29);
-        org.junit.Assert.assertNull(stroke32);
-        org.junit.Assert.assertTrue("'" + float36 + "' != '" + 0.0f + "'", float36 == 0.0f);
-        org.junit.Assert.assertNotNull(color41);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator46);
-        org.junit.Assert.assertNotNull(categoryItemRenderer48);
-        org.junit.Assert.assertNull(valueAxis50);
-        org.junit.Assert.assertTrue("'" + double51 + "' != '" + 0.0d + "'", double51 == 0.0d);
-        org.junit.Assert.assertNotNull(paint52);
-        org.junit.Assert.assertTrue("'" + int53 + "' != '" + 1 + "'", int53 == 1);
-        org.junit.Assert.assertNotNull(color54);
-        org.junit.Assert.assertNotNull(stroke56);
-        org.junit.Assert.assertNotNull(gradientPaintTransformType61);
-        org.junit.Assert.assertTrue("'" + float65 + "' != '" + 0.0f + "'", float65 == 0.0f);
-        org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + true + "'", boolean68 == true);
-        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + true + "'", boolean78 == true);
-        org.junit.Assert.assertNotNull(itemLabelAnchor84);
-        org.junit.Assert.assertNotNull(color85);
-        org.junit.Assert.assertTrue("'" + boolean86 + "' != '" + false + "'", boolean86 == false);
-        org.junit.Assert.assertTrue("'" + boolean89 + "' != '" + false + "'", boolean89 == false);
-        org.junit.Assert.assertTrue("'" + boolean96 + "' != '" + true + "'", boolean96 == true);
-    }
-
-    @Test
-    public void test2154() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2154");
+            System.out.format("%n%s%n", "RegressionTest4.test2114");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color5 = java.awt.Color.BLUE;
@@ -7343,9 +5463,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2155() throws Throwable {
+    public void test2115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2155");
+            System.out.format("%n%s%n", "RegressionTest4.test2115");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -7360,9 +5480,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2156() throws Throwable {
+    public void test2116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2156");
+            System.out.format("%n%s%n", "RegressionTest4.test2116");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -7402,9 +5522,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2157() throws Throwable {
+    public void test2117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2157");
+            System.out.format("%n%s%n", "RegressionTest4.test2117");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
@@ -7427,9 +5547,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2158() throws Throwable {
+    public void test2118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2158");
+            System.out.format("%n%s%n", "RegressionTest4.test2118");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -7455,18 +5575,18 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2159() throws Throwable {
+    public void test2119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2159");
+            System.out.format("%n%s%n", "RegressionTest4.test2119");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         java.awt.Font font2 = barRenderer0.getLegendTextFont(3);
         org.junit.Assert.assertNull(font2);
     }
 
     @Test
-    public void test2160() throws Throwable {
+    public void test2120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2160");
+            System.out.format("%n%s%n", "RegressionTest4.test2120");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -7490,9 +5610,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2161() throws Throwable {
+    public void test2121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2161");
+            System.out.format("%n%s%n", "RegressionTest4.test2121");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -7547,9 +5667,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2162() throws Throwable {
+    public void test2122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2162");
+            System.out.format("%n%s%n", "RegressionTest4.test2122");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -7569,9 +5689,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2163() throws Throwable {
+    public void test2123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2163");
+            System.out.format("%n%s%n", "RegressionTest4.test2123");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -7615,9 +5735,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2164() throws Throwable {
+    public void test2124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2164");
+            System.out.format("%n%s%n", "RegressionTest4.test2124");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         int int4 = defaultCategoryDataset0.getRowIndex((java.lang.Comparable) (byte) 10);
@@ -7680,9 +5800,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2165() throws Throwable {
+    public void test2125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2165");
+            System.out.format("%n%s%n", "RegressionTest4.test2125");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -7713,9 +5833,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2166() throws Throwable {
+    public void test2126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2166");
+            System.out.format("%n%s%n", "RegressionTest4.test2126");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -7739,9 +5859,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2167() throws Throwable {
+    public void test2127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2167");
+            System.out.format("%n%s%n", "RegressionTest4.test2127");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -7768,9 +5888,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2168() throws Throwable {
+    public void test2128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2168");
+            System.out.format("%n%s%n", "RegressionTest4.test2128");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color5 = java.awt.Color.BLUE;
@@ -7841,9 +5961,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2169() throws Throwable {
+    public void test2129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2169");
+            System.out.format("%n%s%n", "RegressionTest4.test2129");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer8 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean10 = lineAndShapeRenderer8.isSeriesVisibleInLegend(1);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator12 = null;
@@ -7917,9 +6037,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2170() throws Throwable {
+    public void test2130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2170");
+            System.out.format("%n%s%n", "RegressionTest4.test2130");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -7946,9 +6066,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2171() throws Throwable {
+    public void test2131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2171");
+            System.out.format("%n%s%n", "RegressionTest4.test2131");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         int int2 = keyedObjects2D0.getRowIndex((java.lang.Comparable) 1);
         java.lang.Object obj3 = null;
@@ -7967,9 +6087,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2172() throws Throwable {
+    public void test2132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2172");
+            System.out.format("%n%s%n", "RegressionTest4.test2132");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -8017,48 +6137,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2173() throws Throwable {
+    public void test2133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2173");
-        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
-        boolean boolean1 = barRenderer0.isDrawBarOutline();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color5 = java.awt.Color.BLUE;
-        lineAndShapeRenderer4.setBaseItemLabelPaint((java.awt.Paint) color5);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator10 = lineAndShapeRenderer4.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition11 = lineAndShapeRenderer4.getBaseNegativeItemLabelPosition();
-        barRenderer0.setNegativeItemLabelPositionFallback(itemLabelPosition11);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator16 = null;
-        lineAndShapeRenderer15.setBaseURLGenerator(categoryURLGenerator16);
-        java.awt.Shape shape19 = lineAndShapeRenderer15.getLegendShape(0);
-        lineAndShapeRenderer15.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font23 = lineAndShapeRenderer15.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer15.setUseSeriesOffset(true);
-        java.awt.Shape shape27 = null;
-        lineAndShapeRenderer15.setSeriesShape((int) (short) 10, shape27, true);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition30 = lineAndShapeRenderer15.getBasePositiveItemLabelPosition();
-        org.jfree.chart.text.TextAnchor textAnchor31 = itemLabelPosition30.getTextAnchor();
-        barRenderer0.setPositiveItemLabelPositionFallback(itemLabelPosition30);
-        barRenderer0.setSeriesItemLabelsVisible(10, true);
-        org.jfree.chart.plot.CategoryPlot categoryPlot36 = barRenderer0.getPlot();
-        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator40 = barRenderer0.getToolTipGenerator(10, 5, true);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(color5);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator10);
-        org.junit.Assert.assertNotNull(itemLabelPosition11);
-        org.junit.Assert.assertNull(shape19);
-        org.junit.Assert.assertNull(font23);
-        org.junit.Assert.assertNotNull(itemLabelPosition30);
-        org.junit.Assert.assertNotNull(textAnchor31);
-        org.junit.Assert.assertNull(categoryPlot36);
-        org.junit.Assert.assertNull(categoryToolTipGenerator40);
-    }
-
-    @Test
-    public void test2174() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2174");
+            System.out.format("%n%s%n", "RegressionTest4.test2133");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -8089,9 +6170,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2175() throws Throwable {
+    public void test2134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2175");
+            System.out.format("%n%s%n", "RegressionTest4.test2134");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -8139,9 +6220,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2176() throws Throwable {
+    public void test2135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2176");
+            System.out.format("%n%s%n", "RegressionTest4.test2135");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setTickLabelsVisible(false);
@@ -8170,50 +6251,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2177() throws Throwable {
+    public void test2136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2177");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
-        lineAndShapeRenderer2.setSeriesURLGenerator(0, categoryURLGenerator6, false);
-        java.awt.Color color9 = org.jfree.chart.ChartColor.LIGHT_GREEN;
-        java.awt.color.ColorSpace colorSpace10 = color9.getColorSpace();
-        lineAndShapeRenderer2.setBaseFillPaint((java.awt.Paint) color9);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator15 = null;
-        lineAndShapeRenderer14.setBaseURLGenerator(categoryURLGenerator15);
-        java.awt.Shape shape18 = lineAndShapeRenderer14.getLegendShape(0);
-        lineAndShapeRenderer14.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font22 = lineAndShapeRenderer14.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer14.setUseSeriesOffset(true);
-        java.awt.Shape shape26 = null;
-        lineAndShapeRenderer14.setSeriesShape((int) (short) 10, shape26, true);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition29 = lineAndShapeRenderer14.getBasePositiveItemLabelPosition();
-        lineAndShapeRenderer2.setBasePositiveItemLabelPosition(itemLabelPosition29);
-        java.awt.Stroke stroke31 = lineAndShapeRenderer2.getBaseOutlineStroke();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer35 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color36 = java.awt.Color.BLUE;
-        lineAndShapeRenderer35.setBaseItemLabelPaint((java.awt.Paint) color36);
-        java.awt.Stroke stroke39 = lineAndShapeRenderer35.getSeriesOutlineStroke((int) (short) 1);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition41 = lineAndShapeRenderer35.getSeriesNegativeItemLabelPosition((int) (short) 1);
-        lineAndShapeRenderer2.setSeriesNegativeItemLabelPosition(50, itemLabelPosition41, false);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(color9);
-        org.junit.Assert.assertNotNull(colorSpace10);
-        org.junit.Assert.assertNull(shape18);
-        org.junit.Assert.assertNull(font22);
-        org.junit.Assert.assertNotNull(itemLabelPosition29);
-        org.junit.Assert.assertNotNull(stroke31);
-        org.junit.Assert.assertNotNull(color36);
-        org.junit.Assert.assertNull(stroke39);
-        org.junit.Assert.assertNotNull(itemLabelPosition41);
-    }
-
-    @Test
-    public void test2178() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2178");
+            System.out.format("%n%s%n", "RegressionTest4.test2136");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -8248,9 +6288,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2179() throws Throwable {
+    public void test2137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2179");
+            System.out.format("%n%s%n", "RegressionTest4.test2137");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color5 = java.awt.Color.BLUE;
@@ -8357,9 +6397,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2180() throws Throwable {
+    public void test2138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2180");
+            System.out.format("%n%s%n", "RegressionTest4.test2138");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -8391,9 +6431,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2181() throws Throwable {
+    public void test2139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2181");
+            System.out.format("%n%s%n", "RegressionTest4.test2139");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -8452,9 +6492,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2182() throws Throwable {
+    public void test2140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2182");
+            System.out.format("%n%s%n", "RegressionTest4.test2140");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -8474,9 +6514,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2183() throws Throwable {
+    public void test2141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2183");
+            System.out.format("%n%s%n", "RegressionTest4.test2141");
         java.awt.Color color0 = org.jfree.chart.ChartColor.DARK_RED;
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
@@ -8551,9 +6591,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2184() throws Throwable {
+    public void test2142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2184");
+            System.out.format("%n%s%n", "RegressionTest4.test2142");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -8578,9 +6618,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2185() throws Throwable {
+    public void test2143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2185");
+            System.out.format("%n%s%n", "RegressionTest4.test2143");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -8633,9 +6673,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2186() throws Throwable {
+    public void test2144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2186");
+            System.out.format("%n%s%n", "RegressionTest4.test2144");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -8677,9 +6717,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2187() throws Throwable {
+    public void test2145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2187");
+            System.out.format("%n%s%n", "RegressionTest4.test2145");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -8719,9 +6759,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2188() throws Throwable {
+    public void test2146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2188");
+            System.out.format("%n%s%n", "RegressionTest4.test2146");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -8746,9 +6786,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2189() throws Throwable {
+    public void test2147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2189");
+            System.out.format("%n%s%n", "RegressionTest4.test2147");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -8772,9 +6812,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2190() throws Throwable {
+    public void test2148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2190");
+            System.out.format("%n%s%n", "RegressionTest4.test2148");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -8838,9 +6878,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2191() throws Throwable {
+    public void test2149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2191");
+            System.out.format("%n%s%n", "RegressionTest4.test2149");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -8863,42 +6903,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2192() throws Throwable {
+    public void test2150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2192");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        java.awt.Shape shape5 = lineAndShapeRenderer2.getBaseShape();
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer8 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator9 = null;
-        lineAndShapeRenderer8.setBaseURLGenerator(categoryURLGenerator9);
-        java.awt.Shape shape12 = lineAndShapeRenderer8.getLegendShape(0);
-        lineAndShapeRenderer8.setAutoPopulateSeriesStroke(false);
-        java.awt.Font font16 = lineAndShapeRenderer8.getSeriesItemLabelFont(0);
-        lineAndShapeRenderer8.setUseSeriesOffset(true);
-        java.awt.Font font20 = null;
-        lineAndShapeRenderer8.setSeriesItemLabelFont((int) (short) 1, font20, false);
-        java.awt.Stroke stroke26 = lineAndShapeRenderer8.getItemOutlineStroke(0, 1, false);
-        lineAndShapeRenderer2.setBaseStroke(stroke26, true);
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition29 = lineAndShapeRenderer2.getBasePositiveItemLabelPosition();
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator31 = null;
-        lineAndShapeRenderer2.setSeriesItemLabelGenerator(11, categoryItemLabelGenerator31);
-        double double33 = lineAndShapeRenderer2.getItemLabelAnchorOffset();
-        lineAndShapeRenderer2.setItemLabelAnchorOffset(6.0d);
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNotNull(shape5);
-        org.junit.Assert.assertNull(shape12);
-        org.junit.Assert.assertNull(font16);
-        org.junit.Assert.assertNotNull(stroke26);
-        org.junit.Assert.assertNotNull(itemLabelPosition29);
-        org.junit.Assert.assertTrue("'" + double33 + "' != '" + 2.0d + "'", double33 == 2.0d);
-    }
-
-    @Test
-    public void test2193() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2193");
+            System.out.format("%n%s%n", "RegressionTest4.test2150");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -8922,9 +6929,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2194() throws Throwable {
+    public void test2151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2194");
+            System.out.format("%n%s%n", "RegressionTest4.test2151");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -8965,9 +6972,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2195() throws Throwable {
+    public void test2152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2195");
+            System.out.format("%n%s%n", "RegressionTest4.test2152");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -8990,9 +6997,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2196() throws Throwable {
+    public void test2153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2196");
+            System.out.format("%n%s%n", "RegressionTest4.test2153");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9058,9 +7065,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2197() throws Throwable {
+    public void test2154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2197");
+            System.out.format("%n%s%n", "RegressionTest4.test2154");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -9149,44 +7156,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2198() throws Throwable {
+    public void test2155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2198");
-        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float3 = categoryAxis2.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
-        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
-        categoryAxis15.setLabelAngle(3.0d);
-        categoryAxis15.setMinorTickMarkInsideLength(2.0f);
-        org.jfree.chart.axis.CategoryAxis categoryAxis21 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float22 = categoryAxis21.getTickMarkInsideLength();
-        categoryAxis21.setTickLabelsVisible(false);
-        double double25 = categoryAxis21.getLowerMargin();
-        java.lang.String str26 = categoryAxis21.getLabelToolTip();
-        org.jfree.chart.axis.CategoryLabelPositions categoryLabelPositions27 = categoryAxis21.getCategoryLabelPositions();
-        categoryAxis15.setCategoryLabelPositions(categoryLabelPositions27);
-        org.jfree.chart.axis.CategoryLabelPositions categoryLabelPositions29 = categoryAxis15.getCategoryLabelPositions();
-        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
-        org.junit.Assert.assertNotNull(categoryAxis15);
-        org.junit.Assert.assertTrue("'" + float22 + "' != '" + 0.0f + "'", float22 == 0.0f);
-        org.junit.Assert.assertTrue("'" + double25 + "' != '" + 0.05d + "'", double25 == 0.05d);
-        org.junit.Assert.assertNull(str26);
-        org.junit.Assert.assertNotNull(categoryLabelPositions27);
-        org.junit.Assert.assertNotNull(categoryLabelPositions29);
-    }
-
-    @Test
-    public void test2199() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2199");
+            System.out.format("%n%s%n", "RegressionTest4.test2155");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -9213,9 +7185,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2200() throws Throwable {
+    public void test2156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2200");
+            System.out.format("%n%s%n", "RegressionTest4.test2156");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9235,9 +7207,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2201() throws Throwable {
+    public void test2157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2201");
+            System.out.format("%n%s%n", "RegressionTest4.test2157");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         int int4 = defaultCategoryDataset0.getRowIndex((java.lang.Comparable) (byte) 10);
@@ -9300,9 +7272,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2202() throws Throwable {
+    public void test2158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2202");
+            System.out.format("%n%s%n", "RegressionTest4.test2158");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9352,9 +7324,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2203() throws Throwable {
+    public void test2159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2203");
+            System.out.format("%n%s%n", "RegressionTest4.test2159");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
@@ -9392,9 +7364,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2204() throws Throwable {
+    public void test2160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2204");
+            System.out.format("%n%s%n", "RegressionTest4.test2160");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9433,9 +7405,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2205() throws Throwable {
+    public void test2161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2205");
+            System.out.format("%n%s%n", "RegressionTest4.test2161");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9525,9 +7497,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2206() throws Throwable {
+    public void test2162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2206");
+            System.out.format("%n%s%n", "RegressionTest4.test2162");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator6 = null;
@@ -9553,9 +7525,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2207() throws Throwable {
+    public void test2163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2207");
+            System.out.format("%n%s%n", "RegressionTest4.test2163");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -9591,9 +7563,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2208() throws Throwable {
+    public void test2164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2208");
+            System.out.format("%n%s%n", "RegressionTest4.test2164");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -9623,9 +7595,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2209() throws Throwable {
+    public void test2165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2209");
+            System.out.format("%n%s%n", "RegressionTest4.test2165");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9643,9 +7615,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2210() throws Throwable {
+    public void test2166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2210");
+            System.out.format("%n%s%n", "RegressionTest4.test2166");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9678,9 +7650,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2211() throws Throwable {
+    public void test2167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2211");
+            System.out.format("%n%s%n", "RegressionTest4.test2167");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9717,9 +7689,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2212() throws Throwable {
+    public void test2168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2212");
+            System.out.format("%n%s%n", "RegressionTest4.test2168");
         org.jfree.chart.axis.CategoryAxis categoryAxis0 = new org.jfree.chart.axis.CategoryAxis();
         float float1 = categoryAxis0.getMinorTickMarkInsideLength();
         categoryAxis0.setLabelToolTip("java.awt.Color[r=255,g=255,b=255]");
@@ -9730,9 +7702,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2213() throws Throwable {
+    public void test2169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2213");
+            System.out.format("%n%s%n", "RegressionTest4.test2169");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -9751,9 +7723,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2214() throws Throwable {
+    public void test2170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2214");
+            System.out.format("%n%s%n", "RegressionTest4.test2170");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -9773,9 +7745,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2215() throws Throwable {
+    public void test2171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2215");
+            System.out.format("%n%s%n", "RegressionTest4.test2171");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -9799,9 +7771,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2216() throws Throwable {
+    public void test2172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2216");
+            System.out.format("%n%s%n", "RegressionTest4.test2172");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -9833,9 +7805,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2217() throws Throwable {
+    public void test2173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2217");
+            System.out.format("%n%s%n", "RegressionTest4.test2173");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -9905,16 +7877,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2218() throws Throwable {
+    public void test2174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2218");
+            System.out.format("%n%s%n", "RegressionTest4.test2174");
         org.jfree.chart.labels.StandardCategorySeriesLabelGenerator standardCategorySeriesLabelGenerator1 = new org.jfree.chart.labels.StandardCategorySeriesLabelGenerator("hi!");
     }
 
     @Test
-    public void test2219() throws Throwable {
+    public void test2175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2219");
+            System.out.format("%n%s%n", "RegressionTest4.test2175");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -9961,9 +7933,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2220() throws Throwable {
+    public void test2176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2220");
+            System.out.format("%n%s%n", "RegressionTest4.test2176");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
@@ -9975,9 +7947,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2221() throws Throwable {
+    public void test2177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2221");
+            System.out.format("%n%s%n", "RegressionTest4.test2177");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -9999,9 +7971,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2222() throws Throwable {
+    public void test2178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2222");
+            System.out.format("%n%s%n", "RegressionTest4.test2178");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -10053,9 +8025,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2223() throws Throwable {
+    public void test2179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2223");
+            System.out.format("%n%s%n", "RegressionTest4.test2179");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -10130,9 +8102,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2224() throws Throwable {
+    public void test2180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2224");
+            System.out.format("%n%s%n", "RegressionTest4.test2180");
         org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
         double double2 = rectangleInsets0.calculateBottomInset(0.0d);
         double double4 = rectangleInsets0.trimWidth((double) '#');
@@ -10189,9 +8161,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2225() throws Throwable {
+    public void test2181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2225");
+            System.out.format("%n%s%n", "RegressionTest4.test2181");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -10219,9 +8191,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2226() throws Throwable {
+    public void test2182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2226");
+            System.out.format("%n%s%n", "RegressionTest4.test2182");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -10239,17 +8211,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2227() throws Throwable {
+    public void test2183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2227");
+            System.out.format("%n%s%n", "RegressionTest4.test2183");
         java.awt.Color color2 = java.awt.Color.getColor("", 11);
         org.junit.Assert.assertNotNull(color2);
     }
 
     @Test
-    public void test2228() throws Throwable {
+    public void test2184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2228");
+            System.out.format("%n%s%n", "RegressionTest4.test2184");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         java.awt.Font font5 = lineAndShapeRenderer2.getBaseItemLabelFont();
@@ -10266,9 +8238,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2229() throws Throwable {
+    public void test2185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2229");
+            System.out.format("%n%s%n", "RegressionTest4.test2185");
         org.jfree.chart.util.GradientPaintTransformType gradientPaintTransformType0 = org.jfree.chart.util.GradientPaintTransformType.CENTER_HORIZONTAL;
         org.jfree.chart.util.StandardGradientPaintTransformer standardGradientPaintTransformer1 = new org.jfree.chart.util.StandardGradientPaintTransformer(gradientPaintTransformType0);
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -10319,9 +8291,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2230() throws Throwable {
+    public void test2186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2230");
+            System.out.format("%n%s%n", "RegressionTest4.test2186");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
         lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
@@ -10370,9 +8342,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2231() throws Throwable {
+    public void test2187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2231");
+            System.out.format("%n%s%n", "RegressionTest4.test2187");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator6 = null;
@@ -10388,9 +8360,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2232() throws Throwable {
+    public void test2188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2232");
+            System.out.format("%n%s%n", "RegressionTest4.test2188");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -10425,9 +8397,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2233() throws Throwable {
+    public void test2189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2233");
+            System.out.format("%n%s%n", "RegressionTest4.test2189");
         java.awt.Color color4 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         org.jfree.chart.util.DefaultShadowGenerator defaultShadowGenerator8 = new org.jfree.chart.util.DefaultShadowGenerator((int) '#', color4, (float) 4, 0, 29.0d);
         int int9 = color4.getGreen();
@@ -10438,9 +8410,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2234() throws Throwable {
+    public void test2190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2234");
+            System.out.format("%n%s%n", "RegressionTest4.test2190");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -10526,9 +8498,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2235() throws Throwable {
+    public void test2191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2235");
+            System.out.format("%n%s%n", "RegressionTest4.test2191");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -10548,9 +8520,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2236() throws Throwable {
+    public void test2192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2236");
+            System.out.format("%n%s%n", "RegressionTest4.test2192");
         org.jfree.chart.util.BooleanList booleanList0 = new org.jfree.chart.util.BooleanList();
         org.jfree.data.category.CategoryDataset categoryDataset1 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis3 = new org.jfree.chart.axis.CategoryAxis("hi!");
@@ -10579,9 +8551,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2237() throws Throwable {
+    public void test2193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2237");
+            System.out.format("%n%s%n", "RegressionTest4.test2193");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -10638,9 +8610,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2238() throws Throwable {
+    public void test2194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2238");
+            System.out.format("%n%s%n", "RegressionTest4.test2194");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -10663,9 +8635,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2239() throws Throwable {
+    public void test2195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2239");
+            System.out.format("%n%s%n", "RegressionTest4.test2195");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -10720,9 +8692,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2240() throws Throwable {
+    public void test2196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2240");
+            System.out.format("%n%s%n", "RegressionTest4.test2196");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         java.util.List list3 = defaultCategoryDataset0.getColumnKeys();
@@ -10738,17 +8710,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2241() throws Throwable {
+    public void test2197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2241");
+            System.out.format("%n%s%n", "RegressionTest4.test2197");
         java.awt.Color color1 = java.awt.Color.getColor("SortOrder.ASCENDING");
         org.junit.Assert.assertNull(color1);
     }
 
     @Test
-    public void test2242() throws Throwable {
+    public void test2198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2242");
+            System.out.format("%n%s%n", "RegressionTest4.test2198");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -10789,9 +8761,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2243() throws Throwable {
+    public void test2199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2243");
+            System.out.format("%n%s%n", "RegressionTest4.test2199");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -10815,9 +8787,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2244() throws Throwable {
+    public void test2200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2244");
+            System.out.format("%n%s%n", "RegressionTest4.test2200");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         java.util.List list3 = defaultCategoryDataset0.getColumnKeys();
@@ -10831,9 +8803,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2245() throws Throwable {
+    public void test2201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2245");
+            System.out.format("%n%s%n", "RegressionTest4.test2201");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -10855,23 +8827,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2246() throws Throwable {
+    public void test2202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2246");
-        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
-        boolean boolean1 = barRenderer0.isDrawBarOutline();
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition2 = barRenderer0.getBasePositiveItemLabelPosition();
-        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition3 = barRenderer0.getPositiveItemLabelPositionFallback();
-        barRenderer0.setMinimumBarLength(0.0d);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(itemLabelPosition2);
-        org.junit.Assert.assertNull(itemLabelPosition3);
-    }
-
-    @Test
-    public void test2247() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2247");
+            System.out.format("%n%s%n", "RegressionTest4.test2202");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
@@ -10956,9 +8914,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2248() throws Throwable {
+    public void test2203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2248");
+            System.out.format("%n%s%n", "RegressionTest4.test2203");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
@@ -10985,9 +8943,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2249() throws Throwable {
+    public void test2204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2249");
+            System.out.format("%n%s%n", "RegressionTest4.test2204");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -11048,9 +9006,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2250() throws Throwable {
+    public void test2205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2250");
+            System.out.format("%n%s%n", "RegressionTest4.test2205");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -11125,9 +9083,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2251() throws Throwable {
+    public void test2206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2251");
+            System.out.format("%n%s%n", "RegressionTest4.test2206");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -11163,9 +9121,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2252() throws Throwable {
+    public void test2207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2252");
+            System.out.format("%n%s%n", "RegressionTest4.test2207");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -11254,9 +9212,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2253() throws Throwable {
+    public void test2208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2253");
+            System.out.format("%n%s%n", "RegressionTest4.test2208");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -11284,9 +9242,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2254() throws Throwable {
+    public void test2209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2254");
+            System.out.format("%n%s%n", "RegressionTest4.test2209");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.text.AttributedString attributedString2 = legendItem1.getAttributedLabel();
         java.lang.String str3 = legendItem1.getDescription();
@@ -11326,9 +9284,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2255() throws Throwable {
+    public void test2210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2255");
+            System.out.format("%n%s%n", "RegressionTest4.test2210");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -11347,9 +9305,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2256() throws Throwable {
+    public void test2211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2256");
+            System.out.format("%n%s%n", "RegressionTest4.test2211");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -11368,9 +9326,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2257() throws Throwable {
+    public void test2212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2257");
+            System.out.format("%n%s%n", "RegressionTest4.test2212");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator7 = null;
         lineAndShapeRenderer6.setBaseURLGenerator(categoryURLGenerator7);
@@ -11443,9 +9401,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2258() throws Throwable {
+    public void test2213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2258");
+            System.out.format("%n%s%n", "RegressionTest4.test2213");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -11512,9 +9470,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2259() throws Throwable {
+    public void test2214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2259");
+            System.out.format("%n%s%n", "RegressionTest4.test2214");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
@@ -11576,9 +9534,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2260() throws Throwable {
+    public void test2215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2260");
+            System.out.format("%n%s%n", "RegressionTest4.test2215");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -11672,9 +9630,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2261() throws Throwable {
+    public void test2216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2261");
+            System.out.format("%n%s%n", "RegressionTest4.test2216");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -11688,9 +9646,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2262() throws Throwable {
+    public void test2217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2262");
+            System.out.format("%n%s%n", "RegressionTest4.test2217");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -11711,9 +9669,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2263() throws Throwable {
+    public void test2218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2263");
+            System.out.format("%n%s%n", "RegressionTest4.test2218");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
@@ -11747,9 +9705,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2264() throws Throwable {
+    public void test2219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2264");
+            System.out.format("%n%s%n", "RegressionTest4.test2219");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -11773,9 +9731,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2265() throws Throwable {
+    public void test2220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2265");
+            System.out.format("%n%s%n", "RegressionTest4.test2220");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -11817,9 +9775,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2266() throws Throwable {
+    public void test2221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2266");
+            System.out.format("%n%s%n", "RegressionTest4.test2221");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -11914,9 +9872,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2267() throws Throwable {
+    public void test2222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2267");
+            System.out.format("%n%s%n", "RegressionTest4.test2222");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         org.jfree.chart.ChartColor chartColor5 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
         legendItem1.setFillPaint((java.awt.Paint) chartColor5);
@@ -11931,9 +9889,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2268() throws Throwable {
+    public void test2223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2268");
+            System.out.format("%n%s%n", "RegressionTest4.test2223");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -12017,9 +9975,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2269() throws Throwable {
+    public void test2224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2269");
+            System.out.format("%n%s%n", "RegressionTest4.test2224");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -12063,17 +10021,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2270() throws Throwable {
+    public void test2225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2270");
+            System.out.format("%n%s%n", "RegressionTest4.test2225");
         org.jfree.chart.text.TextAnchor textAnchor0 = org.jfree.chart.text.TextAnchor.HALF_ASCENT_CENTER;
         org.junit.Assert.assertNotNull(textAnchor0);
     }
 
     @Test
-    public void test2271() throws Throwable {
+    public void test2226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2271");
+            System.out.format("%n%s%n", "RegressionTest4.test2226");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         org.jfree.data.general.Dataset dataset2 = null;
         legendItem1.setDataset(dataset2);
@@ -12098,31 +10056,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2272() throws Throwable {
+    public void test2227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2272");
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color3 = java.awt.Color.BLUE;
-        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
-        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
-        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
-        java.awt.Paint paint16 = lineAndShapeRenderer2.getItemFillPaint((-1), (int) (short) 100, false);
-        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator17 = lineAndShapeRenderer2.getLegendItemURLGenerator();
-        java.awt.Paint paint18 = lineAndShapeRenderer2.getBaseItemLabelPaint();
-        org.junit.Assert.assertNotNull(color3);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
-        org.junit.Assert.assertNull(paint12);
-        org.junit.Assert.assertNotNull(paint16);
-        org.junit.Assert.assertNull(categorySeriesLabelGenerator17);
-        org.junit.Assert.assertNotNull(paint18);
-    }
-
-    @Test
-    public void test2273() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2273");
+            System.out.format("%n%s%n", "RegressionTest4.test2227");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -12209,9 +10145,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2274() throws Throwable {
+    public void test2228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2274");
+            System.out.format("%n%s%n", "RegressionTest4.test2228");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -12269,9 +10205,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2275() throws Throwable {
+    public void test2229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2275");
+            System.out.format("%n%s%n", "RegressionTest4.test2229");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -12334,9 +10270,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2276() throws Throwable {
+    public void test2230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2276");
+            System.out.format("%n%s%n", "RegressionTest4.test2230");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -12386,9 +10322,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2277() throws Throwable {
+    public void test2231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2277");
+            System.out.format("%n%s%n", "RegressionTest4.test2231");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color5 = java.awt.Color.BLUE;
@@ -12431,9 +10367,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2278() throws Throwable {
+    public void test2232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2278");
+            System.out.format("%n%s%n", "RegressionTest4.test2232");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -12504,9 +10440,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2279() throws Throwable {
+    public void test2233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2279");
+            System.out.format("%n%s%n", "RegressionTest4.test2233");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -12576,9 +10512,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2280() throws Throwable {
+    public void test2234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2280");
+            System.out.format("%n%s%n", "RegressionTest4.test2234");
         org.jfree.chart.event.ChartChangeEventType chartChangeEventType0 = org.jfree.chart.event.ChartChangeEventType.NEW_DATASET;
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean5 = lineAndShapeRenderer3.isSeriesVisibleInLegend(1);
@@ -12598,9 +10534,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2281() throws Throwable {
+    public void test2235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2281");
+            System.out.format("%n%s%n", "RegressionTest4.test2235");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
@@ -12626,9 +10562,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2282() throws Throwable {
+    public void test2236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2282");
+            System.out.format("%n%s%n", "RegressionTest4.test2236");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -12661,9 +10597,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2283() throws Throwable {
+    public void test2237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2283");
+            System.out.format("%n%s%n", "RegressionTest4.test2237");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -12697,9 +10633,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2284() throws Throwable {
+    public void test2238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2284");
+            System.out.format("%n%s%n", "RegressionTest4.test2238");
         org.jfree.chart.util.GradientPaintTransformType gradientPaintTransformType0 = org.jfree.chart.util.GradientPaintTransformType.CENTER_HORIZONTAL;
         org.jfree.chart.util.StandardGradientPaintTransformer standardGradientPaintTransformer1 = new org.jfree.chart.util.StandardGradientPaintTransformer(gradientPaintTransformType0);
         java.awt.Color color2 = java.awt.Color.YELLOW;
@@ -12735,9 +10671,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2285() throws Throwable {
+    public void test2239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2285");
+            System.out.format("%n%s%n", "RegressionTest4.test2239");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -12814,9 +10750,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2286() throws Throwable {
+    public void test2240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2286");
+            System.out.format("%n%s%n", "RegressionTest4.test2240");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -12893,9 +10829,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2287() throws Throwable {
+    public void test2241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2287");
+            System.out.format("%n%s%n", "RegressionTest4.test2241");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -12975,9 +10911,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2288() throws Throwable {
+    public void test2242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2288");
+            System.out.format("%n%s%n", "RegressionTest4.test2242");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -12997,9 +10933,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2289() throws Throwable {
+    public void test2243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2289");
+            System.out.format("%n%s%n", "RegressionTest4.test2243");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -13019,9 +10955,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2290() throws Throwable {
+    public void test2244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2290");
+            System.out.format("%n%s%n", "RegressionTest4.test2244");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer5 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
@@ -13070,9 +11006,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2291() throws Throwable {
+    public void test2245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2291");
+            System.out.format("%n%s%n", "RegressionTest4.test2245");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -13140,9 +11076,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2292() throws Throwable {
+    public void test2246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2292");
+            System.out.format("%n%s%n", "RegressionTest4.test2246");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -13185,9 +11121,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2293() throws Throwable {
+    public void test2247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2293");
+            System.out.format("%n%s%n", "RegressionTest4.test2247");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -13221,9 +11157,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2294() throws Throwable {
+    public void test2248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2294");
+            System.out.format("%n%s%n", "RegressionTest4.test2248");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         java.lang.Object obj2 = categoryAxis1.clone();
         categoryAxis1.setMaximumCategoryLabelWidthRatio(0.0f);
@@ -13232,9 +11168,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2295() throws Throwable {
+    public void test2249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2295");
+            System.out.format("%n%s%n", "RegressionTest4.test2249");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -13256,9 +11192,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2296() throws Throwable {
+    public void test2250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2296");
+            System.out.format("%n%s%n", "RegressionTest4.test2250");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -13273,9 +11209,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2297() throws Throwable {
+    public void test2251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2297");
+            System.out.format("%n%s%n", "RegressionTest4.test2251");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -13316,9 +11252,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2298() throws Throwable {
+    public void test2252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2298");
+            System.out.format("%n%s%n", "RegressionTest4.test2252");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -13379,9 +11315,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2299() throws Throwable {
+    public void test2253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2299");
+            System.out.format("%n%s%n", "RegressionTest4.test2253");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -13443,9 +11379,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2300() throws Throwable {
+    public void test2254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2300");
+            System.out.format("%n%s%n", "RegressionTest4.test2254");
         org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
         double double2 = rectangleInsets0.calculateBottomInset(0.0d);
         double double4 = rectangleInsets0.trimWidth((double) '#');
@@ -13501,9 +11437,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2301() throws Throwable {
+    public void test2255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2301");
+            System.out.format("%n%s%n", "RegressionTest4.test2255");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -13523,9 +11459,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2302() throws Throwable {
+    public void test2256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2302");
+            System.out.format("%n%s%n", "RegressionTest4.test2256");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -13582,9 +11518,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2303() throws Throwable {
+    public void test2257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2303");
+            System.out.format("%n%s%n", "RegressionTest4.test2257");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -13640,9 +11576,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2304() throws Throwable {
+    public void test2258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2304");
+            System.out.format("%n%s%n", "RegressionTest4.test2258");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -13718,9 +11654,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2305() throws Throwable {
+    public void test2259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2305");
+            System.out.format("%n%s%n", "RegressionTest4.test2259");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -13754,9 +11690,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2306() throws Throwable {
+    public void test2260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2306");
+            System.out.format("%n%s%n", "RegressionTest4.test2260");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -13835,9 +11771,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2307() throws Throwable {
+    public void test2261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2307");
+            System.out.format("%n%s%n", "RegressionTest4.test2261");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -13904,9 +11840,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2308() throws Throwable {
+    public void test2262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2308");
+            System.out.format("%n%s%n", "RegressionTest4.test2262");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -13932,9 +11868,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2309() throws Throwable {
+    public void test2263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2309");
+            System.out.format("%n%s%n", "RegressionTest4.test2263");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -13959,9 +11895,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2310() throws Throwable {
+    public void test2264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2310");
+            System.out.format("%n%s%n", "RegressionTest4.test2264");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
@@ -13979,9 +11915,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2311() throws Throwable {
+    public void test2265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2311");
+            System.out.format("%n%s%n", "RegressionTest4.test2265");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         java.awt.Font font5 = lineAndShapeRenderer2.getBaseItemLabelFont();
@@ -14016,9 +11952,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2312() throws Throwable {
+    public void test2266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2312");
+            System.out.format("%n%s%n", "RegressionTest4.test2266");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14073,9 +12009,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2313() throws Throwable {
+    public void test2267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2313");
+            System.out.format("%n%s%n", "RegressionTest4.test2267");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14107,9 +12043,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2314() throws Throwable {
+    public void test2268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2314");
+            System.out.format("%n%s%n", "RegressionTest4.test2268");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -14134,9 +12070,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2315() throws Throwable {
+    public void test2269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2315");
+            System.out.format("%n%s%n", "RegressionTest4.test2269");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -14180,9 +12116,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2316() throws Throwable {
+    public void test2270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2316");
+            System.out.format("%n%s%n", "RegressionTest4.test2270");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14253,9 +12189,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2317() throws Throwable {
+    public void test2271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2317");
+            System.out.format("%n%s%n", "RegressionTest4.test2271");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setTickLabelsVisible(false);
@@ -14318,9 +12254,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2318() throws Throwable {
+    public void test2272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2318");
+            System.out.format("%n%s%n", "RegressionTest4.test2272");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -14358,9 +12294,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2319() throws Throwable {
+    public void test2273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2319");
+            System.out.format("%n%s%n", "RegressionTest4.test2273");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         java.lang.Object obj2 = categoryAxis1.clone();
         categoryAxis1.setMaximumCategoryLabelWidthRatio(0.0f);
@@ -14427,9 +12363,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2320() throws Throwable {
+    public void test2274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2320");
+            System.out.format("%n%s%n", "RegressionTest4.test2274");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
@@ -14473,9 +12409,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2321() throws Throwable {
+    public void test2275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2321");
+            System.out.format("%n%s%n", "RegressionTest4.test2275");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14522,9 +12458,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2322() throws Throwable {
+    public void test2276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2322");
+            System.out.format("%n%s%n", "RegressionTest4.test2276");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14557,9 +12493,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2323() throws Throwable {
+    public void test2277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2323");
+            System.out.format("%n%s%n", "RegressionTest4.test2277");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -14602,9 +12538,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2324() throws Throwable {
+    public void test2278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2324");
+            System.out.format("%n%s%n", "RegressionTest4.test2278");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -14637,9 +12573,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2325() throws Throwable {
+    public void test2279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2325");
+            System.out.format("%n%s%n", "RegressionTest4.test2279");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14699,9 +12635,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2326() throws Throwable {
+    public void test2280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2326");
+            System.out.format("%n%s%n", "RegressionTest4.test2280");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14742,9 +12678,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2327() throws Throwable {
+    public void test2281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2327");
+            System.out.format("%n%s%n", "RegressionTest4.test2281");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14789,9 +12725,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2328() throws Throwable {
+    public void test2282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2328");
+            System.out.format("%n%s%n", "RegressionTest4.test2282");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -14827,9 +12763,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2329() throws Throwable {
+    public void test2283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2329");
+            System.out.format("%n%s%n", "RegressionTest4.test2283");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -14849,9 +12785,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2330() throws Throwable {
+    public void test2284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2330");
+            System.out.format("%n%s%n", "RegressionTest4.test2284");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -14864,9 +12800,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2331() throws Throwable {
+    public void test2285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2331");
+            System.out.format("%n%s%n", "RegressionTest4.test2285");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -14951,9 +12887,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2332() throws Throwable {
+    public void test2286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2332");
+            System.out.format("%n%s%n", "RegressionTest4.test2286");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         java.awt.Font font5 = lineAndShapeRenderer2.getBaseLegendTextFont();
@@ -14989,18 +12925,18 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2333() throws Throwable {
+    public void test2287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2333");
+            System.out.format("%n%s%n", "RegressionTest4.test2287");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("");
         java.awt.Shape shape2 = legendItem1.getLine();
         org.junit.Assert.assertNotNull(shape2);
     }
 
     @Test
-    public void test2334() throws Throwable {
+    public void test2288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2334");
+            System.out.format("%n%s%n", "RegressionTest4.test2288");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -15025,9 +12961,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2335() throws Throwable {
+    public void test2289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2335");
+            System.out.format("%n%s%n", "RegressionTest4.test2289");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -15129,9 +13065,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2336() throws Throwable {
+    public void test2290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2336");
+            System.out.format("%n%s%n", "RegressionTest4.test2290");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -15151,9 +13087,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2337() throws Throwable {
+    public void test2291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2337");
+            System.out.format("%n%s%n", "RegressionTest4.test2291");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         java.lang.Object obj2 = categoryAxis1.clone();
         java.awt.Font font3 = categoryAxis1.getTickLabelFont();
@@ -15192,9 +13128,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2338() throws Throwable {
+    public void test2292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2338");
+            System.out.format("%n%s%n", "RegressionTest4.test2292");
         org.jfree.chart.util.BooleanList booleanList0 = new org.jfree.chart.util.BooleanList();
         org.jfree.data.category.CategoryDataset categoryDataset1 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis3 = new org.jfree.chart.axis.CategoryAxis("hi!");
@@ -15234,9 +13170,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2339() throws Throwable {
+    public void test2293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2339");
+            System.out.format("%n%s%n", "RegressionTest4.test2293");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -15261,9 +13197,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2340() throws Throwable {
+    public void test2294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2340");
+            System.out.format("%n%s%n", "RegressionTest4.test2294");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator5 = null;
@@ -15285,9 +13221,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2341() throws Throwable {
+    public void test2295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2341");
+            System.out.format("%n%s%n", "RegressionTest4.test2295");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -15313,9 +13249,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2342() throws Throwable {
+    public void test2296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2342");
+            System.out.format("%n%s%n", "RegressionTest4.test2296");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -15387,9 +13323,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2343() throws Throwable {
+    public void test2297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2343");
+            System.out.format("%n%s%n", "RegressionTest4.test2297");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -15448,9 +13384,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2344() throws Throwable {
+    public void test2298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2344");
+            System.out.format("%n%s%n", "RegressionTest4.test2298");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -15482,9 +13418,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2345() throws Throwable {
+    public void test2299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2345");
+            System.out.format("%n%s%n", "RegressionTest4.test2299");
         java.text.AttributedString attributedString0 = null;
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color7 = java.awt.Color.BLUE;
@@ -15547,9 +13483,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2346() throws Throwable {
+    public void test2300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2346");
+            System.out.format("%n%s%n", "RegressionTest4.test2300");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -15570,9 +13506,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2347() throws Throwable {
+    public void test2301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2347");
+            System.out.format("%n%s%n", "RegressionTest4.test2301");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
@@ -15652,9 +13588,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2348() throws Throwable {
+    public void test2302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2348");
+            System.out.format("%n%s%n", "RegressionTest4.test2302");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -15742,9 +13678,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2349() throws Throwable {
+    public void test2303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2349");
+            System.out.format("%n%s%n", "RegressionTest4.test2303");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -15764,9 +13700,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2350() throws Throwable {
+    public void test2304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2350");
+            System.out.format("%n%s%n", "RegressionTest4.test2304");
         org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_TICK_LABEL_INSETS;
         double double1 = rectangleInsets0.getTop();
         org.junit.Assert.assertNotNull(rectangleInsets0);
@@ -15774,9 +13710,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2351() throws Throwable {
+    public void test2305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2351");
+            System.out.format("%n%s%n", "RegressionTest4.test2305");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -15815,9 +13751,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2352() throws Throwable {
+    public void test2306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2352");
+            System.out.format("%n%s%n", "RegressionTest4.test2306");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -15829,9 +13765,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2353() throws Throwable {
+    public void test2307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2353");
+            System.out.format("%n%s%n", "RegressionTest4.test2307");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -15925,9 +13861,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2354() throws Throwable {
+    public void test2308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2354");
+            System.out.format("%n%s%n", "RegressionTest4.test2308");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -16004,9 +13940,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2355() throws Throwable {
+    public void test2309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2355");
+            System.out.format("%n%s%n", "RegressionTest4.test2309");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -16069,9 +14005,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2356() throws Throwable {
+    public void test2310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2356");
+            System.out.format("%n%s%n", "RegressionTest4.test2310");
         org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor0 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
         java.awt.Color color1 = java.awt.Color.yellow;
         boolean boolean2 = itemLabelAnchor0.equals((java.lang.Object) color1);
@@ -16083,9 +14019,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2357() throws Throwable {
+    public void test2311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2357");
+            System.out.format("%n%s%n", "RegressionTest4.test2311");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -16133,9 +14069,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2358() throws Throwable {
+    public void test2312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2358");
+            System.out.format("%n%s%n", "RegressionTest4.test2312");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -16196,9 +14132,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2359() throws Throwable {
+    public void test2313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2359");
+            System.out.format("%n%s%n", "RegressionTest4.test2313");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -16217,9 +14153,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2360() throws Throwable {
+    public void test2314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2360");
+            System.out.format("%n%s%n", "RegressionTest4.test2314");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -16237,9 +14173,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2361() throws Throwable {
+    public void test2315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2361");
+            System.out.format("%n%s%n", "RegressionTest4.test2315");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -16298,9 +14234,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2362() throws Throwable {
+    public void test2316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2362");
+            System.out.format("%n%s%n", "RegressionTest4.test2316");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         int int2 = keyedObjects2D0.getRowIndex((java.lang.Comparable) 1);
         java.lang.Object obj3 = null;
@@ -16320,9 +14256,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2363() throws Throwable {
+    public void test2317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2363");
+            System.out.format("%n%s%n", "RegressionTest4.test2317");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Graphics2D graphics2D3 = null;
         org.jfree.data.category.CategoryDataset categoryDataset4 = null;
@@ -16353,9 +14289,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2364() throws Throwable {
+    public void test2318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2364");
+            System.out.format("%n%s%n", "RegressionTest4.test2318");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -16375,9 +14311,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2365() throws Throwable {
+    public void test2319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2365");
+            System.out.format("%n%s%n", "RegressionTest4.test2319");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         java.lang.Object obj2 = categoryAxis1.clone();
         java.awt.Font font3 = categoryAxis1.getTickLabelFont();
@@ -16427,9 +14363,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2366() throws Throwable {
+    public void test2320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2366");
+            System.out.format("%n%s%n", "RegressionTest4.test2320");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -16449,9 +14385,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2367() throws Throwable {
+    public void test2321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2367");
+            System.out.format("%n%s%n", "RegressionTest4.test2321");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         double double2 = categoryAxis1.getFixedDimension();
         org.jfree.chart.plot.Plot plot3 = categoryAxis1.getPlot();
@@ -16549,9 +14485,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2368() throws Throwable {
+    public void test2322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2368");
+            System.out.format("%n%s%n", "RegressionTest4.test2322");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -16585,9 +14521,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2369() throws Throwable {
+    public void test2323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2369");
+            System.out.format("%n%s%n", "RegressionTest4.test2323");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -16617,9 +14553,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2370() throws Throwable {
+    public void test2324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2370");
+            System.out.format("%n%s%n", "RegressionTest4.test2324");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -16675,9 +14611,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2371() throws Throwable {
+    public void test2325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2371");
+            System.out.format("%n%s%n", "RegressionTest4.test2325");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -16692,9 +14628,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2372() throws Throwable {
+    public void test2326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2372");
+            System.out.format("%n%s%n", "RegressionTest4.test2326");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -16745,9 +14681,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2373() throws Throwable {
+    public void test2327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2373");
+            System.out.format("%n%s%n", "RegressionTest4.test2327");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -16773,9 +14709,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2374() throws Throwable {
+    public void test2328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2374");
+            System.out.format("%n%s%n", "RegressionTest4.test2328");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -16858,9 +14794,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2375() throws Throwable {
+    public void test2329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2375");
+            System.out.format("%n%s%n", "RegressionTest4.test2329");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         keyedObjects2D0.clear();
         java.lang.Object obj2 = keyedObjects2D0.clone();
@@ -16875,9 +14811,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2376() throws Throwable {
+    public void test2330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2376");
+            System.out.format("%n%s%n", "RegressionTest4.test2330");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -16979,9 +14915,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2377() throws Throwable {
+    public void test2331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2377");
+            System.out.format("%n%s%n", "RegressionTest4.test2331");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -17045,9 +14981,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2378() throws Throwable {
+    public void test2332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2378");
+            System.out.format("%n%s%n", "RegressionTest4.test2332");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition2 = barRenderer0.getBasePositiveItemLabelPosition();
@@ -17075,9 +15011,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2379() throws Throwable {
+    public void test2333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2379");
+            System.out.format("%n%s%n", "RegressionTest4.test2333");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -17141,9 +15077,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2380() throws Throwable {
+    public void test2334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2380");
+            System.out.format("%n%s%n", "RegressionTest4.test2334");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -17168,9 +15104,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2381() throws Throwable {
+    public void test2335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2381");
+            System.out.format("%n%s%n", "RegressionTest4.test2335");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -17206,9 +15142,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2382() throws Throwable {
+    public void test2336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2382");
+            System.out.format("%n%s%n", "RegressionTest4.test2336");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -17245,9 +15181,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2383() throws Throwable {
+    public void test2337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2383");
+            System.out.format("%n%s%n", "RegressionTest4.test2337");
         java.awt.Paint[] paintArray0 = org.jfree.chart.plot.DefaultDrawingSupplier.DEFAULT_OUTLINE_PAINT_SEQUENCE;
         java.awt.Paint[] paintArray1 = org.jfree.chart.ChartColor.createDefaultPaintArray();
         java.awt.Stroke[] strokeArray2 = null;
@@ -17264,9 +15200,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2384() throws Throwable {
+    public void test2338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2384");
+            System.out.format("%n%s%n", "RegressionTest4.test2338");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -17356,9 +15292,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2385() throws Throwable {
+    public void test2339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2385");
+            System.out.format("%n%s%n", "RegressionTest4.test2339");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -17403,9 +15339,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2386() throws Throwable {
+    public void test2340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2386");
+            System.out.format("%n%s%n", "RegressionTest4.test2340");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -17428,9 +15364,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2387() throws Throwable {
+    public void test2341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2387");
+            System.out.format("%n%s%n", "RegressionTest4.test2341");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -17443,9 +15379,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2388() throws Throwable {
+    public void test2342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2388");
+            System.out.format("%n%s%n", "RegressionTest4.test2342");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -17487,9 +15423,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2389() throws Throwable {
+    public void test2343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2389");
+            System.out.format("%n%s%n", "RegressionTest4.test2343");
         org.jfree.chart.JFreeChart jFreeChart1 = null;
         org.jfree.chart.event.ChartChangeEventType chartChangeEventType2 = org.jfree.chart.event.ChartChangeEventType.GENERAL;
         java.lang.String str3 = chartChangeEventType2.toString();
@@ -17499,9 +15435,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2390() throws Throwable {
+    public void test2344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2390");
+            System.out.format("%n%s%n", "RegressionTest4.test2344");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -17539,18 +15475,18 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2391() throws Throwable {
+    public void test2345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2391");
+            System.out.format("%n%s%n", "RegressionTest4.test2345");
         org.jfree.data.UnknownKeyException unknownKeyException1 = new org.jfree.data.UnknownKeyException("ItemLabelAnchor.OUTSIDE6");
         java.lang.Throwable[] throwableArray2 = unknownKeyException1.getSuppressed();
         org.junit.Assert.assertNotNull(throwableArray2);
     }
 
     @Test
-    public void test2392() throws Throwable {
+    public void test2346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2392");
+            System.out.format("%n%s%n", "RegressionTest4.test2346");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -17629,9 +15565,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2393() throws Throwable {
+    public void test2347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2393");
+            System.out.format("%n%s%n", "RegressionTest4.test2347");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -17683,9 +15619,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2394() throws Throwable {
+    public void test2348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2394");
+            System.out.format("%n%s%n", "RegressionTest4.test2348");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -17740,9 +15676,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2395() throws Throwable {
+    public void test2349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2395");
+            System.out.format("%n%s%n", "RegressionTest4.test2349");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -17766,9 +15702,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2396() throws Throwable {
+    public void test2350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2396");
+            System.out.format("%n%s%n", "RegressionTest4.test2350");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -17793,9 +15729,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2397() throws Throwable {
+    public void test2351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2397");
+            System.out.format("%n%s%n", "RegressionTest4.test2351");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -17838,9 +15774,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2398() throws Throwable {
+    public void test2352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2398");
+            System.out.format("%n%s%n", "RegressionTest4.test2352");
         java.text.AttributedString attributedString0 = null;
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color7 = java.awt.Color.BLUE;
@@ -17913,9 +15849,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2399() throws Throwable {
+    public void test2353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2399");
+            System.out.format("%n%s%n", "RegressionTest4.test2353");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
@@ -17976,9 +15912,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2400() throws Throwable {
+    public void test2354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2400");
+            System.out.format("%n%s%n", "RegressionTest4.test2354");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
@@ -17991,9 +15927,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2401() throws Throwable {
+    public void test2355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2401");
+            System.out.format("%n%s%n", "RegressionTest4.test2355");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -18091,9 +16027,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2402() throws Throwable {
+    public void test2356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2402");
+            System.out.format("%n%s%n", "RegressionTest4.test2356");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -18150,9 +16086,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2403() throws Throwable {
+    public void test2357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2403");
+            System.out.format("%n%s%n", "RegressionTest4.test2357");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -18191,9 +16127,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2404() throws Throwable {
+    public void test2358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2404");
+            System.out.format("%n%s%n", "RegressionTest4.test2358");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -18273,9 +16209,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2405() throws Throwable {
+    public void test2359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2405");
+            System.out.format("%n%s%n", "RegressionTest4.test2359");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -18362,9 +16298,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2406() throws Throwable {
+    public void test2360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2406");
+            System.out.format("%n%s%n", "RegressionTest4.test2360");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -18387,9 +16323,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2407() throws Throwable {
+    public void test2361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2407");
+            System.out.format("%n%s%n", "RegressionTest4.test2361");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -18417,9 +16353,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2408() throws Throwable {
+    public void test2362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2408");
+            System.out.format("%n%s%n", "RegressionTest4.test2362");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -18441,9 +16377,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2409() throws Throwable {
+    public void test2363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2409");
+            System.out.format("%n%s%n", "RegressionTest4.test2363");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -18489,9 +16425,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2410() throws Throwable {
+    public void test2364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2410");
+            System.out.format("%n%s%n", "RegressionTest4.test2364");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -18532,9 +16468,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2411() throws Throwable {
+    public void test2365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2411");
+            System.out.format("%n%s%n", "RegressionTest4.test2365");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -18557,9 +16493,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2412() throws Throwable {
+    public void test2366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2412");
+            System.out.format("%n%s%n", "RegressionTest4.test2366");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -18627,9 +16563,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2413() throws Throwable {
+    public void test2367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2413");
+            System.out.format("%n%s%n", "RegressionTest4.test2367");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -18651,9 +16587,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2414() throws Throwable {
+    public void test2368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2414");
+            System.out.format("%n%s%n", "RegressionTest4.test2368");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         int int2 = keyedObjects0.getIndex((java.lang.Comparable) 255);
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -18697,54 +16633,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2415() throws Throwable {
+    public void test2369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2415");
-        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
-        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
-        float float3 = categoryAxis2.getTickMarkInsideLength();
-        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        java.awt.Color color8 = java.awt.Color.BLUE;
-        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
-        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
-        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
-        boolean boolean15 = categoryPlot14.canSelectByPoint();
-        org.jfree.chart.LegendItemCollection legendItemCollection16 = categoryPlot14.getFixedLegendItems();
-        java.awt.Stroke stroke17 = categoryPlot14.getRangeGridlineStroke();
-        org.jfree.chart.event.RendererChangeEvent rendererChangeEvent18 = null;
-        categoryPlot14.rendererChanged(rendererChangeEvent18);
-        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer23 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
-        boolean boolean25 = lineAndShapeRenderer23.isSeriesVisibleInLegend(1);
-        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator27 = null;
-        lineAndShapeRenderer23.setSeriesURLGenerator(0, categoryURLGenerator27, false);
-        java.awt.Color color30 = org.jfree.chart.ChartColor.LIGHT_GREEN;
-        java.awt.color.ColorSpace colorSpace31 = color30.getColorSpace();
-        lineAndShapeRenderer23.setBaseFillPaint((java.awt.Paint) color30);
-        boolean boolean33 = lineAndShapeRenderer23.getBaseShapesVisible();
-        java.lang.Boolean boolean35 = lineAndShapeRenderer23.getSeriesLinesVisible(0);
-        org.jfree.chart.ChartColor chartColor39 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
-        lineAndShapeRenderer23.setBasePaint((java.awt.Paint) chartColor39);
-        java.awt.Paint paint44 = lineAndShapeRenderer23.getItemLabelPaint((-16776961), (-12517568), true);
-        categoryPlot14.setRenderer((int) '4', (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer23);
-        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
-        org.junit.Assert.assertNotNull(color8);
-        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
-        org.junit.Assert.assertNull(legendItemCollection16);
-        org.junit.Assert.assertNotNull(stroke17);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
-        org.junit.Assert.assertNotNull(color30);
-        org.junit.Assert.assertNotNull(colorSpace31);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
-        org.junit.Assert.assertNull(boolean35);
-        org.junit.Assert.assertNotNull(paint44);
-    }
-
-    @Test
-    public void test2416() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2416");
+            System.out.format("%n%s%n", "RegressionTest4.test2369");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -18786,9 +16677,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2417() throws Throwable {
+    public void test2370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2417");
+            System.out.format("%n%s%n", "RegressionTest4.test2370");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -18847,9 +16738,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2418() throws Throwable {
+    public void test2371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2418");
+            System.out.format("%n%s%n", "RegressionTest4.test2371");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         java.util.List list3 = defaultCategoryDataset0.getColumnKeys();
@@ -18863,9 +16754,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2419() throws Throwable {
+    public void test2372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2419");
+            System.out.format("%n%s%n", "RegressionTest4.test2372");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -18934,9 +16825,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2420() throws Throwable {
+    public void test2373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2420");
+            System.out.format("%n%s%n", "RegressionTest4.test2373");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -18955,9 +16846,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2421() throws Throwable {
+    public void test2374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2421");
+            System.out.format("%n%s%n", "RegressionTest4.test2374");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -18985,9 +16876,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2422() throws Throwable {
+    public void test2375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2422");
+            System.out.format("%n%s%n", "RegressionTest4.test2375");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -19067,9 +16958,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2423() throws Throwable {
+    public void test2376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2423");
+            System.out.format("%n%s%n", "RegressionTest4.test2376");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -19100,9 +16991,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2424() throws Throwable {
+    public void test2377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2424");
+            System.out.format("%n%s%n", "RegressionTest4.test2377");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.text.AttributedString attributedString2 = legendItem1.getAttributedLabel();
         boolean boolean3 = legendItem1.isShapeFilled();
@@ -19117,9 +17008,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2425() throws Throwable {
+    public void test2378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2425");
+            System.out.format("%n%s%n", "RegressionTest4.test2378");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -19160,9 +17051,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2426() throws Throwable {
+    public void test2379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2426");
+            System.out.format("%n%s%n", "RegressionTest4.test2379");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         java.lang.Object obj2 = categoryAxis1.clone();
         java.awt.Font font3 = categoryAxis1.getTickLabelFont();
@@ -19212,9 +17103,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2427() throws Throwable {
+    public void test2380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2427");
+            System.out.format("%n%s%n", "RegressionTest4.test2380");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -19265,9 +17156,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2428() throws Throwable {
+    public void test2381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2428");
+            System.out.format("%n%s%n", "RegressionTest4.test2381");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         org.jfree.chart.axis.AxisLocation axisLocation2 = org.jfree.chart.axis.AxisLocation.BOTTOM_OR_LEFT;
         keyedObjects0.addObject((java.lang.Comparable) 0L, (java.lang.Object) axisLocation2);
@@ -19276,9 +17167,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2429() throws Throwable {
+    public void test2382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2429");
+            System.out.format("%n%s%n", "RegressionTest4.test2382");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -19337,9 +17228,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2430() throws Throwable {
+    public void test2383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2430");
+            System.out.format("%n%s%n", "RegressionTest4.test2383");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -19397,9 +17288,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2431() throws Throwable {
+    public void test2384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2431");
+            System.out.format("%n%s%n", "RegressionTest4.test2384");
         org.jfree.chart.util.ObjectList objectList1 = new org.jfree.chart.util.ObjectList(8);
         java.lang.Object obj3 = objectList1.get(4);
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -19460,9 +17351,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2432() throws Throwable {
+    public void test2385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2432");
+            System.out.format("%n%s%n", "RegressionTest4.test2385");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -19505,9 +17396,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2433() throws Throwable {
+    public void test2386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2433");
+            System.out.format("%n%s%n", "RegressionTest4.test2386");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -19522,9 +17413,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2434() throws Throwable {
+    public void test2387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2434");
+            System.out.format("%n%s%n", "RegressionTest4.test2387");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -19548,9 +17439,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2435() throws Throwable {
+    public void test2388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2435");
+            System.out.format("%n%s%n", "RegressionTest4.test2388");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -19622,9 +17513,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2436() throws Throwable {
+    public void test2389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2436");
+            System.out.format("%n%s%n", "RegressionTest4.test2389");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         int int2 = keyedObjects2D0.getRowIndex((java.lang.Comparable) 1);
         java.lang.Object obj3 = null;
@@ -19686,9 +17577,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2437() throws Throwable {
+    public void test2390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2437");
+            System.out.format("%n%s%n", "RegressionTest4.test2390");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -19748,9 +17639,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2438() throws Throwable {
+    public void test2391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2438");
+            System.out.format("%n%s%n", "RegressionTest4.test2391");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(true, false);
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color7 = java.awt.Color.BLUE;
@@ -19768,9 +17659,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2439() throws Throwable {
+    public void test2392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2439");
+            System.out.format("%n%s%n", "RegressionTest4.test2392");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -19818,9 +17709,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2440() throws Throwable {
+    public void test2393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2440");
+            System.out.format("%n%s%n", "RegressionTest4.test2393");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -19835,9 +17726,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2441() throws Throwable {
+    public void test2394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2441");
+            System.out.format("%n%s%n", "RegressionTest4.test2394");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -19917,9 +17808,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2442() throws Throwable {
+    public void test2395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2442");
+            System.out.format("%n%s%n", "RegressionTest4.test2395");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -19980,9 +17871,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2443() throws Throwable {
+    public void test2396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2443");
+            System.out.format("%n%s%n", "RegressionTest4.test2396");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -19998,9 +17889,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2444() throws Throwable {
+    public void test2397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2444");
+            System.out.format("%n%s%n", "RegressionTest4.test2397");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         int int4 = defaultCategoryDataset0.getRowIndex((java.lang.Comparable) (byte) 10);
@@ -20061,9 +17952,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2445() throws Throwable {
+    public void test2398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2445");
+            System.out.format("%n%s%n", "RegressionTest4.test2398");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -20118,9 +18009,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2446() throws Throwable {
+    public void test2399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2446");
+            System.out.format("%n%s%n", "RegressionTest4.test2399");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -20204,9 +18095,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2447() throws Throwable {
+    public void test2400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2447");
+            System.out.format("%n%s%n", "RegressionTest4.test2400");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -20259,9 +18150,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2448() throws Throwable {
+    public void test2401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2448");
+            System.out.format("%n%s%n", "RegressionTest4.test2401");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -20279,9 +18170,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2449() throws Throwable {
+    public void test2402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2449");
+            System.out.format("%n%s%n", "RegressionTest4.test2402");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -20309,9 +18200,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2450() throws Throwable {
+    public void test2403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2450");
+            System.out.format("%n%s%n", "RegressionTest4.test2403");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -20330,9 +18221,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2451() throws Throwable {
+    public void test2404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2451");
+            System.out.format("%n%s%n", "RegressionTest4.test2404");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -20351,9 +18242,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2452() throws Throwable {
+    public void test2405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2452");
+            System.out.format("%n%s%n", "RegressionTest4.test2405");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -20405,9 +18296,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2453() throws Throwable {
+    public void test2406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2453");
+            System.out.format("%n%s%n", "RegressionTest4.test2406");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -20482,9 +18373,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2454() throws Throwable {
+    public void test2407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2454");
+            System.out.format("%n%s%n", "RegressionTest4.test2407");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -20509,9 +18400,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2455() throws Throwable {
+    public void test2408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2455");
+            System.out.format("%n%s%n", "RegressionTest4.test2408");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -20544,5 +18435,4013 @@ public class RegressionTest4 {
         org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
         org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
         org.junit.Assert.assertNotNull(stroke28);
+    }
+
+    @Test
+    public void test2409() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2409");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        java.awt.Color color9 = java.awt.Color.darkGray;
+        lineAndShapeRenderer2.setBaseOutlinePaint((java.awt.Paint) color9, true);
+        lineAndShapeRenderer2.setBaseItemLabelsVisible(true, false);
+        lineAndShapeRenderer2.setSeriesVisibleInLegend((int) ' ', (java.lang.Boolean) true);
+        org.jfree.chart.axis.CategoryAxis categoryAxis20 = new org.jfree.chart.axis.CategoryAxis("TextAnchor.BOTTOM_CENTER");
+        java.awt.Color color22 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        categoryAxis20.setTickLabelPaint((java.lang.Comparable) (-1.6776955E7d), (java.awt.Paint) color22);
+        lineAndShapeRenderer2.setSeriesFillPaint(10, (java.awt.Paint) color22);
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNotNull(color9);
+        org.junit.Assert.assertNotNull(color22);
+    }
+
+    @Test
+    public void test2410() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2410");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
+        java.awt.Font font5 = lineAndShapeRenderer2.getBaseItemLabelFont();
+        java.awt.Stroke stroke9 = lineAndShapeRenderer2.getItemStroke(100, 0, true);
+        boolean boolean11 = lineAndShapeRenderer2.isSeriesVisible(4);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color16 = java.awt.Color.BLUE;
+        lineAndShapeRenderer15.setBaseItemLabelPaint((java.awt.Paint) color16);
+        java.awt.Shape shape18 = lineAndShapeRenderer15.getBaseShape();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer21 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator22 = null;
+        lineAndShapeRenderer21.setBaseURLGenerator(categoryURLGenerator22);
+        java.awt.Shape shape25 = lineAndShapeRenderer21.getLegendShape(0);
+        lineAndShapeRenderer21.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font29 = lineAndShapeRenderer21.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer21.setUseSeriesOffset(true);
+        java.awt.Font font33 = null;
+        lineAndShapeRenderer21.setSeriesItemLabelFont((int) (short) 1, font33, false);
+        java.awt.Stroke stroke39 = lineAndShapeRenderer21.getItemOutlineStroke(0, 1, false);
+        lineAndShapeRenderer15.setBaseStroke(stroke39, true);
+        lineAndShapeRenderer15.clearSeriesStrokes(true);
+        java.awt.Stroke stroke44 = lineAndShapeRenderer15.getBaseOutlineStroke();
+        lineAndShapeRenderer2.setSeriesOutlineStroke((int) ' ', stroke44, true);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator47 = lineAndShapeRenderer2.getBaseToolTipGenerator();
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(font5);
+        org.junit.Assert.assertNotNull(stroke9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(color16);
+        org.junit.Assert.assertNotNull(shape18);
+        org.junit.Assert.assertNull(shape25);
+        org.junit.Assert.assertNull(font29);
+        org.junit.Assert.assertNotNull(stroke39);
+        org.junit.Assert.assertNotNull(stroke44);
+        org.junit.Assert.assertNull(categoryToolTipGenerator47);
+    }
+
+    @Test
+    public void test2411() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2411");
+        org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.plot.Plot.DEFAULT_INSETS;
+        java.awt.geom.Rectangle2D rectangle2D1 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            java.awt.geom.Rectangle2D rectangle2D4 = rectangleInsets0.createInsetRectangle(rectangle2D1, true, false);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Null 'base' argument.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(rectangleInsets0);
+    }
+
+    @Test
+    public void test2412() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2412");
+        org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem1.setLinePaint((java.awt.Paint) color5);
+        boolean boolean7 = legendItem1.isShapeOutlineVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer10 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color11 = java.awt.Color.BLUE;
+        lineAndShapeRenderer10.setBaseItemLabelPaint((java.awt.Paint) color11);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator16 = lineAndShapeRenderer10.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition18 = lineAndShapeRenderer10.getSeriesPositiveItemLabelPosition((int) 'a');
+        java.awt.Shape shape20 = lineAndShapeRenderer10.lookupLegendShape(8);
+        legendItem1.setLine(shape20);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer24 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean26 = lineAndShapeRenderer24.isSeriesVisibleInLegend(1);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator28 = null;
+        lineAndShapeRenderer24.setSeriesURLGenerator(0, categoryURLGenerator28, false);
+        java.awt.Color color31 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        java.awt.color.ColorSpace colorSpace32 = color31.getColorSpace();
+        lineAndShapeRenderer24.setBaseFillPaint((java.awt.Paint) color31);
+        legendItem1.setFillPaint((java.awt.Paint) color31);
+        org.jfree.chart.LegendItem legendItem36 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color40 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem36.setLinePaint((java.awt.Paint) color40);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer44 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color45 = java.awt.Color.BLUE;
+        lineAndShapeRenderer44.setBaseItemLabelPaint((java.awt.Paint) color45);
+        java.awt.Shape shape47 = lineAndShapeRenderer44.getBaseShape();
+        org.jfree.chart.entity.ChartEntity chartEntity49 = new org.jfree.chart.entity.ChartEntity(shape47, "");
+        legendItem36.setLine(shape47);
+        org.jfree.chart.util.GradientPaintTransformer gradientPaintTransformer51 = legendItem36.getFillPaintTransformer();
+        legendItem1.setFillPaintTransformer(gradientPaintTransformer51);
+        java.awt.GradientPaint gradientPaint53 = null;
+        java.awt.Shape shape54 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            java.awt.GradientPaint gradientPaint55 = gradientPaintTransformer51.transform(gradientPaint53, shape54);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(color5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(color11);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator16);
+        org.junit.Assert.assertNotNull(itemLabelPosition18);
+        org.junit.Assert.assertNotNull(shape20);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
+        org.junit.Assert.assertNotNull(color31);
+        org.junit.Assert.assertNotNull(colorSpace32);
+        org.junit.Assert.assertNotNull(color40);
+        org.junit.Assert.assertNotNull(color45);
+        org.junit.Assert.assertNotNull(shape47);
+        org.junit.Assert.assertNotNull(gradientPaintTransformer51);
+    }
+
+    @Test
+    public void test2413() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2413");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
+        categoryAxis15.setLabelAngle(3.0d);
+        categoryAxis15.setLabelToolTip("hi!");
+        org.jfree.chart.plot.Plot plot20 = categoryAxis15.getPlot();
+        categoryAxis15.setMinorTickMarkInsideLength((float) (byte) 0);
+        float float23 = categoryAxis15.getTickMarkInsideLength();
+        categoryAxis15.setAxisLineVisible(false);
+        int int26 = categoryAxis15.getCategoryLabelPositionOffset();
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryAxis15);
+        org.junit.Assert.assertNotNull(plot20);
+        org.junit.Assert.assertTrue("'" + float23 + "' != '" + 0.0f + "'", float23 == 0.0f);
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 4 + "'", int26 == 4);
+    }
+
+    @Test
+    public void test2414() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2414");
+        org.jfree.chart.util.ObjectList objectList1 = new org.jfree.chart.util.ObjectList((int) (byte) 0);
+    }
+
+    @Test
+    public void test2415() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2415");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer15 = categoryPlot14.getRenderer();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer18 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean20 = lineAndShapeRenderer18.isSeriesVisibleInLegend(1);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator22 = null;
+        lineAndShapeRenderer18.setSeriesURLGenerator(0, categoryURLGenerator22, false);
+        java.awt.Color color25 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        java.awt.color.ColorSpace colorSpace26 = color25.getColorSpace();
+        lineAndShapeRenderer18.setBaseFillPaint((java.awt.Paint) color25);
+        categoryPlot14.setDomainCrosshairPaint((java.awt.Paint) color25);
+        java.awt.image.ColorModel colorModel29 = null;
+        java.awt.Rectangle rectangle30 = null;
+        java.awt.geom.Rectangle2D rectangle2D31 = null;
+        java.awt.geom.AffineTransform affineTransform32 = null;
+        java.awt.RenderingHints renderingHints33 = null;
+        java.awt.PaintContext paintContext34 = color25.createContext(colorModel29, rectangle30, rectangle2D31, affineTransform32, renderingHints33);
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryItemRenderer15);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
+        org.junit.Assert.assertNotNull(color25);
+        org.junit.Assert.assertNotNull(colorSpace26);
+        org.junit.Assert.assertNotNull(paintContext34);
+    }
+
+    @Test
+    public void test2416() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2416");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
+        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
+        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes13 = lineAndShapeRenderer2.getSelectedItemAttributes();
+        java.awt.Paint paint14 = renderAttributes13.getDefaultLabelPaint();
+        java.awt.Shape shape16 = renderAttributes13.getSeriesShape((-1));
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator20 = null;
+        lineAndShapeRenderer19.setBaseURLGenerator(categoryURLGenerator20);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator23 = null;
+        lineAndShapeRenderer19.setSeriesToolTipGenerator(10, categoryToolTipGenerator23);
+        boolean boolean25 = lineAndShapeRenderer19.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke27 = null;
+        lineAndShapeRenderer19.setSeriesStroke((int) 'a', stroke27, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor31 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color32 = java.awt.Color.yellow;
+        boolean boolean33 = itemLabelAnchor31.equals((java.lang.Object) color32);
+        lineAndShapeRenderer19.setSeriesFillPaint((int) ' ', (java.awt.Paint) color32);
+        renderAttributes13.setDefaultOutlinePaint((java.awt.Paint) color32);
+        java.awt.Font font36 = renderAttributes13.getDefaultLabelFont();
+        java.awt.Shape shape39 = renderAttributes13.getItemShape((int) (byte) -1, (-10));
+        org.jfree.chart.renderer.category.BarRenderer barRenderer40 = new org.jfree.chart.renderer.category.BarRenderer();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer43 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color44 = java.awt.Color.BLUE;
+        lineAndShapeRenderer43.setBaseItemLabelPaint((java.awt.Paint) color44);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator49 = lineAndShapeRenderer43.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator50 = null;
+        lineAndShapeRenderer43.setLegendItemURLGenerator(categorySeriesLabelGenerator50);
+        java.awt.Paint paint53 = lineAndShapeRenderer43.getSeriesPaint(1);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes54 = lineAndShapeRenderer43.getSelectedItemAttributes();
+        java.awt.Color color56 = java.awt.Color.BLUE;
+        renderAttributes54.setSeriesFillPaint((int) 'a', (java.awt.Paint) color56);
+        org.jfree.chart.axis.CategoryAxis categoryAxis59 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float60 = categoryAxis59.getTickMarkInsideLength();
+        categoryAxis59.setMaximumCategoryLabelLines((int) (byte) 1);
+        boolean boolean63 = categoryAxis59.isVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer67 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator68 = null;
+        lineAndShapeRenderer67.setBaseURLGenerator(categoryURLGenerator68);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator71 = null;
+        lineAndShapeRenderer67.setSeriesToolTipGenerator(10, categoryToolTipGenerator71);
+        boolean boolean73 = lineAndShapeRenderer67.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke75 = null;
+        lineAndShapeRenderer67.setSeriesStroke((int) 'a', stroke75, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor79 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color80 = java.awt.Color.yellow;
+        boolean boolean81 = itemLabelAnchor79.equals((java.lang.Object) color80);
+        lineAndShapeRenderer67.setSeriesFillPaint((int) ' ', (java.awt.Paint) color80);
+        categoryAxis59.setTickLabelPaint((java.lang.Comparable) false, (java.awt.Paint) color80);
+        renderAttributes54.setDefaultOutlinePaint((java.awt.Paint) color80);
+        java.awt.Color color86 = org.jfree.chart.ChartColor.DARK_YELLOW;
+        renderAttributes54.setSeriesFillPaint((int) (byte) 0, (java.awt.Paint) color86);
+        java.awt.Paint paint88 = renderAttributes54.getDefaultOutlinePaint();
+        barRenderer40.setShadowPaint(paint88);
+        renderAttributes13.setDefaultLabelPaint(paint88);
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNull(paint12);
+        org.junit.Assert.assertNotNull(renderAttributes13);
+        org.junit.Assert.assertNull(paint14);
+        org.junit.Assert.assertNull(shape16);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor31);
+        org.junit.Assert.assertNotNull(color32);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+        org.junit.Assert.assertNull(font36);
+        org.junit.Assert.assertNull(shape39);
+        org.junit.Assert.assertNotNull(color44);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator49);
+        org.junit.Assert.assertNull(paint53);
+        org.junit.Assert.assertNotNull(renderAttributes54);
+        org.junit.Assert.assertNotNull(color56);
+        org.junit.Assert.assertTrue("'" + float60 + "' != '" + 0.0f + "'", float60 == 0.0f);
+        org.junit.Assert.assertTrue("'" + boolean63 + "' != '" + true + "'", boolean63 == true);
+        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + true + "'", boolean73 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor79);
+        org.junit.Assert.assertNotNull(color80);
+        org.junit.Assert.assertTrue("'" + boolean81 + "' != '" + false + "'", boolean81 == false);
+        org.junit.Assert.assertNotNull(color86);
+        org.junit.Assert.assertNotNull(paint88);
+    }
+
+    @Test
+    public void test2417() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2417");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float10 = categoryAxis9.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
+        double double25 = categoryPlot21.getRangeCrosshairValue();
+        java.awt.Paint paint26 = categoryPlot21.getRangeZeroBaselinePaint();
+        int int27 = categoryPlot21.getRangeAxisCount();
+        java.awt.Color color28 = java.awt.Color.BLUE;
+        categoryPlot21.setRangeMinorGridlinePaint((java.awt.Paint) color28);
+        java.awt.Stroke stroke30 = categoryPlot21.getRangeMinorGridlineStroke();
+        categoryPlot21.clearRangeMarkers();
+        org.jfree.chart.event.AxisChangeEvent axisChangeEvent32 = null;
+        categoryPlot21.axisChanged(axisChangeEvent32);
+        org.jfree.chart.axis.AxisLocation axisLocation35 = categoryPlot21.getRangeAxisLocation(10);
+        org.jfree.chart.annotations.CategoryAnnotation categoryAnnotation36 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            boolean boolean37 = categoryPlot21.removeAnnotation(categoryAnnotation36);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Null 'annotation' argument.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(categoryItemRenderer22);
+        org.junit.Assert.assertNull(valueAxis24);
+        org.junit.Assert.assertTrue("'" + double25 + "' != '" + 0.0d + "'", double25 == 0.0d);
+        org.junit.Assert.assertNotNull(paint26);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 1 + "'", int27 == 1);
+        org.junit.Assert.assertNotNull(color28);
+        org.junit.Assert.assertNotNull(stroke30);
+        org.junit.Assert.assertNotNull(axisLocation35);
+    }
+
+    @Test
+    public void test2418() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2418");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
+        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
+        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
+        java.awt.Paint paint16 = lineAndShapeRenderer2.getItemFillPaint((-1), (int) (short) 100, false);
+        java.awt.Shape shape18 = lineAndShapeRenderer2.lookupLegendShape(4);
+        lineAndShapeRenderer2.setDrawOutlines(false);
+        lineAndShapeRenderer2.setBaseSeriesVisible(true);
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNull(paint12);
+        org.junit.Assert.assertNotNull(paint16);
+        org.junit.Assert.assertNotNull(shape18);
+    }
+
+    @Test
+    public void test2419() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2419");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        boolean boolean5 = lineAndShapeRenderer2.getBaseLinesVisible();
+        java.awt.Stroke stroke7 = lineAndShapeRenderer2.getSeriesStroke(4);
+        boolean boolean8 = lineAndShapeRenderer2.getBaseItemLabelsVisible();
+        java.awt.Font font9 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            lineAndShapeRenderer2.setBaseItemLabelFont(font9);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Null 'font' argument.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertNull(stroke7);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+    }
+
+    @Test
+    public void test2420() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2420");
+        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color4 = java.awt.Color.BLUE;
+        lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator9 = lineAndShapeRenderer3.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator10 = null;
+        lineAndShapeRenderer3.setLegendItemURLGenerator(categorySeriesLabelGenerator10);
+        java.awt.Paint paint13 = lineAndShapeRenderer3.getSeriesPaint(1);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes14 = lineAndShapeRenderer3.getSelectedItemAttributes();
+        java.awt.Color color16 = java.awt.Color.BLUE;
+        renderAttributes14.setSeriesFillPaint((int) 'a', (java.awt.Paint) color16);
+        org.jfree.chart.axis.CategoryAxis categoryAxis19 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float20 = categoryAxis19.getTickMarkInsideLength();
+        categoryAxis19.setMaximumCategoryLabelLines((int) (byte) 1);
+        boolean boolean23 = categoryAxis19.isVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer27 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator28 = null;
+        lineAndShapeRenderer27.setBaseURLGenerator(categoryURLGenerator28);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator31 = null;
+        lineAndShapeRenderer27.setSeriesToolTipGenerator(10, categoryToolTipGenerator31);
+        boolean boolean33 = lineAndShapeRenderer27.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke35 = null;
+        lineAndShapeRenderer27.setSeriesStroke((int) 'a', stroke35, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor39 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color40 = java.awt.Color.yellow;
+        boolean boolean41 = itemLabelAnchor39.equals((java.lang.Object) color40);
+        lineAndShapeRenderer27.setSeriesFillPaint((int) ' ', (java.awt.Paint) color40);
+        categoryAxis19.setTickLabelPaint((java.lang.Comparable) false, (java.awt.Paint) color40);
+        renderAttributes14.setDefaultOutlinePaint((java.awt.Paint) color40);
+        java.awt.Color color46 = org.jfree.chart.ChartColor.DARK_YELLOW;
+        renderAttributes14.setSeriesFillPaint((int) (byte) 0, (java.awt.Paint) color46);
+        java.awt.Paint paint48 = renderAttributes14.getDefaultOutlinePaint();
+        barRenderer0.setShadowPaint(paint48);
+        org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset50 = new org.jfree.data.category.DefaultCategoryDataset();
+        int int52 = defaultCategoryDataset50.getColumnIndex((java.lang.Comparable) 3.0d);
+        org.jfree.data.Range range54 = barRenderer0.findRangeBounds((org.jfree.data.category.CategoryDataset) defaultCategoryDataset50, true);
+        boolean boolean55 = barRenderer0.getBaseSeriesVisibleInLegend();
+        barRenderer0.setMaximumBarWidth((double) 100);
+        org.junit.Assert.assertNotNull(color4);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator9);
+        org.junit.Assert.assertNull(paint13);
+        org.junit.Assert.assertNotNull(renderAttributes14);
+        org.junit.Assert.assertNotNull(color16);
+        org.junit.Assert.assertTrue("'" + float20 + "' != '" + 0.0f + "'", float20 == 0.0f);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor39);
+        org.junit.Assert.assertNotNull(color40);
+        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
+        org.junit.Assert.assertNotNull(color46);
+        org.junit.Assert.assertNotNull(paint48);
+        org.junit.Assert.assertTrue("'" + int52 + "' != '" + (-1) + "'", int52 == (-1));
+        org.junit.Assert.assertNull(range54);
+        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + true + "'", boolean55 == true);
+    }
+
+    @Test
+    public void test2421() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2421");
+        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
+        boolean boolean1 = barRenderer0.isDrawBarOutline();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color5 = java.awt.Color.BLUE;
+        lineAndShapeRenderer4.setBaseItemLabelPaint((java.awt.Paint) color5);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator10 = lineAndShapeRenderer4.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition11 = lineAndShapeRenderer4.getBaseNegativeItemLabelPosition();
+        barRenderer0.setNegativeItemLabelPositionFallback(itemLabelPosition11);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator16 = null;
+        lineAndShapeRenderer15.setBaseURLGenerator(categoryURLGenerator16);
+        java.awt.Shape shape19 = lineAndShapeRenderer15.getLegendShape(0);
+        lineAndShapeRenderer15.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font23 = lineAndShapeRenderer15.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer15.setUseSeriesOffset(true);
+        java.awt.Shape shape27 = null;
+        lineAndShapeRenderer15.setSeriesShape((int) (short) 10, shape27, true);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition30 = lineAndShapeRenderer15.getBasePositiveItemLabelPosition();
+        org.jfree.chart.text.TextAnchor textAnchor31 = itemLabelPosition30.getTextAnchor();
+        barRenderer0.setPositiveItemLabelPositionFallback(itemLabelPosition30);
+        barRenderer0.setSeriesItemLabelsVisible(10, true);
+        org.jfree.chart.plot.CategoryPlot categoryPlot36 = barRenderer0.getPlot();
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator40 = barRenderer0.getToolTipGenerator(10, 5, true);
+        java.lang.Boolean boolean42 = barRenderer0.getSeriesVisible((int) (short) -1);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(color5);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator10);
+        org.junit.Assert.assertNotNull(itemLabelPosition11);
+        org.junit.Assert.assertNull(shape19);
+        org.junit.Assert.assertNull(font23);
+        org.junit.Assert.assertNotNull(itemLabelPosition30);
+        org.junit.Assert.assertNotNull(textAnchor31);
+        org.junit.Assert.assertNull(categoryPlot36);
+        org.junit.Assert.assertNull(categoryToolTipGenerator40);
+        org.junit.Assert.assertNull(boolean42);
+    }
+
+    @Test
+    public void test2422() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2422");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
+        java.awt.Font font5 = lineAndShapeRenderer2.getBaseItemLabelFont();
+        java.awt.Stroke stroke9 = lineAndShapeRenderer2.getItemStroke(100, 0, true);
+        boolean boolean11 = lineAndShapeRenderer2.isSeriesVisible(4);
+        boolean boolean12 = lineAndShapeRenderer2.getAutoPopulateSeriesShape();
+        java.lang.Object obj13 = lineAndShapeRenderer2.clone();
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(font5);
+        org.junit.Assert.assertNotNull(stroke9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertNotNull(obj13);
+    }
+
+    @Test
+    public void test2423() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2423");
+        org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
+        java.text.AttributedString attributedString2 = legendItem1.getAttributedLabel();
+        java.lang.String str3 = legendItem1.getDescription();
+        legendItem1.setSeriesKey((java.lang.Comparable) (byte) 100);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer8 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color9 = java.awt.Color.BLUE;
+        lineAndShapeRenderer8.setBaseItemLabelPaint((java.awt.Paint) color9);
+        java.awt.Shape shape11 = lineAndShapeRenderer8.getBaseShape();
+        org.jfree.chart.entity.ChartEntity chartEntity13 = new org.jfree.chart.entity.ChartEntity(shape11, "");
+        legendItem1.setShape(shape11);
+        boolean boolean15 = legendItem1.isShapeFilled();
+        java.lang.Object obj16 = legendItem1.clone();
+        org.junit.Assert.assertNull(attributedString2);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertNotNull(color9);
+        org.junit.Assert.assertNotNull(shape11);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
+        org.junit.Assert.assertNotNull(obj16);
+    }
+
+    @Test
+    public void test2424() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2424");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.event.PlotChangeEvent plotChangeEvent15 = new org.jfree.chart.event.PlotChangeEvent((org.jfree.chart.plot.Plot) categoryPlot14);
+        java.awt.Stroke stroke16 = categoryPlot14.getRangeMinorGridlineStroke();
+        org.jfree.chart.LegendItemCollection legendItemCollection17 = categoryPlot14.getLegendItems();
+        categoryPlot14.setDomainCrosshairVisible(true);
+        categoryPlot14.clearRangeMarkers();
+        org.jfree.chart.LegendItem legendItem22 = new org.jfree.chart.LegendItem("hi!");
+        java.text.AttributedString attributedString23 = legendItem22.getAttributedLabel();
+        java.lang.String str24 = legendItem22.getDescription();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer27 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator28 = null;
+        lineAndShapeRenderer27.setBaseURLGenerator(categoryURLGenerator28);
+        java.awt.Shape shape31 = lineAndShapeRenderer27.getLegendShape(0);
+        lineAndShapeRenderer27.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font35 = lineAndShapeRenderer27.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer27.setUseSeriesOffset(true);
+        java.awt.Shape shape39 = null;
+        lineAndShapeRenderer27.setSeriesShape((int) (short) 10, shape39, true);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer44 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color45 = java.awt.Color.BLUE;
+        lineAndShapeRenderer44.setBaseItemLabelPaint((java.awt.Paint) color45);
+        java.awt.Stroke stroke48 = lineAndShapeRenderer44.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset49 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis51 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float52 = categoryAxis51.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis53 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer56 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color57 = java.awt.Color.BLUE;
+        lineAndShapeRenderer56.setBaseItemLabelPaint((java.awt.Paint) color57);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator62 = lineAndShapeRenderer56.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot63 = new org.jfree.chart.plot.CategoryPlot(categoryDataset49, categoryAxis51, valueAxis53, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer56);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer64 = categoryPlot63.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis66 = lineAndShapeRenderer44.getRangeAxis(categoryPlot63, (int) '4');
+        double double67 = categoryPlot63.getRangeCrosshairValue();
+        lineAndShapeRenderer27.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot63);
+        org.jfree.chart.axis.CategoryAxis[] categoryAxisArray69 = new org.jfree.chart.axis.CategoryAxis[] {};
+        categoryPlot63.setDomainAxes(categoryAxisArray69);
+        categoryPlot63.setDomainGridlinesVisible(true);
+        java.awt.Color color73 = java.awt.Color.BLUE;
+        int int74 = color73.getRed();
+        categoryPlot63.setRangeCrosshairPaint((java.awt.Paint) color73);
+        legendItem22.setOutlinePaint((java.awt.Paint) color73);
+        java.awt.Color color77 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        legendItem22.setLinePaint((java.awt.Paint) color77);
+        java.awt.Stroke stroke79 = legendItem22.getLineStroke();
+        categoryPlot14.setRangeZeroBaselineStroke(stroke79);
+        org.jfree.chart.LegendItemCollection legendItemCollection81 = categoryPlot14.getFixedLegendItems();
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(stroke16);
+        org.junit.Assert.assertNotNull(legendItemCollection17);
+        org.junit.Assert.assertNull(attributedString23);
+        org.junit.Assert.assertNull(str24);
+        org.junit.Assert.assertNull(shape31);
+        org.junit.Assert.assertNull(font35);
+        org.junit.Assert.assertNotNull(color45);
+        org.junit.Assert.assertNull(stroke48);
+        org.junit.Assert.assertTrue("'" + float52 + "' != '" + 0.0f + "'", float52 == 0.0f);
+        org.junit.Assert.assertNotNull(color57);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator62);
+        org.junit.Assert.assertNotNull(categoryItemRenderer64);
+        org.junit.Assert.assertNull(valueAxis66);
+        org.junit.Assert.assertTrue("'" + double67 + "' != '" + 0.0d + "'", double67 == 0.0d);
+        org.junit.Assert.assertNotNull(categoryAxisArray69);
+        org.junit.Assert.assertNotNull(color73);
+        org.junit.Assert.assertTrue("'" + int74 + "' != '" + 0 + "'", int74 == 0);
+        org.junit.Assert.assertNotNull(color77);
+        org.junit.Assert.assertNotNull(stroke79);
+        org.junit.Assert.assertNull(legendItemCollection81);
+    }
+
+    @Test
+    public void test2425() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2425");
+        org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float2 = categoryAxis1.getTickMarkInsideLength();
+        categoryAxis1.setTickLabelsVisible(false);
+        double double5 = categoryAxis1.getLowerMargin();
+        categoryAxis1.configure();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer9 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color10 = java.awt.Color.BLUE;
+        lineAndShapeRenderer9.setBaseItemLabelPaint((java.awt.Paint) color10);
+        java.awt.Stroke stroke13 = lineAndShapeRenderer9.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset14 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis16 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float17 = categoryAxis16.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis18 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer21 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color22 = java.awt.Color.BLUE;
+        lineAndShapeRenderer21.setBaseItemLabelPaint((java.awt.Paint) color22);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator27 = lineAndShapeRenderer21.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot28 = new org.jfree.chart.plot.CategoryPlot(categoryDataset14, categoryAxis16, valueAxis18, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer21);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer29 = categoryPlot28.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis31 = lineAndShapeRenderer9.getRangeAxis(categoryPlot28, (int) '4');
+        boolean boolean32 = categoryPlot28.isRangeCrosshairVisible();
+        java.awt.Paint paint33 = categoryPlot28.getRangeZeroBaselinePaint();
+        categoryPlot28.mapDatasetToDomainAxis((int) (byte) 1, (int) (short) 10);
+        org.jfree.chart.util.RectangleInsets rectangleInsets37 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
+        double double39 = rectangleInsets37.calculateBottomInset(0.0d);
+        categoryPlot28.setAxisOffset(rectangleInsets37);
+        double double42 = rectangleInsets37.extendWidth((double) 4);
+        double double44 = rectangleInsets37.calculateLeftOutset((double) 10);
+        categoryAxis1.setTickLabelInsets(rectangleInsets37);
+        org.jfree.chart.util.RectangleInsets rectangleInsets46 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            categoryAxis1.setLabelInsets(rectangleInsets46, false);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Null 'insets' argument.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + float2 + "' != '" + 0.0f + "'", float2 == 0.0f);
+        org.junit.Assert.assertTrue("'" + double5 + "' != '" + 0.05d + "'", double5 == 0.05d);
+        org.junit.Assert.assertNotNull(color10);
+        org.junit.Assert.assertNull(stroke13);
+        org.junit.Assert.assertTrue("'" + float17 + "' != '" + 0.0f + "'", float17 == 0.0f);
+        org.junit.Assert.assertNotNull(color22);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator27);
+        org.junit.Assert.assertNotNull(categoryItemRenderer29);
+        org.junit.Assert.assertNull(valueAxis31);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
+        org.junit.Assert.assertNotNull(paint33);
+        org.junit.Assert.assertNotNull(rectangleInsets37);
+        org.junit.Assert.assertTrue("'" + double39 + "' != '" + 3.0d + "'", double39 == 3.0d);
+        org.junit.Assert.assertTrue("'" + double42 + "' != '" + 10.0d + "'", double42 == 10.0d);
+        org.junit.Assert.assertTrue("'" + double44 + "' != '" + 3.0d + "'", double44 == 3.0d);
+    }
+
+    @Test
+    public void test2426() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2426");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
+        org.jfree.chart.event.PlotChangeListener plotChangeListener16 = null;
+        categoryPlot14.addChangeListener(plotChangeListener16);
+        java.awt.Paint paint18 = categoryPlot14.getOutlinePaint();
+        categoryPlot14.setRangeCrosshairVisible(false);
+        org.jfree.data.category.CategoryDataset categoryDataset21 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis23 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float24 = categoryAxis23.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis25 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer28 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color29 = java.awt.Color.BLUE;
+        lineAndShapeRenderer28.setBaseItemLabelPaint((java.awt.Paint) color29);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator34 = lineAndShapeRenderer28.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot35 = new org.jfree.chart.plot.CategoryPlot(categoryDataset21, categoryAxis23, valueAxis25, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer28);
+        org.jfree.chart.axis.AxisLocation axisLocation36 = org.jfree.chart.axis.AxisLocation.TOP_OR_LEFT;
+        categoryPlot35.setRangeAxisLocation(axisLocation36);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer40 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean42 = lineAndShapeRenderer40.isSeriesVisibleInLegend(1);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator44 = null;
+        lineAndShapeRenderer40.setSeriesURLGenerator(0, categoryURLGenerator44, false);
+        java.awt.Color color47 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        java.awt.color.ColorSpace colorSpace48 = color47.getColorSpace();
+        lineAndShapeRenderer40.setBaseFillPaint((java.awt.Paint) color47);
+        boolean boolean50 = lineAndShapeRenderer40.getBaseShapesVisible();
+        java.awt.Graphics2D graphics2D51 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer54 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color55 = java.awt.Color.BLUE;
+        lineAndShapeRenderer54.setBaseItemLabelPaint((java.awt.Paint) color55);
+        java.awt.Stroke stroke58 = lineAndShapeRenderer54.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset59 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis61 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float62 = categoryAxis61.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis63 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer66 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color67 = java.awt.Color.BLUE;
+        lineAndShapeRenderer66.setBaseItemLabelPaint((java.awt.Paint) color67);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator72 = lineAndShapeRenderer66.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot73 = new org.jfree.chart.plot.CategoryPlot(categoryDataset59, categoryAxis61, valueAxis63, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer66);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer74 = categoryPlot73.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis76 = lineAndShapeRenderer54.getRangeAxis(categoryPlot73, (int) '4');
+        boolean boolean77 = categoryPlot73.isRangeCrosshairVisible();
+        java.awt.Paint paint78 = categoryPlot73.getRangeZeroBaselinePaint();
+        categoryPlot73.mapDatasetToDomainAxis((int) (byte) 1, (int) (short) 10);
+        org.jfree.chart.plot.PlotOrientation plotOrientation82 = categoryPlot73.getOrientation();
+        org.jfree.data.category.CategoryDataset categoryDataset83 = null;
+        lineAndShapeRenderer40.drawItemLabel(graphics2D51, plotOrientation82, categoryDataset83, 2, (-1), true, 1.0d, (double) 'a', false);
+        org.jfree.chart.util.RectangleEdge rectangleEdge91 = org.jfree.chart.plot.Plot.resolveDomainAxisLocation(axisLocation36, plotOrientation82);
+        categoryPlot14.setRangeAxisLocation(axisLocation36, false);
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryAxis15);
+        org.junit.Assert.assertNotNull(paint18);
+        org.junit.Assert.assertTrue("'" + float24 + "' != '" + 0.0f + "'", float24 == 0.0f);
+        org.junit.Assert.assertNotNull(color29);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator34);
+        org.junit.Assert.assertNotNull(axisLocation36);
+        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + true + "'", boolean42 == true);
+        org.junit.Assert.assertNotNull(color47);
+        org.junit.Assert.assertNotNull(colorSpace48);
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + true + "'", boolean50 == true);
+        org.junit.Assert.assertNotNull(color55);
+        org.junit.Assert.assertNull(stroke58);
+        org.junit.Assert.assertTrue("'" + float62 + "' != '" + 0.0f + "'", float62 == 0.0f);
+        org.junit.Assert.assertNotNull(color67);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator72);
+        org.junit.Assert.assertNotNull(categoryItemRenderer74);
+        org.junit.Assert.assertNull(valueAxis76);
+        org.junit.Assert.assertTrue("'" + boolean77 + "' != '" + false + "'", boolean77 == false);
+        org.junit.Assert.assertNotNull(paint78);
+        org.junit.Assert.assertNotNull(plotOrientation82);
+        org.junit.Assert.assertNotNull(rectangleEdge91);
+    }
+
+    @Test
+    public void test2427() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2427");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        org.jfree.chart.plot.DrawingSupplier drawingSupplier13 = lineAndShapeRenderer2.getDrawingSupplier();
+        lineAndShapeRenderer2.setBaseCreateEntities(false);
+        java.awt.Font font19 = lineAndShapeRenderer2.getItemLabelFont((int) (short) 0, 0, false);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer23 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator24 = null;
+        lineAndShapeRenderer23.setBaseURLGenerator(categoryURLGenerator24);
+        java.awt.Shape shape27 = lineAndShapeRenderer23.getLegendShape(0);
+        lineAndShapeRenderer23.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font31 = lineAndShapeRenderer23.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer23.setUseSeriesOffset(true);
+        java.awt.Font font35 = null;
+        lineAndShapeRenderer23.setSeriesItemLabelFont((int) (short) 1, font35, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition39 = lineAndShapeRenderer23.getSeriesPositiveItemLabelPosition((int) (byte) 100);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor40 = itemLabelPosition39.getItemLabelAnchor();
+        lineAndShapeRenderer2.setSeriesNegativeItemLabelPosition(1, itemLabelPosition39, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition44 = lineAndShapeRenderer2.getSeriesNegativeItemLabelPosition(0);
+        org.jfree.data.category.CategoryDataset categoryDataset45 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis47 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float48 = categoryAxis47.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis49 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer52 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color53 = java.awt.Color.BLUE;
+        lineAndShapeRenderer52.setBaseItemLabelPaint((java.awt.Paint) color53);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator58 = lineAndShapeRenderer52.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot59 = new org.jfree.chart.plot.CategoryPlot(categoryDataset45, categoryAxis47, valueAxis49, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer52);
+        org.jfree.chart.axis.AxisLocation axisLocation60 = org.jfree.chart.axis.AxisLocation.TOP_OR_LEFT;
+        categoryPlot59.setRangeAxisLocation(axisLocation60);
+        categoryPlot59.clearSelection();
+        boolean boolean63 = itemLabelPosition44.equals((java.lang.Object) categoryPlot59);
+        boolean boolean64 = categoryPlot59.isDomainCrosshairVisible();
+        java.util.List list65 = categoryPlot59.getCategories();
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNull(drawingSupplier13);
+        org.junit.Assert.assertNotNull(font19);
+        org.junit.Assert.assertNull(shape27);
+        org.junit.Assert.assertNull(font31);
+        org.junit.Assert.assertNotNull(itemLabelPosition39);
+        org.junit.Assert.assertNotNull(itemLabelAnchor40);
+        org.junit.Assert.assertNotNull(itemLabelPosition44);
+        org.junit.Assert.assertTrue("'" + float48 + "' != '" + 0.0f + "'", float48 == 0.0f);
+        org.junit.Assert.assertNotNull(color53);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator58);
+        org.junit.Assert.assertNotNull(axisLocation60);
+        org.junit.Assert.assertTrue("'" + boolean63 + "' != '" + false + "'", boolean63 == false);
+        org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + false + "'", boolean64 == false);
+        org.junit.Assert.assertNull(list65);
+    }
+
+    @Test
+    public void test2428() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2428");
+        org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem1.setLinePaint((java.awt.Paint) color5);
+        boolean boolean7 = legendItem1.isShapeOutlineVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer10 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color11 = java.awt.Color.BLUE;
+        lineAndShapeRenderer10.setBaseItemLabelPaint((java.awt.Paint) color11);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator16 = lineAndShapeRenderer10.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition18 = lineAndShapeRenderer10.getSeriesPositiveItemLabelPosition((int) 'a');
+        java.awt.Shape shape20 = lineAndShapeRenderer10.lookupLegendShape(8);
+        legendItem1.setLine(shape20);
+        java.lang.String str22 = legendItem1.getToolTipText();
+        java.lang.Object obj23 = legendItem1.clone();
+        org.junit.Assert.assertNotNull(color5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(color11);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator16);
+        org.junit.Assert.assertNotNull(itemLabelPosition18);
+        org.junit.Assert.assertNotNull(shape20);
+        org.junit.Assert.assertNull(str22);
+        org.junit.Assert.assertNotNull(obj23);
+    }
+
+    @Test
+    public void test2429() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2429");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Shape shape5 = lineAndShapeRenderer2.getBaseShape();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer8 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator9 = null;
+        lineAndShapeRenderer8.setBaseURLGenerator(categoryURLGenerator9);
+        java.awt.Shape shape12 = lineAndShapeRenderer8.getLegendShape(0);
+        lineAndShapeRenderer8.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font16 = lineAndShapeRenderer8.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer8.setUseSeriesOffset(true);
+        java.awt.Font font20 = null;
+        lineAndShapeRenderer8.setSeriesItemLabelFont((int) (short) 1, font20, false);
+        java.awt.Stroke stroke26 = lineAndShapeRenderer8.getItemOutlineStroke(0, 1, false);
+        lineAndShapeRenderer2.setBaseStroke(stroke26, true);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition29 = lineAndShapeRenderer2.getBasePositiveItemLabelPosition();
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator31 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelGenerator(11, categoryItemLabelGenerator31);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer35 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color36 = java.awt.Color.BLUE;
+        lineAndShapeRenderer35.setBaseItemLabelPaint((java.awt.Paint) color36);
+        java.awt.Shape shape38 = lineAndShapeRenderer35.getBaseShape();
+        boolean boolean39 = lineAndShapeRenderer2.equals((java.lang.Object) lineAndShapeRenderer35);
+        boolean boolean42 = lineAndShapeRenderer35.getItemVisible(10, 0);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator43 = lineAndShapeRenderer35.getLegendItemLabelGenerator();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNotNull(shape5);
+        org.junit.Assert.assertNull(shape12);
+        org.junit.Assert.assertNull(font16);
+        org.junit.Assert.assertNotNull(stroke26);
+        org.junit.Assert.assertNotNull(itemLabelPosition29);
+        org.junit.Assert.assertNotNull(color36);
+        org.junit.Assert.assertNotNull(shape38);
+        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + true + "'", boolean39 == true);
+        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + true + "'", boolean42 == true);
+        org.junit.Assert.assertNotNull(categorySeriesLabelGenerator43);
+    }
+
+    @Test
+    public void test2430() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2430");
+        org.jfree.chart.LegendItem legendItem5 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color9 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem5.setLinePaint((java.awt.Paint) color9);
+        boolean boolean11 = legendItem5.isShapeOutlineVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition22 = lineAndShapeRenderer14.getSeriesPositiveItemLabelPosition((int) 'a');
+        java.awt.Shape shape24 = lineAndShapeRenderer14.lookupLegendShape(8);
+        legendItem5.setLine(shape24);
+        java.awt.Stroke stroke26 = org.jfree.chart.plot.CategoryPlot.DEFAULT_CROSSHAIR_STROKE;
+        java.awt.Color color27 = java.awt.Color.orange;
+        org.jfree.chart.LegendItem legendItem28 = new org.jfree.chart.LegendItem("SortOrder.ASCENDING", "{0}", "-3,-3,3,3", "", shape24, stroke26, (java.awt.Paint) color27);
+        int int29 = color27.getAlpha();
+        org.junit.Assert.assertNotNull(color9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(itemLabelPosition22);
+        org.junit.Assert.assertNotNull(shape24);
+        org.junit.Assert.assertNotNull(stroke26);
+        org.junit.Assert.assertNotNull(color27);
+        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 255 + "'", int29 == 255);
+    }
+
+    @Test
+    public void test2431() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2431");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float10 = categoryAxis9.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
+        double double25 = categoryPlot21.getRangeCrosshairValue();
+        java.awt.Paint paint26 = categoryPlot21.getRangeZeroBaselinePaint();
+        int int27 = categoryPlot21.getRangeAxisCount();
+        java.awt.Color color28 = java.awt.Color.BLUE;
+        categoryPlot21.setRangeMinorGridlinePaint((java.awt.Paint) color28);
+        java.awt.Stroke stroke30 = categoryPlot21.getRangeMinorGridlineStroke();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer33 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator34 = null;
+        lineAndShapeRenderer33.setBaseURLGenerator(categoryURLGenerator34);
+        java.awt.Shape shape37 = lineAndShapeRenderer33.getLegendShape(0);
+        lineAndShapeRenderer33.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font41 = lineAndShapeRenderer33.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer33.setUseSeriesOffset(true);
+        java.awt.Font font45 = null;
+        lineAndShapeRenderer33.setSeriesItemLabelFont((int) (short) 1, font45, false);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer50 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color51 = java.awt.Color.BLUE;
+        lineAndShapeRenderer50.setBaseItemLabelPaint((java.awt.Paint) color51);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator56 = lineAndShapeRenderer50.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition58 = lineAndShapeRenderer50.getSeriesPositiveItemLabelPosition((int) 'a');
+        boolean boolean59 = lineAndShapeRenderer50.getBaseItemLabelsVisible();
+        org.jfree.chart.LegendItem legendItem61 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color65 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem61.setLinePaint((java.awt.Paint) color65);
+        lineAndShapeRenderer50.setBaseItemLabelPaint((java.awt.Paint) color65);
+        java.awt.Paint paint71 = lineAndShapeRenderer50.getItemLabelPaint((int) '#', (int) (byte) 1, true);
+        lineAndShapeRenderer33.setBaseItemLabelPaint(paint71);
+        lineAndShapeRenderer33.setSeriesItemLabelsVisible(4, (java.lang.Boolean) false, true);
+        java.awt.Stroke stroke77 = lineAndShapeRenderer33.getBaseOutlineStroke();
+        categoryPlot21.setRangeCrosshairStroke(stroke77);
+        org.jfree.chart.event.PlotChangeEvent plotChangeEvent79 = new org.jfree.chart.event.PlotChangeEvent((org.jfree.chart.plot.Plot) categoryPlot21);
+        categoryPlot21.configureDomainAxes();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(categoryItemRenderer22);
+        org.junit.Assert.assertNull(valueAxis24);
+        org.junit.Assert.assertTrue("'" + double25 + "' != '" + 0.0d + "'", double25 == 0.0d);
+        org.junit.Assert.assertNotNull(paint26);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 1 + "'", int27 == 1);
+        org.junit.Assert.assertNotNull(color28);
+        org.junit.Assert.assertNotNull(stroke30);
+        org.junit.Assert.assertNull(shape37);
+        org.junit.Assert.assertNull(font41);
+        org.junit.Assert.assertNotNull(color51);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator56);
+        org.junit.Assert.assertNotNull(itemLabelPosition58);
+        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + false + "'", boolean59 == false);
+        org.junit.Assert.assertNotNull(color65);
+        org.junit.Assert.assertNotNull(paint71);
+        org.junit.Assert.assertNotNull(stroke77);
+    }
+
+    @Test
+    public void test2432() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2432");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        int int3 = lineAndShapeRenderer2.getColumnCount();
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator5 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelGenerator(2, categoryItemLabelGenerator5);
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+    }
+
+    @Test
+    public void test2433() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2433");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        java.awt.Font font14 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelFont((int) (short) 1, font14, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition18 = lineAndShapeRenderer2.getSeriesPositiveItemLabelPosition((int) (byte) 100);
+        lineAndShapeRenderer2.setAutoPopulateSeriesOutlinePaint(false);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator22 = lineAndShapeRenderer2.getSeriesToolTipGenerator(4);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes23 = lineAndShapeRenderer2.getSelectedItemAttributes();
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNotNull(itemLabelPosition18);
+        org.junit.Assert.assertNull(categoryToolTipGenerator22);
+        org.junit.Assert.assertNotNull(renderAttributes23);
+    }
+
+    @Test
+    public void test2434() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2434");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        org.jfree.chart.plot.DrawingSupplier drawingSupplier13 = lineAndShapeRenderer2.getDrawingSupplier();
+        lineAndShapeRenderer2.setBaseCreateEntities(false);
+        lineAndShapeRenderer2.setBaseItemLabelsVisible(false);
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNull(drawingSupplier13);
+    }
+
+    @Test
+    public void test2435() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2435");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator6 = null;
+        lineAndShapeRenderer2.setSeriesToolTipGenerator(10, categoryToolTipGenerator6);
+        int int8 = lineAndShapeRenderer2.getRowCount();
+        boolean boolean11 = lineAndShapeRenderer2.getItemVisible((int) (byte) 100, (int) '4');
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition15 = lineAndShapeRenderer2.getNegativeItemLabelPosition((int) (byte) 100, (int) (byte) 0, true);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(itemLabelPosition15);
+    }
+
+    @Test
+    public void test2436() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2436");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        java.awt.Shape shape14 = null;
+        lineAndShapeRenderer2.setSeriesShape((int) (short) 10, shape14, true);
+        int int17 = lineAndShapeRenderer2.getRowCount();
+        lineAndShapeRenderer2.setSeriesVisible(3, (java.lang.Boolean) false, false);
+        lineAndShapeRenderer2.setSeriesVisibleInLegend((int) (short) 1, (java.lang.Boolean) false);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator25 = lineAndShapeRenderer2.getBaseItemLabelGenerator();
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator25);
+    }
+
+    @Test
+    public void test2437() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2437");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
+        org.jfree.chart.event.PlotChangeListener plotChangeListener16 = null;
+        categoryPlot14.addChangeListener(plotChangeListener16);
+        java.awt.Color color18 = org.jfree.chart.ChartColor.VERY_DARK_BLUE;
+        categoryPlot14.setOutlinePaint((java.awt.Paint) color18);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer22 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color23 = java.awt.Color.BLUE;
+        lineAndShapeRenderer22.setBaseItemLabelPaint((java.awt.Paint) color23);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator28 = lineAndShapeRenderer22.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator29 = null;
+        lineAndShapeRenderer22.setLegendItemURLGenerator(categorySeriesLabelGenerator29);
+        java.awt.Paint paint32 = lineAndShapeRenderer22.getSeriesPaint(1);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes33 = lineAndShapeRenderer22.getSelectedItemAttributes();
+        java.awt.Paint paint34 = renderAttributes33.getDefaultLabelPaint();
+        java.awt.Shape shape36 = renderAttributes33.getSeriesShape((-1));
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer39 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator40 = null;
+        lineAndShapeRenderer39.setBaseURLGenerator(categoryURLGenerator40);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator43 = null;
+        lineAndShapeRenderer39.setSeriesToolTipGenerator(10, categoryToolTipGenerator43);
+        boolean boolean45 = lineAndShapeRenderer39.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke47 = null;
+        lineAndShapeRenderer39.setSeriesStroke((int) 'a', stroke47, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor51 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color52 = java.awt.Color.yellow;
+        boolean boolean53 = itemLabelAnchor51.equals((java.lang.Object) color52);
+        lineAndShapeRenderer39.setSeriesFillPaint((int) ' ', (java.awt.Paint) color52);
+        renderAttributes33.setDefaultOutlinePaint((java.awt.Paint) color52);
+        categoryPlot14.setOutlinePaint((java.awt.Paint) color52);
+        java.lang.Comparable comparable57 = categoryPlot14.getDomainCrosshairColumnKey();
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryAxis15);
+        org.junit.Assert.assertNotNull(color18);
+        org.junit.Assert.assertNotNull(color23);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator28);
+        org.junit.Assert.assertNull(paint32);
+        org.junit.Assert.assertNotNull(renderAttributes33);
+        org.junit.Assert.assertNull(paint34);
+        org.junit.Assert.assertNull(shape36);
+        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + true + "'", boolean45 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor51);
+        org.junit.Assert.assertNotNull(color52);
+        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
+        org.junit.Assert.assertNull(comparable57);
+    }
+
+    @Test
+    public void test2438() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2438");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
+        lineAndShapeRenderer2.setSeriesURLGenerator(0, categoryURLGenerator6, false);
+        java.awt.Color color9 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        java.awt.color.ColorSpace colorSpace10 = color9.getColorSpace();
+        lineAndShapeRenderer2.setBaseFillPaint((java.awt.Paint) color9);
+        boolean boolean12 = lineAndShapeRenderer2.getBaseShapesVisible();
+        java.lang.Boolean boolean14 = lineAndShapeRenderer2.getSeriesLinesVisible(0);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator18 = lineAndShapeRenderer2.getItemLabelGenerator(0, (int) (short) 1, true);
+        lineAndShapeRenderer2.clearSeriesStrokes(false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition21 = lineAndShapeRenderer2.getBasePositiveItemLabelPosition();
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator23 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            lineAndShapeRenderer2.setSeriesItemLabelGenerator((-254), categoryItemLabelGenerator23);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Requires index >= 0.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(color9);
+        org.junit.Assert.assertNotNull(colorSpace10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertNull(boolean14);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator18);
+        org.junit.Assert.assertNotNull(itemLabelPosition21);
+    }
+
+    @Test
+    public void test2439() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2439");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator6 = null;
+        lineAndShapeRenderer2.setSeriesToolTipGenerator(10, categoryToolTipGenerator6);
+        boolean boolean8 = lineAndShapeRenderer2.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke10 = null;
+        lineAndShapeRenderer2.setSeriesStroke((int) 'a', stroke10, true);
+        java.awt.Font font14 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer17 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator18 = null;
+        lineAndShapeRenderer17.setBaseURLGenerator(categoryURLGenerator18);
+        java.awt.Paint paint21 = lineAndShapeRenderer17.getSeriesOutlinePaint(0);
+        java.awt.Font font22 = lineAndShapeRenderer17.getBaseItemLabelFont();
+        java.awt.Shape shape24 = lineAndShapeRenderer17.lookupSeriesShape(2);
+        lineAndShapeRenderer2.setBaseShape(shape24, false);
+        java.awt.Paint paint28 = lineAndShapeRenderer2.lookupSeriesFillPaint((-1));
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNull(font14);
+        org.junit.Assert.assertNull(paint21);
+        org.junit.Assert.assertNotNull(font22);
+        org.junit.Assert.assertNotNull(shape24);
+        org.junit.Assert.assertNotNull(paint28);
+    }
+
+    @Test
+    public void test2440() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2440");
+        org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
+        double double2 = rectangleInsets0.calculateBottomInset(0.0d);
+        double double4 = rectangleInsets0.trimWidth((double) '#');
+        double double6 = rectangleInsets0.calculateTopInset((double) (byte) 100);
+        java.lang.String str7 = rectangleInsets0.toString();
+        double double9 = rectangleInsets0.calculateLeftInset((-5.0d));
+        org.jfree.data.category.CategoryDataset categoryDataset10 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis12 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float13 = categoryAxis12.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis14 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer17 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color18 = java.awt.Color.BLUE;
+        lineAndShapeRenderer17.setBaseItemLabelPaint((java.awt.Paint) color18);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator23 = lineAndShapeRenderer17.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot24 = new org.jfree.chart.plot.CategoryPlot(categoryDataset10, categoryAxis12, valueAxis14, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer17);
+        org.jfree.chart.axis.CategoryAxis categoryAxis25 = categoryPlot24.getDomainAxis();
+        org.jfree.chart.axis.ValueAxis valueAxis26 = null;
+        org.jfree.data.Range range27 = categoryPlot24.getDataRange(valueAxis26);
+        org.jfree.chart.axis.AxisLocation axisLocation28 = categoryPlot24.getRangeAxisLocation();
+        categoryPlot24.clearRangeMarkers(0);
+        org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset31 = new org.jfree.data.category.DefaultCategoryDataset();
+        int int33 = defaultCategoryDataset31.getColumnIndex((java.lang.Comparable) 3.0d);
+        int int35 = defaultCategoryDataset31.getRowIndex((java.lang.Comparable) (byte) 10);
+        defaultCategoryDataset31.clearSelection();
+        int int37 = categoryPlot24.indexOf((org.jfree.data.category.CategoryDataset) defaultCategoryDataset31);
+        defaultCategoryDataset31.validateObject();
+        defaultCategoryDataset31.clear();
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo40 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent41 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-5.0d), (org.jfree.data.general.Dataset) defaultCategoryDataset31, datasetChangeInfo40);
+        java.util.List list42 = defaultCategoryDataset31.getColumnKeys();
+        int int43 = defaultCategoryDataset31.getRowCount();
+        org.junit.Assert.assertNotNull(rectangleInsets0);
+        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 3.0d + "'", double2 == 3.0d);
+        org.junit.Assert.assertTrue("'" + double4 + "' != '" + 29.0d + "'", double4 == 29.0d);
+        org.junit.Assert.assertTrue("'" + double6 + "' != '" + 3.0d + "'", double6 == 3.0d);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "RectangleInsets[t=3.0,l=3.0,b=3.0,r=3.0]" + "'", str7, "RectangleInsets[t=3.0,l=3.0,b=3.0,r=3.0]");
+        org.junit.Assert.assertTrue("'" + double9 + "' != '" + 3.0d + "'", double9 == 3.0d);
+        org.junit.Assert.assertTrue("'" + float13 + "' != '" + 0.0f + "'", float13 == 0.0f);
+        org.junit.Assert.assertNotNull(color18);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator23);
+        org.junit.Assert.assertNotNull(categoryAxis25);
+        org.junit.Assert.assertNull(range27);
+        org.junit.Assert.assertNotNull(axisLocation28);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + (-1) + "'", int33 == (-1));
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + (-1) + "'", int35 == (-1));
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + (-1) + "'", int37 == (-1));
+        org.junit.Assert.assertNotNull(list42);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+    }
+
+    @Test
+    public void test2441() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2441");
+        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
+        boolean boolean1 = barRenderer0.isDrawBarOutline();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color5 = java.awt.Color.BLUE;
+        lineAndShapeRenderer4.setBaseItemLabelPaint((java.awt.Paint) color5);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator10 = lineAndShapeRenderer4.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition11 = lineAndShapeRenderer4.getBaseNegativeItemLabelPosition();
+        barRenderer0.setNegativeItemLabelPositionFallback(itemLabelPosition11);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator16 = null;
+        lineAndShapeRenderer15.setBaseURLGenerator(categoryURLGenerator16);
+        java.awt.Shape shape19 = lineAndShapeRenderer15.getLegendShape(0);
+        lineAndShapeRenderer15.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font23 = lineAndShapeRenderer15.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer15.setUseSeriesOffset(true);
+        java.awt.Shape shape27 = null;
+        lineAndShapeRenderer15.setSeriesShape((int) (short) 10, shape27, true);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition30 = lineAndShapeRenderer15.getBasePositiveItemLabelPosition();
+        org.jfree.chart.text.TextAnchor textAnchor31 = itemLabelPosition30.getTextAnchor();
+        barRenderer0.setPositiveItemLabelPositionFallback(itemLabelPosition30);
+        boolean boolean33 = barRenderer0.getShadowsVisible();
+        org.jfree.chart.renderer.category.BarPainter barPainter34 = barRenderer0.getBarPainter();
+        org.jfree.chart.util.GradientPaintTransformer gradientPaintTransformer35 = barRenderer0.getGradientPaintTransformer();
+        org.jfree.chart.LegendItem legendItem38 = barRenderer0.getLegendItem((int) '4', 11);
+        boolean boolean39 = barRenderer0.getBaseCreateEntities();
+        org.jfree.data.KeyedObjects keyedObjects40 = new org.jfree.data.KeyedObjects();
+        keyedObjects40.clear();
+        int int42 = keyedObjects40.getItemCount();
+        int int43 = keyedObjects40.getItemCount();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer48 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color49 = java.awt.Color.BLUE;
+        lineAndShapeRenderer48.setBaseItemLabelPaint((java.awt.Paint) color49);
+        java.awt.Stroke stroke52 = lineAndShapeRenderer48.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset53 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis55 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float56 = categoryAxis55.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis57 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer60 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color61 = java.awt.Color.BLUE;
+        lineAndShapeRenderer60.setBaseItemLabelPaint((java.awt.Paint) color61);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator66 = lineAndShapeRenderer60.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot67 = new org.jfree.chart.plot.CategoryPlot(categoryDataset53, categoryAxis55, valueAxis57, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer60);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer68 = categoryPlot67.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis70 = lineAndShapeRenderer48.getRangeAxis(categoryPlot67, (int) '4');
+        double double71 = categoryPlot67.getRangeCrosshairValue();
+        java.awt.Paint paint72 = categoryPlot67.getRangeZeroBaselinePaint();
+        int int73 = categoryPlot67.getRangeAxisCount();
+        java.awt.Color color74 = java.awt.Color.BLUE;
+        categoryPlot67.setRangeMinorGridlinePaint((java.awt.Paint) color74);
+        java.awt.Stroke stroke76 = categoryPlot67.getRangeMinorGridlineStroke();
+        keyedObjects40.insertValue((int) (short) 0, (java.lang.Comparable) 104.0d, (java.lang.Object) stroke76);
+        boolean boolean78 = barRenderer0.equals((java.lang.Object) 104.0d);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(color5);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator10);
+        org.junit.Assert.assertNotNull(itemLabelPosition11);
+        org.junit.Assert.assertNull(shape19);
+        org.junit.Assert.assertNull(font23);
+        org.junit.Assert.assertNotNull(itemLabelPosition30);
+        org.junit.Assert.assertNotNull(textAnchor31);
+// flaky:         org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+        org.junit.Assert.assertNotNull(barPainter34);
+        org.junit.Assert.assertNotNull(gradientPaintTransformer35);
+        org.junit.Assert.assertNull(legendItem38);
+        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + true + "'", boolean39 == true);
+        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(color49);
+        org.junit.Assert.assertNull(stroke52);
+        org.junit.Assert.assertTrue("'" + float56 + "' != '" + 0.0f + "'", float56 == 0.0f);
+        org.junit.Assert.assertNotNull(color61);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator66);
+        org.junit.Assert.assertNotNull(categoryItemRenderer68);
+        org.junit.Assert.assertNull(valueAxis70);
+        org.junit.Assert.assertTrue("'" + double71 + "' != '" + 0.0d + "'", double71 == 0.0d);
+        org.junit.Assert.assertNotNull(paint72);
+        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 1 + "'", int73 == 1);
+        org.junit.Assert.assertNotNull(color74);
+        org.junit.Assert.assertNotNull(stroke76);
+        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + false + "'", boolean78 == false);
+    }
+
+    @Test
+    public void test2442() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2442");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        boolean boolean15 = categoryPlot14.canSelectByPoint();
+        org.jfree.chart.LegendItemCollection legendItemCollection16 = categoryPlot14.getFixedLegendItems();
+        java.awt.Stroke stroke17 = categoryPlot14.getRangeGridlineStroke();
+        org.jfree.chart.event.RendererChangeEvent rendererChangeEvent18 = null;
+        categoryPlot14.rendererChanged(rendererChangeEvent18);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer23 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean25 = lineAndShapeRenderer23.isSeriesVisibleInLegend(1);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator27 = null;
+        lineAndShapeRenderer23.setSeriesURLGenerator(0, categoryURLGenerator27, false);
+        java.awt.Color color30 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        java.awt.color.ColorSpace colorSpace31 = color30.getColorSpace();
+        lineAndShapeRenderer23.setBaseFillPaint((java.awt.Paint) color30);
+        boolean boolean33 = lineAndShapeRenderer23.getBaseShapesVisible();
+        java.lang.Boolean boolean35 = lineAndShapeRenderer23.getSeriesLinesVisible(0);
+        org.jfree.chart.ChartColor chartColor39 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
+        lineAndShapeRenderer23.setBasePaint((java.awt.Paint) chartColor39);
+        java.awt.Paint paint44 = lineAndShapeRenderer23.getItemLabelPaint((-16776961), (-12517568), true);
+        categoryPlot14.setRenderer((int) '4', (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer23);
+        org.jfree.data.category.CategoryDataset categoryDataset47 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis49 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float50 = categoryAxis49.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis51 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer54 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color55 = java.awt.Color.BLUE;
+        lineAndShapeRenderer54.setBaseItemLabelPaint((java.awt.Paint) color55);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator60 = lineAndShapeRenderer54.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot61 = new org.jfree.chart.plot.CategoryPlot(categoryDataset47, categoryAxis49, valueAxis51, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer54);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer62 = categoryPlot61.getRenderer();
+        org.jfree.chart.axis.CategoryAxis categoryAxis64 = categoryPlot61.getDomainAxisForDataset(2);
+        double double65 = categoryAxis64.getLowerMargin();
+        org.jfree.chart.util.RectangleInsets rectangleInsets66 = categoryAxis64.getLabelInsets();
+        org.jfree.data.category.CategoryDataset categoryDataset67 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis69 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float70 = categoryAxis69.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis71 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer74 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color75 = java.awt.Color.BLUE;
+        lineAndShapeRenderer74.setBaseItemLabelPaint((java.awt.Paint) color75);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator80 = lineAndShapeRenderer74.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot81 = new org.jfree.chart.plot.CategoryPlot(categoryDataset67, categoryAxis69, valueAxis71, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer74);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer82 = categoryPlot81.getRenderer();
+        org.jfree.chart.plot.PlotOrientation plotOrientation83 = categoryPlot81.getOrientation();
+        categoryAxis64.setPlot((org.jfree.chart.plot.Plot) categoryPlot81);
+        java.awt.Stroke stroke85 = categoryPlot81.getDomainGridlineStroke();
+        // The following exception was thrown during execution in test generation
+        try {
+            lineAndShapeRenderer23.setSeriesStroke((-12517568), stroke85);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Requires index >= 0.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
+        org.junit.Assert.assertNull(legendItemCollection16);
+        org.junit.Assert.assertNotNull(stroke17);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
+        org.junit.Assert.assertNotNull(color30);
+        org.junit.Assert.assertNotNull(colorSpace31);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
+        org.junit.Assert.assertNull(boolean35);
+        org.junit.Assert.assertNotNull(paint44);
+        org.junit.Assert.assertTrue("'" + float50 + "' != '" + 0.0f + "'", float50 == 0.0f);
+        org.junit.Assert.assertNotNull(color55);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator60);
+        org.junit.Assert.assertNotNull(categoryItemRenderer62);
+        org.junit.Assert.assertNotNull(categoryAxis64);
+        org.junit.Assert.assertTrue("'" + double65 + "' != '" + 0.05d + "'", double65 == 0.05d);
+        org.junit.Assert.assertNotNull(rectangleInsets66);
+        org.junit.Assert.assertTrue("'" + float70 + "' != '" + 0.0f + "'", float70 == 0.0f);
+        org.junit.Assert.assertNotNull(color75);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator80);
+        org.junit.Assert.assertNotNull(categoryItemRenderer82);
+        org.junit.Assert.assertNotNull(plotOrientation83);
+        org.junit.Assert.assertNotNull(stroke85);
+    }
+
+    @Test
+    public void test2443() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2443");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
+        org.jfree.chart.util.RectangleInsets rectangleInsets16 = categoryPlot14.getInsets();
+        double double18 = rectangleInsets16.calculateBottomOutset((double) ' ');
+        double double20 = rectangleInsets16.calculateBottomInset((-6.0d));
+        java.lang.String str21 = rectangleInsets16.toString();
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryAxis15);
+        org.junit.Assert.assertNotNull(rectangleInsets16);
+        org.junit.Assert.assertTrue("'" + double18 + "' != '" + 4.0d + "'", double18 == 4.0d);
+        org.junit.Assert.assertTrue("'" + double20 + "' != '" + 4.0d + "'", double20 == 4.0d);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "RectangleInsets[t=4.0,l=8.0,b=4.0,r=8.0]" + "'", str21, "RectangleInsets[t=4.0,l=8.0,b=4.0,r=8.0]");
+    }
+
+    @Test
+    public void test2444() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2444");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
+        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
+        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes13 = lineAndShapeRenderer2.getSelectedItemAttributes();
+        java.awt.Paint paint14 = renderAttributes13.getDefaultLabelPaint();
+        java.awt.Paint paint15 = renderAttributes13.getDefaultPaint();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color20 = java.awt.Color.BLUE;
+        lineAndShapeRenderer19.setBaseItemLabelPaint((java.awt.Paint) color20);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator25 = lineAndShapeRenderer19.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator26 = null;
+        lineAndShapeRenderer19.setLegendItemURLGenerator(categorySeriesLabelGenerator26);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator29 = null;
+        lineAndShapeRenderer19.setSeriesItemLabelGenerator((int) '#', categoryItemLabelGenerator29);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer33 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color34 = java.awt.Color.BLUE;
+        lineAndShapeRenderer33.setBaseItemLabelPaint((java.awt.Paint) color34);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator39 = lineAndShapeRenderer33.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator40 = null;
+        lineAndShapeRenderer33.setLegendItemURLGenerator(categorySeriesLabelGenerator40);
+        java.awt.Paint paint43 = lineAndShapeRenderer33.getSeriesPaint(1);
+        java.awt.Paint paint47 = lineAndShapeRenderer33.getItemFillPaint((-1), (int) (short) 100, false);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer51 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color52 = java.awt.Color.BLUE;
+        lineAndShapeRenderer51.setBaseItemLabelPaint((java.awt.Paint) color52);
+        java.awt.Shape shape54 = lineAndShapeRenderer51.getBaseShape();
+        lineAndShapeRenderer33.setLegendShape((int) (byte) 1, shape54);
+        java.awt.Paint paint56 = lineAndShapeRenderer33.getBaseItemLabelPaint();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer59 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color60 = java.awt.Color.BLUE;
+        lineAndShapeRenderer59.setBaseItemLabelPaint((java.awt.Paint) color60);
+        java.awt.Stroke stroke63 = lineAndShapeRenderer59.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset64 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis66 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float67 = categoryAxis66.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis68 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer71 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color72 = java.awt.Color.BLUE;
+        lineAndShapeRenderer71.setBaseItemLabelPaint((java.awt.Paint) color72);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator77 = lineAndShapeRenderer71.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot78 = new org.jfree.chart.plot.CategoryPlot(categoryDataset64, categoryAxis66, valueAxis68, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer71);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer79 = categoryPlot78.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis81 = lineAndShapeRenderer59.getRangeAxis(categoryPlot78, (int) '4');
+        double double82 = categoryPlot78.getRangeCrosshairValue();
+        java.awt.Paint paint83 = categoryPlot78.getRangeZeroBaselinePaint();
+        lineAndShapeRenderer33.setBaseFillPaint(paint83, true);
+        lineAndShapeRenderer19.setBasePaint(paint83);
+        renderAttributes13.setSeriesOutlinePaint((int) (byte) 0, paint83);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Boolean boolean89 = renderAttributes13.getSeriesCreateEntity((int) 'a');
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNull(paint12);
+        org.junit.Assert.assertNotNull(renderAttributes13);
+        org.junit.Assert.assertNull(paint14);
+        org.junit.Assert.assertNull(paint15);
+        org.junit.Assert.assertNotNull(color20);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator25);
+        org.junit.Assert.assertNotNull(color34);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator39);
+        org.junit.Assert.assertNull(paint43);
+        org.junit.Assert.assertNotNull(paint47);
+        org.junit.Assert.assertNotNull(color52);
+        org.junit.Assert.assertNotNull(shape54);
+        org.junit.Assert.assertNotNull(paint56);
+        org.junit.Assert.assertNotNull(color60);
+        org.junit.Assert.assertNull(stroke63);
+        org.junit.Assert.assertTrue("'" + float67 + "' != '" + 0.0f + "'", float67 == 0.0f);
+        org.junit.Assert.assertNotNull(color72);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator77);
+        org.junit.Assert.assertNotNull(categoryItemRenderer79);
+        org.junit.Assert.assertNull(valueAxis81);
+        org.junit.Assert.assertTrue("'" + double82 + "' != '" + 0.0d + "'", double82 == 0.0d);
+        org.junit.Assert.assertNotNull(paint83);
+    }
+
+    @Test
+    public void test2445() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2445");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        java.awt.Shape shape14 = null;
+        lineAndShapeRenderer2.setSeriesShape((int) (short) 10, shape14, true);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color20 = java.awt.Color.BLUE;
+        lineAndShapeRenderer19.setBaseItemLabelPaint((java.awt.Paint) color20);
+        java.awt.Stroke stroke23 = lineAndShapeRenderer19.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset24 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis26 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float27 = categoryAxis26.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis28 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer31 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color32 = java.awt.Color.BLUE;
+        lineAndShapeRenderer31.setBaseItemLabelPaint((java.awt.Paint) color32);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator37 = lineAndShapeRenderer31.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot38 = new org.jfree.chart.plot.CategoryPlot(categoryDataset24, categoryAxis26, valueAxis28, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer31);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer39 = categoryPlot38.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis41 = lineAndShapeRenderer19.getRangeAxis(categoryPlot38, (int) '4');
+        double double42 = categoryPlot38.getRangeCrosshairValue();
+        lineAndShapeRenderer2.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot38);
+        org.jfree.chart.axis.CategoryAxis[] categoryAxisArray44 = new org.jfree.chart.axis.CategoryAxis[] {};
+        categoryPlot38.setDomainAxes(categoryAxisArray44);
+        categoryPlot38.setDomainGridlinesVisible(true);
+        java.awt.Color color48 = java.awt.Color.BLUE;
+        int int49 = color48.getRed();
+        categoryPlot38.setRangeCrosshairPaint((java.awt.Paint) color48);
+        boolean boolean51 = categoryPlot38.isSubplot();
+        float float52 = categoryPlot38.getBackgroundImageAlpha();
+        categoryPlot38.clearSelection();
+        categoryPlot38.setRangeCrosshairValue(2.0d, false);
+        boolean boolean57 = categoryPlot38.getDrawSharedDomainAxis();
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNotNull(color20);
+        org.junit.Assert.assertNull(stroke23);
+        org.junit.Assert.assertTrue("'" + float27 + "' != '" + 0.0f + "'", float27 == 0.0f);
+        org.junit.Assert.assertNotNull(color32);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator37);
+        org.junit.Assert.assertNotNull(categoryItemRenderer39);
+        org.junit.Assert.assertNull(valueAxis41);
+        org.junit.Assert.assertTrue("'" + double42 + "' != '" + 0.0d + "'", double42 == 0.0d);
+        org.junit.Assert.assertNotNull(categoryAxisArray44);
+        org.junit.Assert.assertNotNull(color48);
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
+        org.junit.Assert.assertTrue("'" + float52 + "' != '" + 0.5f + "'", float52 == 0.5f);
+        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
+    }
+
+    @Test
+    public void test2446() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2446");
+        org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
+        double double2 = rectangleInsets0.calculateBottomInset(0.0d);
+        double double4 = rectangleInsets0.trimWidth((double) '#');
+        double double6 = rectangleInsets0.calculateTopInset((double) (byte) 100);
+        java.lang.String str7 = rectangleInsets0.toString();
+        double double8 = rectangleInsets0.getBottom();
+        org.junit.Assert.assertNotNull(rectangleInsets0);
+        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 3.0d + "'", double2 == 3.0d);
+        org.junit.Assert.assertTrue("'" + double4 + "' != '" + 29.0d + "'", double4 == 29.0d);
+        org.junit.Assert.assertTrue("'" + double6 + "' != '" + 3.0d + "'", double6 == 3.0d);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "RectangleInsets[t=3.0,l=3.0,b=3.0,r=3.0]" + "'", str7, "RectangleInsets[t=3.0,l=3.0,b=3.0,r=3.0]");
+        org.junit.Assert.assertTrue("'" + double8 + "' != '" + 3.0d + "'", double8 == 3.0d);
+    }
+
+    @Test
+    public void test2447() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2447");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        org.jfree.chart.plot.DrawingSupplier drawingSupplier13 = lineAndShapeRenderer2.getDrawingSupplier();
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator14 = lineAndShapeRenderer2.getLegendItemURLGenerator();
+        java.awt.Font font15 = lineAndShapeRenderer2.getBaseItemLabelFont();
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNull(drawingSupplier13);
+        org.junit.Assert.assertNull(categorySeriesLabelGenerator14);
+        org.junit.Assert.assertNotNull(font15);
+    }
+
+    @Test
+    public void test2448() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2448");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float10 = categoryAxis9.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
+        double double25 = categoryPlot21.getRangeCrosshairValue();
+        java.awt.Paint paint26 = categoryPlot21.getRangeZeroBaselinePaint();
+        int int27 = categoryPlot21.getRangeAxisCount();
+        java.awt.Color color28 = java.awt.Color.BLUE;
+        categoryPlot21.setRangeMinorGridlinePaint((java.awt.Paint) color28);
+        java.awt.Stroke stroke30 = categoryPlot21.getRangeMinorGridlineStroke();
+        categoryPlot21.clearRangeMarkers();
+        org.jfree.chart.event.AnnotationChangeEvent annotationChangeEvent32 = null;
+        categoryPlot21.annotationChanged(annotationChangeEvent32);
+        categoryPlot21.clearSelection();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(categoryItemRenderer22);
+        org.junit.Assert.assertNull(valueAxis24);
+        org.junit.Assert.assertTrue("'" + double25 + "' != '" + 0.0d + "'", double25 == 0.0d);
+        org.junit.Assert.assertNotNull(paint26);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 1 + "'", int27 == 1);
+        org.junit.Assert.assertNotNull(color28);
+        org.junit.Assert.assertNotNull(stroke30);
+    }
+
+    @Test
+    public void test2449() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2449");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        java.lang.Object obj15 = categoryPlot14.clone();
+        org.jfree.chart.util.RectangleEdge rectangleEdge17 = categoryPlot14.getDomainAxisEdge((int) ' ');
+        org.jfree.chart.LegendItemCollection legendItemCollection18 = categoryPlot14.getLegendItems();
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(obj15);
+        org.junit.Assert.assertNotNull(rectangleEdge17);
+        org.junit.Assert.assertNotNull(legendItemCollection18);
+    }
+
+    @Test
+    public void test2450() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2450");
+        org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float2 = categoryAxis1.getTickMarkInsideLength();
+        categoryAxis1.setTickLabelsVisible(false);
+        categoryAxis1.setLabel("RectangleInsets[t=3.0,l=3.0,b=3.0,r=3.0]");
+        categoryAxis1.setLabelURL("");
+        org.jfree.data.category.CategoryDataset categoryDataset9 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis11 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float12 = categoryAxis11.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis13 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer16 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color17 = java.awt.Color.BLUE;
+        lineAndShapeRenderer16.setBaseItemLabelPaint((java.awt.Paint) color17);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator22 = lineAndShapeRenderer16.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot23 = new org.jfree.chart.plot.CategoryPlot(categoryDataset9, categoryAxis11, valueAxis13, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer16);
+        boolean boolean24 = categoryPlot23.canSelectByPoint();
+        org.jfree.chart.axis.ValueAxis valueAxis26 = categoryPlot23.getRangeAxisForDataset((int) '4');
+        org.jfree.chart.axis.AxisLocation axisLocation28 = categoryPlot23.getRangeAxisLocation((int) '4');
+        boolean boolean29 = categoryPlot23.canSelectByRegion();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer32 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color33 = java.awt.Color.BLUE;
+        lineAndShapeRenderer32.setBaseItemLabelPaint((java.awt.Paint) color33);
+        java.awt.Stroke stroke36 = lineAndShapeRenderer32.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset37 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis39 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float40 = categoryAxis39.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis41 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer44 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color45 = java.awt.Color.BLUE;
+        lineAndShapeRenderer44.setBaseItemLabelPaint((java.awt.Paint) color45);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator50 = lineAndShapeRenderer44.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot51 = new org.jfree.chart.plot.CategoryPlot(categoryDataset37, categoryAxis39, valueAxis41, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer44);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer52 = categoryPlot51.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis54 = lineAndShapeRenderer32.getRangeAxis(categoryPlot51, (int) '4');
+        boolean boolean55 = categoryPlot51.isRangeCrosshairVisible();
+        java.awt.Paint paint56 = categoryPlot51.getRangeZeroBaselinePaint();
+        categoryPlot51.mapDatasetToDomainAxis((int) (byte) 1, (int) (short) 10);
+        org.jfree.chart.util.RectangleInsets rectangleInsets60 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
+        double double62 = rectangleInsets60.calculateBottomInset(0.0d);
+        categoryPlot51.setAxisOffset(rectangleInsets60);
+        categoryPlot23.setInsets(rectangleInsets60, true);
+        double double67 = rectangleInsets60.extendWidth((double) 8);
+        categoryAxis1.setTickLabelInsets(rectangleInsets60);
+        org.junit.Assert.assertTrue("'" + float2 + "' != '" + 0.0f + "'", float2 == 0.0f);
+        org.junit.Assert.assertTrue("'" + float12 + "' != '" + 0.0f + "'", float12 == 0.0f);
+        org.junit.Assert.assertNotNull(color17);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator22);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + true + "'", boolean24 == true);
+        org.junit.Assert.assertNull(valueAxis26);
+        org.junit.Assert.assertNotNull(axisLocation28);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + true + "'", boolean29 == true);
+        org.junit.Assert.assertNotNull(color33);
+        org.junit.Assert.assertNull(stroke36);
+        org.junit.Assert.assertTrue("'" + float40 + "' != '" + 0.0f + "'", float40 == 0.0f);
+        org.junit.Assert.assertNotNull(color45);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator50);
+        org.junit.Assert.assertNotNull(categoryItemRenderer52);
+        org.junit.Assert.assertNull(valueAxis54);
+        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + false + "'", boolean55 == false);
+        org.junit.Assert.assertNotNull(paint56);
+        org.junit.Assert.assertNotNull(rectangleInsets60);
+        org.junit.Assert.assertTrue("'" + double62 + "' != '" + 3.0d + "'", double62 == 3.0d);
+        org.junit.Assert.assertTrue("'" + double67 + "' != '" + 14.0d + "'", double67 == 14.0d);
+    }
+
+    @Test
+    public void test2451() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2451");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
+        java.awt.Font font5 = lineAndShapeRenderer2.getBaseItemLabelFont();
+        java.awt.Stroke stroke9 = lineAndShapeRenderer2.getItemStroke(100, 0, true);
+        boolean boolean11 = lineAndShapeRenderer2.isSeriesVisible(4);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color16 = java.awt.Color.BLUE;
+        lineAndShapeRenderer15.setBaseItemLabelPaint((java.awt.Paint) color16);
+        java.awt.Shape shape18 = lineAndShapeRenderer15.getBaseShape();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer21 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator22 = null;
+        lineAndShapeRenderer21.setBaseURLGenerator(categoryURLGenerator22);
+        java.awt.Shape shape25 = lineAndShapeRenderer21.getLegendShape(0);
+        lineAndShapeRenderer21.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font29 = lineAndShapeRenderer21.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer21.setUseSeriesOffset(true);
+        java.awt.Font font33 = null;
+        lineAndShapeRenderer21.setSeriesItemLabelFont((int) (short) 1, font33, false);
+        java.awt.Stroke stroke39 = lineAndShapeRenderer21.getItemOutlineStroke(0, 1, false);
+        lineAndShapeRenderer15.setBaseStroke(stroke39, true);
+        lineAndShapeRenderer15.clearSeriesStrokes(true);
+        java.awt.Stroke stroke44 = lineAndShapeRenderer15.getBaseOutlineStroke();
+        lineAndShapeRenderer2.setSeriesOutlineStroke((int) ' ', stroke44, true);
+        org.jfree.data.category.CategoryDataset categoryDataset47 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis49 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float50 = categoryAxis49.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis51 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer54 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color55 = java.awt.Color.BLUE;
+        lineAndShapeRenderer54.setBaseItemLabelPaint((java.awt.Paint) color55);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator60 = lineAndShapeRenderer54.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot61 = new org.jfree.chart.plot.CategoryPlot(categoryDataset47, categoryAxis49, valueAxis51, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer54);
+        org.jfree.chart.event.PlotChangeEvent plotChangeEvent62 = new org.jfree.chart.event.PlotChangeEvent((org.jfree.chart.plot.Plot) categoryPlot61);
+        java.awt.Stroke stroke63 = categoryPlot61.getRangeMinorGridlineStroke();
+        java.awt.Paint paint64 = categoryPlot61.getDomainGridlinePaint();
+        lineAndShapeRenderer2.setPlot(categoryPlot61);
+        categoryPlot61.configureRangeAxes();
+        java.lang.Class<?> wildcardClass67 = categoryPlot61.getClass();
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(font5);
+        org.junit.Assert.assertNotNull(stroke9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(color16);
+        org.junit.Assert.assertNotNull(shape18);
+        org.junit.Assert.assertNull(shape25);
+        org.junit.Assert.assertNull(font29);
+        org.junit.Assert.assertNotNull(stroke39);
+        org.junit.Assert.assertNotNull(stroke44);
+        org.junit.Assert.assertTrue("'" + float50 + "' != '" + 0.0f + "'", float50 == 0.0f);
+        org.junit.Assert.assertNotNull(color55);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator60);
+        org.junit.Assert.assertNotNull(stroke63);
+        org.junit.Assert.assertNotNull(paint64);
+        org.junit.Assert.assertNotNull(wildcardClass67);
+    }
+
+    @Test
+    public void test2452() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2452");
+        org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float2 = categoryAxis1.getTickMarkInsideLength();
+        categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
+        boolean boolean5 = categoryAxis1.isVisible();
+        java.awt.Font font7 = null;
+        categoryAxis1.setTickLabelFont((java.lang.Comparable) (byte) 10, font7);
+        double double9 = categoryAxis1.getLowerMargin();
+        categoryAxis1.setMinorTickMarkInsideLength((float) (short) 0);
+        org.junit.Assert.assertTrue("'" + float2 + "' != '" + 0.0f + "'", float2 == 0.0f);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
+        org.junit.Assert.assertTrue("'" + double9 + "' != '" + 0.05d + "'", double9 == 0.05d);
+    }
+
+    @Test
+    public void test2453() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2453");
+        java.awt.Shape shape0 = org.jfree.chart.plot.Plot.DEFAULT_LEGEND_ITEM_CIRCLE;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color4 = java.awt.Color.BLUE;
+        lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
+        java.awt.Stroke stroke7 = lineAndShapeRenderer3.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset8 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis10 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float11 = categoryAxis10.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis12 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color16 = java.awt.Color.BLUE;
+        lineAndShapeRenderer15.setBaseItemLabelPaint((java.awt.Paint) color16);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator21 = lineAndShapeRenderer15.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot22 = new org.jfree.chart.plot.CategoryPlot(categoryDataset8, categoryAxis10, valueAxis12, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer15);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer23 = categoryPlot22.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis25 = lineAndShapeRenderer3.getRangeAxis(categoryPlot22, (int) '4');
+        boolean boolean26 = categoryPlot22.isRangeCrosshairVisible();
+        org.jfree.chart.plot.DatasetRenderingOrder datasetRenderingOrder27 = categoryPlot22.getDatasetRenderingOrder();
+        boolean boolean28 = categoryPlot22.getDrawSharedDomainAxis();
+        org.jfree.chart.axis.ValueAxis valueAxis29 = null;
+        org.jfree.data.Range range30 = categoryPlot22.getDataRange(valueAxis29);
+        boolean boolean31 = categoryPlot22.isDomainZoomable();
+        org.jfree.data.category.CategoryDataset categoryDataset32 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis34 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float35 = categoryAxis34.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis36 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer39 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color40 = java.awt.Color.BLUE;
+        lineAndShapeRenderer39.setBaseItemLabelPaint((java.awt.Paint) color40);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator45 = lineAndShapeRenderer39.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot46 = new org.jfree.chart.plot.CategoryPlot(categoryDataset32, categoryAxis34, valueAxis36, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer39);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer47 = categoryPlot46.getRenderer();
+        org.jfree.chart.axis.CategoryAxis categoryAxis49 = categoryPlot46.getDomainAxisForDataset(2);
+        java.awt.Font font50 = categoryAxis49.getTickLabelFont();
+        java.awt.Paint paint51 = categoryAxis49.getTickLabelPaint();
+        categoryPlot22.setDomainCrosshairPaint(paint51);
+        org.jfree.chart.entity.PlotEntity plotEntity53 = new org.jfree.chart.entity.PlotEntity(shape0, (org.jfree.chart.plot.Plot) categoryPlot22);
+        org.junit.Assert.assertNotNull(shape0);
+        org.junit.Assert.assertNotNull(color4);
+        org.junit.Assert.assertNull(stroke7);
+        org.junit.Assert.assertTrue("'" + float11 + "' != '" + 0.0f + "'", float11 == 0.0f);
+        org.junit.Assert.assertNotNull(color16);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator21);
+        org.junit.Assert.assertNotNull(categoryItemRenderer23);
+        org.junit.Assert.assertNull(valueAxis25);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(datasetRenderingOrder27);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+        org.junit.Assert.assertNull(range30);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertTrue("'" + float35 + "' != '" + 0.0f + "'", float35 == 0.0f);
+        org.junit.Assert.assertNotNull(color40);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator45);
+        org.junit.Assert.assertNotNull(categoryItemRenderer47);
+        org.junit.Assert.assertNotNull(categoryAxis49);
+        org.junit.Assert.assertNotNull(font50);
+        org.junit.Assert.assertNotNull(paint51);
+    }
+
+    @Test
+    public void test2454() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2454");
+        org.jfree.data.UnknownKeyException unknownKeyException1 = new org.jfree.data.UnknownKeyException("RectangleInsets[t=4.0,l=8.0,b=4.0,r=8.0]");
+    }
+
+    @Test
+    public void test2455() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2455");
+        org.jfree.data.category.AbstractCategoryDataset abstractCategoryDataset0 = new org.jfree.data.category.AbstractCategoryDataset();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color4 = java.awt.Color.BLUE;
+        lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
+        java.awt.Stroke stroke7 = lineAndShapeRenderer3.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset8 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis10 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float11 = categoryAxis10.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis12 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color16 = java.awt.Color.BLUE;
+        lineAndShapeRenderer15.setBaseItemLabelPaint((java.awt.Paint) color16);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator21 = lineAndShapeRenderer15.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot22 = new org.jfree.chart.plot.CategoryPlot(categoryDataset8, categoryAxis10, valueAxis12, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer15);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer23 = categoryPlot22.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis25 = lineAndShapeRenderer3.getRangeAxis(categoryPlot22, (int) '4');
+        boolean boolean26 = categoryPlot22.isRangeCrosshairVisible();
+        java.awt.Paint paint27 = categoryPlot22.getRangeZeroBaselinePaint();
+        abstractCategoryDataset0.addChangeListener((org.jfree.data.event.DatasetChangeListener) categoryPlot22);
+        org.jfree.chart.util.RectangleEdge rectangleEdge29 = categoryPlot22.getRangeAxisEdge();
+        int int30 = categoryPlot22.getDatasetCount();
+        org.junit.Assert.assertNotNull(color4);
+        org.junit.Assert.assertNull(stroke7);
+        org.junit.Assert.assertTrue("'" + float11 + "' != '" + 0.0f + "'", float11 == 0.0f);
+        org.junit.Assert.assertNotNull(color16);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator21);
+        org.junit.Assert.assertNotNull(categoryItemRenderer23);
+        org.junit.Assert.assertNull(valueAxis25);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(paint27);
+        org.junit.Assert.assertNotNull(rectangleEdge29);
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 1 + "'", int30 == 1);
+    }
+
+    @Test
+    public void test2456() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2456");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
+        java.awt.Font font5 = lineAndShapeRenderer2.getBaseItemLabelFont();
+        java.awt.Stroke stroke9 = lineAndShapeRenderer2.getItemStroke(100, 0, true);
+        boolean boolean11 = lineAndShapeRenderer2.isSeriesVisible(4);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color16 = java.awt.Color.BLUE;
+        lineAndShapeRenderer15.setBaseItemLabelPaint((java.awt.Paint) color16);
+        java.awt.Shape shape18 = lineAndShapeRenderer15.getBaseShape();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer21 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator22 = null;
+        lineAndShapeRenderer21.setBaseURLGenerator(categoryURLGenerator22);
+        java.awt.Shape shape25 = lineAndShapeRenderer21.getLegendShape(0);
+        lineAndShapeRenderer21.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font29 = lineAndShapeRenderer21.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer21.setUseSeriesOffset(true);
+        java.awt.Font font33 = null;
+        lineAndShapeRenderer21.setSeriesItemLabelFont((int) (short) 1, font33, false);
+        java.awt.Stroke stroke39 = lineAndShapeRenderer21.getItemOutlineStroke(0, 1, false);
+        lineAndShapeRenderer15.setBaseStroke(stroke39, true);
+        lineAndShapeRenderer15.clearSeriesStrokes(true);
+        java.awt.Stroke stroke44 = lineAndShapeRenderer15.getBaseOutlineStroke();
+        lineAndShapeRenderer2.setSeriesOutlineStroke((int) ' ', stroke44, true);
+        lineAndShapeRenderer2.setBaseCreateEntities(false);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(font5);
+        org.junit.Assert.assertNotNull(stroke9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(color16);
+        org.junit.Assert.assertNotNull(shape18);
+        org.junit.Assert.assertNull(shape25);
+        org.junit.Assert.assertNull(font29);
+        org.junit.Assert.assertNotNull(stroke39);
+        org.junit.Assert.assertNotNull(stroke44);
+    }
+
+    @Test
+    public void test2457() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2457");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Paint paint6 = lineAndShapeRenderer2.getSeriesOutlinePaint(0);
+        java.awt.Font font8 = lineAndShapeRenderer2.lookupLegendTextFont((int) (byte) 0);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator10 = null;
+        lineAndShapeRenderer2.setSeriesToolTipGenerator((int) (short) 100, categoryToolTipGenerator10, true);
+        int int13 = lineAndShapeRenderer2.getColumnCount();
+        org.junit.Assert.assertNull(paint6);
+        org.junit.Assert.assertNull(font8);
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+    }
+
+    @Test
+    public void test2458() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2458");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        boolean boolean7 = lineAndShapeRenderer2.getAutoPopulateSeriesPaint();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+    }
+
+    @Test
+    public void test2459() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2459");
+        org.jfree.chart.renderer.category.BarRenderer barRenderer1 = new org.jfree.chart.renderer.category.BarRenderer();
+        boolean boolean2 = barRenderer1.isDrawBarOutline();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer5 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color6 = java.awt.Color.BLUE;
+        lineAndShapeRenderer5.setBaseItemLabelPaint((java.awt.Paint) color6);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator11 = lineAndShapeRenderer5.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition12 = lineAndShapeRenderer5.getBaseNegativeItemLabelPosition();
+        barRenderer1.setNegativeItemLabelPositionFallback(itemLabelPosition12);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer16 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator17 = null;
+        lineAndShapeRenderer16.setBaseURLGenerator(categoryURLGenerator17);
+        java.awt.Shape shape20 = lineAndShapeRenderer16.getLegendShape(0);
+        lineAndShapeRenderer16.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font24 = lineAndShapeRenderer16.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer16.setUseSeriesOffset(true);
+        java.awt.Shape shape28 = null;
+        lineAndShapeRenderer16.setSeriesShape((int) (short) 10, shape28, true);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition31 = lineAndShapeRenderer16.getBasePositiveItemLabelPosition();
+        org.jfree.chart.text.TextAnchor textAnchor32 = itemLabelPosition31.getTextAnchor();
+        barRenderer1.setPositiveItemLabelPositionFallback(itemLabelPosition31);
+        boolean boolean34 = barRenderer1.getShadowsVisible();
+        org.jfree.chart.renderer.category.BarPainter barPainter35 = barRenderer1.getBarPainter();
+        java.awt.Color color36 = org.jfree.chart.ChartColor.DARK_MAGENTA;
+        barRenderer1.setShadowPaint((java.awt.Paint) color36);
+        barRenderer1.setBaseItemLabelsVisible(false, false);
+        barRenderer1.setItemMargin((double) 'a');
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition43 = barRenderer1.getPositiveItemLabelPositionFallback();
+        org.jfree.data.KeyedObject keyedObject44 = new org.jfree.data.KeyedObject((java.lang.Comparable) "ItemLabelAnchor.OUTSIDE6", (java.lang.Object) itemLabelPosition43);
+        java.lang.Object obj45 = keyedObject44.getObject();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(color6);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator11);
+        org.junit.Assert.assertNotNull(itemLabelPosition12);
+        org.junit.Assert.assertNull(shape20);
+        org.junit.Assert.assertNull(font24);
+        org.junit.Assert.assertNotNull(itemLabelPosition31);
+        org.junit.Assert.assertNotNull(textAnchor32);
+// flaky:         org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(barPainter35);
+        org.junit.Assert.assertNotNull(color36);
+        org.junit.Assert.assertNotNull(itemLabelPosition43);
+        org.junit.Assert.assertNotNull(obj45);
+    }
+
+    @Test
+    public void test2460() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2460");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
+        org.jfree.chart.axis.ValueAxis valueAxis16 = null;
+        org.jfree.data.Range range17 = categoryPlot14.getDataRange(valueAxis16);
+        java.awt.Graphics2D graphics2D18 = null;
+        java.awt.geom.Rectangle2D rectangle2D19 = null;
+        categoryPlot14.drawBackgroundImage(graphics2D18, rectangle2D19);
+        org.jfree.chart.plot.Marker marker22 = null;
+        org.jfree.chart.util.Layer layer23 = null;
+        boolean boolean25 = categoryPlot14.removeDomainMarker((int) ' ', marker22, layer23, false);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer28 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color29 = java.awt.Color.BLUE;
+        lineAndShapeRenderer28.setBaseItemLabelPaint((java.awt.Paint) color29);
+        java.awt.Stroke stroke32 = lineAndShapeRenderer28.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset33 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis35 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float36 = categoryAxis35.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis37 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer40 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color41 = java.awt.Color.BLUE;
+        lineAndShapeRenderer40.setBaseItemLabelPaint((java.awt.Paint) color41);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator46 = lineAndShapeRenderer40.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot47 = new org.jfree.chart.plot.CategoryPlot(categoryDataset33, categoryAxis35, valueAxis37, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer40);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer48 = categoryPlot47.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis50 = lineAndShapeRenderer28.getRangeAxis(categoryPlot47, (int) '4');
+        double double51 = categoryPlot47.getRangeCrosshairValue();
+        java.awt.Paint paint52 = categoryPlot47.getRangeZeroBaselinePaint();
+        int int53 = categoryPlot47.getRangeAxisCount();
+        java.awt.Color color54 = java.awt.Color.BLUE;
+        categoryPlot47.setRangeMinorGridlinePaint((java.awt.Paint) color54);
+        java.awt.Stroke stroke56 = categoryPlot47.getRangeMinorGridlineStroke();
+        categoryPlot47.clearRangeMarkers();
+        org.jfree.chart.event.AnnotationChangeEvent annotationChangeEvent58 = null;
+        categoryPlot47.annotationChanged(annotationChangeEvent58);
+        org.jfree.chart.util.GradientPaintTransformType gradientPaintTransformType61 = org.jfree.chart.util.GradientPaintTransformType.HORIZONTAL;
+        org.jfree.chart.util.StandardGradientPaintTransformer standardGradientPaintTransformer62 = new org.jfree.chart.util.StandardGradientPaintTransformer(gradientPaintTransformType61);
+        org.jfree.chart.axis.CategoryAxis categoryAxis64 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float65 = categoryAxis64.getTickMarkInsideLength();
+        categoryAxis64.setMaximumCategoryLabelLines((int) (byte) 1);
+        boolean boolean68 = categoryAxis64.isVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer72 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator73 = null;
+        lineAndShapeRenderer72.setBaseURLGenerator(categoryURLGenerator73);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator76 = null;
+        lineAndShapeRenderer72.setSeriesToolTipGenerator(10, categoryToolTipGenerator76);
+        boolean boolean78 = lineAndShapeRenderer72.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke80 = null;
+        lineAndShapeRenderer72.setSeriesStroke((int) 'a', stroke80, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor84 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color85 = java.awt.Color.yellow;
+        boolean boolean86 = itemLabelAnchor84.equals((java.lang.Object) color85);
+        lineAndShapeRenderer72.setSeriesFillPaint((int) ' ', (java.awt.Paint) color85);
+        categoryAxis64.setTickLabelPaint((java.lang.Comparable) false, (java.awt.Paint) color85);
+        boolean boolean89 = standardGradientPaintTransformer62.equals((java.lang.Object) color85);
+        org.jfree.chart.util.DefaultShadowGenerator defaultShadowGenerator93 = new org.jfree.chart.util.DefaultShadowGenerator(0, color85, (float) 2, 100, (double) (short) 100);
+        categoryPlot47.setShadowGenerator((org.jfree.chart.util.ShadowGenerator) defaultShadowGenerator93);
+        categoryPlot14.setShadowGenerator((org.jfree.chart.util.ShadowGenerator) defaultShadowGenerator93);
+        boolean boolean96 = categoryPlot14.isRangeZoomable();
+        categoryPlot14.setRangeCrosshairVisible(false);
+        boolean boolean99 = categoryPlot14.isRangeZoomable();
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryAxis15);
+        org.junit.Assert.assertNull(range17);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(color29);
+        org.junit.Assert.assertNull(stroke32);
+        org.junit.Assert.assertTrue("'" + float36 + "' != '" + 0.0f + "'", float36 == 0.0f);
+        org.junit.Assert.assertNotNull(color41);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator46);
+        org.junit.Assert.assertNotNull(categoryItemRenderer48);
+        org.junit.Assert.assertNull(valueAxis50);
+        org.junit.Assert.assertTrue("'" + double51 + "' != '" + 0.0d + "'", double51 == 0.0d);
+        org.junit.Assert.assertNotNull(paint52);
+        org.junit.Assert.assertTrue("'" + int53 + "' != '" + 1 + "'", int53 == 1);
+        org.junit.Assert.assertNotNull(color54);
+        org.junit.Assert.assertNotNull(stroke56);
+        org.junit.Assert.assertNotNull(gradientPaintTransformType61);
+        org.junit.Assert.assertTrue("'" + float65 + "' != '" + 0.0f + "'", float65 == 0.0f);
+        org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + true + "'", boolean68 == true);
+        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + true + "'", boolean78 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor84);
+        org.junit.Assert.assertNotNull(color85);
+        org.junit.Assert.assertTrue("'" + boolean86 + "' != '" + false + "'", boolean86 == false);
+        org.junit.Assert.assertTrue("'" + boolean89 + "' != '" + false + "'", boolean89 == false);
+        org.junit.Assert.assertTrue("'" + boolean96 + "' != '" + true + "'", boolean96 == true);
+        org.junit.Assert.assertTrue("'" + boolean99 + "' != '" + true + "'", boolean99 == true);
+    }
+
+    @Test
+    public void test2461() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2461");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelGenerator((int) (short) 100, categoryItemLabelGenerator8);
+        lineAndShapeRenderer2.setDrawOutlines(true);
+        java.awt.Shape shape12 = lineAndShapeRenderer2.getBaseShape();
+        int int13 = lineAndShapeRenderer2.getRowCount();
+        boolean boolean15 = lineAndShapeRenderer2.isSeriesVisibleInLegend(50);
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertNotNull(shape12);
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
+    }
+
+    @Test
+    public void test2462() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2462");
+        org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem1.setLinePaint((java.awt.Paint) color5);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer9 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color10 = java.awt.Color.BLUE;
+        lineAndShapeRenderer9.setBaseItemLabelPaint((java.awt.Paint) color10);
+        java.awt.Shape shape12 = lineAndShapeRenderer9.getBaseShape();
+        org.jfree.chart.entity.ChartEntity chartEntity14 = new org.jfree.chart.entity.ChartEntity(shape12, "");
+        legendItem1.setLine(shape12);
+        java.awt.Shape shape16 = legendItem1.getShape();
+        java.lang.String str17 = legendItem1.getLabel();
+        java.awt.Paint paint18 = legendItem1.getLinePaint();
+        org.jfree.data.general.Dataset dataset19 = legendItem1.getDataset();
+        legendItem1.setDescription("java.awt.Color[r=64,g=255,b=64]");
+        org.junit.Assert.assertNotNull(color5);
+        org.junit.Assert.assertNotNull(color10);
+        org.junit.Assert.assertNotNull(shape12);
+        org.junit.Assert.assertNotNull(shape16);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "hi!" + "'", str17, "hi!");
+        org.junit.Assert.assertNotNull(paint18);
+        org.junit.Assert.assertNull(dataset19);
+    }
+
+    @Test
+    public void test2463() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2463");
+        org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
+        int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
+        defaultCategoryDataset0.setValue(0.05d, (java.lang.Comparable) (byte) 100, (java.lang.Comparable) 4);
+        defaultCategoryDataset0.validateObject();
+        defaultCategoryDataset0.removeColumn((int) (short) 0);
+        defaultCategoryDataset0.clearSelection();
+        org.jfree.data.category.CategoryDatasetSelectionState categoryDatasetSelectionState11 = null;
+        defaultCategoryDataset0.setSelectionState(categoryDatasetSelectionState11);
+        org.junit.Assert.assertTrue("'" + int2 + "' != '" + (-1) + "'", int2 == (-1));
+    }
+
+    @Test
+    public void test2464() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2464");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        int int13 = lineAndShapeRenderer2.getColumnCount();
+        lineAndShapeRenderer2.setBaseSeriesVisibleInLegend(true);
+        boolean boolean17 = lineAndShapeRenderer2.isSeriesVisibleInLegend(3);
+        org.jfree.chart.renderer.category.BarRenderer barRenderer19 = new org.jfree.chart.renderer.category.BarRenderer();
+        boolean boolean20 = barRenderer19.isDrawBarOutline();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer23 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color24 = java.awt.Color.BLUE;
+        lineAndShapeRenderer23.setBaseItemLabelPaint((java.awt.Paint) color24);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator29 = lineAndShapeRenderer23.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition30 = lineAndShapeRenderer23.getBaseNegativeItemLabelPosition();
+        barRenderer19.setNegativeItemLabelPositionFallback(itemLabelPosition30);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition32 = barRenderer19.getPositiveItemLabelPositionFallback();
+        barRenderer19.setIncludeBaseInRange(false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition35 = barRenderer19.getNegativeItemLabelPositionFallback();
+        lineAndShapeRenderer2.setSeriesNegativeItemLabelPosition(15, itemLabelPosition35);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer40 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color41 = java.awt.Color.BLUE;
+        lineAndShapeRenderer40.setBaseItemLabelPaint((java.awt.Paint) color41);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator46 = lineAndShapeRenderer40.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator47 = null;
+        lineAndShapeRenderer40.setLegendItemURLGenerator(categorySeriesLabelGenerator47);
+        java.awt.Paint paint50 = lineAndShapeRenderer40.getSeriesPaint(1);
+        java.awt.Paint paint54 = lineAndShapeRenderer40.getItemFillPaint((-1), (int) (short) 100, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator55 = lineAndShapeRenderer40.getLegendItemURLGenerator();
+        java.awt.Paint paint56 = lineAndShapeRenderer40.getBaseItemLabelPaint();
+        lineAndShapeRenderer2.setLegendTextPaint(11, paint56);
+        org.jfree.chart.LegendItem legendItem64 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color68 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem64.setLinePaint((java.awt.Paint) color68);
+        boolean boolean70 = legendItem64.isShapeOutlineVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer73 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color74 = java.awt.Color.BLUE;
+        lineAndShapeRenderer73.setBaseItemLabelPaint((java.awt.Paint) color74);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator79 = lineAndShapeRenderer73.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition81 = lineAndShapeRenderer73.getSeriesPositiveItemLabelPosition((int) 'a');
+        java.awt.Shape shape83 = lineAndShapeRenderer73.lookupLegendShape(8);
+        legendItem64.setLine(shape83);
+        java.awt.Stroke stroke85 = org.jfree.chart.plot.CategoryPlot.DEFAULT_CROSSHAIR_STROKE;
+        java.awt.Color color86 = java.awt.Color.orange;
+        org.jfree.chart.LegendItem legendItem87 = new org.jfree.chart.LegendItem("SortOrder.ASCENDING", "{0}", "-3,-3,3,3", "", shape83, stroke85, (java.awt.Paint) color86);
+        lineAndShapeRenderer2.setSeriesFillPaint(50, (java.awt.Paint) color86, false);
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(color24);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator29);
+        org.junit.Assert.assertNotNull(itemLabelPosition30);
+        org.junit.Assert.assertNull(itemLabelPosition32);
+        org.junit.Assert.assertNotNull(itemLabelPosition35);
+        org.junit.Assert.assertNotNull(color41);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator46);
+        org.junit.Assert.assertNull(paint50);
+        org.junit.Assert.assertNotNull(paint54);
+        org.junit.Assert.assertNull(categorySeriesLabelGenerator55);
+        org.junit.Assert.assertNotNull(paint56);
+        org.junit.Assert.assertNotNull(color68);
+        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
+        org.junit.Assert.assertNotNull(color74);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator79);
+        org.junit.Assert.assertNotNull(itemLabelPosition81);
+        org.junit.Assert.assertNotNull(shape83);
+        org.junit.Assert.assertNotNull(stroke85);
+        org.junit.Assert.assertNotNull(color86);
+    }
+
+    @Test
+    public void test2465() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2465");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        org.jfree.chart.plot.DrawingSupplier drawingSupplier13 = lineAndShapeRenderer2.getDrawingSupplier();
+        lineAndShapeRenderer2.setBaseCreateEntities(false);
+        java.awt.Font font19 = lineAndShapeRenderer2.getItemLabelFont((int) (short) 0, 0, false);
+        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator standardCategorySeriesLabelGenerator21 = new org.jfree.chart.labels.StandardCategorySeriesLabelGenerator("{0}");
+        lineAndShapeRenderer2.setLegendItemToolTipGenerator((org.jfree.chart.labels.CategorySeriesLabelGenerator) standardCategorySeriesLabelGenerator21);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer25 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color26 = java.awt.Color.BLUE;
+        lineAndShapeRenderer25.setBaseItemLabelPaint((java.awt.Paint) color26);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator31 = lineAndShapeRenderer25.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator32 = null;
+        lineAndShapeRenderer25.setLegendItemURLGenerator(categorySeriesLabelGenerator32);
+        java.awt.Paint paint35 = lineAndShapeRenderer25.getSeriesPaint(1);
+        java.awt.Paint paint39 = lineAndShapeRenderer25.getItemFillPaint((-1), (int) (short) 100, false);
+        java.awt.Shape shape41 = lineAndShapeRenderer25.lookupLegendShape(4);
+        lineAndShapeRenderer2.setBaseShape(shape41, true);
+        lineAndShapeRenderer2.setSeriesItemLabelsVisible((int) (short) 1, true);
+        org.jfree.data.KeyedObjects keyedObjects48 = new org.jfree.data.KeyedObjects();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer52 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color53 = java.awt.Color.BLUE;
+        lineAndShapeRenderer52.setBaseItemLabelPaint((java.awt.Paint) color53);
+        java.awt.Stroke stroke56 = lineAndShapeRenderer52.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset57 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis59 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float60 = categoryAxis59.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis61 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer64 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color65 = java.awt.Color.BLUE;
+        lineAndShapeRenderer64.setBaseItemLabelPaint((java.awt.Paint) color65);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator70 = lineAndShapeRenderer64.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot71 = new org.jfree.chart.plot.CategoryPlot(categoryDataset57, categoryAxis59, valueAxis61, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer64);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer72 = categoryPlot71.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis74 = lineAndShapeRenderer52.getRangeAxis(categoryPlot71, (int) '4');
+        boolean boolean75 = categoryPlot71.isRangeCrosshairVisible();
+        org.jfree.chart.util.RectangleEdge rectangleEdge76 = categoryPlot71.getDomainAxisEdge();
+        boolean boolean77 = categoryPlot71.isRangeZeroBaselineVisible();
+        boolean boolean78 = categoryPlot71.isDomainGridlinesVisible();
+        keyedObjects48.addObject((java.lang.Comparable) (short) 100, (java.lang.Object) categoryPlot71);
+        java.awt.Stroke stroke80 = categoryPlot71.getDomainGridlineStroke();
+        lineAndShapeRenderer2.setSeriesStroke(11, stroke80, true);
+        lineAndShapeRenderer2.setSeriesLinesVisible((int) (short) 0, true);
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNull(drawingSupplier13);
+        org.junit.Assert.assertNotNull(font19);
+        org.junit.Assert.assertNotNull(color26);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator31);
+        org.junit.Assert.assertNull(paint35);
+        org.junit.Assert.assertNotNull(paint39);
+        org.junit.Assert.assertNotNull(shape41);
+        org.junit.Assert.assertNotNull(color53);
+        org.junit.Assert.assertNull(stroke56);
+        org.junit.Assert.assertTrue("'" + float60 + "' != '" + 0.0f + "'", float60 == 0.0f);
+        org.junit.Assert.assertNotNull(color65);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator70);
+        org.junit.Assert.assertNotNull(categoryItemRenderer72);
+        org.junit.Assert.assertNull(valueAxis74);
+        org.junit.Assert.assertTrue("'" + boolean75 + "' != '" + false + "'", boolean75 == false);
+        org.junit.Assert.assertNotNull(rectangleEdge76);
+        org.junit.Assert.assertTrue("'" + boolean77 + "' != '" + false + "'", boolean77 == false);
+        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + false + "'", boolean78 == false);
+        org.junit.Assert.assertNotNull(stroke80);
+    }
+
+    @Test
+    public void test2466() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2466");
+        org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
+        int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
+        java.util.List list3 = defaultCategoryDataset0.getColumnKeys();
+        defaultCategoryDataset0.validateObject();
+        defaultCategoryDataset0.validateObject();
+        org.junit.Assert.assertTrue("'" + int2 + "' != '" + (-1) + "'", int2 == (-1));
+        org.junit.Assert.assertNotNull(list3);
+    }
+
+    @Test
+    public void test2467() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2467");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
+        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
+        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes13 = lineAndShapeRenderer2.getSelectedItemAttributes();
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        renderAttributes13.setSeriesFillPaint((int) 'a', (java.awt.Paint) color15);
+        org.jfree.chart.axis.CategoryAxis categoryAxis18 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float19 = categoryAxis18.getTickMarkInsideLength();
+        categoryAxis18.setMaximumCategoryLabelLines((int) (byte) 1);
+        boolean boolean22 = categoryAxis18.isVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer26 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator27 = null;
+        lineAndShapeRenderer26.setBaseURLGenerator(categoryURLGenerator27);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator30 = null;
+        lineAndShapeRenderer26.setSeriesToolTipGenerator(10, categoryToolTipGenerator30);
+        boolean boolean32 = lineAndShapeRenderer26.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke34 = null;
+        lineAndShapeRenderer26.setSeriesStroke((int) 'a', stroke34, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor38 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color39 = java.awt.Color.yellow;
+        boolean boolean40 = itemLabelAnchor38.equals((java.lang.Object) color39);
+        lineAndShapeRenderer26.setSeriesFillPaint((int) ' ', (java.awt.Paint) color39);
+        categoryAxis18.setTickLabelPaint((java.lang.Comparable) false, (java.awt.Paint) color39);
+        renderAttributes13.setDefaultOutlinePaint((java.awt.Paint) color39);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer46 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator47 = null;
+        lineAndShapeRenderer46.setBaseURLGenerator(categoryURLGenerator47);
+        java.awt.Shape shape50 = lineAndShapeRenderer46.getLegendShape(0);
+        lineAndShapeRenderer46.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font54 = lineAndShapeRenderer46.getSeriesItemLabelFont(0);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator55 = null;
+        lineAndShapeRenderer46.setBaseToolTipGenerator(categoryToolTipGenerator55);
+        org.jfree.chart.ChartColor chartColor60 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
+        lineAndShapeRenderer46.setBaseItemLabelPaint((java.awt.Paint) chartColor60);
+        renderAttributes13.setDefaultPaint((java.awt.Paint) chartColor60);
+        renderAttributes13.setDefaultLabelVisible((java.lang.Boolean) true);
+        java.awt.Paint paint66 = renderAttributes13.getSeriesOutlinePaint(5);
+        java.awt.Paint paint67 = renderAttributes13.getDefaultLabelPaint();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNull(paint12);
+        org.junit.Assert.assertNotNull(renderAttributes13);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertTrue("'" + float19 + "' != '" + 0.0f + "'", float19 == 0.0f);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + true + "'", boolean32 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor38);
+        org.junit.Assert.assertNotNull(color39);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertNull(shape50);
+        org.junit.Assert.assertNull(font54);
+        org.junit.Assert.assertNull(paint66);
+        org.junit.Assert.assertNull(paint67);
+    }
+
+    @Test
+    public void test2468() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2468");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float10 = categoryAxis9.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
+        boolean boolean25 = categoryPlot21.isRangeCrosshairVisible();
+        java.awt.Paint paint26 = categoryPlot21.getRangeZeroBaselinePaint();
+        categoryPlot21.mapDatasetToDomainAxis((int) (byte) 1, (int) (short) 10);
+        org.jfree.chart.plot.PlotOrientation plotOrientation30 = categoryPlot21.getOrientation();
+        // The following exception was thrown during execution in test generation
+        try {
+            categoryPlot21.zoom(4.0d);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(categoryItemRenderer22);
+        org.junit.Assert.assertNull(valueAxis24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(paint26);
+        org.junit.Assert.assertNotNull(plotOrientation30);
+    }
+
+    @Test
+    public void test2469() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2469");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        java.awt.Font font14 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelFont((int) (short) 1, font14, false);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color20 = java.awt.Color.BLUE;
+        lineAndShapeRenderer19.setBaseItemLabelPaint((java.awt.Paint) color20);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator25 = lineAndShapeRenderer19.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition27 = lineAndShapeRenderer19.getSeriesPositiveItemLabelPosition((int) 'a');
+        boolean boolean28 = lineAndShapeRenderer19.getBaseItemLabelsVisible();
+        org.jfree.chart.LegendItem legendItem30 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color34 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem30.setLinePaint((java.awt.Paint) color34);
+        lineAndShapeRenderer19.setBaseItemLabelPaint((java.awt.Paint) color34);
+        java.awt.Paint paint40 = lineAndShapeRenderer19.getItemLabelPaint((int) '#', (int) (byte) 1, true);
+        lineAndShapeRenderer2.setBaseItemLabelPaint(paint40);
+        lineAndShapeRenderer2.setBaseCreateEntities(true);
+        boolean boolean46 = lineAndShapeRenderer2.getItemShapeVisible((int) (byte) 10, 10);
+        java.lang.Object obj47 = lineAndShapeRenderer2.clone();
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNotNull(color20);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator25);
+        org.junit.Assert.assertNotNull(itemLabelPosition27);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+        org.junit.Assert.assertNotNull(color34);
+        org.junit.Assert.assertNotNull(paint40);
+        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + true + "'", boolean46 == true);
+        org.junit.Assert.assertNotNull(obj47);
+    }
+
+    @Test
+    public void test2470() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2470");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        lineAndShapeRenderer2.setSeriesVisible(15, (java.lang.Boolean) false);
+        org.junit.Assert.assertNotNull(color3);
+    }
+
+    @Test
+    public void test2471() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2471");
+        org.jfree.chart.plot.DefaultDrawingSupplier defaultDrawingSupplier0 = new org.jfree.chart.plot.DefaultDrawingSupplier();
+        java.lang.Object obj1 = defaultDrawingSupplier0.clone();
+        java.awt.Stroke stroke2 = defaultDrawingSupplier0.getNextStroke();
+        java.awt.Stroke stroke3 = defaultDrawingSupplier0.getNextOutlineStroke();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean8 = lineAndShapeRenderer6.isSeriesVisibleInLegend(1);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator10 = null;
+        lineAndShapeRenderer6.setSeriesURLGenerator(0, categoryURLGenerator10, false);
+        java.awt.Color color13 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        java.awt.color.ColorSpace colorSpace14 = color13.getColorSpace();
+        lineAndShapeRenderer6.setBaseFillPaint((java.awt.Paint) color13);
+        boolean boolean16 = lineAndShapeRenderer6.getBaseShapesVisible();
+        java.lang.Boolean boolean18 = lineAndShapeRenderer6.getSeriesLinesVisible(0);
+        java.awt.Paint paint19 = lineAndShapeRenderer6.getBaseLegendTextPaint();
+        boolean boolean20 = defaultDrawingSupplier0.equals((java.lang.Object) lineAndShapeRenderer6);
+        org.junit.Assert.assertNotNull(obj1);
+        org.junit.Assert.assertNotNull(stroke2);
+        org.junit.Assert.assertNotNull(stroke3);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(color13);
+        org.junit.Assert.assertNotNull(colorSpace14);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNull(boolean18);
+        org.junit.Assert.assertNull(paint19);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+    }
+
+    @Test
+    public void test2472() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2472");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer15 = categoryPlot14.getRenderer();
+        org.jfree.chart.plot.PlotOrientation plotOrientation16 = categoryPlot14.getOrientation();
+        categoryPlot14.clearDomainAxes();
+        java.util.List list18 = categoryPlot14.getCategories();
+        org.jfree.chart.axis.ValueAxis valueAxis19 = null;
+        org.jfree.data.Range range20 = categoryPlot14.getDataRange(valueAxis19);
+        org.jfree.chart.LegendItemCollection legendItemCollection21 = categoryPlot14.getLegendItems();
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jfree.chart.LegendItem legendItem23 = legendItemCollection21.get((-16776961));
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: null");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryItemRenderer15);
+        org.junit.Assert.assertNotNull(plotOrientation16);
+        org.junit.Assert.assertNull(list18);
+        org.junit.Assert.assertNull(range20);
+        org.junit.Assert.assertNotNull(legendItemCollection21);
+    }
+
+    @Test
+    public void test2473() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2473");
+        org.jfree.chart.util.BooleanList booleanList0 = new org.jfree.chart.util.BooleanList();
+        org.jfree.data.category.CategoryDataset categoryDataset1 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis3 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float4 = categoryAxis3.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis5 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer8 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color9 = java.awt.Color.BLUE;
+        lineAndShapeRenderer8.setBaseItemLabelPaint((java.awt.Paint) color9);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator14 = lineAndShapeRenderer8.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot15 = new org.jfree.chart.plot.CategoryPlot(categoryDataset1, categoryAxis3, valueAxis5, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer8);
+        org.jfree.chart.event.PlotChangeEvent plotChangeEvent16 = new org.jfree.chart.event.PlotChangeEvent((org.jfree.chart.plot.Plot) categoryPlot15);
+        org.jfree.chart.JFreeChart jFreeChart17 = plotChangeEvent16.getChart();
+        java.lang.Object obj18 = plotChangeEvent16.getSource();
+        org.jfree.chart.plot.Plot plot19 = plotChangeEvent16.getPlot();
+        boolean boolean20 = booleanList0.equals((java.lang.Object) plotChangeEvent16);
+        java.lang.Object obj21 = booleanList0.clone();
+        // The following exception was thrown during execution in test generation
+        try {
+            booleanList0.setBoolean((int) (byte) -1, (java.lang.Boolean) false);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Requires index >= 0.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + float4 + "' != '" + 0.0f + "'", float4 == 0.0f);
+        org.junit.Assert.assertNotNull(color9);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator14);
+        org.junit.Assert.assertNull(jFreeChart17);
+        org.junit.Assert.assertNotNull(obj18);
+        org.junit.Assert.assertNotNull(plot19);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(obj21);
+    }
+
+    @Test
+    public void test2474() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2474");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Shape shape5 = lineAndShapeRenderer2.getBaseShape();
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getBaseOutlineStroke();
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator7 = null;
+        lineAndShapeRenderer2.setBaseItemLabelGenerator(categoryItemLabelGenerator7, false);
+        java.awt.Font font11 = lineAndShapeRenderer2.getLegendTextFont((-1));
+        org.jfree.data.category.CategoryDataset categoryDataset12 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis14 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float15 = categoryAxis14.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis16 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer19 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color20 = java.awt.Color.BLUE;
+        lineAndShapeRenderer19.setBaseItemLabelPaint((java.awt.Paint) color20);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator25 = lineAndShapeRenderer19.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot26 = new org.jfree.chart.plot.CategoryPlot(categoryDataset12, categoryAxis14, valueAxis16, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer19);
+        lineAndShapeRenderer19.setSeriesVisibleInLegend(3, (java.lang.Boolean) false, false);
+        org.jfree.chart.axis.CategoryAxis categoryAxis33 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        java.lang.Object obj34 = categoryAxis33.clone();
+        java.awt.Font font35 = categoryAxis33.getTickLabelFont();
+        lineAndShapeRenderer19.setSeriesItemLabelFont((int) '#', font35);
+        lineAndShapeRenderer2.setBaseItemLabelFont(font35);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator38 = lineAndShapeRenderer2.getLegendItemToolTipGenerator();
+        boolean boolean39 = lineAndShapeRenderer2.getBaseCreateEntities();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNotNull(shape5);
+        org.junit.Assert.assertNotNull(stroke6);
+        org.junit.Assert.assertNull(font11);
+        org.junit.Assert.assertTrue("'" + float15 + "' != '" + 0.0f + "'", float15 == 0.0f);
+        org.junit.Assert.assertNotNull(color20);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator25);
+        org.junit.Assert.assertNotNull(obj34);
+        org.junit.Assert.assertNotNull(font35);
+        org.junit.Assert.assertNull(categorySeriesLabelGenerator38);
+        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + true + "'", boolean39 == true);
+    }
+
+    @Test
+    public void test2475() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2475");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float10 = categoryAxis9.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
+        boolean boolean25 = categoryPlot21.isRangeCrosshairVisible();
+        org.jfree.chart.plot.DatasetRenderingOrder datasetRenderingOrder26 = categoryPlot21.getDatasetRenderingOrder();
+        boolean boolean27 = categoryPlot21.canSelectByPoint();
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer28 = categoryPlot21.getRenderer();
+        float float29 = categoryPlot21.getBackgroundImageAlpha();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(categoryItemRenderer22);
+        org.junit.Assert.assertNull(valueAxis24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(datasetRenderingOrder26);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
+        org.junit.Assert.assertNotNull(categoryItemRenderer28);
+        org.junit.Assert.assertTrue("'" + float29 + "' != '" + 0.5f + "'", float29 == 0.5f);
+    }
+
+    @Test
+    public void test2476() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2476");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Shape shape5 = lineAndShapeRenderer2.getBaseShape();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer8 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator9 = null;
+        lineAndShapeRenderer8.setBaseURLGenerator(categoryURLGenerator9);
+        java.awt.Shape shape12 = lineAndShapeRenderer8.getLegendShape(0);
+        lineAndShapeRenderer8.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font16 = lineAndShapeRenderer8.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer8.setUseSeriesOffset(true);
+        java.awt.Font font20 = null;
+        lineAndShapeRenderer8.setSeriesItemLabelFont((int) (short) 1, font20, false);
+        java.awt.Stroke stroke26 = lineAndShapeRenderer8.getItemOutlineStroke(0, 1, false);
+        lineAndShapeRenderer2.setBaseStroke(stroke26, true);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition29 = lineAndShapeRenderer2.getBasePositiveItemLabelPosition();
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator31 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelGenerator(11, categoryItemLabelGenerator31);
+        double double33 = lineAndShapeRenderer2.getItemLabelAnchorOffset();
+        lineAndShapeRenderer2.setItemLabelAnchorOffset(6.0d);
+        java.awt.Shape shape36 = lineAndShapeRenderer2.getBaseLegendShape();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNotNull(shape5);
+        org.junit.Assert.assertNull(shape12);
+        org.junit.Assert.assertNull(font16);
+        org.junit.Assert.assertNotNull(stroke26);
+        org.junit.Assert.assertNotNull(itemLabelPosition29);
+        org.junit.Assert.assertTrue("'" + double33 + "' != '" + 2.0d + "'", double33 == 2.0d);
+        org.junit.Assert.assertNull(shape36);
+    }
+
+    @Test
+    public void test2477() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2477");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator11 = null;
+        lineAndShapeRenderer2.setBaseToolTipGenerator(categoryToolTipGenerator11);
+        org.jfree.chart.ChartColor chartColor16 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) chartColor16);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator18 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator18);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator23 = lineAndShapeRenderer2.getURLGenerator(192, (int) (byte) 10, true);
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNull(categoryURLGenerator23);
+    }
+
+    @Test
+    public void test2478() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2478");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
+        categoryAxis15.setLabelAngle(3.0d);
+        categoryAxis15.setMinorTickMarkInsideLength(2.0f);
+        org.jfree.chart.axis.CategoryAxis categoryAxis21 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float22 = categoryAxis21.getTickMarkInsideLength();
+        categoryAxis21.setTickLabelsVisible(false);
+        double double25 = categoryAxis21.getLowerMargin();
+        java.lang.String str26 = categoryAxis21.getLabelToolTip();
+        org.jfree.chart.axis.CategoryLabelPositions categoryLabelPositions27 = categoryAxis21.getCategoryLabelPositions();
+        categoryAxis15.setCategoryLabelPositions(categoryLabelPositions27);
+        org.jfree.chart.axis.CategoryLabelPositions categoryLabelPositions29 = categoryAxis15.getCategoryLabelPositions();
+        categoryAxis15.setLabelToolTip("PlotEntity: tooltip = {0}");
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryAxis15);
+        org.junit.Assert.assertTrue("'" + float22 + "' != '" + 0.0f + "'", float22 == 0.0f);
+        org.junit.Assert.assertTrue("'" + double25 + "' != '" + 0.05d + "'", double25 == 0.05d);
+        org.junit.Assert.assertNull(str26);
+        org.junit.Assert.assertNotNull(categoryLabelPositions27);
+        org.junit.Assert.assertNotNull(categoryLabelPositions29);
+    }
+
+    @Test
+    public void test2479() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2479");
+        java.awt.Color color1 = java.awt.Color.BLUE;
+        int int2 = color1.getRed();
+        org.jfree.chart.util.DefaultShadowGenerator defaultShadowGenerator6 = new org.jfree.chart.util.DefaultShadowGenerator((int) (short) 10, color1, (float) 1L, 10, (double) 0L);
+        double double7 = defaultShadowGenerator6.getAngle();
+        int int8 = defaultShadowGenerator6.calculateOffsetX();
+        int int9 = defaultShadowGenerator6.calculateOffsetX();
+        int int10 = defaultShadowGenerator6.getShadowSize();
+        org.junit.Assert.assertNotNull(color1);
+        org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
+        org.junit.Assert.assertTrue("'" + double7 + "' != '" + 0.0d + "'", double7 == 0.0d);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 10 + "'", int10 == 10);
+    }
+
+    @Test
+    public void test2480() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2480");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        java.awt.Shape shape14 = null;
+        lineAndShapeRenderer2.setSeriesShape((int) (short) 10, shape14, true);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition17 = lineAndShapeRenderer2.getBasePositiveItemLabelPosition();
+        java.awt.Graphics2D graphics2D18 = null;
+        org.jfree.chart.plot.PlotOrientation plotOrientation19 = null;
+        java.awt.geom.Rectangle2D rectangle2D20 = null;
+        java.awt.geom.Rectangle2D rectangle2D21 = null;
+        org.jfree.chart.util.RectangleInsets rectangleInsets22 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
+        double double24 = rectangleInsets22.calculateBottomInset(0.0d);
+        double double26 = rectangleInsets22.trimWidth((double) '#');
+        org.jfree.chart.util.LengthAdjustmentType lengthAdjustmentType27 = null;
+        org.jfree.chart.util.RectangleAnchor rectangleAnchor28 = null;
+        java.awt.geom.Point2D point2D29 = lineAndShapeRenderer2.calculateDomainMarkerTextAnchorPoint(graphics2D18, plotOrientation19, rectangle2D20, rectangle2D21, rectangleInsets22, lengthAdjustmentType27, rectangleAnchor28);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer32 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color33 = java.awt.Color.BLUE;
+        lineAndShapeRenderer32.setBaseItemLabelPaint((java.awt.Paint) color33);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator38 = lineAndShapeRenderer32.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator39 = null;
+        lineAndShapeRenderer32.setLegendItemURLGenerator(categorySeriesLabelGenerator39);
+        java.awt.Paint paint42 = lineAndShapeRenderer32.getSeriesPaint(1);
+        java.awt.Paint paint46 = lineAndShapeRenderer32.getItemFillPaint((-1), (int) (short) 100, false);
+        java.awt.Shape shape48 = lineAndShapeRenderer32.lookupLegendShape(4);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer51 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator52 = null;
+        lineAndShapeRenderer51.setBaseURLGenerator(categoryURLGenerator52);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator55 = null;
+        lineAndShapeRenderer51.setSeriesToolTipGenerator(10, categoryToolTipGenerator55);
+        boolean boolean57 = lineAndShapeRenderer51.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke59 = null;
+        lineAndShapeRenderer51.setSeriesStroke((int) 'a', stroke59, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor63 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color64 = java.awt.Color.yellow;
+        boolean boolean65 = itemLabelAnchor63.equals((java.lang.Object) color64);
+        lineAndShapeRenderer51.setSeriesFillPaint((int) ' ', (java.awt.Paint) color64);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer69 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color70 = java.awt.Color.BLUE;
+        lineAndShapeRenderer69.setBaseItemLabelPaint((java.awt.Paint) color70);
+        java.awt.Stroke stroke73 = lineAndShapeRenderer69.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset74 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis76 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float77 = categoryAxis76.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis78 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer81 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color82 = java.awt.Color.BLUE;
+        lineAndShapeRenderer81.setBaseItemLabelPaint((java.awt.Paint) color82);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator87 = lineAndShapeRenderer81.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot88 = new org.jfree.chart.plot.CategoryPlot(categoryDataset74, categoryAxis76, valueAxis78, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer81);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer89 = categoryPlot88.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis91 = lineAndShapeRenderer69.getRangeAxis(categoryPlot88, (int) '4');
+        boolean boolean92 = categoryPlot88.isRangeCrosshairVisible();
+        lineAndShapeRenderer51.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot88);
+        org.jfree.chart.entity.PlotEntity plotEntity94 = new org.jfree.chart.entity.PlotEntity(shape48, (org.jfree.chart.plot.Plot) categoryPlot88);
+        lineAndShapeRenderer2.setBaseShape(shape48, true);
+        java.awt.Stroke stroke98 = lineAndShapeRenderer2.lookupSeriesStroke(0);
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNotNull(itemLabelPosition17);
+        org.junit.Assert.assertNotNull(rectangleInsets22);
+        org.junit.Assert.assertTrue("'" + double24 + "' != '" + 3.0d + "'", double24 == 3.0d);
+        org.junit.Assert.assertTrue("'" + double26 + "' != '" + 29.0d + "'", double26 == 29.0d);
+        org.junit.Assert.assertNotNull(point2D29);
+        org.junit.Assert.assertNotNull(color33);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator38);
+        org.junit.Assert.assertNull(paint42);
+        org.junit.Assert.assertNotNull(paint46);
+        org.junit.Assert.assertNotNull(shape48);
+        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + true + "'", boolean57 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor63);
+        org.junit.Assert.assertNotNull(color64);
+        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
+        org.junit.Assert.assertNotNull(color70);
+        org.junit.Assert.assertNull(stroke73);
+        org.junit.Assert.assertTrue("'" + float77 + "' != '" + 0.0f + "'", float77 == 0.0f);
+        org.junit.Assert.assertNotNull(color82);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator87);
+        org.junit.Assert.assertNotNull(categoryItemRenderer89);
+        org.junit.Assert.assertNull(valueAxis91);
+        org.junit.Assert.assertTrue("'" + boolean92 + "' != '" + false + "'", boolean92 == false);
+        org.junit.Assert.assertNotNull(stroke98);
+    }
+
+    @Test
+    public void test2481() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2481");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer8 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color9 = java.awt.Color.BLUE;
+        lineAndShapeRenderer8.setBaseItemLabelPaint((java.awt.Paint) color9);
+        java.awt.Stroke stroke12 = lineAndShapeRenderer8.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset13 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis15 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float16 = categoryAxis15.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis17 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer20 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color21 = java.awt.Color.BLUE;
+        lineAndShapeRenderer20.setBaseItemLabelPaint((java.awt.Paint) color21);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator26 = lineAndShapeRenderer20.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot27 = new org.jfree.chart.plot.CategoryPlot(categoryDataset13, categoryAxis15, valueAxis17, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer20);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer28 = categoryPlot27.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis30 = lineAndShapeRenderer8.getRangeAxis(categoryPlot27, (int) '4');
+        java.lang.String str31 = categoryPlot27.getNoDataMessage();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer34 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color35 = java.awt.Color.BLUE;
+        lineAndShapeRenderer34.setBaseItemLabelPaint((java.awt.Paint) color35);
+        java.awt.Stroke stroke38 = lineAndShapeRenderer34.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset39 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis41 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float42 = categoryAxis41.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis43 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer46 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color47 = java.awt.Color.BLUE;
+        lineAndShapeRenderer46.setBaseItemLabelPaint((java.awt.Paint) color47);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator52 = lineAndShapeRenderer46.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot53 = new org.jfree.chart.plot.CategoryPlot(categoryDataset39, categoryAxis41, valueAxis43, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer46);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer54 = categoryPlot53.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis56 = lineAndShapeRenderer34.getRangeAxis(categoryPlot53, (int) '4');
+        double double57 = categoryPlot53.getRangeCrosshairValue();
+        java.awt.Paint paint58 = categoryPlot53.getRangeZeroBaselinePaint();
+        int int59 = categoryPlot53.getRangeAxisCount();
+        java.awt.Color color60 = java.awt.Color.BLUE;
+        categoryPlot53.setRangeMinorGridlinePaint((java.awt.Paint) color60);
+        java.awt.Stroke stroke62 = categoryPlot53.getRangeMinorGridlineStroke();
+        categoryPlot27.setOutlineStroke(stroke62);
+        lineAndShapeRenderer2.setSeriesStroke((int) '#', stroke62);
+        java.awt.Font font65 = lineAndShapeRenderer2.getBaseItemLabelFont();
+        java.awt.Paint paint66 = lineAndShapeRenderer2.getBasePaint();
+        org.jfree.chart.renderer.category.BarRenderer barRenderer67 = new org.jfree.chart.renderer.category.BarRenderer();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer71 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator72 = null;
+        lineAndShapeRenderer71.setBaseURLGenerator(categoryURLGenerator72);
+        java.awt.Shape shape75 = lineAndShapeRenderer71.getLegendShape(0);
+        lineAndShapeRenderer71.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font79 = lineAndShapeRenderer71.getSeriesItemLabelFont(0);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator80 = null;
+        lineAndShapeRenderer71.setBaseToolTipGenerator(categoryToolTipGenerator80);
+        org.jfree.chart.ChartColor chartColor85 = new org.jfree.chart.ChartColor(0, 8, (int) ' ');
+        lineAndShapeRenderer71.setBaseItemLabelPaint((java.awt.Paint) chartColor85);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition87 = lineAndShapeRenderer71.getBasePositiveItemLabelPosition();
+        barRenderer67.setSeriesPositiveItemLabelPosition((int) 'a', itemLabelPosition87, false);
+        lineAndShapeRenderer2.setBasePositiveItemLabelPosition(itemLabelPosition87);
+        org.jfree.chart.text.TextAnchor textAnchor91 = itemLabelPosition87.getRotationAnchor();
+        org.junit.Assert.assertNotNull(color9);
+        org.junit.Assert.assertNull(stroke12);
+        org.junit.Assert.assertTrue("'" + float16 + "' != '" + 0.0f + "'", float16 == 0.0f);
+        org.junit.Assert.assertNotNull(color21);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator26);
+        org.junit.Assert.assertNotNull(categoryItemRenderer28);
+        org.junit.Assert.assertNull(valueAxis30);
+        org.junit.Assert.assertNull(str31);
+        org.junit.Assert.assertNotNull(color35);
+        org.junit.Assert.assertNull(stroke38);
+        org.junit.Assert.assertTrue("'" + float42 + "' != '" + 0.0f + "'", float42 == 0.0f);
+        org.junit.Assert.assertNotNull(color47);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator52);
+        org.junit.Assert.assertNotNull(categoryItemRenderer54);
+        org.junit.Assert.assertNull(valueAxis56);
+        org.junit.Assert.assertTrue("'" + double57 + "' != '" + 0.0d + "'", double57 == 0.0d);
+        org.junit.Assert.assertNotNull(paint58);
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 1 + "'", int59 == 1);
+        org.junit.Assert.assertNotNull(color60);
+        org.junit.Assert.assertNotNull(stroke62);
+        org.junit.Assert.assertNotNull(font65);
+        org.junit.Assert.assertNotNull(paint66);
+        org.junit.Assert.assertNull(shape75);
+        org.junit.Assert.assertNull(font79);
+        org.junit.Assert.assertNotNull(itemLabelPosition87);
+        org.junit.Assert.assertNotNull(textAnchor91);
+    }
+
+    @Test
+    public void test2482() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2482");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
+        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes11 = lineAndShapeRenderer2.getSelectedItemAttributes();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator15 = null;
+        lineAndShapeRenderer14.setBaseURLGenerator(categoryURLGenerator15);
+        java.awt.Shape shape18 = lineAndShapeRenderer14.getLegendShape(0);
+        lineAndShapeRenderer14.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font22 = lineAndShapeRenderer14.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer14.setUseSeriesOffset(true);
+        java.awt.Shape shape26 = null;
+        lineAndShapeRenderer14.setSeriesShape((int) (short) 10, shape26, true);
+        lineAndShapeRenderer14.setSeriesLinesVisible((int) (short) 100, false);
+        java.awt.Stroke stroke33 = lineAndShapeRenderer14.getSeriesOutlineStroke(100);
+        java.awt.Paint paint37 = lineAndShapeRenderer14.getItemPaint(100, 0, false);
+        renderAttributes11.setDefaultOutlinePaint(paint37);
+        java.awt.Paint paint40 = renderAttributes11.getSeriesOutlinePaint(5);
+        java.awt.Color color41 = org.jfree.chart.ChartColor.VERY_LIGHT_MAGENTA;
+        renderAttributes11.setDefaultOutlinePaint((java.awt.Paint) color41);
+        java.awt.Shape shape43 = renderAttributes11.getDefaultShape();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNotNull(renderAttributes11);
+        org.junit.Assert.assertNull(shape18);
+        org.junit.Assert.assertNull(font22);
+        org.junit.Assert.assertNull(stroke33);
+        org.junit.Assert.assertNotNull(paint37);
+        org.junit.Assert.assertNull(paint40);
+        org.junit.Assert.assertNotNull(color41);
+        org.junit.Assert.assertNull(shape43);
+    }
+
+    @Test
+    public void test2483() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2483");
+        org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color5 = java.awt.Color.BLUE;
+        lineAndShapeRenderer4.setBaseItemLabelPaint((java.awt.Paint) color5);
+        java.awt.Stroke stroke8 = lineAndShapeRenderer4.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset9 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis11 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float12 = categoryAxis11.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis13 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer16 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color17 = java.awt.Color.BLUE;
+        lineAndShapeRenderer16.setBaseItemLabelPaint((java.awt.Paint) color17);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator22 = lineAndShapeRenderer16.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot23 = new org.jfree.chart.plot.CategoryPlot(categoryDataset9, categoryAxis11, valueAxis13, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer16);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer24 = categoryPlot23.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis26 = lineAndShapeRenderer4.getRangeAxis(categoryPlot23, (int) '4');
+        boolean boolean27 = categoryPlot23.isRangeCrosshairVisible();
+        org.jfree.chart.util.RectangleEdge rectangleEdge28 = categoryPlot23.getDomainAxisEdge();
+        boolean boolean29 = categoryPlot23.isRangeZeroBaselineVisible();
+        boolean boolean30 = categoryPlot23.isDomainGridlinesVisible();
+        keyedObjects0.addObject((java.lang.Comparable) (short) 100, (java.lang.Object) categoryPlot23);
+        org.jfree.chart.axis.CategoryAxis categoryAxis34 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        java.lang.Object obj35 = categoryAxis34.clone();
+        java.awt.Font font36 = categoryAxis34.getTickLabelFont();
+        categoryAxis34.setCategoryMargin((double) 3);
+        keyedObjects0.addObject((java.lang.Comparable) "ItemLabelAnchor.INSIDE7", (java.lang.Object) categoryAxis34);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer43 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color44 = java.awt.Color.BLUE;
+        lineAndShapeRenderer43.setBaseItemLabelPaint((java.awt.Paint) color44);
+        java.awt.Stroke stroke47 = lineAndShapeRenderer43.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset48 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis50 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float51 = categoryAxis50.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis52 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer55 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color56 = java.awt.Color.BLUE;
+        lineAndShapeRenderer55.setBaseItemLabelPaint((java.awt.Paint) color56);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator61 = lineAndShapeRenderer55.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot62 = new org.jfree.chart.plot.CategoryPlot(categoryDataset48, categoryAxis50, valueAxis52, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer55);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer63 = categoryPlot62.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis65 = lineAndShapeRenderer43.getRangeAxis(categoryPlot62, (int) '4');
+        boolean boolean66 = categoryPlot62.isRangeCrosshairVisible();
+        java.awt.Paint paint67 = categoryPlot62.getRangeZeroBaselinePaint();
+        categoryPlot62.mapDatasetToDomainAxis((int) (byte) 1, (int) (short) 10);
+        keyedObjects0.addObject((java.lang.Comparable) 1.0E-8d, (java.lang.Object) categoryPlot62);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer75 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean77 = lineAndShapeRenderer75.isSeriesVisibleInLegend(1);
+        java.awt.Font font78 = lineAndShapeRenderer75.getBaseLegendTextFont();
+        java.awt.Color color81 = java.awt.Color.GRAY;
+        org.jfree.chart.util.DefaultShadowGenerator defaultShadowGenerator85 = new org.jfree.chart.util.DefaultShadowGenerator((int) (byte) 0, color81, 1.0f, (-1), 10.0d);
+        lineAndShapeRenderer75.setSeriesPaint(0, (java.awt.Paint) color81, false);
+        int int88 = lineAndShapeRenderer75.getPassCount();
+        keyedObjects0.setObject((java.lang.Comparable) "ItemLabelAnchor.OUTSIDE6", (java.lang.Object) int88);
+        org.junit.Assert.assertNotNull(color5);
+        org.junit.Assert.assertNull(stroke8);
+        org.junit.Assert.assertTrue("'" + float12 + "' != '" + 0.0f + "'", float12 == 0.0f);
+        org.junit.Assert.assertNotNull(color17);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator22);
+        org.junit.Assert.assertNotNull(categoryItemRenderer24);
+        org.junit.Assert.assertNull(valueAxis26);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertNotNull(rectangleEdge28);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertNotNull(obj35);
+        org.junit.Assert.assertNotNull(font36);
+        org.junit.Assert.assertNotNull(color44);
+        org.junit.Assert.assertNull(stroke47);
+        org.junit.Assert.assertTrue("'" + float51 + "' != '" + 0.0f + "'", float51 == 0.0f);
+        org.junit.Assert.assertNotNull(color56);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator61);
+        org.junit.Assert.assertNotNull(categoryItemRenderer63);
+        org.junit.Assert.assertNull(valueAxis65);
+        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + false + "'", boolean66 == false);
+        org.junit.Assert.assertNotNull(paint67);
+        org.junit.Assert.assertTrue("'" + boolean77 + "' != '" + true + "'", boolean77 == true);
+        org.junit.Assert.assertNull(font78);
+        org.junit.Assert.assertNotNull(color81);
+        org.junit.Assert.assertTrue("'" + int88 + "' != '" + 2 + "'", int88 == 2);
+    }
+
+    @Test
+    public void test2484() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2484");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator13 = null;
+        lineAndShapeRenderer2.setBaseToolTipGenerator(categoryToolTipGenerator13);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator15 = lineAndShapeRenderer2.getLegendItemLabelGenerator();
+        java.awt.Paint paint16 = lineAndShapeRenderer2.getBaseItemLabelPaint();
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition18 = null;
+        lineAndShapeRenderer2.setSeriesPositiveItemLabelPosition((int) (byte) 0, itemLabelPosition18);
+        lineAndShapeRenderer2.setSeriesLinesVisible(8, false);
+        java.awt.Shape shape23 = lineAndShapeRenderer2.getBaseShape();
+        int int24 = lineAndShapeRenderer2.getPassCount();
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNotNull(categorySeriesLabelGenerator15);
+        org.junit.Assert.assertNotNull(paint16);
+        org.junit.Assert.assertNotNull(shape23);
+        org.junit.Assert.assertTrue("'" + int24 + "' != '" + 2 + "'", int24 == 2);
+    }
+
+    @Test
+    public void test2485() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2485");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition9 = lineAndShapeRenderer2.getBaseNegativeItemLabelPosition();
+        java.awt.Graphics2D graphics2D10 = null;
+        java.awt.geom.Rectangle2D rectangle2D11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        java.awt.Stroke stroke18 = lineAndShapeRenderer14.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset19 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis21 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float22 = categoryAxis21.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis23 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer26 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color27 = java.awt.Color.BLUE;
+        lineAndShapeRenderer26.setBaseItemLabelPaint((java.awt.Paint) color27);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator32 = lineAndShapeRenderer26.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot33 = new org.jfree.chart.plot.CategoryPlot(categoryDataset19, categoryAxis21, valueAxis23, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer26);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer34 = categoryPlot33.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis36 = lineAndShapeRenderer14.getRangeAxis(categoryPlot33, (int) '4');
+        boolean boolean37 = categoryPlot33.isRangeCrosshairVisible();
+        org.jfree.chart.util.RectangleEdge rectangleEdge38 = categoryPlot33.getDomainAxisEdge();
+        org.jfree.data.category.CategoryDataset categoryDataset39 = null;
+        org.jfree.chart.plot.PlotRenderingInfo plotRenderingInfo40 = null;
+        org.jfree.chart.renderer.category.CategoryItemRendererState categoryItemRendererState41 = lineAndShapeRenderer2.initialise(graphics2D10, rectangle2D11, categoryPlot33, categoryDataset39, plotRenderingInfo40);
+        org.jfree.chart.event.AnnotationChangeEvent annotationChangeEvent42 = null;
+        categoryPlot33.annotationChanged(annotationChangeEvent42);
+        categoryPlot33.setDomainCrosshairColumnKey((java.lang.Comparable) 1L, true);
+        categoryPlot33.configureDomainAxes();
+        java.awt.Paint paint48 = categoryPlot33.getDomainCrosshairPaint();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNotNull(itemLabelPosition9);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(stroke18);
+        org.junit.Assert.assertTrue("'" + float22 + "' != '" + 0.0f + "'", float22 == 0.0f);
+        org.junit.Assert.assertNotNull(color27);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator32);
+        org.junit.Assert.assertNotNull(categoryItemRenderer34);
+        org.junit.Assert.assertNull(valueAxis36);
+        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
+        org.junit.Assert.assertNotNull(rectangleEdge38);
+        org.junit.Assert.assertNotNull(categoryItemRendererState41);
+        org.junit.Assert.assertNotNull(paint48);
+    }
+
+    @Test
+    public void test2486() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2486");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float10 = categoryAxis9.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
+        boolean boolean25 = categoryPlot21.isRangeCrosshairVisible();
+        org.jfree.chart.plot.DatasetRenderingOrder datasetRenderingOrder26 = categoryPlot21.getDatasetRenderingOrder();
+        org.jfree.chart.plot.PlotRenderingInfo plotRenderingInfo29 = null;
+        java.awt.geom.Point2D point2D30 = null;
+        categoryPlot21.zoomDomainAxes(1.0d, (double) (-1L), plotRenderingInfo29, point2D30);
+        categoryPlot21.setDomainCrosshairVisible(false);
+        float float34 = categoryPlot21.getForegroundAlpha();
+        org.jfree.chart.axis.AxisLocation axisLocation35 = categoryPlot21.getRangeAxisLocation();
+        org.jfree.chart.util.RectangleInsets rectangleInsets36 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
+        double double38 = rectangleInsets36.calculateBottomInset(0.0d);
+        org.jfree.chart.util.UnitType unitType39 = rectangleInsets36.getUnitType();
+        categoryPlot21.setInsets(rectangleInsets36, true);
+        categoryPlot21.clearRangeMarkers(255);
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(categoryItemRenderer22);
+        org.junit.Assert.assertNull(valueAxis24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(datasetRenderingOrder26);
+        org.junit.Assert.assertTrue("'" + float34 + "' != '" + 1.0f + "'", float34 == 1.0f);
+        org.junit.Assert.assertNotNull(axisLocation35);
+        org.junit.Assert.assertNotNull(rectangleInsets36);
+        org.junit.Assert.assertTrue("'" + double38 + "' != '" + 3.0d + "'", double38 == 3.0d);
+        org.junit.Assert.assertNotNull(unitType39);
+    }
+
+    @Test
+    public void test2487() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2487");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float10 = categoryAxis9.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
+        boolean boolean25 = categoryPlot21.isRangeCrosshairVisible();
+        org.jfree.chart.plot.DatasetRenderingOrder datasetRenderingOrder26 = categoryPlot21.getDatasetRenderingOrder();
+        org.jfree.data.category.CategoryDataset categoryDataset27 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis29 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float30 = categoryAxis29.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis31 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer34 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color35 = java.awt.Color.BLUE;
+        lineAndShapeRenderer34.setBaseItemLabelPaint((java.awt.Paint) color35);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator40 = lineAndShapeRenderer34.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot41 = new org.jfree.chart.plot.CategoryPlot(categoryDataset27, categoryAxis29, valueAxis31, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer34);
+        org.jfree.chart.axis.AxisLocation axisLocation42 = org.jfree.chart.axis.AxisLocation.TOP_OR_LEFT;
+        categoryPlot41.setRangeAxisLocation(axisLocation42);
+        categoryPlot21.setRangeAxisLocation(axisLocation42, true);
+        java.awt.Color color46 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        categoryPlot21.setRangeMinorGridlinePaint((java.awt.Paint) color46);
+        categoryPlot21.setRangeMinorGridlinesVisible(true);
+        org.jfree.chart.util.Layer layer50 = null;
+        java.util.Collection collection51 = categoryPlot21.getRangeMarkers(layer50);
+        org.jfree.chart.event.RendererChangeEvent rendererChangeEvent52 = null;
+        categoryPlot21.rendererChanged(rendererChangeEvent52);
+        categoryPlot21.clearRangeMarkers((int) '4');
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(categoryItemRenderer22);
+        org.junit.Assert.assertNull(valueAxis24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(datasetRenderingOrder26);
+        org.junit.Assert.assertTrue("'" + float30 + "' != '" + 0.0f + "'", float30 == 0.0f);
+        org.junit.Assert.assertNotNull(color35);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator40);
+        org.junit.Assert.assertNotNull(axisLocation42);
+        org.junit.Assert.assertNotNull(color46);
+        org.junit.Assert.assertNull(collection51);
+    }
+
+    @Test
+    public void test2488() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2488");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator6 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelGenerator((int) (short) 100, categoryItemLabelGenerator6, true);
+        org.jfree.chart.event.RendererChangeEvent rendererChangeEvent9 = null;
+        lineAndShapeRenderer2.notifyListeners(rendererChangeEvent9);
+        lineAndShapeRenderer2.setSeriesVisibleInLegend(255, (java.lang.Boolean) false);
+        lineAndShapeRenderer2.removeAnnotations();
+        lineAndShapeRenderer2.setSeriesItemLabelsVisible(2, (java.lang.Boolean) false);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+    }
+
+    @Test
+    public void test2489() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2489");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font10 = lineAndShapeRenderer2.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer2.setUseSeriesOffset(true);
+        java.awt.Font font14 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelFont((int) (short) 1, font14, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition18 = lineAndShapeRenderer2.getSeriesPositiveItemLabelPosition((int) (byte) 100);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator19 = lineAndShapeRenderer2.getLegendItemURLGenerator();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer22 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color23 = java.awt.Color.BLUE;
+        lineAndShapeRenderer22.setBaseItemLabelPaint((java.awt.Paint) color23);
+        java.awt.Shape shape25 = lineAndShapeRenderer22.getBaseShape();
+        java.awt.Stroke stroke26 = lineAndShapeRenderer22.getBaseOutlineStroke();
+        lineAndShapeRenderer2.setBaseOutlineStroke(stroke26, true);
+        boolean boolean32 = lineAndShapeRenderer2.getItemCreateEntity(255, (int) (byte) -1, false);
+        // The following exception was thrown during execution in test generation
+        try {
+            lineAndShapeRenderer2.setSeriesVisible((-254), (java.lang.Boolean) false);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Requires index >= 0.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(font10);
+        org.junit.Assert.assertNotNull(itemLabelPosition18);
+        org.junit.Assert.assertNull(categorySeriesLabelGenerator19);
+        org.junit.Assert.assertNotNull(color23);
+        org.junit.Assert.assertNotNull(shape25);
+        org.junit.Assert.assertNotNull(stroke26);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + true + "'", boolean32 == true);
+    }
+
+    @Test
+    public void test2490() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2490");
+        org.jfree.data.category.CategoryDataset categoryDataset0 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float3 = categoryAxis2.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis4 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer7 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color8 = java.awt.Color.BLUE;
+        lineAndShapeRenderer7.setBaseItemLabelPaint((java.awt.Paint) color8);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator13 = lineAndShapeRenderer7.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot14 = new org.jfree.chart.plot.CategoryPlot(categoryDataset0, categoryAxis2, valueAxis4, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer7);
+        org.jfree.chart.axis.CategoryAxis categoryAxis15 = categoryPlot14.getDomainAxis();
+        categoryAxis15.setLabelAngle(3.0d);
+        categoryAxis15.setLabelToolTip("hi!");
+        org.jfree.chart.plot.Plot plot20 = categoryAxis15.getPlot();
+        double double21 = categoryAxis15.getLowerMargin();
+        java.awt.Graphics2D graphics2D22 = null;
+        org.jfree.chart.axis.AxisState axisState23 = null;
+        java.awt.geom.Rectangle2D rectangle2D24 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer27 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color28 = java.awt.Color.BLUE;
+        lineAndShapeRenderer27.setBaseItemLabelPaint((java.awt.Paint) color28);
+        java.awt.Stroke stroke31 = lineAndShapeRenderer27.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset32 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis34 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float35 = categoryAxis34.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis36 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer39 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color40 = java.awt.Color.BLUE;
+        lineAndShapeRenderer39.setBaseItemLabelPaint((java.awt.Paint) color40);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator45 = lineAndShapeRenderer39.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot46 = new org.jfree.chart.plot.CategoryPlot(categoryDataset32, categoryAxis34, valueAxis36, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer39);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer47 = categoryPlot46.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis49 = lineAndShapeRenderer27.getRangeAxis(categoryPlot46, (int) '4');
+        boolean boolean50 = categoryPlot46.isRangeCrosshairVisible();
+        org.jfree.chart.util.RectangleEdge rectangleEdge51 = categoryPlot46.getDomainAxisEdge();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.util.List list52 = categoryAxis15.refreshTicks(graphics2D22, axisState23, rectangle2D24, rectangleEdge51);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + float3 + "' != '" + 0.0f + "'", float3 == 0.0f);
+        org.junit.Assert.assertNotNull(color8);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator13);
+        org.junit.Assert.assertNotNull(categoryAxis15);
+        org.junit.Assert.assertNotNull(plot20);
+        org.junit.Assert.assertTrue("'" + double21 + "' != '" + 0.05d + "'", double21 == 0.05d);
+        org.junit.Assert.assertNotNull(color28);
+        org.junit.Assert.assertNull(stroke31);
+        org.junit.Assert.assertTrue("'" + float35 + "' != '" + 0.0f + "'", float35 == 0.0f);
+        org.junit.Assert.assertNotNull(color40);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator45);
+        org.junit.Assert.assertNotNull(categoryItemRenderer47);
+        org.junit.Assert.assertNull(valueAxis49);
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
+        org.junit.Assert.assertNotNull(rectangleEdge51);
+    }
+
+    @Test
+    public void test2491() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2491");
+        org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
+        boolean boolean1 = barRenderer0.isDrawBarOutline();
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition2 = barRenderer0.getBasePositiveItemLabelPosition();
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition3 = barRenderer0.getPositiveItemLabelPositionFallback();
+        boolean boolean4 = barRenderer0.getIncludeBaseInRange();
+        org.jfree.data.category.CategoryDataset categoryDataset5 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis7 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float8 = categoryAxis7.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis9 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer12 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color13 = java.awt.Color.BLUE;
+        lineAndShapeRenderer12.setBaseItemLabelPaint((java.awt.Paint) color13);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator18 = lineAndShapeRenderer12.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot19 = new org.jfree.chart.plot.CategoryPlot(categoryDataset5, categoryAxis7, valueAxis9, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer12);
+        boolean boolean20 = categoryPlot19.canSelectByPoint();
+        org.jfree.chart.LegendItemCollection legendItemCollection21 = categoryPlot19.getFixedLegendItems();
+        java.awt.Stroke stroke22 = categoryPlot19.getRangeGridlineStroke();
+        org.jfree.chart.axis.CategoryAxis categoryAxis24 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        double double25 = categoryAxis24.getFixedDimension();
+        org.jfree.chart.plot.Plot plot26 = categoryAxis24.getPlot();
+        org.jfree.chart.util.RectangleInsets rectangleInsets27 = categoryAxis24.getLabelInsets();
+        double double29 = rectangleInsets27.calculateTopInset((double) 1.0f);
+        categoryPlot19.setAxisOffset(rectangleInsets27);
+        categoryPlot19.setRangeCrosshairVisible(false);
+        org.jfree.chart.axis.ValueAxis valueAxis34 = categoryPlot19.getRangeAxisForDataset(4);
+        barRenderer0.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot19);
+        boolean boolean39 = barRenderer0.isItemLabelVisible(0, 0, true);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(itemLabelPosition2);
+        org.junit.Assert.assertNull(itemLabelPosition3);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertTrue("'" + float8 + "' != '" + 0.0f + "'", float8 == 0.0f);
+        org.junit.Assert.assertNotNull(color13);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator18);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
+        org.junit.Assert.assertNull(legendItemCollection21);
+        org.junit.Assert.assertNotNull(stroke22);
+        org.junit.Assert.assertTrue("'" + double25 + "' != '" + 0.0d + "'", double25 == 0.0d);
+        org.junit.Assert.assertNull(plot26);
+        org.junit.Assert.assertNotNull(rectangleInsets27);
+        org.junit.Assert.assertTrue("'" + double29 + "' != '" + 3.0d + "'", double29 == 3.0d);
+        org.junit.Assert.assertNull(valueAxis34);
+        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
+    }
+
+    @Test
+    public void test2492() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2492");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
+        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
+        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes13 = lineAndShapeRenderer2.getSelectedItemAttributes();
+        java.awt.Paint paint14 = renderAttributes13.getDefaultLabelPaint();
+        java.awt.Paint paint15 = renderAttributes13.getDefaultPaint();
+        java.lang.Boolean boolean16 = renderAttributes13.getDefaultCreateEntity();
+        java.awt.Paint paint17 = renderAttributes13.getDefaultOutlinePaint();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNull(paint12);
+        org.junit.Assert.assertNotNull(renderAttributes13);
+        org.junit.Assert.assertNull(paint14);
+        org.junit.Assert.assertNull(paint15);
+        org.junit.Assert.assertNull(boolean16);
+        org.junit.Assert.assertNull(paint17);
+    }
+
+    @Test
+    public void test2493() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2493");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        lineAndShapeRenderer2.setAutoPopulateSeriesFillPaint(false);
+        java.lang.Boolean boolean10 = lineAndShapeRenderer2.getSeriesVisible((int) (byte) 10);
+        java.awt.Graphics2D graphics2D11 = null;
+        org.jfree.chart.plot.PlotOrientation plotOrientation12 = null;
+        java.awt.geom.Rectangle2D rectangle2D13 = null;
+        java.awt.geom.Rectangle2D rectangle2D14 = null;
+        org.jfree.data.category.CategoryDataset categoryDataset15 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis17 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float18 = categoryAxis17.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis19 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer22 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color23 = java.awt.Color.BLUE;
+        lineAndShapeRenderer22.setBaseItemLabelPaint((java.awt.Paint) color23);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator28 = lineAndShapeRenderer22.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot29 = new org.jfree.chart.plot.CategoryPlot(categoryDataset15, categoryAxis17, valueAxis19, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer22);
+        java.lang.Object obj30 = categoryPlot29.clone();
+        org.jfree.chart.util.RectangleInsets rectangleInsets31 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
+        double double33 = rectangleInsets31.extendWidth((double) 10L);
+        double double35 = rectangleInsets31.extendWidth((double) (short) -1);
+        double double36 = rectangleInsets31.getRight();
+        categoryPlot29.setInsets(rectangleInsets31, false);
+        double double40 = rectangleInsets31.extendWidth((double) (-1));
+        double double41 = rectangleInsets31.getBottom();
+        double double43 = rectangleInsets31.calculateRightOutset(0.0d);
+        org.jfree.chart.util.LengthAdjustmentType lengthAdjustmentType44 = null;
+        org.jfree.chart.util.RectangleAnchor rectangleAnchor45 = null;
+        java.awt.geom.Point2D point2D46 = lineAndShapeRenderer2.calculateRangeMarkerTextAnchorPoint(graphics2D11, plotOrientation12, rectangle2D13, rectangle2D14, rectangleInsets31, lengthAdjustmentType44, rectangleAnchor45);
+        java.awt.Paint paint48 = lineAndShapeRenderer2.getSeriesOutlinePaint((int) (byte) 10);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator50 = null;
+        lineAndShapeRenderer2.setSeriesItemLabelGenerator(8, categoryItemLabelGenerator50);
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertNull(boolean10);
+        org.junit.Assert.assertTrue("'" + float18 + "' != '" + 0.0f + "'", float18 == 0.0f);
+        org.junit.Assert.assertNotNull(color23);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator28);
+        org.junit.Assert.assertNotNull(obj30);
+        org.junit.Assert.assertNotNull(rectangleInsets31);
+        org.junit.Assert.assertTrue("'" + double33 + "' != '" + 16.0d + "'", double33 == 16.0d);
+        org.junit.Assert.assertTrue("'" + double35 + "' != '" + 5.0d + "'", double35 == 5.0d);
+        org.junit.Assert.assertTrue("'" + double36 + "' != '" + 3.0d + "'", double36 == 3.0d);
+        org.junit.Assert.assertTrue("'" + double40 + "' != '" + 5.0d + "'", double40 == 5.0d);
+        org.junit.Assert.assertTrue("'" + double41 + "' != '" + 3.0d + "'", double41 == 3.0d);
+        org.junit.Assert.assertTrue("'" + double43 + "' != '" + 3.0d + "'", double43 == 3.0d);
+        org.junit.Assert.assertNotNull(point2D46);
+        org.junit.Assert.assertNull(paint48);
+    }
+
+    @Test
+    public void test2494() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2494");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        java.awt.Stroke stroke6 = lineAndShapeRenderer2.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset7 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis9 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float10 = categoryAxis9.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis11 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color15 = java.awt.Color.BLUE;
+        lineAndShapeRenderer14.setBaseItemLabelPaint((java.awt.Paint) color15);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator20 = lineAndShapeRenderer14.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot21 = new org.jfree.chart.plot.CategoryPlot(categoryDataset7, categoryAxis9, valueAxis11, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer14);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer22 = categoryPlot21.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis24 = lineAndShapeRenderer2.getRangeAxis(categoryPlot21, (int) '4');
+        double double25 = categoryPlot21.getRangeCrosshairValue();
+        java.awt.Paint paint26 = categoryPlot21.getRangeZeroBaselinePaint();
+        int int27 = categoryPlot21.getRangeAxisCount();
+        java.awt.Color color28 = java.awt.Color.BLUE;
+        categoryPlot21.setRangeMinorGridlinePaint((java.awt.Paint) color28);
+        java.awt.Stroke stroke30 = categoryPlot21.getRangeMinorGridlineStroke();
+        categoryPlot21.clearRangeMarkers();
+        org.jfree.chart.event.AxisChangeEvent axisChangeEvent32 = null;
+        categoryPlot21.axisChanged(axisChangeEvent32);
+        org.jfree.chart.axis.AxisLocation axisLocation35 = categoryPlot21.getRangeAxisLocation(10);
+        org.jfree.chart.plot.Plot plot36 = categoryPlot21.getParent();
+        org.jfree.chart.axis.CategoryAxis categoryAxis38 = categoryPlot21.getDomainAxis(100);
+        categoryPlot21.setDomainCrosshairVisible(false);
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(stroke6);
+        org.junit.Assert.assertTrue("'" + float10 + "' != '" + 0.0f + "'", float10 == 0.0f);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator20);
+        org.junit.Assert.assertNotNull(categoryItemRenderer22);
+        org.junit.Assert.assertNull(valueAxis24);
+        org.junit.Assert.assertTrue("'" + double25 + "' != '" + 0.0d + "'", double25 == 0.0d);
+        org.junit.Assert.assertNotNull(paint26);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 1 + "'", int27 == 1);
+        org.junit.Assert.assertNotNull(color28);
+        org.junit.Assert.assertNotNull(stroke30);
+        org.junit.Assert.assertNotNull(axisLocation35);
+        org.junit.Assert.assertNull(plot36);
+        org.junit.Assert.assertNull(categoryAxis38);
+    }
+
+    @Test
+    public void test2495() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2495");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        java.awt.Shape shape6 = lineAndShapeRenderer2.getLegendShape(0);
+        org.jfree.chart.annotations.CategoryAnnotation categoryAnnotation7 = null;
+        boolean boolean8 = lineAndShapeRenderer2.removeAnnotation(categoryAnnotation7);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer11 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator12 = null;
+        lineAndShapeRenderer11.setBaseURLGenerator(categoryURLGenerator12);
+        java.awt.Shape shape15 = lineAndShapeRenderer11.getLegendShape(0);
+        lineAndShapeRenderer11.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font19 = lineAndShapeRenderer11.getSeriesItemLabelFont(0);
+        java.awt.Paint paint21 = lineAndShapeRenderer11.lookupLegendTextPaint(4);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition22 = lineAndShapeRenderer11.getBasePositiveItemLabelPosition();
+        lineAndShapeRenderer2.setBaseNegativeItemLabelPosition(itemLabelPosition22);
+        java.awt.Paint paint24 = lineAndShapeRenderer2.getBasePaint();
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator26 = lineAndShapeRenderer2.getSeriesURLGenerator((-1));
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator28 = null;
+        lineAndShapeRenderer2.setSeriesURLGenerator(0, categoryURLGenerator28);
+        lineAndShapeRenderer2.setSeriesVisibleInLegend((int) (byte) 100, (java.lang.Boolean) false, false);
+        org.junit.Assert.assertNull(shape6);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNull(shape15);
+        org.junit.Assert.assertNull(font19);
+        org.junit.Assert.assertNull(paint21);
+        org.junit.Assert.assertNotNull(itemLabelPosition22);
+        org.junit.Assert.assertNotNull(paint24);
+        org.junit.Assert.assertNull(categoryURLGenerator26);
+    }
+
+    @Test
+    public void test2496() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2496");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
+        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
+        java.awt.Paint paint12 = lineAndShapeRenderer2.getSeriesPaint(1);
+        java.awt.Paint paint16 = lineAndShapeRenderer2.getItemFillPaint((-1), (int) (short) 100, false);
+        java.awt.Shape shape18 = lineAndShapeRenderer2.lookupLegendShape(4);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer21 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator22 = null;
+        lineAndShapeRenderer21.setBaseURLGenerator(categoryURLGenerator22);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator25 = null;
+        lineAndShapeRenderer21.setSeriesToolTipGenerator(10, categoryToolTipGenerator25);
+        boolean boolean27 = lineAndShapeRenderer21.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke29 = null;
+        lineAndShapeRenderer21.setSeriesStroke((int) 'a', stroke29, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor33 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color34 = java.awt.Color.yellow;
+        boolean boolean35 = itemLabelAnchor33.equals((java.lang.Object) color34);
+        lineAndShapeRenderer21.setSeriesFillPaint((int) ' ', (java.awt.Paint) color34);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer39 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color40 = java.awt.Color.BLUE;
+        lineAndShapeRenderer39.setBaseItemLabelPaint((java.awt.Paint) color40);
+        java.awt.Stroke stroke43 = lineAndShapeRenderer39.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset44 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis46 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float47 = categoryAxis46.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis48 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer51 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color52 = java.awt.Color.BLUE;
+        lineAndShapeRenderer51.setBaseItemLabelPaint((java.awt.Paint) color52);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator57 = lineAndShapeRenderer51.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot58 = new org.jfree.chart.plot.CategoryPlot(categoryDataset44, categoryAxis46, valueAxis48, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer51);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer59 = categoryPlot58.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis61 = lineAndShapeRenderer39.getRangeAxis(categoryPlot58, (int) '4');
+        boolean boolean62 = categoryPlot58.isRangeCrosshairVisible();
+        lineAndShapeRenderer21.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot58);
+        org.jfree.chart.entity.PlotEntity plotEntity64 = new org.jfree.chart.entity.PlotEntity(shape18, (org.jfree.chart.plot.Plot) categoryPlot58);
+        org.jfree.data.category.CategoryDataset categoryDataset65 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis67 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float68 = categoryAxis67.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis69 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer72 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color73 = java.awt.Color.BLUE;
+        lineAndShapeRenderer72.setBaseItemLabelPaint((java.awt.Paint) color73);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator78 = lineAndShapeRenderer72.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot79 = new org.jfree.chart.plot.CategoryPlot(categoryDataset65, categoryAxis67, valueAxis69, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer72);
+        org.jfree.chart.axis.CategoryAxis categoryAxis80 = categoryPlot79.getDomainAxis();
+        org.jfree.chart.axis.ValueAxis valueAxis81 = null;
+        org.jfree.data.Range range82 = categoryPlot79.getDataRange(valueAxis81);
+        org.jfree.chart.axis.AxisLocation axisLocation83 = categoryPlot79.getRangeAxisLocation();
+        categoryPlot58.setRangeAxisLocation(axisLocation83, false);
+        categoryPlot58.setWeight((int) ' ');
+        org.jfree.chart.axis.CategoryAnchor categoryAnchor88 = categoryPlot58.getDomainGridlinePosition();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNull(paint12);
+        org.junit.Assert.assertNotNull(paint16);
+        org.junit.Assert.assertNotNull(shape18);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor33);
+        org.junit.Assert.assertNotNull(color34);
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
+        org.junit.Assert.assertNotNull(color40);
+        org.junit.Assert.assertNull(stroke43);
+        org.junit.Assert.assertTrue("'" + float47 + "' != '" + 0.0f + "'", float47 == 0.0f);
+        org.junit.Assert.assertNotNull(color52);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator57);
+        org.junit.Assert.assertNotNull(categoryItemRenderer59);
+        org.junit.Assert.assertNull(valueAxis61);
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
+        org.junit.Assert.assertTrue("'" + float68 + "' != '" + 0.0f + "'", float68 == 0.0f);
+        org.junit.Assert.assertNotNull(color73);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator78);
+        org.junit.Assert.assertNotNull(categoryAxis80);
+        org.junit.Assert.assertNull(range82);
+        org.junit.Assert.assertNotNull(axisLocation83);
+        org.junit.Assert.assertNotNull(categoryAnchor88);
+    }
+
+    @Test
+    public void test2497() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2497");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color3 = java.awt.Color.BLUE;
+        lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator8 = lineAndShapeRenderer2.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator9 = null;
+        lineAndShapeRenderer2.setLegendItemURLGenerator(categorySeriesLabelGenerator9);
+        org.jfree.chart.renderer.RenderAttributes renderAttributes11 = lineAndShapeRenderer2.getSelectedItemAttributes();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer14 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator15 = null;
+        lineAndShapeRenderer14.setBaseURLGenerator(categoryURLGenerator15);
+        java.awt.Shape shape18 = lineAndShapeRenderer14.getLegendShape(0);
+        lineAndShapeRenderer14.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font22 = lineAndShapeRenderer14.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer14.setUseSeriesOffset(true);
+        java.awt.Shape shape26 = null;
+        lineAndShapeRenderer14.setSeriesShape((int) (short) 10, shape26, true);
+        lineAndShapeRenderer14.setSeriesLinesVisible((int) (short) 100, false);
+        java.awt.Stroke stroke33 = lineAndShapeRenderer14.getSeriesOutlineStroke(100);
+        java.awt.Paint paint37 = lineAndShapeRenderer14.getItemPaint(100, 0, false);
+        renderAttributes11.setDefaultOutlinePaint(paint37);
+        java.awt.Paint paint40 = renderAttributes11.getSeriesOutlinePaint(5);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer44 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator45 = null;
+        lineAndShapeRenderer44.setBaseURLGenerator(categoryURLGenerator45);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator48 = null;
+        lineAndShapeRenderer44.setSeriesToolTipGenerator(10, categoryToolTipGenerator48);
+        boolean boolean50 = lineAndShapeRenderer44.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke52 = null;
+        lineAndShapeRenderer44.setSeriesStroke((int) 'a', stroke52, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor56 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color57 = java.awt.Color.yellow;
+        boolean boolean58 = itemLabelAnchor56.equals((java.lang.Object) color57);
+        lineAndShapeRenderer44.setSeriesFillPaint((int) ' ', (java.awt.Paint) color57);
+        java.awt.Shape shape60 = org.jfree.chart.plot.Plot.DEFAULT_LEGEND_ITEM_CIRCLE;
+        lineAndShapeRenderer44.setBaseShape(shape60);
+        renderAttributes11.setSeriesShape(11, shape60);
+        renderAttributes11.setDefaultLabelVisible((java.lang.Boolean) false);
+        java.awt.Paint paint65 = renderAttributes11.getDefaultLabelPaint();
+        org.junit.Assert.assertNotNull(color3);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator8);
+        org.junit.Assert.assertNotNull(renderAttributes11);
+        org.junit.Assert.assertNull(shape18);
+        org.junit.Assert.assertNull(font22);
+        org.junit.Assert.assertNull(stroke33);
+        org.junit.Assert.assertNotNull(paint37);
+        org.junit.Assert.assertNull(paint40);
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + true + "'", boolean50 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor56);
+        org.junit.Assert.assertNotNull(color57);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertNotNull(shape60);
+        org.junit.Assert.assertNull(paint65);
+    }
+
+    @Test
+    public void test2498() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2498");
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
+        lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
+        org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator6 = null;
+        lineAndShapeRenderer2.setSeriesToolTipGenerator(10, categoryToolTipGenerator6);
+        boolean boolean8 = lineAndShapeRenderer2.getBaseSeriesVisibleInLegend();
+        java.awt.Stroke stroke10 = null;
+        lineAndShapeRenderer2.setSeriesStroke((int) 'a', stroke10, true);
+        org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor14 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE3;
+        java.awt.Color color15 = java.awt.Color.yellow;
+        boolean boolean16 = itemLabelAnchor14.equals((java.lang.Object) color15);
+        lineAndShapeRenderer2.setSeriesFillPaint((int) ' ', (java.awt.Paint) color15);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer20 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color21 = java.awt.Color.BLUE;
+        lineAndShapeRenderer20.setBaseItemLabelPaint((java.awt.Paint) color21);
+        java.awt.Stroke stroke24 = lineAndShapeRenderer20.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.data.category.CategoryDataset categoryDataset25 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis27 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float28 = categoryAxis27.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis29 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer32 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color33 = java.awt.Color.BLUE;
+        lineAndShapeRenderer32.setBaseItemLabelPaint((java.awt.Paint) color33);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator38 = lineAndShapeRenderer32.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot39 = new org.jfree.chart.plot.CategoryPlot(categoryDataset25, categoryAxis27, valueAxis29, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer32);
+        org.jfree.chart.renderer.category.CategoryItemRenderer categoryItemRenderer40 = categoryPlot39.getRenderer();
+        org.jfree.chart.axis.ValueAxis valueAxis42 = lineAndShapeRenderer20.getRangeAxis(categoryPlot39, (int) '4');
+        boolean boolean43 = categoryPlot39.isRangeCrosshairVisible();
+        lineAndShapeRenderer2.addChangeListener((org.jfree.chart.event.RendererChangeListener) categoryPlot39);
+        lineAndShapeRenderer2.setDefaultEntityRadius((int) '#');
+        lineAndShapeRenderer2.setSeriesCreateEntities(3, (java.lang.Boolean) false, true);
+        java.awt.Shape shape52 = lineAndShapeRenderer2.getLegendShape(11);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer56 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        boolean boolean58 = lineAndShapeRenderer56.isSeriesVisibleInLegend(1);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator60 = null;
+        lineAndShapeRenderer56.setSeriesURLGenerator(0, categoryURLGenerator60, false);
+        java.awt.Color color63 = org.jfree.chart.ChartColor.LIGHT_GREEN;
+        java.awt.color.ColorSpace colorSpace64 = color63.getColorSpace();
+        lineAndShapeRenderer56.setBaseFillPaint((java.awt.Paint) color63);
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer68 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator69 = null;
+        lineAndShapeRenderer68.setBaseURLGenerator(categoryURLGenerator69);
+        java.awt.Shape shape72 = lineAndShapeRenderer68.getLegendShape(0);
+        lineAndShapeRenderer68.setAutoPopulateSeriesStroke(false);
+        java.awt.Font font76 = lineAndShapeRenderer68.getSeriesItemLabelFont(0);
+        lineAndShapeRenderer68.setUseSeriesOffset(true);
+        java.awt.Shape shape80 = null;
+        lineAndShapeRenderer68.setSeriesShape((int) (short) 10, shape80, true);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition83 = lineAndShapeRenderer68.getBasePositiveItemLabelPosition();
+        lineAndShapeRenderer56.setBasePositiveItemLabelPosition(itemLabelPosition83);
+        java.awt.Stroke stroke85 = lineAndShapeRenderer56.getBaseOutlineStroke();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer89 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color90 = java.awt.Color.BLUE;
+        lineAndShapeRenderer89.setBaseItemLabelPaint((java.awt.Paint) color90);
+        java.awt.Stroke stroke93 = lineAndShapeRenderer89.getSeriesOutlineStroke((int) (short) 1);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition95 = lineAndShapeRenderer89.getSeriesNegativeItemLabelPosition((int) (short) 1);
+        lineAndShapeRenderer56.setSeriesNegativeItemLabelPosition(50, itemLabelPosition95, false);
+        lineAndShapeRenderer2.setSeriesNegativeItemLabelPosition((int) (byte) 100, itemLabelPosition95);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(itemLabelAnchor14);
+        org.junit.Assert.assertNotNull(color15);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(color21);
+        org.junit.Assert.assertNull(stroke24);
+        org.junit.Assert.assertTrue("'" + float28 + "' != '" + 0.0f + "'", float28 == 0.0f);
+        org.junit.Assert.assertNotNull(color33);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator38);
+        org.junit.Assert.assertNotNull(categoryItemRenderer40);
+        org.junit.Assert.assertNull(valueAxis42);
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
+        org.junit.Assert.assertNull(shape52);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + true + "'", boolean58 == true);
+        org.junit.Assert.assertNotNull(color63);
+        org.junit.Assert.assertNotNull(colorSpace64);
+        org.junit.Assert.assertNull(shape72);
+        org.junit.Assert.assertNull(font76);
+        org.junit.Assert.assertNotNull(itemLabelPosition83);
+        org.junit.Assert.assertNotNull(stroke85);
+        org.junit.Assert.assertNotNull(color90);
+        org.junit.Assert.assertNull(stroke93);
+        org.junit.Assert.assertNotNull(itemLabelPosition95);
+    }
+
+    @Test
+    public void test2499() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2499");
+        org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float2 = categoryAxis1.getTickMarkInsideLength();
+        categoryAxis1.setTickLabelsVisible(false);
+        org.jfree.chart.LegendItem legendItem6 = new org.jfree.chart.LegendItem("hi!");
+        java.awt.Color color10 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
+        legendItem6.setLinePaint((java.awt.Paint) color10);
+        boolean boolean12 = legendItem6.isShapeOutlineVisible();
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer15 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color16 = java.awt.Color.BLUE;
+        lineAndShapeRenderer15.setBaseItemLabelPaint((java.awt.Paint) color16);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator21 = lineAndShapeRenderer15.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.labels.ItemLabelPosition itemLabelPosition23 = lineAndShapeRenderer15.getSeriesPositiveItemLabelPosition((int) 'a');
+        java.awt.Shape shape25 = lineAndShapeRenderer15.lookupLegendShape(8);
+        legendItem6.setLine(shape25);
+        boolean boolean27 = categoryAxis1.equals((java.lang.Object) shape25);
+        org.jfree.chart.entity.ChartEntity chartEntity28 = new org.jfree.chart.entity.ChartEntity(shape25);
+        chartEntity28.setToolTipText("GradientPaintTransformType.HORIZONTAL");
+        java.lang.String str31 = chartEntity28.toString();
+        org.junit.Assert.assertTrue("'" + float2 + "' != '" + 0.0f + "'", float2 == 0.0f);
+        org.junit.Assert.assertNotNull(color10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertNotNull(color16);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator21);
+        org.junit.Assert.assertNotNull(itemLabelPosition23);
+        org.junit.Assert.assertNotNull(shape25);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "ChartEntity: tooltip = GradientPaintTransformType.HORIZONTAL" + "'", str31, "ChartEntity: tooltip = GradientPaintTransformType.HORIZONTAL");
+    }
+
+    @Test
+    public void test2500() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2500");
+        org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
+        int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
+        int int3 = defaultCategoryDataset0.getRowCount();
+        org.jfree.data.category.CategoryDataset categoryDataset4 = null;
+        org.jfree.chart.axis.CategoryAxis categoryAxis6 = new org.jfree.chart.axis.CategoryAxis("hi!");
+        float float7 = categoryAxis6.getTickMarkInsideLength();
+        org.jfree.chart.axis.ValueAxis valueAxis8 = null;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer11 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
+        java.awt.Color color12 = java.awt.Color.BLUE;
+        lineAndShapeRenderer11.setBaseItemLabelPaint((java.awt.Paint) color12);
+        org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator17 = lineAndShapeRenderer11.getItemLabelGenerator((int) '#', 0, false);
+        org.jfree.chart.plot.CategoryPlot categoryPlot18 = new org.jfree.chart.plot.CategoryPlot(categoryDataset4, categoryAxis6, valueAxis8, (org.jfree.chart.renderer.category.CategoryItemRenderer) lineAndShapeRenderer11);
+        org.jfree.chart.axis.AxisLocation axisLocation19 = org.jfree.chart.axis.AxisLocation.TOP_OR_LEFT;
+        categoryPlot18.setRangeAxisLocation(axisLocation19);
+        categoryPlot18.configureDomainAxes();
+        categoryPlot18.setBackgroundImageAlpha((float) 0);
+        boolean boolean24 = categoryPlot18.isDomainPannable();
+        defaultCategoryDataset0.addChangeListener((org.jfree.data.event.DatasetChangeListener) categoryPlot18);
+        org.junit.Assert.assertTrue("'" + int2 + "' != '" + (-1) + "'", int2 == (-1));
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertTrue("'" + float7 + "' != '" + 0.0f + "'", float7 == 0.0f);
+        org.junit.Assert.assertNotNull(color12);
+        org.junit.Assert.assertNull(categoryItemLabelGenerator17);
+        org.junit.Assert.assertNotNull(axisLocation19);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
     }
 }

@@ -208,57 +208,5 @@ public class ErrorTest0 {
         // during test generation this statement threw an exception of type java.lang.NullPointerException in error
         char[] charArray18 = textBuffer15.finishCurrentSegment();
     }
-
-    @Test
-    public void test14() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "ErrorTest0.test14");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
-        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
-        char[] charArray5 = textBuffer4.finishCurrentSegment();
-    }
-
-    @Test
-    public void test15() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "ErrorTest0.test15");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonParser6.configure(feature7, true);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec10 = jsonParser6.getCodec();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation11 = jsonParser6.getTokenLocation();
-        java.lang.Boolean boolean12 = jsonParser6.nextBooleanValue();
-        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
-        java.lang.Boolean boolean13 = jsonParser6.nextBooleanValue();
-    }
-
-    @Test
-    public void test16() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "ErrorTest0.test16");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        jsonParser6.close();
-        java.lang.Object obj8 = jsonParser6.getTypeId();
-        long long10 = jsonParser6.nextLongValue((long) (byte) 0);
-        java.lang.String str11 = jsonParser6.nextTextValue();
-        boolean boolean12 = jsonParser6.isClosed();
-        boolean boolean13 = jsonParser6.isExpectedStartArrayToken();
-        boolean boolean14 = jsonParser6.getValueAsBoolean();
-        com.fasterxml.jackson.core.JsonToken jsonToken15 = jsonParser6.nextValue();
-        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
-        java.lang.Boolean boolean16 = jsonParser6.nextBooleanValue();
-    }
 }
 

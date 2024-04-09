@@ -1,2 +1,3 @@
 TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
-org.apache.commons.jxpath.ri.model.dom.DOMNodePointer,LINE;BRANCH;EXCEPTION;WEAKMUTATION;OUTPUT;METHOD;METHODNOEXCEPTION;CBRANCH,0.6722563488258745,2194,1372
+org.apache.commons.jxpath.ri.model.dom.DOMNodePointer,BRANCH,0.7737704918032787,305,236
+org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer,BRANCH,0.6369426751592356,314,200

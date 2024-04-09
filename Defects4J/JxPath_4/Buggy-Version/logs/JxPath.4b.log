@@ -1,17 +1,17 @@
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 11:55:26  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 02:00:46  ######
 Mode: regression
 Parameters:
- -g randoop
+ -g evosuite
  -p JxPath
  -v 4b
  -n 1
  -b 240
  -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/modified_classes/4.src
  -s 1004
-Created test suite archive: JxPath-4b-randoop.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/JxPath_4/Buggy-Version/JxPath/randoop/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 11:59:44  ######
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:51:47  ######
+Created test suite archive: JxPath-4b-evosuite.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/Defects4J/JxPath_4/Buggy-Version/JxPath/evosuite/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 02:03:32  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 02:03:36  ######
 Mode: error-revealing
 Parameters:
  -g randoop
@@ -22,17 +22,4 @@ Parameters:
  -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/modified_classes/4.src
  -s 1004
 Test generator (randoop) did not generate any tests!
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:55:55  ######
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 23:55:59  ######
-Mode: regression
-Parameters:
- -g randoop
- -p JxPath
- -v 4b
- -n 1
- -b 240
- -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/modified_classes/4.src
- -s 1004
-Created test suite archive: JxPath-4b-randoop.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/JxPath_4/Buggy-Version/JxPath/randoop/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 00:00:17  ######
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 02:07:42  ######

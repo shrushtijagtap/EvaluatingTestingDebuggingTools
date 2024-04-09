@@ -1,4 +1,4 @@
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 17:53:07  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 19:46:48  ######
 Mode: regression
 Parameters:
  -g evosuite
@@ -9,5 +9,18 @@ Parameters:
  -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Mockito/modified_classes/1.src
  -s 1001
 Created test suite archive: Mockito-1b-evosuite.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J-Pending/Mockito_1/Buggy-Version/Mockito/evosuite/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 17:55:34  ######
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/Defects4J/Mockito_1/Buggy-Version/Mockito/evosuite/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 19:49:15  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 19:50:00  ######
+Mode: error-revealing
+Parameters:
+ -g randoop
+ -p Mockito
+ -v 1b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Mockito/modified_classes/1.src
+ -s 1001
+Created test suite archive: Mockito-1b-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/Defects4J/Mockito_1/Buggy-Version/Mockito/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 19:54:24  ######

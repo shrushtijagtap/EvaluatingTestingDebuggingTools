@@ -1,2 +1,2 @@
 TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
-com.fasterxml.jackson.core.json.UTF8StreamJsonParser,LINE;BRANCH;EXCEPTION;WEAKMUTATION;OUTPUT;METHOD;METHODNOEXCEPTION;CBRANCH,0.40442042972767084,5404,1487
+com.fasterxml.jackson.core.json.UTF8StreamJsonParser,BRANCH,0.3447452229299363,1256,435

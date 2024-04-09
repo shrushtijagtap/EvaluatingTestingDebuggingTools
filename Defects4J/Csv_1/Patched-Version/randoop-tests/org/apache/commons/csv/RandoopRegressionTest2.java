@@ -13,6 +13,283 @@ public class RandoopRegressionTest2 {
     public void test1001() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RandoopRegressionTest2.test1001");
+        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat24 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat26 = cSVFormat24.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat28 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser29 = new org.apache.commons.csv.CSVParser("", cSVFormat28);
+        java.lang.String[] strArray31 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat32 = cSVFormat28.withHeader(strArray31);
+        java.lang.String str33 = cSVFormat24.format(strArray31);
+        org.apache.commons.csv.CSVFormat cSVFormat34 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray31);
+        org.apache.commons.csv.CSVFormat cSVFormat36 = cSVFormat34.withSurroundingSpacesIgnored(true);
+        java.lang.String[] strArray37 = cSVFormat34.getHeader();
+        java.util.Map<java.lang.String, java.lang.Integer> strMap38 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord39 = new org.apache.commons.csv.CSVRecord(strArray37, strMap38);
+        org.apache.commons.csv.CSVFormat cSVFormat40 = new org.apache.commons.csv.CSVFormat('a', ',', ' ', '4', false, false, "[, , , hi!, hi!]", strArray37);
+        java.lang.String str41 = cSVFormat9.format(strArray37);
+        org.apache.commons.csv.CSVFormat cSVFormat42 = new org.apache.commons.csv.CSVFormat('a', '4', 'a', 'a', false, false, "Delimiter=<,> Encapsulator=<\">", strArray37);
+        boolean boolean43 = cSVFormat42.isEscaping();
+        org.junit.Assert.assertNotNull(cSVFormat7);
+        org.junit.Assert.assertNotNull(cSVFormat9);
+        org.junit.Assert.assertNotNull(cSVFormat24);
+        org.junit.Assert.assertNotNull(cSVFormat26);
+        org.junit.Assert.assertNotNull(cSVFormat28);
+        org.junit.Assert.assertNotNull(strArray31);
+        org.junit.Assert.assertNotNull(cSVFormat32);
+        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "hi!" + "'", str33, "hi!");
+        org.junit.Assert.assertNotNull(cSVFormat36);
+        org.junit.Assert.assertNotNull(strArray37);
+        org.junit.Assert.assertEquals("'" + str41 + "' != '" + "hi!" + "'", str41, "hi!");
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + true + "'", boolean43 == true);
+    }
+
+    @Test
+    public void test1002() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1002");
+        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser12 = new org.apache.commons.csv.CSVParser("", cSVFormat11);
+        java.lang.String[] strArray14 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat15 = cSVFormat11.withHeader(strArray14);
+        java.lang.String str16 = cSVFormat7.format(strArray14);
+        org.apache.commons.csv.CSVFormat cSVFormat17 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray14);
+        org.apache.commons.csv.CSVFormat cSVFormat19 = cSVFormat17.withDelimiter('\"');
+        org.apache.commons.csv.CSVFormat cSVFormat21 = cSVFormat17.withEscape('\ufffe');
+        org.apache.commons.csv.CSVFormat cSVFormat23 = cSVFormat17.withEscape(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat25 = cSVFormat17.withEmptyLinesIgnored(true);
+        org.apache.commons.csv.CSVFormat cSVFormat27 = cSVFormat25.withEmptyLinesIgnored(true);
+        org.apache.commons.csv.CSVFormat cSVFormat49 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat51 = cSVFormat49.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat53 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser54 = new org.apache.commons.csv.CSVParser("", cSVFormat53);
+        java.lang.String[] strArray56 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat57 = cSVFormat53.withHeader(strArray56);
+        java.lang.String str58 = cSVFormat49.format(strArray56);
+        org.apache.commons.csv.CSVFormat cSVFormat59 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray56);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap60 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord61 = new org.apache.commons.csv.CSVRecord(strArray56, strMap60);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap62 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord63 = new org.apache.commons.csv.CSVRecord(strArray56, strMap62);
+        java.util.Iterator<java.lang.String> strItor64 = cSVRecord63.iterator();
+        java.lang.String[] strArray65 = cSVRecord63.values();
+        org.apache.commons.csv.CSVFormat cSVFormat66 = new org.apache.commons.csv.CSVFormat('#', '#', '\"', '\t', true, false, "Delimiter=<\t> Encapsulator=<\"> EmptyLines:ignored SurroundingSpaces:ignored", strArray65);
+        org.apache.commons.csv.CSVFormat cSVFormat67 = new org.apache.commons.csv.CSVFormat('\ufffe', '\"', 'a', '\ufffe', true, true, "[, , , hi!, hi!]", strArray65);
+        org.apache.commons.csv.CSVFormat cSVFormat68 = cSVFormat27.withHeader(strArray65);
+        org.junit.Assert.assertNotNull(cSVFormat7);
+        org.junit.Assert.assertNotNull(cSVFormat9);
+        org.junit.Assert.assertNotNull(cSVFormat11);
+        org.junit.Assert.assertNotNull(strArray14);
+        org.junit.Assert.assertNotNull(cSVFormat15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "hi!" + "'", str16, "hi!");
+        org.junit.Assert.assertNotNull(cSVFormat19);
+        org.junit.Assert.assertNotNull(cSVFormat21);
+        org.junit.Assert.assertNotNull(cSVFormat23);
+        org.junit.Assert.assertNotNull(cSVFormat25);
+        org.junit.Assert.assertNotNull(cSVFormat27);
+        org.junit.Assert.assertNotNull(cSVFormat49);
+        org.junit.Assert.assertNotNull(cSVFormat51);
+        org.junit.Assert.assertNotNull(cSVFormat53);
+        org.junit.Assert.assertNotNull(strArray56);
+        org.junit.Assert.assertNotNull(cSVFormat57);
+        org.junit.Assert.assertEquals("'" + str58 + "' != '" + "hi!" + "'", str58, "hi!");
+        org.junit.Assert.assertNotNull(strItor64);
+        org.junit.Assert.assertNotNull(strArray65);
+        org.junit.Assert.assertNotNull(cSVFormat68);
+    }
+
+    @Test
+    public void test1003() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1003");
+        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser12 = new org.apache.commons.csv.CSVParser("", cSVFormat11);
+        java.lang.String[] strArray14 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat15 = cSVFormat11.withHeader(strArray14);
+        java.lang.String str16 = cSVFormat7.format(strArray14);
+        org.apache.commons.csv.CSVFormat cSVFormat17 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray14);
+        org.apache.commons.csv.CSVFormat cSVFormat19 = cSVFormat17.withSurroundingSpacesIgnored(true);
+        org.apache.commons.csv.CSVFormat cSVFormat21 = cSVFormat19.withEscape('\ufffe');
+        boolean boolean22 = cSVFormat19.isSurroundingSpacesIgnored();
+        org.junit.Assert.assertNotNull(cSVFormat7);
+        org.junit.Assert.assertNotNull(cSVFormat9);
+        org.junit.Assert.assertNotNull(cSVFormat11);
+        org.junit.Assert.assertNotNull(strArray14);
+        org.junit.Assert.assertNotNull(cSVFormat15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "hi!" + "'", str16, "hi!");
+        org.junit.Assert.assertNotNull(cSVFormat19);
+        org.junit.Assert.assertNotNull(cSVFormat21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+    }
+
+    @Test
+    public void test1004() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1004");
+        org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser5 = new org.apache.commons.csv.CSVParser("", cSVFormat4);
+        java.lang.String[] strArray7 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat8 = cSVFormat4.withHeader(strArray7);
+        java.lang.String str9 = cSVFormat0.format(strArray7);
+        org.apache.commons.csv.CSVFormat cSVFormat11 = cSVFormat0.withDelimiter(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat13 = cSVFormat0.withDelimiter('4');
+        org.apache.commons.csv.ExtendedBufferedReader extendedBufferedReader14 = null;
+        org.apache.commons.csv.CSVLexer cSVLexer15 = new org.apache.commons.csv.CSVLexer(cSVFormat0, extendedBufferedReader14);
+        char char16 = cSVFormat0.getEncapsulator();
+        org.junit.Assert.assertNotNull(cSVFormat0);
+        org.junit.Assert.assertNotNull(cSVFormat2);
+        org.junit.Assert.assertNotNull(cSVFormat4);
+        org.junit.Assert.assertNotNull(strArray7);
+        org.junit.Assert.assertNotNull(cSVFormat8);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "hi!" + "'", str9, "hi!");
+        org.junit.Assert.assertNotNull(cSVFormat11);
+        org.junit.Assert.assertNotNull(cSVFormat13);
+        org.junit.Assert.assertTrue("'" + char16 + "' != '" + '\"' + "'", char16 == '\"');
+    }
+
+    @Test
+    public void test1005() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1005");
+        org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat2.withCommentStart(' ');
+        char char5 = cSVFormat4.getEscape();
+        org.apache.commons.csv.ExtendedBufferedReader extendedBufferedReader6 = null;
+        org.apache.commons.csv.CSVLexer cSVLexer7 = new org.apache.commons.csv.CSVLexer(cSVFormat4, extendedBufferedReader6);
+        boolean boolean8 = cSVFormat4.isCommentingEnabled();
+        org.apache.commons.csv.CSVFormat cSVFormat10 = cSVFormat4.withCommentStart('#');
+        org.apache.commons.csv.CSVFormat cSVFormat12 = org.apache.commons.csv.CSVFormat.EXCEL;
+        boolean boolean13 = cSVFormat12.isEmptyLinesIgnored();
+        org.apache.commons.csv.CSVParser cSVParser14 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat12);
+        java.lang.String str15 = cSVFormat12.getLineSeparator();
+        org.apache.commons.csv.CSVFormat cSVFormat17 = cSVFormat12.withDelimiter('4');
+        cSVFormat17.validate();
+        java.lang.String str19 = cSVFormat17.toString();
+        org.apache.commons.csv.CSVFormat cSVFormat21 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser22 = new org.apache.commons.csv.CSVParser("", cSVFormat21);
+        java.lang.String[] strArray24 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat25 = cSVFormat21.withHeader(strArray24);
+        org.apache.commons.csv.CSVFormat cSVFormat26 = cSVFormat17.withHeader(strArray24);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap27 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord28 = new org.apache.commons.csv.CSVRecord(strArray24, strMap27);
+        java.lang.String str29 = cSVFormat10.format(strArray24);
+        org.apache.commons.csv.CSVFormat cSVFormat31 = cSVFormat10.withLineSeparator("Delimiter=< > Encapsulator=<\"> EmptyLines:ignored");
+        org.apache.commons.csv.CSVFormat cSVFormat33 = cSVFormat31.withSurroundingSpacesIgnored(true);
+        org.apache.commons.csv.CSVFormat cSVFormat35 = cSVFormat31.withLineSeparator("Delimiter=<4> Encapsulator=<\">");
+        org.apache.commons.csv.CSVFormat cSVFormat50 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat52 = cSVFormat50.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat54 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser55 = new org.apache.commons.csv.CSVParser("", cSVFormat54);
+        java.lang.String[] strArray57 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat58 = cSVFormat54.withHeader(strArray57);
+        java.lang.String str59 = cSVFormat50.format(strArray57);
+        org.apache.commons.csv.CSVFormat cSVFormat60 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray57);
+        java.lang.String[] strArray61 = cSVFormat60.getHeader();
+        org.apache.commons.csv.CSVFormat cSVFormat62 = new org.apache.commons.csv.CSVFormat('\"', ',', '#', '#', false, true, "Delimiter=< > Encapsulator=<\"> EmptyLines:ignored", strArray61);
+        org.apache.commons.csv.CSVFormat cSVFormat63 = cSVFormat31.withHeader(strArray61);
+        org.junit.Assert.assertNotNull(cSVFormat0);
+        org.junit.Assert.assertNotNull(cSVFormat2);
+        org.junit.Assert.assertNotNull(cSVFormat4);
+        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\ufffe' + "'", char5 == '\ufffe');
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(cSVFormat10);
+        org.junit.Assert.assertNotNull(cSVFormat12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "\r\n" + "'", str15, "\r\n");
+        org.junit.Assert.assertNotNull(cSVFormat17);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "Delimiter=<4> Encapsulator=<\">" + "'", str19, "Delimiter=<4> Encapsulator=<\">");
+        org.junit.Assert.assertNotNull(cSVFormat21);
+        org.junit.Assert.assertNotNull(strArray24);
+        org.junit.Assert.assertNotNull(cSVFormat25);
+        org.junit.Assert.assertNotNull(cSVFormat26);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "hi!" + "'", str29, "hi!");
+        org.junit.Assert.assertNotNull(cSVFormat31);
+        org.junit.Assert.assertNotNull(cSVFormat33);
+        org.junit.Assert.assertNotNull(cSVFormat35);
+        org.junit.Assert.assertNotNull(cSVFormat50);
+        org.junit.Assert.assertNotNull(cSVFormat52);
+        org.junit.Assert.assertNotNull(cSVFormat54);
+        org.junit.Assert.assertNotNull(strArray57);
+        org.junit.Assert.assertNotNull(cSVFormat58);
+        org.junit.Assert.assertEquals("'" + str59 + "' != '" + "hi!" + "'", str59, "hi!");
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(cSVFormat63);
+    }
+
+    @Test
+    public void test1006() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1006");
+        org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.MYSQL;
+        org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat10 = cSVFormat8.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat12 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser13 = new org.apache.commons.csv.CSVParser("", cSVFormat12);
+        java.lang.String[] strArray15 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat16 = cSVFormat12.withHeader(strArray15);
+        java.lang.String str17 = cSVFormat8.format(strArray15);
+        org.apache.commons.csv.CSVFormat cSVFormat18 = new org.apache.commons.csv.CSVFormat('#', ' ', ' ', 'a', true, true, "\"\",,,hi!,hi!,", strArray15);
+        java.lang.String str19 = cSVFormat0.format(strArray15);
+        org.apache.commons.csv.CSVFormat cSVFormat21 = cSVFormat0.withEmptyLinesIgnored(false);
+        org.apache.commons.csv.CSVFormat cSVFormat29 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVFormat cSVFormat31 = cSVFormat29.withCommentStart(' ');
+        org.apache.commons.csv.CSVFormat cSVFormat33 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser34 = new org.apache.commons.csv.CSVParser("", cSVFormat33);
+        java.lang.String[] strArray36 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat37 = cSVFormat33.withHeader(strArray36);
+        java.lang.String str38 = cSVFormat29.format(strArray36);
+        org.apache.commons.csv.CSVFormat cSVFormat39 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray36);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap40 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord41 = new org.apache.commons.csv.CSVRecord(strArray36, strMap40);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap42 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord43 = new org.apache.commons.csv.CSVRecord(strArray36, strMap42);
+        java.util.Iterator<java.lang.String> strItor44 = cSVRecord43.iterator();
+        java.lang.String[] strArray45 = cSVRecord43.values();
+        java.util.Map<java.lang.String, java.lang.Integer> strMap46 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord47 = new org.apache.commons.csv.CSVRecord(strArray45, strMap46);
+        org.apache.commons.csv.CSVFormat cSVFormat48 = cSVFormat21.withHeader(strArray45);
+        org.apache.commons.csv.CSVFormat cSVFormat50 = cSVFormat48.withCommentStart(',');
+        org.apache.commons.csv.CSVFormat cSVFormat52 = cSVFormat48.withEncapsulator('#');
+        org.apache.commons.csv.CSVFormat cSVFormat54 = cSVFormat48.withLineSeparator("\"\"   hi! hi!");
+        org.apache.commons.csv.ExtendedBufferedReader extendedBufferedReader55 = null;
+        org.apache.commons.csv.CSVLexer cSVLexer56 = new org.apache.commons.csv.CSVLexer(cSVFormat48, extendedBufferedReader55);
+        boolean boolean57 = cSVFormat48.isSurroundingSpacesIgnored();
+        org.junit.Assert.assertNotNull(cSVFormat0);
+        org.junit.Assert.assertNotNull(cSVFormat8);
+        org.junit.Assert.assertNotNull(cSVFormat10);
+        org.junit.Assert.assertNotNull(cSVFormat12);
+        org.junit.Assert.assertNotNull(strArray15);
+        org.junit.Assert.assertNotNull(cSVFormat16);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "hi!" + "'", str17, "hi!");
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "hi!" + "'", str19, "hi!");
+        org.junit.Assert.assertNotNull(cSVFormat21);
+        org.junit.Assert.assertNotNull(cSVFormat29);
+        org.junit.Assert.assertNotNull(cSVFormat31);
+        org.junit.Assert.assertNotNull(cSVFormat33);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(cSVFormat37);
+        org.junit.Assert.assertEquals("'" + str38 + "' != '" + "hi!" + "'", str38, "hi!");
+        org.junit.Assert.assertNotNull(strItor44);
+        org.junit.Assert.assertNotNull(strArray45);
+        org.junit.Assert.assertNotNull(cSVFormat48);
+        org.junit.Assert.assertNotNull(cSVFormat50);
+        org.junit.Assert.assertNotNull(cSVFormat52);
+        org.junit.Assert.assertNotNull(cSVFormat54);
+        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
+    }
+
+    @Test
+    public void test1007() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1007");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         java.lang.String[] strArray4 = new java.lang.String[] { "hi!" };
@@ -64,9 +341,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1002() throws Throwable {
+    public void test1008() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1002");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1008");
         org.apache.commons.csv.CSVFormat cSVFormat14 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat16 = cSVFormat14.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat18 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -95,9 +372,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1003() throws Throwable {
+    public void test1009() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1003");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1009");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat0.withEscape('a');
@@ -140,9 +417,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1004() throws Throwable {
+    public void test1010() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1004");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1010");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         char char4 = cSVFormat3.getCommentStart();
@@ -155,9 +432,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1005() throws Throwable {
+    public void test1011() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1005");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1011");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -186,9 +463,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1006() throws Throwable {
+    public void test1012() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1006");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1012");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat24 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -243,9 +520,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1007() throws Throwable {
+    public void test1013() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1007");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1013");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = cSVFormat3.withCommentStart(' ');
@@ -270,9 +547,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1008() throws Throwable {
+    public void test1014() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1008");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1014");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -299,9 +576,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1009() throws Throwable {
+    public void test1015() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1009");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1015");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat24 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -354,9 +631,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1010() throws Throwable {
+    public void test1016() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1010");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1016");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -389,9 +666,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1011() throws Throwable {
+    public void test1017() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1011");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1017");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.MYSQL;
         org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat10 = cSVFormat8.withCommentStart(' ');
@@ -423,9 +700,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1012() throws Throwable {
+    public void test1018() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1012");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1018");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -451,9 +728,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1013() throws Throwable {
+    public void test1019() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1013");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1019");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -479,9 +756,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1014() throws Throwable {
+    public void test1020() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1014");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1020");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -510,9 +787,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1015() throws Throwable {
+    public void test1021() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1015");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1021");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -538,9 +815,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1016() throws Throwable {
+    public void test1022() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1016");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1022");
         org.apache.commons.csv.CSVFormat cSVFormat22 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat24 = cSVFormat22.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat26 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -626,9 +903,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1017() throws Throwable {
+    public void test1023() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1017");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1023");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -682,9 +959,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1018() throws Throwable {
+    public void test1024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1018");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1024");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -728,9 +1005,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1019() throws Throwable {
+    public void test1025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1019");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1025");
         org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat10 = cSVFormat8.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat12 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -761,9 +1038,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1020() throws Throwable {
+    public void test1026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1020");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1026");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -789,9 +1066,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1021() throws Throwable {
+    public void test1027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1021");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1027");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -810,9 +1087,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1022() throws Throwable {
+    public void test1028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1022");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1028");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -841,9 +1118,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1023() throws Throwable {
+    public void test1029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1023");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1029");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -874,9 +1151,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1024() throws Throwable {
+    public void test1030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1024");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1030");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -907,9 +1184,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1025() throws Throwable {
+    public void test1031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1025");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1031");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat1.withEscape('a');
@@ -961,9 +1238,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1026() throws Throwable {
+    public void test1032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1026");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1032");
         org.apache.commons.csv.Token token0 = new org.apache.commons.csv.Token();
         token0.isReady = false;
         boolean boolean3 = token0.isReady;
@@ -1044,9 +1321,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1027() throws Throwable {
+    public void test1033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1027");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1033");
         org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.MYSQL;
         org.apache.commons.csv.CSVFormat cSVFormat16 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat18 = cSVFormat16.withCommentStart(' ');
@@ -1074,9 +1351,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1028() throws Throwable {
+    public void test1034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1028");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1034");
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("", cSVFormat2);
         char char4 = cSVFormat2.getEncapsulator();
@@ -1088,9 +1365,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1029() throws Throwable {
+    public void test1035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1029");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1035");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat2.withCommentStart(' ');
@@ -1143,9 +1420,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1030() throws Throwable {
+    public void test1036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1030");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1036");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1175,9 +1452,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1031() throws Throwable {
+    public void test1037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1031");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1037");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1213,9 +1490,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1032() throws Throwable {
+    public void test1038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1032");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1038");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         org.apache.commons.csv.CSVRecord cSVRecord3 = cSVParser2.getRecord();
@@ -1230,9 +1507,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1033() throws Throwable {
+    public void test1039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1033");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1039");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = cSVFormat3.withCommentStart(' ');
@@ -1251,9 +1528,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1034() throws Throwable {
+    public void test1040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1034");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1040");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1301,9 +1578,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1035() throws Throwable {
+    public void test1041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1035");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1041");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1338,9 +1615,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1036() throws Throwable {
+    public void test1042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1036");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1042");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         java.lang.String str1 = cSVFormat0.getLineSeparator();
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1442,9 +1719,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1037() throws Throwable {
+    public void test1043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1037");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1043");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.MYSQL;
         org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat10 = cSVFormat8.withCommentStart(' ');
@@ -1524,9 +1801,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1038() throws Throwable {
+    public void test1044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1038");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1044");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat2.withCommentStart(' ');
@@ -1558,9 +1835,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1039() throws Throwable {
+    public void test1045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1039");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1045");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1591,9 +1868,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1040() throws Throwable {
+    public void test1046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1040");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1046");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = cSVFormat3.withCommentStart(' ');
@@ -1608,9 +1885,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1041() throws Throwable {
+    public void test1047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1041");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1047");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1642,9 +1919,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1042() throws Throwable {
+    public void test1048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1042");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1048");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1674,9 +1951,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1043() throws Throwable {
+    public void test1049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1043");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1049");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1700,9 +1977,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1044() throws Throwable {
+    public void test1050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1044");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1050");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1753,9 +2030,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1045() throws Throwable {
+    public void test1051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1045");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1051");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         int int3 = cSVParser2.getLineNumber();
@@ -1770,9 +2047,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1046() throws Throwable {
+    public void test1052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1046");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1052");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -1789,9 +2066,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1047() throws Throwable {
+    public void test1053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1047");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1053");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1819,9 +2096,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1048() throws Throwable {
+    public void test1054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1048");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1054");
         java.io.Reader reader0 = null;
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
@@ -1877,9 +2154,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1049() throws Throwable {
+    public void test1055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1049");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1055");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -1939,9 +2216,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1050() throws Throwable {
+    public void test1056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1050");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1056");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -1972,9 +2249,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1051() throws Throwable {
+    public void test1057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1051");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1057");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.TDF;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("Delimiter=<4> Encapsulator=<\">", cSVFormat1);
         int int3 = cSVParser2.getLineNumber();
@@ -1987,9 +2264,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1052() throws Throwable {
+    public void test1058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1052");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1058");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2044,9 +2321,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1053() throws Throwable {
+    public void test1059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1053");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1059");
         org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat10 = cSVFormat8.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat12 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2085,9 +2362,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1054() throws Throwable {
+    public void test1060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1054");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1060");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2115,9 +2392,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1055() throws Throwable {
+    public void test1061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1055");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1061");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2141,9 +2418,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1056() throws Throwable {
+    public void test1062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1056");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1062");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2167,9 +2444,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1057() throws Throwable {
+    public void test1063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1057");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1063");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         org.apache.commons.csv.CSVRecord cSVRecord3 = cSVParser2.getRecord();
@@ -2184,9 +2461,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1058() throws Throwable {
+    public void test1064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1058");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1064");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2208,9 +2485,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1059() throws Throwable {
+    public void test1065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1059");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1065");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2240,9 +2517,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1060() throws Throwable {
+    public void test1066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1060");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1066");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         char char3 = cSVFormat1.getEncapsulator();
@@ -2262,9 +2539,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1061() throws Throwable {
+    public void test1067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1061");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1067");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2295,9 +2572,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1062() throws Throwable {
+    public void test1068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1062");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1068");
         java.io.Reader reader0 = null;
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
@@ -2321,9 +2598,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1063() throws Throwable {
+    public void test1069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1063");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1069");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2357,9 +2634,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1064() throws Throwable {
+    public void test1070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1064");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1070");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2391,9 +2668,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1065() throws Throwable {
+    public void test1071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1065");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1071");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = cSVFormat3.withCommentStart(' ');
@@ -2426,9 +2703,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1066() throws Throwable {
+    public void test1072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1066");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1072");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat2.withCommentStart(' ');
@@ -2480,9 +2757,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1067() throws Throwable {
+    public void test1073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1067");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1073");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         org.apache.commons.csv.ExtendedBufferedReader extendedBufferedReader3 = null;
@@ -2586,9 +2863,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1068() throws Throwable {
+    public void test1074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1068");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1074");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat0.withCommentStart('\ufffe');
@@ -2626,9 +2903,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1069() throws Throwable {
+    public void test1075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1069");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1075");
         java.io.Reader reader0 = null;
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
@@ -2684,9 +2961,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1070() throws Throwable {
+    public void test1076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1070");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1076");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2717,9 +2994,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1071() throws Throwable {
+    public void test1077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1071");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1077");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.MYSQL;
         org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat10 = cSVFormat8.withCommentStart(' ');
@@ -2751,9 +3028,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1072() throws Throwable {
+    public void test1078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1072");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1078");
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("", cSVFormat2);
         java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
@@ -2779,9 +3056,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1073() throws Throwable {
+    public void test1079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1073");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1079");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.MYSQL;
         org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat10 = cSVFormat8.withCommentStart(' ');
@@ -2843,9 +3120,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1074() throws Throwable {
+    public void test1080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1074");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1080");
         org.apache.commons.csv.CSVFormat cSVFormat8 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean9 = cSVFormat8.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser10 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat8);
@@ -2895,9 +3172,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1075() throws Throwable {
+    public void test1081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1075");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1081");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2950,9 +3227,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1076() throws Throwable {
+    public void test1082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1076");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1082");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -2986,9 +3263,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1077() throws Throwable {
+    public void test1083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1077");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1083");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3013,9 +3290,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1078() throws Throwable {
+    public void test1084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1078");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1084");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat0.withEscape('a');
@@ -3064,9 +3341,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1079() throws Throwable {
+    public void test1085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1079");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1085");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3089,9 +3366,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1080() throws Throwable {
+    public void test1086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1080");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1086");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3173,9 +3450,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1081() throws Throwable {
+    public void test1087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1081");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1087");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.TDF;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("Delimiter=<4> Encapsulator=<\">", cSVFormat1);
         java.util.Iterator<org.apache.commons.csv.CSVRecord> cSVRecordItor3 = cSVParser2.iterator();
@@ -3188,9 +3465,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1082() throws Throwable {
+    public void test1088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1082");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1088");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         java.lang.String str1 = cSVFormat0.getLineSeparator();
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat0.withEscape('\"');
@@ -3235,9 +3512,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1083() throws Throwable {
+    public void test1089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1083");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1089");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -3319,9 +3596,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1084() throws Throwable {
+    public void test1090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1084");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1090");
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("", cSVFormat2);
         java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
@@ -3343,9 +3620,54 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1085() throws Throwable {
+    public void test1091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1085");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1091");
+        org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
+        boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
+        org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat0.withEscape('a');
+        org.apache.commons.csv.CSVFormat cSVFormat5 = cSVFormat3.withEscape('#');
+        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.EXCEL;
+        boolean boolean8 = cSVFormat7.isEmptyLinesIgnored();
+        org.apache.commons.csv.CSVParser cSVParser9 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat7);
+        java.lang.String str10 = cSVFormat7.getLineSeparator();
+        org.apache.commons.csv.CSVFormat cSVFormat12 = cSVFormat7.withDelimiter('4');
+        cSVFormat12.validate();
+        java.lang.String str14 = cSVFormat12.toString();
+        org.apache.commons.csv.CSVFormat cSVFormat16 = org.apache.commons.csv.CSVFormat.DEFAULT;
+        org.apache.commons.csv.CSVParser cSVParser17 = new org.apache.commons.csv.CSVParser("", cSVFormat16);
+        java.lang.String[] strArray19 = new java.lang.String[] { "hi!" };
+        org.apache.commons.csv.CSVFormat cSVFormat20 = cSVFormat16.withHeader(strArray19);
+        org.apache.commons.csv.CSVFormat cSVFormat21 = cSVFormat12.withHeader(strArray19);
+        java.util.Map<java.lang.String, java.lang.Integer> strMap22 = null;
+        org.apache.commons.csv.CSVRecord cSVRecord23 = new org.apache.commons.csv.CSVRecord(strArray19, strMap22);
+        org.apache.commons.csv.CSVFormat cSVFormat24 = cSVFormat3.withHeader(strArray19);
+        boolean boolean25 = cSVFormat3.isEmptyLinesIgnored();
+        char char26 = cSVFormat3.getEscape();
+        org.apache.commons.csv.ExtendedBufferedReader extendedBufferedReader27 = null;
+        org.apache.commons.csv.CSVLexer cSVLexer28 = new org.apache.commons.csv.CSVLexer(cSVFormat3, extendedBufferedReader27);
+        org.junit.Assert.assertNotNull(cSVFormat0);
+        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
+        org.junit.Assert.assertNotNull(cSVFormat3);
+        org.junit.Assert.assertNotNull(cSVFormat5);
+        org.junit.Assert.assertNotNull(cSVFormat7);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "\r\n" + "'", str10, "\r\n");
+        org.junit.Assert.assertNotNull(cSVFormat12);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "Delimiter=<4> Encapsulator=<\">" + "'", str14, "Delimiter=<4> Encapsulator=<\">");
+        org.junit.Assert.assertNotNull(cSVFormat16);
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(cSVFormat20);
+        org.junit.Assert.assertNotNull(cSVFormat21);
+        org.junit.Assert.assertNotNull(cSVFormat24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertTrue("'" + char26 + "' != '" + 'a' + "'", char26 == 'a');
+    }
+
+    @Test
+    public void test1092() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1092");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat0.withEscape('a');
@@ -3390,9 +3712,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1086() throws Throwable {
+    public void test1093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1086");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1093");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat0.withEscape('a');
@@ -3433,9 +3755,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1087() throws Throwable {
+    public void test1094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1087");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1094");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3463,9 +3785,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1088() throws Throwable {
+    public void test1095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1088");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1095");
         org.apache.commons.csv.CSVFormat cSVFormat21 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat23 = cSVFormat21.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat25 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3493,9 +3815,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1089() throws Throwable {
+    public void test1096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1089");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1096");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3525,9 +3847,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1090() throws Throwable {
+    public void test1097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1090");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1097");
         java.lang.String[] strArray11 = new java.lang.String[] { "\"\"   hi! hi!", "hi!", "", "\"\"   hi! hi!" };
         org.apache.commons.csv.CSVFormat cSVFormat12 = new org.apache.commons.csv.CSVFormat('#', '\"', '\ufffe', '4', false, true, "hi!", strArray11);
         java.lang.String[] strArray13 = null;
@@ -3556,9 +3878,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1091() throws Throwable {
+    public void test1098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1091");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1098");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3594,9 +3916,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1092() throws Throwable {
+    public void test1099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1092");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1099");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -3624,9 +3946,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1093() throws Throwable {
+    public void test1100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1093");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1100");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3656,9 +3978,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1094() throws Throwable {
+    public void test1101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1094");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1101");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3688,9 +4010,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1095() throws Throwable {
+    public void test1102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1095");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1102");
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("", cSVFormat2);
         java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
@@ -3714,9 +4036,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1096() throws Throwable {
+    public void test1103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1096");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1103");
         org.apache.commons.csv.CSVFormat cSVFormat14 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat16 = cSVFormat14.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat18 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3747,9 +4069,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1097() throws Throwable {
+    public void test1104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1097");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1104");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -3777,9 +4099,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1098() throws Throwable {
+    public void test1105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1098");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1105");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3807,9 +4129,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1099() throws Throwable {
+    public void test1106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1099");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1106");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3838,9 +4160,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1100() throws Throwable {
+    public void test1107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1100");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1107");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         int int3 = cSVParser2.getLineNumber();
@@ -3855,9 +4177,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1101() throws Throwable {
+    public void test1108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1101");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1108");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3886,9 +4208,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1102() throws Throwable {
+    public void test1109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1102");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1109");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3920,9 +4242,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1103() throws Throwable {
+    public void test1110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1103");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1110");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -3972,9 +4294,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1104() throws Throwable {
+    public void test1111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1104");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1111");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4006,9 +4328,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1105() throws Throwable {
+    public void test1112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1105");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1112");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4040,9 +4362,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1106() throws Throwable {
+    public void test1113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1106");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1113");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat24 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4102,9 +4424,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1107() throws Throwable {
+    public void test1114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1107");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1114");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat2.withCommentStart(' ');
@@ -4136,9 +4458,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1108() throws Throwable {
+    public void test1115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1108");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1115");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat1);
@@ -4166,9 +4488,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1109() throws Throwable {
+    public void test1116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1109");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1116");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         char char3 = cSVFormat1.getEncapsulator();
@@ -4210,9 +4532,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1110() throws Throwable {
+    public void test1117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1110");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1117");
         org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("", cSVFormat2);
         java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
@@ -4234,9 +4556,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1111() throws Throwable {
+    public void test1118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1111");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1118");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4267,9 +4589,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1112() throws Throwable {
+    public void test1119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1112");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1119");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("", cSVFormat1);
         int int3 = cSVParser2.getLineNumber();
@@ -4284,9 +4606,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1113() throws Throwable {
+    public void test1120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1113");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1120");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4312,9 +4634,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1114() throws Throwable {
+    public void test1121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1114");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1121");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4352,9 +4674,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1115() throws Throwable {
+    public void test1122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1115");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1122");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = cSVFormat3.withEmptyLinesIgnored(true);
@@ -4375,9 +4697,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1116() throws Throwable {
+    public void test1123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1116");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1123");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat2.withEmptyLinesIgnored(true);
@@ -4419,9 +4741,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1117() throws Throwable {
+    public void test1124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1117");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1124");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4452,9 +4774,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1118() throws Throwable {
+    public void test1125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1118");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1125");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4491,9 +4813,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1119() throws Throwable {
+    public void test1126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1119");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1126");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
         boolean boolean2 = cSVFormat1.isEmptyLinesIgnored();
         org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat1.withEscape('a');
@@ -4536,9 +4858,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1120() throws Throwable {
+    public void test1127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1120");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1127");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4567,9 +4889,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1121() throws Throwable {
+    public void test1128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1121");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1128");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4619,9 +4941,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1122() throws Throwable {
+    public void test1129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1122");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1129");
         org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4651,9 +4973,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1123() throws Throwable {
+    public void test1130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1123");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1130");
         org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -4748,9 +5070,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1124() throws Throwable {
+    public void test1131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1124");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1131");
         org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
         org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
         org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat2.withCommentStart(' ');
@@ -4856,506 +5178,6 @@ public class RandoopRegressionTest2 {
         org.junit.Assert.assertNotNull(cSVFormat92);
         org.junit.Assert.assertNotNull(cSVFormat93);
         org.junit.Assert.assertNotNull(cSVFormat94);
-    }
-
-    @Test
-    public void test1125() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1125");
-        org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat5 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser6 = new org.apache.commons.csv.CSVParser("", cSVFormat5);
-        java.lang.String[] strArray8 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat5.withHeader(strArray8);
-        java.lang.String str10 = cSVFormat1.format(strArray8);
-        org.apache.commons.csv.CSVFormat cSVFormat12 = cSVFormat1.withDelimiter(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat14 = cSVFormat1.withEscape(' ');
-        char char15 = cSVFormat14.getDelimiter();
-        org.apache.commons.csv.CSVFormat cSVFormat17 = cSVFormat14.withSurroundingSpacesIgnored(true);
-        org.apache.commons.csv.CSVFormat cSVFormat19 = cSVFormat14.withEscape(' ');
-        cSVFormat19.validate();
-        org.apache.commons.csv.CSVParser cSVParser21 = new org.apache.commons.csv.CSVParser("[Delimiter=<, > Encapsulator=<\"> CommentStart=< > EmptyLines:ignored]", cSVFormat19);
-        java.util.List<org.apache.commons.csv.CSVRecord> cSVRecordList22 = cSVParser21.getRecords();
-        org.junit.Assert.assertNotNull(cSVFormat1);
-        org.junit.Assert.assertNotNull(cSVFormat3);
-        org.junit.Assert.assertNotNull(cSVFormat5);
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(cSVFormat9);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "hi!" + "'", str10, "hi!");
-        org.junit.Assert.assertNotNull(cSVFormat12);
-        org.junit.Assert.assertNotNull(cSVFormat14);
-        org.junit.Assert.assertTrue("'" + char15 + "' != '" + ',' + "'", char15 == ',');
-        org.junit.Assert.assertNotNull(cSVFormat17);
-        org.junit.Assert.assertNotNull(cSVFormat19);
-        org.junit.Assert.assertNotNull(cSVRecordList22);
-    }
-
-    @Test
-    public void test1126() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1126");
-        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser12 = new org.apache.commons.csv.CSVParser("", cSVFormat11);
-        java.lang.String[] strArray14 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat15 = cSVFormat11.withHeader(strArray14);
-        java.lang.String str16 = cSVFormat7.format(strArray14);
-        org.apache.commons.csv.CSVFormat cSVFormat17 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray14);
-        org.apache.commons.csv.CSVFormat cSVFormat19 = cSVFormat17.withSurroundingSpacesIgnored(true);
-        boolean boolean20 = cSVFormat19.isCommentingEnabled();
-        org.apache.commons.csv.CSVFormat cSVFormat22 = cSVFormat19.withLineSeparator("\r\n");
-        org.apache.commons.csv.CSVFormat cSVFormat24 = cSVFormat19.withLineSeparator("");
-        java.io.Reader reader25 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Iterable<org.apache.commons.csv.CSVRecord> cSVRecordIterable26 = cSVFormat24.parse(reader25);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The encapsulator character and the delimiter cannot be the same (\"#\")");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(cSVFormat7);
-        org.junit.Assert.assertNotNull(cSVFormat9);
-        org.junit.Assert.assertNotNull(cSVFormat11);
-        org.junit.Assert.assertNotNull(strArray14);
-        org.junit.Assert.assertNotNull(cSVFormat15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "hi!" + "'", str16, "hi!");
-        org.junit.Assert.assertNotNull(cSVFormat19);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
-        org.junit.Assert.assertNotNull(cSVFormat22);
-        org.junit.Assert.assertNotNull(cSVFormat24);
-    }
-
-    @Test
-    public void test1127() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1127");
-        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser12 = new org.apache.commons.csv.CSVParser("", cSVFormat11);
-        java.lang.String[] strArray14 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat15 = cSVFormat11.withHeader(strArray14);
-        java.lang.String str16 = cSVFormat7.format(strArray14);
-        org.apache.commons.csv.CSVFormat cSVFormat17 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray14);
-        org.apache.commons.csv.CSVFormat cSVFormat19 = cSVFormat17.withLineSeparator("hi!");
-        char char20 = cSVFormat17.getDelimiter();
-        boolean boolean21 = cSVFormat17.isCommentingEnabled();
-        char char22 = cSVFormat17.getEncapsulator();
-        org.apache.commons.csv.CSVFormat cSVFormat24 = cSVFormat17.withSurroundingSpacesIgnored(false);
-        org.apache.commons.csv.CSVFormat cSVFormat26 = cSVFormat17.withEncapsulator('4');
-        org.junit.Assert.assertNotNull(cSVFormat7);
-        org.junit.Assert.assertNotNull(cSVFormat9);
-        org.junit.Assert.assertNotNull(cSVFormat11);
-        org.junit.Assert.assertNotNull(strArray14);
-        org.junit.Assert.assertNotNull(cSVFormat15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "hi!" + "'", str16, "hi!");
-        org.junit.Assert.assertNotNull(cSVFormat19);
-        org.junit.Assert.assertTrue("'" + char20 + "' != '" + '#' + "'", char20 == '#');
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
-        org.junit.Assert.assertTrue("'" + char22 + "' != '" + '#' + "'", char22 == '#');
-        org.junit.Assert.assertNotNull(cSVFormat24);
-        org.junit.Assert.assertNotNull(cSVFormat26);
-    }
-
-    @Test
-    public void test1128() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1128");
-        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat11 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser12 = new org.apache.commons.csv.CSVParser("", cSVFormat11);
-        java.lang.String[] strArray14 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat15 = cSVFormat11.withHeader(strArray14);
-        java.lang.String str16 = cSVFormat7.format(strArray14);
-        org.apache.commons.csv.CSVFormat cSVFormat17 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray14);
-        org.apache.commons.csv.CSVFormat cSVFormat19 = cSVFormat17.withSurroundingSpacesIgnored(true);
-        boolean boolean20 = cSVFormat19.isCommentingEnabled();
-        org.apache.commons.csv.CSVFormat cSVFormat22 = cSVFormat19.withLineSeparator("\r\n");
-        org.apache.commons.csv.CSVFormat cSVFormat24 = cSVFormat19.withLineSeparator("");
-        org.apache.commons.csv.CSVFormat cSVFormat26 = cSVFormat19.withCommentStart('a');
-        char char27 = cSVFormat19.getCommentStart();
-        java.io.Reader reader28 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Iterable<org.apache.commons.csv.CSVRecord> cSVRecordIterable29 = cSVFormat19.parse(reader28);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The encapsulator character and the delimiter cannot be the same (\"#\")");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(cSVFormat7);
-        org.junit.Assert.assertNotNull(cSVFormat9);
-        org.junit.Assert.assertNotNull(cSVFormat11);
-        org.junit.Assert.assertNotNull(strArray14);
-        org.junit.Assert.assertNotNull(cSVFormat15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "hi!" + "'", str16, "hi!");
-        org.junit.Assert.assertNotNull(cSVFormat19);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
-        org.junit.Assert.assertNotNull(cSVFormat22);
-        org.junit.Assert.assertNotNull(cSVFormat24);
-        org.junit.Assert.assertNotNull(cSVFormat26);
-        org.junit.Assert.assertTrue("'" + char27 + "' != '" + '4' + "'", char27 == '4');
-    }
-
-    @Test
-    public void test1129() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1129");
-        org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.TDF;
-        org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat1.withEncapsulator(',');
-        char char4 = cSVFormat3.getDelimiter();
-        org.apache.commons.csv.CSVParser cSVParser5 = new org.apache.commons.csv.CSVParser("Delimiter=<,> Encapsulator=< > CommentStart=<,>", cSVFormat3);
-        java.util.Iterator<org.apache.commons.csv.CSVRecord> cSVRecordItor6 = cSVParser5.iterator();
-        java.util.Iterator<org.apache.commons.csv.CSVRecord> cSVRecordItor7 = cSVParser5.iterator();
-        java.util.Iterator<org.apache.commons.csv.CSVRecord> cSVRecordItor8 = cSVParser5.iterator();
-        org.junit.Assert.assertNotNull(cSVFormat1);
-        org.junit.Assert.assertNotNull(cSVFormat3);
-        org.junit.Assert.assertTrue("'" + char4 + "' != '" + '\t' + "'", char4 == '\t');
-        org.junit.Assert.assertNotNull(cSVRecordItor6);
-        org.junit.Assert.assertNotNull(cSVRecordItor7);
-        org.junit.Assert.assertNotNull(cSVRecordItor8);
-    }
-
-    @Test
-    public void test1130() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1130");
-        org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.EXCEL;
-        boolean boolean1 = cSVFormat0.isEmptyLinesIgnored();
-        org.apache.commons.csv.CSVFormat cSVFormat3 = cSVFormat0.withEscape('a');
-        org.apache.commons.csv.CSVFormat cSVFormat5 = cSVFormat3.withEscape('#');
-        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.EXCEL;
-        boolean boolean8 = cSVFormat7.isEmptyLinesIgnored();
-        org.apache.commons.csv.CSVParser cSVParser9 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat7);
-        java.lang.String str10 = cSVFormat7.getLineSeparator();
-        org.apache.commons.csv.CSVFormat cSVFormat12 = cSVFormat7.withDelimiter('4');
-        cSVFormat12.validate();
-        java.lang.String str14 = cSVFormat12.toString();
-        org.apache.commons.csv.CSVFormat cSVFormat16 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser17 = new org.apache.commons.csv.CSVParser("", cSVFormat16);
-        java.lang.String[] strArray19 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat20 = cSVFormat16.withHeader(strArray19);
-        org.apache.commons.csv.CSVFormat cSVFormat21 = cSVFormat12.withHeader(strArray19);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap22 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord23 = new org.apache.commons.csv.CSVRecord(strArray19, strMap22);
-        org.apache.commons.csv.CSVFormat cSVFormat24 = cSVFormat3.withHeader(strArray19);
-        boolean boolean25 = cSVFormat3.isEmptyLinesIgnored();
-        char char26 = cSVFormat3.getEscape();
-        org.apache.commons.csv.ExtendedBufferedReader extendedBufferedReader27 = null;
-        org.apache.commons.csv.CSVLexer cSVLexer28 = new org.apache.commons.csv.CSVLexer(cSVFormat3, extendedBufferedReader27);
-        boolean boolean30 = cSVLexer28.isWhitespace((-1));
-        org.junit.Assert.assertNotNull(cSVFormat0);
-        org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
-        org.junit.Assert.assertNotNull(cSVFormat3);
-        org.junit.Assert.assertNotNull(cSVFormat5);
-        org.junit.Assert.assertNotNull(cSVFormat7);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "\r\n" + "'", str10, "\r\n");
-        org.junit.Assert.assertNotNull(cSVFormat12);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "Delimiter=<4> Encapsulator=<\">" + "'", str14, "Delimiter=<4> Encapsulator=<\">");
-        org.junit.Assert.assertNotNull(cSVFormat16);
-        org.junit.Assert.assertNotNull(strArray19);
-        org.junit.Assert.assertNotNull(cSVFormat20);
-        org.junit.Assert.assertNotNull(cSVFormat21);
-        org.junit.Assert.assertNotNull(cSVFormat24);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertTrue("'" + char26 + "' != '" + 'a' + "'", char26 == 'a');
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-    }
-
-    @Test
-    public void test1131() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1131");
-        org.apache.commons.csv.CSVFormat cSVFormat14 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat16 = cSVFormat14.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat18 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser19 = new org.apache.commons.csv.CSVParser("", cSVFormat18);
-        java.lang.String[] strArray21 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat22 = cSVFormat18.withHeader(strArray21);
-        java.lang.String str23 = cSVFormat14.format(strArray21);
-        org.apache.commons.csv.CSVFormat cSVFormat24 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray21);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap25 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord26 = new org.apache.commons.csv.CSVRecord(strArray21, strMap25);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap27 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord28 = new org.apache.commons.csv.CSVRecord(strArray21, strMap27);
-        java.util.Iterator<java.lang.String> strItor29 = cSVRecord28.iterator();
-        java.lang.String[] strArray30 = cSVRecord28.values();
-        org.apache.commons.csv.CSVFormat cSVFormat31 = new org.apache.commons.csv.CSVFormat('#', '#', '\"', '\t', true, false, "Delimiter=<\t> Encapsulator=<\"> EmptyLines:ignored SurroundingSpaces:ignored", strArray30);
-        java.lang.String str32 = cSVFormat31.getLineSeparator();
-        boolean boolean33 = cSVFormat31.isCommentingEnabled();
-        org.apache.commons.csv.CSVFormat cSVFormat35 = cSVFormat31.withEncapsulator('4');
-        java.lang.Class<?> wildcardClass36 = cSVFormat35.getClass();
-        org.junit.Assert.assertNotNull(cSVFormat14);
-        org.junit.Assert.assertNotNull(cSVFormat16);
-        org.junit.Assert.assertNotNull(cSVFormat18);
-        org.junit.Assert.assertNotNull(strArray21);
-        org.junit.Assert.assertNotNull(cSVFormat22);
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "hi!" + "'", str23, "hi!");
-        org.junit.Assert.assertNotNull(strItor29);
-        org.junit.Assert.assertNotNull(strArray30);
-        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "Delimiter=<\t> Encapsulator=<\"> EmptyLines:ignored SurroundingSpaces:ignored" + "'", str32, "Delimiter=<\t> Encapsulator=<\"> EmptyLines:ignored SurroundingSpaces:ignored");
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
-        org.junit.Assert.assertNotNull(cSVFormat35);
-        org.junit.Assert.assertNotNull(wildcardClass36);
-    }
-
-    @Test
-    public void test1132() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1132");
-        org.apache.commons.csv.CSVFormat cSVFormat22 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat24 = cSVFormat22.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat26 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser27 = new org.apache.commons.csv.CSVParser("", cSVFormat26);
-        java.lang.String[] strArray29 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat30 = cSVFormat26.withHeader(strArray29);
-        java.lang.String str31 = cSVFormat22.format(strArray29);
-        org.apache.commons.csv.CSVFormat cSVFormat32 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray29);
-        org.apache.commons.csv.CSVFormat cSVFormat34 = cSVFormat32.withLineSeparator("hi!");
-        org.apache.commons.csv.CSVFormat cSVFormat36 = cSVFormat32.withDelimiter(',');
-        char char37 = cSVFormat36.getEscape();
-        org.apache.commons.csv.CSVParser cSVParser38 = new org.apache.commons.csv.CSVParser("[, , , hi!, hi!]", cSVFormat36);
-        org.apache.commons.csv.CSVFormat cSVFormat46 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat48 = cSVFormat46.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat50 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser51 = new org.apache.commons.csv.CSVParser("", cSVFormat50);
-        java.lang.String[] strArray53 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat54 = cSVFormat50.withHeader(strArray53);
-        java.lang.String str55 = cSVFormat46.format(strArray53);
-        org.apache.commons.csv.CSVFormat cSVFormat56 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray53);
-        org.apache.commons.csv.CSVFormat cSVFormat58 = cSVFormat56.withLineSeparator("hi!");
-        org.apache.commons.csv.CSVFormat cSVFormat60 = cSVFormat56.withDelimiter(',');
-        org.apache.commons.csv.CSVFormat cSVFormat61 = org.apache.commons.csv.CSVFormat.EXCEL;
-        boolean boolean62 = cSVFormat61.isEmptyLinesIgnored();
-        org.apache.commons.csv.CSVFormat cSVFormat64 = cSVFormat61.withEscape('a');
-        org.apache.commons.csv.CSVFormat cSVFormat66 = cSVFormat64.withEscape('#');
-        org.apache.commons.csv.CSVFormat cSVFormat68 = org.apache.commons.csv.CSVFormat.EXCEL;
-        boolean boolean69 = cSVFormat68.isEmptyLinesIgnored();
-        org.apache.commons.csv.CSVParser cSVParser70 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat68);
-        java.lang.String str71 = cSVFormat68.getLineSeparator();
-        org.apache.commons.csv.CSVFormat cSVFormat73 = cSVFormat68.withDelimiter('4');
-        cSVFormat73.validate();
-        java.lang.String str75 = cSVFormat73.toString();
-        org.apache.commons.csv.CSVFormat cSVFormat77 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser78 = new org.apache.commons.csv.CSVParser("", cSVFormat77);
-        java.lang.String[] strArray80 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat81 = cSVFormat77.withHeader(strArray80);
-        org.apache.commons.csv.CSVFormat cSVFormat82 = cSVFormat73.withHeader(strArray80);
-        java.util.Map<java.lang.String, java.lang.Integer> strMap83 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord84 = new org.apache.commons.csv.CSVRecord(strArray80, strMap83);
-        org.apache.commons.csv.CSVFormat cSVFormat85 = cSVFormat64.withHeader(strArray80);
-        org.apache.commons.csv.CSVFormat cSVFormat86 = cSVFormat60.withHeader(strArray80);
-        java.lang.String str87 = cSVFormat36.format(strArray80);
-        org.apache.commons.csv.CSVFormat cSVFormat88 = new org.apache.commons.csv.CSVFormat('\ufffe', '\t', ',', '\"', true, true, "Delimiter=< > Encapsulator=<\"> EmptyLines:ignored", strArray80);
-        org.apache.commons.csv.CSVFormat cSVFormat89 = new org.apache.commons.csv.CSVFormat('a', '4', '#', '4', true, false, "Delimiter=<,> Encapsulator=<\">", strArray80);
-        org.apache.commons.csv.CSVFormat cSVFormat91 = cSVFormat89.withEscape('a');
-        org.junit.Assert.assertNotNull(cSVFormat22);
-        org.junit.Assert.assertNotNull(cSVFormat24);
-        org.junit.Assert.assertNotNull(cSVFormat26);
-        org.junit.Assert.assertNotNull(strArray29);
-        org.junit.Assert.assertNotNull(cSVFormat30);
-        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "hi!" + "'", str31, "hi!");
-        org.junit.Assert.assertNotNull(cSVFormat34);
-        org.junit.Assert.assertNotNull(cSVFormat36);
-        org.junit.Assert.assertTrue("'" + char37 + "' != '" + ' ' + "'", char37 == ' ');
-        org.junit.Assert.assertNotNull(cSVFormat46);
-        org.junit.Assert.assertNotNull(cSVFormat48);
-        org.junit.Assert.assertNotNull(cSVFormat50);
-        org.junit.Assert.assertNotNull(strArray53);
-        org.junit.Assert.assertNotNull(cSVFormat54);
-        org.junit.Assert.assertEquals("'" + str55 + "' != '" + "hi!" + "'", str55, "hi!");
-        org.junit.Assert.assertNotNull(cSVFormat58);
-        org.junit.Assert.assertNotNull(cSVFormat60);
-        org.junit.Assert.assertNotNull(cSVFormat61);
-        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
-        org.junit.Assert.assertNotNull(cSVFormat64);
-        org.junit.Assert.assertNotNull(cSVFormat66);
-        org.junit.Assert.assertNotNull(cSVFormat68);
-        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
-        org.junit.Assert.assertEquals("'" + str71 + "' != '" + "\r\n" + "'", str71, "\r\n");
-        org.junit.Assert.assertNotNull(cSVFormat73);
-        org.junit.Assert.assertEquals("'" + str75 + "' != '" + "Delimiter=<4> Encapsulator=<\">" + "'", str75, "Delimiter=<4> Encapsulator=<\">");
-        org.junit.Assert.assertNotNull(cSVFormat77);
-        org.junit.Assert.assertNotNull(strArray80);
-        org.junit.Assert.assertNotNull(cSVFormat81);
-        org.junit.Assert.assertNotNull(cSVFormat82);
-        org.junit.Assert.assertNotNull(cSVFormat85);
-        org.junit.Assert.assertNotNull(cSVFormat86);
-        org.junit.Assert.assertEquals("'" + str87 + "' != '" + "hi!hi!" + "'", str87, "hi!hi!");
-        org.junit.Assert.assertNotNull(cSVFormat91);
-    }
-
-    @Test
-    public void test1133() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1133");
-        org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser5 = new org.apache.commons.csv.CSVParser("", cSVFormat4);
-        java.lang.String[] strArray7 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat8 = cSVFormat4.withHeader(strArray7);
-        java.lang.String str9 = cSVFormat0.format(strArray7);
-        char char10 = cSVFormat0.getDelimiter();
-        char char11 = cSVFormat0.getEncapsulator();
-        org.apache.commons.csv.CSVFormat cSVFormat13 = cSVFormat0.withEscape('\t');
-        boolean boolean14 = cSVFormat13.isEncapsulating();
-        org.apache.commons.csv.CSVFormat cSVFormat16 = cSVFormat13.withEmptyLinesIgnored(true);
-        org.apache.commons.csv.CSVFormat cSVFormat18 = cSVFormat16.withEscape('4');
-        org.junit.Assert.assertNotNull(cSVFormat0);
-        org.junit.Assert.assertNotNull(cSVFormat2);
-        org.junit.Assert.assertNotNull(cSVFormat4);
-        org.junit.Assert.assertNotNull(strArray7);
-        org.junit.Assert.assertNotNull(cSVFormat8);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "hi!" + "'", str9, "hi!");
-        org.junit.Assert.assertTrue("'" + char10 + "' != '" + ',' + "'", char10 == ',');
-        org.junit.Assert.assertTrue("'" + char11 + "' != '" + '\"' + "'", char11 == '\"');
-        org.junit.Assert.assertNotNull(cSVFormat13);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
-        org.junit.Assert.assertNotNull(cSVFormat16);
-        org.junit.Assert.assertNotNull(cSVFormat18);
-    }
-
-    @Test
-    public void test1134() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1134");
-        org.apache.commons.csv.CSVFormat cSVFormat2 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser3 = new org.apache.commons.csv.CSVParser("", cSVFormat2);
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat6 = cSVFormat2.withHeader(strArray5);
-        org.apache.commons.csv.CSVParser cSVParser7 = new org.apache.commons.csv.CSVParser("Delimiter=<,> Encapsulator=<\"> CommentStart=< > EmptyLines:ignored", cSVFormat6);
-        int int8 = cSVParser7.getLineNumber();
-        java.util.Iterator<org.apache.commons.csv.CSVRecord> cSVRecordItor9 = cSVParser7.iterator();
-        org.junit.Assert.assertNotNull(cSVFormat2);
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertNotNull(cSVFormat6);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
-        org.junit.Assert.assertNotNull(cSVRecordItor9);
-    }
-
-    @Test
-    public void test1135() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1135");
-        org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat4 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser5 = new org.apache.commons.csv.CSVParser("", cSVFormat4);
-        java.lang.String[] strArray7 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat8 = cSVFormat4.withHeader(strArray7);
-        java.lang.String str9 = cSVFormat0.format(strArray7);
-        org.apache.commons.csv.CSVFormat cSVFormat11 = cSVFormat0.withDelimiter(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat13 = cSVFormat11.withEncapsulator('4');
-        char char14 = cSVFormat11.getEncapsulator();
-        org.apache.commons.csv.CSVFormat cSVFormat16 = cSVFormat11.withLineSeparator("\"\",,,hi!,hi!,");
-        boolean boolean17 = cSVFormat16.isEscaping();
-        org.apache.commons.csv.CSVFormat cSVFormat19 = cSVFormat16.withEncapsulator('a');
-        org.junit.Assert.assertNotNull(cSVFormat0);
-        org.junit.Assert.assertNotNull(cSVFormat2);
-        org.junit.Assert.assertNotNull(cSVFormat4);
-        org.junit.Assert.assertNotNull(strArray7);
-        org.junit.Assert.assertNotNull(cSVFormat8);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "hi!" + "'", str9, "hi!");
-        org.junit.Assert.assertNotNull(cSVFormat11);
-        org.junit.Assert.assertNotNull(cSVFormat13);
-        org.junit.Assert.assertTrue("'" + char14 + "' != '" + '\"' + "'", char14 == '\"');
-        org.junit.Assert.assertNotNull(cSVFormat16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNotNull(cSVFormat19);
-    }
-
-    @Test
-    public void test1136() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1136");
-        org.apache.commons.csv.CSVFormat cSVFormat0 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat2 = cSVFormat0.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat4 = cSVFormat2.withCommentStart(' ');
-        char char5 = cSVFormat4.getEscape();
-        org.apache.commons.csv.ExtendedBufferedReader extendedBufferedReader6 = null;
-        org.apache.commons.csv.CSVLexer cSVLexer7 = new org.apache.commons.csv.CSVLexer(cSVFormat4, extendedBufferedReader6);
-        boolean boolean9 = cSVLexer7.isCommentStart((int) (byte) 10);
-        boolean boolean11 = cSVLexer7.isCommentStart((int) '\t');
-        boolean boolean12 = cSVLexer7.emptyLinesIgnored;
-        org.apache.commons.csv.CSVFormat cSVFormat14 = org.apache.commons.csv.CSVFormat.EXCEL;
-        boolean boolean15 = cSVFormat14.isEmptyLinesIgnored();
-        org.apache.commons.csv.CSVParser cSVParser16 = new org.apache.commons.csv.CSVParser("hi!", cSVFormat14);
-        java.lang.String str17 = cSVFormat14.getLineSeparator();
-        org.apache.commons.csv.CSVFormat cSVFormat19 = cSVFormat14.withDelimiter('4');
-        cSVFormat19.validate();
-        java.lang.String str21 = cSVFormat19.toString();
-        org.apache.commons.csv.ExtendedBufferedReader extendedBufferedReader22 = null;
-        org.apache.commons.csv.CSVLexer cSVLexer23 = new org.apache.commons.csv.CSVLexer(cSVFormat19, extendedBufferedReader22);
-        boolean boolean25 = cSVLexer23.isWhitespace((int) '\ufffe');
-        boolean boolean27 = cSVLexer23.isWhitespace((int) (short) -1);
-        org.apache.commons.csv.Token token28 = new org.apache.commons.csv.Token();
-        token28.isReady = false;
-        org.apache.commons.csv.Token.Type type31 = token28.type;
-        token28.isReady = false;
-        org.apache.commons.csv.Token.Type type34 = token28.type;
-        java.lang.StringBuilder stringBuilder35 = token28.content;
-        cSVLexer23.trimTrailingSpaces(stringBuilder35);
-        cSVLexer7.trimTrailingSpaces(stringBuilder35);
-        org.junit.Assert.assertNotNull(cSVFormat0);
-        org.junit.Assert.assertNotNull(cSVFormat2);
-        org.junit.Assert.assertNotNull(cSVFormat4);
-        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\ufffe' + "'", char5 == '\ufffe');
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertNotNull(cSVFormat14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "\r\n" + "'", str17, "\r\n");
-        org.junit.Assert.assertNotNull(cSVFormat19);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "Delimiter=<4> Encapsulator=<\">" + "'", str21, "Delimiter=<4> Encapsulator=<\">");
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertTrue("'" + type31 + "' != '" + org.apache.commons.csv.Token.Type.INVALID + "'", type31.equals(org.apache.commons.csv.Token.Type.INVALID));
-        org.junit.Assert.assertTrue("'" + type34 + "' != '" + org.apache.commons.csv.Token.Type.INVALID + "'", type34.equals(org.apache.commons.csv.Token.Type.INVALID));
-        org.junit.Assert.assertNotNull(stringBuilder35);
-        org.junit.Assert.assertEquals(stringBuilder35.toString(), "");
-    }
-
-    @Test
-    public void test1137() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1137");
-        org.apache.commons.csv.CSVFormat cSVFormat7 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat9 = cSVFormat7.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat24 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVFormat cSVFormat26 = cSVFormat24.withCommentStart(' ');
-        org.apache.commons.csv.CSVFormat cSVFormat28 = org.apache.commons.csv.CSVFormat.DEFAULT;
-        org.apache.commons.csv.CSVParser cSVParser29 = new org.apache.commons.csv.CSVParser("", cSVFormat28);
-        java.lang.String[] strArray31 = new java.lang.String[] { "hi!" };
-        org.apache.commons.csv.CSVFormat cSVFormat32 = cSVFormat28.withHeader(strArray31);
-        java.lang.String str33 = cSVFormat24.format(strArray31);
-        org.apache.commons.csv.CSVFormat cSVFormat34 = new org.apache.commons.csv.CSVFormat('#', '#', '4', ' ', true, false, "hi!", strArray31);
-        org.apache.commons.csv.CSVFormat cSVFormat36 = cSVFormat34.withSurroundingSpacesIgnored(true);
-        java.lang.String[] strArray37 = cSVFormat34.getHeader();
-        java.util.Map<java.lang.String, java.lang.Integer> strMap38 = null;
-        org.apache.commons.csv.CSVRecord cSVRecord39 = new org.apache.commons.csv.CSVRecord(strArray37, strMap38);
-        org.apache.commons.csv.CSVFormat cSVFormat40 = new org.apache.commons.csv.CSVFormat('a', ',', ' ', '4', false, false, "[, , , hi!, hi!]", strArray37);
-        java.lang.String str41 = cSVFormat9.format(strArray37);
-        org.apache.commons.csv.CSVFormat cSVFormat42 = new org.apache.commons.csv.CSVFormat('a', '4', 'a', 'a', false, false, "Delimiter=<,> Encapsulator=<\">", strArray37);
-        char char43 = cSVFormat42.getDelimiter();
-        org.apache.commons.csv.CSVFormat cSVFormat45 = cSVFormat42.withDelimiter('#');
-        org.junit.Assert.assertNotNull(cSVFormat7);
-        org.junit.Assert.assertNotNull(cSVFormat9);
-        org.junit.Assert.assertNotNull(cSVFormat24);
-        org.junit.Assert.assertNotNull(cSVFormat26);
-        org.junit.Assert.assertNotNull(cSVFormat28);
-        org.junit.Assert.assertNotNull(strArray31);
-        org.junit.Assert.assertNotNull(cSVFormat32);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "hi!" + "'", str33, "hi!");
-        org.junit.Assert.assertNotNull(cSVFormat36);
-        org.junit.Assert.assertNotNull(strArray37);
-        org.junit.Assert.assertEquals("'" + str41 + "' != '" + "hi!" + "'", str41, "hi!");
-        org.junit.Assert.assertTrue("'" + char43 + "' != '" + 'a' + "'", char43 == 'a');
-        org.junit.Assert.assertNotNull(cSVFormat45);
     }
 }
 

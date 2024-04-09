@@ -1,0 +1,2 @@
+TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
+org.apache.commons.csv.ExtendedBufferedReader,BRANCH,0.6538461538461539,26,17

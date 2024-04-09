@@ -79,10 +79,10 @@ def checkout_and_copy(bug_id, project_id, modified_classes, work_dir, repo_path,
         for test in failingTests:
             test_out.write(test+"\n")
 
-    modifiedClasses_file = os.path.join(f'{project_id}_{bug_id}', 'modified_classes.txt')
-    with open(modifiedClasses_file, 'w') as class_out:
-        for mc in modified_classes.split(';'):
-            class_out.write(mc.replace('.', '/') + '.java'+"\n")
+    # modifiedClasses_file = os.path.join(f'{project_id}_{bug_id}', 'modified_classes.txt')
+    # with open(modifiedClasses_file, 'w') as class_out:
+    #     for mc in modified_classes.split(';'):
+    #         class_out.write(mc.replace('.', '/') + '.java'+"\n")
 
 
 def get_buffy_and_fixed_versions(repo_path, count):

@@ -4244,38 +4244,6 @@ public class RegressionTest6 {
             System.out.format("%n%s%n", "RegressionTest6.test3155");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
-        int int8 = refinedSoundex5.difference("", "");
-        char[] charArray11 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex12 = new org.apache.commons.codec.language.Soundex(charArray11);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex13 = new org.apache.commons.codec.language.RefinedSoundex(charArray11);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex14 = new org.apache.commons.codec.language.RefinedSoundex(charArray11);
-        int int17 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) refinedSoundex14, "", "");
-        java.lang.Object obj18 = refinedSoundex5.encode((java.lang.Object) "");
-        java.lang.String str20 = refinedSoundex5.encode("");
-        char char22 = refinedSoundex5.getMappingCode('4');
-        org.junit.Assert.assertNotNull(charArray2);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
-        org.junit.Assert.assertNotNull(charArray11);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray11), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray11), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray11), "[ , 4]");
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertEquals("'" + obj18 + "' != '" + "" + "'", obj18, "");
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
-        org.junit.Assert.assertTrue("'" + char22 + "' != '" + '\000' + "'", char22 == '\000');
-    }
-
-    @Test
-    public void test3156() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3156");
-        char[] charArray2 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str6 = soundex4.soundex("");
         int int7 = soundex4.getMaxLength();
@@ -4310,9 +4278,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3157() throws Throwable {
+    public void test3156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3157");
+            System.out.format("%n%s%n", "RegressionTest6.test3156");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -4349,9 +4317,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3158() throws Throwable {
+    public void test3157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3158");
+            System.out.format("%n%s%n", "RegressionTest6.test3157");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -4387,9 +4355,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3159() throws Throwable {
+    public void test3158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3159");
+            System.out.format("%n%s%n", "RegressionTest6.test3158");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -4407,9 +4375,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3160() throws Throwable {
+    public void test3159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3160");
+            System.out.format("%n%s%n", "RegressionTest6.test3159");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -4432,9 +4400,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3161() throws Throwable {
+    public void test3160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3161");
+            System.out.format("%n%s%n", "RegressionTest6.test3160");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -4455,9 +4423,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3162() throws Throwable {
+    public void test3161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3162");
+            System.out.format("%n%s%n", "RegressionTest6.test3161");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -4476,9 +4444,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3163() throws Throwable {
+    public void test3162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3163");
+            System.out.format("%n%s%n", "RegressionTest6.test3162");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -4503,9 +4471,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3164() throws Throwable {
+    public void test3163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3164");
+            System.out.format("%n%s%n", "RegressionTest6.test3163");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode(' ');
@@ -4524,9 +4492,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3165() throws Throwable {
+    public void test3164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3165");
+            System.out.format("%n%s%n", "RegressionTest6.test3164");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode('a');
@@ -4545,9 +4513,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3166() throws Throwable {
+    public void test3165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3166");
+            System.out.format("%n%s%n", "RegressionTest6.test3165");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4565,9 +4533,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3167() throws Throwable {
+    public void test3166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3167");
+            System.out.format("%n%s%n", "RegressionTest6.test3166");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -4601,9 +4569,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3168() throws Throwable {
+    public void test3167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3168");
+            System.out.format("%n%s%n", "RegressionTest6.test3167");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4622,9 +4590,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3169() throws Throwable {
+    public void test3168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3169");
+            System.out.format("%n%s%n", "RegressionTest6.test3168");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -4647,9 +4615,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3170() throws Throwable {
+    public void test3169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3170");
+            System.out.format("%n%s%n", "RegressionTest6.test3169");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -4684,9 +4652,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3171() throws Throwable {
+    public void test3170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3171");
+            System.out.format("%n%s%n", "RegressionTest6.test3170");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -4707,9 +4675,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3172() throws Throwable {
+    public void test3171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3172");
+            System.out.format("%n%s%n", "RegressionTest6.test3171");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -4732,9 +4700,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3173() throws Throwable {
+    public void test3172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3173");
+            System.out.format("%n%s%n", "RegressionTest6.test3172");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4747,9 +4715,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3174() throws Throwable {
+    public void test3173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3174");
+            System.out.format("%n%s%n", "RegressionTest6.test3173");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -4772,9 +4740,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3175() throws Throwable {
+    public void test3174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3175");
+            System.out.format("%n%s%n", "RegressionTest6.test3174");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4797,9 +4765,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3176() throws Throwable {
+    public void test3175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3176");
+            System.out.format("%n%s%n", "RegressionTest6.test3175");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -4853,9 +4821,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3177() throws Throwable {
+    public void test3176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3177");
+            System.out.format("%n%s%n", "RegressionTest6.test3176");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4878,9 +4846,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3178() throws Throwable {
+    public void test3177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3178");
+            System.out.format("%n%s%n", "RegressionTest6.test3177");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -4912,9 +4880,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3179() throws Throwable {
+    public void test3178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3179");
+            System.out.format("%n%s%n", "RegressionTest6.test3178");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -4934,9 +4902,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3180() throws Throwable {
+    public void test3179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3180");
+            System.out.format("%n%s%n", "RegressionTest6.test3179");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -4963,9 +4931,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3181() throws Throwable {
+    public void test3180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3181");
+            System.out.format("%n%s%n", "RegressionTest6.test3180");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength((-1));
@@ -4986,9 +4954,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3182() throws Throwable {
+    public void test3181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3182");
+            System.out.format("%n%s%n", "RegressionTest6.test3181");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -5010,9 +4978,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3183() throws Throwable {
+    public void test3182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3183");
+            System.out.format("%n%s%n", "RegressionTest6.test3182");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -5044,9 +5012,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3184() throws Throwable {
+    public void test3183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3184");
+            System.out.format("%n%s%n", "RegressionTest6.test3183");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -5065,9 +5033,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3185() throws Throwable {
+    public void test3184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3185");
+            System.out.format("%n%s%n", "RegressionTest6.test3184");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -5110,9 +5078,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3186() throws Throwable {
+    public void test3185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3186");
+            System.out.format("%n%s%n", "RegressionTest6.test3185");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -5133,9 +5101,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3187() throws Throwable {
+    public void test3186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3187");
+            System.out.format("%n%s%n", "RegressionTest6.test3186");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -5156,9 +5124,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3188() throws Throwable {
+    public void test3187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3188");
+            System.out.format("%n%s%n", "RegressionTest6.test3187");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5184,9 +5152,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3189() throws Throwable {
+    public void test3188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3189");
+            System.out.format("%n%s%n", "RegressionTest6.test3188");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -5207,9 +5175,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3190() throws Throwable {
+    public void test3189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3190");
+            System.out.format("%n%s%n", "RegressionTest6.test3189");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5244,9 +5212,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3191() throws Throwable {
+    public void test3190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3191");
+            System.out.format("%n%s%n", "RegressionTest6.test3190");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -5271,9 +5239,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3192() throws Throwable {
+    public void test3191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3192");
+            System.out.format("%n%s%n", "RegressionTest6.test3191");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5309,9 +5277,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3193() throws Throwable {
+    public void test3192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3193");
+            System.out.format("%n%s%n", "RegressionTest6.test3192");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -5350,9 +5318,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3194() throws Throwable {
+    public void test3193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3194");
+            System.out.format("%n%s%n", "RegressionTest6.test3193");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -5373,9 +5341,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3195() throws Throwable {
+    public void test3194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3195");
+            System.out.format("%n%s%n", "RegressionTest6.test3194");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5401,9 +5369,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3196() throws Throwable {
+    public void test3195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3196");
+            System.out.format("%n%s%n", "RegressionTest6.test3195");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -5424,9 +5392,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3197() throws Throwable {
+    public void test3196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3197");
+            System.out.format("%n%s%n", "RegressionTest6.test3196");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -5451,9 +5419,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3198() throws Throwable {
+    public void test3197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3198");
+            System.out.format("%n%s%n", "RegressionTest6.test3197");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5489,9 +5457,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3199() throws Throwable {
+    public void test3198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3199");
+            System.out.format("%n%s%n", "RegressionTest6.test3198");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -5522,9 +5490,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3200() throws Throwable {
+    public void test3199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3200");
+            System.out.format("%n%s%n", "RegressionTest6.test3199");
         char[] charArray2 = new char[] { '4', 'a' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -5543,9 +5511,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3201() throws Throwable {
+    public void test3200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3201");
+            System.out.format("%n%s%n", "RegressionTest6.test3200");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -5566,9 +5534,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3202() throws Throwable {
+    public void test3201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3202");
+            System.out.format("%n%s%n", "RegressionTest6.test3201");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5603,9 +5571,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3203() throws Throwable {
+    public void test3202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3203");
+            System.out.format("%n%s%n", "RegressionTest6.test3202");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -5628,9 +5596,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3204() throws Throwable {
+    public void test3203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3204");
+            System.out.format("%n%s%n", "RegressionTest6.test3203");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -5648,9 +5616,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3205() throws Throwable {
+    public void test3204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3205");
+            System.out.format("%n%s%n", "RegressionTest6.test3204");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5677,9 +5645,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3206() throws Throwable {
+    public void test3205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3206");
+            System.out.format("%n%s%n", "RegressionTest6.test3205");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -5699,9 +5667,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3207() throws Throwable {
+    public void test3206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3207");
+            System.out.format("%n%s%n", "RegressionTest6.test3206");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -5722,9 +5690,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3208() throws Throwable {
+    public void test3207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3208");
+            System.out.format("%n%s%n", "RegressionTest6.test3207");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -5761,9 +5729,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3209() throws Throwable {
+    public void test3208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3209");
+            System.out.format("%n%s%n", "RegressionTest6.test3208");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -5779,9 +5747,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3210() throws Throwable {
+    public void test3209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3210");
+            System.out.format("%n%s%n", "RegressionTest6.test3209");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -5850,9 +5818,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3211() throws Throwable {
+    public void test3210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3211");
+            System.out.format("%n%s%n", "RegressionTest6.test3210");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -5873,9 +5841,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3212() throws Throwable {
+    public void test3211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3212");
+            System.out.format("%n%s%n", "RegressionTest6.test3211");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -5904,9 +5872,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3213() throws Throwable {
+    public void test3212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3213");
+            System.out.format("%n%s%n", "RegressionTest6.test3212");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -5930,9 +5898,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3214() throws Throwable {
+    public void test3213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3214");
+            System.out.format("%n%s%n", "RegressionTest6.test3213");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -5962,9 +5930,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3215() throws Throwable {
+    public void test3214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3215");
+            System.out.format("%n%s%n", "RegressionTest6.test3214");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -6012,9 +5980,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3216() throws Throwable {
+    public void test3215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3216");
+            System.out.format("%n%s%n", "RegressionTest6.test3215");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -6035,9 +6003,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3217() throws Throwable {
+    public void test3216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3217");
+            System.out.format("%n%s%n", "RegressionTest6.test3216");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -6062,9 +6030,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3218() throws Throwable {
+    public void test3217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3218");
+            System.out.format("%n%s%n", "RegressionTest6.test3217");
         char[] charArray2 = new char[] { '4', 'a' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6082,9 +6050,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3219() throws Throwable {
+    public void test3218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3219");
+            System.out.format("%n%s%n", "RegressionTest6.test3218");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -6115,9 +6083,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3220() throws Throwable {
+    public void test3219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3220");
+            System.out.format("%n%s%n", "RegressionTest6.test3219");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -6140,9 +6108,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3221() throws Throwable {
+    public void test3220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3221");
+            System.out.format("%n%s%n", "RegressionTest6.test3220");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -6168,9 +6136,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3222() throws Throwable {
+    public void test3221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3222");
+            System.out.format("%n%s%n", "RegressionTest6.test3221");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -6191,9 +6159,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3223() throws Throwable {
+    public void test3222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3223");
+            System.out.format("%n%s%n", "RegressionTest6.test3222");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -6229,9 +6197,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3224() throws Throwable {
+    public void test3223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3224");
+            System.out.format("%n%s%n", "RegressionTest6.test3223");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6256,9 +6224,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3225() throws Throwable {
+    public void test3224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3225");
+            System.out.format("%n%s%n", "RegressionTest6.test3224");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength((-1));
@@ -6277,9 +6245,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3226() throws Throwable {
+    public void test3225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3226");
+            System.out.format("%n%s%n", "RegressionTest6.test3225");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -6304,9 +6272,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3227() throws Throwable {
+    public void test3226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3227");
+            System.out.format("%n%s%n", "RegressionTest6.test3226");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -6324,9 +6292,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3228() throws Throwable {
+    public void test3227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3228");
+            System.out.format("%n%s%n", "RegressionTest6.test3227");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -6368,9 +6336,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3229() throws Throwable {
+    public void test3228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3229");
+            System.out.format("%n%s%n", "RegressionTest6.test3228");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -6394,9 +6362,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3230() throws Throwable {
+    public void test3229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3230");
+            System.out.format("%n%s%n", "RegressionTest6.test3229");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -6416,9 +6384,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3231() throws Throwable {
+    public void test3230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3231");
+            System.out.format("%n%s%n", "RegressionTest6.test3230");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -6453,9 +6421,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3232() throws Throwable {
+    public void test3231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3232");
+            System.out.format("%n%s%n", "RegressionTest6.test3231");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -6480,9 +6448,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3233() throws Throwable {
+    public void test3232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3233");
+            System.out.format("%n%s%n", "RegressionTest6.test3232");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -6505,9 +6473,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3234() throws Throwable {
+    public void test3233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3234");
+            System.out.format("%n%s%n", "RegressionTest6.test3233");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -6528,9 +6496,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3235() throws Throwable {
+    public void test3234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3235");
+            System.out.format("%n%s%n", "RegressionTest6.test3234");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -6553,9 +6521,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3236() throws Throwable {
+    public void test3235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3236");
+            System.out.format("%n%s%n", "RegressionTest6.test3235");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -6598,9 +6566,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3237() throws Throwable {
+    public void test3236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3237");
+            System.out.format("%n%s%n", "RegressionTest6.test3236");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -6647,9 +6615,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3238() throws Throwable {
+    public void test3237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3238");
+            System.out.format("%n%s%n", "RegressionTest6.test3237");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -6683,9 +6651,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3239() throws Throwable {
+    public void test3238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3239");
+            System.out.format("%n%s%n", "RegressionTest6.test3238");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -6704,9 +6672,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3240() throws Throwable {
+    public void test3239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3240");
+            System.out.format("%n%s%n", "RegressionTest6.test3239");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -6722,9 +6690,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3241() throws Throwable {
+    public void test3240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3241");
+            System.out.format("%n%s%n", "RegressionTest6.test3240");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -6766,9 +6734,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3242() throws Throwable {
+    public void test3241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3242");
+            System.out.format("%n%s%n", "RegressionTest6.test3241");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode(' ');
@@ -6789,9 +6757,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3243() throws Throwable {
+    public void test3242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3243");
+            System.out.format("%n%s%n", "RegressionTest6.test3242");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -6811,9 +6779,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3244() throws Throwable {
+    public void test3243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3244");
+            System.out.format("%n%s%n", "RegressionTest6.test3243");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -6845,9 +6813,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3245() throws Throwable {
+    public void test3244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3245");
+            System.out.format("%n%s%n", "RegressionTest6.test3244");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -6872,9 +6840,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3246() throws Throwable {
+    public void test3245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3246");
+            System.out.format("%n%s%n", "RegressionTest6.test3245");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -6901,9 +6869,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3247() throws Throwable {
+    public void test3246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3247");
+            System.out.format("%n%s%n", "RegressionTest6.test3246");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -6996,9 +6964,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3248() throws Throwable {
+    public void test3247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3248");
+            System.out.format("%n%s%n", "RegressionTest6.test3247");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -7019,9 +6987,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3249() throws Throwable {
+    public void test3248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3249");
+            System.out.format("%n%s%n", "RegressionTest6.test3248");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength((int) (short) -1);
@@ -7049,9 +7017,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3250() throws Throwable {
+    public void test3249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3250");
+            System.out.format("%n%s%n", "RegressionTest6.test3249");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -7089,9 +7057,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3251() throws Throwable {
+    public void test3250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3251");
+            System.out.format("%n%s%n", "RegressionTest6.test3250");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -7111,9 +7079,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3252() throws Throwable {
+    public void test3251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3252");
+            System.out.format("%n%s%n", "RegressionTest6.test3251");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -7128,9 +7096,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3253() throws Throwable {
+    public void test3252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3253");
+            System.out.format("%n%s%n", "RegressionTest6.test3252");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -7150,9 +7118,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3254() throws Throwable {
+    public void test3253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3254");
+            System.out.format("%n%s%n", "RegressionTest6.test3253");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -7170,9 +7138,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3255() throws Throwable {
+    public void test3254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3255");
+            System.out.format("%n%s%n", "RegressionTest6.test3254");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -7205,9 +7173,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3256() throws Throwable {
+    public void test3255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3256");
+            System.out.format("%n%s%n", "RegressionTest6.test3255");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -7251,9 +7219,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3257() throws Throwable {
+    public void test3256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3257");
+            System.out.format("%n%s%n", "RegressionTest6.test3256");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -7286,9 +7254,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3258() throws Throwable {
+    public void test3257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3258");
+            System.out.format("%n%s%n", "RegressionTest6.test3257");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -7310,9 +7278,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3259() throws Throwable {
+    public void test3258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3259");
+            System.out.format("%n%s%n", "RegressionTest6.test3258");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -7330,9 +7298,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3260() throws Throwable {
+    public void test3259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3260");
+            System.out.format("%n%s%n", "RegressionTest6.test3259");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -7351,9 +7319,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3261() throws Throwable {
+    public void test3260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3261");
+            System.out.format("%n%s%n", "RegressionTest6.test3260");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -7397,9 +7365,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3262() throws Throwable {
+    public void test3261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3262");
+            System.out.format("%n%s%n", "RegressionTest6.test3261");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -7423,9 +7391,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3263() throws Throwable {
+    public void test3262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3263");
+            System.out.format("%n%s%n", "RegressionTest6.test3262");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -7454,9 +7422,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3264() throws Throwable {
+    public void test3263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3264");
+            System.out.format("%n%s%n", "RegressionTest6.test3263");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode('a');
@@ -7479,9 +7447,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3265() throws Throwable {
+    public void test3264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3265");
+            System.out.format("%n%s%n", "RegressionTest6.test3264");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -7504,9 +7472,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3266() throws Throwable {
+    public void test3265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3266");
+            System.out.format("%n%s%n", "RegressionTest6.test3265");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -7537,9 +7505,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3267() throws Throwable {
+    public void test3266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3267");
+            System.out.format("%n%s%n", "RegressionTest6.test3266");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -7597,9 +7565,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3268() throws Throwable {
+    public void test3267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3268");
+            System.out.format("%n%s%n", "RegressionTest6.test3267");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -7619,9 +7587,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3269() throws Throwable {
+    public void test3268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3269");
+            System.out.format("%n%s%n", "RegressionTest6.test3268");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -7644,9 +7612,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3270() throws Throwable {
+    public void test3269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3270");
+            System.out.format("%n%s%n", "RegressionTest6.test3269");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -7667,9 +7635,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3271() throws Throwable {
+    public void test3270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3271");
+            System.out.format("%n%s%n", "RegressionTest6.test3270");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -7713,9 +7681,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3272() throws Throwable {
+    public void test3271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3272");
+            System.out.format("%n%s%n", "RegressionTest6.test3271");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -7742,9 +7710,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3273() throws Throwable {
+    public void test3272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3273");
+            System.out.format("%n%s%n", "RegressionTest6.test3272");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -7763,9 +7731,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3274() throws Throwable {
+    public void test3273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3274");
+            System.out.format("%n%s%n", "RegressionTest6.test3273");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -7789,9 +7757,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3275() throws Throwable {
+    public void test3274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3275");
+            System.out.format("%n%s%n", "RegressionTest6.test3274");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -7834,9 +7802,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3276() throws Throwable {
+    public void test3275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3276");
+            System.out.format("%n%s%n", "RegressionTest6.test3275");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -7880,9 +7848,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3277() throws Throwable {
+    public void test3276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3277");
+            System.out.format("%n%s%n", "RegressionTest6.test3276");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -7905,9 +7873,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3278() throws Throwable {
+    public void test3277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3278");
+            System.out.format("%n%s%n", "RegressionTest6.test3277");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -7934,9 +7902,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3279() throws Throwable {
+    public void test3278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3279");
+            System.out.format("%n%s%n", "RegressionTest6.test3278");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -7961,9 +7929,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3280() throws Throwable {
+    public void test3279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3280");
+            System.out.format("%n%s%n", "RegressionTest6.test3279");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -7994,9 +7962,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3281() throws Throwable {
+    public void test3280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3281");
+            System.out.format("%n%s%n", "RegressionTest6.test3280");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -8043,9 +8011,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3282() throws Throwable {
+    public void test3281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3282");
+            System.out.format("%n%s%n", "RegressionTest6.test3281");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -8074,9 +8042,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3283() throws Throwable {
+    public void test3282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3283");
+            System.out.format("%n%s%n", "RegressionTest6.test3282");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -8099,9 +8067,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3284() throws Throwable {
+    public void test3283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3284");
+            System.out.format("%n%s%n", "RegressionTest6.test3283");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -8132,9 +8100,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3285() throws Throwable {
+    public void test3284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3285");
+            System.out.format("%n%s%n", "RegressionTest6.test3284");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8182,9 +8150,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3286() throws Throwable {
+    public void test3285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3286");
+            System.out.format("%n%s%n", "RegressionTest6.test3285");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8204,9 +8172,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3287() throws Throwable {
+    public void test3286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3287");
+            System.out.format("%n%s%n", "RegressionTest6.test3286");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -8230,9 +8198,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3288() throws Throwable {
+    public void test3287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3288");
+            System.out.format("%n%s%n", "RegressionTest6.test3287");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode(' ');
@@ -8265,9 +8233,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3289() throws Throwable {
+    public void test3288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3289");
+            System.out.format("%n%s%n", "RegressionTest6.test3288");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8286,9 +8254,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3290() throws Throwable {
+    public void test3289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3290");
+            System.out.format("%n%s%n", "RegressionTest6.test3289");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         // The following exception was thrown during execution in test generation
@@ -8305,9 +8273,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3291() throws Throwable {
+    public void test3290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3291");
+            System.out.format("%n%s%n", "RegressionTest6.test3290");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -8348,9 +8316,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3292() throws Throwable {
+    public void test3291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3292");
+            System.out.format("%n%s%n", "RegressionTest6.test3291");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -8375,9 +8343,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3293() throws Throwable {
+    public void test3292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3293");
+            System.out.format("%n%s%n", "RegressionTest6.test3292");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -8412,9 +8380,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3294() throws Throwable {
+    public void test3293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3294");
+            System.out.format("%n%s%n", "RegressionTest6.test3293");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -8433,9 +8401,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3295() throws Throwable {
+    public void test3294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3295");
+            System.out.format("%n%s%n", "RegressionTest6.test3294");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         char[] charArray10 = new char[] { '4', 'a', '#' };
@@ -8480,9 +8448,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3296() throws Throwable {
+    public void test3295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3296");
+            System.out.format("%n%s%n", "RegressionTest6.test3295");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -8513,9 +8481,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3297() throws Throwable {
+    public void test3296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3297");
+            System.out.format("%n%s%n", "RegressionTest6.test3296");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -8548,9 +8516,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3298() throws Throwable {
+    public void test3297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3298");
+            System.out.format("%n%s%n", "RegressionTest6.test3297");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8571,9 +8539,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3299() throws Throwable {
+    public void test3298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3299");
+            System.out.format("%n%s%n", "RegressionTest6.test3298");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8606,9 +8574,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3300() throws Throwable {
+    public void test3299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3300");
+            System.out.format("%n%s%n", "RegressionTest6.test3299");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -8641,9 +8609,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3301() throws Throwable {
+    public void test3300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3301");
+            System.out.format("%n%s%n", "RegressionTest6.test3300");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -8666,9 +8634,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3302() throws Throwable {
+    public void test3301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3302");
+            System.out.format("%n%s%n", "RegressionTest6.test3301");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8697,9 +8665,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3303() throws Throwable {
+    public void test3302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3303");
+            System.out.format("%n%s%n", "RegressionTest6.test3302");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -8724,9 +8692,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3304() throws Throwable {
+    public void test3303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3304");
+            System.out.format("%n%s%n", "RegressionTest6.test3303");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8744,9 +8712,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3305() throws Throwable {
+    public void test3304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3305");
+            System.out.format("%n%s%n", "RegressionTest6.test3304");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8793,9 +8761,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3306() throws Throwable {
+    public void test3305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3306");
+            System.out.format("%n%s%n", "RegressionTest6.test3305");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -8821,9 +8789,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3307() throws Throwable {
+    public void test3306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3307");
+            System.out.format("%n%s%n", "RegressionTest6.test3306");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -8846,9 +8814,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3308() throws Throwable {
+    public void test3307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3308");
+            System.out.format("%n%s%n", "RegressionTest6.test3307");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -8873,9 +8841,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3309() throws Throwable {
+    public void test3308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3309");
+            System.out.format("%n%s%n", "RegressionTest6.test3308");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -8914,9 +8882,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3310() throws Throwable {
+    public void test3309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3310");
+            System.out.format("%n%s%n", "RegressionTest6.test3309");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8937,9 +8905,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3311() throws Throwable {
+    public void test3310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3311");
+            System.out.format("%n%s%n", "RegressionTest6.test3310");
         char[] charArray2 = new char[] { '4', 'a' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8972,9 +8940,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3312() throws Throwable {
+    public void test3311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3312");
+            System.out.format("%n%s%n", "RegressionTest6.test3311");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -9004,9 +8972,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3313() throws Throwable {
+    public void test3312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3313");
+            System.out.format("%n%s%n", "RegressionTest6.test3312");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode('a');
@@ -9025,9 +8993,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3314() throws Throwable {
+    public void test3313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3314");
+            System.out.format("%n%s%n", "RegressionTest6.test3313");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -9041,9 +9009,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3315() throws Throwable {
+    public void test3314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3315");
+            System.out.format("%n%s%n", "RegressionTest6.test3314");
         org.apache.commons.codec.StringEncoder stringEncoder0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -9055,9 +9023,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3316() throws Throwable {
+    public void test3315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3316");
+            System.out.format("%n%s%n", "RegressionTest6.test3315");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -9078,9 +9046,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3317() throws Throwable {
+    public void test3316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3317");
+            System.out.format("%n%s%n", "RegressionTest6.test3316");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -9100,9 +9068,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3318() throws Throwable {
+    public void test3317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3318");
+            System.out.format("%n%s%n", "RegressionTest6.test3317");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -9133,9 +9101,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3319() throws Throwable {
+    public void test3318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3319");
+            System.out.format("%n%s%n", "RegressionTest6.test3318");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9158,9 +9126,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3320() throws Throwable {
+    public void test3319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3320");
+            System.out.format("%n%s%n", "RegressionTest6.test3319");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -9196,9 +9164,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3321() throws Throwable {
+    public void test3320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3321");
+            System.out.format("%n%s%n", "RegressionTest6.test3320");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -9227,9 +9195,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3322() throws Throwable {
+    public void test3321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3322");
+            System.out.format("%n%s%n", "RegressionTest6.test3321");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -9268,9 +9236,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3323() throws Throwable {
+    public void test3322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3323");
+            System.out.format("%n%s%n", "RegressionTest6.test3322");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -9294,9 +9262,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3324() throws Throwable {
+    public void test3323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3324");
+            System.out.format("%n%s%n", "RegressionTest6.test3323");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -9317,9 +9285,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3325() throws Throwable {
+    public void test3324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3325");
+            System.out.format("%n%s%n", "RegressionTest6.test3324");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -9340,9 +9308,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3326() throws Throwable {
+    public void test3325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3326");
+            System.out.format("%n%s%n", "RegressionTest6.test3325");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -9372,9 +9340,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3327() throws Throwable {
+    public void test3326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3327");
+            System.out.format("%n%s%n", "RegressionTest6.test3326");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -9395,9 +9363,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3328() throws Throwable {
+    public void test3327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3328");
+            System.out.format("%n%s%n", "RegressionTest6.test3327");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -9416,9 +9384,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3329() throws Throwable {
+    public void test3328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3329");
+            System.out.format("%n%s%n", "RegressionTest6.test3328");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9449,9 +9417,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3330() throws Throwable {
+    public void test3329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3330");
+            System.out.format("%n%s%n", "RegressionTest6.test3329");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9472,9 +9440,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3331() throws Throwable {
+    public void test3330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3331");
+            System.out.format("%n%s%n", "RegressionTest6.test3330");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -9507,9 +9475,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3332() throws Throwable {
+    public void test3331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3332");
+            System.out.format("%n%s%n", "RegressionTest6.test3331");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9565,9 +9533,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3333() throws Throwable {
+    public void test3332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3333");
+            System.out.format("%n%s%n", "RegressionTest6.test3332");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9590,9 +9558,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3334() throws Throwable {
+    public void test3333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3334");
+            System.out.format("%n%s%n", "RegressionTest6.test3333");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -9617,9 +9585,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3335() throws Throwable {
+    public void test3334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3335");
+            System.out.format("%n%s%n", "RegressionTest6.test3334");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -9640,9 +9608,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3336() throws Throwable {
+    public void test3335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3336");
+            System.out.format("%n%s%n", "RegressionTest6.test3335");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -9665,9 +9633,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3337() throws Throwable {
+    public void test3336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3337");
+            System.out.format("%n%s%n", "RegressionTest6.test3336");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9694,9 +9662,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3338() throws Throwable {
+    public void test3337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3338");
+            System.out.format("%n%s%n", "RegressionTest6.test3337");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -9732,9 +9700,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3339() throws Throwable {
+    public void test3338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3339");
+            System.out.format("%n%s%n", "RegressionTest6.test3338");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -9757,9 +9725,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3340() throws Throwable {
+    public void test3339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3340");
+            System.out.format("%n%s%n", "RegressionTest6.test3339");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -9779,9 +9747,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3341() throws Throwable {
+    public void test3340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3341");
+            System.out.format("%n%s%n", "RegressionTest6.test3340");
         org.apache.commons.codec.StringEncoder stringEncoder0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -9793,9 +9761,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3342() throws Throwable {
+    public void test3341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3342");
+            System.out.format("%n%s%n", "RegressionTest6.test3341");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -9816,9 +9784,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3343() throws Throwable {
+    public void test3342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3343");
+            System.out.format("%n%s%n", "RegressionTest6.test3342");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -9837,9 +9805,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3344() throws Throwable {
+    public void test3343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3344");
+            System.out.format("%n%s%n", "RegressionTest6.test3343");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -9874,9 +9842,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3345() throws Throwable {
+    public void test3344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3345");
+            System.out.format("%n%s%n", "RegressionTest6.test3344");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -9934,9 +9902,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3346() throws Throwable {
+    public void test3345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3346");
+            System.out.format("%n%s%n", "RegressionTest6.test3345");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9973,9 +9941,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3347() throws Throwable {
+    public void test3346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3347");
+            System.out.format("%n%s%n", "RegressionTest6.test3346");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -10003,9 +9971,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3348() throws Throwable {
+    public void test3347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3348");
+            System.out.format("%n%s%n", "RegressionTest6.test3347");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -10066,9 +10034,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3349() throws Throwable {
+    public void test3348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3349");
+            System.out.format("%n%s%n", "RegressionTest6.test3348");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -10096,9 +10064,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3350() throws Throwable {
+    public void test3349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3350");
+            System.out.format("%n%s%n", "RegressionTest6.test3349");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -10137,9 +10105,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3351() throws Throwable {
+    public void test3350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3351");
+            System.out.format("%n%s%n", "RegressionTest6.test3350");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -10158,9 +10126,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3352() throws Throwable {
+    public void test3351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3352");
+            System.out.format("%n%s%n", "RegressionTest6.test3351");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -10195,9 +10163,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3353() throws Throwable {
+    public void test3352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3353");
+            System.out.format("%n%s%n", "RegressionTest6.test3352");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         int int5 = soundex4.getMaxLength();
@@ -10220,9 +10188,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3354() throws Throwable {
+    public void test3353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3354");
+            System.out.format("%n%s%n", "RegressionTest6.test3353");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode(' ');
@@ -10243,9 +10211,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3355() throws Throwable {
+    public void test3354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3355");
+            System.out.format("%n%s%n", "RegressionTest6.test3354");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -10282,9 +10250,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3356() throws Throwable {
+    public void test3355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3356");
+            System.out.format("%n%s%n", "RegressionTest6.test3355");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -10315,9 +10283,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3357() throws Throwable {
+    public void test3356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3357");
+            System.out.format("%n%s%n", "RegressionTest6.test3356");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -10357,9 +10325,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3358() throws Throwable {
+    public void test3357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3358");
+            System.out.format("%n%s%n", "RegressionTest6.test3357");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -10395,9 +10363,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3359() throws Throwable {
+    public void test3358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3359");
+            System.out.format("%n%s%n", "RegressionTest6.test3358");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -10424,9 +10392,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3360() throws Throwable {
+    public void test3359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3360");
+            System.out.format("%n%s%n", "RegressionTest6.test3359");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -10445,9 +10413,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3361() throws Throwable {
+    public void test3360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3361");
+            System.out.format("%n%s%n", "RegressionTest6.test3360");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -10468,9 +10436,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3362() throws Throwable {
+    public void test3361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3362");
+            System.out.format("%n%s%n", "RegressionTest6.test3361");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -10489,9 +10457,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3363() throws Throwable {
+    public void test3362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3363");
+            System.out.format("%n%s%n", "RegressionTest6.test3362");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -10509,9 +10477,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3364() throws Throwable {
+    public void test3363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3364");
+            System.out.format("%n%s%n", "RegressionTest6.test3363");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -10552,9 +10520,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3365() throws Throwable {
+    public void test3364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3365");
+            System.out.format("%n%s%n", "RegressionTest6.test3364");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -10574,9 +10542,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3366() throws Throwable {
+    public void test3365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3366");
+            System.out.format("%n%s%n", "RegressionTest6.test3365");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -10609,9 +10577,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3367() throws Throwable {
+    public void test3366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3367");
+            System.out.format("%n%s%n", "RegressionTest6.test3366");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -10636,9 +10604,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3368() throws Throwable {
+    public void test3367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3368");
+            System.out.format("%n%s%n", "RegressionTest6.test3367");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -10684,9 +10652,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3369() throws Throwable {
+    public void test3368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3369");
+            System.out.format("%n%s%n", "RegressionTest6.test3368");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -10707,9 +10675,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3370() throws Throwable {
+    public void test3369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3370");
+            System.out.format("%n%s%n", "RegressionTest6.test3369");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -10794,9 +10762,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3371() throws Throwable {
+    public void test3370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3371");
+            System.out.format("%n%s%n", "RegressionTest6.test3370");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -10819,9 +10787,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3372() throws Throwable {
+    public void test3371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3372");
+            System.out.format("%n%s%n", "RegressionTest6.test3371");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -10842,9 +10810,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3373() throws Throwable {
+    public void test3372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3373");
+            System.out.format("%n%s%n", "RegressionTest6.test3372");
         org.apache.commons.codec.StringEncoder stringEncoder0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -10856,9 +10824,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3374() throws Throwable {
+    public void test3373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3374");
+            System.out.format("%n%s%n", "RegressionTest6.test3373");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -10894,9 +10862,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3375() throws Throwable {
+    public void test3374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3375");
+            System.out.format("%n%s%n", "RegressionTest6.test3374");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -10921,9 +10889,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3376() throws Throwable {
+    public void test3375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3376");
+            System.out.format("%n%s%n", "RegressionTest6.test3375");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -10941,9 +10909,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3377() throws Throwable {
+    public void test3376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3377");
+            System.out.format("%n%s%n", "RegressionTest6.test3376");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength((int) (short) -1);
@@ -10962,9 +10930,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3378() throws Throwable {
+    public void test3377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3378");
+            System.out.format("%n%s%n", "RegressionTest6.test3377");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -10996,9 +10964,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3379() throws Throwable {
+    public void test3378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3379");
+            System.out.format("%n%s%n", "RegressionTest6.test3378");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -11023,9 +10991,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3380() throws Throwable {
+    public void test3379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3380");
+            System.out.format("%n%s%n", "RegressionTest6.test3379");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -11060,9 +11028,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3381() throws Throwable {
+    public void test3380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3381");
+            System.out.format("%n%s%n", "RegressionTest6.test3380");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -11092,9 +11060,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3382() throws Throwable {
+    public void test3381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3382");
+            System.out.format("%n%s%n", "RegressionTest6.test3381");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11115,9 +11083,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3383() throws Throwable {
+    public void test3382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3383");
+            System.out.format("%n%s%n", "RegressionTest6.test3382");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -11150,9 +11118,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3384() throws Throwable {
+    public void test3383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3384");
+            System.out.format("%n%s%n", "RegressionTest6.test3383");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11193,9 +11161,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3385() throws Throwable {
+    public void test3384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3385");
+            System.out.format("%n%s%n", "RegressionTest6.test3384");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -11218,9 +11186,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3386() throws Throwable {
+    public void test3385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3386");
+            System.out.format("%n%s%n", "RegressionTest6.test3385");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -11240,9 +11208,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3387() throws Throwable {
+    public void test3386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3387");
+            System.out.format("%n%s%n", "RegressionTest6.test3386");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11271,9 +11239,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3388() throws Throwable {
+    public void test3387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3388");
+            System.out.format("%n%s%n", "RegressionTest6.test3387");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -11292,9 +11260,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3389() throws Throwable {
+    public void test3388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3389");
+            System.out.format("%n%s%n", "RegressionTest6.test3388");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -11329,9 +11297,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3390() throws Throwable {
+    public void test3389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3390");
+            System.out.format("%n%s%n", "RegressionTest6.test3389");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -11364,9 +11332,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3391() throws Throwable {
+    public void test3390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3391");
+            System.out.format("%n%s%n", "RegressionTest6.test3390");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -11419,9 +11387,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3392() throws Throwable {
+    public void test3391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3392");
+            System.out.format("%n%s%n", "RegressionTest6.test3391");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11441,9 +11409,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3393() throws Throwable {
+    public void test3392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3393");
+            System.out.format("%n%s%n", "RegressionTest6.test3392");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11478,9 +11446,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3394() throws Throwable {
+    public void test3393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3394");
+            System.out.format("%n%s%n", "RegressionTest6.test3393");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -11537,9 +11505,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3395() throws Throwable {
+    public void test3394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3395");
+            System.out.format("%n%s%n", "RegressionTest6.test3394");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11577,9 +11545,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3396() throws Throwable {
+    public void test3395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3396");
+            System.out.format("%n%s%n", "RegressionTest6.test3395");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -11606,9 +11574,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3397() throws Throwable {
+    public void test3396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3397");
+            System.out.format("%n%s%n", "RegressionTest6.test3396");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11631,9 +11599,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3398() throws Throwable {
+    public void test3397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3398");
+            System.out.format("%n%s%n", "RegressionTest6.test3397");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11676,9 +11644,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3399() throws Throwable {
+    public void test3398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3399");
+            System.out.format("%n%s%n", "RegressionTest6.test3398");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -11711,9 +11679,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3400() throws Throwable {
+    public void test3399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3400");
+            System.out.format("%n%s%n", "RegressionTest6.test3399");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -11735,9 +11703,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3401() throws Throwable {
+    public void test3400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3401");
+            System.out.format("%n%s%n", "RegressionTest6.test3400");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -11759,9 +11727,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3402() throws Throwable {
+    public void test3401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3402");
+            System.out.format("%n%s%n", "RegressionTest6.test3401");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11777,9 +11745,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3403() throws Throwable {
+    public void test3402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3403");
+            System.out.format("%n%s%n", "RegressionTest6.test3402");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -11800,9 +11768,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3404() throws Throwable {
+    public void test3403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3404");
+            System.out.format("%n%s%n", "RegressionTest6.test3403");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength(1);
@@ -11823,9 +11791,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3405() throws Throwable {
+    public void test3404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3405");
+            System.out.format("%n%s%n", "RegressionTest6.test3404");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11848,9 +11816,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3406() throws Throwable {
+    public void test3405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3406");
+            System.out.format("%n%s%n", "RegressionTest6.test3405");
         org.apache.commons.codec.StringEncoder stringEncoder0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -11862,9 +11830,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3407() throws Throwable {
+    public void test3406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3407");
+            System.out.format("%n%s%n", "RegressionTest6.test3406");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11891,9 +11859,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3408() throws Throwable {
+    public void test3407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3408");
+            System.out.format("%n%s%n", "RegressionTest6.test3407");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -11925,9 +11893,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3409() throws Throwable {
+    public void test3408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3409");
+            System.out.format("%n%s%n", "RegressionTest6.test3408");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -11960,9 +11928,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3410() throws Throwable {
+    public void test3409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3410");
+            System.out.format("%n%s%n", "RegressionTest6.test3409");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -12002,9 +11970,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3411() throws Throwable {
+    public void test3410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3411");
+            System.out.format("%n%s%n", "RegressionTest6.test3410");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12033,9 +12001,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3412() throws Throwable {
+    public void test3411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3412");
+            System.out.format("%n%s%n", "RegressionTest6.test3411");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12072,9 +12040,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3413() throws Throwable {
+    public void test3412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3413");
+            System.out.format("%n%s%n", "RegressionTest6.test3412");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -12099,9 +12067,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3414() throws Throwable {
+    public void test3413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3414");
+            System.out.format("%n%s%n", "RegressionTest6.test3413");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12136,9 +12104,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3415() throws Throwable {
+    public void test3414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3415");
+            System.out.format("%n%s%n", "RegressionTest6.test3414");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12165,9 +12133,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3416() throws Throwable {
+    public void test3415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3416");
+            System.out.format("%n%s%n", "RegressionTest6.test3415");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -12201,9 +12169,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3417() throws Throwable {
+    public void test3416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3417");
+            System.out.format("%n%s%n", "RegressionTest6.test3416");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12226,9 +12194,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3418() throws Throwable {
+    public void test3417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3418");
+            System.out.format("%n%s%n", "RegressionTest6.test3417");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -12270,9 +12238,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3419() throws Throwable {
+    public void test3418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3419");
+            System.out.format("%n%s%n", "RegressionTest6.test3418");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12297,9 +12265,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3420() throws Throwable {
+    public void test3419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3420");
+            System.out.format("%n%s%n", "RegressionTest6.test3419");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12324,9 +12292,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3421() throws Throwable {
+    public void test3420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3421");
+            System.out.format("%n%s%n", "RegressionTest6.test3420");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12349,9 +12317,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3422() throws Throwable {
+    public void test3421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3422");
+            System.out.format("%n%s%n", "RegressionTest6.test3421");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -12394,9 +12362,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3423() throws Throwable {
+    public void test3422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3423");
+            System.out.format("%n%s%n", "RegressionTest6.test3422");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -12423,9 +12391,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3424() throws Throwable {
+    public void test3423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3424");
+            System.out.format("%n%s%n", "RegressionTest6.test3423");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -12450,9 +12418,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3425() throws Throwable {
+    public void test3424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3425");
+            System.out.format("%n%s%n", "RegressionTest6.test3424");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -12474,9 +12442,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3426() throws Throwable {
+    public void test3425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3426");
+            System.out.format("%n%s%n", "RegressionTest6.test3425");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -12498,9 +12466,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3427() throws Throwable {
+    public void test3426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3427");
+            System.out.format("%n%s%n", "RegressionTest6.test3426");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -12523,9 +12491,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3428() throws Throwable {
+    public void test3427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3428");
+            System.out.format("%n%s%n", "RegressionTest6.test3427");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -12554,9 +12522,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3429() throws Throwable {
+    public void test3428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3429");
+            System.out.format("%n%s%n", "RegressionTest6.test3428");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -12583,9 +12551,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3430() throws Throwable {
+    public void test3429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3430");
+            System.out.format("%n%s%n", "RegressionTest6.test3429");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -12608,9 +12576,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3431() throws Throwable {
+    public void test3430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3431");
+            System.out.format("%n%s%n", "RegressionTest6.test3430");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode('a');
@@ -12633,9 +12601,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3432() throws Throwable {
+    public void test3431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3432");
+            System.out.format("%n%s%n", "RegressionTest6.test3431");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12656,9 +12624,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3433() throws Throwable {
+    public void test3432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3433");
+            System.out.format("%n%s%n", "RegressionTest6.test3432");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12683,9 +12651,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3434() throws Throwable {
+    public void test3433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3434");
+            System.out.format("%n%s%n", "RegressionTest6.test3433");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -12717,9 +12685,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3435() throws Throwable {
+    public void test3434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3435");
+            System.out.format("%n%s%n", "RegressionTest6.test3434");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -12748,9 +12716,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3436() throws Throwable {
+    public void test3435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3436");
+            System.out.format("%n%s%n", "RegressionTest6.test3435");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12775,9 +12743,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3437() throws Throwable {
+    public void test3436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3437");
+            System.out.format("%n%s%n", "RegressionTest6.test3436");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         // The following exception was thrown during execution in test generation
@@ -12794,9 +12762,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3438() throws Throwable {
+    public void test3437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3438");
+            System.out.format("%n%s%n", "RegressionTest6.test3437");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -12817,9 +12785,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3439() throws Throwable {
+    public void test3438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3439");
+            System.out.format("%n%s%n", "RegressionTest6.test3438");
         char[] charArray2 = new char[] { '4', 'a' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -12840,9 +12808,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3440() throws Throwable {
+    public void test3439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3440");
+            System.out.format("%n%s%n", "RegressionTest6.test3439");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -12863,9 +12831,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3441() throws Throwable {
+    public void test3440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3441");
+            System.out.format("%n%s%n", "RegressionTest6.test3440");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12893,9 +12861,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3442() throws Throwable {
+    public void test3441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3442");
+            System.out.format("%n%s%n", "RegressionTest6.test3441");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12946,9 +12914,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3443() throws Throwable {
+    public void test3442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3443");
+            System.out.format("%n%s%n", "RegressionTest6.test3442");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -12988,9 +12956,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3444() throws Throwable {
+    public void test3443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3444");
+            System.out.format("%n%s%n", "RegressionTest6.test3443");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -13021,9 +12989,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3445() throws Throwable {
+    public void test3444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3445");
+            System.out.format("%n%s%n", "RegressionTest6.test3444");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -13043,9 +13011,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3446() throws Throwable {
+    public void test3445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3446");
+            System.out.format("%n%s%n", "RegressionTest6.test3445");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -13090,9 +13058,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3447() throws Throwable {
+    public void test3446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3447");
+            System.out.format("%n%s%n", "RegressionTest6.test3446");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -13116,9 +13084,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3448() throws Throwable {
+    public void test3447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3448");
+            System.out.format("%n%s%n", "RegressionTest6.test3447");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -13136,9 +13104,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3449() throws Throwable {
+    public void test3448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3449");
+            System.out.format("%n%s%n", "RegressionTest6.test3448");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -13175,9 +13143,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3450() throws Throwable {
+    public void test3449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3450");
+            System.out.format("%n%s%n", "RegressionTest6.test3449");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -13200,9 +13168,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3451() throws Throwable {
+    public void test3450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3451");
+            System.out.format("%n%s%n", "RegressionTest6.test3450");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -13229,9 +13197,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3452() throws Throwable {
+    public void test3451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3452");
+            System.out.format("%n%s%n", "RegressionTest6.test3451");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -13264,9 +13232,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3453() throws Throwable {
+    public void test3452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3453");
+            System.out.format("%n%s%n", "RegressionTest6.test3452");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -13293,9 +13261,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3454() throws Throwable {
+    public void test3453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3454");
+            System.out.format("%n%s%n", "RegressionTest6.test3453");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -13316,9 +13284,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3455() throws Throwable {
+    public void test3454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3455");
+            System.out.format("%n%s%n", "RegressionTest6.test3454");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -13357,9 +13325,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3456() throws Throwable {
+    public void test3455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3456");
+            System.out.format("%n%s%n", "RegressionTest6.test3455");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -13395,9 +13363,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3457() throws Throwable {
+    public void test3456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3457");
+            System.out.format("%n%s%n", "RegressionTest6.test3456");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -13435,9 +13403,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3458() throws Throwable {
+    public void test3457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3458");
+            System.out.format("%n%s%n", "RegressionTest6.test3457");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -13451,9 +13419,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3459() throws Throwable {
+    public void test3458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3459");
+            System.out.format("%n%s%n", "RegressionTest6.test3458");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -13482,9 +13450,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3460() throws Throwable {
+    public void test3459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3460");
+            System.out.format("%n%s%n", "RegressionTest6.test3459");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -13500,9 +13468,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3461() throws Throwable {
+    public void test3460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3461");
+            System.out.format("%n%s%n", "RegressionTest6.test3460");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -13535,9 +13503,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3462() throws Throwable {
+    public void test3461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3462");
+            System.out.format("%n%s%n", "RegressionTest6.test3461");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength((int) (short) -1);
@@ -13556,9 +13524,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3463() throws Throwable {
+    public void test3462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3463");
+            System.out.format("%n%s%n", "RegressionTest6.test3462");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -13581,9 +13549,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3464() throws Throwable {
+    public void test3463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3464");
+            System.out.format("%n%s%n", "RegressionTest6.test3463");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -13650,9 +13618,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3465() throws Throwable {
+    public void test3464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3465");
+            System.out.format("%n%s%n", "RegressionTest6.test3464");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -13677,9 +13645,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3466() throws Throwable {
+    public void test3465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3466");
+            System.out.format("%n%s%n", "RegressionTest6.test3465");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -13704,9 +13672,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3467() throws Throwable {
+    public void test3466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3467");
+            System.out.format("%n%s%n", "RegressionTest6.test3466");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -13733,9 +13701,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3468() throws Throwable {
+    public void test3467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3468");
+            System.out.format("%n%s%n", "RegressionTest6.test3467");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -13777,9 +13745,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3469() throws Throwable {
+    public void test3468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3469");
+            System.out.format("%n%s%n", "RegressionTest6.test3468");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -13805,9 +13773,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3470() throws Throwable {
+    public void test3469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3470");
+            System.out.format("%n%s%n", "RegressionTest6.test3469");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -13830,9 +13798,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3471() throws Throwable {
+    public void test3470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3471");
+            System.out.format("%n%s%n", "RegressionTest6.test3470");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -13863,9 +13831,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3472() throws Throwable {
+    public void test3471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3472");
+            System.out.format("%n%s%n", "RegressionTest6.test3471");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -13888,9 +13856,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3473() throws Throwable {
+    public void test3472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3473");
+            System.out.format("%n%s%n", "RegressionTest6.test3472");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -13915,9 +13883,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3474() throws Throwable {
+    public void test3473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3474");
+            System.out.format("%n%s%n", "RegressionTest6.test3473");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -13938,9 +13906,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3475() throws Throwable {
+    public void test3474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3475");
+            System.out.format("%n%s%n", "RegressionTest6.test3474");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -13998,9 +13966,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3476() throws Throwable {
+    public void test3475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3476");
+            System.out.format("%n%s%n", "RegressionTest6.test3475");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -14035,9 +14003,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3477() throws Throwable {
+    public void test3476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3477");
+            System.out.format("%n%s%n", "RegressionTest6.test3476");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -14057,9 +14025,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3478() throws Throwable {
+    public void test3477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3478");
+            System.out.format("%n%s%n", "RegressionTest6.test3477");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14109,9 +14077,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3479() throws Throwable {
+    public void test3478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3479");
+            System.out.format("%n%s%n", "RegressionTest6.test3478");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14132,9 +14100,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3480() throws Throwable {
+    public void test3479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3480");
+            System.out.format("%n%s%n", "RegressionTest6.test3479");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14156,9 +14124,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3481() throws Throwable {
+    public void test3480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3481");
+            System.out.format("%n%s%n", "RegressionTest6.test3480");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -14171,9 +14139,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3482() throws Throwable {
+    public void test3481() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3482");
+            System.out.format("%n%s%n", "RegressionTest6.test3481");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -14192,9 +14160,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3483() throws Throwable {
+    public void test3482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3483");
+            System.out.format("%n%s%n", "RegressionTest6.test3482");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14212,9 +14180,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3484() throws Throwable {
+    public void test3483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3484");
+            System.out.format("%n%s%n", "RegressionTest6.test3483");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -14237,9 +14205,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3485() throws Throwable {
+    public void test3484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3485");
+            System.out.format("%n%s%n", "RegressionTest6.test3484");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -14257,9 +14225,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3486() throws Throwable {
+    public void test3485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3486");
+            System.out.format("%n%s%n", "RegressionTest6.test3485");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -14284,9 +14252,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3487() throws Throwable {
+    public void test3486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3487");
+            System.out.format("%n%s%n", "RegressionTest6.test3486");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -14321,9 +14289,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3488() throws Throwable {
+    public void test3487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3488");
+            System.out.format("%n%s%n", "RegressionTest6.test3487");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -14360,9 +14328,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3489() throws Throwable {
+    public void test3488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3489");
+            System.out.format("%n%s%n", "RegressionTest6.test3488");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -14379,9 +14347,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3490() throws Throwable {
+    public void test3489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3490");
+            System.out.format("%n%s%n", "RegressionTest6.test3489");
         char[] charArray2 = new char[] { '4', 'a' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -14400,9 +14368,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3491() throws Throwable {
+    public void test3490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3491");
+            System.out.format("%n%s%n", "RegressionTest6.test3490");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -14429,9 +14397,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3492() throws Throwable {
+    public void test3491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3492");
+            System.out.format("%n%s%n", "RegressionTest6.test3491");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -14459,9 +14427,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3493() throws Throwable {
+    public void test3492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3493");
+            System.out.format("%n%s%n", "RegressionTest6.test3492");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -14496,9 +14464,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3494() throws Throwable {
+    public void test3493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3494");
+            System.out.format("%n%s%n", "RegressionTest6.test3493");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14527,9 +14495,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3495() throws Throwable {
+    public void test3494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3495");
+            System.out.format("%n%s%n", "RegressionTest6.test3494");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -14554,9 +14522,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3496() throws Throwable {
+    public void test3495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3496");
+            System.out.format("%n%s%n", "RegressionTest6.test3495");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -14574,9 +14542,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3497() throws Throwable {
+    public void test3496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3497");
+            System.out.format("%n%s%n", "RegressionTest6.test3496");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -14597,9 +14565,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3498() throws Throwable {
+    public void test3497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3498");
+            System.out.format("%n%s%n", "RegressionTest6.test3497");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -14626,9 +14594,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3499() throws Throwable {
+    public void test3498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3499");
+            System.out.format("%n%s%n", "RegressionTest6.test3498");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14662,9 +14630,9 @@ public class RegressionTest6 {
     }
 
     @Test
-    public void test3500() throws Throwable {
+    public void test3499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest6.test3500");
+            System.out.format("%n%s%n", "RegressionTest6.test3499");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -14690,6 +14658,23 @@ public class RegressionTest6 {
         org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
         org.junit.Assert.assertTrue("'" + char15 + "' != '" + '\000' + "'", char15 == '\000');
         org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+    }
+
+    @Test
+    public void test3500() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest6.test3500");
+        char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        java.lang.String str9 = refinedSoundex7.soundex("");
+        java.lang.Class<?> wildcardClass10 = refinedSoundex7.getClass();
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), " #aa#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), " #aa#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ , #, a, a, #]");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertNotNull(wildcardClass10);
     }
 }
 

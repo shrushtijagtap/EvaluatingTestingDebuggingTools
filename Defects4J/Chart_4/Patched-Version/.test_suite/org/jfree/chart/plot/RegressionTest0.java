@@ -50,7 +50,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart5 = org.jfree.chart.ChartFactory.createCandlestickChart("Last", "PlotOrientation.VERTICAL", "LGPL", oHLCDataset3, true);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@7ae82e3a is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@131d6d6a is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -113,7 +113,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart20 = org.jfree.chart.ChartFactory.createXYBarChart("", "0,0,0,0,0,0,0,0", false, "", (org.jfree.data.xy.IntervalXYDataset) timeSeriesCollection5, plotOrientation15, true, true, true);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@a6a6340 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@29686e67 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -250,7 +250,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart5 = org.jfree.chart.ChartFactory.createCandlestickChart("[10.0, 0.0]", "DatasetRenderingOrder.FORWARD", "0,0,0,0,0,0,0,0", oHLCDataset3, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@6cb4a42e is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@4ddf1518 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -484,7 +484,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedDomainXYPlot1.addRangeMarker((int) '#', (org.jfree.chart.plot.Marker) intervalMarker36, layer80, true);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@554ecf10 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@2290970 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -669,7 +669,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             intervalMarker38.addChangeListener((org.jfree.chart.event.MarkerChangeListener) combinedDomainXYPlot42);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@1a4f75c0 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@63e17a64 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -1530,7 +1530,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart5 = org.jfree.chart.ChartFactory.createCandlestickChart("ThreadContext", "MINOR", "RectangleAnchor.BOTTOM_RIGHT", oHLCDataset3, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@6e838cbc is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@7ad81585 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -1870,7 +1870,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart8 = org.jfree.chart.ChartFactory.createBubbleChart("ClassContext", "LGPL", "", xYZDataset3, plotOrientation4, false, true, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@2c71f575 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@6c3983f1 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -2444,7 +2444,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart18 = org.jfree.chart.ChartFactory.createXYStepChart("{0}", "", "ThreadContext", xYDataset3, plotOrientation13, false, true, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@5d05fab is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@1f0f82db is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -3569,7 +3569,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedRangeXYPlot0.add((org.jfree.chart.plot.XYPlot) combinedDomainXYPlot12);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@30bec222 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@6d297096 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -3752,7 +3752,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart20 = org.jfree.chart.ChartFactory.createBubbleChart("EXPAND", "RectangleEdge.RIGHT?series=5&amp;item=11", "Last", xYZDataset3, plotOrientation15, true, false, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@4150be53 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@19b23a23 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -5018,7 +5018,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart38 = org.jfree.chart.ChartFactory.createStackedBarChart3D("item", "ChartChangeEventType.GENERAL", "", categoryDataset3, plotOrientation6, false, true, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@52f18e90 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@20b41f9a is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -5263,7 +5263,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart17 = org.jfree.chart.ChartFactory.createXYStepChart("DateTickUnit[DateTickUnitType.HOUR, 100]", "item", "org.jfree.data.general.SeriesException: [10.0, 0.0]", (org.jfree.data.xy.XYDataset) timeSeriesCollection4, plotOrientation12, false, false, true);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@4a6745a9 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@463af863 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -6242,44 +6242,6 @@ public class RegressionTest0 {
     public void test141() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test141");
-        org.jfree.chart.axis.ValueAxis valueAxis0 = null;
-        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
-        org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
-        xYAreaRenderer3.clearSeriesStrokes(false);
-        org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator6 = null;
-        xYAreaRenderer3.setLegendItemURLGenerator(xYSeriesLabelGenerator6);
-        xYAreaRenderer3.setSeriesVisibleInLegend(0, (java.lang.Boolean) true);
-        boolean boolean14 = xYAreaRenderer3.isItemLabelVisible((int) '#', (int) '#', true);
-        combinedDomainXYPlot1.setRenderer((org.jfree.chart.renderer.xy.XYItemRenderer) xYAreaRenderer3);
-        org.jfree.chart.axis.ValueAxis valueAxis16 = null;
-        int int17 = combinedDomainXYPlot1.getRangeAxisIndex(valueAxis16);
-        org.jfree.chart.axis.ValueAxis valueAxis18 = null;
-        combinedDomainXYPlot1.setDomainAxis(valueAxis18);
-        org.jfree.chart.axis.ValueAxis valueAxis20 = null;
-        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot21 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis20);
-        java.awt.Graphics2D graphics2D22 = null;
-        org.jfree.chart.entity.EntityCollection entityCollection23 = null;
-        org.jfree.chart.ChartRenderingInfo chartRenderingInfo24 = new org.jfree.chart.ChartRenderingInfo(entityCollection23);
-        java.awt.Paint paint25 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
-        boolean boolean26 = chartRenderingInfo24.equals((java.lang.Object) paint25);
-        java.awt.geom.Rectangle2D rectangle2D27 = chartRenderingInfo24.getChartArea();
-        java.util.List list28 = null;
-        combinedDomainXYPlot21.drawDomainGridlines(graphics2D22, rectangle2D27, list28);
-        org.jfree.chart.axis.NumberAxis numberAxis31 = new org.jfree.chart.axis.NumberAxis("");
-        org.jfree.chart.entity.AxisEntity axisEntity34 = new org.jfree.chart.entity.AxisEntity((java.awt.Shape) rectangle2D27, (org.jfree.chart.axis.Axis) numberAxis31, "", "DatasetRenderingOrder.FORWARD");
-        combinedDomainXYPlot1.setRangeAxis((org.jfree.chart.axis.ValueAxis) numberAxis31);
-        numberAxis31.setTickLabelsVisible(true);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertNotNull(paint25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNotNull(rectangle2D27);
-    }
-
-    @Test
-    public void test142() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test142");
         org.jfree.chart.title.TextTitle textTitle1 = new org.jfree.chart.title.TextTitle("");
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot3 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis2);
@@ -6303,9 +6265,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test143() throws Throwable {
+    public void test142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test143");
+            System.out.format("%n%s%n", "RegressionTest0.test142");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator6 = null;
@@ -6396,9 +6358,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test144() throws Throwable {
+    public void test143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test144");
+            System.out.format("%n%s%n", "RegressionTest0.test143");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -6421,9 +6383,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test145() throws Throwable {
+    public void test144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test145");
+            System.out.format("%n%s%n", "RegressionTest0.test144");
         java.util.Locale locale1 = null;
         java.lang.ClassLoader classLoader2 = null;
         java.util.ResourceBundle.Control control3 = null;
@@ -6437,9 +6399,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test146() throws Throwable {
+    public void test145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test146");
+            System.out.format("%n%s%n", "RegressionTest0.test145");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.awt.Color color4 = java.awt.Color.cyan;
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer6 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -6487,7 +6449,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedRangeXYPlot0.addRangeMarker((int) (byte) -1, (org.jfree.chart.plot.Marker) intervalMarker27, layer68, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@9dd0193 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@16d94ac9 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -6520,9 +6482,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test147() throws Throwable {
+    public void test146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test147");
+            System.out.format("%n%s%n", "RegressionTest0.test146");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -6592,9 +6554,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test148() throws Throwable {
+    public void test147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test148");
+            System.out.format("%n%s%n", "RegressionTest0.test147");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         org.jfree.chart.labels.StandardXYToolTipGenerator standardXYToolTipGenerator3 = org.jfree.chart.labels.StandardXYToolTipGenerator.getTimeSeriesInstance();
         java.text.NumberFormat numberFormat4 = standardXYToolTipGenerator3.getXFormat();
@@ -6608,9 +6570,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test149() throws Throwable {
+    public void test148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test149");
+            System.out.format("%n%s%n", "RegressionTest0.test148");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.axis.ValueAxis valueAxis3 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot4 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis3);
@@ -6625,9 +6587,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test150() throws Throwable {
+    public void test149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test150");
+            System.out.format("%n%s%n", "RegressionTest0.test149");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -6668,9 +6630,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test151() throws Throwable {
+    public void test150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test151");
+            System.out.format("%n%s%n", "RegressionTest0.test150");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         org.jfree.chart.plot.PiePlot piePlot1 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup2 = piePlot1.getDatasetGroup();
@@ -6704,9 +6666,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test152() throws Throwable {
+    public void test151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test152");
+            System.out.format("%n%s%n", "RegressionTest0.test151");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -6736,9 +6698,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test153() throws Throwable {
+    public void test152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test153");
+            System.out.format("%n%s%n", "RegressionTest0.test152");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -6815,9 +6777,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test154() throws Throwable {
+    public void test153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test154");
+            System.out.format("%n%s%n", "RegressionTest0.test153");
         java.util.Locale locale1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -6829,9 +6791,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test155() throws Throwable {
+    public void test154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test155");
+            System.out.format("%n%s%n", "RegressionTest0.test154");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -6868,9 +6830,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test156() throws Throwable {
+    public void test155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test156");
+            System.out.format("%n%s%n", "RegressionTest0.test155");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.axis.ValueAxis valueAxis3 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot4 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis3);
@@ -6941,9 +6903,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test157() throws Throwable {
+    public void test156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test157");
+            System.out.format("%n%s%n", "RegressionTest0.test156");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.awt.Stroke stroke1 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
         combinedRangeXYPlot0.setRangeCrosshairStroke(stroke1);
@@ -6959,9 +6921,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test158() throws Throwable {
+    public void test157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test158");
+            System.out.format("%n%s%n", "RegressionTest0.test157");
         org.jfree.chart.util.GradientPaintTransformType gradientPaintTransformType0 = org.jfree.chart.util.GradientPaintTransformType.HORIZONTAL;
         org.jfree.chart.util.StandardGradientPaintTransformer standardGradientPaintTransformer1 = new org.jfree.chart.util.StandardGradientPaintTransformer(gradientPaintTransformType0);
         java.lang.Object obj2 = standardGradientPaintTransformer1.clone();
@@ -7032,9 +6994,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test159() throws Throwable {
+    public void test158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test159");
+            System.out.format("%n%s%n", "RegressionTest0.test158");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -7089,9 +7051,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test160() throws Throwable {
+    public void test159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test160");
+            System.out.format("%n%s%n", "RegressionTest0.test159");
         org.jfree.chart.block.BorderArrangement borderArrangement0 = new org.jfree.chart.block.BorderArrangement();
         java.util.TimeZone timeZone1 = null;
         org.jfree.data.time.TimeSeriesCollection timeSeriesCollection2 = new org.jfree.data.time.TimeSeriesCollection(timeZone1);
@@ -7129,9 +7091,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test161() throws Throwable {
+    public void test160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test161");
+            System.out.format("%n%s%n", "RegressionTest0.test160");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -7198,9 +7160,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test162() throws Throwable {
+    public void test161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test162");
+            System.out.format("%n%s%n", "RegressionTest0.test161");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -7258,9 +7220,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test163() throws Throwable {
+    public void test162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test163");
+            System.out.format("%n%s%n", "RegressionTest0.test162");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator3 = barRenderer3D2.getBaseToolTipGenerator();
         boolean boolean6 = barRenderer3D2.getItemVisible(0, 8);
@@ -7271,9 +7233,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test164() throws Throwable {
+    public void test163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test164");
+            System.out.format("%n%s%n", "RegressionTest0.test163");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -7291,9 +7253,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test165() throws Throwable {
+    public void test164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test165");
+            System.out.format("%n%s%n", "RegressionTest0.test164");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         double double1 = combinedRangeXYPlot0.getGap();
         java.awt.Paint paint2 = combinedRangeXYPlot0.getDomainTickBandPaint();
@@ -7302,9 +7264,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test166() throws Throwable {
+    public void test165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test166");
+            System.out.format("%n%s%n", "RegressionTest0.test165");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -7392,9 +7354,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test167() throws Throwable {
+    public void test166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test167");
+            System.out.format("%n%s%n", "RegressionTest0.test166");
         org.jfree.data.time.Year year2 = new org.jfree.data.time.Year((int) (short) 0);
         long long3 = year2.getFirstMillisecond();
         org.jfree.data.time.Year year5 = new org.jfree.data.time.Year((int) (short) 0);
@@ -7419,9 +7381,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test168() throws Throwable {
+    public void test167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test168");
+            System.out.format("%n%s%n", "RegressionTest0.test167");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -7450,9 +7412,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test169() throws Throwable {
+    public void test168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test169");
+            System.out.format("%n%s%n", "RegressionTest0.test168");
         org.jfree.chart.title.TextTitle textTitle1 = new org.jfree.chart.title.TextTitle("");
         boolean boolean2 = textTitle1.getExpandToFitSpace();
         textTitle1.setText("");
@@ -7465,9 +7427,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test170() throws Throwable {
+    public void test169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test170");
+            System.out.format("%n%s%n", "RegressionTest0.test169");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         int int1 = categoryPlot0.getDatasetCount();
         org.jfree.chart.util.RectangleEdge rectangleEdge5 = org.jfree.chart.util.RectangleEdge.RIGHT;
@@ -7512,9 +7474,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test171() throws Throwable {
+    public void test170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test171");
+            System.out.format("%n%s%n", "RegressionTest0.test170");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -7581,7 +7543,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedDomainXYPlot1.add((org.jfree.chart.plot.XYPlot) combinedDomainXYPlot71, 7);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@3141869d is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@542abbb6 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -7615,9 +7577,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test172() throws Throwable {
+    public void test171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test172");
+            System.out.format("%n%s%n", "RegressionTest0.test171");
         java.awt.Shape shape1 = org.jfree.chart.util.ShapeUtilities.createUpTriangle((float) (byte) 0);
         org.jfree.chart.title.TextTitle textTitle3 = new org.jfree.chart.title.TextTitle("");
         org.jfree.chart.entity.TitleEntity titleEntity6 = new org.jfree.chart.entity.TitleEntity(shape1, (org.jfree.chart.title.Title) textTitle3, "LGPL", "ThreadContext");
@@ -7626,9 +7588,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test173() throws Throwable {
+    public void test172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test173");
+            System.out.format("%n%s%n", "RegressionTest0.test172");
         org.jfree.chart.util.PaintMap paintMap0 = new org.jfree.chart.util.PaintMap();
         java.awt.Paint paint2 = paintMap0.getPaint((java.lang.Comparable) "ChartChangeEventType.GENERAL");
         java.awt.Color color5 = java.awt.Color.getColor("hi!", (int) (short) 100);
@@ -7656,9 +7618,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test174() throws Throwable {
+    public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test174");
+            System.out.format("%n%s%n", "RegressionTest0.test173");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -7684,9 +7646,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test175() throws Throwable {
+    public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test175");
+            System.out.format("%n%s%n", "RegressionTest0.test174");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         java.awt.Shape shape5 = barRenderer3D0.getBaseShape();
@@ -7768,9 +7730,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test176() throws Throwable {
+    public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test176");
+            System.out.format("%n%s%n", "RegressionTest0.test175");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         boolean boolean3 = xYAreaRenderer1.isSeriesItemLabelsVisible((int) (byte) 1);
         java.awt.Paint paint5 = xYAreaRenderer1.getSeriesPaint(0);
@@ -7825,9 +7787,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test177() throws Throwable {
+    public void test176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test177");
+            System.out.format("%n%s%n", "RegressionTest0.test176");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         org.jfree.chart.labels.StandardXYToolTipGenerator standardXYToolTipGenerator3 = org.jfree.chart.labels.StandardXYToolTipGenerator.getTimeSeriesInstance();
         java.text.NumberFormat numberFormat4 = standardXYToolTipGenerator3.getXFormat();
@@ -7878,51 +7840,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test178() throws Throwable {
+    public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test178");
-        org.jfree.chart.util.StrokeMap strokeMap0 = new org.jfree.chart.util.StrokeMap();
-        org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D();
-        java.awt.Font font6 = barRenderer3D2.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
-        java.awt.Shape shape7 = barRenderer3D2.getBaseShape();
-        barRenderer3D2.setBaseSeriesVisible(false);
-        org.jfree.chart.axis.ValueAxis valueAxis10 = null;
-        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot11 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis10);
-        org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer13 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
-        xYAreaRenderer13.clearSeriesStrokes(false);
-        org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator16 = null;
-        xYAreaRenderer13.setLegendItemURLGenerator(xYSeriesLabelGenerator16);
-        xYAreaRenderer13.setSeriesVisibleInLegend(0, (java.lang.Boolean) true);
-        boolean boolean24 = xYAreaRenderer13.isItemLabelVisible((int) '#', (int) '#', true);
-        combinedDomainXYPlot11.setRenderer((org.jfree.chart.renderer.xy.XYItemRenderer) xYAreaRenderer13);
-        org.jfree.chart.axis.ValueAxis valueAxis26 = null;
-        int int27 = combinedDomainXYPlot11.getRangeAxisIndex(valueAxis26);
-        boolean boolean28 = combinedDomainXYPlot11.isRangeCrosshairVisible();
-        org.jfree.chart.util.RectangleInsets rectangleInsets29 = org.jfree.chart.title.Title.DEFAULT_PADDING;
-        double double30 = rectangleInsets29.getLeft();
-        double double32 = rectangleInsets29.calculateLeftOutset((double) 0L);
-        combinedDomainXYPlot11.setAxisOffset(rectangleInsets29);
-        combinedDomainXYPlot11.setDomainGridlinesVisible(false);
-        java.awt.Paint paint36 = combinedDomainXYPlot11.getNoDataMessagePaint();
-        barRenderer3D2.setBaseItemLabelPaint(paint36, false);
-        java.awt.Stroke stroke39 = barRenderer3D2.getBaseOutlineStroke();
-        strokeMap0.put((java.lang.Comparable) "DateTickMarkPosition.MIDDLE", stroke39);
-        org.junit.Assert.assertNotNull(font6);
-        org.junit.Assert.assertNotNull(shape7);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-        org.junit.Assert.assertNotNull(rectangleInsets29);
-        org.junit.Assert.assertTrue("'" + double30 + "' != '" + 1.0d + "'", double30 == 1.0d);
-        org.junit.Assert.assertTrue("'" + double32 + "' != '" + 1.0d + "'", double32 == 1.0d);
-        org.junit.Assert.assertNotNull(paint36);
-        org.junit.Assert.assertNotNull(stroke39);
-    }
-
-    @Test
-    public void test179() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test179");
+            System.out.format("%n%s%n", "RegressionTest0.test177");
         org.jfree.chart.renderer.PaintScale paintScale0 = null;
         org.jfree.chart.axis.ValueAxis valueAxis1 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot2 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis1);
@@ -7949,9 +7869,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test180() throws Throwable {
+    public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test180");
+            System.out.format("%n%s%n", "RegressionTest0.test178");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -8003,9 +7923,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test181() throws Throwable {
+    public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test181");
+            System.out.format("%n%s%n", "RegressionTest0.test179");
         org.jfree.chart.renderer.xy.XYBarRenderer xYBarRenderer1 = new org.jfree.chart.renderer.xy.XYBarRenderer(10.0d);
         xYBarRenderer1.setMargin(0.05d);
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition4 = xYBarRenderer1.getNegativeItemLabelPositionFallback();
@@ -8015,9 +7935,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test182() throws Throwable {
+    public void test180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test182");
+            System.out.format("%n%s%n", "RegressionTest0.test180");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         int int1 = categoryPlot0.getDatasetCount();
         org.jfree.chart.util.RectangleEdge rectangleEdge5 = org.jfree.chart.util.RectangleEdge.RIGHT;
@@ -8044,9 +7964,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test183() throws Throwable {
+    public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test183");
+            System.out.format("%n%s%n", "RegressionTest0.test181");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         int int1 = combinedDomainXYPlot0.getBackgroundImageAlignment();
         org.jfree.chart.entity.EntityCollection entityCollection2 = null;
@@ -8077,9 +7997,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test184() throws Throwable {
+    public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test184");
+            System.out.format("%n%s%n", "RegressionTest0.test182");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         org.jfree.chart.axis.ValueAxis valueAxis1 = null;
         polarPlot0.setAxis(valueAxis1);
@@ -8087,9 +8007,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test185() throws Throwable {
+    public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test185");
+            System.out.format("%n%s%n", "RegressionTest0.test183");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -8112,9 +8032,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test186() throws Throwable {
+    public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test186");
+            System.out.format("%n%s%n", "RegressionTest0.test184");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
@@ -8170,17 +8090,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test187() throws Throwable {
+    public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test187");
+            System.out.format("%n%s%n", "RegressionTest0.test185");
         java.awt.Shape shape1 = org.jfree.chart.util.ShapeUtilities.createDiamond((float) 1577894400001L);
         org.junit.Assert.assertNotNull(shape1);
     }
 
     @Test
-    public void test188() throws Throwable {
+    public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test188");
+            System.out.format("%n%s%n", "RegressionTest0.test186");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
@@ -8246,7 +8166,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedRangeXYPlot0.addDomainMarker((org.jfree.chart.plot.Marker) intervalMarker66);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@df45ca8 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@51d1be32 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -8280,9 +8200,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test189() throws Throwable {
+    public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test189");
+            System.out.format("%n%s%n", "RegressionTest0.test187");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         categoryPlot0.clearAnnotations();
         org.jfree.chart.event.RendererChangeEvent rendererChangeEvent2 = null;
@@ -8380,9 +8300,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test190() throws Throwable {
+    public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test190");
+            System.out.format("%n%s%n", "RegressionTest0.test188");
         org.jfree.chart.axis.NumberAxis numberAxis1 = new org.jfree.chart.axis.NumberAxis("");
         int int2 = numberAxis1.getMinorTickCount();
         numberAxis1.setMinorTickMarksVisible(true);
@@ -8460,9 +8380,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test191() throws Throwable {
+    public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test191");
+            System.out.format("%n%s%n", "RegressionTest0.test189");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -8516,9 +8436,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test192() throws Throwable {
+    public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test192");
+            System.out.format("%n%s%n", "RegressionTest0.test190");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -8551,9 +8471,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test193() throws Throwable {
+    public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test193");
+            System.out.format("%n%s%n", "RegressionTest0.test191");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         double double1 = combinedRangeXYPlot0.getGap();
         org.jfree.chart.LegendItemCollection legendItemCollection2 = combinedRangeXYPlot0.getLegendItems();
@@ -8569,9 +8489,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test194() throws Throwable {
+    public void test192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test194");
+            System.out.format("%n%s%n", "RegressionTest0.test192");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -8620,9 +8540,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test195() throws Throwable {
+    public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test195");
+            System.out.format("%n%s%n", "RegressionTest0.test193");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         org.jfree.chart.plot.PiePlot piePlot1 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup2 = piePlot1.getDatasetGroup();
@@ -8702,9 +8622,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test196() throws Throwable {
+    public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test196");
+            System.out.format("%n%s%n", "RegressionTest0.test194");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer5 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer5.clearSeriesStrokes(false);
         org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator8 = null;
@@ -8726,9 +8646,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test197() throws Throwable {
+    public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test197");
+            System.out.format("%n%s%n", "RegressionTest0.test195");
         org.jfree.chart.title.TextTitle textTitle1 = new org.jfree.chart.title.TextTitle("");
         boolean boolean2 = textTitle1.getExpandToFitSpace();
         textTitle1.setText("");
@@ -8763,9 +8683,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test198() throws Throwable {
+    public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test198");
+            System.out.format("%n%s%n", "RegressionTest0.test196");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -8797,9 +8717,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test199() throws Throwable {
+    public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test199");
+            System.out.format("%n%s%n", "RegressionTest0.test197");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -8849,7 +8769,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedDomainXYPlot1.addChangeListener((org.jfree.chart.event.PlotChangeListener) combinedDomainXYPlot52);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@7c6d09d7 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@59922ffc is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -8868,9 +8788,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test200() throws Throwable {
+    public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test200");
+            System.out.format("%n%s%n", "RegressionTest0.test198");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.event.AxisChangeEvent axisChangeEvent2 = null;
@@ -8891,9 +8811,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test201() throws Throwable {
+    public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test201");
+            System.out.format("%n%s%n", "RegressionTest0.test199");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         boolean boolean3 = xYAreaRenderer1.isSeriesItemLabelsVisible((int) (byte) 1);
         java.awt.Paint paint4 = xYAreaRenderer1.getBaseLegendTextPaint();
@@ -9001,9 +8921,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test202() throws Throwable {
+    public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test202");
+            System.out.format("%n%s%n", "RegressionTest0.test200");
         org.jfree.chart.ui.ProjectInfo projectInfo0 = org.jfree.chart.JFreeChart.INFO;
         org.jfree.chart.ui.Library[] libraryArray1 = projectInfo0.getOptionalLibraries();
         org.jfree.chart.axis.SegmentedTimeline segmentedTimeline2 = org.jfree.chart.axis.SegmentedTimeline.newMondayThroughFridayTimeline();
@@ -9023,9 +8943,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test203() throws Throwable {
+    public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test203");
+            System.out.format("%n%s%n", "RegressionTest0.test201");
         org.jfree.chart.plot.RingPlot ringPlot0 = new org.jfree.chart.plot.RingPlot();
         ringPlot0.setSectionDepth(0.08d);
         java.awt.Graphics2D graphics2D3 = null;
@@ -9110,9 +9030,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test204() throws Throwable {
+    public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test204");
+            System.out.format("%n%s%n", "RegressionTest0.test202");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -9174,9 +9094,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test205() throws Throwable {
+    public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test205");
+            System.out.format("%n%s%n", "RegressionTest0.test203");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -9205,9 +9125,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test206() throws Throwable {
+    public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test206");
+            System.out.format("%n%s%n", "RegressionTest0.test204");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -9233,9 +9153,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test207() throws Throwable {
+    public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test207");
+            System.out.format("%n%s%n", "RegressionTest0.test205");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         combinedDomainXYPlot1.setDomainMinorGridlinesVisible(false);
@@ -9256,9 +9176,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test208() throws Throwable {
+    public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test208");
+            System.out.format("%n%s%n", "RegressionTest0.test206");
         java.util.TimeZone timeZone0 = null;
         org.jfree.data.time.TimeSeriesCollection timeSeriesCollection1 = new org.jfree.data.time.TimeSeriesCollection(timeZone0);
         org.jfree.chart.plot.CategoryPlot categoryPlot2 = new org.jfree.chart.plot.CategoryPlot();
@@ -9276,9 +9196,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test209() throws Throwable {
+    public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test209");
+            System.out.format("%n%s%n", "RegressionTest0.test207");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         java.awt.Paint paint1 = combinedDomainXYPlot0.getRangeGridlinePaint();
         java.awt.Graphics2D graphics2D2 = null;
@@ -9321,17 +9241,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test210() throws Throwable {
+    public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test210");
+            System.out.format("%n%s%n", "RegressionTest0.test208");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         combinedDomainXYPlot0.setDomainZeroBaselineVisible(false);
     }
 
     @Test
-    public void test211() throws Throwable {
+    public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test211");
+            System.out.format("%n%s%n", "RegressionTest0.test209");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -9364,9 +9284,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test212() throws Throwable {
+    public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test212");
+            System.out.format("%n%s%n", "RegressionTest0.test210");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.labels.CategorySeriesLabelGenerator categorySeriesLabelGenerator3 = null;
         barRenderer3D2.setLegendItemToolTipGenerator(categorySeriesLabelGenerator3);
@@ -9378,9 +9298,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test213() throws Throwable {
+    public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test213");
+            System.out.format("%n%s%n", "RegressionTest0.test211");
         org.jfree.chart.util.LogFormat logFormat5 = new org.jfree.chart.util.LogFormat((double) 7, "RectangleEdge.RIGHT", "", false);
         java.lang.StringBuffer stringBuffer7 = null;
         java.text.FieldPosition fieldPosition8 = null;
@@ -9421,9 +9341,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test214() throws Throwable {
+    public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test214");
+            System.out.format("%n%s%n", "RegressionTest0.test212");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         combinedRangeXYPlot0.setGap((double) (-16777216));
@@ -9451,23 +9371,23 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test215() throws Throwable {
+    public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test215");
+            System.out.format("%n%s%n", "RegressionTest0.test213");
         org.jfree.data.xy.OHLCDataset oHLCDataset3 = null;
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart5 = org.jfree.chart.ChartFactory.createCandlestickChart("", "", "", oHLCDataset3, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@4c8be5ee is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@4f6124c0 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
     }
 
     @Test
-    public void test216() throws Throwable {
+    public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test216");
+            System.out.format("%n%s%n", "RegressionTest0.test214");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangePannable(false);
@@ -9483,9 +9403,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test217() throws Throwable {
+    public void test215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test217");
+            System.out.format("%n%s%n", "RegressionTest0.test215");
         java.awt.Color color4 = org.jfree.chart.ChartColor.VERY_DARK_RED;
         org.jfree.chart.block.BlockBorder blockBorder5 = new org.jfree.chart.block.BlockBorder(0.025d, (double) 2, (double) 9, (double) 1L, (java.awt.Paint) color4);
         org.jfree.chart.block.BorderArrangement borderArrangement6 = new org.jfree.chart.block.BorderArrangement();
@@ -9578,9 +9498,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test218");
+            System.out.format("%n%s%n", "RegressionTest0.test216");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -9612,16 +9532,16 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test219");
+            System.out.format("%n%s%n", "RegressionTest0.test217");
         org.jfree.chart.axis.NumberTickUnit numberTickUnit1 = new org.jfree.chart.axis.NumberTickUnit(90.0d);
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test220");
+            System.out.format("%n%s%n", "RegressionTest0.test218");
         org.jfree.data.general.PieDataset pieDataset1 = null;
         java.util.Locale locale4 = null;
         // The following exception was thrown during execution in test generation
@@ -9634,9 +9554,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test221");
+            System.out.format("%n%s%n", "RegressionTest0.test219");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -9654,17 +9574,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test222");
+            System.out.format("%n%s%n", "RegressionTest0.test220");
         org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
         org.junit.Assert.assertNotNull(rectangleInsets0);
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test223");
+            System.out.format("%n%s%n", "RegressionTest0.test221");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         java.awt.Font font1 = polarPlot0.getAngleLabelFont();
         org.jfree.chart.axis.ValueAxis valueAxis2 = polarPlot0.getAxis();
@@ -9693,9 +9613,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test224");
+            System.out.format("%n%s%n", "RegressionTest0.test222");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         java.awt.Shape shape5 = barRenderer3D0.getBaseShape();
@@ -9792,9 +9712,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test225() throws Throwable {
+    public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test225");
+            System.out.format("%n%s%n", "RegressionTest0.test223");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -9838,9 +9758,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test226");
+            System.out.format("%n%s%n", "RegressionTest0.test224");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Color color2 = org.jfree.chart.ChartColor.DARK_BLUE;
@@ -9853,9 +9773,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test227");
+            System.out.format("%n%s%n", "RegressionTest0.test225");
         org.jfree.data.xy.TableXYDataset tableXYDataset3 = null;
         org.jfree.chart.plot.CategoryPlot categoryPlot4 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer6 = org.jfree.chart.util.Layer.FOREGROUND;
@@ -9869,7 +9789,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart17 = org.jfree.chart.ChartFactory.createStackedXYAreaChart("NO_CHANGE", "RectangleEdge.RIGHT", "12/31/69", tableXYDataset3, plotOrientation12, true, false, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@3146801 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@5ec5ca4 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -9881,9 +9801,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test228");
+            System.out.format("%n%s%n", "RegressionTest0.test226");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -9913,9 +9833,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test229() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test229");
+            System.out.format("%n%s%n", "RegressionTest0.test227");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator4 = null;
@@ -9941,9 +9861,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test230() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test230");
+            System.out.format("%n%s%n", "RegressionTest0.test228");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -9977,9 +9897,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test231() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test231");
+            System.out.format("%n%s%n", "RegressionTest0.test229");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -10028,16 +9948,16 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test232() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test232");
+            System.out.format("%n%s%n", "RegressionTest0.test230");
         org.jfree.chart.plot.CrosshairState crosshairState1 = new org.jfree.chart.plot.CrosshairState(false);
     }
 
     @Test
-    public void test233() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test233");
+            System.out.format("%n%s%n", "RegressionTest0.test231");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -10056,9 +9976,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test234() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test234");
+            System.out.format("%n%s%n", "RegressionTest0.test232");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer2 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer2.clearSeriesStrokes(false);
@@ -10080,23 +10000,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test235() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test235");
-        org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
-        java.awt.Stroke stroke1 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
-        combinedRangeXYPlot0.setRangeCrosshairStroke(stroke1);
-        org.jfree.chart.util.Layer layer3 = org.jfree.chart.util.Layer.BACKGROUND;
-        java.util.Collection collection4 = combinedRangeXYPlot0.getDomainMarkers(layer3);
-        org.junit.Assert.assertNotNull(stroke1);
-        org.junit.Assert.assertNotNull(layer3);
-        org.junit.Assert.assertNull(collection4);
-    }
-
-    @Test
-    public void test236() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test236");
+            System.out.format("%n%s%n", "RegressionTest0.test233");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -10122,9 +10028,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test237() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test237");
+            System.out.format("%n%s%n", "RegressionTest0.test234");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         java.awt.Font font1 = polarPlot0.getAngleLabelFont();
         org.jfree.chart.axis.ValueAxis valueAxis2 = polarPlot0.getAxis();
@@ -10235,9 +10141,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test238() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test238");
+            System.out.format("%n%s%n", "RegressionTest0.test235");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -10275,7 +10181,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart49 = new org.jfree.chart.JFreeChart((org.jfree.chart.plot.Plot) combinedDomainXYPlot1);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@461eeac is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@60ddfa59 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -10294,9 +10200,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test239() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test239");
+            System.out.format("%n%s%n", "RegressionTest0.test236");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -10331,9 +10237,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test240() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test240");
+            System.out.format("%n%s%n", "RegressionTest0.test237");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         boolean boolean3 = xYAreaRenderer1.isSeriesItemLabelsVisible((int) (byte) 1);
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition4 = xYAreaRenderer1.getBasePositiveItemLabelPosition();
@@ -10384,9 +10290,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test241() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test241");
+            System.out.format("%n%s%n", "RegressionTest0.test238");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -10466,9 +10372,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test242() throws Throwable {
+    public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test242");
+            System.out.format("%n%s%n", "RegressionTest0.test239");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         java.awt.Shape shape5 = barRenderer3D0.getBaseShape();
@@ -10558,9 +10464,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test243() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test243");
+            System.out.format("%n%s%n", "RegressionTest0.test240");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         combinedRangeXYPlot0.setGap((double) (-16777216));
@@ -10585,7 +10491,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedRangeXYPlot0.addDomainMarker(7, (org.jfree.chart.plot.Marker) valueMarker8, layer9);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@74311a0d is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@694e31dd is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -10601,9 +10507,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test244() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test244");
+            System.out.format("%n%s%n", "RegressionTest0.test241");
         org.jfree.chart.block.BorderArrangement borderArrangement0 = new org.jfree.chart.block.BorderArrangement();
         java.util.TimeZone timeZone1 = null;
         org.jfree.data.time.TimeSeriesCollection timeSeriesCollection2 = new org.jfree.data.time.TimeSeriesCollection(timeZone1);
@@ -10641,9 +10547,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test245() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test245");
+            System.out.format("%n%s%n", "RegressionTest0.test242");
         org.jfree.chart.resources.JFreeChartResources jFreeChartResources0 = new org.jfree.chart.resources.JFreeChartResources();
         java.lang.Object[][] objArray1 = jFreeChartResources0.getContents();
         boolean boolean3 = jFreeChartResources0.containsKey("PlotOrientation.VERTICAL");
@@ -10652,9 +10558,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test246() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test246");
+            System.out.format("%n%s%n", "RegressionTest0.test243");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -10679,9 +10585,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test247() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test247");
+            System.out.format("%n%s%n", "RegressionTest0.test244");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangePannable(false);
@@ -10695,9 +10601,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test248() throws Throwable {
+    public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test248");
+            System.out.format("%n%s%n", "RegressionTest0.test245");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -10735,17 +10641,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test249() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test249");
+            System.out.format("%n%s%n", "RegressionTest0.test246");
         org.jfree.chart.axis.NumberAxis numberAxis1 = new org.jfree.chart.axis.NumberAxis("RectangleAnchor.TOP_LEFT");
         numberAxis1.setAutoTickUnitSelection(true, true);
     }
 
     @Test
-    public void test250() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test250");
+            System.out.format("%n%s%n", "RegressionTest0.test247");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangeGridlinesVisible(true);
@@ -10759,9 +10665,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test251() throws Throwable {
+    public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test251");
+            System.out.format("%n%s%n", "RegressionTest0.test248");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangeGridlinesVisible(true);
@@ -10815,23 +10721,23 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test252() throws Throwable {
+    public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test252");
+            System.out.format("%n%s%n", "RegressionTest0.test249");
         org.jfree.data.xy.OHLCDataset oHLCDataset3 = null;
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart5 = org.jfree.chart.ChartFactory.createCandlestickChart("JFreeChart", "ChartChangeEventType.DATASET_UPDATED", "Combined_Domain_XYPlot", oHLCDataset3, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@41f1ee7 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@1f77580a is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
     }
 
     @Test
-    public void test253() throws Throwable {
+    public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test253");
+            System.out.format("%n%s%n", "RegressionTest0.test250");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -10885,9 +10791,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test254() throws Throwable {
+    public void test251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test254");
+            System.out.format("%n%s%n", "RegressionTest0.test251");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -10955,9 +10861,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test255() throws Throwable {
+    public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test255");
+            System.out.format("%n%s%n", "RegressionTest0.test252");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -11010,9 +10916,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test256() throws Throwable {
+    public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test256");
+            System.out.format("%n%s%n", "RegressionTest0.test253");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.awt.Paint paint1 = combinedRangeXYPlot0.getDomainMinorGridlinePaint();
         org.jfree.chart.axis.ValueAxis valueAxis2 = combinedRangeXYPlot0.getRangeAxis();
@@ -11021,9 +10927,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test257() throws Throwable {
+    public void test254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test257");
+            System.out.format("%n%s%n", "RegressionTest0.test254");
         org.jfree.chart.axis.LogAxis logAxis1 = new org.jfree.chart.axis.LogAxis("item");
         java.awt.geom.Rectangle2D rectangle2D3 = null;
         org.jfree.chart.axis.ValueAxis valueAxis4 = null;
@@ -11043,9 +10949,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test258() throws Throwable {
+    public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test258");
+            System.out.format("%n%s%n", "RegressionTest0.test255");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -11075,9 +10981,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test259() throws Throwable {
+    public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test259");
+            System.out.format("%n%s%n", "RegressionTest0.test256");
         org.jfree.chart.plot.PiePlot piePlot0 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup1 = piePlot0.getDatasetGroup();
         org.jfree.chart.event.PlotChangeListener plotChangeListener2 = null;
@@ -11163,9 +11069,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test260() throws Throwable {
+    public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test260");
+            System.out.format("%n%s%n", "RegressionTest0.test257");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -11199,9 +11105,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test261() throws Throwable {
+    public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test261");
+            System.out.format("%n%s%n", "RegressionTest0.test258");
         org.jfree.chart.plot.PiePlot piePlot0 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup1 = piePlot0.getDatasetGroup();
         int int2 = piePlot0.getBackgroundImageAlignment();
@@ -11242,9 +11148,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test262() throws Throwable {
+    public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test262");
+            System.out.format("%n%s%n", "RegressionTest0.test259");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -11299,9 +11205,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test263() throws Throwable {
+    public void test260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test263");
+            System.out.format("%n%s%n", "RegressionTest0.test260");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -11364,9 +11270,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test264() throws Throwable {
+    public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test264");
+            System.out.format("%n%s%n", "RegressionTest0.test261");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangePannable(false);
@@ -11381,9 +11287,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test265() throws Throwable {
+    public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test265");
+            System.out.format("%n%s%n", "RegressionTest0.test262");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -11422,9 +11328,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test266() throws Throwable {
+    public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test266");
+            System.out.format("%n%s%n", "RegressionTest0.test263");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         int int1 = categoryPlot0.getDatasetCount();
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
@@ -11443,9 +11349,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test267() throws Throwable {
+    public void test264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test267");
+            System.out.format("%n%s%n", "RegressionTest0.test264");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.awt.Stroke stroke1 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
         combinedRangeXYPlot0.setRangeCrosshairStroke(stroke1);
@@ -11460,9 +11366,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test268() throws Throwable {
+    public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test268");
+            System.out.format("%n%s%n", "RegressionTest0.test265");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -11509,9 +11415,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test269() throws Throwable {
+    public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test269");
+            System.out.format("%n%s%n", "RegressionTest0.test266");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -11573,9 +11479,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test270() throws Throwable {
+    public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test270");
+            System.out.format("%n%s%n", "RegressionTest0.test267");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -11663,9 +11569,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test271() throws Throwable {
+    public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test271");
+            System.out.format("%n%s%n", "RegressionTest0.test268");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Color color2 = org.jfree.chart.ChartColor.DARK_BLUE;
@@ -11676,9 +11582,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test272() throws Throwable {
+    public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test272");
+            System.out.format("%n%s%n", "RegressionTest0.test269");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -11760,9 +11666,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test273() throws Throwable {
+    public void test270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test273");
+            System.out.format("%n%s%n", "RegressionTest0.test270");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         java.awt.Paint paint1 = polarPlot0.getAngleLabelPaint();
         java.awt.Graphics2D graphics2D2 = null;
@@ -11844,9 +11750,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test274() throws Throwable {
+    public void test271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test274");
+            System.out.format("%n%s%n", "RegressionTest0.test271");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.event.AxisChangeEvent axisChangeEvent2 = null;
@@ -11867,9 +11773,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test275() throws Throwable {
+    public void test272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test275");
+            System.out.format("%n%s%n", "RegressionTest0.test272");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         combinedRangeXYPlot0.setGap((double) (-16777216));
@@ -11882,9 +11788,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test276() throws Throwable {
+    public void test273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test276");
+            System.out.format("%n%s%n", "RegressionTest0.test273");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -11932,7 +11838,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedDomainXYPlot1.addDomainMarker((org.jfree.chart.plot.Marker) intervalMarker55, layer68);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@17c062ad is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@5f4e6692 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -11963,9 +11869,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test277() throws Throwable {
+    public void test274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test277");
+            System.out.format("%n%s%n", "RegressionTest0.test274");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -12073,9 +11979,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test278() throws Throwable {
+    public void test275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test278");
+            System.out.format("%n%s%n", "RegressionTest0.test275");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -12114,9 +12020,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test279() throws Throwable {
+    public void test276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test279");
+            System.out.format("%n%s%n", "RegressionTest0.test276");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -12140,9 +12046,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test280() throws Throwable {
+    public void test277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test280");
+            System.out.format("%n%s%n", "RegressionTest0.test277");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.lang.Object obj2 = combinedDomainXYPlot1.clone();
@@ -12152,9 +12058,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test281() throws Throwable {
+    public void test278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test281");
+            System.out.format("%n%s%n", "RegressionTest0.test278");
         org.jfree.data.xy.XYSeries xYSeries3 = new org.jfree.data.xy.XYSeries((java.lang.Comparable) 0.2d, true, false);
         boolean boolean4 = xYSeries3.getAllowDuplicateXValues();
         int int6 = xYSeries3.indexOf((java.lang.Number) (short) -1);
@@ -12177,9 +12083,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test282() throws Throwable {
+    public void test279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test282");
+            System.out.format("%n%s%n", "RegressionTest0.test279");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -12249,9 +12155,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test283() throws Throwable {
+    public void test280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test283");
+            System.out.format("%n%s%n", "RegressionTest0.test280");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         org.jfree.chart.axis.ValueAxis valueAxis1 = null;
         polarPlot0.setAxis(valueAxis1);
@@ -12288,9 +12194,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test284() throws Throwable {
+    public void test281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test284");
+            System.out.format("%n%s%n", "RegressionTest0.test281");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         combinedRangeXYPlot0.setGap((double) (-16777216));
@@ -12309,9 +12215,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test285() throws Throwable {
+    public void test282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test285");
+            System.out.format("%n%s%n", "RegressionTest0.test282");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -12387,9 +12293,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test286() throws Throwable {
+    public void test283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test286");
+            System.out.format("%n%s%n", "RegressionTest0.test283");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -12436,17 +12342,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test287() throws Throwable {
+    public void test284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test287");
+            System.out.format("%n%s%n", "RegressionTest0.test284");
         org.jfree.chart.renderer.xy.XYStepAreaRenderer xYStepAreaRenderer0 = new org.jfree.chart.renderer.xy.XYStepAreaRenderer();
         xYStepAreaRenderer0.setPlotArea(true);
     }
 
     @Test
-    public void test288() throws Throwable {
+    public void test285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test288");
+            System.out.format("%n%s%n", "RegressionTest0.test285");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -12498,9 +12404,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test289() throws Throwable {
+    public void test286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test289");
+            System.out.format("%n%s%n", "RegressionTest0.test286");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         java.awt.Color color5 = java.awt.Color.cyan;
@@ -12538,9 +12444,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test290() throws Throwable {
+    public void test287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test290");
+            System.out.format("%n%s%n", "RegressionTest0.test287");
         org.jfree.data.xy.DefaultXYDataset defaultXYDataset3 = new org.jfree.data.xy.DefaultXYDataset();
         org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState4 = defaultXYDataset3.getSelectionState();
         int int5 = defaultXYDataset3.getSeriesCount();
@@ -12556,7 +12462,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart19 = org.jfree.chart.ChartFactory.createXYStepChart("JFreeChart version EXPAND.\n(C)opyright 2000-2008, by Object Refinery Limited and Contributors.\n\nFor terms of use, see the licence below.\n\nFURTHER INFORMATION:http://www.jfree.org/jfreechart/index.html\nCONTRIBUTORS:\nOTHER LIBRARIES USED BY JFreeChart:JFreeChart EXPAND (http://www.jfree.org/jfreechart/index.html).JFreeChart EXPAND (http://www.jfree.org/jfreechart/index.html).JFreeChart EXPAND (http://www.jfree.org/jfreechart/index.html).JFreeChart EXPAND (http://www.jfree.org/jfreechart/index.html).JFreeChart EXPAND (http://www.jfree.org/jfreechart/index.html).JFreeChart EXPAND (http://www.jfree.org/jfreechart/index.html).JFreeChart EXPAND (http://www.jfree.org/jfreechart/index.html).\nJFreeChart LICENCE TERMS:\nClassContext", "[Dec 31, 1969 4:00:00 PM --> Dec 31, 1969 4:00:00 PM]", "", (org.jfree.data.xy.XYDataset) defaultXYDataset3, plotOrientation14, true, true, true);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@2be14d93 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@5d39fbfc is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -12570,9 +12476,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test291() throws Throwable {
+    public void test288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test291");
+            System.out.format("%n%s%n", "RegressionTest0.test288");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -12592,9 +12498,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test292() throws Throwable {
+    public void test289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test292");
+            System.out.format("%n%s%n", "RegressionTest0.test289");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -12622,9 +12528,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test293() throws Throwable {
+    public void test290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test293");
+            System.out.format("%n%s%n", "RegressionTest0.test290");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer5 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer5.clearSeriesStrokes(false);
         boolean boolean8 = xYAreaRenderer5.getPlotLines();
@@ -12687,9 +12593,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test294() throws Throwable {
+    public void test291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test294");
+            System.out.format("%n%s%n", "RegressionTest0.test291");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -12760,9 +12666,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test295() throws Throwable {
+    public void test292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test295");
+            System.out.format("%n%s%n", "RegressionTest0.test292");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -12784,9 +12690,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test296() throws Throwable {
+    public void test293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test296");
+            System.out.format("%n%s%n", "RegressionTest0.test293");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         double double1 = combinedRangeXYPlot0.getGap();
         org.jfree.data.xy.XYDataset xYDataset3 = combinedRangeXYPlot0.getDataset(2147483647);
@@ -12804,9 +12710,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test297() throws Throwable {
+    public void test294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test297");
+            System.out.format("%n%s%n", "RegressionTest0.test294");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -12862,9 +12768,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test298() throws Throwable {
+    public void test295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test298");
+            System.out.format("%n%s%n", "RegressionTest0.test295");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -12930,9 +12836,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test299() throws Throwable {
+    public void test296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test299");
+            System.out.format("%n%s%n", "RegressionTest0.test296");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Color color2 = org.jfree.chart.ChartColor.DARK_BLUE;
@@ -12947,9 +12853,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test300() throws Throwable {
+    public void test297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test300");
+            System.out.format("%n%s%n", "RegressionTest0.test297");
         org.jfree.data.xy.XYDataset xYDataset0 = null;
         org.jfree.chart.axis.ValueAxis valueAxis1 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot2 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis1);
@@ -12972,9 +12878,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test301() throws Throwable {
+    public void test298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test301");
+            System.out.format("%n%s%n", "RegressionTest0.test298");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -13058,9 +12964,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test302() throws Throwable {
+    public void test299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test302");
+            System.out.format("%n%s%n", "RegressionTest0.test299");
         org.jfree.chart.axis.DateTickUnitType dateTickUnitType1 = org.jfree.chart.axis.DateTickUnitType.HOUR;
         org.jfree.chart.axis.DateTickUnit dateTickUnit3 = new org.jfree.chart.axis.DateTickUnit(dateTickUnitType1, 100);
         java.lang.String str5 = dateTickUnit3.valueToString((double) (short) 1);
@@ -13132,9 +13038,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test303() throws Throwable {
+    public void test300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test303");
+            System.out.format("%n%s%n", "RegressionTest0.test300");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -13155,9 +13061,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test304() throws Throwable {
+    public void test301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test304");
+            System.out.format("%n%s%n", "RegressionTest0.test301");
         org.jfree.chart.axis.LogAxis logAxis1 = new org.jfree.chart.axis.LogAxis("item");
         java.text.NumberFormat numberFormat2 = java.text.NumberFormat.getNumberInstance();
         int int3 = numberFormat2.getMinimumFractionDigits();
@@ -13169,9 +13075,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test305() throws Throwable {
+    public void test302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test305");
+            System.out.format("%n%s%n", "RegressionTest0.test302");
         org.jfree.chart.util.StrokeList strokeList0 = new org.jfree.chart.util.StrokeList();
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer2 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer2.clearSeriesStrokes(false);
@@ -13230,9 +13136,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test306() throws Throwable {
+    public void test303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test306");
+            System.out.format("%n%s%n", "RegressionTest0.test303");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         boolean boolean3 = xYAreaRenderer1.isSeriesItemLabelsVisible((int) (byte) 1);
         java.awt.Paint paint4 = xYAreaRenderer1.getBaseLegendTextPaint();
@@ -13269,9 +13175,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test307() throws Throwable {
+    public void test304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test307");
+            System.out.format("%n%s%n", "RegressionTest0.test304");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -13316,9 +13222,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test308() throws Throwable {
+    public void test305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test308");
+            System.out.format("%n%s%n", "RegressionTest0.test305");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -13384,17 +13290,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test309() throws Throwable {
+    public void test306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test309");
+            System.out.format("%n%s%n", "RegressionTest0.test306");
         java.awt.Font font0 = org.jfree.chart.JFreeChart.DEFAULT_TITLE_FONT;
         org.junit.Assert.assertNotNull(font0);
     }
 
     @Test
-    public void test310() throws Throwable {
+    public void test307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test310");
+            System.out.format("%n%s%n", "RegressionTest0.test307");
         org.jfree.data.time.TimeSeries timeSeries1 = new org.jfree.data.time.TimeSeries((java.lang.Comparable) 5);
         org.jfree.chart.title.TextTitle textTitle3 = new org.jfree.chart.title.TextTitle("");
         boolean boolean4 = textTitle3.getExpandToFitSpace();
@@ -13438,9 +13344,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test311() throws Throwable {
+    public void test308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test311");
+            System.out.format("%n%s%n", "RegressionTest0.test308");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         double double1 = barRenderer3D0.getXOffset();
         double double2 = barRenderer3D0.getMaximumBarWidth();
@@ -13453,9 +13359,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test312() throws Throwable {
+    public void test309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test312");
+            System.out.format("%n%s%n", "RegressionTest0.test309");
         org.jfree.chart.util.PaintList paintList0 = new org.jfree.chart.util.PaintList();
         org.jfree.chart.axis.ValueAxis valueAxis1 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot2 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis1);
@@ -13483,9 +13389,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test313() throws Throwable {
+    public void test310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test313");
+            System.out.format("%n%s%n", "RegressionTest0.test310");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator4 = null;
@@ -13558,9 +13464,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test314() throws Throwable {
+    public void test311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test314");
+            System.out.format("%n%s%n", "RegressionTest0.test311");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -13588,9 +13494,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test315() throws Throwable {
+    public void test312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test315");
+            System.out.format("%n%s%n", "RegressionTest0.test312");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         java.awt.Font font1 = polarPlot0.getAngleLabelFont();
         org.jfree.chart.axis.ValueAxis valueAxis2 = polarPlot0.getAxis();
@@ -13624,9 +13530,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test316() throws Throwable {
+    public void test313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test316");
+            System.out.format("%n%s%n", "RegressionTest0.test313");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator3 = barRenderer3D2.getBaseToolTipGenerator();
         java.awt.Paint paint4 = barRenderer3D2.getBaseItemLabelPaint();
@@ -13731,9 +13637,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test317() throws Throwable {
+    public void test314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test317");
+            System.out.format("%n%s%n", "RegressionTest0.test314");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         java.awt.Paint paint1 = polarPlot0.getAngleLabelPaint();
         org.jfree.chart.entity.EntityCollection entityCollection3 = null;
@@ -13761,9 +13667,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test318() throws Throwable {
+    public void test315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test318");
+            System.out.format("%n%s%n", "RegressionTest0.test315");
         double[] doubleArray5 = new double[] {};
         double[] doubleArray6 = new double[] {};
         double[] doubleArray7 = new double[] {};
@@ -13783,7 +13689,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart25 = org.jfree.chart.ChartFactory.createAreaChart("http://www.jfree.org/jfreechart/index.html", "PlotOrientation.VERTICAL", "Combined_Domain_XYPlot", categoryDataset11, plotOrientation20, true, true, false);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@51ada8c3 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@44cc9ba9 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -13807,9 +13713,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test319() throws Throwable {
+    public void test316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test319");
+            System.out.format("%n%s%n", "RegressionTest0.test316");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
@@ -13853,9 +13759,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test320() throws Throwable {
+    public void test317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test320");
+            System.out.format("%n%s%n", "RegressionTest0.test317");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -13920,9 +13826,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test321() throws Throwable {
+    public void test318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test321");
+            System.out.format("%n%s%n", "RegressionTest0.test318");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -13949,7 +13855,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedDomainXYPlot1.removeChangeListener((org.jfree.chart.event.PlotChangeListener) combinedRangeXYPlot29);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@58980390 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedRangeXYPlot@78e6c249 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -13965,9 +13871,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test322() throws Throwable {
+    public void test319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test322");
+            System.out.format("%n%s%n", "RegressionTest0.test319");
         java.util.TimeZone timeZone0 = null;
         org.jfree.data.time.TimeSeriesCollection timeSeriesCollection1 = new org.jfree.data.time.TimeSeriesCollection(timeZone0);
         org.jfree.chart.plot.CategoryPlot categoryPlot2 = new org.jfree.chart.plot.CategoryPlot();
@@ -13988,9 +13894,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test323() throws Throwable {
+    public void test320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test323");
+            System.out.format("%n%s%n", "RegressionTest0.test320");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         org.jfree.chart.plot.PiePlot piePlot1 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup2 = piePlot1.getDatasetGroup();
@@ -14020,7 +13926,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             combinedDomainXYPlot0.addChangeListener((org.jfree.chart.event.PlotChangeListener) combinedDomainXYPlot16);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@56a947f2 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@6678d530 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -14036,9 +13942,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test324() throws Throwable {
+    public void test321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test324");
+            System.out.format("%n%s%n", "RegressionTest0.test321");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangeGridlinesVisible(true);
@@ -14050,9 +13956,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test325() throws Throwable {
+    public void test322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test325");
+            System.out.format("%n%s%n", "RegressionTest0.test322");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         java.awt.Shape shape5 = barRenderer3D0.getBaseShape();
@@ -14091,9 +13997,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test326() throws Throwable {
+    public void test323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test326");
+            System.out.format("%n%s%n", "RegressionTest0.test323");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -14157,9 +14063,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test327() throws Throwable {
+    public void test324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test327");
+            System.out.format("%n%s%n", "RegressionTest0.test324");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -14213,9 +14119,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test328() throws Throwable {
+    public void test325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test328");
+            System.out.format("%n%s%n", "RegressionTest0.test325");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         java.awt.Shape shape5 = barRenderer3D0.getBaseShape();
@@ -14245,9 +14151,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test329() throws Throwable {
+    public void test326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test329");
+            System.out.format("%n%s%n", "RegressionTest0.test326");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -14288,9 +14194,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test330() throws Throwable {
+    public void test327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test330");
+            System.out.format("%n%s%n", "RegressionTest0.test327");
         org.jfree.chart.util.VerticalAlignment verticalAlignment0 = org.jfree.chart.util.VerticalAlignment.TOP;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         java.awt.Paint paint2 = combinedDomainXYPlot1.getRangeGridlinePaint();
@@ -14327,9 +14233,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test331() throws Throwable {
+    public void test328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test331");
+            System.out.format("%n%s%n", "RegressionTest0.test328");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -14381,9 +14287,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test332() throws Throwable {
+    public void test329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test332");
+            System.out.format("%n%s%n", "RegressionTest0.test329");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -14421,9 +14327,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test333() throws Throwable {
+    public void test330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test333");
+            System.out.format("%n%s%n", "RegressionTest0.test330");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator3 = barRenderer3D2.getBaseToolTipGenerator();
         java.awt.Stroke stroke4 = barRenderer3D2.getBaseStroke();
@@ -14440,39 +14346,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test334() throws Throwable {
+    public void test331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test334");
-        org.jfree.chart.util.PaintList paintList0 = new org.jfree.chart.util.PaintList();
-        org.jfree.chart.axis.ValueAxis valueAxis1 = null;
-        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot2 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis1);
-        org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer4 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
-        xYAreaRenderer4.clearSeriesStrokes(false);
-        org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator7 = null;
-        xYAreaRenderer4.setLegendItemURLGenerator(xYSeriesLabelGenerator7);
-        xYAreaRenderer4.setSeriesVisibleInLegend(0, (java.lang.Boolean) true);
-        boolean boolean15 = xYAreaRenderer4.isItemLabelVisible((int) '#', (int) '#', true);
-        combinedDomainXYPlot2.setRenderer((org.jfree.chart.renderer.xy.XYItemRenderer) xYAreaRenderer4);
-        combinedDomainXYPlot2.clearDomainMarkers();
-        java.awt.Font font19 = org.jfree.chart.axis.Axis.DEFAULT_TICK_LABEL_FONT;
-        java.awt.Paint paint20 = org.jfree.chart.renderer.category.BarRenderer3D.DEFAULT_WALL_PAINT;
-        org.jfree.chart.text.TextMeasurer textMeasurer23 = null;
-        org.jfree.chart.text.TextBlock textBlock24 = org.jfree.chart.text.TextUtilities.createTextBlock("", font19, paint20, (float) (-1L), (int) (short) -1, textMeasurer23);
-        combinedDomainXYPlot2.setDomainCrosshairPaint(paint20);
-        boolean boolean26 = paintList0.equals((java.lang.Object) paint20);
-        java.awt.Paint paint28 = null;
-        paintList0.setPaint(0, paint28);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(font19);
-        org.junit.Assert.assertNotNull(paint20);
-        org.junit.Assert.assertNotNull(textBlock24);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
-    }
-
-    @Test
-    public void test335() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test335");
+            System.out.format("%n%s%n", "RegressionTest0.test331");
         org.jfree.chart.labels.StandardPieSectionLabelGenerator standardPieSectionLabelGenerator0 = new org.jfree.chart.labels.StandardPieSectionLabelGenerator();
         org.jfree.data.general.PieDataset pieDataset1 = null;
         java.lang.String str3 = standardPieSectionLabelGenerator0.generateSectionLabel(pieDataset1, (java.lang.Comparable) 2.0d);
@@ -14493,9 +14369,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test336() throws Throwable {
+    public void test332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test336");
+            System.out.format("%n%s%n", "RegressionTest0.test332");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Color color2 = org.jfree.chart.ChartColor.DARK_BLUE;
@@ -14512,9 +14388,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test337() throws Throwable {
+    public void test333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test337");
+            System.out.format("%n%s%n", "RegressionTest0.test333");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -14584,9 +14460,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test338() throws Throwable {
+    public void test334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test338");
+            System.out.format("%n%s%n", "RegressionTest0.test334");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         org.jfree.chart.plot.PiePlot piePlot1 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup2 = piePlot1.getDatasetGroup();
@@ -14640,9 +14516,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test339() throws Throwable {
+    public void test335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test339");
+            System.out.format("%n%s%n", "RegressionTest0.test335");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.axis.ValueAxis valueAxis3 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot4 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis3);
@@ -14661,9 +14537,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test340() throws Throwable {
+    public void test336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test340");
+            System.out.format("%n%s%n", "RegressionTest0.test336");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         combinedRangeXYPlot0.setGap((double) (-16777216));
@@ -14674,9 +14550,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test341() throws Throwable {
+    public void test337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test341");
+            System.out.format("%n%s%n", "RegressionTest0.test337");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangePannable(false);
@@ -14693,9 +14569,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test342() throws Throwable {
+    public void test338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test342");
+            System.out.format("%n%s%n", "RegressionTest0.test338");
         org.jfree.chart.plot.RingPlot ringPlot0 = new org.jfree.chart.plot.RingPlot();
         java.awt.Shape shape1 = ringPlot0.getLegendItemShape();
         org.jfree.data.general.PieDataset pieDataset2 = ringPlot0.getDataset();
@@ -14738,9 +14614,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test343() throws Throwable {
+    public void test339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test343");
+            System.out.format("%n%s%n", "RegressionTest0.test339");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -14795,9 +14671,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test344() throws Throwable {
+    public void test340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test344");
+            System.out.format("%n%s%n", "RegressionTest0.test340");
         org.jfree.data.time.Year year2 = new org.jfree.data.time.Year((int) (short) 0);
         long long3 = year2.getFirstMillisecond();
         org.jfree.data.time.Year year5 = new org.jfree.data.time.Year((int) (short) 0);
@@ -14816,9 +14692,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test345() throws Throwable {
+    public void test341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test345");
+            System.out.format("%n%s%n", "RegressionTest0.test341");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.awt.Stroke stroke1 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
         combinedRangeXYPlot0.setRangeCrosshairStroke(stroke1);
@@ -14844,9 +14720,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test346() throws Throwable {
+    public void test342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test346");
+            System.out.format("%n%s%n", "RegressionTest0.test342");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -14897,9 +14773,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test347() throws Throwable {
+    public void test343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test347");
+            System.out.format("%n%s%n", "RegressionTest0.test343");
         org.jfree.chart.block.BorderArrangement borderArrangement0 = new org.jfree.chart.block.BorderArrangement();
         java.util.TimeZone timeZone1 = null;
         org.jfree.data.time.TimeSeriesCollection timeSeriesCollection2 = new org.jfree.data.time.TimeSeriesCollection(timeZone1);
@@ -14936,9 +14812,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test348() throws Throwable {
+    public void test344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test348");
+            System.out.format("%n%s%n", "RegressionTest0.test344");
         org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.title.Title.DEFAULT_PADDING;
         org.jfree.chart.title.TextTitle textTitle2 = new org.jfree.chart.title.TextTitle("");
         boolean boolean3 = textTitle2.getExpandToFitSpace();
@@ -14964,9 +14840,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test349() throws Throwable {
+    public void test345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test349");
+            System.out.format("%n%s%n", "RegressionTest0.test345");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.axis.ValueAxis valueAxis3 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot4 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis3);
@@ -14981,9 +14857,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test350() throws Throwable {
+    public void test346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test350");
+            System.out.format("%n%s%n", "RegressionTest0.test346");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         combinedRangeXYPlot0.setGap((double) (-16777216));
@@ -14994,9 +14870,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test351() throws Throwable {
+    public void test347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test351");
+            System.out.format("%n%s%n", "RegressionTest0.test347");
         org.jfree.chart.plot.PiePlot piePlot1 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup2 = piePlot1.getDatasetGroup();
         int int3 = piePlot1.getBackgroundImageAlignment();
@@ -15024,9 +14900,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test352() throws Throwable {
+    public void test348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test352");
+            System.out.format("%n%s%n", "RegressionTest0.test348");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -15078,9 +14954,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test353() throws Throwable {
+    public void test349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test353");
+            System.out.format("%n%s%n", "RegressionTest0.test349");
         double[] doubleArray5 = new double[] {};
         double[] doubleArray6 = new double[] {};
         double[] doubleArray7 = new double[] {};
@@ -15115,7 +14991,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart41 = org.jfree.chart.ChartFactory.createLineChart("ChartChangeEventType.DATASET_UPDATED", "RectangleEdge.RIGHT", "SerialDate.weekInMonthToString(): invalid code.", categoryDataset11, plotOrientation35, false, false, true);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@13c605c6 is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@16231558 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -15146,9 +15022,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test354() throws Throwable {
+    public void test350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test354");
+            System.out.format("%n%s%n", "RegressionTest0.test350");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -15184,9 +15060,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test355() throws Throwable {
+    public void test351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test355");
+            System.out.format("%n%s%n", "RegressionTest0.test351");
         org.jfree.chart.title.TextTitle textTitle1 = new org.jfree.chart.title.TextTitle("");
         boolean boolean2 = textTitle1.getExpandToFitSpace();
         textTitle1.setText("");
@@ -15230,9 +15106,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test356() throws Throwable {
+    public void test352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test356");
+            System.out.format("%n%s%n", "RegressionTest0.test352");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -15281,9 +15157,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test357() throws Throwable {
+    public void test353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test357");
+            System.out.format("%n%s%n", "RegressionTest0.test353");
         org.jfree.chart.plot.PiePlot piePlot0 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup1 = piePlot0.getDatasetGroup();
         int int2 = piePlot0.getBackgroundImageAlignment();
@@ -15331,9 +15207,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test358() throws Throwable {
+    public void test354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test358");
+            System.out.format("%n%s%n", "RegressionTest0.test354");
         org.jfree.data.xy.OHLCDataset oHLCDataset3 = null;
         org.jfree.chart.axis.Timeline timeline4 = null;
         // The following exception was thrown during execution in test generation
@@ -15346,9 +15222,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test359() throws Throwable {
+    public void test355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test359");
+            System.out.format("%n%s%n", "RegressionTest0.test355");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         java.awt.Graphics2D graphics2D1 = null;
         java.awt.geom.Rectangle2D rectangle2D2 = null;
@@ -15362,9 +15238,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test360() throws Throwable {
+    public void test356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test360");
+            System.out.format("%n%s%n", "RegressionTest0.test356");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         java.awt.Paint paint1 = polarPlot0.getAngleLabelPaint();
         org.jfree.chart.plot.PolarPlot polarPlot3 = new org.jfree.chart.plot.PolarPlot();
@@ -15416,9 +15292,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test361() throws Throwable {
+    public void test357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test361");
+            System.out.format("%n%s%n", "RegressionTest0.test357");
         org.jfree.chart.title.TextTitle textTitle1 = new org.jfree.chart.title.TextTitle("");
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot3 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis2);
@@ -15492,9 +15368,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test362() throws Throwable {
+    public void test358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test362");
+            System.out.format("%n%s%n", "RegressionTest0.test358");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -15515,9 +15391,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test363() throws Throwable {
+    public void test359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test363");
+            System.out.format("%n%s%n", "RegressionTest0.test359");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.entity.EntityCollection entityCollection3 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo4 = new org.jfree.chart.ChartRenderingInfo(entityCollection3);
@@ -15548,9 +15424,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test364() throws Throwable {
+    public void test360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test364");
+            System.out.format("%n%s%n", "RegressionTest0.test360");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Color color2 = org.jfree.chart.ChartColor.DARK_BLUE;
@@ -15572,9 +15448,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test365() throws Throwable {
+    public void test361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test365");
+            System.out.format("%n%s%n", "RegressionTest0.test361");
         org.jfree.chart.renderer.xy.XYStepAreaRenderer xYStepAreaRenderer0 = new org.jfree.chart.renderer.xy.XYStepAreaRenderer();
         java.lang.Boolean boolean2 = xYStepAreaRenderer0.getSeriesVisible((-1));
         xYStepAreaRenderer0.setRangeBase(1.0E-8d);
@@ -15584,9 +15460,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test366() throws Throwable {
+    public void test362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test366");
+            System.out.format("%n%s%n", "RegressionTest0.test362");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         org.jfree.chart.plot.PiePlot piePlot1 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup2 = piePlot1.getDatasetGroup();
@@ -15667,9 +15543,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test367() throws Throwable {
+    public void test363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test367");
+            System.out.format("%n%s%n", "RegressionTest0.test363");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator6 = null;
@@ -15723,9 +15599,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test368() throws Throwable {
+    public void test364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test368");
+            System.out.format("%n%s%n", "RegressionTest0.test364");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Color color2 = org.jfree.chart.ChartColor.DARK_BLUE;
@@ -15757,9 +15633,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test369() throws Throwable {
+    public void test365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test369");
+            System.out.format("%n%s%n", "RegressionTest0.test365");
         org.jfree.chart.renderer.xy.XYBarRenderer xYBarRenderer1 = new org.jfree.chart.renderer.xy.XYBarRenderer((double) 255);
         org.jfree.chart.axis.NumberAxis numberAxis3 = new org.jfree.chart.axis.NumberAxis("");
         org.jfree.data.Range range5 = null;
@@ -15797,9 +15673,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test370() throws Throwable {
+    public void test366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test370");
+            System.out.format("%n%s%n", "RegressionTest0.test366");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -15825,9 +15701,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test371() throws Throwable {
+    public void test367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test371");
+            System.out.format("%n%s%n", "RegressionTest0.test367");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -15893,9 +15769,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test372() throws Throwable {
+    public void test368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test372");
+            System.out.format("%n%s%n", "RegressionTest0.test368");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -15916,9 +15792,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test373() throws Throwable {
+    public void test369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test373");
+            System.out.format("%n%s%n", "RegressionTest0.test369");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -15934,9 +15810,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test374() throws Throwable {
+    public void test370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test374");
+            System.out.format("%n%s%n", "RegressionTest0.test370");
         org.jfree.chart.util.Size2D size2D2 = new org.jfree.chart.util.Size2D((double) (short) 0, 4.0d);
         size2D2.width = Double.NaN;
         double double5 = size2D2.height;
@@ -15946,9 +15822,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test375() throws Throwable {
+    public void test371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test375");
+            System.out.format("%n%s%n", "RegressionTest0.test371");
         org.jfree.chart.plot.CrosshairState crosshairState0 = new org.jfree.chart.plot.CrosshairState();
         crosshairState0.setAnchorY((double) '4');
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer8 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -16013,9 +15889,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test376() throws Throwable {
+    public void test372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test376");
+            System.out.format("%n%s%n", "RegressionTest0.test372");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -16076,23 +15952,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test377() throws Throwable {
+    public void test373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test377");
-        org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
-        java.awt.Stroke stroke1 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
-        combinedRangeXYPlot0.setRangeCrosshairStroke(stroke1);
-        java.awt.geom.Point2D point2D3 = combinedRangeXYPlot0.getQuadrantOrigin();
-        int int4 = combinedRangeXYPlot0.getRendererCount();
-        org.junit.Assert.assertNotNull(stroke1);
-        org.junit.Assert.assertNotNull(point2D3);
-        org.junit.Assert.assertTrue("'" + int4 + "' != '" + 1 + "'", int4 == 1);
-    }
-
-    @Test
-    public void test378() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test378");
+            System.out.format("%n%s%n", "RegressionTest0.test373");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         combinedDomainXYPlot1.setDomainMinorGridlinesVisible(false);
@@ -16112,9 +15974,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test379() throws Throwable {
+    public void test374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test379");
+            System.out.format("%n%s%n", "RegressionTest0.test374");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -16183,9 +16045,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test380() throws Throwable {
+    public void test375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test380");
+            System.out.format("%n%s%n", "RegressionTest0.test375");
         org.jfree.data.time.TimePeriodAnchor timePeriodAnchor0 = org.jfree.data.time.TimePeriodAnchor.MIDDLE;
         java.lang.String str1 = timePeriodAnchor0.toString();
         org.junit.Assert.assertNotNull(timePeriodAnchor0);
@@ -16193,9 +16055,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test381() throws Throwable {
+    public void test376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test381");
+            System.out.format("%n%s%n", "RegressionTest0.test376");
         org.jfree.chart.block.BorderArrangement borderArrangement0 = new org.jfree.chart.block.BorderArrangement();
         java.util.TimeZone timeZone1 = null;
         org.jfree.data.time.TimeSeriesCollection timeSeriesCollection2 = new org.jfree.data.time.TimeSeriesCollection(timeZone1);
@@ -16233,9 +16095,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test382() throws Throwable {
+    public void test377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test382");
+            System.out.format("%n%s%n", "RegressionTest0.test377");
         org.jfree.chart.resources.JFreeChartResources jFreeChartResources0 = new org.jfree.chart.resources.JFreeChartResources();
         org.jfree.chart.plot.PiePlot.localizationResources = jFreeChartResources0;
         java.lang.Object obj3 = jFreeChartResources0.handleGetObject("ThreadContext");
@@ -16248,9 +16110,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test383() throws Throwable {
+    public void test378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test383");
+            System.out.format("%n%s%n", "RegressionTest0.test378");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Color color2 = org.jfree.chart.ChartColor.DARK_BLUE;
@@ -16263,9 +16125,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test384() throws Throwable {
+    public void test379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test384");
+            System.out.format("%n%s%n", "RegressionTest0.test379");
         org.jfree.chart.axis.LogAxis logAxis1 = new org.jfree.chart.axis.LogAxis("item");
         java.awt.Graphics2D graphics2D2 = null;
         org.jfree.chart.plot.CategoryPlot categoryPlot4 = new org.jfree.chart.plot.CategoryPlot();
@@ -16378,9 +16240,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test385() throws Throwable {
+    public void test380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test385");
+            System.out.format("%n%s%n", "RegressionTest0.test380");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         java.awt.Font font1 = polarPlot0.getAngleLabelFont();
         org.jfree.chart.axis.ValueAxis valueAxis2 = polarPlot0.getAxis();
@@ -16408,9 +16270,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test386() throws Throwable {
+    public void test381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test386");
+            System.out.format("%n%s%n", "RegressionTest0.test381");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -16465,9 +16327,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test387() throws Throwable {
+    public void test382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test387");
+            System.out.format("%n%s%n", "RegressionTest0.test382");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
@@ -16541,9 +16403,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test388() throws Throwable {
+    public void test383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test388");
+            System.out.format("%n%s%n", "RegressionTest0.test383");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -16599,9 +16461,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test389() throws Throwable {
+    public void test384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test389");
+            System.out.format("%n%s%n", "RegressionTest0.test384");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -16657,9 +16519,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test390() throws Throwable {
+    public void test385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test390");
+            System.out.format("%n%s%n", "RegressionTest0.test385");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -16724,9 +16586,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test391() throws Throwable {
+    public void test386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test391");
+            System.out.format("%n%s%n", "RegressionTest0.test386");
         org.jfree.chart.plot.PiePlot piePlot0 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup1 = piePlot0.getDatasetGroup();
         org.jfree.chart.event.PlotChangeListener plotChangeListener2 = null;
@@ -16827,9 +16689,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test392() throws Throwable {
+    public void test387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test392");
+            System.out.format("%n%s%n", "RegressionTest0.test387");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
@@ -16871,9 +16733,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test393() throws Throwable {
+    public void test388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test393");
+            System.out.format("%n%s%n", "RegressionTest0.test388");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.labels.CategoryToolTipGenerator categoryToolTipGenerator3 = barRenderer3D2.getBaseToolTipGenerator();
         boolean boolean6 = barRenderer3D2.getItemVisible(0, 8);
@@ -16915,9 +16777,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test394() throws Throwable {
+    public void test389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test394");
+            System.out.format("%n%s%n", "RegressionTest0.test389");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -16970,9 +16832,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test395() throws Throwable {
+    public void test390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test395");
+            System.out.format("%n%s%n", "RegressionTest0.test390");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         int int1 = categoryPlot0.getDatasetCount();
         org.jfree.chart.util.RectangleEdge rectangleEdge5 = org.jfree.chart.util.RectangleEdge.RIGHT;
@@ -17012,9 +16874,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test396() throws Throwable {
+    public void test391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test396");
+            System.out.format("%n%s%n", "RegressionTest0.test391");
         java.awt.Shape shape0 = null;
         org.jfree.chart.plot.RingPlot ringPlot1 = new org.jfree.chart.plot.RingPlot();
         java.awt.Shape shape2 = ringPlot1.getLegendItemShape();
@@ -17029,9 +16891,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test397() throws Throwable {
+    public void test392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test397");
+            System.out.format("%n%s%n", "RegressionTest0.test392");
         org.jfree.chart.plot.IntervalMarker intervalMarker2 = new org.jfree.chart.plot.IntervalMarker((double) (short) 100, (double) 10);
         java.awt.Color color3 = org.jfree.chart.ChartColor.VERY_DARK_RED;
         intervalMarker2.setPaint((java.awt.Paint) color3);
@@ -17093,9 +16955,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test398() throws Throwable {
+    public void test393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test398");
+            System.out.format("%n%s%n", "RegressionTest0.test393");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -17199,9 +17061,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test399() throws Throwable {
+    public void test394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test399");
+            System.out.format("%n%s%n", "RegressionTest0.test394");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -17296,9 +17158,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test400() throws Throwable {
+    public void test395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test400");
+            System.out.format("%n%s%n", "RegressionTest0.test395");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -17353,9 +17215,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test401() throws Throwable {
+    public void test396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test401");
+            System.out.format("%n%s%n", "RegressionTest0.test396");
         org.jfree.data.time.DateRange dateRange0 = new org.jfree.data.time.DateRange();
         java.util.Date date1 = dateRange0.getUpperDate();
         org.jfree.data.time.Month month2 = new org.jfree.data.time.Month(date1);
@@ -17391,9 +17253,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test402() throws Throwable {
+    public void test397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test402");
+            System.out.format("%n%s%n", "RegressionTest0.test397");
         org.jfree.chart.plot.PiePlot piePlot0 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup1 = piePlot0.getDatasetGroup();
         org.jfree.chart.event.PlotChangeListener plotChangeListener2 = null;
@@ -17428,7 +17290,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             piePlot0.addChangeListener((org.jfree.chart.event.PlotChangeListener) combinedDomainXYPlot11);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@6ad2925e is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.plot.CombinedDomainXYPlot@36ae61f5 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -17448,9 +17310,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test403() throws Throwable {
+    public void test398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test403");
+            System.out.format("%n%s%n", "RegressionTest0.test398");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -17476,9 +17338,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test404() throws Throwable {
+    public void test399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test404");
+            System.out.format("%n%s%n", "RegressionTest0.test399");
         org.jfree.chart.labels.StandardXYSeriesLabelGenerator standardXYSeriesLabelGenerator1 = new org.jfree.chart.labels.StandardXYSeriesLabelGenerator("ThreadContext");
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot3 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis2);
@@ -17513,9 +17375,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test405() throws Throwable {
+    public void test400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test405");
+            System.out.format("%n%s%n", "RegressionTest0.test400");
         org.jfree.chart.plot.IntervalMarker intervalMarker2 = new org.jfree.chart.plot.IntervalMarker((double) (short) 100, (double) 10);
         java.awt.Color color3 = org.jfree.chart.ChartColor.VERY_DARK_RED;
         intervalMarker2.setPaint((java.awt.Paint) color3);
@@ -17574,9 +17436,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test406() throws Throwable {
+    public void test401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test406");
+            System.out.format("%n%s%n", "RegressionTest0.test401");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         org.jfree.chart.plot.PiePlot piePlot1 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup2 = piePlot1.getDatasetGroup();
@@ -17661,9 +17523,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test407() throws Throwable {
+    public void test402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test407");
+            System.out.format("%n%s%n", "RegressionTest0.test402");
         org.jfree.chart.block.BorderArrangement borderArrangement0 = new org.jfree.chart.block.BorderArrangement();
         org.jfree.chart.block.BlockContainer blockContainer1 = new org.jfree.chart.block.BlockContainer((org.jfree.chart.block.Arrangement) borderArrangement0);
         blockContainer1.clear();
@@ -17721,9 +17583,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test408() throws Throwable {
+    public void test403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test408");
+            System.out.format("%n%s%n", "RegressionTest0.test403");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         java.awt.Shape shape5 = barRenderer3D0.getBaseShape();
@@ -17810,9 +17672,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test409() throws Throwable {
+    public void test404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test409");
+            System.out.format("%n%s%n", "RegressionTest0.test404");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         double double1 = combinedRangeXYPlot0.getGap();
         org.jfree.chart.LegendItemCollection legendItemCollection2 = combinedRangeXYPlot0.getLegendItems();
@@ -17825,9 +17687,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test410() throws Throwable {
+    public void test405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test410");
+            System.out.format("%n%s%n", "RegressionTest0.test405");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator4 = null;
@@ -17900,9 +17762,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test411() throws Throwable {
+    public void test406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test411");
+            System.out.format("%n%s%n", "RegressionTest0.test406");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         combinedRangeXYPlot0.setGap((double) (-16777216));
@@ -17935,9 +17797,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test412() throws Throwable {
+    public void test407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test412");
+            System.out.format("%n%s%n", "RegressionTest0.test407");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -17993,9 +17855,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test413() throws Throwable {
+    public void test408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test413");
+            System.out.format("%n%s%n", "RegressionTest0.test408");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -18034,9 +17896,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test414() throws Throwable {
+    public void test409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test414");
+            System.out.format("%n%s%n", "RegressionTest0.test409");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -18082,9 +17944,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test415() throws Throwable {
+    public void test410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test415");
+            System.out.format("%n%s%n", "RegressionTest0.test410");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -18121,9 +17983,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test416() throws Throwable {
+    public void test411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test416");
+            System.out.format("%n%s%n", "RegressionTest0.test411");
         java.util.TimeZone timeZone0 = org.jfree.chart.axis.SegmentedTimeline.DEFAULT_TIME_ZONE;
         java.lang.Class<?> wildcardClass1 = timeZone0.getClass();
         boolean boolean2 = org.jfree.chart.util.SerialUtilities.isSerializable((java.lang.Class) wildcardClass1);
@@ -18138,9 +18000,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test417() throws Throwable {
+    public void test412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test417");
+            System.out.format("%n%s%n", "RegressionTest0.test412");
         org.jfree.chart.axis.DateTickUnitType dateTickUnitType1 = org.jfree.chart.axis.DateTickUnitType.HOUR;
         org.jfree.chart.axis.DateTickUnit dateTickUnit3 = new org.jfree.chart.axis.DateTickUnit(dateTickUnitType1, 100);
         java.lang.String str5 = dateTickUnit3.valueToString((double) (short) 1);
@@ -18210,9 +18072,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test418() throws Throwable {
+    public void test413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test418");
+            System.out.format("%n%s%n", "RegressionTest0.test413");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -18231,9 +18093,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test419() throws Throwable {
+    public void test414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test419");
+            System.out.format("%n%s%n", "RegressionTest0.test414");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         org.jfree.chart.plot.PiePlot piePlot1 = new org.jfree.chart.plot.PiePlot();
         org.jfree.data.general.DatasetGroup datasetGroup2 = piePlot1.getDatasetGroup();
@@ -18312,9 +18174,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test420() throws Throwable {
+    public void test415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test420");
+            System.out.format("%n%s%n", "RegressionTest0.test415");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -18342,9 +18204,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test421() throws Throwable {
+    public void test416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test421");
+            System.out.format("%n%s%n", "RegressionTest0.test416");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -18427,9 +18289,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test422() throws Throwable {
+    public void test417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test422");
+            System.out.format("%n%s%n", "RegressionTest0.test417");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -18461,9 +18323,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test423() throws Throwable {
+    public void test418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test423");
+            System.out.format("%n%s%n", "RegressionTest0.test418");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         int int1 = combinedDomainXYPlot0.getBackgroundImageAlignment();
         org.jfree.chart.entity.EntityCollection entityCollection2 = null;
@@ -18493,9 +18355,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test424() throws Throwable {
+    public void test419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test424");
+            System.out.format("%n%s%n", "RegressionTest0.test419");
         org.jfree.data.time.Year year2 = new org.jfree.data.time.Year((int) (short) 0);
         long long3 = year2.getFirstMillisecond();
         org.jfree.data.time.Year year5 = new org.jfree.data.time.Year((int) (short) 0);
@@ -18603,9 +18465,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test425() throws Throwable {
+    public void test420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test425");
+            System.out.format("%n%s%n", "RegressionTest0.test420");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -18627,9 +18489,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test426() throws Throwable {
+    public void test421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test426");
+            System.out.format("%n%s%n", "RegressionTest0.test421");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangePannable(false);
@@ -18644,9 +18506,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test427() throws Throwable {
+    public void test422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test427");
+            System.out.format("%n%s%n", "RegressionTest0.test422");
         org.jfree.chart.util.LogFormat logFormat6 = new org.jfree.chart.util.LogFormat((double) 7, "RectangleEdge.RIGHT", "", false);
         java.lang.StringBuffer stringBuffer8 = null;
         java.text.FieldPosition fieldPosition9 = null;
@@ -18696,9 +18558,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test428() throws Throwable {
+    public void test423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test428");
+            System.out.format("%n%s%n", "RegressionTest0.test423");
         org.jfree.chart.renderer.xy.XYBarRenderer xYBarRenderer1 = new org.jfree.chart.renderer.xy.XYBarRenderer(10.0d);
         xYBarRenderer1.setMargin(0.05d);
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition4 = xYBarRenderer1.getNegativeItemLabelPositionFallback();
@@ -18763,9 +18625,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test429() throws Throwable {
+    public void test424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test429");
+            System.out.format("%n%s%n", "RegressionTest0.test424");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -18787,9 +18649,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test430() throws Throwable {
+    public void test425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test430");
+            System.out.format("%n%s%n", "RegressionTest0.test425");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         java.awt.Paint paint1 = combinedDomainXYPlot0.getRangeGridlinePaint();
         org.jfree.chart.plot.CategoryPlot categoryPlot2 = new org.jfree.chart.plot.CategoryPlot();
@@ -18847,9 +18709,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test431() throws Throwable {
+    public void test426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test431");
+            System.out.format("%n%s%n", "RegressionTest0.test426");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator4 = null;
@@ -18863,9 +18725,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test432() throws Throwable {
+    public void test427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test432");
+            System.out.format("%n%s%n", "RegressionTest0.test427");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.awt.Stroke stroke1 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
         combinedRangeXYPlot0.setRangeCrosshairStroke(stroke1);
@@ -18881,9 +18743,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test433() throws Throwable {
+    public void test428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test433");
+            System.out.format("%n%s%n", "RegressionTest0.test428");
         java.text.NumberFormat numberFormat1 = java.text.NumberFormat.getNumberInstance();
         int int2 = numberFormat1.getMinimumFractionDigits();
         java.math.RoundingMode roundingMode3 = numberFormat1.getRoundingMode();
@@ -18951,9 +18813,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test434() throws Throwable {
+    public void test429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test434");
+            System.out.format("%n%s%n", "RegressionTest0.test429");
         org.jfree.chart.title.TextTitle textTitle1 = new org.jfree.chart.title.TextTitle("");
         boolean boolean2 = textTitle1.getExpandToFitSpace();
         textTitle1.setText("");
@@ -19043,9 +18905,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test435() throws Throwable {
+    public void test430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test435");
+            System.out.format("%n%s%n", "RegressionTest0.test430");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D0 = new org.jfree.chart.renderer.category.BarRenderer3D();
         java.awt.Font font4 = barRenderer3D0.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
         java.awt.Shape shape5 = barRenderer3D0.getBaseShape();
@@ -19109,9 +18971,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test436() throws Throwable {
+    public void test431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test436");
+            System.out.format("%n%s%n", "RegressionTest0.test431");
         org.jfree.chart.plot.CategoryPlot categoryPlot1 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer3 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection4 = categoryPlot1.getDomainMarkers((int) 'a', layer3);
@@ -19167,9 +19029,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test437() throws Throwable {
+    public void test432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test437");
+            System.out.format("%n%s%n", "RegressionTest0.test432");
         org.jfree.data.xy.XYZDataset xYZDataset3 = null;
         org.jfree.chart.plot.CategoryPlot categoryPlot4 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer6 = org.jfree.chart.util.Layer.FOREGROUND;
@@ -19183,7 +19045,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart17 = org.jfree.chart.ChartFactory.createBubbleChart("ChartChangeEventType.GENERAL", "DomainOrder.NONE", "WMAP_Plot", xYZDataset3, plotOrientation12, false, true, true);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@2a3e102d is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@584ed60e is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -19195,9 +19057,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test438() throws Throwable {
+    public void test433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test438");
+            System.out.format("%n%s%n", "RegressionTest0.test433");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -19293,9 +19155,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test439() throws Throwable {
+    public void test434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test439");
+            System.out.format("%n%s%n", "RegressionTest0.test434");
         org.jfree.data.Range range1 = null;
         org.jfree.chart.block.RectangleConstraint rectangleConstraint2 = new org.jfree.chart.block.RectangleConstraint(0.0d, range1);
         org.jfree.data.Range range5 = new org.jfree.data.Range((double) (-1L), 0.0d);
@@ -19391,9 +19253,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test440() throws Throwable {
+    public void test435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test440");
+            System.out.format("%n%s%n", "RegressionTest0.test435");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -19494,9 +19356,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test441() throws Throwable {
+    public void test436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test441");
+            System.out.format("%n%s%n", "RegressionTest0.test436");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -19527,9 +19389,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test442() throws Throwable {
+    public void test437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test442");
+            System.out.format("%n%s%n", "RegressionTest0.test437");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -19579,9 +19441,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test443() throws Throwable {
+    public void test438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test443");
+            System.out.format("%n%s%n", "RegressionTest0.test438");
         org.jfree.chart.plot.CrosshairState crosshairState0 = new org.jfree.chart.plot.CrosshairState();
         double double1 = crosshairState0.getCrosshairY();
         double double2 = crosshairState0.getCrosshairX();
@@ -19592,9 +19454,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test444() throws Throwable {
+    public void test439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test444");
+            System.out.format("%n%s%n", "RegressionTest0.test439");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -19657,9 +19519,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test445() throws Throwable {
+    public void test440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test445");
+            System.out.format("%n%s%n", "RegressionTest0.test440");
         org.jfree.data.xy.XYDataItem xYDataItem2 = new org.jfree.data.xy.XYDataItem((double) (byte) 10, (double) 0);
         double double3 = xYDataItem2.getXValue();
         double double4 = xYDataItem2.getXValue();
@@ -19671,9 +19533,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test446() throws Throwable {
+    public void test441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test446");
+            System.out.format("%n%s%n", "RegressionTest0.test441");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -19714,9 +19576,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test447() throws Throwable {
+    public void test442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test447");
+            System.out.format("%n%s%n", "RegressionTest0.test442");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -19751,9 +19613,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test448() throws Throwable {
+    public void test443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test448");
+            System.out.format("%n%s%n", "RegressionTest0.test443");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         boolean boolean3 = xYAreaRenderer1.isSeriesItemLabelsVisible((int) (byte) 1);
         java.awt.Paint paint4 = xYAreaRenderer1.getBaseLegendTextPaint();
@@ -19813,9 +19675,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test449() throws Throwable {
+    public void test444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test449");
+            System.out.format("%n%s%n", "RegressionTest0.test444");
         org.jfree.chart.plot.PolarPlot polarPlot0 = new org.jfree.chart.plot.PolarPlot();
         org.jfree.chart.axis.ValueAxis valueAxis1 = null;
         polarPlot0.setAxis(valueAxis1);
@@ -19879,9 +19741,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test450() throws Throwable {
+    public void test445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test450");
+            System.out.format("%n%s%n", "RegressionTest0.test445");
         org.jfree.chart.block.BorderArrangement borderArrangement0 = new org.jfree.chart.block.BorderArrangement();
         java.util.TimeZone timeZone1 = null;
         org.jfree.data.time.TimeSeriesCollection timeSeriesCollection2 = new org.jfree.data.time.TimeSeriesCollection(timeZone1);
@@ -19925,9 +19787,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test451() throws Throwable {
+    public void test446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test451");
+            System.out.format("%n%s%n", "RegressionTest0.test446");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         org.jfree.chart.LegendItemCollection legendItemCollection1 = combinedRangeXYPlot0.getLegendItems();
         combinedRangeXYPlot0.setRangePannable(false);
@@ -19945,9 +19807,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test452() throws Throwable {
+    public void test447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test452");
+            System.out.format("%n%s%n", "RegressionTest0.test447");
         org.jfree.data.xy.DefaultXYDataset defaultXYDataset3 = new org.jfree.data.xy.DefaultXYDataset();
         org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState4 = defaultXYDataset3.getSelectionState();
         int int5 = defaultXYDataset3.getSeriesCount();
@@ -19969,7 +19831,7 @@ public class RegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             org.jfree.chart.JFreeChart jFreeChart28 = org.jfree.chart.ChartFactory.createXYStepChart("RectangleConstraint[LengthConstraintType.FIXED: width=0.0, height=10.0]", "ChartChangeEventType.DATASET_UPDATED", "PieLabelLinkStyle.QUAD_CURVE", (org.jfree.data.xy.XYDataset) defaultXYDataset3, plotOrientation24, true, true, true);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@494c946f is not of type class sun.util.calendar.ZoneInfo");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.chart.JFreeChart@cea21b6 is not of type class sun.util.calendar.ZoneInfo");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -19985,9 +19847,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test453() throws Throwable {
+    public void test448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test453");
+            System.out.format("%n%s%n", "RegressionTest0.test448");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -20042,9 +19904,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test454() throws Throwable {
+    public void test449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test454");
+            System.out.format("%n%s%n", "RegressionTest0.test449");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -20121,9 +19983,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test455() throws Throwable {
+    public void test450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test455");
+            System.out.format("%n%s%n", "RegressionTest0.test450");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         int int1 = categoryPlot0.getDatasetCount();
         org.jfree.chart.plot.PlotOrientation plotOrientation2 = categoryPlot0.getOrientation();
@@ -20161,9 +20023,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test456() throws Throwable {
+    public void test451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test456");
+            System.out.format("%n%s%n", "RegressionTest0.test451");
         org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D((double) 0.0f, (double) 100L);
         org.jfree.chart.axis.ValueAxis valueAxis3 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot4 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis3);
@@ -20190,9 +20052,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test457() throws Throwable {
+    public void test452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test457");
+            System.out.format("%n%s%n", "RegressionTest0.test452");
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot0 = new org.jfree.chart.plot.CombinedDomainXYPlot();
         java.awt.Paint paint1 = combinedDomainXYPlot0.getRangeGridlinePaint();
         java.awt.Graphics2D graphics2D2 = null;
@@ -20229,9 +20091,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test458() throws Throwable {
+    public void test453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test458");
+            System.out.format("%n%s%n", "RegressionTest0.test453");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -20273,9 +20135,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test459() throws Throwable {
+    public void test454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test459");
+            System.out.format("%n%s%n", "RegressionTest0.test454");
         org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
         org.jfree.chart.util.Layer layer2 = org.jfree.chart.util.Layer.FOREGROUND;
         java.util.Collection collection3 = categoryPlot0.getDomainMarkers((int) 'a', layer2);
@@ -20331,9 +20193,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test460() throws Throwable {
+    public void test455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test460");
+            System.out.format("%n%s%n", "RegressionTest0.test455");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -20357,9 +20219,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test461() throws Throwable {
+    public void test456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test461");
+            System.out.format("%n%s%n", "RegressionTest0.test456");
         java.util.TimeZone timeZone0 = null;
         org.jfree.data.time.TimeSeriesCollection timeSeriesCollection1 = new org.jfree.data.time.TimeSeriesCollection(timeZone0);
         org.jfree.chart.plot.CategoryPlot categoryPlot2 = new org.jfree.chart.plot.CategoryPlot();
@@ -20378,9 +20240,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test462() throws Throwable {
+    public void test457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test462");
+            System.out.format("%n%s%n", "RegressionTest0.test457");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -20410,9 +20272,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test463() throws Throwable {
+    public void test458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test463");
+            System.out.format("%n%s%n", "RegressionTest0.test458");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.util.List list1 = combinedRangeXYPlot0.getSubplots();
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
@@ -20458,9 +20320,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test464() throws Throwable {
+    public void test459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test464");
+            System.out.format("%n%s%n", "RegressionTest0.test459");
         org.jfree.chart.title.TextTitle textTitle1 = new org.jfree.chart.title.TextTitle("");
         org.jfree.chart.util.HorizontalAlignment horizontalAlignment2 = textTitle1.getHorizontalAlignment();
         java.lang.String str3 = textTitle1.getID();
@@ -20517,9 +20379,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test465() throws Throwable {
+    public void test460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test465");
+            System.out.format("%n%s%n", "RegressionTest0.test460");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -20562,9 +20424,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test466() throws Throwable {
+    public void test461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test466");
+            System.out.format("%n%s%n", "RegressionTest0.test461");
         java.awt.geom.Rectangle2D rectangle2D2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -20576,9 +20438,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test467() throws Throwable {
+    public void test462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test467");
+            System.out.format("%n%s%n", "RegressionTest0.test462");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         java.awt.Graphics2D graphics2D2 = null;
@@ -20599,9 +20461,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test468() throws Throwable {
+    public void test463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test468");
+            System.out.format("%n%s%n", "RegressionTest0.test463");
         org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
         java.awt.Stroke stroke1 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
         combinedRangeXYPlot0.setRangeCrosshairStroke(stroke1);
@@ -20664,9 +20526,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test469() throws Throwable {
+    public void test464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test469");
+            System.out.format("%n%s%n", "RegressionTest0.test464");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -20718,9 +20580,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test470() throws Throwable {
+    public void test465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test470");
+            System.out.format("%n%s%n", "RegressionTest0.test465");
         org.jfree.chart.axis.ValueAxis valueAxis1 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot2 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis1);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer4 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -20760,9 +20622,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test471() throws Throwable {
+    public void test466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test471");
+            System.out.format("%n%s%n", "RegressionTest0.test466");
         org.jfree.chart.entity.EntityCollection entityCollection0 = null;
         org.jfree.chart.ChartRenderingInfo chartRenderingInfo1 = new org.jfree.chart.ChartRenderingInfo(entityCollection0);
         java.awt.Paint paint2 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
@@ -20809,9 +20671,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test472() throws Throwable {
+    public void test467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test472");
+            System.out.format("%n%s%n", "RegressionTest0.test467");
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer1 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
         xYAreaRenderer1.clearSeriesStrokes(false);
         boolean boolean4 = xYAreaRenderer1.getPlotLines();
@@ -20871,9 +20733,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test473() throws Throwable {
+    public void test468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test473");
+            System.out.format("%n%s%n", "RegressionTest0.test468");
         org.jfree.data.xy.DefaultXYDataset defaultXYDataset0 = new org.jfree.data.xy.DefaultXYDataset();
         org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState1 = defaultXYDataset0.getSelectionState();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateRangeBounds((org.jfree.data.xy.XYDataset) defaultXYDataset0);
@@ -20908,9 +20770,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test474() throws Throwable {
+    public void test469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test474");
+            System.out.format("%n%s%n", "RegressionTest0.test469");
         org.jfree.chart.axis.ValueAxis valueAxis0 = null;
         org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
         org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
@@ -20941,5 +20803,246 @@ public class RegressionTest0 {
         org.junit.Assert.assertNull(datasetGroup26);
         org.junit.Assert.assertNotNull(chartChangeEventType31);
         org.junit.Assert.assertEquals("'" + str32 + "' != '" + "ChartChangeEventType.GENERAL" + "'", str32, "ChartChangeEventType.GENERAL");
+    }
+
+    @Test
+    public void test470() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test470");
+        org.jfree.chart.axis.ValueAxis valueAxis0 = null;
+        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot1 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis0);
+        org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer3 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
+        xYAreaRenderer3.clearSeriesStrokes(false);
+        org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator6 = null;
+        xYAreaRenderer3.setLegendItemURLGenerator(xYSeriesLabelGenerator6);
+        xYAreaRenderer3.setSeriesVisibleInLegend(0, (java.lang.Boolean) true);
+        boolean boolean14 = xYAreaRenderer3.isItemLabelVisible((int) '#', (int) '#', true);
+        combinedDomainXYPlot1.setRenderer((org.jfree.chart.renderer.xy.XYItemRenderer) xYAreaRenderer3);
+        org.jfree.chart.axis.ValueAxis valueAxis16 = null;
+        int int17 = combinedDomainXYPlot1.getRangeAxisIndex(valueAxis16);
+        org.jfree.chart.axis.ValueAxis valueAxis18 = null;
+        combinedDomainXYPlot1.setDomainAxis(valueAxis18);
+        org.jfree.chart.axis.ValueAxis valueAxis20 = null;
+        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot21 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis20);
+        java.awt.Graphics2D graphics2D22 = null;
+        org.jfree.chart.entity.EntityCollection entityCollection23 = null;
+        org.jfree.chart.ChartRenderingInfo chartRenderingInfo24 = new org.jfree.chart.ChartRenderingInfo(entityCollection23);
+        java.awt.Paint paint25 = org.jfree.chart.title.LegendTitle.DEFAULT_ITEM_PAINT;
+        boolean boolean26 = chartRenderingInfo24.equals((java.lang.Object) paint25);
+        java.awt.geom.Rectangle2D rectangle2D27 = chartRenderingInfo24.getChartArea();
+        java.util.List list28 = null;
+        combinedDomainXYPlot21.drawDomainGridlines(graphics2D22, rectangle2D27, list28);
+        org.jfree.chart.axis.NumberAxis numberAxis31 = new org.jfree.chart.axis.NumberAxis("");
+        org.jfree.chart.entity.AxisEntity axisEntity34 = new org.jfree.chart.entity.AxisEntity((java.awt.Shape) rectangle2D27, (org.jfree.chart.axis.Axis) numberAxis31, "", "DatasetRenderingOrder.FORWARD");
+        combinedDomainXYPlot1.setRangeAxis((org.jfree.chart.axis.ValueAxis) numberAxis31);
+        numberAxis31.setTickLabelsVisible(true);
+        numberAxis31.setAxisLineVisible(false);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertNotNull(paint25);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(rectangle2D27);
+    }
+
+    @Test
+    public void test471() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test471");
+        java.awt.Font font1 = org.jfree.chart.axis.Axis.DEFAULT_TICK_LABEL_FONT;
+        java.awt.Paint paint2 = org.jfree.chart.renderer.category.BarRenderer3D.DEFAULT_WALL_PAINT;
+        org.jfree.chart.text.TextMeasurer textMeasurer5 = null;
+        org.jfree.chart.text.TextBlock textBlock6 = org.jfree.chart.text.TextUtilities.createTextBlock("", font1, paint2, (float) (-1L), (int) (short) -1, textMeasurer5);
+        org.jfree.chart.title.TextTitle textTitle8 = new org.jfree.chart.title.TextTitle("");
+        org.jfree.chart.util.HorizontalAlignment horizontalAlignment9 = textTitle8.getTextAlignment();
+        org.jfree.chart.util.VerticalAlignment verticalAlignment10 = null;
+        org.jfree.chart.block.ColumnArrangement columnArrangement13 = new org.jfree.chart.block.ColumnArrangement(horizontalAlignment9, verticalAlignment10, (double) '#', (double) (byte) 1);
+        textBlock6.setLineAlignment(horizontalAlignment9);
+        java.awt.Graphics2D graphics2D15 = null;
+        org.jfree.chart.text.TextBlockAnchor textBlockAnchor18 = org.jfree.chart.text.TextBlockAnchor.CENTER_LEFT;
+        org.jfree.chart.axis.SegmentedTimeline segmentedTimeline19 = org.jfree.chart.axis.SegmentedTimeline.newMondayThroughFridayTimeline();
+        boolean boolean20 = textBlockAnchor18.equals((java.lang.Object) segmentedTimeline19);
+        java.awt.Shape shape24 = textBlock6.calculateBounds(graphics2D15, (float) 11, (float) 86400000L, textBlockAnchor18, (float) 'a', (float) ' ', (double) (short) 1);
+        org.jfree.chart.title.TextTitle textTitle26 = new org.jfree.chart.title.TextTitle("");
+        org.jfree.chart.axis.ValueAxis valueAxis27 = null;
+        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot28 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis27);
+        org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer30 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
+        xYAreaRenderer30.clearSeriesStrokes(false);
+        org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator33 = null;
+        xYAreaRenderer30.setLegendItemURLGenerator(xYSeriesLabelGenerator33);
+        xYAreaRenderer30.setSeriesVisibleInLegend(0, (java.lang.Boolean) true);
+        boolean boolean41 = xYAreaRenderer30.isItemLabelVisible((int) '#', (int) '#', true);
+        combinedDomainXYPlot28.setRenderer((org.jfree.chart.renderer.xy.XYItemRenderer) xYAreaRenderer30);
+        boolean boolean43 = combinedDomainXYPlot28.canSelectByPoint();
+        org.jfree.chart.axis.AxisLocation axisLocation44 = org.jfree.chart.axis.AxisLocation.BOTTOM_OR_RIGHT;
+        combinedDomainXYPlot28.setRangeAxisLocation(axisLocation44, true);
+        boolean boolean47 = textTitle26.equals((java.lang.Object) combinedDomainXYPlot28);
+        org.jfree.chart.entity.TitleEntity titleEntity48 = new org.jfree.chart.entity.TitleEntity(shape24, (org.jfree.chart.title.Title) textTitle26);
+        org.junit.Assert.assertNotNull(font1);
+        org.junit.Assert.assertNotNull(paint2);
+        org.junit.Assert.assertNotNull(textBlock6);
+        org.junit.Assert.assertNotNull(horizontalAlignment9);
+        org.junit.Assert.assertNotNull(textBlockAnchor18);
+        org.junit.Assert.assertNotNull(segmentedTimeline19);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(shape24);
+        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
+        org.junit.Assert.assertNotNull(axisLocation44);
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
+    }
+
+    @Test
+    public void test472() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test472");
+        org.jfree.chart.renderer.xy.XYStepRenderer xYStepRenderer0 = new org.jfree.chart.renderer.xy.XYStepRenderer();
+        java.lang.Boolean boolean2 = xYStepRenderer0.getSeriesLinesVisible(0);
+        java.lang.Object obj3 = null;
+        boolean boolean4 = xYStepRenderer0.equals(obj3);
+        java.lang.Boolean boolean6 = xYStepRenderer0.getSeriesLinesVisible(3);
+        org.junit.Assert.assertNull(boolean2);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertNull(boolean6);
+    }
+
+    @Test
+    public void test473() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test473");
+        org.jfree.chart.util.StrokeMap strokeMap0 = new org.jfree.chart.util.StrokeMap();
+        org.jfree.chart.renderer.category.BarRenderer3D barRenderer3D2 = new org.jfree.chart.renderer.category.BarRenderer3D();
+        java.awt.Font font6 = barRenderer3D2.getItemLabelFont((int) (byte) -1, (int) (byte) 1, false);
+        java.awt.Shape shape7 = barRenderer3D2.getBaseShape();
+        barRenderer3D2.setBaseSeriesVisible(false);
+        org.jfree.chart.axis.ValueAxis valueAxis10 = null;
+        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot11 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis10);
+        org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer13 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
+        xYAreaRenderer13.clearSeriesStrokes(false);
+        org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator16 = null;
+        xYAreaRenderer13.setLegendItemURLGenerator(xYSeriesLabelGenerator16);
+        xYAreaRenderer13.setSeriesVisibleInLegend(0, (java.lang.Boolean) true);
+        boolean boolean24 = xYAreaRenderer13.isItemLabelVisible((int) '#', (int) '#', true);
+        combinedDomainXYPlot11.setRenderer((org.jfree.chart.renderer.xy.XYItemRenderer) xYAreaRenderer13);
+        org.jfree.chart.axis.ValueAxis valueAxis26 = null;
+        int int27 = combinedDomainXYPlot11.getRangeAxisIndex(valueAxis26);
+        boolean boolean28 = combinedDomainXYPlot11.isRangeCrosshairVisible();
+        org.jfree.chart.util.RectangleInsets rectangleInsets29 = org.jfree.chart.title.Title.DEFAULT_PADDING;
+        double double30 = rectangleInsets29.getLeft();
+        double double32 = rectangleInsets29.calculateLeftOutset((double) 0L);
+        combinedDomainXYPlot11.setAxisOffset(rectangleInsets29);
+        combinedDomainXYPlot11.setDomainGridlinesVisible(false);
+        java.awt.Paint paint36 = combinedDomainXYPlot11.getNoDataMessagePaint();
+        barRenderer3D2.setBaseItemLabelPaint(paint36, false);
+        java.awt.Stroke stroke39 = barRenderer3D2.getBaseOutlineStroke();
+        strokeMap0.put((java.lang.Comparable) "DateTickMarkPosition.MIDDLE", stroke39);
+        java.lang.Object obj41 = strokeMap0.clone();
+        org.junit.Assert.assertNotNull(font6);
+        org.junit.Assert.assertNotNull(shape7);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+        org.junit.Assert.assertNotNull(rectangleInsets29);
+        org.junit.Assert.assertTrue("'" + double30 + "' != '" + 1.0d + "'", double30 == 1.0d);
+        org.junit.Assert.assertTrue("'" + double32 + "' != '" + 1.0d + "'", double32 == 1.0d);
+        org.junit.Assert.assertNotNull(paint36);
+        org.junit.Assert.assertNotNull(stroke39);
+        org.junit.Assert.assertNotNull(obj41);
+    }
+
+    @Test
+    public void test474() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test474");
+        org.jfree.chart.util.PaintList paintList0 = new org.jfree.chart.util.PaintList();
+        org.jfree.chart.axis.ValueAxis valueAxis1 = null;
+        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot2 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis1);
+        org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer4 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
+        xYAreaRenderer4.clearSeriesStrokes(false);
+        org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator7 = null;
+        xYAreaRenderer4.setLegendItemURLGenerator(xYSeriesLabelGenerator7);
+        xYAreaRenderer4.setSeriesVisibleInLegend(0, (java.lang.Boolean) true);
+        boolean boolean15 = xYAreaRenderer4.isItemLabelVisible((int) '#', (int) '#', true);
+        combinedDomainXYPlot2.setRenderer((org.jfree.chart.renderer.xy.XYItemRenderer) xYAreaRenderer4);
+        combinedDomainXYPlot2.clearDomainMarkers();
+        java.awt.Font font19 = org.jfree.chart.axis.Axis.DEFAULT_TICK_LABEL_FONT;
+        java.awt.Paint paint20 = org.jfree.chart.renderer.category.BarRenderer3D.DEFAULT_WALL_PAINT;
+        org.jfree.chart.text.TextMeasurer textMeasurer23 = null;
+        org.jfree.chart.text.TextBlock textBlock24 = org.jfree.chart.text.TextUtilities.createTextBlock("", font19, paint20, (float) (-1L), (int) (short) -1, textMeasurer23);
+        combinedDomainXYPlot2.setDomainCrosshairPaint(paint20);
+        boolean boolean26 = paintList0.equals((java.lang.Object) paint20);
+        java.awt.Paint paint28 = null;
+        paintList0.setPaint(0, paint28);
+        java.awt.Paint paint31 = paintList0.getPaint(5);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNotNull(font19);
+        org.junit.Assert.assertNotNull(paint20);
+        org.junit.Assert.assertNotNull(textBlock24);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
+        org.junit.Assert.assertNull(paint31);
+    }
+
+    @Test
+    public void test475() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test475");
+        org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot0 = new org.jfree.chart.plot.CombinedRangeXYPlot();
+        java.awt.Stroke stroke1 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
+        combinedRangeXYPlot0.setRangeCrosshairStroke(stroke1);
+        java.awt.geom.Point2D point2D3 = combinedRangeXYPlot0.getQuadrantOrigin();
+        int int4 = combinedRangeXYPlot0.getRendererCount();
+        java.util.List list5 = combinedRangeXYPlot0.getSubplots();
+        org.junit.Assert.assertNotNull(stroke1);
+        org.junit.Assert.assertNotNull(point2D3);
+        org.junit.Assert.assertTrue("'" + int4 + "' != '" + 1 + "'", int4 == 1);
+        org.junit.Assert.assertNotNull(list5);
+    }
+
+    @Test
+    public void test476() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test476");
+        org.jfree.chart.plot.CategoryPlot categoryPlot0 = new org.jfree.chart.plot.CategoryPlot();
+        int int1 = categoryPlot0.getDatasetCount();
+        org.jfree.chart.plot.PlotOrientation plotOrientation2 = categoryPlot0.getOrientation();
+        org.jfree.chart.axis.ValueAxis valueAxis3 = null;
+        org.jfree.chart.plot.CombinedDomainXYPlot combinedDomainXYPlot4 = new org.jfree.chart.plot.CombinedDomainXYPlot(valueAxis3);
+        org.jfree.chart.renderer.xy.XYAreaRenderer xYAreaRenderer6 = new org.jfree.chart.renderer.xy.XYAreaRenderer((int) '4');
+        xYAreaRenderer6.clearSeriesStrokes(false);
+        org.jfree.chart.labels.XYSeriesLabelGenerator xYSeriesLabelGenerator9 = null;
+        xYAreaRenderer6.setLegendItemURLGenerator(xYSeriesLabelGenerator9);
+        xYAreaRenderer6.setSeriesVisibleInLegend(0, (java.lang.Boolean) true);
+        boolean boolean17 = xYAreaRenderer6.isItemLabelVisible((int) '#', (int) '#', true);
+        combinedDomainXYPlot4.setRenderer((org.jfree.chart.renderer.xy.XYItemRenderer) xYAreaRenderer6);
+        org.jfree.chart.axis.ValueAxis valueAxis19 = null;
+        int int20 = combinedDomainXYPlot4.getRangeAxisIndex(valueAxis19);
+        boolean boolean21 = combinedDomainXYPlot4.isRangeCrosshairVisible();
+        org.jfree.chart.util.RectangleInsets rectangleInsets22 = org.jfree.chart.title.Title.DEFAULT_PADDING;
+        double double23 = rectangleInsets22.getLeft();
+        double double25 = rectangleInsets22.calculateLeftOutset((double) 0L);
+        combinedDomainXYPlot4.setAxisOffset(rectangleInsets22);
+        combinedDomainXYPlot4.setDomainGridlinesVisible(false);
+        boolean boolean29 = combinedDomainXYPlot4.isDomainMinorGridlinesVisible();
+        boolean boolean30 = plotOrientation2.equals((java.lang.Object) combinedDomainXYPlot4);
+        org.jfree.chart.plot.Marker marker32 = null;
+        org.jfree.chart.plot.CombinedRangeXYPlot combinedRangeXYPlot33 = new org.jfree.chart.plot.CombinedRangeXYPlot();
+        java.awt.Stroke stroke34 = org.jfree.chart.plot.XYPlot.DEFAULT_GRIDLINE_STROKE;
+        combinedRangeXYPlot33.setRangeCrosshairStroke(stroke34);
+        org.jfree.chart.util.Layer layer36 = org.jfree.chart.util.Layer.BACKGROUND;
+        java.util.Collection collection37 = combinedRangeXYPlot33.getDomainMarkers(layer36);
+        boolean boolean38 = combinedDomainXYPlot4.removeDomainMarker(100, marker32, layer36);
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 1 + "'", int1 == 1);
+        org.junit.Assert.assertNotNull(plotOrientation2);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 0 + "'", int20 == 0);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertNotNull(rectangleInsets22);
+        org.junit.Assert.assertTrue("'" + double23 + "' != '" + 1.0d + "'", double23 == 1.0d);
+        org.junit.Assert.assertTrue("'" + double25 + "' != '" + 1.0d + "'", double25 == 1.0d);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertNotNull(stroke34);
+        org.junit.Assert.assertNotNull(layer36);
+        org.junit.Assert.assertNull(collection37);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
     }
 }

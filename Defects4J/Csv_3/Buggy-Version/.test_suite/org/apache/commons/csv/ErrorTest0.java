@@ -965,5 +965,15 @@ public class ErrorTest0 {
         // during test generation this statement threw an exception of type java.lang.NullPointerException in error
         java.util.Map<java.lang.String, java.lang.Integer> strMap8 = cSVParser3.getHeaderMap();
     }
+
+    @Test
+    public void test58() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "ErrorTest0.test58");
+        org.apache.commons.csv.CSVFormat cSVFormat1 = org.apache.commons.csv.CSVFormat.EXCEL;
+        org.apache.commons.csv.CSVParser cSVParser2 = new org.apache.commons.csv.CSVParser("[]", cSVFormat1);
+        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
+        java.util.Map<java.lang.String, java.lang.Integer> strMap3 = cSVParser2.getHeaderMap();
+    }
 }
 

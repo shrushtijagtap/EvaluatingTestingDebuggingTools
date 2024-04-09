@@ -1,3 +1,4 @@
-org.apache.commons.math3.geometry.euclidean.threed.SubLineTest.testIntersectionNotIntersecting
-org.apache.commons.math3.geometry.euclidean.twod.SubLineTest.testIntersectionParallel
-org.apache.commons.math3.geometry.euclidean.twod.RandoopRegressionTest0.test116
+org.apache.commons.math3.geometry.euclidean.threed.EvosuiteSubLine_ESTest.test3
+org.apache.commons.math3.geometry.euclidean.twod.EvosuiteSubLine_ESTest.test03
+org.apache.commons.math3.geometry.euclidean.twod.RandoopRegressionTest0.test110
+org.apache.commons.math3.geometry.euclidean.twod.RandoopRegressionTest0.test110

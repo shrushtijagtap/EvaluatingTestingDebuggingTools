@@ -1,5 +1,13 @@
-org.joda.time.TestPartial_Basics.testWith_baseAndArgHaveNoRange
 org.joda.time.field.RandoopErrorTest0.test10
+org.joda.time.field.RandoopErrorTest0.test17
+org.joda.time.field.RandoopErrorTest0.test05
+org.joda.time.field.RandoopErrorTest0.test03
+org.joda.time.field.RandoopErrorTest0.test02
+org.joda.time.field.RandoopErrorTest0.test01
+org.joda.time.field.RandoopErrorTest0.test18
+org.joda.time.field.RandoopErrorTest0.test11
 org.joda.time.field.RandoopErrorTest0.test13
-org.joda.time.field.RandoopErrorTest0.test16
-org.joda.time.field.RandoopErrorTest0.test19
+org.joda.time.field.RandoopErrorTest0.test07
+org.joda.time.EvosuitePartial_ESTest.test23
+org.joda.time.EvosuitePartial_ESTest.test22
+org.joda.time.field.EvosuiteUnsupportedDurationField_ESTest.test19

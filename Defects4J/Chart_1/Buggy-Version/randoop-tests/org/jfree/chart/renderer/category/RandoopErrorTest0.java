@@ -12,7 +12,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test001() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test001");
+            System.out.format("%n%s%n", "ErrorTest0.test001");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -34,7 +34,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test002() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test002");
+            System.out.format("%n%s%n", "ErrorTest0.test002");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -66,7 +66,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test003() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test003");
+            System.out.format("%n%s%n", "ErrorTest0.test003");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float2 = categoryAxis1.getTickMarkInsideLength();
         categoryAxis1.setMaximumCategoryLabelLines((int) (byte) 1);
@@ -95,7 +95,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test004() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test004");
+            System.out.format("%n%s%n", "ErrorTest0.test004");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -128,7 +128,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test005() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test005");
+            System.out.format("%n%s%n", "ErrorTest0.test005");
         org.jfree.chart.util.SortOrder sortOrder0 = org.jfree.chart.util.SortOrder.ASCENDING;
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
@@ -151,7 +151,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test006() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test006");
+            System.out.format("%n%s%n", "ErrorTest0.test006");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -205,7 +205,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test007() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test007");
+            System.out.format("%n%s%n", "ErrorTest0.test007");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -254,7 +254,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test008() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test008");
+            System.out.format("%n%s%n", "ErrorTest0.test008");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -318,7 +318,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test009() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test009");
+            System.out.format("%n%s%n", "ErrorTest0.test009");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -353,7 +353,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test010() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test010");
+            System.out.format("%n%s%n", "ErrorTest0.test010");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -387,7 +387,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test011() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test011");
+            System.out.format("%n%s%n", "ErrorTest0.test011");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -439,7 +439,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test012() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test012");
+            System.out.format("%n%s%n", "ErrorTest0.test012");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -480,7 +480,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test013() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test013");
+            System.out.format("%n%s%n", "ErrorTest0.test013");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -516,7 +516,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test014() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test014");
+            System.out.format("%n%s%n", "ErrorTest0.test014");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color5 = java.awt.Color.BLUE;
@@ -561,7 +561,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test015() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test015");
+            System.out.format("%n%s%n", "ErrorTest0.test015");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -613,7 +613,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test016() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test016");
+            System.out.format("%n%s%n", "ErrorTest0.test016");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -660,7 +660,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test017() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test017");
+            System.out.format("%n%s%n", "ErrorTest0.test017");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -715,7 +715,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test018() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test018");
+            System.out.format("%n%s%n", "ErrorTest0.test018");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -752,7 +752,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test019() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test019");
+            System.out.format("%n%s%n", "ErrorTest0.test019");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -810,7 +810,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test020() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test020");
+            System.out.format("%n%s%n", "ErrorTest0.test020");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -871,7 +871,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test021() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test021");
+            System.out.format("%n%s%n", "ErrorTest0.test021");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -913,7 +913,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test022() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test022");
+            System.out.format("%n%s%n", "ErrorTest0.test022");
         org.jfree.data.category.AbstractCategoryDataset abstractCategoryDataset0 = new org.jfree.data.category.AbstractCategoryDataset();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
@@ -972,7 +972,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test023() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test023");
+            System.out.format("%n%s%n", "ErrorTest0.test023");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1024,7 +1024,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test024");
+            System.out.format("%n%s%n", "ErrorTest0.test024");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -1052,7 +1052,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test025");
+            System.out.format("%n%s%n", "ErrorTest0.test025");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1105,7 +1105,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test026");
+            System.out.format("%n%s%n", "ErrorTest0.test026");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1163,7 +1163,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test027");
+            System.out.format("%n%s%n", "ErrorTest0.test027");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -1205,7 +1205,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test028");
+            System.out.format("%n%s%n", "ErrorTest0.test028");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -1264,7 +1264,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test029");
+            System.out.format("%n%s%n", "ErrorTest0.test029");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -1289,7 +1289,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test030");
+            System.out.format("%n%s%n", "ErrorTest0.test030");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1352,7 +1352,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test031");
+            System.out.format("%n%s%n", "ErrorTest0.test031");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1418,7 +1418,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test032");
+            System.out.format("%n%s%n", "ErrorTest0.test032");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -1470,7 +1470,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test033");
+            System.out.format("%n%s%n", "ErrorTest0.test033");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -1510,7 +1510,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test034");
+            System.out.format("%n%s%n", "ErrorTest0.test034");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -1568,7 +1568,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test035");
+            System.out.format("%n%s%n", "ErrorTest0.test035");
         org.jfree.data.category.AbstractCategoryDataset abstractCategoryDataset0 = new org.jfree.data.category.AbstractCategoryDataset();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
@@ -1609,7 +1609,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test036");
+            System.out.format("%n%s%n", "ErrorTest0.test036");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1660,7 +1660,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test037");
+            System.out.format("%n%s%n", "ErrorTest0.test037");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -1685,7 +1685,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test038");
+            System.out.format("%n%s%n", "ErrorTest0.test038");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1743,7 +1743,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test039");
+            System.out.format("%n%s%n", "ErrorTest0.test039");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Graphics2D graphics2D3 = null;
         org.jfree.data.category.CategoryDataset categoryDataset4 = null;
@@ -1804,7 +1804,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test040");
+            System.out.format("%n%s%n", "ErrorTest0.test040");
         java.awt.Paint[] paintArray0 = org.jfree.chart.plot.DefaultDrawingSupplier.DEFAULT_FILL_PAINT_SEQUENCE;
         java.awt.Paint[] paintArray1 = org.jfree.chart.plot.DefaultDrawingSupplier.DEFAULT_FILL_PAINT_SEQUENCE;
         org.jfree.chart.LegendItem legendItem3 = new org.jfree.chart.LegendItem("hi!");
@@ -1863,7 +1863,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test041");
+            System.out.format("%n%s%n", "ErrorTest0.test041");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -1901,7 +1901,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test042");
+            System.out.format("%n%s%n", "ErrorTest0.test042");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -1950,7 +1950,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test043");
+            System.out.format("%n%s%n", "ErrorTest0.test043");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -1993,7 +1993,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test044");
+            System.out.format("%n%s%n", "ErrorTest0.test044");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2033,7 +2033,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test045");
+            System.out.format("%n%s%n", "ErrorTest0.test045");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2099,7 +2099,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test046");
+            System.out.format("%n%s%n", "ErrorTest0.test046");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
         lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
@@ -2158,7 +2158,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test047");
+            System.out.format("%n%s%n", "ErrorTest0.test047");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2201,7 +2201,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test048");
+            System.out.format("%n%s%n", "ErrorTest0.test048");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2241,7 +2241,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test049");
+            System.out.format("%n%s%n", "ErrorTest0.test049");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -2286,7 +2286,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test050");
+            System.out.format("%n%s%n", "ErrorTest0.test050");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2326,7 +2326,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test051");
+            System.out.format("%n%s%n", "ErrorTest0.test051");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
         lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
@@ -2386,7 +2386,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test052");
+            System.out.format("%n%s%n", "ErrorTest0.test052");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2423,7 +2423,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test053");
+            System.out.format("%n%s%n", "ErrorTest0.test053");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -2473,7 +2473,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test054");
+            System.out.format("%n%s%n", "ErrorTest0.test054");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2527,7 +2527,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test055");
+            System.out.format("%n%s%n", "ErrorTest0.test055");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -2565,7 +2565,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test056");
+            System.out.format("%n%s%n", "ErrorTest0.test056");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color5 = java.awt.Color.BLUE;
@@ -2606,7 +2606,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test057");
+            System.out.format("%n%s%n", "ErrorTest0.test057");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2646,7 +2646,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test058");
+            System.out.format("%n%s%n", "ErrorTest0.test058");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -2701,7 +2701,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test059");
+            System.out.format("%n%s%n", "ErrorTest0.test059");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -2750,7 +2750,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test060");
+            System.out.format("%n%s%n", "ErrorTest0.test060");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -2803,7 +2803,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test061");
+            System.out.format("%n%s%n", "ErrorTest0.test061");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = null;
         org.jfree.chart.axis.ValueAxis valueAxis2 = null;
@@ -2876,7 +2876,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test062");
+            System.out.format("%n%s%n", "ErrorTest0.test062");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -2912,7 +2912,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test063");
+            System.out.format("%n%s%n", "ErrorTest0.test063");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -2947,7 +2947,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test064");
+            System.out.format("%n%s%n", "ErrorTest0.test064");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -2991,7 +2991,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test065");
+            System.out.format("%n%s%n", "ErrorTest0.test065");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -3020,7 +3020,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test066");
+            System.out.format("%n%s%n", "ErrorTest0.test066");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition2 = barRenderer0.getBasePositiveItemLabelPosition();
@@ -3056,7 +3056,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test067");
+            System.out.format("%n%s%n", "ErrorTest0.test067");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -3090,7 +3090,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test068");
+            System.out.format("%n%s%n", "ErrorTest0.test068");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3139,7 +3139,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test069");
+            System.out.format("%n%s%n", "ErrorTest0.test069");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3192,7 +3192,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test070");
+            System.out.format("%n%s%n", "ErrorTest0.test070");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3253,7 +3253,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test071");
+            System.out.format("%n%s%n", "ErrorTest0.test071");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
         lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
@@ -3313,7 +3313,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test072");
+            System.out.format("%n%s%n", "ErrorTest0.test072");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3373,7 +3373,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test073");
+            System.out.format("%n%s%n", "ErrorTest0.test073");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3425,7 +3425,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test074");
+            System.out.format("%n%s%n", "ErrorTest0.test074");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3496,7 +3496,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test075");
+            System.out.format("%n%s%n", "ErrorTest0.test075");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3558,7 +3558,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test076");
+            System.out.format("%n%s%n", "ErrorTest0.test076");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -3620,7 +3620,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test077");
+            System.out.format("%n%s%n", "ErrorTest0.test077");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -3678,7 +3678,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test078");
+            System.out.format("%n%s%n", "ErrorTest0.test078");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         boolean boolean7 = lineAndShapeRenderer2.getItemVisible((int) (byte) 100, 0);
@@ -3748,7 +3748,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test079");
+            System.out.format("%n%s%n", "ErrorTest0.test079");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -3803,7 +3803,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test080");
+            System.out.format("%n%s%n", "ErrorTest0.test080");
         org.jfree.chart.axis.CategoryAxis categoryAxis1 = new org.jfree.chart.axis.CategoryAxis("hi!");
         double double2 = categoryAxis1.getFixedDimension();
         org.jfree.chart.plot.Plot plot3 = categoryAxis1.getPlot();
@@ -3875,7 +3875,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test081");
+            System.out.format("%n%s%n", "ErrorTest0.test081");
         org.jfree.chart.labels.ItemLabelAnchor itemLabelAnchor0 = org.jfree.chart.labels.ItemLabelAnchor.INSIDE7;
         org.jfree.chart.text.TextAnchor textAnchor1 = org.jfree.chart.text.TextAnchor.BASELINE_CENTER;
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -3920,7 +3920,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test082");
+            System.out.format("%n%s%n", "ErrorTest0.test082");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -3945,7 +3945,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test083");
+            System.out.format("%n%s%n", "ErrorTest0.test083");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -3995,7 +3995,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test084");
+            System.out.format("%n%s%n", "ErrorTest0.test084");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -4051,7 +4051,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test085");
+            System.out.format("%n%s%n", "ErrorTest0.test085");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4123,7 +4123,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test086");
+            System.out.format("%n%s%n", "ErrorTest0.test086");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -4164,7 +4164,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test087");
+            System.out.format("%n%s%n", "ErrorTest0.test087");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -4184,7 +4184,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test088");
+            System.out.format("%n%s%n", "ErrorTest0.test088");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4256,7 +4256,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test089");
+            System.out.format("%n%s%n", "ErrorTest0.test089");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -4320,7 +4320,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test090");
+            System.out.format("%n%s%n", "ErrorTest0.test090");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4372,7 +4372,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test091");
+            System.out.format("%n%s%n", "ErrorTest0.test091");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -4423,7 +4423,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test092");
+            System.out.format("%n%s%n", "ErrorTest0.test092");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4475,7 +4475,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test093");
+            System.out.format("%n%s%n", "ErrorTest0.test093");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -4527,7 +4527,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test094");
+            System.out.format("%n%s%n", "ErrorTest0.test094");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4585,7 +4585,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test095");
+            System.out.format("%n%s%n", "ErrorTest0.test095");
         org.jfree.data.category.CategoryDataset categoryDataset1 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis3 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float4 = categoryAxis3.getTickMarkInsideLength();
@@ -4633,7 +4633,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test096");
+            System.out.format("%n%s%n", "ErrorTest0.test096");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -4654,7 +4654,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test097");
+            System.out.format("%n%s%n", "ErrorTest0.test097");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -4691,7 +4691,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test098");
+            System.out.format("%n%s%n", "ErrorTest0.test098");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.labels.CategoryItemLabelGenerator categoryItemLabelGenerator6 = null;
@@ -4749,7 +4749,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test099");
+            System.out.format("%n%s%n", "ErrorTest0.test099");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -4789,7 +4789,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test100");
+            System.out.format("%n%s%n", "ErrorTest0.test100");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color5 = java.awt.Color.BLUE;
@@ -4842,7 +4842,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test101");
+            System.out.format("%n%s%n", "ErrorTest0.test101");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -4890,7 +4890,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test102");
+            System.out.format("%n%s%n", "ErrorTest0.test102");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color4 = java.awt.Color.BLUE;
         lineAndShapeRenderer3.setBaseItemLabelPaint((java.awt.Paint) color4);
@@ -4949,7 +4949,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test103");
+            System.out.format("%n%s%n", "ErrorTest0.test103");
         org.jfree.data.KeyedObjects keyedObjects0 = new org.jfree.data.KeyedObjects();
         java.lang.Object obj1 = keyedObjects0.clone();
         int int3 = keyedObjects0.getIndex((java.lang.Comparable) (-1.0d));
@@ -5014,7 +5014,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test104");
+            System.out.format("%n%s%n", "ErrorTest0.test104");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5056,7 +5056,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test105");
+            System.out.format("%n%s%n", "ErrorTest0.test105");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -5112,7 +5112,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test106");
+            System.out.format("%n%s%n", "ErrorTest0.test106");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         boolean boolean4 = lineAndShapeRenderer2.isSeriesVisibleInLegend(1);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator6 = null;
@@ -5154,7 +5154,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test107");
+            System.out.format("%n%s%n", "ErrorTest0.test107");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer6 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color7 = java.awt.Color.BLUE;
         lineAndShapeRenderer6.setBaseItemLabelPaint((java.awt.Paint) color7);
@@ -5209,7 +5209,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test108");
+            System.out.format("%n%s%n", "ErrorTest0.test108");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -5255,7 +5255,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test109");
+            System.out.format("%n%s%n", "ErrorTest0.test109");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5316,7 +5316,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test110");
+            System.out.format("%n%s%n", "ErrorTest0.test110");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5356,7 +5356,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test111");
+            System.out.format("%n%s%n", "ErrorTest0.test111");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition2 = barRenderer0.getBasePositiveItemLabelPosition();
@@ -5387,7 +5387,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test112");
+            System.out.format("%n%s%n", "ErrorTest0.test112");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -5437,7 +5437,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test113");
+            System.out.format("%n%s%n", "ErrorTest0.test113");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -5481,7 +5481,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test114");
+            System.out.format("%n%s%n", "ErrorTest0.test114");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.text.AttributedString attributedString2 = legendItem1.getAttributedLabel();
         boolean boolean3 = legendItem1.isShapeFilled();
@@ -5533,7 +5533,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test115");
+            System.out.format("%n%s%n", "ErrorTest0.test115");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5573,7 +5573,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test116");
+            System.out.format("%n%s%n", "ErrorTest0.test116");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -5619,7 +5619,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test117");
+            System.out.format("%n%s%n", "ErrorTest0.test117");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -5690,7 +5690,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test118");
+            System.out.format("%n%s%n", "ErrorTest0.test118");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -5762,7 +5762,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test119");
+            System.out.format("%n%s%n", "ErrorTest0.test119");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -5833,7 +5833,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test120");
+            System.out.format("%n%s%n", "ErrorTest0.test120");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer3 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator4 = null;
@@ -5894,7 +5894,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test121");
+            System.out.format("%n%s%n", "ErrorTest0.test121");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         int int2 = keyedObjects2D0.getRowIndex((java.lang.Comparable) 1);
         java.lang.Object obj3 = null;
@@ -5944,7 +5944,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test122");
+            System.out.format("%n%s%n", "ErrorTest0.test122");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -6002,7 +6002,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test123");
+            System.out.format("%n%s%n", "ErrorTest0.test123");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         java.util.List list3 = defaultCategoryDataset0.getColumnKeys();
@@ -6033,7 +6033,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test124");
+            System.out.format("%n%s%n", "ErrorTest0.test124");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -6110,7 +6110,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test125");
+            System.out.format("%n%s%n", "ErrorTest0.test125");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6144,7 +6144,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test126");
+            System.out.format("%n%s%n", "ErrorTest0.test126");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6198,7 +6198,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test127");
+            System.out.format("%n%s%n", "ErrorTest0.test127");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -6242,7 +6242,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test128");
+            System.out.format("%n%s%n", "ErrorTest0.test128");
         org.jfree.chart.renderer.RenderAttributes renderAttributes1 = new org.jfree.chart.renderer.RenderAttributes(true);
         // during test generation this statement threw an exception of type java.lang.NullPointerException in error
         java.awt.Paint paint3 = renderAttributes1.getSeriesLabelPaint((-12517568));
@@ -6251,7 +6251,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test129");
+            System.out.format("%n%s%n", "ErrorTest0.test129");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6324,7 +6324,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test130");
+            System.out.format("%n%s%n", "ErrorTest0.test130");
         org.jfree.data.category.CategoryDataset categoryDataset1 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis3 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float4 = categoryAxis3.getTickMarkInsideLength();
@@ -6373,7 +6373,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test131");
+            System.out.format("%n%s%n", "ErrorTest0.test131");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         java.awt.Color color3 = java.awt.Color.BLUE;
         lineAndShapeRenderer2.setBaseItemLabelPaint((java.awt.Paint) color3);
@@ -6416,7 +6416,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test132");
+            System.out.format("%n%s%n", "ErrorTest0.test132");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6452,7 +6452,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test133");
+            System.out.format("%n%s%n", "ErrorTest0.test133");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         java.util.List list3 = defaultCategoryDataset0.getColumnKeys();
@@ -6482,7 +6482,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test134");
+            System.out.format("%n%s%n", "ErrorTest0.test134");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6532,7 +6532,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test135");
+            System.out.format("%n%s%n", "ErrorTest0.test135");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         java.util.List list3 = defaultCategoryDataset0.getColumnKeys();
@@ -6562,7 +6562,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test136");
+            System.out.format("%n%s%n", "ErrorTest0.test136");
         org.jfree.data.KeyedObjects2D keyedObjects2D0 = new org.jfree.data.KeyedObjects2D();
         int int2 = keyedObjects2D0.getRowIndex((java.lang.Comparable) 1);
         java.lang.Object obj3 = null;
@@ -6593,7 +6593,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test137");
+            System.out.format("%n%s%n", "ErrorTest0.test137");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -6617,7 +6617,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test138");
+            System.out.format("%n%s%n", "ErrorTest0.test138");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -6663,7 +6663,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test139");
+            System.out.format("%n%s%n", "ErrorTest0.test139");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -6707,7 +6707,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test140");
+            System.out.format("%n%s%n", "ErrorTest0.test140");
         org.jfree.chart.LegendItem legendItem1 = new org.jfree.chart.LegendItem("hi!");
         java.awt.Color color5 = java.awt.Color.getHSBColor((float) (short) 1, (float) ' ', 0.0f);
         legendItem1.setLinePaint((java.awt.Paint) color5);
@@ -6744,7 +6744,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test141");
+            System.out.format("%n%s%n", "ErrorTest0.test141");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -6808,7 +6808,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test142");
+            System.out.format("%n%s%n", "ErrorTest0.test142");
         org.jfree.chart.util.RectangleInsets rectangleInsets0 = org.jfree.chart.axis.Axis.DEFAULT_AXIS_LABEL_INSETS;
         double double2 = rectangleInsets0.calculateBottomInset(0.0d);
         org.jfree.chart.util.UnitType unitType3 = rectangleInsets0.getUnitType();
@@ -6866,7 +6866,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test143");
+            System.out.format("%n%s%n", "ErrorTest0.test143");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -6911,7 +6911,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test144");
+            System.out.format("%n%s%n", "ErrorTest0.test144");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         java.util.List list3 = defaultCategoryDataset0.getColumnKeys();
@@ -6941,7 +6941,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test145");
+            System.out.format("%n%s%n", "ErrorTest0.test145");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer4 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
@@ -6990,7 +6990,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test146");
+            System.out.format("%n%s%n", "ErrorTest0.test146");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis2 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float3 = categoryAxis2.getTickMarkInsideLength();
@@ -7055,7 +7055,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test147");
+            System.out.format("%n%s%n", "ErrorTest0.test147");
         org.jfree.chart.renderer.category.BarRenderer barRenderer0 = new org.jfree.chart.renderer.category.BarRenderer();
         boolean boolean1 = barRenderer0.isDrawBarOutline();
         org.jfree.chart.labels.ItemLabelPosition itemLabelPosition2 = barRenderer0.getBasePositiveItemLabelPosition();
@@ -7104,7 +7104,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test148");
+            System.out.format("%n%s%n", "ErrorTest0.test148");
         org.jfree.data.category.CategoryDataset categoryDataset1 = null;
         org.jfree.chart.axis.CategoryAxis categoryAxis3 = new org.jfree.chart.axis.CategoryAxis("hi!");
         float float4 = categoryAxis3.getTickMarkInsideLength();
@@ -7153,7 +7153,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test149");
+            System.out.format("%n%s%n", "ErrorTest0.test149");
         org.jfree.chart.renderer.category.LineAndShapeRenderer lineAndShapeRenderer2 = new org.jfree.chart.renderer.category.LineAndShapeRenderer(false, true);
         org.jfree.chart.urls.CategoryURLGenerator categoryURLGenerator3 = null;
         lineAndShapeRenderer2.setBaseURLGenerator(categoryURLGenerator3);
@@ -7182,7 +7182,7 @@ public class RandoopErrorTest0 {
     @Test
     public void test150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test150");
+            System.out.format("%n%s%n", "ErrorTest0.test150");
         org.jfree.data.category.DefaultCategoryDataset defaultCategoryDataset0 = new org.jfree.data.category.DefaultCategoryDataset();
         int int2 = defaultCategoryDataset0.getColumnIndex((java.lang.Comparable) 3.0d);
         int int4 = defaultCategoryDataset0.getRowIndex((java.lang.Comparable) (byte) 10);

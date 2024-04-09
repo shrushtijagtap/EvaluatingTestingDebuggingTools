@@ -1,4 +1,17 @@
-######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 18:24:29  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 13:54:54  ######
+Mode: regression
+Parameters:
+ -g evosuite
+ -p Csv
+ -v 4f
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Csv/modified_classes/4.src
+ -s 1004
+Created test suite archive: Csv-4f-evosuite.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/sejal/Csv_4/Patched-Version/Csv/evosuite/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 13:57:03  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 13:57:06  ######
 Mode: regression
 Parameters:
  -g randoop
@@ -9,5 +22,5 @@ Parameters:
  -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Csv/modified_classes/4.src
  -s 1004
 Created test suite archive: Csv-4f-randoop.1.tar.bz2
-Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/Csv_4/Patched-Version/Csv/randoop/1
-######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 18:28:43  ######
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/sejal/Csv_4/Patched-Version/Csv/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-06 14:01:17  ######

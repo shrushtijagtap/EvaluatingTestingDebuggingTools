@@ -1162,31 +1162,6 @@ public class RandoopRegressionTest0 {
     public void test024() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RandoopRegressionTest0.test024");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        java.util.List list11 = commandLine10.getArgList();
-        java.lang.String str13 = commandLine10.getOptionValue("arg");
-        java.lang.Object obj15 = commandLine10.getOptionObject('#');
-        java.lang.String[] strArray17 = commandLine10.getOptionValues("org.apache.commons.cli.MissingArgumentException: arg");
-        java.lang.Object obj19 = commandLine10.getOptionObject(' ');
-        java.util.Iterator iterator20 = commandLine10.iterator();
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(list11);
-        org.junit.Assert.assertNull(str13);
-        org.junit.Assert.assertNull(obj15);
-        org.junit.Assert.assertNull(strArray17);
-        org.junit.Assert.assertNull(obj19);
-        org.junit.Assert.assertNotNull(iterator20);
-    }
-
-    @Test
-    public void test025() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test025");
         org.apache.commons.cli.Option option1 = org.apache.commons.cli.OptionBuilder.create("");
         boolean boolean2 = option1.isRequired();
         java.lang.String str3 = option1.getValue();
@@ -1274,9 +1249,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test026() throws Throwable {
+    public void test025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test026");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test025");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1347,9 +1322,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test027() throws Throwable {
+    public void test026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test027");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test026");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1415,9 +1390,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test028() throws Throwable {
+    public void test027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test028");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test027");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1470,9 +1445,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test029() throws Throwable {
+    public void test028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test029");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test028");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1567,9 +1542,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test030() throws Throwable {
+    public void test029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test030");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test029");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1649,9 +1624,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test031() throws Throwable {
+    public void test030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test031");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test030");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1726,9 +1701,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test032() throws Throwable {
+    public void test031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test032");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test031");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1747,9 +1722,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test033() throws Throwable {
+    public void test032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test033");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test032");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1830,9 +1805,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test034() throws Throwable {
+    public void test033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test034");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test033");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1851,9 +1826,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test035() throws Throwable {
+    public void test034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test035");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test034");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -1928,9 +1903,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test036() throws Throwable {
+    public void test035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test036");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test035");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -1957,9 +1932,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test037() throws Throwable {
+    public void test036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test037");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test036");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2040,9 +2015,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test038() throws Throwable {
+    public void test037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test038");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test037");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2119,9 +2094,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test039() throws Throwable {
+    public void test038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test039");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test038");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2200,9 +2175,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test040() throws Throwable {
+    public void test039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test040");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test039");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -2270,9 +2245,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test041() throws Throwable {
+    public void test040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test041");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test040");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2297,9 +2272,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test042() throws Throwable {
+    public void test041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test042");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test041");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2318,29 +2293,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test043() throws Throwable {
+    public void test042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test043");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        java.lang.String str13 = commandLine10.getOptionValue("[ Options: [ short {} ] [ long {} ]", " ");
-        commandLine10.addArg("org.apache.commons.cli.MissingArgumentException: arg");
-        java.lang.String str18 = commandLine10.getOptionValue('a', " ");
-        java.lang.String str21 = commandLine10.getOptionValue("[ Options: [ short {} ] [ long {} ]", "[ option:   :: null ]");
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + " " + "'", str13, " ");
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + " " + "'", str18, " ");
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "[ option:   :: null ]" + "'", str21, "[ option:   :: null ]");
-    }
-
-    @Test
-    public void test044() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test044");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test042");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2397,9 +2352,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test045() throws Throwable {
+    public void test043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test045");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test043");
         org.apache.commons.cli.Option option4 = new org.apache.commons.cli.Option("", "arg", true, "");
         org.apache.commons.cli.PosixParser posixParser5 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options6 = new org.apache.commons.cli.Options();
@@ -2416,9 +2371,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test046() throws Throwable {
+    public void test044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test046");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test044");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2437,9 +2392,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test047() throws Throwable {
+    public void test045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test047");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test045");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2465,9 +2420,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test048() throws Throwable {
+    public void test046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test048");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test046");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -2489,9 +2444,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test049() throws Throwable {
+    public void test047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test049");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test047");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2514,9 +2469,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test050() throws Throwable {
+    public void test048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test050");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test048");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2567,9 +2522,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test051() throws Throwable {
+    public void test049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test051");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test049");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2616,9 +2571,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test052() throws Throwable {
+    public void test050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test052");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test050");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2687,9 +2642,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test053() throws Throwable {
+    public void test051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test053");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test051");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2706,9 +2661,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test054() throws Throwable {
+    public void test052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test054");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test052");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2770,9 +2725,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test055() throws Throwable {
+    public void test053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test055");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test053");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2827,9 +2782,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test056() throws Throwable {
+    public void test054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test056");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test054");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -2850,9 +2805,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test057() throws Throwable {
+    public void test055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test057");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test055");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -2881,9 +2836,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test058() throws Throwable {
+    public void test056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test058");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test056");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -2968,9 +2923,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test059() throws Throwable {
+    public void test057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test059");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test057");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3047,9 +3002,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test060() throws Throwable {
+    public void test058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test060");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test058");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3070,9 +3025,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test061() throws Throwable {
+    public void test059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test061");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test059");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3091,9 +3046,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test062() throws Throwable {
+    public void test060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test062");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test060");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -3121,9 +3076,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test063() throws Throwable {
+    public void test061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test063");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test061");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3144,9 +3099,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test064() throws Throwable {
+    public void test062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test064");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test062");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -3216,9 +3171,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test065() throws Throwable {
+    public void test063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test065");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test063");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3239,9 +3194,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test066() throws Throwable {
+    public void test064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test066");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test064");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -3302,9 +3257,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test067() throws Throwable {
+    public void test065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test067");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test065");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3381,9 +3336,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test068() throws Throwable {
+    public void test066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test068");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test066");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3479,9 +3434,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test069() throws Throwable {
+    public void test067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test069");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test067");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3554,9 +3509,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test070() throws Throwable {
+    public void test068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test070");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test068");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3629,9 +3584,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test071() throws Throwable {
+    public void test069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test071");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test069");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3686,9 +3641,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test072() throws Throwable {
+    public void test070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test072");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test070");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3761,9 +3716,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test073() throws Throwable {
+    public void test071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test073");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test071");
         org.apache.commons.cli.Option option1 = org.apache.commons.cli.OptionBuilder.create("");
         boolean boolean2 = option1.isRequired();
         java.lang.String str3 = option1.getValue();
@@ -3825,9 +3780,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test074() throws Throwable {
+    public void test072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test074");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test072");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -3873,9 +3828,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test075() throws Throwable {
+    public void test073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test075");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test073");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3929,9 +3884,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test076() throws Throwable {
+    public void test074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test076");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test074");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -3960,9 +3915,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test077() throws Throwable {
+    public void test075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test077");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test075");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -3983,9 +3938,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test078() throws Throwable {
+    public void test076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test078");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test076");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4068,9 +4023,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test079() throws Throwable {
+    public void test077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test079");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test077");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -4123,9 +4078,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test080() throws Throwable {
+    public void test078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test080");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test078");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4178,9 +4133,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test081() throws Throwable {
+    public void test079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test081");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test079");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4239,9 +4194,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test082() throws Throwable {
+    public void test080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test082");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test080");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4308,9 +4263,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test083() throws Throwable {
+    public void test081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test083");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test081");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4337,9 +4292,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test084() throws Throwable {
+    public void test082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test084");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test082");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -4410,9 +4365,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test085() throws Throwable {
+    public void test083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test085");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test083");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4463,9 +4418,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test086() throws Throwable {
+    public void test084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test086");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test084");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -4539,9 +4494,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test087() throws Throwable {
+    public void test085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test087");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test085");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4557,9 +4512,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test088() throws Throwable {
+    public void test086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test088");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test086");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -4635,9 +4590,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test089() throws Throwable {
+    public void test087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test089");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test087");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4723,9 +4678,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test090() throws Throwable {
+    public void test088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test090");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test088");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4814,9 +4769,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test091() throws Throwable {
+    public void test089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test091");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test089");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4846,9 +4801,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test092() throws Throwable {
+    public void test090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test092");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test090");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -4877,9 +4832,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test093() throws Throwable {
+    public void test091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test093");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test091");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -4963,9 +4918,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test094() throws Throwable {
+    public void test092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test094");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test092");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -5015,9 +4970,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test095() throws Throwable {
+    public void test093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test095");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test093");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5087,9 +5042,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test096() throws Throwable {
+    public void test094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test096");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test094");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5161,9 +5116,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test097() throws Throwable {
+    public void test095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test097");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test095");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5230,9 +5185,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test098() throws Throwable {
+    public void test096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test098");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test096");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5255,9 +5210,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test099() throws Throwable {
+    public void test097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test099");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test097");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5338,9 +5293,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test100() throws Throwable {
+    public void test098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test100");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test098");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5426,9 +5381,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test101() throws Throwable {
+    public void test099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test101");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test099");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5491,9 +5446,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test102() throws Throwable {
+    public void test100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test102");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test100");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5570,9 +5525,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test103() throws Throwable {
+    public void test101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test103");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test101");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5625,9 +5580,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test104() throws Throwable {
+    public void test102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test104");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test102");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5650,9 +5605,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test105() throws Throwable {
+    public void test103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test105");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test103");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5729,9 +5684,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test106() throws Throwable {
+    public void test104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test106");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test104");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5797,9 +5752,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test107() throws Throwable {
+    public void test105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test107");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test105");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5850,9 +5805,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test108() throws Throwable {
+    public void test106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test108");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test106");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser2 = new org.apache.commons.cli.PosixParser();
@@ -5881,9 +5836,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test109() throws Throwable {
+    public void test107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test109");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test107");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -5969,9 +5924,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test110() throws Throwable {
+    public void test108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test110");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test108");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6053,9 +6008,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test111() throws Throwable {
+    public void test109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test111");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test109");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6116,9 +6071,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test112() throws Throwable {
+    public void test110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test112");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test110");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6178,9 +6133,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test113() throws Throwable {
+    public void test111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test113");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test111");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6274,9 +6229,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test114() throws Throwable {
+    public void test112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test114");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test112");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6342,9 +6297,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test115() throws Throwable {
+    public void test113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test115");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test113");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6365,9 +6320,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test116() throws Throwable {
+    public void test114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test116");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test114");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -6428,9 +6383,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test117() throws Throwable {
+    public void test115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test117");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test115");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6510,9 +6465,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test118() throws Throwable {
+    public void test116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test118");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test116");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6593,9 +6548,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test119() throws Throwable {
+    public void test117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test119");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test117");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6650,9 +6605,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test120() throws Throwable {
+    public void test118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test120");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test118");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6705,93 +6660,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test121() throws Throwable {
+    public void test119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test121");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.PosixParser posixParser12 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options13 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray20 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties21 = null;
-        org.apache.commons.cli.CommandLine commandLine22 = posixParser12.parse(options13, strArray20, properties21);
-        org.apache.commons.cli.Options options23 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option25 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str26 = option25.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup27 = options23.getOptionGroup(option25);
-        java.lang.String[] strArray34 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties35 = null;
-        org.apache.commons.cli.CommandLine commandLine37 = posixParser12.parse(options23, strArray34, properties35, false);
-        org.apache.commons.cli.PosixParser posixParser38 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray46 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties47 = null;
-        org.apache.commons.cli.CommandLine commandLine48 = posixParser38.parse(options39, strArray46, properties47);
-        org.apache.commons.cli.Options options49 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option51 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str52 = option51.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup53 = options49.getOptionGroup(option51);
-        java.lang.String[] strArray60 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties61 = null;
-        org.apache.commons.cli.CommandLine commandLine63 = posixParser38.parse(options49, strArray60, properties61, false);
-        org.apache.commons.cli.PosixParser posixParser64 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options65 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray72 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties73 = null;
-        org.apache.commons.cli.CommandLine commandLine74 = posixParser64.parse(options65, strArray72, properties73);
-        java.lang.String[] strArray76 = posixParser12.flatten(options49, strArray72, true);
-        java.util.Properties properties77 = null;
-        org.apache.commons.cli.CommandLine commandLine79 = posixParser0.parse(options11, strArray72, properties77, false);
-        org.apache.commons.cli.Option option81 = org.apache.commons.cli.OptionBuilder.create(' ');
-        char char82 = option81.getValueSeparator();
-        java.lang.String str83 = option81.getKey();
-        option81.setRequired(false);
-        org.apache.commons.cli.Options options86 = options11.addOption(option81);
-        org.apache.commons.cli.Options options87 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option89 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str90 = option89.getArgName();
-        option89.setLongOpt("");
-        org.apache.commons.cli.Options options93 = options87.addOption(option89);
-        option81.setType((java.lang.Object) option89);
-        java.lang.Object obj95 = option89.getType();
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(strArray20);
-        org.junit.Assert.assertNotNull(commandLine22);
-        org.junit.Assert.assertNotNull(option25);
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "arg" + "'", str26, "arg");
-        org.junit.Assert.assertNull(optionGroup27);
-        org.junit.Assert.assertNotNull(strArray34);
-        org.junit.Assert.assertNotNull(commandLine37);
-        org.junit.Assert.assertNotNull(strArray46);
-        org.junit.Assert.assertNotNull(commandLine48);
-        org.junit.Assert.assertNotNull(option51);
-        org.junit.Assert.assertEquals("'" + str52 + "' != '" + "arg" + "'", str52, "arg");
-        org.junit.Assert.assertNull(optionGroup53);
-        org.junit.Assert.assertNotNull(strArray60);
-        org.junit.Assert.assertNotNull(commandLine63);
-        org.junit.Assert.assertNotNull(strArray72);
-        org.junit.Assert.assertNotNull(commandLine74);
-        org.junit.Assert.assertNotNull(strArray76);
-        org.junit.Assert.assertNotNull(commandLine79);
-        org.junit.Assert.assertNotNull(option81);
-        org.junit.Assert.assertTrue("'" + char82 + "' != '" + '\000' + "'", char82 == '\000');
-        org.junit.Assert.assertEquals("'" + str83 + "' != '" + " " + "'", str83, " ");
-        org.junit.Assert.assertNotNull(options86);
-        org.junit.Assert.assertNotNull(option89);
-        org.junit.Assert.assertEquals("'" + str90 + "' != '" + "arg" + "'", str90, "arg");
-        org.junit.Assert.assertNotNull(options93);
-        org.junit.Assert.assertNull(obj95);
-    }
-
-    @Test
-    public void test122() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test122");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test119");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6878,9 +6749,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test123() throws Throwable {
+    public void test120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test123");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test120");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -6944,9 +6815,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test124() throws Throwable {
+    public void test121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test124");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test121");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7027,9 +6898,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test125() throws Throwable {
+    public void test122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test125");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test122");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -7078,9 +6949,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test126() throws Throwable {
+    public void test123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test126");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test123");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7161,9 +7032,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test127() throws Throwable {
+    public void test124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test127");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test124");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7233,9 +7104,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test128() throws Throwable {
+    public void test125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test128");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test125");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -7304,9 +7175,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test129() throws Throwable {
+    public void test126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test129");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test126");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7372,9 +7243,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test130() throws Throwable {
+    public void test127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test130");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test127");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7457,9 +7328,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test131() throws Throwable {
+    public void test128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test131");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test128");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7536,9 +7407,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test132() throws Throwable {
+    public void test129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test132");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test129");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7617,9 +7488,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test133() throws Throwable {
+    public void test130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test133");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test130");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7689,9 +7560,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test134() throws Throwable {
+    public void test131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test134");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test131");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7748,9 +7619,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test135() throws Throwable {
+    public void test132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test135");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test132");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7790,9 +7661,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test136() throws Throwable {
+    public void test133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test136");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test133");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7813,9 +7684,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test137() throws Throwable {
+    public void test134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test137");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test134");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7902,9 +7773,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test138() throws Throwable {
+    public void test135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test138");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test135");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -7984,9 +7855,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test139() throws Throwable {
+    public void test136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test139");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test136");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -8056,9 +7927,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test140() throws Throwable {
+    public void test137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test140");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test137");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8145,28 +8016,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test141() throws Throwable {
+    public void test138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test141");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        java.util.List list11 = commandLine10.getArgList();
-        java.lang.String str13 = commandLine10.getOptionValue("[ option:    :: null ]");
-        java.lang.Object obj15 = commandLine10.getOptionObject("[ option:   :: null ]");
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(list11);
-        org.junit.Assert.assertNull(str13);
-        org.junit.Assert.assertNull(obj15);
-    }
-
-    @Test
-    public void test142() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test142");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test138");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8230,9 +8082,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test143() throws Throwable {
+    public void test139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test143");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test139");
         org.apache.commons.cli.Options options0 = new org.apache.commons.cli.Options();
         org.apache.commons.cli.Option option2 = org.apache.commons.cli.OptionBuilder.create("");
         java.lang.String str3 = option2.getArgName();
@@ -8306,9 +8158,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test144() throws Throwable {
+    public void test140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test144");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test140");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8357,9 +8209,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test145() throws Throwable {
+    public void test141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test145");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test141");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8429,9 +8281,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test146() throws Throwable {
+    public void test142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test146");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test142");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8480,9 +8332,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test147() throws Throwable {
+    public void test143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test147");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test143");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8544,9 +8396,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test148() throws Throwable {
+    public void test144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test148");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test144");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8567,9 +8419,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test149() throws Throwable {
+    public void test145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test149");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test145");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8653,9 +8505,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test150() throws Throwable {
+    public void test146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test150");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test146");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8737,9 +8589,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test151() throws Throwable {
+    public void test147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test151");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test147");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8758,9 +8610,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test152() throws Throwable {
+    public void test148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test152");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test148");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8781,9 +8633,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test153() throws Throwable {
+    public void test149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test153");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test149");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8827,9 +8679,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test154() throws Throwable {
+    public void test150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test154");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test150");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -8905,9 +8757,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test155() throws Throwable {
+    public void test151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test155");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test151");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -8930,94 +8782,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test156() throws Throwable {
+    public void test152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test156");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser2 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options3 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray10 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties11 = null;
-        org.apache.commons.cli.CommandLine commandLine12 = posixParser2.parse(options3, strArray10, properties11);
-        java.lang.String[] strArray13 = new java.lang.String[] {};
-        java.util.Properties properties14 = null;
-        org.apache.commons.cli.CommandLine commandLine15 = posixParser1.parse(options3, strArray13, properties14);
-        org.apache.commons.cli.Options options20 = options3.addOption("", "[ option:   :: null :: 0 ]", true, " ");
-        java.util.List list21 = options20.helpOptions();
-        java.lang.String[] strArray26 = new java.lang.String[] { "org.apache.commons.cli.UnrecognizedOptionException:  ", "org.apache.commons.cli.UnrecognizedOptionException: org.apache.commons.cli.MissingArgumentException: arg", "[ option:   :: null ]", " " };
-        java.util.Properties properties27 = null;
-        org.apache.commons.cli.CommandLine commandLine29 = posixParser0.parse(options20, strArray26, properties27, true);
-        org.apache.commons.cli.Options options30 = new org.apache.commons.cli.Options();
-        java.util.List list31 = options30.getRequiredOptions();
-        org.apache.commons.cli.Option option33 = org.apache.commons.cli.OptionBuilder.create(' ');
-        char char34 = option33.getValueSeparator();
-        boolean boolean35 = option33.hasArgName();
-        org.apache.commons.cli.OptionGroup optionGroup36 = options30.getOptionGroup(option33);
-        org.apache.commons.cli.PosixParser posixParser37 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options38 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray45 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties46 = null;
-        org.apache.commons.cli.CommandLine commandLine47 = posixParser37.parse(options38, strArray45, properties46);
-        org.apache.commons.cli.Options options48 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option50 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str51 = option50.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup52 = options48.getOptionGroup(option50);
-        java.lang.String[] strArray59 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties60 = null;
-        org.apache.commons.cli.CommandLine commandLine62 = posixParser37.parse(options48, strArray59, properties60, false);
-        org.apache.commons.cli.Options options63 = new org.apache.commons.cli.Options();
-        java.util.List list64 = options63.getRequiredOptions();
-        org.apache.commons.cli.PosixParser posixParser65 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options66 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray73 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties74 = null;
-        org.apache.commons.cli.CommandLine commandLine75 = posixParser65.parse(options66, strArray73, properties74);
-        org.apache.commons.cli.Options options76 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option78 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str79 = option78.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup80 = options76.getOptionGroup(option78);
-        java.lang.String[] strArray87 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties88 = null;
-        org.apache.commons.cli.CommandLine commandLine90 = posixParser65.parse(options76, strArray87, properties88, false);
-        org.apache.commons.cli.CommandLine commandLine91 = posixParser37.parse(options63, strArray87);
-        org.apache.commons.cli.CommandLine commandLine93 = posixParser0.parse(options30, strArray87, false);
-        org.junit.Assert.assertNotNull(strArray10);
-        org.junit.Assert.assertNotNull(commandLine12);
-        org.junit.Assert.assertNotNull(strArray13);
-        org.junit.Assert.assertNotNull(commandLine15);
-        org.junit.Assert.assertNotNull(options20);
-        org.junit.Assert.assertNotNull(list21);
-        org.junit.Assert.assertNotNull(strArray26);
-        org.junit.Assert.assertNotNull(commandLine29);
-        org.junit.Assert.assertNotNull(list31);
-        org.junit.Assert.assertNotNull(option33);
-        org.junit.Assert.assertTrue("'" + char34 + "' != '" + '\000' + "'", char34 == '\000');
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
-        org.junit.Assert.assertNull(optionGroup36);
-        org.junit.Assert.assertNotNull(strArray45);
-        org.junit.Assert.assertNotNull(commandLine47);
-        org.junit.Assert.assertNotNull(option50);
-        org.junit.Assert.assertEquals("'" + str51 + "' != '" + "arg" + "'", str51, "arg");
-        org.junit.Assert.assertNull(optionGroup52);
-        org.junit.Assert.assertNotNull(strArray59);
-        org.junit.Assert.assertNotNull(commandLine62);
-        org.junit.Assert.assertNotNull(list64);
-        org.junit.Assert.assertNotNull(strArray73);
-        org.junit.Assert.assertNotNull(commandLine75);
-        org.junit.Assert.assertNotNull(option78);
-        org.junit.Assert.assertEquals("'" + str79 + "' != '" + "arg" + "'", str79, "arg");
-        org.junit.Assert.assertNull(optionGroup80);
-        org.junit.Assert.assertNotNull(strArray87);
-        org.junit.Assert.assertNotNull(commandLine90);
-        org.junit.Assert.assertNotNull(commandLine91);
-        org.junit.Assert.assertNotNull(commandLine93);
-    }
-
-    @Test
-    public void test157() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test157");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test152");
         org.apache.commons.cli.Option option4 = new org.apache.commons.cli.Option("", "arg", true, "");
         org.apache.commons.cli.PosixParser posixParser5 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options6 = new org.apache.commons.cli.Options();
@@ -9039,9 +8806,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test158() throws Throwable {
+    public void test153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test158");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test153");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -9113,9 +8880,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test159() throws Throwable {
+    public void test154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test159");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test154");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9170,80 +8937,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test160() throws Throwable {
+    public void test155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test160");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        org.apache.commons.cli.PosixParser posixParser11 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray19 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties20 = null;
-        org.apache.commons.cli.CommandLine commandLine21 = posixParser11.parse(options12, strArray19, properties20);
-        org.apache.commons.cli.Options options22 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option24 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str25 = option24.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup26 = options22.getOptionGroup(option24);
-        java.lang.String[] strArray33 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties34 = null;
-        org.apache.commons.cli.CommandLine commandLine36 = posixParser11.parse(options22, strArray33, properties34, false);
-        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
-        java.util.List list38 = options37.getRequiredOptions();
-        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties48 = null;
-        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
-        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str53 = option52.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
-        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties62 = null;
-        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
-        org.apache.commons.cli.CommandLine commandLine65 = posixParser11.parse(options37, strArray61);
-        java.lang.String[] strArray67 = new java.lang.String[] { "hi!" };
-        java.lang.String[] strArray69 = posixParser0.flatten(options37, strArray67, true);
-        boolean boolean71 = options37.hasOption("[ Options: [ short {} ] [ long {} ]");
-        org.apache.commons.cli.Option option73 = org.apache.commons.cli.OptionBuilder.create("");
-        boolean boolean74 = option73.isRequired();
-        boolean boolean75 = option73.hasLongOpt();
-        option73.setLongOpt("");
-        org.apache.commons.cli.Options options78 = options37.addOption(option73);
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(strArray19);
-        org.junit.Assert.assertNotNull(commandLine21);
-        org.junit.Assert.assertNotNull(option24);
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "arg" + "'", str25, "arg");
-        org.junit.Assert.assertNull(optionGroup26);
-        org.junit.Assert.assertNotNull(strArray33);
-        org.junit.Assert.assertNotNull(commandLine36);
-        org.junit.Assert.assertNotNull(list38);
-        org.junit.Assert.assertNotNull(strArray47);
-        org.junit.Assert.assertNotNull(commandLine49);
-        org.junit.Assert.assertNotNull(option52);
-        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
-        org.junit.Assert.assertNull(optionGroup54);
-        org.junit.Assert.assertNotNull(strArray61);
-        org.junit.Assert.assertNotNull(commandLine64);
-        org.junit.Assert.assertNotNull(commandLine65);
-        org.junit.Assert.assertNotNull(strArray67);
-        org.junit.Assert.assertNotNull(strArray69);
-        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
-        org.junit.Assert.assertNotNull(option73);
-        org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + false + "'", boolean74 == false);
-        org.junit.Assert.assertTrue("'" + boolean75 + "' != '" + false + "'", boolean75 == false);
-        org.junit.Assert.assertNotNull(options78);
-    }
-
-    @Test
-    public void test161() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test161");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test155");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9294,9 +8990,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test162() throws Throwable {
+    public void test156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test162");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test156");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9373,9 +9069,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test163() throws Throwable {
+    public void test157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test163");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test157");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9396,9 +9092,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test164() throws Throwable {
+    public void test158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test164");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test158");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9460,9 +9156,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test165() throws Throwable {
+    public void test159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test165");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test159");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9535,34 +9231,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test166() throws Throwable {
+    public void test160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test166");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties10 = null;
-        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
-        java.lang.String[] strArray12 = new java.lang.String[] {};
-        java.util.Properties properties13 = null;
-        org.apache.commons.cli.CommandLine commandLine14 = posixParser0.parse(options2, strArray12, properties13);
-        org.apache.commons.cli.Options options19 = options2.addOption("", "[ option:   :: null :: 0 ]", true, " ");
-        org.apache.commons.cli.Option option21 = options19.getOption("[ option:   :: null :: 0 ]");
-        java.util.Collection collection22 = options19.getOptionGroups();
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertNotNull(commandLine11);
-        org.junit.Assert.assertNotNull(strArray12);
-        org.junit.Assert.assertNotNull(commandLine14);
-        org.junit.Assert.assertNotNull(options19);
-        org.junit.Assert.assertNotNull(option21);
-        org.junit.Assert.assertNotNull(collection22);
-    }
-
-    @Test
-    public void test167() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test167");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test160");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9619,9 +9290,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test168() throws Throwable {
+    public void test161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test168");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test161");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9645,9 +9316,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test169() throws Throwable {
+    public void test162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test169");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test162");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9672,9 +9343,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test170() throws Throwable {
+    public void test163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test170");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test163");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9725,9 +9396,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test171() throws Throwable {
+    public void test164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test171");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test164");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9795,9 +9466,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test172() throws Throwable {
+    public void test165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test172");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test165");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9874,9 +9545,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test173() throws Throwable {
+    public void test166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test173");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test166");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -9957,9 +9628,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test174() throws Throwable {
+    public void test167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test174");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test167");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10038,9 +9709,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test175() throws Throwable {
+    public void test168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test175");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test168");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10091,9 +9762,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test176() throws Throwable {
+    public void test169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test176");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test169");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10144,9 +9815,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test177() throws Throwable {
+    public void test170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test177");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test170");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10173,9 +9844,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test178() throws Throwable {
+    public void test171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test178");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test171");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10194,9 +9865,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test179() throws Throwable {
+    public void test172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test179");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test172");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -10251,9 +9922,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test180() throws Throwable {
+    public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test180");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test173");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10304,9 +9975,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test181() throws Throwable {
+    public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test181");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test174");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10381,9 +10052,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test182() throws Throwable {
+    public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test182");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test175");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10408,9 +10079,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test183() throws Throwable {
+    public void test176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test183");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test176");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10495,9 +10166,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test184() throws Throwable {
+    public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test184");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test177");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10559,9 +10230,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test185() throws Throwable {
+    public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test185");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test178");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -10582,9 +10253,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test186() throws Throwable {
+    public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test186");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test179");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10635,9 +10306,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test187() throws Throwable {
+    public void test180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test187");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test180");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10715,9 +10386,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test188() throws Throwable {
+    public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test188");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test181");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10786,9 +10457,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test189() throws Throwable {
+    public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test189");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test182");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -10861,9 +10532,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test190() throws Throwable {
+    public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test190");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test183");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -10934,40 +10605,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test191() throws Throwable {
+    public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test191");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        java.lang.String str13 = commandLine10.getOptionValue("arg", "hi!");
-        java.lang.String str15 = commandLine10.getOptionValue("arg");
-        org.apache.commons.cli.Option option17 = org.apache.commons.cli.OptionBuilder.create("");
-        boolean boolean18 = option17.isRequired();
-        java.lang.String str19 = option17.getValue();
-        option17.setType((java.lang.Object) 0);
-        java.lang.String str22 = option17.toString();
-        java.lang.String str23 = option17.toString();
-        commandLine10.addOption(option17);
-        org.apache.commons.cli.Option[] optionArray25 = commandLine10.getOptions();
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "hi!" + "'", str13, "hi!");
-        org.junit.Assert.assertNull(str15);
-        org.junit.Assert.assertNotNull(option17);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNull(str19);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "[ option:   :: null :: 0 ]" + "'", str22, "[ option:   :: null :: 0 ]");
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "[ option:   :: null :: 0 ]" + "'", str23, "[ option:   :: null :: 0 ]");
-        org.junit.Assert.assertNotNull(optionArray25);
-    }
-
-    @Test
-    public void test192() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test192");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test184");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11049,9 +10689,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test193() throws Throwable {
+    public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test193");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test185");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11140,9 +10780,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test194() throws Throwable {
+    public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test194");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test186");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11231,9 +10871,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test195() throws Throwable {
+    public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test195");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test187");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -11305,9 +10945,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test196() throws Throwable {
+    public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test196");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test188");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11387,9 +11027,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test197() throws Throwable {
+    public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test197");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test189");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11459,9 +11099,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test198() throws Throwable {
+    public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test198");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test190");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11534,9 +11174,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test199() throws Throwable {
+    public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test199");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test191");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -11606,9 +11246,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test200() throws Throwable {
+    public void test192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test200");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test192");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11681,9 +11321,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test201() throws Throwable {
+    public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test201");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test193");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11765,9 +11405,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test202() throws Throwable {
+    public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test202");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test194");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11822,9 +11462,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test203() throws Throwable {
+    public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test203");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test195");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -11896,49 +11536,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test204() throws Throwable {
+    public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test204");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str14 = option13.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
-        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties23 = null;
-        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
-        boolean boolean27 = options11.hasOption("org.apache.commons.cli.MissingArgumentException: arg");
-        org.apache.commons.cli.Option option29 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str30 = option29.getArgName();
-        option29.setLongOpt("");
-        boolean boolean33 = option29.hasArgs();
-        java.lang.String str34 = option29.getDescription();
-        java.lang.String str36 = option29.getValue((int) (short) -1);
-        org.apache.commons.cli.Options options37 = options11.addOption(option29);
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(option13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
-        org.junit.Assert.assertNull(optionGroup15);
-        org.junit.Assert.assertNotNull(strArray22);
-        org.junit.Assert.assertNotNull(commandLine25);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertNotNull(option29);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "arg" + "'", str30, "arg");
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-        org.junit.Assert.assertNull(str34);
-        org.junit.Assert.assertNull(str36);
-        org.junit.Assert.assertNotNull(options37);
-    }
-
-    @Test
-    public void test205() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test205");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test196");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12027,9 +11627,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test206() throws Throwable {
+    public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test206");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test197");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12126,9 +11726,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test207() throws Throwable {
+    public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test207");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test198");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -12199,34 +11799,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test208() throws Throwable {
+    public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test208");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties10 = null;
-        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
-        java.lang.String[] strArray12 = new java.lang.String[] {};
-        java.util.Properties properties13 = null;
-        org.apache.commons.cli.CommandLine commandLine14 = posixParser0.parse(options2, strArray12, properties13);
-        org.apache.commons.cli.Options options19 = options2.addOption("", "[ option:   :: null :: 0 ]", true, " ");
-        org.apache.commons.cli.Options options23 = options2.addOption("", false, "[ Options: [ short {} ] [ long {} ]");
-        java.util.Collection collection24 = options23.getOptionGroups();
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertNotNull(commandLine11);
-        org.junit.Assert.assertNotNull(strArray12);
-        org.junit.Assert.assertNotNull(commandLine14);
-        org.junit.Assert.assertNotNull(options19);
-        org.junit.Assert.assertNotNull(options23);
-        org.junit.Assert.assertNotNull(collection24);
-    }
-
-    @Test
-    public void test209() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test209");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test199");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12285,9 +11860,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test210() throws Throwable {
+    public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test210");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test200");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -12337,9 +11912,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test211() throws Throwable {
+    public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test211");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test201");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12358,83 +11933,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test212() throws Throwable {
+    public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test212");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties10 = null;
-        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
-        java.lang.String[] strArray12 = new java.lang.String[] {};
-        java.util.Properties properties13 = null;
-        org.apache.commons.cli.CommandLine commandLine14 = posixParser0.parse(options2, strArray12, properties13);
-        org.apache.commons.cli.PosixParser posixParser15 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser16 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options17 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray24 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties25 = null;
-        org.apache.commons.cli.CommandLine commandLine26 = posixParser16.parse(options17, strArray24, properties25);
-        java.lang.String[] strArray27 = new java.lang.String[] {};
-        java.util.Properties properties28 = null;
-        org.apache.commons.cli.CommandLine commandLine29 = posixParser15.parse(options17, strArray27, properties28);
-        org.apache.commons.cli.PosixParser posixParser30 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser31 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options32 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray39 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties40 = null;
-        org.apache.commons.cli.CommandLine commandLine41 = posixParser31.parse(options32, strArray39, properties40);
-        java.lang.String[] strArray42 = new java.lang.String[] {};
-        java.util.Properties properties43 = null;
-        org.apache.commons.cli.CommandLine commandLine44 = posixParser30.parse(options32, strArray42, properties43);
-        org.apache.commons.cli.CommandLine commandLine45 = posixParser0.parse(options17, strArray42);
-        org.apache.commons.cli.Options options46 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option48 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str49 = option48.getArgName();
-        option48.setLongOpt("");
-        org.apache.commons.cli.Options options52 = options46.addOption(option48);
-        java.lang.String[] strArray54 = new java.lang.String[] { " " };
-        org.apache.commons.cli.CommandLine commandLine56 = posixParser0.parse(options46, strArray54, true);
-        org.apache.commons.cli.Option option58 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str59 = option58.getArgName();
-        option58.setLongOpt("");
-        boolean boolean62 = option58.hasArg();
-        char char63 = option58.getValueSeparator();
-        char char64 = option58.getValueSeparator();
-        commandLine56.addOption(option58);
-        option58.setArgName("hi!");
-        java.lang.String str68 = option58.getOpt();
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertNotNull(commandLine11);
-        org.junit.Assert.assertNotNull(strArray12);
-        org.junit.Assert.assertNotNull(commandLine14);
-        org.junit.Assert.assertNotNull(strArray24);
-        org.junit.Assert.assertNotNull(commandLine26);
-        org.junit.Assert.assertNotNull(strArray27);
-        org.junit.Assert.assertNotNull(commandLine29);
-        org.junit.Assert.assertNotNull(strArray39);
-        org.junit.Assert.assertNotNull(commandLine41);
-        org.junit.Assert.assertNotNull(strArray42);
-        org.junit.Assert.assertNotNull(commandLine44);
-        org.junit.Assert.assertNotNull(commandLine45);
-        org.junit.Assert.assertNotNull(option48);
-        org.junit.Assert.assertEquals("'" + str49 + "' != '" + "arg" + "'", str49, "arg");
-        org.junit.Assert.assertNotNull(options52);
-        org.junit.Assert.assertNotNull(strArray54);
-        org.junit.Assert.assertNotNull(commandLine56);
-        org.junit.Assert.assertNotNull(option58);
-        org.junit.Assert.assertEquals("'" + str59 + "' != '" + "arg" + "'", str59, "arg");
-        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
-        org.junit.Assert.assertTrue("'" + char63 + "' != '" + '\000' + "'", char63 == '\000');
-        org.junit.Assert.assertTrue("'" + char64 + "' != '" + '\000' + "'", char64 == '\000');
-        org.junit.Assert.assertEquals("'" + str68 + "' != '" + "" + "'", str68, "");
-    }
-
-    @Test
-    public void test213() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test213");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test202");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12507,9 +12008,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test214() throws Throwable {
+    public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test214");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test203");
         org.apache.commons.cli.Options options0 = new org.apache.commons.cli.Options();
         java.util.Collection collection1 = options0.getOptionGroups();
         java.util.List list2 = options0.helpOptions();
@@ -12594,9 +12095,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test215() throws Throwable {
+    public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test215");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test204");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -12671,9 +12172,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test216() throws Throwable {
+    public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test216");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test205");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12746,9 +12247,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test217() throws Throwable {
+    public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test217");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test206");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12821,9 +12322,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test218");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test207");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12893,9 +12394,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test219");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test208");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -12985,9 +12486,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test220");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test209");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -13040,9 +12541,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test221");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test210");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -13070,9 +12571,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test222");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test211");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13143,9 +12644,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test223");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test212");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13228,9 +12729,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test224");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test213");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13249,9 +12750,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test225() throws Throwable {
+    public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test225");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test214");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13293,9 +12794,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test226");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test215");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13368,9 +12869,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test227");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test216");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13449,9 +12950,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test228");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test217");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13538,9 +13039,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test229() throws Throwable {
+    public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test229");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test218");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13617,93 +13118,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test230() throws Throwable {
+    public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test230");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        org.apache.commons.cli.PosixParser posixParser11 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray19 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties20 = null;
-        org.apache.commons.cli.CommandLine commandLine21 = posixParser11.parse(options12, strArray19, properties20);
-        org.apache.commons.cli.Options options22 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option24 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str25 = option24.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup26 = options22.getOptionGroup(option24);
-        java.lang.String[] strArray33 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties34 = null;
-        org.apache.commons.cli.CommandLine commandLine36 = posixParser11.parse(options22, strArray33, properties34, false);
-        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
-        java.util.List list38 = options37.getRequiredOptions();
-        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties48 = null;
-        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
-        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str53 = option52.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
-        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties62 = null;
-        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
-        org.apache.commons.cli.CommandLine commandLine65 = posixParser11.parse(options37, strArray61);
-        java.lang.String[] strArray67 = new java.lang.String[] { "hi!" };
-        java.lang.String[] strArray69 = posixParser0.flatten(options37, strArray67, true);
-        org.apache.commons.cli.Options options70 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray71 = null;
-        java.util.Properties properties72 = null;
-        org.apache.commons.cli.CommandLine commandLine74 = posixParser0.parse(options70, strArray71, properties72, false);
-        org.apache.commons.cli.Options options75 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option77 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str78 = option77.getArgName();
-        option77.setLongOpt("");
-        org.apache.commons.cli.Options options81 = options75.addOption(option77);
-        org.apache.commons.cli.OptionBuilder optionBuilder82 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) options75);
-        java.util.List list83 = options75.helpOptions();
-        java.lang.String[] strArray89 = new java.lang.String[] { "org.apache.commons.cli.MissingArgumentException: arg", "[ Options: [ short {=[ option:   :: [ option:   :: null :: 0 ] ]} ] [ long {} ]", " ", "[ Options: [ short {=[ option:   :: [ Options: [ short {} ] [ long {} ] ]} ] [ long {[ option:   :: null :: 0 ]=[ option:  [ option:   :: null :: 0 ] +ARG ::   ]} ]", " " };
-        java.util.Properties properties90 = null;
-        org.apache.commons.cli.CommandLine commandLine91 = posixParser0.parse(options75, strArray89, properties90);
-        java.lang.String str92 = options75.toString();
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(strArray19);
-        org.junit.Assert.assertNotNull(commandLine21);
-        org.junit.Assert.assertNotNull(option24);
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "arg" + "'", str25, "arg");
-        org.junit.Assert.assertNull(optionGroup26);
-        org.junit.Assert.assertNotNull(strArray33);
-        org.junit.Assert.assertNotNull(commandLine36);
-        org.junit.Assert.assertNotNull(list38);
-        org.junit.Assert.assertNotNull(strArray47);
-        org.junit.Assert.assertNotNull(commandLine49);
-        org.junit.Assert.assertNotNull(option52);
-        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
-        org.junit.Assert.assertNull(optionGroup54);
-        org.junit.Assert.assertNotNull(strArray61);
-        org.junit.Assert.assertNotNull(commandLine64);
-        org.junit.Assert.assertNotNull(commandLine65);
-        org.junit.Assert.assertNotNull(strArray67);
-        org.junit.Assert.assertNotNull(strArray69);
-        org.junit.Assert.assertNotNull(commandLine74);
-        org.junit.Assert.assertNotNull(option77);
-        org.junit.Assert.assertEquals("'" + str78 + "' != '" + "arg" + "'", str78, "arg");
-        org.junit.Assert.assertNotNull(options81);
-        org.junit.Assert.assertNotNull(optionBuilder82);
-        org.junit.Assert.assertNotNull(list83);
-        org.junit.Assert.assertNotNull(strArray89);
-        org.junit.Assert.assertNotNull(commandLine91);
-        org.junit.Assert.assertEquals("'" + str92 + "' != '" + "[ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ]" + "'", str92, "[ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ]");
-    }
-
-    @Test
-    public void test231() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test231");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test219");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13726,9 +13143,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test232() throws Throwable {
+    public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test232");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test220");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13747,9 +13164,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test233() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test233");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test221");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13839,9 +13256,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test234() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test234");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test222");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13854,9 +13271,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test235() throws Throwable {
+    public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test235");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test223");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13927,9 +13344,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test236() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test236");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test224");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13950,9 +13367,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test237() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test237");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test225");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -13975,9 +13392,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test238() throws Throwable {
+    public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test238");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test226");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14056,9 +13473,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test239() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test239");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test227");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14147,9 +13564,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test240() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test240");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test228");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14174,9 +13591,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test241() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test241");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test229");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14197,9 +13614,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test242() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test242");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test230");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14287,9 +13704,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test243() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test243");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test231");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14359,9 +13776,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test244() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test244");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test232");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14446,9 +13863,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test245() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test245");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test233");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14508,9 +13925,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test246() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test246");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test234");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14583,9 +14000,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test247() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test247");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test235");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14640,9 +14057,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test248() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test248");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test236");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14657,9 +14074,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test249() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test249");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test237");
         org.apache.commons.cli.Options options0 = new org.apache.commons.cli.Options();
         org.apache.commons.cli.Option option2 = org.apache.commons.cli.OptionBuilder.create("");
         java.lang.String str3 = option2.getArgName();
@@ -14695,9 +14112,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test250() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test250");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test238");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -14767,9 +14184,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test251() throws Throwable {
+    public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test251");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test239");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14790,9 +14207,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test252() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test252");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test240");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14871,9 +14288,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test253() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test253");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test241");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -14958,9 +14375,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test254() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test254");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test242");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser2 = new org.apache.commons.cli.PosixParser();
@@ -14995,9 +14412,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test255() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test255");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test243");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15072,100 +14489,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test256() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test256");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str14 = option13.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
-        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties23 = null;
-        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
-        org.apache.commons.cli.PosixParser posixParser26 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser27 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options28 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray35 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties36 = null;
-        org.apache.commons.cli.CommandLine commandLine37 = posixParser27.parse(options28, strArray35, properties36);
-        java.lang.String[] strArray38 = new java.lang.String[] {};
-        java.util.Properties properties39 = null;
-        org.apache.commons.cli.CommandLine commandLine40 = posixParser26.parse(options28, strArray38, properties39);
-        org.apache.commons.cli.PosixParser posixParser41 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser42 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options43 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray50 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties51 = null;
-        org.apache.commons.cli.CommandLine commandLine52 = posixParser42.parse(options43, strArray50, properties51);
-        java.lang.String[] strArray53 = new java.lang.String[] {};
-        java.util.Properties properties54 = null;
-        org.apache.commons.cli.CommandLine commandLine55 = posixParser41.parse(options43, strArray53, properties54);
-        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser57 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options58 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray65 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties66 = null;
-        org.apache.commons.cli.CommandLine commandLine67 = posixParser57.parse(options58, strArray65, properties66);
-        java.lang.String[] strArray68 = new java.lang.String[] {};
-        java.util.Properties properties69 = null;
-        org.apache.commons.cli.CommandLine commandLine70 = posixParser56.parse(options58, strArray68, properties69);
-        org.apache.commons.cli.CommandLine commandLine71 = posixParser26.parse(options43, strArray68);
-        org.apache.commons.cli.Options options72 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option74 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str75 = option74.getArgName();
-        option74.setLongOpt("");
-        org.apache.commons.cli.Options options78 = options72.addOption(option74);
-        java.lang.String[] strArray80 = new java.lang.String[] { " " };
-        org.apache.commons.cli.CommandLine commandLine82 = posixParser26.parse(options72, strArray80, true);
-        java.lang.String[] strArray83 = null;
-        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options72, strArray83);
-        org.apache.commons.cli.Option option86 = options72.getOption("[ Options: [ short {} ] [ long {} ]");
-        boolean boolean88 = options72.hasOption("[ Options: [ short {=[ option:   :: [ option:   :: null :: 0 ] ]} ] [ long {} ]");
-        java.util.Collection collection89 = options72.getOptionGroups();
-        org.apache.commons.cli.Options options94 = options72.addOption("", "org.apache.commons.cli.ParseException: hi!", false, "[ option:   :: null ]");
-        java.util.List list95 = options94.getRequiredOptions();
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(option13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
-        org.junit.Assert.assertNull(optionGroup15);
-        org.junit.Assert.assertNotNull(strArray22);
-        org.junit.Assert.assertNotNull(commandLine25);
-        org.junit.Assert.assertNotNull(strArray35);
-        org.junit.Assert.assertNotNull(commandLine37);
-        org.junit.Assert.assertNotNull(strArray38);
-        org.junit.Assert.assertNotNull(commandLine40);
-        org.junit.Assert.assertNotNull(strArray50);
-        org.junit.Assert.assertNotNull(commandLine52);
-        org.junit.Assert.assertNotNull(strArray53);
-        org.junit.Assert.assertNotNull(commandLine55);
-        org.junit.Assert.assertNotNull(strArray65);
-        org.junit.Assert.assertNotNull(commandLine67);
-        org.junit.Assert.assertNotNull(strArray68);
-        org.junit.Assert.assertNotNull(commandLine70);
-        org.junit.Assert.assertNotNull(commandLine71);
-        org.junit.Assert.assertNotNull(option74);
-        org.junit.Assert.assertEquals("'" + str75 + "' != '" + "arg" + "'", str75, "arg");
-        org.junit.Assert.assertNotNull(options78);
-        org.junit.Assert.assertNotNull(strArray80);
-        org.junit.Assert.assertNotNull(commandLine82);
-        org.junit.Assert.assertNotNull(commandLine84);
-        org.junit.Assert.assertNull(option86);
-        org.junit.Assert.assertTrue("'" + boolean88 + "' != '" + false + "'", boolean88 == false);
-        org.junit.Assert.assertNotNull(collection89);
-        org.junit.Assert.assertNotNull(options94);
-        org.junit.Assert.assertNotNull(list95);
-    }
-
-    @Test
-    public void test257() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test257");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test244");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15248,9 +14574,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test258() throws Throwable {
+    public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test258");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test245");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15301,9 +14627,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test259() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test259");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test246");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15366,9 +14692,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test260() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test260");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test247");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15419,9 +14745,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test261() throws Throwable {
+    public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test261");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test248");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15441,173 +14767,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test262() throws Throwable {
+    public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test262");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str14 = option13.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
-        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties23 = null;
-        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
-        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
-        java.util.List list27 = options26.getRequiredOptions();
-        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties37 = null;
-        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
-        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str42 = option41.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
-        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties51 = null;
-        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
-        org.apache.commons.cli.Options options54 = new org.apache.commons.cli.Options();
-        java.util.List list55 = options54.getRequiredOptions();
-        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options57 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray64 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties65 = null;
-        org.apache.commons.cli.CommandLine commandLine66 = posixParser56.parse(options57, strArray64, properties65);
-        org.apache.commons.cli.Options options67 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option69 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str70 = option69.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup71 = options67.getOptionGroup(option69);
-        java.lang.String[] strArray78 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties79 = null;
-        org.apache.commons.cli.CommandLine commandLine81 = posixParser56.parse(options67, strArray78, properties79, false);
-        org.apache.commons.cli.CommandLine commandLine82 = posixParser28.parse(options54, strArray78);
-        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options26, strArray78, false);
-        java.lang.Object obj86 = commandLine84.getOptionObject(" ");
-        org.apache.commons.cli.Option[] optionArray87 = commandLine84.getOptions();
-        java.lang.String[] strArray89 = commandLine84.getOptionValues("");
-        org.apache.commons.cli.Option[] optionArray90 = commandLine84.getOptions();
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(option13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
-        org.junit.Assert.assertNull(optionGroup15);
-        org.junit.Assert.assertNotNull(strArray22);
-        org.junit.Assert.assertNotNull(commandLine25);
-        org.junit.Assert.assertNotNull(list27);
-        org.junit.Assert.assertNotNull(strArray36);
-        org.junit.Assert.assertNotNull(commandLine38);
-        org.junit.Assert.assertNotNull(option41);
-        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
-        org.junit.Assert.assertNull(optionGroup43);
-        org.junit.Assert.assertNotNull(strArray50);
-        org.junit.Assert.assertNotNull(commandLine53);
-        org.junit.Assert.assertNotNull(list55);
-        org.junit.Assert.assertNotNull(strArray64);
-        org.junit.Assert.assertNotNull(commandLine66);
-        org.junit.Assert.assertNotNull(option69);
-        org.junit.Assert.assertEquals("'" + str70 + "' != '" + "arg" + "'", str70, "arg");
-        org.junit.Assert.assertNull(optionGroup71);
-        org.junit.Assert.assertNotNull(strArray78);
-        org.junit.Assert.assertNotNull(commandLine81);
-        org.junit.Assert.assertNotNull(commandLine82);
-        org.junit.Assert.assertNotNull(commandLine84);
-        org.junit.Assert.assertNull(obj86);
-        org.junit.Assert.assertNotNull(optionArray87);
-        org.junit.Assert.assertNull(strArray89);
-        org.junit.Assert.assertNotNull(optionArray90);
-    }
-
-    @Test
-    public void test263() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test263");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str14 = option13.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
-        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties23 = null;
-        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
-        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
-        java.util.List list27 = options26.getRequiredOptions();
-        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties37 = null;
-        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
-        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str42 = option41.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
-        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties51 = null;
-        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
-        org.apache.commons.cli.Options options54 = new org.apache.commons.cli.Options();
-        java.util.List list55 = options54.getRequiredOptions();
-        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options57 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray64 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties65 = null;
-        org.apache.commons.cli.CommandLine commandLine66 = posixParser56.parse(options57, strArray64, properties65);
-        org.apache.commons.cli.Options options67 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option69 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str70 = option69.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup71 = options67.getOptionGroup(option69);
-        java.lang.String[] strArray78 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties79 = null;
-        org.apache.commons.cli.CommandLine commandLine81 = posixParser56.parse(options67, strArray78, properties79, false);
-        org.apache.commons.cli.CommandLine commandLine82 = posixParser28.parse(options54, strArray78);
-        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options26, strArray78, false);
-        java.lang.Object obj86 = commandLine84.getOptionObject(" ");
-        java.util.Iterator iterator87 = commandLine84.iterator();
-        java.lang.String[] strArray89 = commandLine84.getOptionValues("hi!");
-        java.lang.String str91 = commandLine84.getOptionValue('a');
-        java.lang.String str94 = commandLine84.getOptionValue("org.apache.commons.cli.MissingArgumentException: arg", "");
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(option13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
-        org.junit.Assert.assertNull(optionGroup15);
-        org.junit.Assert.assertNotNull(strArray22);
-        org.junit.Assert.assertNotNull(commandLine25);
-        org.junit.Assert.assertNotNull(list27);
-        org.junit.Assert.assertNotNull(strArray36);
-        org.junit.Assert.assertNotNull(commandLine38);
-        org.junit.Assert.assertNotNull(option41);
-        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
-        org.junit.Assert.assertNull(optionGroup43);
-        org.junit.Assert.assertNotNull(strArray50);
-        org.junit.Assert.assertNotNull(commandLine53);
-        org.junit.Assert.assertNotNull(list55);
-        org.junit.Assert.assertNotNull(strArray64);
-        org.junit.Assert.assertNotNull(commandLine66);
-        org.junit.Assert.assertNotNull(option69);
-        org.junit.Assert.assertEquals("'" + str70 + "' != '" + "arg" + "'", str70, "arg");
-        org.junit.Assert.assertNull(optionGroup71);
-        org.junit.Assert.assertNotNull(strArray78);
-        org.junit.Assert.assertNotNull(commandLine81);
-        org.junit.Assert.assertNotNull(commandLine82);
-        org.junit.Assert.assertNotNull(commandLine84);
-        org.junit.Assert.assertNull(obj86);
-        org.junit.Assert.assertNotNull(iterator87);
-        org.junit.Assert.assertNull(strArray89);
-        org.junit.Assert.assertNull(str91);
-        org.junit.Assert.assertEquals("'" + str94 + "' != '" + "" + "'", str94, "");
-    }
-
-    @Test
-    public void test264() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test264");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test249");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15660,9 +14822,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test265() throws Throwable {
+    public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test265");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test250");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15762,9 +14924,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test266() throws Throwable {
+    public void test251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test266");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test251");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15845,9 +15007,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test267() throws Throwable {
+    public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test267");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test252");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15866,9 +15028,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test268() throws Throwable {
+    public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test268");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test253");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -15941,95 +15103,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test269() throws Throwable {
+    public void test254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test269");
-        org.apache.commons.cli.Options options0 = new org.apache.commons.cli.Options();
-        java.util.Collection collection1 = options0.getOptionGroups();
-        java.util.List list2 = options0.helpOptions();
-        java.util.Collection collection3 = options0.getOptions();
-        org.apache.commons.cli.PosixParser posixParser4 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options5 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray12 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties13 = null;
-        org.apache.commons.cli.CommandLine commandLine14 = posixParser4.parse(options5, strArray12, properties13);
-        org.apache.commons.cli.Options options15 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.PosixParser posixParser16 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options17 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray24 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties25 = null;
-        org.apache.commons.cli.CommandLine commandLine26 = posixParser16.parse(options17, strArray24, properties25);
-        org.apache.commons.cli.Options options27 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option29 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str30 = option29.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup31 = options27.getOptionGroup(option29);
-        java.lang.String[] strArray38 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties39 = null;
-        org.apache.commons.cli.CommandLine commandLine41 = posixParser16.parse(options27, strArray38, properties39, false);
-        org.apache.commons.cli.PosixParser posixParser42 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options43 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray50 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties51 = null;
-        org.apache.commons.cli.CommandLine commandLine52 = posixParser42.parse(options43, strArray50, properties51);
-        org.apache.commons.cli.Options options53 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option55 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str56 = option55.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup57 = options53.getOptionGroup(option55);
-        java.lang.String[] strArray64 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties65 = null;
-        org.apache.commons.cli.CommandLine commandLine67 = posixParser42.parse(options53, strArray64, properties65, false);
-        org.apache.commons.cli.PosixParser posixParser68 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options69 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray76 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties77 = null;
-        org.apache.commons.cli.CommandLine commandLine78 = posixParser68.parse(options69, strArray76, properties77);
-        java.lang.String[] strArray80 = posixParser16.flatten(options53, strArray76, true);
-        java.util.Properties properties81 = null;
-        org.apache.commons.cli.CommandLine commandLine83 = posixParser4.parse(options15, strArray76, properties81, false);
-        java.lang.String[] strArray85 = commandLine83.getOptionValues("org.apache.commons.cli.MissingArgumentException: arg");
-        org.apache.commons.cli.Option option87 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str88 = option87.getArgName();
-        option87.setLongOpt("");
-        boolean boolean91 = option87.hasArgs();
-        java.lang.String str92 = option87.getKey();
-        commandLine83.addOption(option87);
-        org.apache.commons.cli.OptionGroup optionGroup94 = options0.getOptionGroup(option87);
-        option87.setValueSeparator('a');
-        org.junit.Assert.assertNotNull(collection1);
-        org.junit.Assert.assertNotNull(list2);
-        org.junit.Assert.assertNotNull(collection3);
-        org.junit.Assert.assertNotNull(strArray12);
-        org.junit.Assert.assertNotNull(commandLine14);
-        org.junit.Assert.assertNotNull(strArray24);
-        org.junit.Assert.assertNotNull(commandLine26);
-        org.junit.Assert.assertNotNull(option29);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "arg" + "'", str30, "arg");
-        org.junit.Assert.assertNull(optionGroup31);
-        org.junit.Assert.assertNotNull(strArray38);
-        org.junit.Assert.assertNotNull(commandLine41);
-        org.junit.Assert.assertNotNull(strArray50);
-        org.junit.Assert.assertNotNull(commandLine52);
-        org.junit.Assert.assertNotNull(option55);
-        org.junit.Assert.assertEquals("'" + str56 + "' != '" + "arg" + "'", str56, "arg");
-        org.junit.Assert.assertNull(optionGroup57);
-        org.junit.Assert.assertNotNull(strArray64);
-        org.junit.Assert.assertNotNull(commandLine67);
-        org.junit.Assert.assertNotNull(strArray76);
-        org.junit.Assert.assertNotNull(commandLine78);
-        org.junit.Assert.assertNotNull(strArray80);
-        org.junit.Assert.assertNotNull(commandLine83);
-        org.junit.Assert.assertNull(strArray85);
-        org.junit.Assert.assertNotNull(option87);
-        org.junit.Assert.assertEquals("'" + str88 + "' != '" + "arg" + "'", str88, "arg");
-        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + false + "'", boolean91 == false);
-        org.junit.Assert.assertEquals("'" + str92 + "' != '" + "" + "'", str92, "");
-        org.junit.Assert.assertNull(optionGroup94);
-    }
-
-    @Test
-    public void test270() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test270");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test254");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16084,9 +15160,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test271() throws Throwable {
+    public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test271");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test255");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16171,9 +15247,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test272() throws Throwable {
+    public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test272");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test256");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16233,9 +15309,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test273() throws Throwable {
+    public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test273");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test257");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16254,9 +15330,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test274() throws Throwable {
+    public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test274");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test258");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16314,9 +15390,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test275() throws Throwable {
+    public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test275");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test259");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16395,9 +15471,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test276() throws Throwable {
+    public void test260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test276");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test260");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16436,9 +15512,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test277() throws Throwable {
+    public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test277");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test261");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16457,92 +15533,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test278() throws Throwable {
+    public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test278");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties9 = null;
-        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
-        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str14 = option13.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
-        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties23 = null;
-        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
-        org.apache.commons.cli.PosixParser posixParser26 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser27 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options28 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray35 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties36 = null;
-        org.apache.commons.cli.CommandLine commandLine37 = posixParser27.parse(options28, strArray35, properties36);
-        java.lang.String[] strArray38 = new java.lang.String[] {};
-        java.util.Properties properties39 = null;
-        org.apache.commons.cli.CommandLine commandLine40 = posixParser26.parse(options28, strArray38, properties39);
-        org.apache.commons.cli.PosixParser posixParser41 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser42 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options43 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray50 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties51 = null;
-        org.apache.commons.cli.CommandLine commandLine52 = posixParser42.parse(options43, strArray50, properties51);
-        java.lang.String[] strArray53 = new java.lang.String[] {};
-        java.util.Properties properties54 = null;
-        org.apache.commons.cli.CommandLine commandLine55 = posixParser41.parse(options43, strArray53, properties54);
-        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser57 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options58 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray65 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties66 = null;
-        org.apache.commons.cli.CommandLine commandLine67 = posixParser57.parse(options58, strArray65, properties66);
-        java.lang.String[] strArray68 = new java.lang.String[] {};
-        java.util.Properties properties69 = null;
-        org.apache.commons.cli.CommandLine commandLine70 = posixParser56.parse(options58, strArray68, properties69);
-        org.apache.commons.cli.CommandLine commandLine71 = posixParser26.parse(options43, strArray68);
-        org.apache.commons.cli.Options options72 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option74 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str75 = option74.getArgName();
-        option74.setLongOpt("");
-        org.apache.commons.cli.Options options78 = options72.addOption(option74);
-        java.lang.String[] strArray80 = new java.lang.String[] { " " };
-        org.apache.commons.cli.CommandLine commandLine82 = posixParser26.parse(options72, strArray80, true);
-        java.lang.String[] strArray83 = null;
-        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options72, strArray83);
-        java.util.Collection collection85 = options72.getOptionGroups();
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertNotNull(commandLine10);
-        org.junit.Assert.assertNotNull(option13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
-        org.junit.Assert.assertNull(optionGroup15);
-        org.junit.Assert.assertNotNull(strArray22);
-        org.junit.Assert.assertNotNull(commandLine25);
-        org.junit.Assert.assertNotNull(strArray35);
-        org.junit.Assert.assertNotNull(commandLine37);
-        org.junit.Assert.assertNotNull(strArray38);
-        org.junit.Assert.assertNotNull(commandLine40);
-        org.junit.Assert.assertNotNull(strArray50);
-        org.junit.Assert.assertNotNull(commandLine52);
-        org.junit.Assert.assertNotNull(strArray53);
-        org.junit.Assert.assertNotNull(commandLine55);
-        org.junit.Assert.assertNotNull(strArray65);
-        org.junit.Assert.assertNotNull(commandLine67);
-        org.junit.Assert.assertNotNull(strArray68);
-        org.junit.Assert.assertNotNull(commandLine70);
-        org.junit.Assert.assertNotNull(commandLine71);
-        org.junit.Assert.assertNotNull(option74);
-        org.junit.Assert.assertEquals("'" + str75 + "' != '" + "arg" + "'", str75, "arg");
-        org.junit.Assert.assertNotNull(options78);
-        org.junit.Assert.assertNotNull(strArray80);
-        org.junit.Assert.assertNotNull(commandLine82);
-        org.junit.Assert.assertNotNull(commandLine84);
-        org.junit.Assert.assertNotNull(collection85);
-    }
-
-    @Test
-    public void test279() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test279");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test262");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16560,9 +15553,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test280() throws Throwable {
+    public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test280");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test263");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16615,92 +15608,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test281() throws Throwable {
+    public void test264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test281");
-        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties10 = null;
-        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
-        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.PosixParser posixParser13 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options14 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray21 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties22 = null;
-        org.apache.commons.cli.CommandLine commandLine23 = posixParser13.parse(options14, strArray21, properties22);
-        org.apache.commons.cli.Options options24 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option26 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str27 = option26.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup28 = options24.getOptionGroup(option26);
-        java.lang.String[] strArray35 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties36 = null;
-        org.apache.commons.cli.CommandLine commandLine38 = posixParser13.parse(options24, strArray35, properties36, false);
-        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties48 = null;
-        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
-        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
-        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
-        java.lang.String str53 = option52.getArgName();
-        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
-        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
-        java.util.Properties properties62 = null;
-        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
-        org.apache.commons.cli.PosixParser posixParser65 = new org.apache.commons.cli.PosixParser();
-        org.apache.commons.cli.Options options66 = new org.apache.commons.cli.Options();
-        java.lang.String[] strArray73 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
-        java.util.Properties properties74 = null;
-        org.apache.commons.cli.CommandLine commandLine75 = posixParser65.parse(options66, strArray73, properties74);
-        java.lang.String[] strArray77 = posixParser13.flatten(options50, strArray73, true);
-        java.util.Properties properties78 = null;
-        org.apache.commons.cli.CommandLine commandLine80 = posixParser1.parse(options12, strArray73, properties78, false);
-        org.apache.commons.cli.Option option82 = org.apache.commons.cli.OptionBuilder.create(' ');
-        char char83 = option82.getValueSeparator();
-        java.lang.String str84 = option82.getKey();
-        option82.setRequired(false);
-        org.apache.commons.cli.Options options87 = options12.addOption(option82);
-        boolean boolean89 = options12.hasOption("hi!");
-        boolean boolean91 = options12.hasOption("");
-        java.lang.String[] strArray93 = new java.lang.String[] { "org.apache.commons.cli.UnrecognizedOptionException: " };
-        java.util.Properties properties94 = null;
-        org.apache.commons.cli.CommandLine commandLine96 = posixParser0.parse(options12, strArray93, properties94, false);
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertNotNull(commandLine11);
-        org.junit.Assert.assertNotNull(strArray21);
-        org.junit.Assert.assertNotNull(commandLine23);
-        org.junit.Assert.assertNotNull(option26);
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "arg" + "'", str27, "arg");
-        org.junit.Assert.assertNull(optionGroup28);
-        org.junit.Assert.assertNotNull(strArray35);
-        org.junit.Assert.assertNotNull(commandLine38);
-        org.junit.Assert.assertNotNull(strArray47);
-        org.junit.Assert.assertNotNull(commandLine49);
-        org.junit.Assert.assertNotNull(option52);
-        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
-        org.junit.Assert.assertNull(optionGroup54);
-        org.junit.Assert.assertNotNull(strArray61);
-        org.junit.Assert.assertNotNull(commandLine64);
-        org.junit.Assert.assertNotNull(strArray73);
-        org.junit.Assert.assertNotNull(commandLine75);
-        org.junit.Assert.assertNotNull(strArray77);
-        org.junit.Assert.assertNotNull(commandLine80);
-        org.junit.Assert.assertNotNull(option82);
-        org.junit.Assert.assertTrue("'" + char83 + "' != '" + '\000' + "'", char83 == '\000');
-        org.junit.Assert.assertEquals("'" + str84 + "' != '" + " " + "'", str84, " ");
-        org.junit.Assert.assertNotNull(options87);
-        org.junit.Assert.assertTrue("'" + boolean89 + "' != '" + false + "'", boolean89 == false);
-        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + false + "'", boolean91 == false);
-        org.junit.Assert.assertNotNull(strArray93);
-        org.junit.Assert.assertNotNull(commandLine96);
-    }
-
-    @Test
-    public void test282() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test282");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test264");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16725,9 +15635,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test283() throws Throwable {
+    public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test283");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test265");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser2 = new org.apache.commons.cli.PosixParser();
@@ -16756,9 +15666,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test284() throws Throwable {
+    public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test284");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test266");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16829,9 +15739,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test285() throws Throwable {
+    public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test285");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test267");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16852,9 +15762,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test286() throws Throwable {
+    public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test286");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test268");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -16935,9 +15845,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test287() throws Throwable {
+    public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test287");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test269");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
@@ -17016,9 +15926,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test288() throws Throwable {
+    public void test270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test288");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test270");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17092,9 +16002,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test289() throws Throwable {
+    public void test271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test289");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test271");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17133,9 +16043,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test290() throws Throwable {
+    public void test272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test290");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test272");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17204,9 +16114,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test291() throws Throwable {
+    public void test273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test291");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test273");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17273,9 +16183,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test292() throws Throwable {
+    public void test274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test292");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test274");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17345,9 +16255,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test293() throws Throwable {
+    public void test275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test293");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test275");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17407,9 +16317,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test294() throws Throwable {
+    public void test276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test294");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test276");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17482,9 +16392,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test295() throws Throwable {
+    public void test277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test295");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test277");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17562,9 +16472,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test296() throws Throwable {
+    public void test278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test296");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test278");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
         java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
@@ -17621,9 +16531,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test297() throws Throwable {
+    public void test279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test297");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test279");
         org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
         org.apache.commons.cli.PosixParser posixParser2 = new org.apache.commons.cli.PosixParser();
@@ -17656,5 +16566,2426 @@ public class RandoopRegressionTest0 {
         org.junit.Assert.assertNotNull(strArray26);
         org.junit.Assert.assertNotNull(commandLine29);
         org.junit.Assert.assertNotNull(collection30);
+    }
+
+    @Test
+    public void test280() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test280");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        java.util.List list27 = options26.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties37 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str42 = option41.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
+        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
+        org.apache.commons.cli.CommandLine commandLine54 = posixParser0.parse(options26, strArray50);
+        java.lang.String[] strArray55 = commandLine54.getArgs();
+        java.lang.Object obj57 = commandLine54.getOptionObject(" ");
+        org.apache.commons.cli.OptionBuilder optionBuilder58 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) commandLine54);
+        java.lang.String[] strArray59 = commandLine54.getArgs();
+        boolean boolean61 = commandLine54.hasOption('4');
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(list27);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(option41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
+        org.junit.Assert.assertNull(optionGroup43);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine53);
+        org.junit.Assert.assertNotNull(commandLine54);
+        org.junit.Assert.assertNotNull(strArray55);
+        org.junit.Assert.assertNull(obj57);
+        org.junit.Assert.assertNotNull(optionBuilder58);
+        org.junit.Assert.assertNotNull(strArray59);
+        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
+    }
+
+    @Test
+    public void test281() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test281");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.PosixParser posixParser11 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray19 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties20 = null;
+        org.apache.commons.cli.CommandLine commandLine21 = posixParser11.parse(options12, strArray19, properties20);
+        org.apache.commons.cli.Options options22 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option24 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str25 = option24.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup26 = options22.getOptionGroup(option24);
+        java.lang.String[] strArray33 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties34 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser11.parse(options22, strArray33, properties34, false);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        java.util.List list38 = options37.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties48 = null;
+        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
+        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str53 = option52.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
+        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties62 = null;
+        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
+        org.apache.commons.cli.CommandLine commandLine65 = posixParser11.parse(options37, strArray61);
+        java.lang.String[] strArray67 = new java.lang.String[] { "hi!" };
+        java.lang.String[] strArray69 = posixParser0.flatten(options37, strArray67, true);
+        boolean boolean71 = options37.hasOption("[ Options: [ short {} ] [ long {} ]");
+        boolean boolean73 = options37.hasOption("");
+        org.apache.commons.cli.Option option75 = org.apache.commons.cli.OptionBuilder.create("");
+        boolean boolean76 = option75.isRequired();
+        java.lang.String str77 = option75.getValue();
+        option75.setType((java.lang.Object) 0);
+        java.lang.String str80 = option75.toString();
+        org.apache.commons.cli.Options options81 = options37.addOption(option75);
+        org.apache.commons.cli.OptionBuilder optionBuilder82 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) options37);
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(commandLine21);
+        org.junit.Assert.assertNotNull(option24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "arg" + "'", str25, "arg");
+        org.junit.Assert.assertNull(optionGroup26);
+        org.junit.Assert.assertNotNull(strArray33);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(list38);
+        org.junit.Assert.assertNotNull(strArray47);
+        org.junit.Assert.assertNotNull(commandLine49);
+        org.junit.Assert.assertNotNull(option52);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
+        org.junit.Assert.assertNull(optionGroup54);
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(commandLine64);
+        org.junit.Assert.assertNotNull(commandLine65);
+        org.junit.Assert.assertNotNull(strArray67);
+        org.junit.Assert.assertNotNull(strArray69);
+        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
+        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + false + "'", boolean73 == false);
+        org.junit.Assert.assertNotNull(option75);
+        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
+        org.junit.Assert.assertNull(str77);
+        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "[ option:   :: null :: 0 ]" + "'", str80, "[ option:   :: null :: 0 ]");
+        org.junit.Assert.assertNotNull(options81);
+        org.junit.Assert.assertNotNull(optionBuilder82);
+    }
+
+    @Test
+    public void test282() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test282");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        java.util.List list27 = options26.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties37 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str42 = option41.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
+        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
+        org.apache.commons.cli.Options options54 = new org.apache.commons.cli.Options();
+        java.util.List list55 = options54.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options57 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray64 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties65 = null;
+        org.apache.commons.cli.CommandLine commandLine66 = posixParser56.parse(options57, strArray64, properties65);
+        org.apache.commons.cli.Options options67 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option69 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str70 = option69.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup71 = options67.getOptionGroup(option69);
+        java.lang.String[] strArray78 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties79 = null;
+        org.apache.commons.cli.CommandLine commandLine81 = posixParser56.parse(options67, strArray78, properties79, false);
+        org.apache.commons.cli.CommandLine commandLine82 = posixParser28.parse(options54, strArray78);
+        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options26, strArray78, false);
+        java.lang.Object obj86 = commandLine84.getOptionObject(" ");
+        java.util.Iterator iterator87 = commandLine84.iterator();
+        java.lang.String[] strArray89 = commandLine84.getOptionValues("hi!");
+        boolean boolean91 = commandLine84.hasOption('4');
+        java.lang.String str93 = commandLine84.getOptionValue("hi!");
+        java.lang.Object obj95 = commandLine84.getOptionObject("");
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Class<?> wildcardClass96 = obj95.getClass();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(list27);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(option41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
+        org.junit.Assert.assertNull(optionGroup43);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine53);
+        org.junit.Assert.assertNotNull(list55);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(commandLine66);
+        org.junit.Assert.assertNotNull(option69);
+        org.junit.Assert.assertEquals("'" + str70 + "' != '" + "arg" + "'", str70, "arg");
+        org.junit.Assert.assertNull(optionGroup71);
+        org.junit.Assert.assertNotNull(strArray78);
+        org.junit.Assert.assertNotNull(commandLine81);
+        org.junit.Assert.assertNotNull(commandLine82);
+        org.junit.Assert.assertNotNull(commandLine84);
+        org.junit.Assert.assertNull(obj86);
+        org.junit.Assert.assertNotNull(iterator87);
+        org.junit.Assert.assertNull(strArray89);
+        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + false + "'", boolean91 == false);
+        org.junit.Assert.assertNull(str93);
+        org.junit.Assert.assertNull(obj95);
+    }
+
+    @Test
+    public void test283() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test283");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.util.List list11 = commandLine10.getArgList();
+        java.lang.String str13 = commandLine10.getOptionValue("arg");
+        java.lang.Object obj15 = commandLine10.getOptionObject('#');
+        java.lang.String[] strArray17 = commandLine10.getOptionValues("org.apache.commons.cli.MissingArgumentException: arg");
+        java.lang.Object obj19 = commandLine10.getOptionObject(' ');
+        java.lang.Object obj21 = commandLine10.getOptionObject('#');
+        java.util.List list22 = commandLine10.getArgList();
+        boolean boolean24 = commandLine10.hasOption(' ');
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(list11);
+        org.junit.Assert.assertNull(str13);
+        org.junit.Assert.assertNull(obj15);
+        org.junit.Assert.assertNull(strArray17);
+        org.junit.Assert.assertNull(obj19);
+        org.junit.Assert.assertNull(obj21);
+        org.junit.Assert.assertNotNull(list22);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+    }
+
+    @Test
+    public void test284() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test284");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.PosixParser posixParser26 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser27 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options28 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray35 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties36 = null;
+        org.apache.commons.cli.CommandLine commandLine37 = posixParser27.parse(options28, strArray35, properties36);
+        java.lang.String[] strArray38 = new java.lang.String[] {};
+        java.util.Properties properties39 = null;
+        org.apache.commons.cli.CommandLine commandLine40 = posixParser26.parse(options28, strArray38, properties39);
+        org.apache.commons.cli.PosixParser posixParser41 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser42 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options43 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray50 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine52 = posixParser42.parse(options43, strArray50, properties51);
+        java.lang.String[] strArray53 = new java.lang.String[] {};
+        java.util.Properties properties54 = null;
+        org.apache.commons.cli.CommandLine commandLine55 = posixParser41.parse(options43, strArray53, properties54);
+        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser57 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options58 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray65 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties66 = null;
+        org.apache.commons.cli.CommandLine commandLine67 = posixParser57.parse(options58, strArray65, properties66);
+        java.lang.String[] strArray68 = new java.lang.String[] {};
+        java.util.Properties properties69 = null;
+        org.apache.commons.cli.CommandLine commandLine70 = posixParser56.parse(options58, strArray68, properties69);
+        org.apache.commons.cli.CommandLine commandLine71 = posixParser26.parse(options43, strArray68);
+        org.apache.commons.cli.Options options72 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option74 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str75 = option74.getArgName();
+        option74.setLongOpt("");
+        org.apache.commons.cli.Options options78 = options72.addOption(option74);
+        java.lang.String[] strArray80 = new java.lang.String[] { " " };
+        org.apache.commons.cli.CommandLine commandLine82 = posixParser26.parse(options72, strArray80, true);
+        java.lang.String[] strArray83 = null;
+        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options72, strArray83);
+        java.util.Collection collection85 = options72.getOptionGroups();
+        java.util.Collection collection86 = options72.getOptions();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(strArray35);
+        org.junit.Assert.assertNotNull(commandLine37);
+        org.junit.Assert.assertNotNull(strArray38);
+        org.junit.Assert.assertNotNull(commandLine40);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine52);
+        org.junit.Assert.assertNotNull(strArray53);
+        org.junit.Assert.assertNotNull(commandLine55);
+        org.junit.Assert.assertNotNull(strArray65);
+        org.junit.Assert.assertNotNull(commandLine67);
+        org.junit.Assert.assertNotNull(strArray68);
+        org.junit.Assert.assertNotNull(commandLine70);
+        org.junit.Assert.assertNotNull(commandLine71);
+        org.junit.Assert.assertNotNull(option74);
+        org.junit.Assert.assertEquals("'" + str75 + "' != '" + "arg" + "'", str75, "arg");
+        org.junit.Assert.assertNotNull(options78);
+        org.junit.Assert.assertNotNull(strArray80);
+        org.junit.Assert.assertNotNull(commandLine82);
+        org.junit.Assert.assertNotNull(commandLine84);
+        org.junit.Assert.assertNotNull(collection85);
+        org.junit.Assert.assertNotNull(collection86);
+    }
+
+    @Test
+    public void test285() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test285");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.util.List list11 = commandLine10.getArgList();
+        java.util.Iterator iterator12 = commandLine10.iterator();
+        java.lang.String[] strArray14 = commandLine10.getOptionValues('a');
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(list11);
+        org.junit.Assert.assertNotNull(iterator12);
+        org.junit.Assert.assertNull(strArray14);
+    }
+
+    @Test
+    public void test286() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test286");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties10 = null;
+        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
+        java.lang.String[] strArray12 = new java.lang.String[] {};
+        java.util.Properties properties13 = null;
+        org.apache.commons.cli.CommandLine commandLine14 = posixParser0.parse(options2, strArray12, properties13);
+        org.apache.commons.cli.Options options19 = options2.addOption("", "[ option:   :: null :: 0 ]", true, " ");
+        org.apache.commons.cli.Options options23 = options2.addOption("", false, "[ Options: [ short {} ] [ long {} ]");
+        java.util.Collection collection24 = options23.getOptionGroups();
+        java.lang.String str25 = options23.toString();
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertNotNull(commandLine11);
+        org.junit.Assert.assertNotNull(strArray12);
+        org.junit.Assert.assertNotNull(commandLine14);
+        org.junit.Assert.assertNotNull(options19);
+        org.junit.Assert.assertNotNull(options23);
+        org.junit.Assert.assertNotNull(collection24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "[ Options: [ short {=[ option:   :: [ Options: [ short {} ] [ long {} ] ]} ] [ long {[ option:   :: null :: 0 ]=[ option:  [ option:   :: null :: 0 ] +ARG ::   ]} ]" + "'", str25, "[ Options: [ short {=[ option:   :: [ Options: [ short {} ] [ long {} ] ]} ] [ long {[ option:   :: null :: 0 ]=[ option:  [ option:   :: null :: 0 ] +ARG ::   ]} ]");
+    }
+
+    @Test
+    public void test287() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test287");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String str16 = options11.toString();
+        java.util.List list17 = options11.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser18 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options19 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray26 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties27 = null;
+        org.apache.commons.cli.CommandLine commandLine28 = posixParser18.parse(options19, strArray26, properties27);
+        java.lang.String[] strArray30 = posixParser0.flatten(options11, strArray26, true);
+        java.util.Collection collection31 = options11.getOptions();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "[ Options: [ short {} ] [ long {} ]" + "'", str16, "[ Options: [ short {} ] [ long {} ]");
+        org.junit.Assert.assertNotNull(list17);
+        org.junit.Assert.assertNotNull(strArray26);
+        org.junit.Assert.assertNotNull(commandLine28);
+        org.junit.Assert.assertNotNull(strArray30);
+        org.junit.Assert.assertNotNull(collection31);
+    }
+
+    @Test
+    public void test288() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test288");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.PosixParser posixParser26 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options27 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray34 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties35 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser26.parse(options27, strArray34, properties35);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option39 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str40 = option39.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup41 = options37.getOptionGroup(option39);
+        java.lang.String[] strArray48 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties49 = null;
+        org.apache.commons.cli.CommandLine commandLine51 = posixParser26.parse(options37, strArray48, properties49, false);
+        java.lang.String[] strArray52 = null;
+        java.util.Properties properties53 = null;
+        org.apache.commons.cli.CommandLine commandLine54 = posixParser0.parse(options37, strArray52, properties53);
+        org.apache.commons.cli.PosixParser posixParser55 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options57 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray64 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties65 = null;
+        org.apache.commons.cli.CommandLine commandLine66 = posixParser56.parse(options57, strArray64, properties65);
+        java.lang.String[] strArray67 = new java.lang.String[] {};
+        java.util.Properties properties68 = null;
+        org.apache.commons.cli.CommandLine commandLine69 = posixParser55.parse(options57, strArray67, properties68);
+        org.apache.commons.cli.Options options74 = options57.addOption("", "[ option:   :: null :: 0 ]", true, " ");
+        org.apache.commons.cli.Options options78 = options57.addOption("", false, "[ Options: [ short {} ] [ long {} ]");
+        java.lang.String[] strArray79 = null;
+        java.util.Properties properties80 = null;
+        org.apache.commons.cli.CommandLine commandLine81 = posixParser0.parse(options78, strArray79, properties80);
+        org.apache.commons.cli.Options options82 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option84 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str85 = option84.getArgName();
+        option84.setLongOpt("");
+        org.apache.commons.cli.Options options88 = options82.addOption(option84);
+        org.apache.commons.cli.OptionBuilder optionBuilder89 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) options82);
+        java.lang.String[] strArray90 = null;
+        java.util.Properties properties91 = null;
+        org.apache.commons.cli.CommandLine commandLine92 = posixParser0.parse(options82, strArray90, properties91);
+        org.apache.commons.cli.Option option96 = new org.apache.commons.cli.Option(" ", true, " ");
+        java.lang.String str98 = option96.getValue((int) (short) 1);
+        commandLine92.addOption(option96);
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(strArray34);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(option39);
+        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "arg" + "'", str40, "arg");
+        org.junit.Assert.assertNull(optionGroup41);
+        org.junit.Assert.assertNotNull(strArray48);
+        org.junit.Assert.assertNotNull(commandLine51);
+        org.junit.Assert.assertNotNull(commandLine54);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(commandLine66);
+        org.junit.Assert.assertNotNull(strArray67);
+        org.junit.Assert.assertNotNull(commandLine69);
+        org.junit.Assert.assertNotNull(options74);
+        org.junit.Assert.assertNotNull(options78);
+        org.junit.Assert.assertNotNull(commandLine81);
+        org.junit.Assert.assertNotNull(option84);
+        org.junit.Assert.assertEquals("'" + str85 + "' != '" + "arg" + "'", str85, "arg");
+        org.junit.Assert.assertNotNull(options88);
+        org.junit.Assert.assertNotNull(optionBuilder89);
+        org.junit.Assert.assertNotNull(commandLine92);
+        org.junit.Assert.assertNull(str98);
+    }
+
+    @Test
+    public void test289() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test289");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.PosixParser posixParser12 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options13 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray20 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties21 = null;
+        org.apache.commons.cli.CommandLine commandLine22 = posixParser12.parse(options13, strArray20, properties21);
+        org.apache.commons.cli.Options options23 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option25 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str26 = option25.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup27 = options23.getOptionGroup(option25);
+        java.lang.String[] strArray34 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties35 = null;
+        org.apache.commons.cli.CommandLine commandLine37 = posixParser12.parse(options23, strArray34, properties35, false);
+        org.apache.commons.cli.PosixParser posixParser38 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray46 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties47 = null;
+        org.apache.commons.cli.CommandLine commandLine48 = posixParser38.parse(options39, strArray46, properties47);
+        org.apache.commons.cli.Options options49 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option51 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str52 = option51.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup53 = options49.getOptionGroup(option51);
+        java.lang.String[] strArray60 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties61 = null;
+        org.apache.commons.cli.CommandLine commandLine63 = posixParser38.parse(options49, strArray60, properties61, false);
+        org.apache.commons.cli.PosixParser posixParser64 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options65 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray72 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties73 = null;
+        org.apache.commons.cli.CommandLine commandLine74 = posixParser64.parse(options65, strArray72, properties73);
+        java.lang.String[] strArray76 = posixParser12.flatten(options49, strArray72, true);
+        java.util.Properties properties77 = null;
+        org.apache.commons.cli.CommandLine commandLine79 = posixParser0.parse(options11, strArray72, properties77, false);
+        org.apache.commons.cli.Option option81 = org.apache.commons.cli.OptionBuilder.create(' ');
+        char char82 = option81.getValueSeparator();
+        java.lang.String str83 = option81.getKey();
+        option81.setRequired(false);
+        org.apache.commons.cli.Options options86 = options11.addOption(option81);
+        org.apache.commons.cli.Options options87 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option89 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str90 = option89.getArgName();
+        option89.setLongOpt("");
+        org.apache.commons.cli.Options options93 = options87.addOption(option89);
+        option81.setType((java.lang.Object) option89);
+        java.lang.String str95 = option81.getValue();
+        boolean boolean96 = option81.hasArgName();
+        boolean boolean97 = option81.hasArg();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(strArray20);
+        org.junit.Assert.assertNotNull(commandLine22);
+        org.junit.Assert.assertNotNull(option25);
+        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "arg" + "'", str26, "arg");
+        org.junit.Assert.assertNull(optionGroup27);
+        org.junit.Assert.assertNotNull(strArray34);
+        org.junit.Assert.assertNotNull(commandLine37);
+        org.junit.Assert.assertNotNull(strArray46);
+        org.junit.Assert.assertNotNull(commandLine48);
+        org.junit.Assert.assertNotNull(option51);
+        org.junit.Assert.assertEquals("'" + str52 + "' != '" + "arg" + "'", str52, "arg");
+        org.junit.Assert.assertNull(optionGroup53);
+        org.junit.Assert.assertNotNull(strArray60);
+        org.junit.Assert.assertNotNull(commandLine63);
+        org.junit.Assert.assertNotNull(strArray72);
+        org.junit.Assert.assertNotNull(commandLine74);
+        org.junit.Assert.assertNotNull(strArray76);
+        org.junit.Assert.assertNotNull(commandLine79);
+        org.junit.Assert.assertNotNull(option81);
+        org.junit.Assert.assertTrue("'" + char82 + "' != '" + '\000' + "'", char82 == '\000');
+        org.junit.Assert.assertEquals("'" + str83 + "' != '" + " " + "'", str83, " ");
+        org.junit.Assert.assertNotNull(options86);
+        org.junit.Assert.assertNotNull(option89);
+        org.junit.Assert.assertEquals("'" + str90 + "' != '" + "arg" + "'", str90, "arg");
+        org.junit.Assert.assertNotNull(options93);
+        org.junit.Assert.assertNull(str95);
+        org.junit.Assert.assertTrue("'" + boolean96 + "' != '" + true + "'", boolean96 == true);
+        org.junit.Assert.assertTrue("'" + boolean97 + "' != '" + false + "'", boolean97 == false);
+    }
+
+    @Test
+    public void test290() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test290");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties10 = null;
+        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
+        java.lang.String[] strArray12 = new java.lang.String[] {};
+        java.util.Properties properties13 = null;
+        org.apache.commons.cli.CommandLine commandLine14 = posixParser0.parse(options2, strArray12, properties13);
+        org.apache.commons.cli.PosixParser posixParser15 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser16 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options17 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray24 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties25 = null;
+        org.apache.commons.cli.CommandLine commandLine26 = posixParser16.parse(options17, strArray24, properties25);
+        java.lang.String[] strArray27 = new java.lang.String[] {};
+        java.util.Properties properties28 = null;
+        org.apache.commons.cli.CommandLine commandLine29 = posixParser15.parse(options17, strArray27, properties28);
+        org.apache.commons.cli.PosixParser posixParser30 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser31 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options32 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray39 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties40 = null;
+        org.apache.commons.cli.CommandLine commandLine41 = posixParser31.parse(options32, strArray39, properties40);
+        java.lang.String[] strArray42 = new java.lang.String[] {};
+        java.util.Properties properties43 = null;
+        org.apache.commons.cli.CommandLine commandLine44 = posixParser30.parse(options32, strArray42, properties43);
+        org.apache.commons.cli.CommandLine commandLine45 = posixParser0.parse(options17, strArray42);
+        org.apache.commons.cli.Options options46 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option48 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str49 = option48.getArgName();
+        option48.setLongOpt("");
+        org.apache.commons.cli.Options options52 = options46.addOption(option48);
+        java.lang.String[] strArray54 = new java.lang.String[] { " " };
+        org.apache.commons.cli.CommandLine commandLine56 = posixParser0.parse(options46, strArray54, true);
+        org.apache.commons.cli.Option option58 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str59 = option58.getArgName();
+        option58.setLongOpt("");
+        boolean boolean62 = option58.hasArg();
+        char char63 = option58.getValueSeparator();
+        char char64 = option58.getValueSeparator();
+        commandLine56.addOption(option58);
+        option58.setArgName("hi!");
+        java.lang.String str68 = option58.getOpt();
+        java.lang.String str69 = option58.getKey();
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertNotNull(commandLine11);
+        org.junit.Assert.assertNotNull(strArray12);
+        org.junit.Assert.assertNotNull(commandLine14);
+        org.junit.Assert.assertNotNull(strArray24);
+        org.junit.Assert.assertNotNull(commandLine26);
+        org.junit.Assert.assertNotNull(strArray27);
+        org.junit.Assert.assertNotNull(commandLine29);
+        org.junit.Assert.assertNotNull(strArray39);
+        org.junit.Assert.assertNotNull(commandLine41);
+        org.junit.Assert.assertNotNull(strArray42);
+        org.junit.Assert.assertNotNull(commandLine44);
+        org.junit.Assert.assertNotNull(commandLine45);
+        org.junit.Assert.assertNotNull(option48);
+        org.junit.Assert.assertEquals("'" + str49 + "' != '" + "arg" + "'", str49, "arg");
+        org.junit.Assert.assertNotNull(options52);
+        org.junit.Assert.assertNotNull(strArray54);
+        org.junit.Assert.assertNotNull(commandLine56);
+        org.junit.Assert.assertNotNull(option58);
+        org.junit.Assert.assertEquals("'" + str59 + "' != '" + "arg" + "'", str59, "arg");
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
+        org.junit.Assert.assertTrue("'" + char63 + "' != '" + '\000' + "'", char63 == '\000');
+        org.junit.Assert.assertTrue("'" + char64 + "' != '" + '\000' + "'", char64 == '\000');
+        org.junit.Assert.assertEquals("'" + str68 + "' != '" + "" + "'", str68, "");
+        org.junit.Assert.assertEquals("'" + str69 + "' != '" + "" + "'", str69, "");
+    }
+
+    @Test
+    public void test291() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test291");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option28 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str29 = option28.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup30 = options26.getOptionGroup(option28);
+        org.apache.commons.cli.Option option32 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str33 = option32.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup34 = options26.getOptionGroup(option32);
+        org.apache.commons.cli.Option option36 = options26.getOption("[ Options: [ short {} ] [ long {} ]");
+        org.apache.commons.cli.PosixParser posixParser37 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser38 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray46 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties47 = null;
+        org.apache.commons.cli.CommandLine commandLine48 = posixParser38.parse(options39, strArray46, properties47);
+        java.lang.String[] strArray49 = new java.lang.String[] {};
+        java.util.Properties properties50 = null;
+        org.apache.commons.cli.CommandLine commandLine51 = posixParser37.parse(options39, strArray49, properties50);
+        org.apache.commons.cli.PosixParser posixParser52 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser53 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options54 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray61 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties62 = null;
+        org.apache.commons.cli.CommandLine commandLine63 = posixParser53.parse(options54, strArray61, properties62);
+        java.lang.String[] strArray64 = new java.lang.String[] {};
+        java.util.Properties properties65 = null;
+        org.apache.commons.cli.CommandLine commandLine66 = posixParser52.parse(options54, strArray64, properties65);
+        org.apache.commons.cli.PosixParser posixParser67 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser68 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options69 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray76 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties77 = null;
+        org.apache.commons.cli.CommandLine commandLine78 = posixParser68.parse(options69, strArray76, properties77);
+        java.lang.String[] strArray79 = new java.lang.String[] {};
+        java.util.Properties properties80 = null;
+        org.apache.commons.cli.CommandLine commandLine81 = posixParser67.parse(options69, strArray79, properties80);
+        org.apache.commons.cli.CommandLine commandLine82 = posixParser37.parse(options54, strArray79);
+        org.apache.commons.cli.Options options83 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option85 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str86 = option85.getArgName();
+        option85.setLongOpt("");
+        org.apache.commons.cli.Options options89 = options83.addOption(option85);
+        java.lang.String[] strArray91 = new java.lang.String[] { " " };
+        org.apache.commons.cli.CommandLine commandLine93 = posixParser37.parse(options83, strArray91, true);
+        java.lang.String[] strArray95 = posixParser0.flatten(options26, strArray91, true);
+        java.lang.String str96 = options26.toString();
+        org.apache.commons.cli.Option option98 = options26.getOption("arg");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(option28);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "arg" + "'", str29, "arg");
+        org.junit.Assert.assertNull(optionGroup30);
+        org.junit.Assert.assertNotNull(option32);
+        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "arg" + "'", str33, "arg");
+        org.junit.Assert.assertNull(optionGroup34);
+        org.junit.Assert.assertNull(option36);
+        org.junit.Assert.assertNotNull(strArray46);
+        org.junit.Assert.assertNotNull(commandLine48);
+        org.junit.Assert.assertNotNull(strArray49);
+        org.junit.Assert.assertNotNull(commandLine51);
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(commandLine63);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(commandLine66);
+        org.junit.Assert.assertNotNull(strArray76);
+        org.junit.Assert.assertNotNull(commandLine78);
+        org.junit.Assert.assertNotNull(strArray79);
+        org.junit.Assert.assertNotNull(commandLine81);
+        org.junit.Assert.assertNotNull(commandLine82);
+        org.junit.Assert.assertNotNull(option85);
+        org.junit.Assert.assertEquals("'" + str86 + "' != '" + "arg" + "'", str86, "arg");
+        org.junit.Assert.assertNotNull(options89);
+        org.junit.Assert.assertNotNull(strArray91);
+        org.junit.Assert.assertNotNull(commandLine93);
+        org.junit.Assert.assertNotNull(strArray95);
+        org.junit.Assert.assertEquals("'" + str96 + "' != '" + "[ Options: [ short {} ] [ long {} ]" + "'", str96, "[ Options: [ short {} ] [ long {} ]");
+        org.junit.Assert.assertNull(option98);
+    }
+
+    @Test
+    public void test292() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test292");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.lang.String str13 = commandLine10.getOptionValue("arg", "hi!");
+        java.lang.String str15 = commandLine10.getOptionValue("arg");
+        org.apache.commons.cli.Option option17 = org.apache.commons.cli.OptionBuilder.create("");
+        boolean boolean18 = option17.isRequired();
+        java.lang.String str19 = option17.getValue();
+        option17.setType((java.lang.Object) 0);
+        java.lang.String str22 = option17.toString();
+        java.lang.String str23 = option17.toString();
+        commandLine10.addOption(option17);
+        org.apache.commons.cli.Option[] optionArray25 = commandLine10.getOptions();
+        java.util.Iterator iterator26 = commandLine10.iterator();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "hi!" + "'", str13, "hi!");
+        org.junit.Assert.assertNull(str15);
+        org.junit.Assert.assertNotNull(option17);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNull(str19);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "[ option:   :: null :: 0 ]" + "'", str22, "[ option:   :: null :: 0 ]");
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "[ option:   :: null :: 0 ]" + "'", str23, "[ option:   :: null :: 0 ]");
+        org.junit.Assert.assertNotNull(optionArray25);
+        org.junit.Assert.assertNotNull(iterator26);
+    }
+
+    @Test
+    public void test293() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test293");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.PosixParser posixParser11 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray19 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties20 = null;
+        org.apache.commons.cli.CommandLine commandLine21 = posixParser11.parse(options12, strArray19, properties20);
+        org.apache.commons.cli.Options options22 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option24 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str25 = option24.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup26 = options22.getOptionGroup(option24);
+        java.lang.String[] strArray33 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties34 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser11.parse(options22, strArray33, properties34, false);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        java.util.List list38 = options37.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties48 = null;
+        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
+        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str53 = option52.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
+        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties62 = null;
+        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
+        org.apache.commons.cli.CommandLine commandLine65 = posixParser11.parse(options37, strArray61);
+        java.lang.String[] strArray67 = new java.lang.String[] { "hi!" };
+        java.lang.String[] strArray69 = posixParser0.flatten(options37, strArray67, true);
+        boolean boolean71 = options37.hasOption("[ Options: [ short {} ] [ long {} ]");
+        org.apache.commons.cli.Option option73 = org.apache.commons.cli.OptionBuilder.create("");
+        boolean boolean74 = option73.isRequired();
+        boolean boolean75 = option73.hasLongOpt();
+        option73.setLongOpt("");
+        org.apache.commons.cli.Options options78 = options37.addOption(option73);
+        java.lang.Class<?> wildcardClass79 = options37.getClass();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(commandLine21);
+        org.junit.Assert.assertNotNull(option24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "arg" + "'", str25, "arg");
+        org.junit.Assert.assertNull(optionGroup26);
+        org.junit.Assert.assertNotNull(strArray33);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(list38);
+        org.junit.Assert.assertNotNull(strArray47);
+        org.junit.Assert.assertNotNull(commandLine49);
+        org.junit.Assert.assertNotNull(option52);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
+        org.junit.Assert.assertNull(optionGroup54);
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(commandLine64);
+        org.junit.Assert.assertNotNull(commandLine65);
+        org.junit.Assert.assertNotNull(strArray67);
+        org.junit.Assert.assertNotNull(strArray69);
+        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
+        org.junit.Assert.assertNotNull(option73);
+        org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + false + "'", boolean74 == false);
+        org.junit.Assert.assertTrue("'" + boolean75 + "' != '" + false + "'", boolean75 == false);
+        org.junit.Assert.assertNotNull(options78);
+        org.junit.Assert.assertNotNull(wildcardClass79);
+    }
+
+    @Test
+    public void test294() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test294");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.util.List list11 = commandLine10.getArgList();
+        java.lang.String str14 = commandLine10.getOptionValue('4', "org.apache.commons.cli.MissingArgumentException: arg");
+        commandLine10.addArg("org.apache.commons.cli.MissingOptionException: ");
+        boolean boolean18 = commandLine10.hasOption("[ Options: [ short {} ] [ long {} ]");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(list11);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "org.apache.commons.cli.MissingArgumentException: arg" + "'", str14, "org.apache.commons.cli.MissingArgumentException: arg");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+    }
+
+    @Test
+    public void test295() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test295");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.PosixParser posixParser26 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options27 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray34 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties35 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser26.parse(options27, strArray34, properties35);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option39 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str40 = option39.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup41 = options37.getOptionGroup(option39);
+        java.lang.String[] strArray48 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties49 = null;
+        org.apache.commons.cli.CommandLine commandLine51 = posixParser26.parse(options37, strArray48, properties49, false);
+        java.lang.String[] strArray52 = null;
+        java.util.Properties properties53 = null;
+        org.apache.commons.cli.CommandLine commandLine54 = posixParser0.parse(options37, strArray52, properties53);
+        org.apache.commons.cli.PosixParser posixParser55 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options57 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray64 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties65 = null;
+        org.apache.commons.cli.CommandLine commandLine66 = posixParser56.parse(options57, strArray64, properties65);
+        java.lang.String[] strArray67 = new java.lang.String[] {};
+        java.util.Properties properties68 = null;
+        org.apache.commons.cli.CommandLine commandLine69 = posixParser55.parse(options57, strArray67, properties68);
+        org.apache.commons.cli.Options options74 = options57.addOption("", "[ option:   :: null :: 0 ]", true, " ");
+        org.apache.commons.cli.Options options78 = options57.addOption("", false, "[ Options: [ short {} ] [ long {} ]");
+        java.lang.String[] strArray79 = null;
+        java.util.Properties properties80 = null;
+        org.apache.commons.cli.CommandLine commandLine81 = posixParser0.parse(options78, strArray79, properties80);
+        org.apache.commons.cli.Option[] optionArray82 = commandLine81.getOptions();
+        java.lang.String[] strArray84 = commandLine81.getOptionValues("");
+        java.lang.String str86 = commandLine81.getOptionValue("org.apache.commons.cli.MissingOptionException: org.apache.commons.cli.UnrecognizedOptionException: org.apache.commons.cli.MissingArgumentException: arg");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(strArray34);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(option39);
+        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "arg" + "'", str40, "arg");
+        org.junit.Assert.assertNull(optionGroup41);
+        org.junit.Assert.assertNotNull(strArray48);
+        org.junit.Assert.assertNotNull(commandLine51);
+        org.junit.Assert.assertNotNull(commandLine54);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(commandLine66);
+        org.junit.Assert.assertNotNull(strArray67);
+        org.junit.Assert.assertNotNull(commandLine69);
+        org.junit.Assert.assertNotNull(options74);
+        org.junit.Assert.assertNotNull(options78);
+        org.junit.Assert.assertNotNull(commandLine81);
+        org.junit.Assert.assertNotNull(optionArray82);
+        org.junit.Assert.assertNull(strArray84);
+        org.junit.Assert.assertNull(str86);
+    }
+
+    @Test
+    public void test296() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test296");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.util.List list11 = commandLine10.getArgList();
+        java.lang.String str13 = commandLine10.getOptionValue("arg");
+        java.lang.Object obj15 = commandLine10.getOptionObject('#');
+        java.lang.String[] strArray17 = commandLine10.getOptionValues("org.apache.commons.cli.MissingArgumentException: arg");
+        java.lang.Object obj19 = commandLine10.getOptionObject(' ');
+        java.util.Iterator iterator20 = commandLine10.iterator();
+        java.util.List list21 = commandLine10.getArgList();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(list11);
+        org.junit.Assert.assertNull(str13);
+        org.junit.Assert.assertNull(obj15);
+        org.junit.Assert.assertNull(strArray17);
+        org.junit.Assert.assertNull(obj19);
+        org.junit.Assert.assertNotNull(iterator20);
+        org.junit.Assert.assertNotNull(list21);
+    }
+
+    @Test
+    public void test297() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test297");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        java.util.List list27 = options26.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties37 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str42 = option41.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
+        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
+        org.apache.commons.cli.CommandLine commandLine54 = posixParser0.parse(options26, strArray50);
+        org.apache.commons.cli.Options options58 = options26.addOption("", false, "[ option:   :: null :: 0 ]");
+        org.apache.commons.cli.Option option60 = org.apache.commons.cli.OptionBuilder.create("");
+        boolean boolean61 = option60.isRequired();
+        java.lang.String str62 = option60.getValue();
+        java.lang.String str64 = option60.getValue("arg");
+        org.apache.commons.cli.OptionGroup optionGroup65 = options26.getOptionGroup(option60);
+        boolean boolean66 = option60.hasArgs();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(list27);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(option41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
+        org.junit.Assert.assertNull(optionGroup43);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine53);
+        org.junit.Assert.assertNotNull(commandLine54);
+        org.junit.Assert.assertNotNull(options58);
+        org.junit.Assert.assertNotNull(option60);
+        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
+        org.junit.Assert.assertNull(str62);
+        org.junit.Assert.assertEquals("'" + str64 + "' != '" + "arg" + "'", str64, "arg");
+        org.junit.Assert.assertNull(optionGroup65);
+        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + false + "'", boolean66 == false);
+    }
+
+    @Test
+    public void test298() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test298");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.PosixParser posixParser11 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray19 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties20 = null;
+        org.apache.commons.cli.CommandLine commandLine21 = posixParser11.parse(options12, strArray19, properties20);
+        org.apache.commons.cli.Options options22 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option24 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str25 = option24.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup26 = options22.getOptionGroup(option24);
+        java.lang.String[] strArray33 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties34 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser11.parse(options22, strArray33, properties34, false);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        java.util.List list38 = options37.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties48 = null;
+        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
+        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str53 = option52.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
+        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties62 = null;
+        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
+        org.apache.commons.cli.CommandLine commandLine65 = posixParser11.parse(options37, strArray61);
+        java.lang.String[] strArray67 = new java.lang.String[] { "hi!" };
+        java.lang.String[] strArray69 = posixParser0.flatten(options37, strArray67, true);
+        org.apache.commons.cli.Options options70 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray71 = null;
+        java.util.Properties properties72 = null;
+        org.apache.commons.cli.CommandLine commandLine74 = posixParser0.parse(options70, strArray71, properties72, false);
+        org.apache.commons.cli.Options options75 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option77 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str78 = option77.getArgName();
+        option77.setLongOpt("");
+        org.apache.commons.cli.Options options81 = options75.addOption(option77);
+        org.apache.commons.cli.OptionBuilder optionBuilder82 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) options75);
+        java.util.List list83 = options75.helpOptions();
+        java.lang.String[] strArray89 = new java.lang.String[] { "org.apache.commons.cli.MissingArgumentException: arg", "[ Options: [ short {=[ option:   :: [ option:   :: null :: 0 ] ]} ] [ long {} ]", " ", "[ Options: [ short {=[ option:   :: [ Options: [ short {} ] [ long {} ] ]} ] [ long {[ option:   :: null :: 0 ]=[ option:  [ option:   :: null :: 0 ] +ARG ::   ]} ]", " " };
+        java.util.Properties properties90 = null;
+        org.apache.commons.cli.CommandLine commandLine91 = posixParser0.parse(options75, strArray89, properties90);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.cli.Options options95 = options75.addOption("org.apache.commons.cli.UnrecognizedOptionException:  ", true, "org.apache.commons.cli.UnrecognizedOptionException:  ");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: opt contains illegal character value '.'");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(commandLine21);
+        org.junit.Assert.assertNotNull(option24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "arg" + "'", str25, "arg");
+        org.junit.Assert.assertNull(optionGroup26);
+        org.junit.Assert.assertNotNull(strArray33);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(list38);
+        org.junit.Assert.assertNotNull(strArray47);
+        org.junit.Assert.assertNotNull(commandLine49);
+        org.junit.Assert.assertNotNull(option52);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
+        org.junit.Assert.assertNull(optionGroup54);
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(commandLine64);
+        org.junit.Assert.assertNotNull(commandLine65);
+        org.junit.Assert.assertNotNull(strArray67);
+        org.junit.Assert.assertNotNull(strArray69);
+        org.junit.Assert.assertNotNull(commandLine74);
+        org.junit.Assert.assertNotNull(option77);
+        org.junit.Assert.assertEquals("'" + str78 + "' != '" + "arg" + "'", str78, "arg");
+        org.junit.Assert.assertNotNull(options81);
+        org.junit.Assert.assertNotNull(optionBuilder82);
+        org.junit.Assert.assertNotNull(list83);
+        org.junit.Assert.assertNotNull(strArray89);
+        org.junit.Assert.assertNotNull(commandLine91);
+    }
+
+    @Test
+    public void test299() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test299");
+        org.apache.commons.cli.Options options0 = new org.apache.commons.cli.Options();
+        java.util.Collection collection1 = options0.getOptionGroups();
+        java.util.List list2 = options0.helpOptions();
+        java.util.Collection collection3 = options0.getOptions();
+        org.apache.commons.cli.PosixParser posixParser4 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options5 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray12 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties13 = null;
+        org.apache.commons.cli.CommandLine commandLine14 = posixParser4.parse(options5, strArray12, properties13);
+        org.apache.commons.cli.Options options15 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.PosixParser posixParser16 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options17 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray24 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties25 = null;
+        org.apache.commons.cli.CommandLine commandLine26 = posixParser16.parse(options17, strArray24, properties25);
+        org.apache.commons.cli.Options options27 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option29 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str30 = option29.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup31 = options27.getOptionGroup(option29);
+        java.lang.String[] strArray38 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties39 = null;
+        org.apache.commons.cli.CommandLine commandLine41 = posixParser16.parse(options27, strArray38, properties39, false);
+        org.apache.commons.cli.PosixParser posixParser42 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options43 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray50 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine52 = posixParser42.parse(options43, strArray50, properties51);
+        org.apache.commons.cli.Options options53 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option55 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str56 = option55.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup57 = options53.getOptionGroup(option55);
+        java.lang.String[] strArray64 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties65 = null;
+        org.apache.commons.cli.CommandLine commandLine67 = posixParser42.parse(options53, strArray64, properties65, false);
+        org.apache.commons.cli.PosixParser posixParser68 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options69 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray76 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties77 = null;
+        org.apache.commons.cli.CommandLine commandLine78 = posixParser68.parse(options69, strArray76, properties77);
+        java.lang.String[] strArray80 = posixParser16.flatten(options53, strArray76, true);
+        java.util.Properties properties81 = null;
+        org.apache.commons.cli.CommandLine commandLine83 = posixParser4.parse(options15, strArray76, properties81, false);
+        java.lang.String[] strArray85 = commandLine83.getOptionValues("org.apache.commons.cli.MissingArgumentException: arg");
+        org.apache.commons.cli.Option option87 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str88 = option87.getArgName();
+        option87.setLongOpt("");
+        boolean boolean91 = option87.hasArgs();
+        java.lang.String str92 = option87.getKey();
+        commandLine83.addOption(option87);
+        org.apache.commons.cli.OptionGroup optionGroup94 = options0.getOptionGroup(option87);
+        option87.setValueSeparator('a');
+        option87.setArgName("");
+        org.junit.Assert.assertNotNull(collection1);
+        org.junit.Assert.assertNotNull(list2);
+        org.junit.Assert.assertNotNull(collection3);
+        org.junit.Assert.assertNotNull(strArray12);
+        org.junit.Assert.assertNotNull(commandLine14);
+        org.junit.Assert.assertNotNull(strArray24);
+        org.junit.Assert.assertNotNull(commandLine26);
+        org.junit.Assert.assertNotNull(option29);
+// flaky:         org.junit.Assert.assertEquals("'" + str30 + "' != '" + "[ option:    :: hi! ]" + "'", str30, "[ option:    :: hi! ]");
+        org.junit.Assert.assertNull(optionGroup31);
+        org.junit.Assert.assertNotNull(strArray38);
+        org.junit.Assert.assertNotNull(commandLine41);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine52);
+        org.junit.Assert.assertNotNull(option55);
+        org.junit.Assert.assertEquals("'" + str56 + "' != '" + "arg" + "'", str56, "arg");
+        org.junit.Assert.assertNull(optionGroup57);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(commandLine67);
+        org.junit.Assert.assertNotNull(strArray76);
+        org.junit.Assert.assertNotNull(commandLine78);
+        org.junit.Assert.assertNotNull(strArray80);
+        org.junit.Assert.assertNotNull(commandLine83);
+        org.junit.Assert.assertNull(strArray85);
+        org.junit.Assert.assertNotNull(option87);
+        org.junit.Assert.assertEquals("'" + str88 + "' != '" + "arg" + "'", str88, "arg");
+        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + false + "'", boolean91 == false);
+        org.junit.Assert.assertEquals("'" + str92 + "' != '" + "" + "'", str92, "");
+        org.junit.Assert.assertNull(optionGroup94);
+    }
+
+    @Test
+    public void test300() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test300");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.lang.String str13 = commandLine10.getOptionValue("[ Options: [ short {} ] [ long {} ]", " ");
+        commandLine10.addArg("org.apache.commons.cli.MissingArgumentException: arg");
+        java.lang.String str18 = commandLine10.getOptionValue('a', " ");
+        java.lang.String str21 = commandLine10.getOptionValue("[ Options: [ short {} ] [ long {} ]", "[ option:   :: null ]");
+        java.lang.String str24 = commandLine10.getOptionValue("hi!", "[ Options: [ short {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ] [ long {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ]");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + " " + "'", str13, " ");
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + " " + "'", str18, " ");
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "[ option:   :: null ]" + "'", str21, "[ option:   :: null ]");
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "[ Options: [ short {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ] [ long {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ]" + "'", str24, "[ Options: [ short {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ] [ long {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ]");
+    }
+
+    @Test
+    public void test301() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test301");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.util.List list11 = commandLine10.getArgList();
+        java.lang.String str13 = commandLine10.getOptionValue("arg");
+        java.lang.Object obj15 = commandLine10.getOptionObject('#');
+        java.lang.String[] strArray17 = commandLine10.getOptionValues("org.apache.commons.cli.MissingArgumentException: arg");
+        org.apache.commons.cli.Option[] optionArray18 = commandLine10.getOptions();
+        org.apache.commons.cli.Option[] optionArray19 = commandLine10.getOptions();
+        java.lang.Object obj21 = commandLine10.getOptionObject("[ option:   :: null :: [ option:   :: null ] ]");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(list11);
+        org.junit.Assert.assertNull(str13);
+        org.junit.Assert.assertNull(obj15);
+        org.junit.Assert.assertNull(strArray17);
+        org.junit.Assert.assertNotNull(optionArray18);
+        org.junit.Assert.assertNotNull(optionArray19);
+        org.junit.Assert.assertNull(obj21);
+    }
+
+    @Test
+    public void test302() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test302");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties10 = null;
+        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
+        java.lang.String[] strArray12 = new java.lang.String[] {};
+        java.util.Properties properties13 = null;
+        org.apache.commons.cli.CommandLine commandLine14 = posixParser0.parse(options2, strArray12, properties13);
+        org.apache.commons.cli.PosixParser posixParser15 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser16 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options17 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray24 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties25 = null;
+        org.apache.commons.cli.CommandLine commandLine26 = posixParser16.parse(options17, strArray24, properties25);
+        java.lang.String[] strArray27 = new java.lang.String[] {};
+        java.util.Properties properties28 = null;
+        org.apache.commons.cli.CommandLine commandLine29 = posixParser15.parse(options17, strArray27, properties28);
+        org.apache.commons.cli.PosixParser posixParser30 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser31 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options32 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray39 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties40 = null;
+        org.apache.commons.cli.CommandLine commandLine41 = posixParser31.parse(options32, strArray39, properties40);
+        java.lang.String[] strArray42 = new java.lang.String[] {};
+        java.util.Properties properties43 = null;
+        org.apache.commons.cli.CommandLine commandLine44 = posixParser30.parse(options32, strArray42, properties43);
+        org.apache.commons.cli.CommandLine commandLine45 = posixParser0.parse(options17, strArray42);
+        java.util.Collection collection46 = options17.getOptions();
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertNotNull(commandLine11);
+        org.junit.Assert.assertNotNull(strArray12);
+        org.junit.Assert.assertNotNull(commandLine14);
+        org.junit.Assert.assertNotNull(strArray24);
+        org.junit.Assert.assertNotNull(commandLine26);
+        org.junit.Assert.assertNotNull(strArray27);
+        org.junit.Assert.assertNotNull(commandLine29);
+        org.junit.Assert.assertNotNull(strArray39);
+        org.junit.Assert.assertNotNull(commandLine41);
+        org.junit.Assert.assertNotNull(strArray42);
+        org.junit.Assert.assertNotNull(commandLine44);
+        org.junit.Assert.assertNotNull(commandLine45);
+        org.junit.Assert.assertNotNull(collection46);
+    }
+
+    @Test
+    public void test303() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test303");
+        org.apache.commons.cli.Option option1 = org.apache.commons.cli.OptionBuilder.create("");
+        boolean boolean2 = option1.isRequired();
+        java.lang.String str3 = option1.getValue();
+        java.lang.String str4 = option1.getOpt();
+        option1.setRequired(true);
+        boolean boolean7 = option1.hasValueSeparator();
+        org.apache.commons.cli.PosixParser posixParser8 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options9 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray16 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties17 = null;
+        org.apache.commons.cli.CommandLine commandLine18 = posixParser8.parse(options9, strArray16, properties17);
+        java.util.List list19 = commandLine18.getArgList();
+        java.lang.String str21 = commandLine18.getOptionValue("[ option:    :: null ]");
+        java.lang.Object obj23 = commandLine18.getOptionObject("[ option:   :: null ]");
+        boolean boolean24 = option1.equals(obj23);
+        org.junit.Assert.assertNotNull(option1);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(strArray16);
+        org.junit.Assert.assertNotNull(commandLine18);
+        org.junit.Assert.assertNotNull(list19);
+        org.junit.Assert.assertNull(str21);
+        org.junit.Assert.assertNull(obj23);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+    }
+
+    @Test
+    public void test304() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test304");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.PosixParser posixParser12 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options13 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray20 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties21 = null;
+        org.apache.commons.cli.CommandLine commandLine22 = posixParser12.parse(options13, strArray20, properties21);
+        org.apache.commons.cli.Options options23 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option25 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str26 = option25.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup27 = options23.getOptionGroup(option25);
+        java.lang.String[] strArray34 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties35 = null;
+        org.apache.commons.cli.CommandLine commandLine37 = posixParser12.parse(options23, strArray34, properties35, false);
+        org.apache.commons.cli.PosixParser posixParser38 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray46 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties47 = null;
+        org.apache.commons.cli.CommandLine commandLine48 = posixParser38.parse(options39, strArray46, properties47);
+        org.apache.commons.cli.Options options49 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option51 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str52 = option51.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup53 = options49.getOptionGroup(option51);
+        java.lang.String[] strArray60 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties61 = null;
+        org.apache.commons.cli.CommandLine commandLine63 = posixParser38.parse(options49, strArray60, properties61, false);
+        org.apache.commons.cli.PosixParser posixParser64 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options65 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray72 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties73 = null;
+        org.apache.commons.cli.CommandLine commandLine74 = posixParser64.parse(options65, strArray72, properties73);
+        java.lang.String[] strArray76 = posixParser12.flatten(options49, strArray72, true);
+        java.util.Properties properties77 = null;
+        org.apache.commons.cli.CommandLine commandLine79 = posixParser0.parse(options11, strArray72, properties77, false);
+        org.apache.commons.cli.Option option81 = org.apache.commons.cli.OptionBuilder.create(' ');
+        char char82 = option81.getValueSeparator();
+        java.lang.String str83 = option81.getKey();
+        option81.setRequired(false);
+        org.apache.commons.cli.Options options86 = options11.addOption(option81);
+        org.apache.commons.cli.Options options87 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option89 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str90 = option89.getArgName();
+        option89.setLongOpt("");
+        org.apache.commons.cli.Options options93 = options87.addOption(option89);
+        option81.setType((java.lang.Object) option89);
+        java.lang.Object obj95 = option89.getType();
+        option89.setRequired(true);
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(strArray20);
+        org.junit.Assert.assertNotNull(commandLine22);
+        org.junit.Assert.assertNotNull(option25);
+        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "arg" + "'", str26, "arg");
+        org.junit.Assert.assertNull(optionGroup27);
+        org.junit.Assert.assertNotNull(strArray34);
+        org.junit.Assert.assertNotNull(commandLine37);
+        org.junit.Assert.assertNotNull(strArray46);
+        org.junit.Assert.assertNotNull(commandLine48);
+        org.junit.Assert.assertNotNull(option51);
+        org.junit.Assert.assertEquals("'" + str52 + "' != '" + "arg" + "'", str52, "arg");
+        org.junit.Assert.assertNull(optionGroup53);
+        org.junit.Assert.assertNotNull(strArray60);
+        org.junit.Assert.assertNotNull(commandLine63);
+        org.junit.Assert.assertNotNull(strArray72);
+        org.junit.Assert.assertNotNull(commandLine74);
+        org.junit.Assert.assertNotNull(strArray76);
+        org.junit.Assert.assertNotNull(commandLine79);
+        org.junit.Assert.assertNotNull(option81);
+        org.junit.Assert.assertTrue("'" + char82 + "' != '" + '\000' + "'", char82 == '\000');
+        org.junit.Assert.assertEquals("'" + str83 + "' != '" + " " + "'", str83, " ");
+        org.junit.Assert.assertNotNull(options86);
+        org.junit.Assert.assertNotNull(option89);
+        org.junit.Assert.assertEquals("'" + str90 + "' != '" + "arg" + "'", str90, "arg");
+        org.junit.Assert.assertNotNull(options93);
+        org.junit.Assert.assertNull(obj95);
+    }
+
+    @Test
+    public void test305() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test305");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        java.util.List list27 = options26.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties37 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str42 = option41.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
+        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
+        org.apache.commons.cli.Options options54 = new org.apache.commons.cli.Options();
+        java.util.List list55 = options54.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options57 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray64 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties65 = null;
+        org.apache.commons.cli.CommandLine commandLine66 = posixParser56.parse(options57, strArray64, properties65);
+        org.apache.commons.cli.Options options67 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option69 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str70 = option69.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup71 = options67.getOptionGroup(option69);
+        java.lang.String[] strArray78 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties79 = null;
+        org.apache.commons.cli.CommandLine commandLine81 = posixParser56.parse(options67, strArray78, properties79, false);
+        org.apache.commons.cli.CommandLine commandLine82 = posixParser28.parse(options54, strArray78);
+        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options26, strArray78, false);
+        java.lang.Object obj86 = commandLine84.getOptionObject(" ");
+        java.util.Iterator iterator87 = commandLine84.iterator();
+        java.lang.String[] strArray89 = commandLine84.getOptionValues("hi!");
+        java.lang.String str91 = commandLine84.getOptionValue('a');
+        java.lang.String str94 = commandLine84.getOptionValue("org.apache.commons.cli.MissingArgumentException: arg", "");
+        java.lang.String str97 = commandLine84.getOptionValue(' ', "[ option:   :: null :: [ option:   :: null ] ]");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(list27);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(option41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
+        org.junit.Assert.assertNull(optionGroup43);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine53);
+        org.junit.Assert.assertNotNull(list55);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(commandLine66);
+        org.junit.Assert.assertNotNull(option69);
+        org.junit.Assert.assertEquals("'" + str70 + "' != '" + "arg" + "'", str70, "arg");
+        org.junit.Assert.assertNull(optionGroup71);
+        org.junit.Assert.assertNotNull(strArray78);
+        org.junit.Assert.assertNotNull(commandLine81);
+        org.junit.Assert.assertNotNull(commandLine82);
+        org.junit.Assert.assertNotNull(commandLine84);
+        org.junit.Assert.assertNull(obj86);
+        org.junit.Assert.assertNotNull(iterator87);
+        org.junit.Assert.assertNull(strArray89);
+        org.junit.Assert.assertNull(str91);
+        org.junit.Assert.assertEquals("'" + str94 + "' != '" + "" + "'", str94, "");
+        org.junit.Assert.assertEquals("'" + str97 + "' != '" + "[ option:   :: null :: [ option:   :: null ] ]" + "'", str97, "[ option:   :: null :: [ option:   :: null ] ]");
+    }
+
+    @Test
+    public void test306() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test306");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties10 = null;
+        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
+        java.lang.String[] strArray12 = new java.lang.String[] {};
+        java.util.Properties properties13 = null;
+        org.apache.commons.cli.CommandLine commandLine14 = posixParser0.parse(options2, strArray12, properties13);
+        org.apache.commons.cli.Options options19 = options2.addOption("", "[ option:   :: null :: 0 ]", true, " ");
+        org.apache.commons.cli.Option option21 = options19.getOption("[ option:   :: null :: 0 ]");
+        java.util.Collection collection22 = options19.getOptionGroups();
+        org.apache.commons.cli.Option option24 = options19.getOption("");
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertNotNull(commandLine11);
+        org.junit.Assert.assertNotNull(strArray12);
+        org.junit.Assert.assertNotNull(commandLine14);
+        org.junit.Assert.assertNotNull(options19);
+        org.junit.Assert.assertNotNull(option21);
+        org.junit.Assert.assertNotNull(collection22);
+        org.junit.Assert.assertNotNull(option24);
+    }
+
+    @Test
+    public void test307() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test307");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.PosixParser posixParser11 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray19 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties20 = null;
+        org.apache.commons.cli.CommandLine commandLine21 = posixParser11.parse(options12, strArray19, properties20);
+        org.apache.commons.cli.Options options22 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option24 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str25 = option24.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup26 = options22.getOptionGroup(option24);
+        java.lang.String[] strArray33 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties34 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser11.parse(options22, strArray33, properties34, false);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        java.util.List list38 = options37.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties48 = null;
+        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
+        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str53 = option52.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
+        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties62 = null;
+        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
+        org.apache.commons.cli.CommandLine commandLine65 = posixParser11.parse(options37, strArray61);
+        java.lang.String[] strArray67 = new java.lang.String[] { "hi!" };
+        java.lang.String[] strArray69 = posixParser0.flatten(options37, strArray67, true);
+        boolean boolean71 = options37.hasOption("[ Options: [ short {} ] [ long {} ]");
+        boolean boolean73 = options37.hasOption("");
+        boolean boolean75 = options37.hasOption(" ");
+        org.apache.commons.cli.Option option77 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str78 = option77.getArgName();
+        java.lang.String str79 = option77.getValue();
+        org.apache.commons.cli.OptionGroup optionGroup80 = options37.getOptionGroup(option77);
+        org.apache.commons.cli.OptionGroup optionGroup81 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.cli.Options options82 = options37.addOptionGroup(optionGroup81);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(commandLine21);
+        org.junit.Assert.assertNotNull(option24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "arg" + "'", str25, "arg");
+        org.junit.Assert.assertNull(optionGroup26);
+        org.junit.Assert.assertNotNull(strArray33);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(list38);
+        org.junit.Assert.assertNotNull(strArray47);
+        org.junit.Assert.assertNotNull(commandLine49);
+        org.junit.Assert.assertNotNull(option52);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
+        org.junit.Assert.assertNull(optionGroup54);
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(commandLine64);
+        org.junit.Assert.assertNotNull(commandLine65);
+        org.junit.Assert.assertNotNull(strArray67);
+        org.junit.Assert.assertNotNull(strArray69);
+        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
+        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + false + "'", boolean73 == false);
+        org.junit.Assert.assertTrue("'" + boolean75 + "' != '" + false + "'", boolean75 == false);
+        org.junit.Assert.assertNotNull(option77);
+        org.junit.Assert.assertEquals("'" + str78 + "' != '" + "arg" + "'", str78, "arg");
+        org.junit.Assert.assertNull(str79);
+        org.junit.Assert.assertNull(optionGroup80);
+    }
+
+    @Test
+    public void test308() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test308");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        java.util.List list27 = options26.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties37 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str42 = option41.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
+        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
+        org.apache.commons.cli.CommandLine commandLine54 = posixParser0.parse(options26, strArray50);
+        org.apache.commons.cli.Option option56 = options26.getOption("[ Options: [ short {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ] [ long {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ]");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(list27);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(option41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
+        org.junit.Assert.assertNull(optionGroup43);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine53);
+        org.junit.Assert.assertNotNull(commandLine54);
+        org.junit.Assert.assertNull(option56);
+    }
+
+    @Test
+    public void test309() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test309");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser2 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options3 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray10 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties11 = null;
+        org.apache.commons.cli.CommandLine commandLine12 = posixParser2.parse(options3, strArray10, properties11);
+        java.lang.String[] strArray13 = new java.lang.String[] {};
+        java.util.Properties properties14 = null;
+        org.apache.commons.cli.CommandLine commandLine15 = posixParser1.parse(options3, strArray13, properties14);
+        org.apache.commons.cli.Options options20 = options3.addOption("", "[ option:   :: null :: 0 ]", true, " ");
+        java.util.List list21 = options20.helpOptions();
+        java.lang.String[] strArray26 = new java.lang.String[] { "org.apache.commons.cli.UnrecognizedOptionException:  ", "org.apache.commons.cli.UnrecognizedOptionException: org.apache.commons.cli.MissingArgumentException: arg", "[ option:   :: null ]", " " };
+        java.util.Properties properties27 = null;
+        org.apache.commons.cli.CommandLine commandLine29 = posixParser0.parse(options20, strArray26, properties27, true);
+        org.apache.commons.cli.Options options30 = new org.apache.commons.cli.Options();
+        java.util.List list31 = options30.getRequiredOptions();
+        org.apache.commons.cli.Option option33 = org.apache.commons.cli.OptionBuilder.create(' ');
+        char char34 = option33.getValueSeparator();
+        boolean boolean35 = option33.hasArgName();
+        org.apache.commons.cli.OptionGroup optionGroup36 = options30.getOptionGroup(option33);
+        org.apache.commons.cli.PosixParser posixParser37 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options38 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray45 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties46 = null;
+        org.apache.commons.cli.CommandLine commandLine47 = posixParser37.parse(options38, strArray45, properties46);
+        org.apache.commons.cli.Options options48 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option50 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str51 = option50.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup52 = options48.getOptionGroup(option50);
+        java.lang.String[] strArray59 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties60 = null;
+        org.apache.commons.cli.CommandLine commandLine62 = posixParser37.parse(options48, strArray59, properties60, false);
+        org.apache.commons.cli.Options options63 = new org.apache.commons.cli.Options();
+        java.util.List list64 = options63.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser65 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options66 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray73 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties74 = null;
+        org.apache.commons.cli.CommandLine commandLine75 = posixParser65.parse(options66, strArray73, properties74);
+        org.apache.commons.cli.Options options76 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option78 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str79 = option78.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup80 = options76.getOptionGroup(option78);
+        java.lang.String[] strArray87 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties88 = null;
+        org.apache.commons.cli.CommandLine commandLine90 = posixParser65.parse(options76, strArray87, properties88, false);
+        org.apache.commons.cli.CommandLine commandLine91 = posixParser37.parse(options63, strArray87);
+        org.apache.commons.cli.CommandLine commandLine93 = posixParser0.parse(options30, strArray87, false);
+        java.lang.String[] strArray95 = commandLine93.getOptionValues('a');
+        org.junit.Assert.assertNotNull(strArray10);
+        org.junit.Assert.assertNotNull(commandLine12);
+        org.junit.Assert.assertNotNull(strArray13);
+        org.junit.Assert.assertNotNull(commandLine15);
+        org.junit.Assert.assertNotNull(options20);
+        org.junit.Assert.assertNotNull(list21);
+        org.junit.Assert.assertNotNull(strArray26);
+        org.junit.Assert.assertNotNull(commandLine29);
+        org.junit.Assert.assertNotNull(list31);
+        org.junit.Assert.assertNotNull(option33);
+        org.junit.Assert.assertTrue("'" + char34 + "' != '" + '\000' + "'", char34 == '\000');
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
+        org.junit.Assert.assertNull(optionGroup36);
+        org.junit.Assert.assertNotNull(strArray45);
+        org.junit.Assert.assertNotNull(commandLine47);
+        org.junit.Assert.assertNotNull(option50);
+        org.junit.Assert.assertEquals("'" + str51 + "' != '" + "arg" + "'", str51, "arg");
+        org.junit.Assert.assertNull(optionGroup52);
+        org.junit.Assert.assertNotNull(strArray59);
+        org.junit.Assert.assertNotNull(commandLine62);
+        org.junit.Assert.assertNotNull(list64);
+        org.junit.Assert.assertNotNull(strArray73);
+        org.junit.Assert.assertNotNull(commandLine75);
+        org.junit.Assert.assertNotNull(option78);
+        org.junit.Assert.assertEquals("'" + str79 + "' != '" + "arg" + "'", str79, "arg");
+        org.junit.Assert.assertNull(optionGroup80);
+        org.junit.Assert.assertNotNull(strArray87);
+        org.junit.Assert.assertNotNull(commandLine90);
+        org.junit.Assert.assertNotNull(commandLine91);
+        org.junit.Assert.assertNotNull(commandLine93);
+        org.junit.Assert.assertNull(strArray95);
+    }
+
+    @Test
+    public void test310() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test310");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser2 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options3 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray10 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties11 = null;
+        org.apache.commons.cli.CommandLine commandLine12 = posixParser2.parse(options3, strArray10, properties11);
+        java.lang.String[] strArray13 = new java.lang.String[] {};
+        java.util.Properties properties14 = null;
+        org.apache.commons.cli.CommandLine commandLine15 = posixParser1.parse(options3, strArray13, properties14);
+        org.apache.commons.cli.Options options20 = options3.addOption("", "[ option:   :: null :: 0 ]", true, " ");
+        java.util.List list21 = options20.helpOptions();
+        java.lang.String[] strArray26 = new java.lang.String[] { "org.apache.commons.cli.UnrecognizedOptionException:  ", "org.apache.commons.cli.UnrecognizedOptionException: org.apache.commons.cli.MissingArgumentException: arg", "[ option:   :: null ]", " " };
+        java.util.Properties properties27 = null;
+        org.apache.commons.cli.CommandLine commandLine29 = posixParser0.parse(options20, strArray26, properties27, true);
+        java.lang.String[] strArray31 = commandLine29.getOptionValues('a');
+        java.lang.String[] strArray32 = commandLine29.getArgs();
+        org.apache.commons.cli.Option option35 = new org.apache.commons.cli.Option(" ", " ");
+        commandLine29.addOption(option35);
+        java.lang.String[] strArray38 = commandLine29.getOptionValues('\000');
+        org.junit.Assert.assertNotNull(strArray10);
+        org.junit.Assert.assertNotNull(commandLine12);
+        org.junit.Assert.assertNotNull(strArray13);
+        org.junit.Assert.assertNotNull(commandLine15);
+        org.junit.Assert.assertNotNull(options20);
+        org.junit.Assert.assertNotNull(list21);
+        org.junit.Assert.assertNotNull(strArray26);
+        org.junit.Assert.assertNotNull(commandLine29);
+        org.junit.Assert.assertNull(strArray31);
+        org.junit.Assert.assertNotNull(strArray32);
+        org.junit.Assert.assertNull(strArray38);
+    }
+
+    @Test
+    public void test311() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test311");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.PosixParser posixParser26 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options27 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray34 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties35 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser26.parse(options27, strArray34, properties35);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option39 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str40 = option39.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup41 = options37.getOptionGroup(option39);
+        java.lang.String[] strArray48 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties49 = null;
+        org.apache.commons.cli.CommandLine commandLine51 = posixParser26.parse(options37, strArray48, properties49, false);
+        org.apache.commons.cli.PosixParser posixParser52 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options53 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray60 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties61 = null;
+        org.apache.commons.cli.CommandLine commandLine62 = posixParser52.parse(options53, strArray60, properties61);
+        java.lang.String[] strArray64 = posixParser0.flatten(options37, strArray60, true);
+        org.apache.commons.cli.Options options69 = options37.addOption("arg", " ", false, "");
+        org.apache.commons.cli.Options options73 = options69.addOption(" ", false, "[ Options: [ short {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ] [ long {=[ option:    :: null :: [ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ] ]} ]");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(strArray34);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(option39);
+        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "arg" + "'", str40, "arg");
+        org.junit.Assert.assertNull(optionGroup41);
+        org.junit.Assert.assertNotNull(strArray48);
+        org.junit.Assert.assertNotNull(commandLine51);
+        org.junit.Assert.assertNotNull(strArray60);
+        org.junit.Assert.assertNotNull(commandLine62);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(options69);
+        org.junit.Assert.assertNotNull(options73);
+    }
+
+    @Test
+    public void test312() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test312");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        java.util.List list27 = options26.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties37 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str42 = option41.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
+        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
+        org.apache.commons.cli.Options options54 = new org.apache.commons.cli.Options();
+        java.util.List list55 = options54.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options57 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray64 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties65 = null;
+        org.apache.commons.cli.CommandLine commandLine66 = posixParser56.parse(options57, strArray64, properties65);
+        org.apache.commons.cli.Options options67 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option69 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str70 = option69.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup71 = options67.getOptionGroup(option69);
+        java.lang.String[] strArray78 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties79 = null;
+        org.apache.commons.cli.CommandLine commandLine81 = posixParser56.parse(options67, strArray78, properties79, false);
+        org.apache.commons.cli.CommandLine commandLine82 = posixParser28.parse(options54, strArray78);
+        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options26, strArray78, false);
+        java.lang.Object obj86 = commandLine84.getOptionObject(" ");
+        org.apache.commons.cli.Option[] optionArray87 = commandLine84.getOptions();
+        java.lang.String[] strArray89 = commandLine84.getOptionValues("");
+        org.apache.commons.cli.Option[] optionArray90 = commandLine84.getOptions();
+        java.lang.String str93 = commandLine84.getOptionValue(' ', "[ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ]");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(list27);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(option41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
+        org.junit.Assert.assertNull(optionGroup43);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine53);
+        org.junit.Assert.assertNotNull(list55);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(commandLine66);
+        org.junit.Assert.assertNotNull(option69);
+        org.junit.Assert.assertEquals("'" + str70 + "' != '" + "arg" + "'", str70, "arg");
+        org.junit.Assert.assertNull(optionGroup71);
+        org.junit.Assert.assertNotNull(strArray78);
+        org.junit.Assert.assertNotNull(commandLine81);
+        org.junit.Assert.assertNotNull(commandLine82);
+        org.junit.Assert.assertNotNull(commandLine84);
+        org.junit.Assert.assertNull(obj86);
+        org.junit.Assert.assertNotNull(optionArray87);
+        org.junit.Assert.assertNull(strArray89);
+        org.junit.Assert.assertNotNull(optionArray90);
+        org.junit.Assert.assertEquals("'" + str93 + "' != '" + "[ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ]" + "'", str93, "[ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ]");
+    }
+
+    @Test
+    public void test313() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test313");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.Options options26 = new org.apache.commons.cli.Options();
+        java.util.List list27 = options26.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser28 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options29 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray36 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties37 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser28.parse(options29, strArray36, properties37);
+        org.apache.commons.cli.Options options39 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option41 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str42 = option41.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup43 = options39.getOptionGroup(option41);
+        java.lang.String[] strArray50 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine53 = posixParser28.parse(options39, strArray50, properties51, false);
+        org.apache.commons.cli.Options options54 = new org.apache.commons.cli.Options();
+        java.util.List list55 = options54.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options57 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray64 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties65 = null;
+        org.apache.commons.cli.CommandLine commandLine66 = posixParser56.parse(options57, strArray64, properties65);
+        org.apache.commons.cli.Options options67 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option69 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str70 = option69.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup71 = options67.getOptionGroup(option69);
+        java.lang.String[] strArray78 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties79 = null;
+        org.apache.commons.cli.CommandLine commandLine81 = posixParser56.parse(options67, strArray78, properties79, false);
+        org.apache.commons.cli.CommandLine commandLine82 = posixParser28.parse(options54, strArray78);
+        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options26, strArray78, false);
+        java.lang.String str86 = commandLine84.getOptionValue("arg");
+        java.lang.String[] strArray87 = commandLine84.getArgs();
+        commandLine84.addArg("[ Options: [ short {=[ option:   :: [ option:   :: null :: 0 ] ]} ] [ long {} ]");
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(list27);
+        org.junit.Assert.assertNotNull(strArray36);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(option41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "arg" + "'", str42, "arg");
+        org.junit.Assert.assertNull(optionGroup43);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine53);
+        org.junit.Assert.assertNotNull(list55);
+        org.junit.Assert.assertNotNull(strArray64);
+        org.junit.Assert.assertNotNull(commandLine66);
+        org.junit.Assert.assertNotNull(option69);
+        org.junit.Assert.assertEquals("'" + str70 + "' != '" + "arg" + "'", str70, "arg");
+        org.junit.Assert.assertNull(optionGroup71);
+        org.junit.Assert.assertNotNull(strArray78);
+        org.junit.Assert.assertNotNull(commandLine81);
+        org.junit.Assert.assertNotNull(commandLine82);
+        org.junit.Assert.assertNotNull(commandLine84);
+        org.junit.Assert.assertNull(str86);
+        org.junit.Assert.assertNotNull(strArray87);
+    }
+
+    @Test
+    public void test314() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test314");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties10 = null;
+        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
+        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.PosixParser posixParser13 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options14 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray21 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties22 = null;
+        org.apache.commons.cli.CommandLine commandLine23 = posixParser13.parse(options14, strArray21, properties22);
+        org.apache.commons.cli.Options options24 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option26 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str27 = option26.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup28 = options24.getOptionGroup(option26);
+        java.lang.String[] strArray35 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties36 = null;
+        org.apache.commons.cli.CommandLine commandLine38 = posixParser13.parse(options24, strArray35, properties36, false);
+        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties48 = null;
+        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
+        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str53 = option52.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
+        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties62 = null;
+        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
+        org.apache.commons.cli.PosixParser posixParser65 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options66 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray73 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties74 = null;
+        org.apache.commons.cli.CommandLine commandLine75 = posixParser65.parse(options66, strArray73, properties74);
+        java.lang.String[] strArray77 = posixParser13.flatten(options50, strArray73, true);
+        java.util.Properties properties78 = null;
+        org.apache.commons.cli.CommandLine commandLine80 = posixParser1.parse(options12, strArray73, properties78, false);
+        org.apache.commons.cli.Option option82 = org.apache.commons.cli.OptionBuilder.create(' ');
+        char char83 = option82.getValueSeparator();
+        java.lang.String str84 = option82.getKey();
+        option82.setRequired(false);
+        org.apache.commons.cli.Options options87 = options12.addOption(option82);
+        boolean boolean89 = options12.hasOption("hi!");
+        boolean boolean91 = options12.hasOption("");
+        java.lang.String[] strArray93 = new java.lang.String[] { "org.apache.commons.cli.UnrecognizedOptionException: " };
+        java.util.Properties properties94 = null;
+        org.apache.commons.cli.CommandLine commandLine96 = posixParser0.parse(options12, strArray93, properties94, false);
+        posixParser0.burstToken("org.apache.commons.cli.UnrecognizedOptionException: org.apache.commons.cli.MissingArgumentException: arg", true);
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertNotNull(commandLine11);
+        org.junit.Assert.assertNotNull(strArray21);
+        org.junit.Assert.assertNotNull(commandLine23);
+        org.junit.Assert.assertNotNull(option26);
+        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "arg" + "'", str27, "arg");
+        org.junit.Assert.assertNull(optionGroup28);
+        org.junit.Assert.assertNotNull(strArray35);
+        org.junit.Assert.assertNotNull(commandLine38);
+        org.junit.Assert.assertNotNull(strArray47);
+        org.junit.Assert.assertNotNull(commandLine49);
+        org.junit.Assert.assertNotNull(option52);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
+        org.junit.Assert.assertNull(optionGroup54);
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(commandLine64);
+        org.junit.Assert.assertNotNull(strArray73);
+        org.junit.Assert.assertNotNull(commandLine75);
+        org.junit.Assert.assertNotNull(strArray77);
+        org.junit.Assert.assertNotNull(commandLine80);
+        org.junit.Assert.assertNotNull(option82);
+        org.junit.Assert.assertTrue("'" + char83 + "' != '" + '\000' + "'", char83 == '\000');
+        org.junit.Assert.assertEquals("'" + str84 + "' != '" + " " + "'", str84, " ");
+        org.junit.Assert.assertNotNull(options87);
+        org.junit.Assert.assertTrue("'" + boolean89 + "' != '" + false + "'", boolean89 == false);
+        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + false + "'", boolean91 == false);
+        org.junit.Assert.assertNotNull(strArray93);
+        org.junit.Assert.assertNotNull(commandLine96);
+    }
+
+    @Test
+    public void test315() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test315");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser1 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options2 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray9 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties10 = null;
+        org.apache.commons.cli.CommandLine commandLine11 = posixParser1.parse(options2, strArray9, properties10);
+        java.lang.String[] strArray12 = new java.lang.String[] {};
+        java.util.Properties properties13 = null;
+        org.apache.commons.cli.CommandLine commandLine14 = posixParser0.parse(options2, strArray12, properties13);
+        org.apache.commons.cli.Options options19 = options2.addOption("", "[ option:   :: null :: 0 ]", true, " ");
+        java.util.Collection collection20 = options19.getOptions();
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertNotNull(commandLine11);
+        org.junit.Assert.assertNotNull(strArray12);
+        org.junit.Assert.assertNotNull(commandLine14);
+        org.junit.Assert.assertNotNull(options19);
+        org.junit.Assert.assertNotNull(collection20);
+    }
+
+    @Test
+    public void test316() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test316");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        org.apache.commons.cli.PosixParser posixParser26 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser27 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options28 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray35 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties36 = null;
+        org.apache.commons.cli.CommandLine commandLine37 = posixParser27.parse(options28, strArray35, properties36);
+        java.lang.String[] strArray38 = new java.lang.String[] {};
+        java.util.Properties properties39 = null;
+        org.apache.commons.cli.CommandLine commandLine40 = posixParser26.parse(options28, strArray38, properties39);
+        org.apache.commons.cli.PosixParser posixParser41 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser42 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options43 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray50 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties51 = null;
+        org.apache.commons.cli.CommandLine commandLine52 = posixParser42.parse(options43, strArray50, properties51);
+        java.lang.String[] strArray53 = new java.lang.String[] {};
+        java.util.Properties properties54 = null;
+        org.apache.commons.cli.CommandLine commandLine55 = posixParser41.parse(options43, strArray53, properties54);
+        org.apache.commons.cli.PosixParser posixParser56 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.PosixParser posixParser57 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options58 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray65 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties66 = null;
+        org.apache.commons.cli.CommandLine commandLine67 = posixParser57.parse(options58, strArray65, properties66);
+        java.lang.String[] strArray68 = new java.lang.String[] {};
+        java.util.Properties properties69 = null;
+        org.apache.commons.cli.CommandLine commandLine70 = posixParser56.parse(options58, strArray68, properties69);
+        org.apache.commons.cli.CommandLine commandLine71 = posixParser26.parse(options43, strArray68);
+        org.apache.commons.cli.Options options72 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option74 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str75 = option74.getArgName();
+        option74.setLongOpt("");
+        org.apache.commons.cli.Options options78 = options72.addOption(option74);
+        java.lang.String[] strArray80 = new java.lang.String[] { " " };
+        org.apache.commons.cli.CommandLine commandLine82 = posixParser26.parse(options72, strArray80, true);
+        java.lang.String[] strArray83 = null;
+        org.apache.commons.cli.CommandLine commandLine84 = posixParser0.parse(options72, strArray83);
+        org.apache.commons.cli.Option option86 = options72.getOption("[ Options: [ short {} ] [ long {} ]");
+        boolean boolean88 = options72.hasOption("[ Options: [ short {=[ option:   :: [ option:   :: null :: 0 ] ]} ] [ long {} ]");
+        java.util.Collection collection89 = options72.getOptionGroups();
+        org.apache.commons.cli.Options options94 = options72.addOption("", "org.apache.commons.cli.ParseException: hi!", false, "[ option:   :: null ]");
+        java.util.List list95 = options94.getRequiredOptions();
+        org.apache.commons.cli.OptionGroup optionGroup96 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.cli.Options options97 = options94.addOptionGroup(optionGroup96);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertNotNull(strArray35);
+        org.junit.Assert.assertNotNull(commandLine37);
+        org.junit.Assert.assertNotNull(strArray38);
+        org.junit.Assert.assertNotNull(commandLine40);
+        org.junit.Assert.assertNotNull(strArray50);
+        org.junit.Assert.assertNotNull(commandLine52);
+        org.junit.Assert.assertNotNull(strArray53);
+        org.junit.Assert.assertNotNull(commandLine55);
+        org.junit.Assert.assertNotNull(strArray65);
+        org.junit.Assert.assertNotNull(commandLine67);
+        org.junit.Assert.assertNotNull(strArray68);
+        org.junit.Assert.assertNotNull(commandLine70);
+        org.junit.Assert.assertNotNull(commandLine71);
+        org.junit.Assert.assertNotNull(option74);
+        org.junit.Assert.assertEquals("'" + str75 + "' != '" + "arg" + "'", str75, "arg");
+        org.junit.Assert.assertNotNull(options78);
+        org.junit.Assert.assertNotNull(strArray80);
+        org.junit.Assert.assertNotNull(commandLine82);
+        org.junit.Assert.assertNotNull(commandLine84);
+        org.junit.Assert.assertNull(option86);
+        org.junit.Assert.assertTrue("'" + boolean88 + "' != '" + false + "'", boolean88 == false);
+        org.junit.Assert.assertNotNull(collection89);
+        org.junit.Assert.assertNotNull(options94);
+        org.junit.Assert.assertNotNull(list95);
+    }
+
+    @Test
+    public void test317() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test317");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.lang.String str13 = commandLine10.getOptionValue("[ Options: [ short {} ] [ long {} ]", " ");
+        java.lang.String[] strArray14 = commandLine10.getArgs();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + " " + "'", str13, " ");
+        org.junit.Assert.assertNotNull(strArray14);
+    }
+
+    @Test
+    public void test318() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test318");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.Options options11 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option13 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str14 = option13.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup15 = options11.getOptionGroup(option13);
+        java.lang.String[] strArray22 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties23 = null;
+        org.apache.commons.cli.CommandLine commandLine25 = posixParser0.parse(options11, strArray22, properties23, false);
+        boolean boolean27 = options11.hasOption("org.apache.commons.cli.MissingArgumentException: arg");
+        org.apache.commons.cli.Option option29 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str30 = option29.getArgName();
+        option29.setLongOpt("");
+        boolean boolean33 = option29.hasArgs();
+        java.lang.String str34 = option29.getDescription();
+        java.lang.String str36 = option29.getValue((int) (short) -1);
+        org.apache.commons.cli.Options options37 = options11.addOption(option29);
+        org.apache.commons.cli.Options options42 = options11.addOption("", "org.apache.commons.cli.UnrecognizedOptionException: org.apache.commons.cli.MissingArgumentException: arg", true, "[ option:    :: null ]");
+        org.apache.commons.cli.Option option47 = new org.apache.commons.cli.Option("arg", "hi!", true, " ");
+        option47.setRequired(false);
+        java.lang.String str50 = option47.getKey();
+        boolean boolean51 = option47.hasOptionalArg();
+        option47.setOptionalArg(true);
+        org.apache.commons.cli.Options options54 = options11.addOption(option47);
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(option13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "arg" + "'", str14, "arg");
+        org.junit.Assert.assertNull(optionGroup15);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertNotNull(commandLine25);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertNotNull(option29);
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "arg" + "'", str30, "arg");
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+        org.junit.Assert.assertNull(str34);
+        org.junit.Assert.assertNull(str36);
+        org.junit.Assert.assertNotNull(options37);
+        org.junit.Assert.assertNotNull(options42);
+        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "arg" + "'", str50, "arg");
+        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
+        org.junit.Assert.assertNotNull(options54);
+    }
+
+    @Test
+    public void test319() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test319");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        java.util.List list11 = commandLine10.getArgList();
+        java.lang.String[] strArray13 = commandLine10.getOptionValues("hi!");
+        org.apache.commons.cli.OptionBuilder optionBuilder14 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) commandLine10);
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(list11);
+        org.junit.Assert.assertNull(strArray13);
+        org.junit.Assert.assertNotNull(optionBuilder14);
+    }
+
+    @Test
+    public void test320() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test320");
+        org.apache.commons.cli.PosixParser posixParser0 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options1 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray8 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties9 = null;
+        org.apache.commons.cli.CommandLine commandLine10 = posixParser0.parse(options1, strArray8, properties9);
+        org.apache.commons.cli.PosixParser posixParser11 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options12 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray19 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties20 = null;
+        org.apache.commons.cli.CommandLine commandLine21 = posixParser11.parse(options12, strArray19, properties20);
+        org.apache.commons.cli.Options options22 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option24 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str25 = option24.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup26 = options22.getOptionGroup(option24);
+        java.lang.String[] strArray33 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties34 = null;
+        org.apache.commons.cli.CommandLine commandLine36 = posixParser11.parse(options22, strArray33, properties34, false);
+        org.apache.commons.cli.Options options37 = new org.apache.commons.cli.Options();
+        java.util.List list38 = options37.getRequiredOptions();
+        org.apache.commons.cli.PosixParser posixParser39 = new org.apache.commons.cli.PosixParser();
+        org.apache.commons.cli.Options options40 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray47 = new java.lang.String[] { "", "hi!", "arg", "arg", "hi!", "hi!" };
+        java.util.Properties properties48 = null;
+        org.apache.commons.cli.CommandLine commandLine49 = posixParser39.parse(options40, strArray47, properties48);
+        org.apache.commons.cli.Options options50 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option52 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str53 = option52.getArgName();
+        org.apache.commons.cli.OptionGroup optionGroup54 = options50.getOptionGroup(option52);
+        java.lang.String[] strArray61 = new java.lang.String[] { "hi!", " ", "", "hi!", "", "arg" };
+        java.util.Properties properties62 = null;
+        org.apache.commons.cli.CommandLine commandLine64 = posixParser39.parse(options50, strArray61, properties62, false);
+        org.apache.commons.cli.CommandLine commandLine65 = posixParser11.parse(options37, strArray61);
+        java.lang.String[] strArray67 = new java.lang.String[] { "hi!" };
+        java.lang.String[] strArray69 = posixParser0.flatten(options37, strArray67, true);
+        org.apache.commons.cli.Options options70 = new org.apache.commons.cli.Options();
+        java.lang.String[] strArray71 = null;
+        java.util.Properties properties72 = null;
+        org.apache.commons.cli.CommandLine commandLine74 = posixParser0.parse(options70, strArray71, properties72, false);
+        org.apache.commons.cli.Options options75 = new org.apache.commons.cli.Options();
+        org.apache.commons.cli.Option option77 = org.apache.commons.cli.OptionBuilder.create("");
+        java.lang.String str78 = option77.getArgName();
+        option77.setLongOpt("");
+        org.apache.commons.cli.Options options81 = options75.addOption(option77);
+        org.apache.commons.cli.OptionBuilder optionBuilder82 = org.apache.commons.cli.OptionBuilder.withType((java.lang.Object) options75);
+        java.util.List list83 = options75.helpOptions();
+        java.lang.String[] strArray89 = new java.lang.String[] { "org.apache.commons.cli.MissingArgumentException: arg", "[ Options: [ short {=[ option:   :: [ option:   :: null :: 0 ] ]} ] [ long {} ]", " ", "[ Options: [ short {=[ option:   :: [ Options: [ short {} ] [ long {} ] ]} ] [ long {[ option:   :: null :: 0 ]=[ option:  [ option:   :: null :: 0 ] +ARG ::   ]} ]", " " };
+        java.util.Properties properties90 = null;
+        org.apache.commons.cli.CommandLine commandLine91 = posixParser0.parse(options75, strArray89, properties90);
+        java.lang.String str92 = options75.toString();
+        java.util.List list93 = options75.getRequiredOptions();
+        org.junit.Assert.assertNotNull(strArray8);
+        org.junit.Assert.assertNotNull(commandLine10);
+        org.junit.Assert.assertNotNull(strArray19);
+        org.junit.Assert.assertNotNull(commandLine21);
+        org.junit.Assert.assertNotNull(option24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "arg" + "'", str25, "arg");
+        org.junit.Assert.assertNull(optionGroup26);
+        org.junit.Assert.assertNotNull(strArray33);
+        org.junit.Assert.assertNotNull(commandLine36);
+        org.junit.Assert.assertNotNull(list38);
+        org.junit.Assert.assertNotNull(strArray47);
+        org.junit.Assert.assertNotNull(commandLine49);
+        org.junit.Assert.assertNotNull(option52);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "arg" + "'", str53, "arg");
+        org.junit.Assert.assertNull(optionGroup54);
+        org.junit.Assert.assertNotNull(strArray61);
+        org.junit.Assert.assertNotNull(commandLine64);
+        org.junit.Assert.assertNotNull(commandLine65);
+        org.junit.Assert.assertNotNull(strArray67);
+        org.junit.Assert.assertNotNull(strArray69);
+        org.junit.Assert.assertNotNull(commandLine74);
+        org.junit.Assert.assertNotNull(option77);
+        org.junit.Assert.assertEquals("'" + str78 + "' != '" + "arg" + "'", str78, "arg");
+        org.junit.Assert.assertNotNull(options81);
+        org.junit.Assert.assertNotNull(optionBuilder82);
+        org.junit.Assert.assertNotNull(list83);
+        org.junit.Assert.assertNotNull(strArray89);
+        org.junit.Assert.assertNotNull(commandLine91);
+        org.junit.Assert.assertEquals("'" + str92 + "' != '" + "[ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ]" + "'", str92, "[ Options: [ short {=[ option:    :: null ]} ] [ long {=[ option:    :: null ]} ]");
+        org.junit.Assert.assertNotNull(list93);
     }
 }

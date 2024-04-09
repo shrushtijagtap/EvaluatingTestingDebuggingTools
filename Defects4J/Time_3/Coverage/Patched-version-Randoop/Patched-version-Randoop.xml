@@ -1,0 +1,1152 @@
+<?xml version="1.0"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+
+<coverage line-rate="0.8866396761133604" branch-rate="0.7301587301587301" lines-covered="219" lines-valid="247" branches-covered="46" branches-valid="63" complexity="1.4368932038834952" version="2.0.3" timestamp="1712527439304">
+	<sources>
+		<source>src/main/java</source>
+	</sources>
+	<packages>
+		<package name="org.joda.time" line-rate="0.8866396761133604" branch-rate="0.7301587301587301" complexity="1.4368932038834952">
+			<classes>
+				<class name="org.joda.time.MutableDateTime" filename="org/joda/time/MutableDateTime.java" line-rate="0.9" branch-rate="0.7301587301587301" complexity="1.4368932038834952">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="172" hits="1350" branch="false"/>
+								<line number="173" hits="1350" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(IIIIIII)V" line-rate="0.5" branch-rate="1.0">
+							<lines>
+								<line number="324" hits="10" branch="false"/>
+								<line number="325" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(IIIIIIILorg/joda/time/Chronology;)V" line-rate="0.5" branch-rate="1.0">
+							<lines>
+								<line number="380" hits="10" branch="false"/>
+								<line number="382" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(IIIIIIILorg/joda/time/DateTimeZone;)V" line-rate="0.5" branch-rate="1.0">
+							<lines>
+								<line number="351" hits="20" branch="false"/>
+								<line number="353" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(J)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="210" hits="4" branch="false"/>
+								<line number="211" hits="4" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(JLorg/joda/time/Chronology;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="237" hits="2374" branch="false"/>
+								<line number="238" hits="2374" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(JLorg/joda/time/DateTimeZone;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="223" hits="46" branch="false"/>
+								<line number="224" hits="46" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/Object;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="257" hits="6" branch="false"/>
+								<line number="258" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/Object;Lorg/joda/time/Chronology;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="300" hits="24" branch="false"/>
+								<line number="301" hits="16" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/Object;Lorg/joda/time/DateTimeZone;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="280" hits="10" branch="false"/>
+								<line number="281" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Lorg/joda/time/Chronology;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="199" hits="64" branch="false"/>
+								<line number="200" hits="64" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Lorg/joda/time/DateTimeZone;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="185" hits="144" branch="false"/>
+								<line number="186" hits="144" branch="false"/>
+							</lines>
+						</method>
+						<method name="add" signature="(J)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="497" hits="38" branch="false"/>
+								<line number="498" hits="38" branch="false"/>
+							</lines>
+						</method>
+						<method name="add" signature="(Lorg/joda/time/DurationFieldType;I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="636" hits="148" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="637" hits="2" branch="false"/>
+								<line number="639" hits="146" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="640" hits="114" branch="false"/>
+								<line number="642" hits="140" branch="false"/>
+							</lines>
+						</method>
+						<method name="add" signature="(Lorg/joda/time/ReadableDuration;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="509" hits="672" branch="false"/>
+								<line number="510" hits="672" branch="false"/>
+							</lines>
+						</method>
+						<method name="add" signature="(Lorg/joda/time/ReadableDuration;I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="522" hits="1590" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="523" hits="28" branch="false"/>
+								<line number="525" hits="1590" branch="false"/>
+							</lines>
+						</method>
+						<method name="add" signature="(Lorg/joda/time/ReadablePeriod;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="536" hits="64" branch="false"/>
+								<line number="537" hits="64" branch="false"/>
+							</lines>
+						</method>
+						<method name="add" signature="(Lorg/joda/time/ReadablePeriod;I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="549" hits="536" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="550" hits="54" branch="false"/>
+								<line number="552" hits="536" branch="false"/>
+							</lines>
+						</method>
+						<method name="addDays" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="774" hits="18" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="775" hits="14" branch="false"/>
+								<line number="777" hits="18" branch="false"/>
+							</lines>
+						</method>
+						<method name="addHours" signature="(I)V" line-rate="1.0" branch-rate="0.5">
+							<lines>
+								<line number="797" hits="74" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="798" hits="74" branch="false"/>
+								<line number="800" hits="74" branch="false"/>
+							</lines>
+						</method>
+						<method name="addMillis" signature="(I)V" line-rate="1.0" branch-rate="0.5">
+							<lines>
+								<line number="898" hits="26" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="899" hits="26" branch="false"/>
+								<line number="901" hits="26" branch="false"/>
+							</lines>
+						</method>
+						<method name="addMinutes" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="830" hits="74" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="831" hits="70" branch="false"/>
+								<line number="833" hits="74" branch="false"/>
+							</lines>
+						</method>
+						<method name="addMonths" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="708" hits="22" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="709" hits="20" branch="false"/>
+								<line number="711" hits="22" branch="false"/>
+							</lines>
+						</method>
+						<method name="addSeconds" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="863" hits="58" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="864" hits="52" branch="false"/>
+								<line number="866" hits="58" branch="false"/>
+							</lines>
+						</method>
+						<method name="addWeeks" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="731" hits="154" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="732" hits="144" branch="false"/>
+								<line number="734" hits="154" branch="false"/>
+							</lines>
+						</method>
+						<method name="addWeekyears" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="685" hits="68" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="686" hits="62" branch="false"/>
+								<line number="688" hits="68" branch="false"/>
+							</lines>
+						</method>
+						<method name="addYears" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="662" hits="98" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="663" hits="94" branch="false"/>
+								<line number="665" hits="98" branch="false"/>
+							</lines>
+						</method>
+						<method name="centuryOfEra" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1066" hits="10" branch="false"/>
+							</lines>
+						</method>
+						<method name="clone" signature="()Ljava/lang/Object;" line-rate="0.3333333333333333" branch-rate="1.0">
+							<lines>
+								<line number="1236" hits="14" branch="false"/>
+								<line number="1237" hits="0" branch="false"/>
+								<line number="1238" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="copy" signature="()Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1225" hits="8" branch="false"/>
+							</lines>
+						</method>
+						<method name="dayOfMonth" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1140" hits="56" branch="false"/>
+							</lines>
+						</method>
+						<method name="dayOfWeek" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1151" hits="202" branch="false"/>
+							</lines>
+						</method>
+						<method name="dayOfYear" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1129" hits="54" branch="false"/>
+							</lines>
+						</method>
+						<method name="era" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1057" hits="30" branch="false"/>
+							</lines>
+						</method>
+						<method name="getRoundingField" signature="()Lorg/joda/time/DateTimeField;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="392" hits="12" branch="false"/>
+							</lines>
+						</method>
+						<method name="getRoundingMode" signature="()I" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="402" hits="54" branch="false"/>
+							</lines>
+						</method>
+						<method name="hourOfDay" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1161" hits="622" branch="false"/>
+							</lines>
+						</method>
+						<method name="millisOfDay" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1206" hits="8" branch="false"/>
+							</lines>
+						</method>
+						<method name="millisOfSecond" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1215" hits="180" branch="false"/>
+							</lines>
+						</method>
+						<method name="minuteOfDay" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1170" hits="326" branch="false"/>
+							</lines>
+						</method>
+						<method name="minuteOfHour" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1179" hits="4" branch="false"/>
+							</lines>
+						</method>
+						<method name="monthOfYear" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1111" hits="8" branch="false"/>
+							</lines>
+						</method>
+						<method name="now" signature="()Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="106" hits="820" branch="false"/>
+							</lines>
+						</method>
+						<method name="now" signature="(Lorg/joda/time/Chronology;)Lorg/joda/time/MutableDateTime;" line-rate="0.6666666666666666" branch-rate="0.5">
+							<lines>
+								<line number="133" hits="52" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="134" hits="0" branch="false"/>
+								<line number="136" hits="52" branch="false"/>
+							</lines>
+						</method>
+						<method name="now" signature="(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/MutableDateTime;" line-rate="0.6666666666666666" branch-rate="0.5">
+							<lines>
+								<line number="118" hits="10" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="119" hits="0" branch="false"/>
+								<line number="121" hits="10" branch="false"/>
+							</lines>
+						</method>
+						<method name="parse" signature="(Ljava/lang/String;)Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="150" hits="12" branch="false"/>
+							</lines>
+						</method>
+						<method name="parse" signature="(Ljava/lang/String;Lorg/joda/time/format/DateTimeFormatter;)Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="161" hits="20" branch="false"/>
+							</lines>
+						</method>
+						<method name="property" signature="(Lorg/joda/time/DateTimeFieldType;)Lorg/joda/time/MutableDateTime$Property;" line-rate="0.3333333333333333" branch-rate="0.25">
+							<lines>
+								<line number="1041" hits="2" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="1042" hits="2" branch="false"/>
+								<line number="1044" hits="0" branch="false"/>
+								<line number="1045" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="1046" hits="0" branch="false"/>
+								<line number="1048" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="secondOfDay" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1188" hits="294" branch="false"/>
+							</lines>
+						</method>
+						<method name="secondOfMinute" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1197" hits="24" branch="false"/>
+							</lines>
+						</method>
+						<method name="set" signature="(Lorg/joda/time/DateTimeFieldType;I)V" line-rate="0.75" branch-rate="0.5">
+							<lines>
+								<line number="621" hits="260" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="622" hits="0" branch="false"/>
+								<line number="624" hits="260" branch="false"/>
+								<line number="625" hits="254" branch="false"/>
+							</lines>
+						</method>
+						<method name="setChronology" signature="(Lorg/joda/time/Chronology;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="563" hits="343" branch="false"/>
+								<line number="564" hits="343" branch="false"/>
+							</lines>
+						</method>
+						<method name="setDate" signature="(III)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="951" hits="26" branch="false"/>
+								<line number="952" hits="26" branch="false"/>
+								<line number="953" hits="10" branch="false"/>
+								<line number="954" hits="10" branch="false"/>
+							</lines>
+						</method>
+						<method name="setDate" signature="(J)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="912" hits="52" branch="false"/>
+								<line number="913" hits="52" branch="false"/>
+							</lines>
+						</method>
+						<method name="setDate" signature="(Lorg/joda/time/ReadableInstant;)V" line-rate="1.0" branch-rate="0.75">
+							<lines>
+								<line number="926" hits="36" branch="false"/>
+								<line number="927" hits="36" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="928" hits="32" branch="false"/>
+								<line number="929" hits="32" branch="false"/>
+								<line number="930" hits="32" branch="false"/>
+								<line number="931" hits="32" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="932" hits="32" branch="false"/>
+								<line number="935" hits="36" branch="false"/>
+								<line number="936" hits="36" branch="false"/>
+							</lines>
+						</method>
+						<method name="setDateTime" signature="(IIIIIII)V" line-rate="0.3333333333333333" branch-rate="1.0">
+							<lines>
+								<line number="1026" hits="20" branch="false"/>
+								<line number="1028" hits="0" branch="false"/>
+								<line number="1029" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="setDayOfMonth" signature="(I)V" line-rate="0.5" branch-rate="1.0">
+							<lines>
+								<line number="754" hits="16" branch="false"/>
+								<line number="755" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="setDayOfWeek" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="764" hits="24" branch="false"/>
+								<line number="765" hits="8" branch="false"/>
+							</lines>
+						</method>
+						<method name="setDayOfYear" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="744" hits="774" branch="false"/>
+								<line number="745" hits="770" branch="false"/>
+							</lines>
+						</method>
+						<method name="setHourOfDay" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="787" hits="86" branch="false"/>
+								<line number="788" hits="80" branch="false"/>
+							</lines>
+						</method>
+						<method name="setMillis" signature="(J)V" line-rate="0.5384615384615384" branch-rate="0.42857142857142855">
+							<lines>
+								<line number="454" hits="5889" branch="true" condition-coverage="42% (3/7)">
+									<conditions>
+										<condition number="0" type="switch" coverage="42%"/>
+									</conditions>
+								</line>
+								<line number="456" hits="5243" branch="false"/>
+								<line number="458" hits="32" branch="false"/>
+								<line number="459" hits="32" branch="false"/>
+								<line number="461" hits="0" branch="false"/>
+								<line number="462" hits="0" branch="false"/>
+								<line number="464" hits="0" branch="false"/>
+								<line number="465" hits="0" branch="false"/>
+								<line number="467" hits="0" branch="false"/>
+								<line number="468" hits="0" branch="false"/>
+								<line number="470" hits="614" branch="false"/>
+								<line number="473" hits="5889" branch="false"/>
+								<line number="474" hits="5889" branch="false"/>
+							</lines>
+						</method>
+						<method name="setMillis" signature="(Lorg/joda/time/ReadableInstant;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="485" hits="58" branch="false"/>
+								<line number="486" hits="58" branch="false"/>
+								<line number="487" hits="58" branch="false"/>
+							</lines>
+						</method>
+						<method name="setMillisOfDay" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="876" hits="24" branch="false"/>
+								<line number="877" hits="22" branch="false"/>
+							</lines>
+						</method>
+						<method name="setMillisOfSecond" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="886" hits="32" branch="false"/>
+								<line number="887" hits="26" branch="false"/>
+							</lines>
+						</method>
+						<method name="setMinuteOfDay" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="810" hits="24" branch="false"/>
+								<line number="811" hits="18" branch="false"/>
+							</lines>
+						</method>
+						<method name="setMinuteOfHour" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="820" hits="14" branch="false"/>
+								<line number="821" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="setMonthOfYear" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="698" hits="1516" branch="false"/>
+								<line number="699" hits="1496" branch="false"/>
+							</lines>
+						</method>
+						<method name="setRounding" signature="(Lorg/joda/time/DateTimeField;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="418" hits="22" branch="false"/>
+								<line number="419" hits="22" branch="false"/>
+							</lines>
+						</method>
+						<method name="setRounding" signature="(Lorg/joda/time/DateTimeField;I)V" line-rate="1.0" branch-rate="0.7">
+							<lines>
+								<line number="436" hits="328" branch="true" condition-coverage="83% (5/6)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+										<condition number="1" type="jump" coverage="100%"/>
+										<condition number="2" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="437" hits="4" branch="false"/>
+								<line number="439" hits="324" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="440" hits="324" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="441" hits="324" branch="false"/>
+								<line number="442" hits="324" branch="false"/>
+							</lines>
+						</method>
+						<method name="setSecondOfDay" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="843" hits="424" branch="false"/>
+								<line number="844" hits="424" branch="false"/>
+							</lines>
+						</method>
+						<method name="setSecondOfMinute" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="853" hits="128" branch="false"/>
+								<line number="854" hits="124" branch="false"/>
+							</lines>
+						</method>
+						<method name="setTime" signature="(IIII)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1001" hits="36" branch="false"/>
+								<line number="1003" hits="18" branch="false"/>
+								<line number="1004" hits="18" branch="false"/>
+							</lines>
+						</method>
+						<method name="setTime" signature="(J)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="965" hits="16" branch="false"/>
+								<line number="966" hits="16" branch="false"/>
+								<line number="967" hits="16" branch="false"/>
+							</lines>
+						</method>
+						<method name="setTime" signature="(Lorg/joda/time/ReadableInstant;)V" line-rate="1.0" branch-rate="0.5">
+							<lines>
+								<line number="977" hits="6" branch="false"/>
+								<line number="978" hits="6" branch="false"/>
+								<line number="979" hits="6" branch="false"/>
+								<line number="980" hits="6" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="981" hits="6" branch="false"/>
+								<line number="983" hits="6" branch="false"/>
+								<line number="984" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="setWeekOfWeekyear" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="721" hits="16" branch="false"/>
+								<line number="722" hits="8" branch="false"/>
+							</lines>
+						</method>
+						<method name="setWeekyear" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="675" hits="16" branch="false"/>
+								<line number="676" hits="16" branch="false"/>
+							</lines>
+						</method>
+						<method name="setYear" signature="(I)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="652" hits="182" branch="false"/>
+								<line number="653" hits="182" branch="false"/>
+							</lines>
+						</method>
+						<method name="setZone" signature="(Lorg/joda/time/DateTimeZone;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="582" hits="24" branch="false"/>
+								<line number="583" hits="24" branch="false"/>
+								<line number="584" hits="24" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="585" hits="22" branch="false"/>
+								<line number="587" hits="24" branch="false"/>
+							</lines>
+						</method>
+						<method name="setZoneRetainFields" signature="(Lorg/joda/time/DateTimeZone;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="601" hits="148" branch="false"/>
+								<line number="602" hits="148" branch="false"/>
+								<line number="603" hits="148" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="604" hits="9" branch="false"/>
+								<line number="607" hits="139" branch="false"/>
+								<line number="608" hits="139" branch="false"/>
+								<line number="609" hits="139" branch="false"/>
+								<line number="610" hits="139" branch="false"/>
+							</lines>
+						</method>
+						<method name="toString" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1249" hits="68" branch="false"/>
+							</lines>
+						</method>
+						<method name="weekOfWeekyear" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1120" hits="10" branch="false"/>
+							</lines>
+						</method>
+						<method name="weekyear" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1102" hits="16" branch="false"/>
+							</lines>
+						</method>
+						<method name="year" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1093" hits="34" branch="false"/>
+							</lines>
+						</method>
+						<method name="yearOfCentury" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1075" hits="24" branch="false"/>
+							</lines>
+						</method>
+						<method name="yearOfEra" signature="()Lorg/joda/time/MutableDateTime$Property;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1084" hits="90" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="106" hits="820" branch="false"/>
+						<line number="118" hits="10" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="119" hits="0" branch="false"/>
+						<line number="121" hits="10" branch="false"/>
+						<line number="133" hits="52" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="134" hits="0" branch="false"/>
+						<line number="136" hits="52" branch="false"/>
+						<line number="150" hits="12" branch="false"/>
+						<line number="161" hits="20" branch="false"/>
+						<line number="172" hits="1350" branch="false"/>
+						<line number="173" hits="1350" branch="false"/>
+						<line number="185" hits="144" branch="false"/>
+						<line number="186" hits="144" branch="false"/>
+						<line number="199" hits="64" branch="false"/>
+						<line number="200" hits="64" branch="false"/>
+						<line number="210" hits="4" branch="false"/>
+						<line number="211" hits="4" branch="false"/>
+						<line number="223" hits="46" branch="false"/>
+						<line number="224" hits="46" branch="false"/>
+						<line number="237" hits="2374" branch="false"/>
+						<line number="238" hits="2374" branch="false"/>
+						<line number="257" hits="6" branch="false"/>
+						<line number="258" hits="2" branch="false"/>
+						<line number="280" hits="10" branch="false"/>
+						<line number="281" hits="6" branch="false"/>
+						<line number="300" hits="24" branch="false"/>
+						<line number="301" hits="16" branch="false"/>
+						<line number="324" hits="10" branch="false"/>
+						<line number="325" hits="0" branch="false"/>
+						<line number="351" hits="20" branch="false"/>
+						<line number="353" hits="0" branch="false"/>
+						<line number="380" hits="10" branch="false"/>
+						<line number="382" hits="0" branch="false"/>
+						<line number="392" hits="12" branch="false"/>
+						<line number="402" hits="54" branch="false"/>
+						<line number="418" hits="22" branch="false"/>
+						<line number="419" hits="22" branch="false"/>
+						<line number="436" hits="328" branch="true" condition-coverage="83% (5/6)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+								<condition number="1" type="jump" coverage="100%"/>
+								<condition number="2" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="437" hits="4" branch="false"/>
+						<line number="439" hits="324" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="440" hits="324" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="441" hits="324" branch="false"/>
+						<line number="442" hits="324" branch="false"/>
+						<line number="454" hits="5889" branch="true" condition-coverage="42% (3/7)">
+							<conditions>
+								<condition number="0" type="switch" coverage="42%"/>
+							</conditions>
+						</line>
+						<line number="456" hits="5243" branch="false"/>
+						<line number="458" hits="32" branch="false"/>
+						<line number="459" hits="32" branch="false"/>
+						<line number="461" hits="0" branch="false"/>
+						<line number="462" hits="0" branch="false"/>
+						<line number="464" hits="0" branch="false"/>
+						<line number="465" hits="0" branch="false"/>
+						<line number="467" hits="0" branch="false"/>
+						<line number="468" hits="0" branch="false"/>
+						<line number="470" hits="614" branch="false"/>
+						<line number="473" hits="5889" branch="false"/>
+						<line number="474" hits="5889" branch="false"/>
+						<line number="485" hits="58" branch="false"/>
+						<line number="486" hits="58" branch="false"/>
+						<line number="487" hits="58" branch="false"/>
+						<line number="497" hits="38" branch="false"/>
+						<line number="498" hits="38" branch="false"/>
+						<line number="509" hits="672" branch="false"/>
+						<line number="510" hits="672" branch="false"/>
+						<line number="522" hits="1590" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="523" hits="28" branch="false"/>
+						<line number="525" hits="1590" branch="false"/>
+						<line number="536" hits="64" branch="false"/>
+						<line number="537" hits="64" branch="false"/>
+						<line number="549" hits="536" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="550" hits="54" branch="false"/>
+						<line number="552" hits="536" branch="false"/>
+						<line number="563" hits="343" branch="false"/>
+						<line number="564" hits="343" branch="false"/>
+						<line number="582" hits="24" branch="false"/>
+						<line number="583" hits="24" branch="false"/>
+						<line number="584" hits="24" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="585" hits="22" branch="false"/>
+						<line number="587" hits="24" branch="false"/>
+						<line number="601" hits="148" branch="false"/>
+						<line number="602" hits="148" branch="false"/>
+						<line number="603" hits="148" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="604" hits="9" branch="false"/>
+						<line number="607" hits="139" branch="false"/>
+						<line number="608" hits="139" branch="false"/>
+						<line number="609" hits="139" branch="false"/>
+						<line number="610" hits="139" branch="false"/>
+						<line number="621" hits="260" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="622" hits="0" branch="false"/>
+						<line number="624" hits="260" branch="false"/>
+						<line number="625" hits="254" branch="false"/>
+						<line number="636" hits="148" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="637" hits="2" branch="false"/>
+						<line number="639" hits="146" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="640" hits="114" branch="false"/>
+						<line number="642" hits="140" branch="false"/>
+						<line number="652" hits="182" branch="false"/>
+						<line number="653" hits="182" branch="false"/>
+						<line number="662" hits="98" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="663" hits="94" branch="false"/>
+						<line number="665" hits="98" branch="false"/>
+						<line number="675" hits="16" branch="false"/>
+						<line number="676" hits="16" branch="false"/>
+						<line number="685" hits="68" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="686" hits="62" branch="false"/>
+						<line number="688" hits="68" branch="false"/>
+						<line number="698" hits="1516" branch="false"/>
+						<line number="699" hits="1496" branch="false"/>
+						<line number="708" hits="22" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="709" hits="20" branch="false"/>
+						<line number="711" hits="22" branch="false"/>
+						<line number="721" hits="16" branch="false"/>
+						<line number="722" hits="8" branch="false"/>
+						<line number="731" hits="154" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="732" hits="144" branch="false"/>
+						<line number="734" hits="154" branch="false"/>
+						<line number="744" hits="774" branch="false"/>
+						<line number="745" hits="770" branch="false"/>
+						<line number="754" hits="16" branch="false"/>
+						<line number="755" hits="0" branch="false"/>
+						<line number="764" hits="24" branch="false"/>
+						<line number="765" hits="8" branch="false"/>
+						<line number="774" hits="18" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="775" hits="14" branch="false"/>
+						<line number="777" hits="18" branch="false"/>
+						<line number="787" hits="86" branch="false"/>
+						<line number="788" hits="80" branch="false"/>
+						<line number="797" hits="74" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="798" hits="74" branch="false"/>
+						<line number="800" hits="74" branch="false"/>
+						<line number="810" hits="24" branch="false"/>
+						<line number="811" hits="18" branch="false"/>
+						<line number="820" hits="14" branch="false"/>
+						<line number="821" hits="6" branch="false"/>
+						<line number="830" hits="74" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="831" hits="70" branch="false"/>
+						<line number="833" hits="74" branch="false"/>
+						<line number="843" hits="424" branch="false"/>
+						<line number="844" hits="424" branch="false"/>
+						<line number="853" hits="128" branch="false"/>
+						<line number="854" hits="124" branch="false"/>
+						<line number="863" hits="58" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="864" hits="52" branch="false"/>
+						<line number="866" hits="58" branch="false"/>
+						<line number="876" hits="24" branch="false"/>
+						<line number="877" hits="22" branch="false"/>
+						<line number="886" hits="32" branch="false"/>
+						<line number="887" hits="26" branch="false"/>
+						<line number="898" hits="26" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="899" hits="26" branch="false"/>
+						<line number="901" hits="26" branch="false"/>
+						<line number="912" hits="52" branch="false"/>
+						<line number="913" hits="52" branch="false"/>
+						<line number="926" hits="36" branch="false"/>
+						<line number="927" hits="36" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="928" hits="32" branch="false"/>
+						<line number="929" hits="32" branch="false"/>
+						<line number="930" hits="32" branch="false"/>
+						<line number="931" hits="32" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="932" hits="32" branch="false"/>
+						<line number="935" hits="36" branch="false"/>
+						<line number="936" hits="36" branch="false"/>
+						<line number="951" hits="26" branch="false"/>
+						<line number="952" hits="26" branch="false"/>
+						<line number="953" hits="10" branch="false"/>
+						<line number="954" hits="10" branch="false"/>
+						<line number="965" hits="16" branch="false"/>
+						<line number="966" hits="16" branch="false"/>
+						<line number="967" hits="16" branch="false"/>
+						<line number="977" hits="6" branch="false"/>
+						<line number="978" hits="6" branch="false"/>
+						<line number="979" hits="6" branch="false"/>
+						<line number="980" hits="6" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="981" hits="6" branch="false"/>
+						<line number="983" hits="6" branch="false"/>
+						<line number="984" hits="6" branch="false"/>
+						<line number="1001" hits="36" branch="false"/>
+						<line number="1003" hits="18" branch="false"/>
+						<line number="1004" hits="18" branch="false"/>
+						<line number="1026" hits="20" branch="false"/>
+						<line number="1028" hits="0" branch="false"/>
+						<line number="1029" hits="0" branch="false"/>
+						<line number="1041" hits="2" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="1042" hits="2" branch="false"/>
+						<line number="1044" hits="0" branch="false"/>
+						<line number="1045" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="1046" hits="0" branch="false"/>
+						<line number="1048" hits="0" branch="false"/>
+						<line number="1057" hits="30" branch="false"/>
+						<line number="1066" hits="10" branch="false"/>
+						<line number="1075" hits="24" branch="false"/>
+						<line number="1084" hits="90" branch="false"/>
+						<line number="1093" hits="34" branch="false"/>
+						<line number="1102" hits="16" branch="false"/>
+						<line number="1111" hits="8" branch="false"/>
+						<line number="1120" hits="10" branch="false"/>
+						<line number="1129" hits="54" branch="false"/>
+						<line number="1140" hits="56" branch="false"/>
+						<line number="1151" hits="202" branch="false"/>
+						<line number="1161" hits="622" branch="false"/>
+						<line number="1170" hits="326" branch="false"/>
+						<line number="1179" hits="4" branch="false"/>
+						<line number="1188" hits="294" branch="false"/>
+						<line number="1197" hits="24" branch="false"/>
+						<line number="1206" hits="8" branch="false"/>
+						<line number="1215" hits="180" branch="false"/>
+						<line number="1225" hits="8" branch="false"/>
+						<line number="1236" hits="14" branch="false"/>
+						<line number="1237" hits="0" branch="false"/>
+						<line number="1238" hits="0" branch="false"/>
+						<line number="1249" hits="68" branch="false"/>
+					</lines>
+				</class>
+				<class name="org.joda.time.MutableDateTime$Property" filename="org/joda/time/MutableDateTime.java" line-rate="0.8108108108108109" branch-rate="1.0" complexity="1.4368932038834952">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Lorg/joda/time/MutableDateTime;Lorg/joda/time/DateTimeField;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1289" hits="1998" branch="false"/>
+								<line number="1290" hits="1998" branch="false"/>
+								<line number="1291" hits="1998" branch="false"/>
+								<line number="1292" hits="1998" branch="false"/>
+							</lines>
+						</method>
+						<method name="add" signature="(I)Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1358" hits="20" branch="false"/>
+								<line number="1359" hits="20" branch="false"/>
+							</lines>
+						</method>
+						<method name="add" signature="(J)Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1370" hits="2" branch="false"/>
+								<line number="1371" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="addWrapField" signature="(I)Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1382" hits="8" branch="false"/>
+								<line number="1383" hits="8" branch="false"/>
+							</lines>
+						</method>
+						<method name="getChronology" signature="()Lorg/joda/time/Chronology;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1337" hits="4" branch="false"/>
+							</lines>
+						</method>
+						<method name="getField" signature="()Lorg/joda/time/DateTimeField;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1318" hits="1470" branch="false"/>
+							</lines>
+						</method>
+						<method name="getMillis" signature="()J" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1327" hits="762" branch="false"/>
+							</lines>
+						</method>
+						<method name="getMutableDateTime" signature="()Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1346" hits="10" branch="false"/>
+							</lines>
+						</method>
+						<method name="readObject" signature="(Ljava/io/ObjectInputStream;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="1306" hits="0" branch="false"/>
+								<line number="1307" hits="0" branch="false"/>
+								<line number="1308" hits="0" branch="false"/>
+								<line number="1309" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="roundCeiling" signature="()Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1445" hits="6" branch="false"/>
+								<line number="1446" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="roundFloor" signature="()Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1434" hits="6" branch="false"/>
+								<line number="1435" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="roundHalfCeiling" signature="()Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1469" hits="68" branch="false"/>
+								<line number="1470" hits="68" branch="false"/>
+							</lines>
+						</method>
+						<method name="roundHalfEven" signature="()Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1481" hits="86" branch="false"/>
+								<line number="1482" hits="86" branch="false"/>
+							</lines>
+						</method>
+						<method name="roundHalfFloor" signature="()Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1457" hits="106" branch="false"/>
+								<line number="1458" hits="106" branch="false"/>
+							</lines>
+						</method>
+						<method name="set" signature="(I)Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1395" hits="16" branch="false"/>
+								<line number="1396" hits="12" branch="false"/>
+							</lines>
+						</method>
+						<method name="set" signature="(Ljava/lang/String;)Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1422" hits="14" branch="false"/>
+								<line number="1423" hits="4" branch="false"/>
+							</lines>
+						</method>
+						<method name="set" signature="(Ljava/lang/String;Ljava/util/Locale;)Lorg/joda/time/MutableDateTime;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="1409" hits="18" branch="false"/>
+								<line number="1410" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="writeObject" signature="(Ljava/io/ObjectOutputStream;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="1298" hits="0" branch="false"/>
+								<line number="1299" hits="0" branch="false"/>
+								<line number="1300" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="1289" hits="1998" branch="false"/>
+						<line number="1290" hits="1998" branch="false"/>
+						<line number="1291" hits="1998" branch="false"/>
+						<line number="1292" hits="1998" branch="false"/>
+						<line number="1298" hits="0" branch="false"/>
+						<line number="1299" hits="0" branch="false"/>
+						<line number="1300" hits="0" branch="false"/>
+						<line number="1306" hits="0" branch="false"/>
+						<line number="1307" hits="0" branch="false"/>
+						<line number="1308" hits="0" branch="false"/>
+						<line number="1309" hits="0" branch="false"/>
+						<line number="1318" hits="1470" branch="false"/>
+						<line number="1327" hits="762" branch="false"/>
+						<line number="1337" hits="4" branch="false"/>
+						<line number="1346" hits="10" branch="false"/>
+						<line number="1358" hits="20" branch="false"/>
+						<line number="1359" hits="20" branch="false"/>
+						<line number="1370" hits="2" branch="false"/>
+						<line number="1371" hits="2" branch="false"/>
+						<line number="1382" hits="8" branch="false"/>
+						<line number="1383" hits="8" branch="false"/>
+						<line number="1395" hits="16" branch="false"/>
+						<line number="1396" hits="12" branch="false"/>
+						<line number="1409" hits="18" branch="false"/>
+						<line number="1410" hits="6" branch="false"/>
+						<line number="1422" hits="14" branch="false"/>
+						<line number="1423" hits="4" branch="false"/>
+						<line number="1434" hits="6" branch="false"/>
+						<line number="1435" hits="6" branch="false"/>
+						<line number="1445" hits="6" branch="false"/>
+						<line number="1446" hits="6" branch="false"/>
+						<line number="1457" hits="106" branch="false"/>
+						<line number="1458" hits="106" branch="false"/>
+						<line number="1469" hits="68" branch="false"/>
+						<line number="1470" hits="68" branch="false"/>
+						<line number="1481" hits="86" branch="false"/>
+						<line number="1482" hits="86" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>

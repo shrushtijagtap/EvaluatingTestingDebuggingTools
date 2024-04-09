@@ -12786,6 +12786,141 @@ public class RandoopRegressionTest0 {
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
         com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
         com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory8 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.setNodeFactory(jsonNodeFactory8);
+        com.fasterxml.jackson.databind.Module[] moduleArray10 = new com.fasterxml.jackson.databind.Module[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper11 = objectMapper9.registerModules(moduleArray10);
+        java.text.DateFormat dateFormat12 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper13 = objectMapper9.setDateFormat(dateFormat12);
+        com.fasterxml.jackson.databind.jsontype.SubtypeResolver subtypeResolver14 = objectMapper9.getSubtypeResolver();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec15 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory16 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory17 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory18 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec15, xMLInputFactory16, xMLOutputFactory17);
+        com.fasterxml.jackson.core.Version version19 = xmlFactory18.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper20 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory18);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes21 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter22 = xmlMapper20.writer(characterEscapes21);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray23 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper24 = xmlMapper20.disable(featureArray23);
+        com.fasterxml.jackson.databind.DeserializationContext deserializationContext25 = xmlMapper20.getDeserializationContext();
+        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping26 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper28 = xmlMapper20.enableDefaultTypingAsProperty(defaultTyping26, "");
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory29 = objectMapper28.getNodeFactory();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec30 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory31 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory32 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory33 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec30, xMLInputFactory31, xMLOutputFactory32);
+        com.fasterxml.jackson.core.Version version34 = xmlFactory33.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper35 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory33);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes36 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter37 = xmlMapper35.writer(characterEscapes36);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray38 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper39 = xmlMapper35.disable(featureArray38);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper40 = objectMapper39.disableDefaultTyping();
+        com.fasterxml.jackson.databind.SerializationConfig serializationConfig41 = objectMapper39.getSerializationConfig();
+        com.fasterxml.jackson.databind.SerializerProvider serializerProvider42 = objectMapper39.getSerializerProviderInstance();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec43 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory44 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory45 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory46 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec43, xMLInputFactory44, xMLOutputFactory45);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature47 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory48 = xmlFactory46.disable(feature47);
+        com.fasterxml.jackson.core.Version version49 = xmlFactory48.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass50 = xmlFactory48.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer51 = serializerProvider42.getUnknownTypeSerializer(featureClass50);
+        java.util.TimeZone timeZone52 = serializerProvider42.getTimeZone();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec53 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory54 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory55 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory56 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec53, xMLInputFactory54, xMLOutputFactory55);
+        com.fasterxml.jackson.core.Version version57 = xmlFactory56.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper58 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory56);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes59 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter60 = xmlMapper58.writer(characterEscapes59);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec61 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory62 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory63 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory64 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec61, xMLInputFactory62, xMLOutputFactory63);
+        com.fasterxml.jackson.core.Version version65 = xmlFactory64.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper66 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory64);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes67 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter68 = xmlMapper66.writer(characterEscapes67);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory69 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper70 = xmlMapper66.setNodeFactory(jsonNodeFactory69);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider71 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper72 = xmlMapper66.setFilterProvider(filterProvider71);
+        com.fasterxml.jackson.core.JsonParser jsonParser73 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec74 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory75 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory76 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory77 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec74, xMLInputFactory75, xMLOutputFactory76);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature78 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory79 = xmlFactory77.disable(feature78);
+        com.fasterxml.jackson.core.Version version80 = xmlFactory79.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass81 = xmlFactory79.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor82 = objectMapper72.readValues(jsonParser73, featureClass81);
+        boolean boolean83 = xmlMapper58.canSerialize(featureClass81);
+        com.fasterxml.jackson.databind.JavaType javaType84 = serializerProvider42.constructType((java.lang.reflect.Type) featureClass81);
+        boolean boolean85 = objectMapper28.canDeserialize(javaType84);
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter86 = objectMapper9.writerWithType(javaType84);
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectWriter7);
+        org.junit.Assert.assertNotNull(objectMapper9);
+        org.junit.Assert.assertNotNull(moduleArray10);
+        org.junit.Assert.assertNotNull(objectMapper11);
+        org.junit.Assert.assertNotNull(objectMapper13);
+        org.junit.Assert.assertNotNull(subtypeResolver14);
+        org.junit.Assert.assertNotNull(version19);
+        org.junit.Assert.assertNotNull(objectWriter22);
+        org.junit.Assert.assertNotNull(featureArray23);
+        org.junit.Assert.assertNotNull(objectMapper24);
+        org.junit.Assert.assertNotNull(deserializationContext25);
+        org.junit.Assert.assertNotNull(objectMapper28);
+        org.junit.Assert.assertNotNull(jsonNodeFactory29);
+        org.junit.Assert.assertNotNull(version34);
+        org.junit.Assert.assertNotNull(objectWriter37);
+        org.junit.Assert.assertNotNull(featureArray38);
+        org.junit.Assert.assertNotNull(objectMapper39);
+        org.junit.Assert.assertNotNull(objectMapper40);
+        org.junit.Assert.assertNotNull(serializationConfig41);
+        org.junit.Assert.assertNotNull(serializerProvider42);
+        org.junit.Assert.assertTrue("'" + feature47 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature47.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory48);
+        org.junit.Assert.assertNotNull(version49);
+        org.junit.Assert.assertNotNull(featureClass50);
+        org.junit.Assert.assertNotNull(objJsonSerializer51);
+        org.junit.Assert.assertNotNull(timeZone52);
+        org.junit.Assert.assertEquals(timeZone52.getDisplayName(), "Coordinated Universal Time");
+        org.junit.Assert.assertNotNull(version57);
+        org.junit.Assert.assertNotNull(objectWriter60);
+        org.junit.Assert.assertNotNull(version65);
+        org.junit.Assert.assertNotNull(objectWriter68);
+        org.junit.Assert.assertNotNull(objectMapper70);
+        org.junit.Assert.assertNotNull(objectMapper72);
+        org.junit.Assert.assertTrue("'" + feature78 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature78.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory79);
+        org.junit.Assert.assertNotNull(version80);
+        org.junit.Assert.assertNotNull(featureClass81);
+        org.junit.Assert.assertNotNull(featureItor82);
+        org.junit.Assert.assertTrue("'" + boolean83 + "' != '" + true + "'", boolean83 == true);
+        org.junit.Assert.assertNotNull(javaType84);
+        org.junit.Assert.assertTrue("'" + boolean85 + "' != '" + true + "'", boolean85 == true);
+        org.junit.Assert.assertNotNull(objectWriter86);
+    }
+
+    @Test
+    public void test218() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test218");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
         com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
         com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
         com.fasterxml.jackson.databind.DeserializationContext deserializationContext10 = xmlMapper5.getDeserializationContext();
@@ -12807,9 +12942,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test218");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test219");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -12838,9 +12973,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test219");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test220");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -12881,9 +13016,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test220");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test221");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -12928,9 +13063,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test221");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test222");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -12959,9 +13094,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test222");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test223");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13078,9 +13213,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test223");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test224");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13089,9 +13224,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test224");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test225");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13163,9 +13298,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test225() throws Throwable {
+    public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test225");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test226");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13198,9 +13333,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test226");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test227");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13231,9 +13366,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test227");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test228");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13328,9 +13463,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test228");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test229");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13461,9 +13596,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test229() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test229");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test230");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13517,9 +13652,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test230() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test230");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test231");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -13534,9 +13669,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test231() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test231");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test232");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13601,9 +13736,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test232() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test232");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test233");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -13621,9 +13756,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test233() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test233");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test234");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13651,9 +13786,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test234() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test234");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test235");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13781,9 +13916,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test235() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test235");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test236");
         com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory0 = new com.fasterxml.jackson.dataformat.xml.XmlFactory();
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper1 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory0);
         java.io.OutputStream outputStream2 = null;
@@ -13798,9 +13933,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test236() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test236");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test237");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13828,9 +13963,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test237() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test237");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test238");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13859,9 +13994,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test238() throws Throwable {
+    public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test238");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test239");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -13906,9 +14041,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test239() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test239");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test240");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -13936,9 +14071,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test240() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test240");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test241");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -14044,9 +14179,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test241() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test241");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test242");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         jacksonXmlAnnotationIntrospector0.setDefaultUseWrapper(false);
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector4 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(true);
@@ -14168,9 +14303,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test242() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test242");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test243");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -14314,9 +14449,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test243() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test243");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test244");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -14345,9 +14480,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test244() throws Throwable {
+    public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test244");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test245");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -14368,9 +14503,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test245() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test245");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test246");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -14412,9 +14547,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test246() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test246");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test247");
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector0 = null;
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair2 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector0, annotationIntrospector1);
@@ -14456,9 +14591,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test247() throws Throwable {
+    public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test247");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test248");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -14489,9 +14624,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test248() throws Throwable {
+    public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test248");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test249");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper1 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0);
         com.fasterxml.jackson.databind.ser.DefaultSerializerProvider defaultSerializerProvider2 = null;
@@ -14511,9 +14646,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test249() throws Throwable {
+    public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test249");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test250");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -14593,9 +14728,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test250() throws Throwable {
+    public void test251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test250");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test251");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper1 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0);
         com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature feature2 = null;
@@ -14609,9 +14744,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test251() throws Throwable {
+    public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test251");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test252");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -14718,9 +14853,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test252() throws Throwable {
+    public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test252");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test253");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.Annotated annotated1 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec2 = null;
@@ -14795,9 +14930,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test253() throws Throwable {
+    public void test254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test253");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test254");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -14916,9 +15051,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test254() throws Throwable {
+    public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test254");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test255");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -14942,9 +15077,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test255() throws Throwable {
+    public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test255");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test256");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15057,9 +15192,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test256() throws Throwable {
+    public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test256");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test257");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15131,9 +15266,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test257() throws Throwable {
+    public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test257");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test258");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15260,9 +15395,99 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test258() throws Throwable {
+    public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test258");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test259");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper10 = objectMapper9.disableDefaultTyping();
+        com.fasterxml.jackson.databind.SerializationConfig serializationConfig11 = objectMapper9.getSerializationConfig();
+        com.fasterxml.jackson.databind.SerializerProvider serializerProvider12 = objectMapper9.getSerializerProviderInstance();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec13 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory14 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory15 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory16 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec13, xMLInputFactory14, xMLOutputFactory15);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature17 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory18 = xmlFactory16.disable(feature17);
+        com.fasterxml.jackson.core.Version version19 = xmlFactory18.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass20 = xmlFactory18.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer21 = serializerProvider12.getUnknownTypeSerializer(featureClass20);
+        java.util.TimeZone timeZone22 = serializerProvider12.getTimeZone();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec23 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory24 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory25 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory26 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec23, xMLInputFactory24, xMLOutputFactory25);
+        com.fasterxml.jackson.core.Version version27 = xmlFactory26.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper28 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory26);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes29 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter30 = xmlMapper28.writer(characterEscapes29);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory32 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory33 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory34 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec31, xMLInputFactory32, xMLOutputFactory33);
+        com.fasterxml.jackson.core.Version version35 = xmlFactory34.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper36 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory34);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes37 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter38 = xmlMapper36.writer(characterEscapes37);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory39 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper40 = xmlMapper36.setNodeFactory(jsonNodeFactory39);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider41 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper42 = xmlMapper36.setFilterProvider(filterProvider41);
+        com.fasterxml.jackson.core.JsonParser jsonParser43 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec44 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory45 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory46 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory47 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec44, xMLInputFactory45, xMLOutputFactory46);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature48 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory49 = xmlFactory47.disable(feature48);
+        com.fasterxml.jackson.core.Version version50 = xmlFactory49.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass51 = xmlFactory49.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor52 = objectMapper42.readValues(jsonParser43, featureClass51);
+        boolean boolean53 = xmlMapper28.canSerialize(featureClass51);
+        com.fasterxml.jackson.databind.JavaType javaType54 = serializerProvider12.constructType((java.lang.reflect.Type) featureClass51);
+        boolean boolean55 = serializerProvider12.canOverrideAccessModifiers();
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectWriter7);
+        org.junit.Assert.assertNotNull(featureArray8);
+        org.junit.Assert.assertNotNull(objectMapper9);
+        org.junit.Assert.assertNotNull(objectMapper10);
+        org.junit.Assert.assertNotNull(serializationConfig11);
+        org.junit.Assert.assertNotNull(serializerProvider12);
+        org.junit.Assert.assertTrue("'" + feature17 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature17.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory18);
+        org.junit.Assert.assertNotNull(version19);
+        org.junit.Assert.assertNotNull(featureClass20);
+        org.junit.Assert.assertNotNull(objJsonSerializer21);
+        org.junit.Assert.assertNotNull(timeZone22);
+        org.junit.Assert.assertEquals(timeZone22.getDisplayName(), "Coordinated Universal Time");
+        org.junit.Assert.assertNotNull(version27);
+        org.junit.Assert.assertNotNull(objectWriter30);
+        org.junit.Assert.assertNotNull(version35);
+        org.junit.Assert.assertNotNull(objectWriter38);
+        org.junit.Assert.assertNotNull(objectMapper40);
+        org.junit.Assert.assertNotNull(objectMapper42);
+        org.junit.Assert.assertTrue("'" + feature48 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature48.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory49);
+        org.junit.Assert.assertNotNull(version50);
+        org.junit.Assert.assertNotNull(featureClass51);
+        org.junit.Assert.assertNotNull(featureItor52);
+        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + true + "'", boolean53 == true);
+        org.junit.Assert.assertNotNull(javaType54);
+        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + true + "'", boolean55 == true);
+    }
+
+    @Test
+    public void test260() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test260");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15291,9 +15516,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test259() throws Throwable {
+    public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test259");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test261");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory2 = null;
@@ -15402,9 +15627,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test260() throws Throwable {
+    public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test260");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test262");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -15422,9 +15647,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test261() throws Throwable {
+    public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test261");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test263");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15471,9 +15696,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test262() throws Throwable {
+    public void test264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test262");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test264");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15583,9 +15808,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test263() throws Throwable {
+    public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test263");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test265");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15610,9 +15835,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test264() throws Throwable {
+    public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test264");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test266");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15706,9 +15931,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test265() throws Throwable {
+    public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test265");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test267");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         jacksonXmlAnnotationIntrospector0.setDefaultUseWrapper(false);
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector4 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(true);
@@ -15824,9 +16049,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test266() throws Throwable {
+    public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test266");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test268");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15893,9 +16118,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test267() throws Throwable {
+    public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test267");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test269");
         com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier xmlBeanDeserializerModifier1 = new com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier(" ");
         com.fasterxml.jackson.databind.DeserializationConfig deserializationConfig2 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -15968,9 +16193,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test268() throws Throwable {
+    public void test270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test268");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test270");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -15995,9 +16220,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test269() throws Throwable {
+    public void test271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test269");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test271");
         com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory0 = new com.fasterxml.jackson.dataformat.xml.XmlFactory();
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper1 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory0);
         com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature2 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_DECLARATION;
@@ -16016,9 +16241,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test270() throws Throwable {
+    public void test272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test270");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test272");
         com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory0 = new com.fasterxml.jackson.dataformat.xml.XmlFactory();
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper1 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory0);
         com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature2 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_DECLARATION;
@@ -16030,9 +16255,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test271() throws Throwable {
+    public void test273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test271");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test273");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -16119,9 +16344,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test272() throws Throwable {
+    public void test274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test272");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test274");
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup0 = new com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory2 = null;
@@ -16269,9 +16494,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test273() throws Throwable {
+    public void test275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test273");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test275");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -16289,9 +16514,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test274() throws Throwable {
+    public void test276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test274");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test276");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -16345,9 +16570,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test275() throws Throwable {
+    public void test277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test275");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test277");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -16415,9 +16640,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test276() throws Throwable {
+    public void test278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test276");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test278");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -16503,9 +16728,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test277() throws Throwable {
+    public void test279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test277");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test279");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -16599,9 +16824,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test278() throws Throwable {
+    public void test280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test278");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test280");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -16661,9 +16886,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test279() throws Throwable {
+    public void test281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test279");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test281");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory4 = null;
@@ -16701,9 +16926,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test280() throws Throwable {
+    public void test282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test280");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test282");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -16819,9 +17044,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test281() throws Throwable {
+    public void test283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test281");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test283");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -16931,9 +17156,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test282() throws Throwable {
+    public void test284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test282");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test284");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -16950,9 +17175,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test283() throws Throwable {
+    public void test285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test283");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test285");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -16985,9 +17210,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test284() throws Throwable {
+    public void test286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test284");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test286");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.dataformat.xml.ser.XmlBeanSerializerModifier xmlBeanSerializerModifier3 = new com.fasterxml.jackson.dataformat.xml.ser.XmlBeanSerializerModifier();
@@ -17121,9 +17346,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test285() throws Throwable {
+    public void test287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test285");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test287");
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector0 = null;
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair2 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector0, annotationIntrospector1);
@@ -17262,9 +17487,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test286() throws Throwable {
+    public void test288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test286");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test288");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -17289,9 +17514,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test287() throws Throwable {
+    public void test289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test287");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test289");
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector0 = null;
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair2 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector0, annotationIntrospector1);
@@ -17430,9 +17655,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test288() throws Throwable {
+    public void test290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test288");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test290");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -17463,9 +17688,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test289() throws Throwable {
+    public void test291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test289");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test291");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -17498,9 +17723,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test290() throws Throwable {
+    public void test292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test290");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test292");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -17565,9 +17790,35 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test291() throws Throwable {
+    public void test293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test291");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test293");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
+        com.fasterxml.jackson.databind.DeserializationContext deserializationContext10 = xmlMapper5.getDeserializationContext();
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory11 = new com.fasterxml.jackson.dataformat.xml.XmlFactory((com.fasterxml.jackson.core.ObjectCodec) xmlMapper5);
+        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping12 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper13 = xmlMapper5.enableDefaultTyping(defaultTyping12);
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectWriter7);
+        org.junit.Assert.assertNotNull(featureArray8);
+        org.junit.Assert.assertNotNull(objectMapper9);
+        org.junit.Assert.assertNotNull(deserializationContext10);
+        org.junit.Assert.assertNotNull(objectMapper13);
+    }
+
+    @Test
+    public void test294() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test294");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -17696,9 +17947,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test292() throws Throwable {
+    public void test295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test292");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test295");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -17814,9 +18065,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test293() throws Throwable {
+    public void test296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test293");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test296");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -17841,9 +18092,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test294() throws Throwable {
+    public void test297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test294");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test297");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -17889,9 +18140,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test295() throws Throwable {
+    public void test298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test295");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test298");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -17998,9 +18249,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test296() throws Throwable {
+    public void test299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test296");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test299");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -18119,9 +18370,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test297() throws Throwable {
+    public void test300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test297");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test300");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18150,9 +18401,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test298() throws Throwable {
+    public void test301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test298");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test301");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18187,9 +18438,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test299() throws Throwable {
+    public void test302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test299");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test302");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18271,9 +18522,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test300() throws Throwable {
+    public void test303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test300");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test303");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18309,9 +18560,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test301() throws Throwable {
+    public void test304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test301");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test304");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18332,9 +18583,128 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test302() throws Throwable {
+    public void test305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test302");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test305");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping6 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper8 = xmlMapper5.enableDefaultTypingAsProperty(defaultTyping6, "XML");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec9 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory10 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory11 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory12 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec9, xMLInputFactory10, xMLOutputFactory11);
+        com.fasterxml.jackson.core.Version version13 = xmlFactory12.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper14 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory12);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes15 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter16 = xmlMapper14.writer(characterEscapes15);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray17 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper18 = xmlMapper14.disable(featureArray17);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper19 = objectMapper18.disableDefaultTyping();
+        com.fasterxml.jackson.databind.SerializationConfig serializationConfig20 = objectMapper18.getSerializationConfig();
+        com.fasterxml.jackson.databind.SerializerProvider serializerProvider21 = objectMapper18.getSerializerProviderInstance();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec22 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory23 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory24 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory25 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec22, xMLInputFactory23, xMLOutputFactory24);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature26 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory27 = xmlFactory25.disable(feature26);
+        com.fasterxml.jackson.core.Version version28 = xmlFactory27.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass29 = xmlFactory27.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer30 = serializerProvider21.getUnknownTypeSerializer(featureClass29);
+        java.util.TimeZone timeZone31 = serializerProvider21.getTimeZone();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec32 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory33 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory34 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory35 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec32, xMLInputFactory33, xMLOutputFactory34);
+        com.fasterxml.jackson.core.Version version36 = xmlFactory35.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper37 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory35);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes38 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter39 = xmlMapper37.writer(characterEscapes38);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec40 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory41 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory42 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory43 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec40, xMLInputFactory41, xMLOutputFactory42);
+        com.fasterxml.jackson.core.Version version44 = xmlFactory43.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper45 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory43);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes46 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter47 = xmlMapper45.writer(characterEscapes46);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory48 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper49 = xmlMapper45.setNodeFactory(jsonNodeFactory48);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider50 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper51 = xmlMapper45.setFilterProvider(filterProvider50);
+        com.fasterxml.jackson.core.JsonParser jsonParser52 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec53 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory54 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory55 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory56 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec53, xMLInputFactory54, xMLOutputFactory55);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature57 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory58 = xmlFactory56.disable(feature57);
+        com.fasterxml.jackson.core.Version version59 = xmlFactory58.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass60 = xmlFactory58.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor61 = objectMapper51.readValues(jsonParser52, featureClass60);
+        boolean boolean62 = xmlMapper37.canSerialize(featureClass60);
+        com.fasterxml.jackson.databind.BeanProperty beanProperty63 = null;
+        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer64 = serializerProvider21.findKeySerializer(featureClass60, beanProperty63);
+        com.fasterxml.jackson.databind.cfg.MutableConfigOverride mutableConfigOverride65 = objectMapper8.configOverride(featureClass60);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec66 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory67 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory68 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory69 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec66, xMLInputFactory67, xMLOutputFactory68);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature70 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory71 = xmlFactory69.disable(feature70);
+        java.lang.String str72 = xmlFactory69.getRootValueSeparator();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass73 = xmlFactory69.getFormatReadFeatureType();
+        javax.xml.stream.XMLInputFactory xMLInputFactory74 = xmlFactory69.getXMLInputFactory();
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory75 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory76 = new com.fasterxml.jackson.dataformat.xml.XmlFactory((com.fasterxml.jackson.core.ObjectCodec) objectMapper8, xMLInputFactory74, xMLOutputFactory75);
+        java.lang.String str77 = xmlFactory76.getXMLTextElementName();
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectMapper8);
+        org.junit.Assert.assertNotNull(version13);
+        org.junit.Assert.assertNotNull(objectWriter16);
+        org.junit.Assert.assertNotNull(featureArray17);
+        org.junit.Assert.assertNotNull(objectMapper18);
+        org.junit.Assert.assertNotNull(objectMapper19);
+        org.junit.Assert.assertNotNull(serializationConfig20);
+        org.junit.Assert.assertNotNull(serializerProvider21);
+        org.junit.Assert.assertTrue("'" + feature26 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature26.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory27);
+        org.junit.Assert.assertNotNull(version28);
+        org.junit.Assert.assertNotNull(featureClass29);
+        org.junit.Assert.assertNotNull(objJsonSerializer30);
+        org.junit.Assert.assertNotNull(timeZone31);
+        org.junit.Assert.assertEquals(timeZone31.getDisplayName(), "Coordinated Universal Time");
+        org.junit.Assert.assertNotNull(version36);
+        org.junit.Assert.assertNotNull(objectWriter39);
+        org.junit.Assert.assertNotNull(version44);
+        org.junit.Assert.assertNotNull(objectWriter47);
+        org.junit.Assert.assertNotNull(objectMapper49);
+        org.junit.Assert.assertNotNull(objectMapper51);
+        org.junit.Assert.assertTrue("'" + feature57 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature57.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory58);
+        org.junit.Assert.assertNotNull(version59);
+        org.junit.Assert.assertNotNull(featureClass60);
+        org.junit.Assert.assertNotNull(featureItor61);
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + true + "'", boolean62 == true);
+        org.junit.Assert.assertNotNull(objJsonSerializer64);
+        org.junit.Assert.assertNotNull(mutableConfigOverride65);
+        org.junit.Assert.assertTrue("'" + feature70 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature70.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory71);
+        org.junit.Assert.assertEquals("'" + str72 + "' != '" + " " + "'", str72, " ");
+        org.junit.Assert.assertNotNull(featureClass73);
+        org.junit.Assert.assertNotNull(xMLInputFactory74);
+        org.junit.Assert.assertNull(str77);
+    }
+
+    @Test
+    public void test306() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test306");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18368,9 +18738,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test303() throws Throwable {
+    public void test307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test303");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test307");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18415,9 +18785,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test304() throws Throwable {
+    public void test308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test304");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test308");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18440,9 +18810,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test305() throws Throwable {
+    public void test309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test305");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test309");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18475,9 +18845,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test306() throws Throwable {
+    public void test310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test306");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test310");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18530,9 +18900,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test307() throws Throwable {
+    public void test311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test307");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test311");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18556,9 +18926,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test308() throws Throwable {
+    public void test312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test308");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test312");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18706,9 +19076,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test309() throws Throwable {
+    public void test313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test309");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test313");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18737,9 +19107,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test310() throws Throwable {
+    public void test314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test310");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test314");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18766,9 +19136,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test311() throws Throwable {
+    public void test315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test311");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test315");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -18900,9 +19270,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test312() throws Throwable {
+    public void test316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test312");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test316");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19036,9 +19406,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test313() throws Throwable {
+    public void test317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test313");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test317");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -19050,9 +19420,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test314() throws Throwable {
+    public void test318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test314");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test318");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19099,9 +19469,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test315() throws Throwable {
+    public void test319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test315");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test319");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19135,9 +19505,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test316() throws Throwable {
+    public void test320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test316");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test320");
         com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder xmlTypeResolverBuilder0 = new com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder();
         com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder stdTypeResolverBuilder2 = xmlTypeResolverBuilder0.typeIdVisibility(false);
         com.fasterxml.jackson.databind.DeserializationConfig deserializationConfig3 = null;
@@ -19257,9 +19627,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test317() throws Throwable {
+    public void test321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test317");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test321");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19309,9 +19679,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test318() throws Throwable {
+    public void test322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test318");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test322");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19341,9 +19711,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test319() throws Throwable {
+    public void test323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test319");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test323");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -19388,9 +19758,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test320() throws Throwable {
+    public void test324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test320");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test324");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19418,9 +19788,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test321() throws Throwable {
+    public void test325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test321");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test325");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19506,9 +19876,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test322() throws Throwable {
+    public void test326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test322");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test326");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19593,7 +19963,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xmlMapper5.writeValue(jsonGenerator36, (java.lang.Object) objectWriter83);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.databind.JsonMappingException; message: No serializer found for class com.fasterxml.jackson.dataformat.xml.util.DefaultXmlPrettyPrinter and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: com.fasterxml.jackson.databind.ObjectWriter[\"config\"]->com.fasterxml.jackson.databind.SerializationConfig[\"defaultPrettyPrinter\"])");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.databind.JsonMappingException; message: No serializer found for class com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: com.fasterxml.jackson.databind.ObjectWriter[\"config\"]->com.fasterxml.jackson.databind.SerializationConfig[\"annotationIntrospector\"])");
         } catch (com.fasterxml.jackson.databind.JsonMappingException e) {
         // Expected exception.
         }
@@ -19633,9 +20003,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test323() throws Throwable {
+    public void test327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test323");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test327");
         com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory0 = new com.fasterxml.jackson.dataformat.xml.XmlFactory();
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper1 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory0);
         com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature2 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_DECLARATION;
@@ -19653,9 +20023,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test324() throws Throwable {
+    public void test328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test324");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test328");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19731,9 +20101,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test325() throws Throwable {
+    public void test329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test325");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test329");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -19776,9 +20146,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test326() throws Throwable {
+    public void test330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test326");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test330");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory4 = null;
@@ -19908,9 +20278,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test327() throws Throwable {
+    public void test331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test327");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test331");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20009,9 +20379,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test328() throws Throwable {
+    public void test332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test328");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test332");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20045,9 +20415,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test329() throws Throwable {
+    public void test333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test329");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test333");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -20154,9 +20524,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test330() throws Throwable {
+    public void test334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test330");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test334");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20184,9 +20554,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test331() throws Throwable {
+    public void test335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test331");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test335");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20220,9 +20590,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test332() throws Throwable {
+    public void test336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test332");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test336");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlModule jacksonXmlModule0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlModule();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory2 = null;
@@ -20325,9 +20695,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test333() throws Throwable {
+    public void test337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test333");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test337");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20365,9 +20735,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test334() throws Throwable {
+    public void test338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test334");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test338");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20397,9 +20767,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test335() throws Throwable {
+    public void test339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test335");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test339");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20553,9 +20923,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test336() throws Throwable {
+    public void test340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test336");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test340");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20682,9 +21052,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test337() throws Throwable {
+    public void test341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test337");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test341");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -20720,9 +21090,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test338() throws Throwable {
+    public void test342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test338");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test342");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20765,9 +21135,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test339() throws Throwable {
+    public void test343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test339");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test343");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -20874,9 +21244,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test340() throws Throwable {
+    public void test344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test340");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test344");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -20905,9 +21275,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test341() throws Throwable {
+    public void test345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test341");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test345");
         com.fasterxml.jackson.dataformat.xml.ser.XmlBeanSerializerModifier xmlBeanSerializerModifier0 = new com.fasterxml.jackson.dataformat.xml.ser.XmlBeanSerializerModifier();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory2 = null;
@@ -21027,9 +21397,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test342() throws Throwable {
+    public void test346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test342");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test346");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21070,9 +21440,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test343() throws Throwable {
+    public void test347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test343");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test347");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21144,9 +21514,90 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test344() throws Throwable {
+    public void test348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test344");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test348");
+        com.fasterxml.jackson.dataformat.xml.JacksonXmlModule jacksonXmlModule0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlModule();
+        com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier xmlBeanDeserializerModifier2 = new com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier(" ");
+        com.fasterxml.jackson.databind.DeserializationConfig deserializationConfig3 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory5 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory6 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory7 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec4, xMLInputFactory5, xMLOutputFactory6);
+        com.fasterxml.jackson.core.Version version8 = xmlFactory7.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper9 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory7);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes10 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter11 = xmlMapper9.writer(characterEscapes10);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider12 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter13 = xmlMapper9.writer(filterProvider12);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec14 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory15 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory16 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory17 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec14, xMLInputFactory15, xMLOutputFactory16);
+        com.fasterxml.jackson.core.Version version18 = xmlFactory17.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper19 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory17);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes20 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter21 = xmlMapper19.writer(characterEscapes20);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec22 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory23 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory24 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory25 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec22, xMLInputFactory23, xMLOutputFactory24);
+        com.fasterxml.jackson.core.Version version26 = xmlFactory25.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper27 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory25);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes28 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter29 = xmlMapper27.writer(characterEscapes28);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory30 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper31 = xmlMapper27.setNodeFactory(jsonNodeFactory30);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider32 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper33 = xmlMapper27.setFilterProvider(filterProvider32);
+        com.fasterxml.jackson.core.JsonParser jsonParser34 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec35 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory36 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory37 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory38 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec35, xMLInputFactory36, xMLOutputFactory37);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature39 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory40 = xmlFactory38.disable(feature39);
+        com.fasterxml.jackson.core.Version version41 = xmlFactory40.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass42 = xmlFactory40.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor43 = objectMapper33.readValues(jsonParser34, featureClass42);
+        boolean boolean44 = xmlMapper19.canSerialize(featureClass42);
+        boolean boolean45 = com.fasterxml.jackson.dataformat.xml.util.TypeUtil.isIndexedType(featureClass42);
+        com.fasterxml.jackson.databind.JavaType javaType46 = xmlMapper9.constructType((java.lang.reflect.Type) featureClass42);
+        boolean boolean47 = com.fasterxml.jackson.dataformat.xml.util.TypeUtil.isIndexedType(javaType46);
+        com.fasterxml.jackson.databind.KeyDeserializer keyDeserializer48 = null;
+        com.fasterxml.jackson.databind.KeyDeserializer keyDeserializer49 = xmlBeanDeserializerModifier2.modifyKeyDeserializer(deserializationConfig3, javaType46, keyDeserializer48);
+        com.fasterxml.jackson.databind.module.SimpleModule simpleModule50 = jacksonXmlModule0.setDeserializerModifier((com.fasterxml.jackson.databind.deser.BeanDeserializerModifier) xmlBeanDeserializerModifier2);
+        com.fasterxml.jackson.databind.jsontype.NamedType namedType51 = null;
+        com.fasterxml.jackson.databind.jsontype.NamedType[] namedTypeArray52 = new com.fasterxml.jackson.databind.jsontype.NamedType[] { namedType51 };
+        com.fasterxml.jackson.databind.module.SimpleModule simpleModule53 = jacksonXmlModule0.registerSubtypes(namedTypeArray52);
+        org.junit.Assert.assertNotNull(version8);
+        org.junit.Assert.assertNotNull(objectWriter11);
+        org.junit.Assert.assertNotNull(objectWriter13);
+        org.junit.Assert.assertNotNull(version18);
+        org.junit.Assert.assertNotNull(objectWriter21);
+        org.junit.Assert.assertNotNull(version26);
+        org.junit.Assert.assertNotNull(objectWriter29);
+        org.junit.Assert.assertNotNull(objectMapper31);
+        org.junit.Assert.assertNotNull(objectMapper33);
+        org.junit.Assert.assertTrue("'" + feature39 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature39.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory40);
+        org.junit.Assert.assertNotNull(version41);
+        org.junit.Assert.assertNotNull(featureClass42);
+        org.junit.Assert.assertNotNull(featureItor43);
+        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + true + "'", boolean44 == true);
+        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
+        org.junit.Assert.assertNotNull(javaType46);
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
+        org.junit.Assert.assertNull(keyDeserializer49);
+        org.junit.Assert.assertNotNull(simpleModule50);
+        org.junit.Assert.assertNotNull(namedTypeArray52);
+        org.junit.Assert.assertNotNull(simpleModule53);
+    }
+
+    @Test
+    public void test349() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test349");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -21221,9 +21672,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test345() throws Throwable {
+    public void test350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test345");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test350");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21374,9 +21825,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test346() throws Throwable {
+    public void test351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test346");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test351");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21518,9 +21969,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test347() throws Throwable {
+    public void test352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test347");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test352");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21556,9 +22007,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test348() throws Throwable {
+    public void test353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test348");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test353");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21679,9 +22130,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test349() throws Throwable {
+    public void test354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test349");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test354");
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup0 = new com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup();
         com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider xmlSerializerProvider1 = new com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider(xmlRootNameLookup0);
         // The following exception was thrown during execution in test generation
@@ -21694,9 +22145,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test350() throws Throwable {
+    public void test355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test350");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test355");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21834,9 +22285,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test351() throws Throwable {
+    public void test356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test351");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test356");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21910,9 +22361,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test352() throws Throwable {
+    public void test357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test352");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test357");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21943,9 +22394,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test353() throws Throwable {
+    public void test358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test353");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test358");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -21978,9 +22429,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test354() throws Throwable {
+    public void test359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test354");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test359");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -22025,9 +22476,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test355() throws Throwable {
+    public void test360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test355");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test360");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22061,9 +22512,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test356() throws Throwable {
+    public void test361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test356");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test361");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22111,9 +22562,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test357() throws Throwable {
+    public void test362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test357");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test362");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22142,9 +22593,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test358() throws Throwable {
+    public void test363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test358");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test363");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -22251,9 +22702,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test359() throws Throwable {
+    public void test364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test359");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test364");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22272,9 +22723,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test360() throws Throwable {
+    public void test365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test360");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test365");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22394,9 +22845,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test361() throws Throwable {
+    public void test366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test361");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test366");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22542,9 +22993,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test362() throws Throwable {
+    public void test367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test362");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test367");
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector0 = null;
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair2 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector0, annotationIntrospector1);
@@ -22686,9 +23137,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test363() throws Throwable {
+    public void test368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test363");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test368");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22713,9 +23164,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test364() throws Throwable {
+    public void test369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test364");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test369");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22747,9 +23198,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test365() throws Throwable {
+    public void test370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test365");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test370");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22777,9 +23228,66 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test366() throws Throwable {
+    public void test371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test366");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test371");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory8 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.setNodeFactory(jsonNodeFactory8);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper10 = xmlMapper5.findAndRegisterModules();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = xmlMapper5.getJsonFactory();
+        java.lang.Object obj12 = null;
+        byte[] byteArray13 = xmlMapper5.writeValueAsBytes(obj12);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec14 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory15 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory16 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory17 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec14, xMLInputFactory15, xMLOutputFactory16);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec18 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory19 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory20 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory21 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec18, xMLInputFactory19, xMLOutputFactory20);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature22 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory23 = xmlFactory21.disable(feature22);
+        boolean boolean24 = feature22.enabledByDefault();
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory26 = xmlFactory17.configure(feature22, false);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes27 = xmlFactory26.getCharacterEscapes();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec28 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory29 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory30 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory31 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec28, xMLInputFactory29, xMLOutputFactory30);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature32 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory33 = xmlFactory31.disable(feature32);
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory34 = xmlFactory26.disable(feature32);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper36 = xmlMapper5.configure(feature32, true);
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectWriter7);
+        org.junit.Assert.assertNotNull(objectMapper9);
+        org.junit.Assert.assertNotNull(objectMapper10);
+        org.junit.Assert.assertNotNull(jsonFactory11);
+        org.junit.Assert.assertNotNull(byteArray13);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[60, 110, 117, 108, 108, 47, 62]");
+        org.junit.Assert.assertTrue("'" + feature22 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature22.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory23);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertNotNull(xmlFactory26);
+        org.junit.Assert.assertNull(characterEscapes27);
+        org.junit.Assert.assertTrue("'" + feature32 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature32.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory33);
+        org.junit.Assert.assertNotNull(xmlFactory34);
+        org.junit.Assert.assertNotNull(objectMapper36);
+    }
+
+    @Test
+    public void test372() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test372");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22807,9 +23315,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test367() throws Throwable {
+    public void test373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test367");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test373");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -22933,9 +23441,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test368() throws Throwable {
+    public void test374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test368");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test374");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23039,9 +23547,120 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test369() throws Throwable {
+    public void test375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test369");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test375");
+        javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
+        com.fasterxml.jackson.annotation.JsonInclude.Value value3 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper4 = xmlMapper2.setPropertyInclusion(value3);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec5 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory6 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory7 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory8 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec5, xMLInputFactory6, xMLOutputFactory7);
+        com.fasterxml.jackson.core.Version version9 = xmlFactory8.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper10 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory8);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes11 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter12 = xmlMapper10.writer(characterEscapes11);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray13 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper14 = xmlMapper10.disable(featureArray13);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper15 = objectMapper14.disableDefaultTyping();
+        com.fasterxml.jackson.databind.SerializationConfig serializationConfig16 = objectMapper14.getSerializationConfig();
+        com.fasterxml.jackson.databind.SerializerProvider serializerProvider17 = objectMapper14.getSerializerProviderInstance();
+        com.fasterxml.jackson.core.JsonParser.Feature[] featureArray18 = new com.fasterxml.jackson.core.JsonParser.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper19 = objectMapper14.enable(featureArray18);
+        com.fasterxml.jackson.databind.ser.DefaultSerializerProvider defaultSerializerProvider20 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper21 = objectMapper14.setSerializerProvider(defaultSerializerProvider20);
+        com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier xmlBeanDeserializerModifier23 = new com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier(" ");
+        com.fasterxml.jackson.databind.DeserializationConfig deserializationConfig24 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec25 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory26 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory27 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory28 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec25, xMLInputFactory26, xMLOutputFactory27);
+        com.fasterxml.jackson.core.Version version29 = xmlFactory28.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper30 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory28);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes31 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter32 = xmlMapper30.writer(characterEscapes31);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider33 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter34 = xmlMapper30.writer(filterProvider33);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec35 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory36 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory37 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory38 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec35, xMLInputFactory36, xMLOutputFactory37);
+        com.fasterxml.jackson.core.Version version39 = xmlFactory38.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper40 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory38);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes41 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter42 = xmlMapper40.writer(characterEscapes41);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec43 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory44 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory45 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory46 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec43, xMLInputFactory44, xMLOutputFactory45);
+        com.fasterxml.jackson.core.Version version47 = xmlFactory46.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper48 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory46);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes49 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter50 = xmlMapper48.writer(characterEscapes49);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory51 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper52 = xmlMapper48.setNodeFactory(jsonNodeFactory51);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider53 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper54 = xmlMapper48.setFilterProvider(filterProvider53);
+        com.fasterxml.jackson.core.JsonParser jsonParser55 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec56 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory57 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory58 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory59 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec56, xMLInputFactory57, xMLOutputFactory58);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature60 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory61 = xmlFactory59.disable(feature60);
+        com.fasterxml.jackson.core.Version version62 = xmlFactory61.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass63 = xmlFactory61.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor64 = objectMapper54.readValues(jsonParser55, featureClass63);
+        boolean boolean65 = xmlMapper40.canSerialize(featureClass63);
+        boolean boolean66 = com.fasterxml.jackson.dataformat.xml.util.TypeUtil.isIndexedType(featureClass63);
+        com.fasterxml.jackson.databind.JavaType javaType67 = xmlMapper30.constructType((java.lang.reflect.Type) featureClass63);
+        boolean boolean68 = com.fasterxml.jackson.dataformat.xml.util.TypeUtil.isIndexedType(javaType67);
+        com.fasterxml.jackson.databind.KeyDeserializer keyDeserializer69 = null;
+        com.fasterxml.jackson.databind.KeyDeserializer keyDeserializer70 = xmlBeanDeserializerModifier23.modifyKeyDeserializer(deserializationConfig24, javaType67, keyDeserializer69);
+        java.util.concurrent.atomic.AtomicReference<java.lang.Throwable> throwableAtomicReference71 = null;
+        boolean boolean72 = objectMapper14.canDeserialize(javaType67, throwableAtomicReference71);
+        com.fasterxml.jackson.databind.JavaType javaType73 = objectMapper4.constructType((java.lang.reflect.Type) javaType67);
+        org.junit.Assert.assertNotNull(objectMapper4);
+        org.junit.Assert.assertNotNull(version9);
+        org.junit.Assert.assertNotNull(objectWriter12);
+        org.junit.Assert.assertNotNull(featureArray13);
+        org.junit.Assert.assertNotNull(objectMapper14);
+        org.junit.Assert.assertNotNull(objectMapper15);
+        org.junit.Assert.assertNotNull(serializationConfig16);
+        org.junit.Assert.assertNotNull(serializerProvider17);
+        org.junit.Assert.assertNotNull(featureArray18);
+        org.junit.Assert.assertNotNull(objectMapper19);
+        org.junit.Assert.assertNotNull(objectMapper21);
+        org.junit.Assert.assertNotNull(version29);
+        org.junit.Assert.assertNotNull(objectWriter32);
+        org.junit.Assert.assertNotNull(objectWriter34);
+        org.junit.Assert.assertNotNull(version39);
+        org.junit.Assert.assertNotNull(objectWriter42);
+        org.junit.Assert.assertNotNull(version47);
+        org.junit.Assert.assertNotNull(objectWriter50);
+        org.junit.Assert.assertNotNull(objectMapper52);
+        org.junit.Assert.assertNotNull(objectMapper54);
+        org.junit.Assert.assertTrue("'" + feature60 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature60.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory61);
+        org.junit.Assert.assertNotNull(version62);
+        org.junit.Assert.assertNotNull(featureClass63);
+        org.junit.Assert.assertNotNull(featureItor64);
+        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + true + "'", boolean65 == true);
+        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + false + "'", boolean66 == false);
+        org.junit.Assert.assertNotNull(javaType67);
+        org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + false + "'", boolean68 == false);
+        org.junit.Assert.assertNull(keyDeserializer70);
+        org.junit.Assert.assertTrue("'" + boolean72 + "' != '" + true + "'", boolean72 == true);
+        org.junit.Assert.assertNotNull(javaType73);
+    }
+
+    @Test
+    public void test376() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test376");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23072,9 +23691,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test370() throws Throwable {
+    public void test377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test370");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test377");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23140,9 +23759,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test371() throws Throwable {
+    public void test378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test371");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test378");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23218,9 +23837,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test372() throws Throwable {
+    public void test379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test372");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test379");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23251,9 +23870,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test373() throws Throwable {
+    public void test380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test373");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test380");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23305,9 +23924,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test374() throws Throwable {
+    public void test381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test374");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test381");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23365,9 +23984,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test375() throws Throwable {
+    public void test382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test375");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test382");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23390,9 +24009,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test376() throws Throwable {
+    public void test383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test376");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test383");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23414,9 +24033,135 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test377() throws Throwable {
+    public void test384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test377");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test384");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory5 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory6 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory7 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec4, xMLInputFactory5, xMLOutputFactory6);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature8 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory9 = xmlFactory7.disable(feature8);
+        boolean boolean10 = feature8.enabledByDefault();
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory12 = xmlFactory3.configure(feature8, false);
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature> featureClass13 = xmlFactory12.getFormatWriteFeatureType();
+        com.fasterxml.jackson.dataformat.xml.JacksonXmlModule jacksonXmlModule14 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlModule();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper15 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory12, jacksonXmlModule14);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec16 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory17 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory18 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory19 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec16, xMLInputFactory17, xMLOutputFactory18);
+        com.fasterxml.jackson.core.Version version20 = xmlFactory19.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper21 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory19);
+        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping22 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper24 = xmlMapper21.enableDefaultTypingAsProperty(defaultTyping22, "XML");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec25 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory26 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory27 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory28 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec25, xMLInputFactory26, xMLOutputFactory27);
+        com.fasterxml.jackson.core.Version version29 = xmlFactory28.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper30 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory28);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes31 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter32 = xmlMapper30.writer(characterEscapes31);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray33 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper34 = xmlMapper30.disable(featureArray33);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper35 = objectMapper34.disableDefaultTyping();
+        com.fasterxml.jackson.databind.SerializationConfig serializationConfig36 = objectMapper34.getSerializationConfig();
+        com.fasterxml.jackson.databind.SerializerProvider serializerProvider37 = objectMapper34.getSerializerProviderInstance();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec38 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory39 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory40 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory41 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec38, xMLInputFactory39, xMLOutputFactory40);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature42 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory43 = xmlFactory41.disable(feature42);
+        com.fasterxml.jackson.core.Version version44 = xmlFactory43.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass45 = xmlFactory43.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer46 = serializerProvider37.getUnknownTypeSerializer(featureClass45);
+        java.util.TimeZone timeZone47 = serializerProvider37.getTimeZone();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec48 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory49 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory50 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory51 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec48, xMLInputFactory49, xMLOutputFactory50);
+        com.fasterxml.jackson.core.Version version52 = xmlFactory51.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper53 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory51);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes54 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter55 = xmlMapper53.writer(characterEscapes54);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec56 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory57 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory58 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory59 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec56, xMLInputFactory57, xMLOutputFactory58);
+        com.fasterxml.jackson.core.Version version60 = xmlFactory59.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper61 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory59);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes62 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter63 = xmlMapper61.writer(characterEscapes62);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory64 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper65 = xmlMapper61.setNodeFactory(jsonNodeFactory64);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider66 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper67 = xmlMapper61.setFilterProvider(filterProvider66);
+        com.fasterxml.jackson.core.JsonParser jsonParser68 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec69 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory70 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory71 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory72 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec69, xMLInputFactory70, xMLOutputFactory71);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature73 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory74 = xmlFactory72.disable(feature73);
+        com.fasterxml.jackson.core.Version version75 = xmlFactory74.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass76 = xmlFactory74.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor77 = objectMapper67.readValues(jsonParser68, featureClass76);
+        boolean boolean78 = xmlMapper53.canSerialize(featureClass76);
+        com.fasterxml.jackson.databind.BeanProperty beanProperty79 = null;
+        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer80 = serializerProvider37.findKeySerializer(featureClass76, beanProperty79);
+        com.fasterxml.jackson.databind.cfg.MutableConfigOverride mutableConfigOverride81 = objectMapper24.configOverride(featureClass76);
+        com.fasterxml.jackson.databind.KeyDeserializer keyDeserializer82 = null;
+        com.fasterxml.jackson.databind.module.SimpleModule simpleModule83 = jacksonXmlModule14.addKeyDeserializer(featureClass76, keyDeserializer82);
+        com.fasterxml.jackson.databind.module.SimpleSerializers simpleSerializers84 = null;
+        jacksonXmlModule14.setKeySerializers(simpleSerializers84);
+        org.junit.Assert.assertTrue("'" + feature8 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature8.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory9);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNotNull(xmlFactory12);
+        org.junit.Assert.assertNotNull(featureClass13);
+        org.junit.Assert.assertNotNull(version20);
+        org.junit.Assert.assertNotNull(objectMapper24);
+        org.junit.Assert.assertNotNull(version29);
+        org.junit.Assert.assertNotNull(objectWriter32);
+        org.junit.Assert.assertNotNull(featureArray33);
+        org.junit.Assert.assertNotNull(objectMapper34);
+        org.junit.Assert.assertNotNull(objectMapper35);
+        org.junit.Assert.assertNotNull(serializationConfig36);
+        org.junit.Assert.assertNotNull(serializerProvider37);
+        org.junit.Assert.assertTrue("'" + feature42 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature42.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory43);
+        org.junit.Assert.assertNotNull(version44);
+        org.junit.Assert.assertNotNull(featureClass45);
+        org.junit.Assert.assertNotNull(objJsonSerializer46);
+        org.junit.Assert.assertNotNull(timeZone47);
+        org.junit.Assert.assertEquals(timeZone47.getDisplayName(), "Coordinated Universal Time");
+        org.junit.Assert.assertNotNull(version52);
+        org.junit.Assert.assertNotNull(objectWriter55);
+        org.junit.Assert.assertNotNull(version60);
+        org.junit.Assert.assertNotNull(objectWriter63);
+        org.junit.Assert.assertNotNull(objectMapper65);
+        org.junit.Assert.assertNotNull(objectMapper67);
+        org.junit.Assert.assertTrue("'" + feature73 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature73.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory74);
+        org.junit.Assert.assertNotNull(version75);
+        org.junit.Assert.assertNotNull(featureClass76);
+        org.junit.Assert.assertNotNull(featureItor77);
+        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + true + "'", boolean78 == true);
+        org.junit.Assert.assertNotNull(objJsonSerializer80);
+        org.junit.Assert.assertNotNull(mutableConfigOverride81);
+        org.junit.Assert.assertNotNull(simpleModule83);
+    }
+
+    @Test
+    public void test385() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test385");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23504,9 +24249,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test378() throws Throwable {
+    public void test386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test378");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test386");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23600,9 +24345,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test379() throws Throwable {
+    public void test387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test379");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test387");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23724,9 +24469,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test380() throws Throwable {
+    public void test388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test380");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test388");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23749,9 +24494,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test381() throws Throwable {
+    public void test389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test381");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test389");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23846,9 +24591,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test382() throws Throwable {
+    public void test390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test382");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test390");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -23971,9 +24716,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test383() throws Throwable {
+    public void test391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test383");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test391");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24022,9 +24767,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test384() throws Throwable {
+    public void test392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test384");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test392");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24087,9 +24832,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test385() throws Throwable {
+    public void test393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test385");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test393");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24117,9 +24862,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test386() throws Throwable {
+    public void test394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test386");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test394");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24232,9 +24977,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test387() throws Throwable {
+    public void test395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test387");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test395");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24272,9 +25017,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test388() throws Throwable {
+    public void test396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test388");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test396");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24351,9 +25096,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test389() throws Throwable {
+    public void test397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test389");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test397");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24449,9 +25194,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test390() throws Throwable {
+    public void test398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test390");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test398");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24578,9 +25323,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test391() throws Throwable {
+    public void test399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test391");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test399");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24720,9 +25465,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test392() throws Throwable {
+    public void test400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test392");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test400");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector();
         com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector jacksonAnnotationIntrospector2 = jacksonXmlAnnotationIntrospector0.setConstructorPropertiesImpliesCreator(false);
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -24829,9 +25574,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test393() throws Throwable {
+    public void test401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test393");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test401");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24875,9 +25620,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test394() throws Throwable {
+    public void test402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test394");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test402");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -24903,9 +25648,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test395() throws Throwable {
+    public void test403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test395");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test403");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25032,9 +25777,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test396() throws Throwable {
+    public void test404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test396");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test404");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25062,9 +25807,34 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test397() throws Throwable {
+    public void test405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test397");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test405");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature4 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory5 = xmlFactory3.disable(feature4);
+        com.fasterxml.jackson.core.Version version6 = xmlFactory5.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper7 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory5);
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass8 = xmlFactory5.getFormatReadFeatureType();
+        boolean boolean9 = xmlFactory5.requiresPropertyOrdering();
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory10 = xmlFactory5.copy();
+        javax.xml.stream.XMLInputFactory xMLInputFactory11 = xmlFactory10.getXMLInputFactory();
+        org.junit.Assert.assertTrue("'" + feature4 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature4.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory5);
+        org.junit.Assert.assertNotNull(version6);
+        org.junit.Assert.assertNotNull(featureClass8);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertNotNull(xmlFactory10);
+        org.junit.Assert.assertNotNull(xMLInputFactory11);
+    }
+
+    @Test
+    public void test406() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test406");
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector0 = null;
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair2 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector0, annotationIntrospector1);
@@ -25205,9 +25975,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test398() throws Throwable {
+    public void test407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test398");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test407");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25331,9 +26101,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test399() throws Throwable {
+    public void test408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test399");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test408");
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup0 = new com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup();
         com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider xmlSerializerProvider1 = new com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider(xmlRootNameLookup0);
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup2 = xmlSerializerProvider1._rootNameLookup;
@@ -25367,9 +26137,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test400() throws Throwable {
+    public void test409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test400");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test409");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25507,9 +26277,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test401() throws Throwable {
+    public void test410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test401");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test410");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25546,9 +26316,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test402() throws Throwable {
+    public void test411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test402");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test411");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25578,9 +26348,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test403() throws Throwable {
+    public void test412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test403");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test412");
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup0 = new com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup();
         com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider xmlSerializerProvider1 = new com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider(xmlRootNameLookup0);
         com.fasterxml.jackson.core.ObjectCodec objectCodec2 = null;
@@ -25658,9 +26428,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test404() throws Throwable {
+    public void test413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test404");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test413");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25791,9 +26561,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test405() throws Throwable {
+    public void test414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test405");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test414");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25818,9 +26588,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test406() throws Throwable {
+    public void test415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test406");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test415");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25961,9 +26731,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test407() throws Throwable {
+    public void test416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test407");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test416");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -25996,9 +26766,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test408() throws Throwable {
+    public void test417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test408");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test417");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26048,9 +26818,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test409() throws Throwable {
+    public void test418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test409");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test418");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26094,9 +26864,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test410() throws Throwable {
+    public void test419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test410");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test419");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26129,9 +26899,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test411() throws Throwable {
+    public void test420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test411");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test420");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26260,9 +27030,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test412() throws Throwable {
+    public void test421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test412");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test421");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26375,9 +27145,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test413() throws Throwable {
+    public void test422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test413");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test422");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26520,9 +27290,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test414() throws Throwable {
+    public void test423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test414");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test423");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26581,9 +27351,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test415() throws Throwable {
+    public void test424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test415");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test424");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26613,9 +27383,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test416() throws Throwable {
+    public void test425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test416");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test425");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26647,9 +27417,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test417() throws Throwable {
+    public void test426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test417");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test426");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26674,9 +27444,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test418() throws Throwable {
+    public void test427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test418");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test427");
         com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder xmlTypeResolverBuilder0 = new com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder();
         com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder stdTypeResolverBuilder2 = xmlTypeResolverBuilder0.typeProperty("hi!");
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -26803,9 +27573,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test419() throws Throwable {
+    public void test428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test419");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test428");
         com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier xmlBeanDeserializerModifier1 = new com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier(" ");
         com.fasterxml.jackson.databind.DeserializationConfig deserializationConfig2 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -26890,9 +27660,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test420() throws Throwable {
+    public void test429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test420");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test429");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -26946,9 +27716,115 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test421() throws Throwable {
+    public void test430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test421");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test430");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
+        com.fasterxml.jackson.databind.DeserializationContext deserializationContext10 = xmlMapper5.getDeserializationContext();
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter11 = xmlMapper5.writer();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec12 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory13 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory14 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory15 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec12, xMLInputFactory13, xMLOutputFactory14);
+        com.fasterxml.jackson.core.Version version16 = xmlFactory15.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper17 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory15);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes18 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter19 = xmlMapper17.writer(characterEscapes18);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray20 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper21 = xmlMapper17.disable(featureArray20);
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter22 = xmlMapper17.writer();
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider23 = null;
+        xmlMapper17.setFilters(filterProvider23);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper25 = xmlMapper17.disableDefaultTyping();
+        com.fasterxml.jackson.databind.ser.SerializerFactory serializerFactory26 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper27 = xmlMapper17.setSerializerFactory(serializerFactory26);
+        com.fasterxml.jackson.core.PrettyPrinter prettyPrinter28 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper29 = xmlMapper17.setDefaultPrettyPrinter(prettyPrinter28);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec30 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory31 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory32 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory33 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec30, xMLInputFactory31, xMLOutputFactory32);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature34 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory35 = xmlFactory33.disable(feature34);
+        com.fasterxml.jackson.core.Version version36 = xmlFactory35.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper37 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory35);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature38 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper39 = xmlMapper37.disable(feature38);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec40 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory41 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory42 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory43 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec40, xMLInputFactory41, xMLOutputFactory42);
+        com.fasterxml.jackson.core.Version version44 = xmlFactory43.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper45 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory43);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes46 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter47 = xmlMapper45.writer(characterEscapes46);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory48 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper49 = xmlMapper45.setNodeFactory(jsonNodeFactory48);
+        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider50 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper51 = xmlMapper45.setFilterProvider(filterProvider50);
+        com.fasterxml.jackson.core.JsonParser jsonParser52 = null;
+        com.fasterxml.jackson.core.ObjectCodec objectCodec53 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory54 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory55 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory56 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec53, xMLInputFactory54, xMLOutputFactory55);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature57 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory58 = xmlFactory56.disable(feature57);
+        com.fasterxml.jackson.core.Version version59 = xmlFactory58.version();
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass60 = xmlFactory58.getFormatReadFeatureType();
+        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor61 = objectMapper51.readValues(jsonParser52, featureClass60);
+        boolean boolean62 = objectMapper39.canSerialize(featureClass60);
+        com.fasterxml.jackson.databind.MapperFeature[] mapperFeatureArray63 = new com.fasterxml.jackson.databind.MapperFeature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper64 = objectMapper39.enable(mapperFeatureArray63);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper65 = xmlMapper17.enable(mapperFeatureArray63);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper66 = xmlMapper5.disable(mapperFeatureArray63);
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectWriter7);
+        org.junit.Assert.assertNotNull(featureArray8);
+        org.junit.Assert.assertNotNull(objectMapper9);
+        org.junit.Assert.assertNotNull(deserializationContext10);
+        org.junit.Assert.assertNotNull(objectWriter11);
+        org.junit.Assert.assertNotNull(version16);
+        org.junit.Assert.assertNotNull(objectWriter19);
+        org.junit.Assert.assertNotNull(featureArray20);
+        org.junit.Assert.assertNotNull(objectMapper21);
+        org.junit.Assert.assertNotNull(objectWriter22);
+        org.junit.Assert.assertNotNull(objectMapper25);
+        org.junit.Assert.assertNotNull(objectMapper27);
+        org.junit.Assert.assertNotNull(objectMapper29);
+        org.junit.Assert.assertTrue("'" + feature34 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature34.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory35);
+        org.junit.Assert.assertNotNull(version36);
+        org.junit.Assert.assertTrue("'" + feature38 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature38.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(objectMapper39);
+        org.junit.Assert.assertNotNull(version44);
+        org.junit.Assert.assertNotNull(objectWriter47);
+        org.junit.Assert.assertNotNull(objectMapper49);
+        org.junit.Assert.assertNotNull(objectMapper51);
+        org.junit.Assert.assertTrue("'" + feature57 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature57.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory58);
+        org.junit.Assert.assertNotNull(version59);
+        org.junit.Assert.assertNotNull(featureClass60);
+        org.junit.Assert.assertNotNull(featureItor61);
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + true + "'", boolean62 == true);
+        org.junit.Assert.assertNotNull(mapperFeatureArray63);
+        org.junit.Assert.assertNotNull(objectMapper64);
+        org.junit.Assert.assertNotNull(objectMapper65);
+        org.junit.Assert.assertNotNull(objectMapper66);
+    }
+
+    @Test
+    public void test431() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test431");
         com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder xmlTypeResolverBuilder0 = new com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder();
         com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder stdTypeResolverBuilder2 = xmlTypeResolverBuilder0.typeProperty("hi!");
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -27075,9 +27951,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test422() throws Throwable {
+    public void test432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test422");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test432");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27112,9 +27988,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test423() throws Throwable {
+    public void test433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test423");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test433");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27138,9 +28014,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test424() throws Throwable {
+    public void test434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test424");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test434");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27182,9 +28058,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test425() throws Throwable {
+    public void test435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test425");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test435");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector jacksonXmlAnnotationIntrospector1 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector(false);
         com.fasterxml.jackson.databind.introspect.Annotated annotated2 = null;
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup3 = new com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup();
@@ -27342,9 +28218,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test426() throws Throwable {
+    public void test436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test426");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test436");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27366,9 +28242,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test427() throws Throwable {
+    public void test437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test427");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test437");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27398,9 +28274,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test428() throws Throwable {
+    public void test438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test428");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test438");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27425,9 +28301,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test429() throws Throwable {
+    public void test439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test429");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test439");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27469,9 +28345,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test430() throws Throwable {
+    public void test440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test430");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test440");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27496,9 +28372,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test431() throws Throwable {
+    public void test441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test431");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test441");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper1 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0);
         com.fasterxml.jackson.databind.ser.DefaultSerializerProvider defaultSerializerProvider2 = null;
@@ -27517,9 +28393,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test432() throws Throwable {
+    public void test442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test432");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test442");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27559,9 +28435,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test433() throws Throwable {
+    public void test443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test433");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test443");
         com.fasterxml.jackson.databind.ser.BeanPropertyWriter[] beanPropertyWriterArray0 = new com.fasterxml.jackson.databind.ser.BeanPropertyWriter[] {};
         com.fasterxml.jackson.databind.ser.BeanPropertyWriter[] beanPropertyWriterArray1 = new com.fasterxml.jackson.databind.ser.BeanPropertyWriter[] {};
         com.fasterxml.jackson.databind.ser.BeanPropertyWriter[] beanPropertyWriterArray2 = new com.fasterxml.jackson.databind.ser.BeanPropertyWriter[] {};
@@ -27677,9 +28553,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test434() throws Throwable {
+    public void test444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test434");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test444");
         com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier xmlBeanDeserializerModifier1 = new com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier(" ");
         com.fasterxml.jackson.databind.DeserializationConfig deserializationConfig2 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -27755,9 +28631,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test435() throws Throwable {
+    public void test445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test435");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test445");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -27875,9 +28751,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test436() throws Throwable {
+    public void test446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test436");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test446");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28000,9 +28876,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test437() throws Throwable {
+    public void test447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test437");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test447");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28064,9 +28940,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test438() throws Throwable {
+    public void test448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test438");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test448");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28151,9 +29027,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test439() throws Throwable {
+    public void test449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test439");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test449");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28184,9 +29060,54 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test440() throws Throwable {
+    public void test450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test440");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test450");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature4 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory5 = xmlFactory3.disable(feature4);
+        com.fasterxml.jackson.dataformat.xml.JacksonXmlModule jacksonXmlModule6 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlModule();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper7 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3, jacksonXmlModule6);
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector8 = null;
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector9 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair10 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector8, annotationIntrospector9);
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector11 = null;
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector12 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair13 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector11, annotationIntrospector12);
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair14 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair((com.fasterxml.jackson.databind.AnnotationIntrospector) pair10, (com.fasterxml.jackson.databind.AnnotationIntrospector) pair13);
+        pair14.setDefaultUseWrapper(true);
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector17 = null;
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector18 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair19 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector17, annotationIntrospector18);
+        com.fasterxml.jackson.databind.introspect.Annotated annotated20 = null;
+        java.lang.Boolean boolean21 = pair19.isOutputAsCData(annotated20);
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector22 = null;
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector23 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair24 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector22, annotationIntrospector23);
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector25 = null;
+        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector26 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair27 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector25, annotationIntrospector26);
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair28 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair((com.fasterxml.jackson.databind.AnnotationIntrospector) pair24, (com.fasterxml.jackson.databind.AnnotationIntrospector) pair27);
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair29 = com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair.instance((com.fasterxml.jackson.databind.AnnotationIntrospector) pair19, (com.fasterxml.jackson.databind.AnnotationIntrospector) pair27);
+        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair30 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair((com.fasterxml.jackson.databind.AnnotationIntrospector) pair14, (com.fasterxml.jackson.databind.AnnotationIntrospector) pair19);
+        com.fasterxml.jackson.databind.introspect.Annotated annotated31 = null;
+        java.lang.Boolean boolean32 = pair14.isOutputAsCData(annotated31);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper33 = xmlMapper7.setAnnotationIntrospector((com.fasterxml.jackson.databind.AnnotationIntrospector) pair14);
+        org.junit.Assert.assertTrue("'" + feature4 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature4.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory5);
+        org.junit.Assert.assertNull(boolean21);
+        org.junit.Assert.assertNotNull(pair29);
+        org.junit.Assert.assertNull(boolean32);
+        org.junit.Assert.assertNotNull(objectMapper33);
+    }
+
+    @Test
+    public void test451() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test451");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28332,9 +29253,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test441() throws Throwable {
+    public void test452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test441");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test452");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28453,9 +29374,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test442() throws Throwable {
+    public void test453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test442");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test453");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28589,9 +29510,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test443() throws Throwable {
+    public void test454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test443");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test454");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory4 = null;
@@ -28660,9 +29581,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test444() throws Throwable {
+    public void test455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test444");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test455");
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup0 = new com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup();
         com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider xmlSerializerProvider1 = new com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider(xmlRootNameLookup0);
         int int2 = xmlSerializerProvider1.cachedSerializersCount();
@@ -28670,9 +29591,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test445() throws Throwable {
+    public void test456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test445");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test456");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28694,9 +29615,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test446() throws Throwable {
+    public void test457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test446");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test457");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28798,9 +29719,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test447() throws Throwable {
+    public void test458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test447");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test458");
         com.fasterxml.jackson.dataformat.xml.JacksonXmlModule jacksonXmlModule0 = new com.fasterxml.jackson.dataformat.xml.JacksonXmlModule();
         com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier xmlBeanDeserializerModifier2 = new com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier(" ");
         com.fasterxml.jackson.databind.DeserializationConfig deserializationConfig3 = null;
@@ -28881,9 +29802,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test448() throws Throwable {
+    public void test459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test448");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test459");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28924,9 +29845,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test449() throws Throwable {
+    public void test460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test449");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test460");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28949,9 +29870,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test450() throws Throwable {
+    public void test461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test450");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test461");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -28980,9 +29901,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test451() throws Throwable {
+    public void test462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test451");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test462");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29044,9 +29965,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test452() throws Throwable {
+    public void test463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test452");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test463");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29095,9 +30016,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test453() throws Throwable {
+    public void test464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test453");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test464");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29124,9 +30045,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test454() throws Throwable {
+    public void test465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test454");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test465");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29153,9 +30074,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test455() throws Throwable {
+    public void test466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test455");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test466");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29185,9 +30106,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test456() throws Throwable {
+    public void test467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test456");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test467");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29247,9 +30168,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test457() throws Throwable {
+    public void test468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test457");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test468");
         com.fasterxml.jackson.dataformat.xml.util.DefaultXmlPrettyPrinter defaultXmlPrettyPrinter0 = new com.fasterxml.jackson.dataformat.xml.util.DefaultXmlPrettyPrinter();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory2 = null;
@@ -29370,9 +30291,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test458() throws Throwable {
+    public void test469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test458");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test469");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29402,9 +30323,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test459() throws Throwable {
+    public void test470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test459");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test470");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29487,9 +30408,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test460() throws Throwable {
+    public void test471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test460");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test471");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29541,9 +30462,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test461() throws Throwable {
+    public void test472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test461");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test472");
         com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory0 = new com.fasterxml.jackson.dataformat.xml.XmlFactory();
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper1 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory0);
         com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature2 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_DECLARATION;
@@ -29555,9 +30476,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test462() throws Throwable {
+    public void test473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test462");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test473");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29587,9 +30508,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test463() throws Throwable {
+    public void test474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test463");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test474");
         com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder xmlTypeResolverBuilder0 = new com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder();
         com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder stdTypeResolverBuilder2 = xmlTypeResolverBuilder0.typeProperty("hi!");
         com.fasterxml.jackson.core.ObjectCodec objectCodec3 = null;
@@ -29716,9 +30637,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test464() throws Throwable {
+    public void test475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test464");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test475");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29769,9 +30690,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test465() throws Throwable {
+    public void test476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test465");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test476");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29802,9 +30723,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test466() throws Throwable {
+    public void test477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test466");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test477");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29860,9 +30781,130 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test467() throws Throwable {
+    public void test478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test467");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test478");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature4 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory5 = xmlFactory3.disable(feature4);
+        com.fasterxml.jackson.core.Version version6 = xmlFactory5.version();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec7 = xmlFactory5.getCodec();
+        com.fasterxml.jackson.dataformat.xml.JacksonXmlModule jacksonXmlModule8 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper9 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory5, jacksonXmlModule8);
+        com.fasterxml.jackson.annotation.JsonInclude.Value value10 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper11 = xmlMapper9.setPropertyInclusion(value10);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec12 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory13 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory14 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory15 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec12, xMLInputFactory13, xMLOutputFactory14);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = xmlFactory15.setRootValueSeparator("");
+        java.io.DataOutput dataOutput18 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator19 = jsonFactory17.createGenerator(dataOutput18);
+        boolean boolean20 = jsonGenerator19.canWriteTypeId();
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes21 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator22 = jsonGenerator19.setCharacterEscapes(characterEscapes21);
+        boolean boolean23 = jsonGenerator19.canWriteBinaryNatively();
+        jsonGenerator19.writeOmittedField("hi!");
+        com.fasterxml.jackson.core.FormatSchema formatSchema26 = null;
+        boolean boolean27 = jsonGenerator19.canUseSchema(formatSchema26);
+        com.fasterxml.jackson.databind.ObjectReader objectReader28 = objectMapper11.readerForUpdating((java.lang.Object) jsonGenerator19);
+        org.junit.Assert.assertTrue("'" + feature4 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature4.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory5);
+        org.junit.Assert.assertNotNull(version6);
+        org.junit.Assert.assertNull(objectCodec7);
+        org.junit.Assert.assertNotNull(objectMapper11);
+        org.junit.Assert.assertNotNull(jsonFactory17);
+        org.junit.Assert.assertNotNull(jsonGenerator19);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNotNull(jsonGenerator22);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertNotNull(objectReader28);
+    }
+
+    @Test
+    public void test479() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test479");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
+        com.fasterxml.jackson.databind.DeserializationContext deserializationContext10 = xmlMapper5.getDeserializationContext();
+        com.fasterxml.jackson.core.Version version11 = xmlMapper5.version();
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter12 = xmlMapper5.writerWithDefaultPrettyPrinter();
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper13 = xmlMapper5.enableDefaultTyping();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec14 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory15 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory16 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory17 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec14, xMLInputFactory15, xMLOutputFactory16);
+        com.fasterxml.jackson.core.Version version18 = xmlFactory17.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper19 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory17);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes20 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter21 = xmlMapper19.writer(characterEscapes20);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray22 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper23 = xmlMapper19.disable(featureArray22);
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper24 = xmlMapper19.copy();
+        com.fasterxml.jackson.databind.ser.SerializerFactory serializerFactory25 = xmlMapper19.getSerializerFactory();
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper26 = xmlMapper5.setSerializerFactory(serializerFactory25);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper27 = objectMapper26.clearProblemHandlers();
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectWriter7);
+        org.junit.Assert.assertNotNull(featureArray8);
+        org.junit.Assert.assertNotNull(objectMapper9);
+        org.junit.Assert.assertNotNull(deserializationContext10);
+        org.junit.Assert.assertNotNull(version11);
+        org.junit.Assert.assertNotNull(objectWriter12);
+        org.junit.Assert.assertNotNull(objectMapper13);
+        org.junit.Assert.assertNotNull(version18);
+        org.junit.Assert.assertNotNull(objectWriter21);
+        org.junit.Assert.assertNotNull(featureArray22);
+        org.junit.Assert.assertNotNull(objectMapper23);
+        org.junit.Assert.assertNotNull(xmlMapper24);
+        org.junit.Assert.assertNotNull(serializerFactory25);
+        org.junit.Assert.assertNotNull(objectMapper26);
+        org.junit.Assert.assertNotNull(objectMapper27);
+    }
+
+    @Test
+    public void test480() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test480");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory8 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.setNodeFactory(jsonNodeFactory8);
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory10 = new com.fasterxml.jackson.dataformat.xml.XmlFactory();
+        com.fasterxml.jackson.databind.ObjectReader objectReader11 = xmlMapper5.readerForUpdating((java.lang.Object) xmlFactory10);
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper12 = xmlMapper5.copy();
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory13 = xmlMapper5.getNodeFactory();
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectWriter7);
+        org.junit.Assert.assertNotNull(objectMapper9);
+        org.junit.Assert.assertNotNull(objectReader11);
+        org.junit.Assert.assertNotNull(xmlMapper12);
+        org.junit.Assert.assertNull(jsonNodeFactory13);
+    }
+
+    @Test
+    public void test481() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test481");
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector0 = null;
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair2 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector0, annotationIntrospector1);
@@ -29965,9 +31007,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test468() throws Throwable {
+    public void test482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test468");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test482");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -29999,9 +31041,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test469() throws Throwable {
+    public void test483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test469");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test483");
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup0 = new com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup();
         com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider xmlSerializerProvider1 = new com.fasterxml.jackson.dataformat.xml.ser.XmlSerializerProvider(xmlRootNameLookup0);
         com.fasterxml.jackson.dataformat.xml.util.XmlRootNameLookup xmlRootNameLookup2 = xmlSerializerProvider1._rootNameLookup;
@@ -30145,9 +31187,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test470() throws Throwable {
+    public void test484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test470");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test484");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30166,9 +31208,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test471() throws Throwable {
+    public void test485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test471");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test485");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30194,9 +31236,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test472() throws Throwable {
+    public void test486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test472");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test486");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30230,9 +31272,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test473() throws Throwable {
+    public void test487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test473");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test487");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30290,9 +31332,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test474() throws Throwable {
+    public void test488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test474");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test488");
         com.fasterxml.jackson.dataformat.xml.ser.UnwrappingXmlBeanSerializer unwrappingXmlBeanSerializer0 = null;
         com.fasterxml.jackson.databind.ser.impl.ObjectIdWriter objectIdWriter1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder xmlTypeResolverBuilder2 = new com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder();
@@ -30426,9 +31468,32 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test475() throws Throwable {
+    public void test489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test475");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test489");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature4 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory5 = xmlFactory3.disable(feature4);
+        com.fasterxml.jackson.core.Version version6 = xmlFactory5.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper7 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory5);
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass8 = xmlFactory5.getFormatReadFeatureType();
+        boolean boolean9 = xmlFactory5.requiresPropertyOrdering();
+        com.fasterxml.jackson.core.io.InputDecorator inputDecorator10 = xmlFactory5.getInputDecorator();
+        org.junit.Assert.assertTrue("'" + feature4 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature4.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory5);
+        org.junit.Assert.assertNotNull(version6);
+        org.junit.Assert.assertNotNull(featureClass8);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertNull(inputDecorator10);
+    }
+
+    @Test
+    public void test490() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test490");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30458,9 +31523,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test476() throws Throwable {
+    public void test491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test476");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test491");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30490,9 +31555,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test477() throws Throwable {
+    public void test492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test477");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test492");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30535,9 +31600,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test478() throws Throwable {
+    public void test493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test478");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test493");
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector0 = null;
         com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair2 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector0, annotationIntrospector1);
@@ -30661,9 +31726,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test479() throws Throwable {
+    public void test494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test479");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test494");
         javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
         com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
@@ -30680,9 +31745,133 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test480() throws Throwable {
+    public void test495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test480");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test495");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
+        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
+        int int10 = xmlMapper5.mixInCount();
+        com.fasterxml.jackson.databind.InjectableValues injectableValues11 = xmlMapper5.getInjectableValues();
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature12 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        boolean boolean14 = feature12.enabledIn((int) (byte) 10);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper15 = xmlMapper5.disable(feature12);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec16 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory17 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory18 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory19 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec16, xMLInputFactory17, xMLOutputFactory18);
+        com.fasterxml.jackson.core.Version version20 = xmlFactory19.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper21 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory19);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes22 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter23 = xmlMapper21.writer(characterEscapes22);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray24 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper25 = xmlMapper21.disable(featureArray24);
+        com.fasterxml.jackson.databind.DeserializationContext deserializationContext26 = xmlMapper21.getDeserializationContext();
+        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping27 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper29 = xmlMapper21.enableDefaultTypingAsProperty(defaultTyping27, "");
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory30 = objectMapper29.getNodeFactory();
+        com.fasterxml.jackson.databind.ObjectReader objectReader31 = objectMapper15.reader(jsonNodeFactory30);
+        com.fasterxml.jackson.databind.jsontype.SubtypeResolver subtypeResolver32 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper33 = objectMapper15.setSubtypeResolver(subtypeResolver32);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec34 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory35 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory36 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory37 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec34, xMLInputFactory35, xMLOutputFactory36);
+        com.fasterxml.jackson.core.Version version38 = xmlFactory37.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper39 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory37);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes40 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter41 = xmlMapper39.writer(characterEscapes40);
+        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray42 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper43 = xmlMapper39.disable(featureArray42);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper44 = objectMapper43.disableDefaultTyping();
+        com.fasterxml.jackson.databind.SerializationConfig serializationConfig45 = objectMapper43.getSerializationConfig();
+        com.fasterxml.jackson.databind.node.ArrayNode arrayNode46 = objectMapper43.createArrayNode();
+        java.util.List<com.fasterxml.jackson.databind.Module> moduleList47 = com.fasterxml.jackson.databind.ObjectMapper.findModules();
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper48 = objectMapper43.registerModules((java.lang.Iterable<com.fasterxml.jackson.databind.Module>) moduleList47);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper49 = objectMapper33.registerModules((java.lang.Iterable<com.fasterxml.jackson.databind.Module>) moduleList47);
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter50 = objectMapper49.writerWithDefaultPrettyPrinter();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec51 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory52 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory53 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory54 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec51, xMLInputFactory52, xMLOutputFactory53);
+        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature55 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory56 = xmlFactory54.disable(feature55);
+        com.fasterxml.jackson.core.Version version57 = xmlFactory56.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper58 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory56);
+        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass59 = xmlFactory56.getFormatReadFeatureType();
+        boolean boolean60 = xmlFactory56.requiresPropertyOrdering();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec61 = null;
+        javax.xml.stream.XMLInputFactory xMLInputFactory62 = null;
+        javax.xml.stream.XMLOutputFactory xMLOutputFactory63 = null;
+        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory64 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec61, xMLInputFactory62, xMLOutputFactory63);
+        com.fasterxml.jackson.core.Version version65 = xmlFactory64.version();
+        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper66 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory64);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes67 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter68 = xmlMapper66.writer(characterEscapes67);
+        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory69 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper70 = xmlMapper66.setNodeFactory(jsonNodeFactory69);
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper71 = xmlMapper66.findAndRegisterModules();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory72 = xmlMapper66.getJsonFactory();
+        java.lang.Object obj73 = null;
+        byte[] byteArray74 = xmlMapper66.writeValueAsBytes(obj73);
+        com.fasterxml.jackson.core.JsonParser jsonParser75 = xmlFactory56.createJsonParser(byteArray74);
+        com.fasterxml.jackson.databind.JsonNode jsonNode76 = objectMapper49.readTree(jsonParser75);
+        org.junit.Assert.assertNotNull(version4);
+        org.junit.Assert.assertNotNull(objectWriter7);
+        org.junit.Assert.assertNotNull(featureArray8);
+        org.junit.Assert.assertNotNull(objectMapper9);
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
+        org.junit.Assert.assertNull(injectableValues11);
+        org.junit.Assert.assertTrue("'" + feature12 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature12.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
+        org.junit.Assert.assertNotNull(objectMapper15);
+        org.junit.Assert.assertNotNull(version20);
+        org.junit.Assert.assertNotNull(objectWriter23);
+        org.junit.Assert.assertNotNull(featureArray24);
+        org.junit.Assert.assertNotNull(objectMapper25);
+        org.junit.Assert.assertNotNull(deserializationContext26);
+        org.junit.Assert.assertNotNull(objectMapper29);
+        org.junit.Assert.assertNotNull(jsonNodeFactory30);
+        org.junit.Assert.assertNotNull(objectReader31);
+        org.junit.Assert.assertNotNull(objectMapper33);
+        org.junit.Assert.assertNotNull(version38);
+        org.junit.Assert.assertNotNull(objectWriter41);
+        org.junit.Assert.assertNotNull(featureArray42);
+        org.junit.Assert.assertNotNull(objectMapper43);
+        org.junit.Assert.assertNotNull(objectMapper44);
+        org.junit.Assert.assertNotNull(serializationConfig45);
+        org.junit.Assert.assertNotNull(arrayNode46);
+        org.junit.Assert.assertNotNull(moduleList47);
+        org.junit.Assert.assertNotNull(objectMapper48);
+        org.junit.Assert.assertNotNull(objectMapper49);
+        org.junit.Assert.assertNotNull(objectWriter50);
+        org.junit.Assert.assertTrue("'" + feature55 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature55.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
+        org.junit.Assert.assertNotNull(xmlFactory56);
+        org.junit.Assert.assertNotNull(version57);
+        org.junit.Assert.assertNotNull(featureClass59);
+        org.junit.Assert.assertTrue("'" + boolean60 + "' != '" + false + "'", boolean60 == false);
+        org.junit.Assert.assertNotNull(version65);
+        org.junit.Assert.assertNotNull(objectWriter68);
+        org.junit.Assert.assertNotNull(objectMapper70);
+        org.junit.Assert.assertNotNull(objectMapper71);
+        org.junit.Assert.assertNotNull(jsonFactory72);
+        org.junit.Assert.assertNotNull(byteArray74);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray74), "[60, 110, 117, 108, 108, 47, 62]");
+        org.junit.Assert.assertNotNull(jsonParser75);
+        org.junit.Assert.assertNotNull(jsonNode76);
+    }
+
+    @Test
+    public void test496() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test496");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30829,9 +32018,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test481() throws Throwable {
+    public void test497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test481");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test497");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30892,9 +32081,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test482() throws Throwable {
+    public void test498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test482");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test498");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -30996,9 +32185,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test483() throws Throwable {
+    public void test499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test483");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test499");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -31026,9 +32215,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test484() throws Throwable {
+    public void test500() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test484");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test500");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
         javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
@@ -31056,931 +32245,6 @@ public class RandoopRegressionTest0 {
         org.junit.Assert.assertNotNull(objectMapper9);
         org.junit.Assert.assertNotNull(objectWriter10);
         org.junit.Assert.assertNotNull(objectMapper12);
-    }
-
-    @Test
-    public void test485() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test485");
-        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector0 = null;
-        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector1 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair2 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector0, annotationIntrospector1);
-        com.fasterxml.jackson.databind.introspect.Annotated annotated3 = null;
-        java.lang.Boolean boolean4 = pair2.isOutputAsCData(annotated3);
-        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector5 = null;
-        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector6 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair7 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector5, annotationIntrospector6);
-        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector8 = null;
-        com.fasterxml.jackson.databind.AnnotationIntrospector annotationIntrospector9 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair10 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair(annotationIntrospector8, annotationIntrospector9);
-        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair11 = new com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair((com.fasterxml.jackson.databind.AnnotationIntrospector) pair7, (com.fasterxml.jackson.databind.AnnotationIntrospector) pair10);
-        com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair pair12 = com.fasterxml.jackson.dataformat.xml.XmlAnnotationIntrospector.Pair.instance((com.fasterxml.jackson.databind.AnnotationIntrospector) pair2, (com.fasterxml.jackson.databind.AnnotationIntrospector) pair10);
-        com.fasterxml.jackson.databind.introspect.Annotated annotated13 = null;
-        java.lang.Boolean boolean14 = pair2.isOutputAsCData(annotated13);
-        com.fasterxml.jackson.dataformat.xml.ser.XmlBeanSerializerModifier xmlBeanSerializerModifier15 = new com.fasterxml.jackson.dataformat.xml.ser.XmlBeanSerializerModifier();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec16 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory17 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory18 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory19 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec16, xMLInputFactory17, xMLOutputFactory18);
-        com.fasterxml.jackson.core.Version version20 = xmlFactory19.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper21 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory19);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes22 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter23 = xmlMapper21.writer(characterEscapes22);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray24 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper25 = xmlMapper21.disable(featureArray24);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper26 = objectMapper25.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig27 = objectMapper25.getSerializationConfig();
-        com.fasterxml.jackson.databind.BeanDescription beanDescription28 = null;
-        com.fasterxml.jackson.databind.ser.BeanSerializerBuilder beanSerializerBuilder29 = null;
-        com.fasterxml.jackson.databind.ser.BeanSerializerBuilder beanSerializerBuilder30 = xmlBeanSerializerModifier15.updateBuilder(serializationConfig27, beanDescription28, beanSerializerBuilder29);
-        com.fasterxml.jackson.databind.introspect.AnnotatedMember annotatedMember31 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec32 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory33 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory34 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory35 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec32, xMLInputFactory33, xMLOutputFactory34);
-        com.fasterxml.jackson.core.Version version36 = xmlFactory35.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper37 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory35);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes38 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter39 = xmlMapper37.writer(characterEscapes38);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray40 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper41 = xmlMapper37.disable(featureArray40);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper42 = objectMapper41.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig43 = objectMapper41.getSerializationConfig();
-        com.fasterxml.jackson.databind.SerializerProvider serializerProvider44 = objectMapper41.getSerializerProviderInstance();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec45 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory46 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory47 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory48 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec45, xMLInputFactory46, xMLOutputFactory47);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature49 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory50 = xmlFactory48.disable(feature49);
-        com.fasterxml.jackson.core.Version version51 = xmlFactory50.version();
-        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass52 = xmlFactory50.getFormatReadFeatureType();
-        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer53 = serializerProvider44.getUnknownTypeSerializer(featureClass52);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec54 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory55 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory56 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory57 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec54, xMLInputFactory55, xMLOutputFactory56);
-        com.fasterxml.jackson.core.Version version58 = xmlFactory57.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper59 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory57);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes60 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter61 = xmlMapper59.writer(characterEscapes60);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory62 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper63 = xmlMapper59.setNodeFactory(jsonNodeFactory62);
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory64 = new com.fasterxml.jackson.dataformat.xml.XmlFactory();
-        com.fasterxml.jackson.databind.ObjectReader objectReader65 = xmlMapper59.readerForUpdating((java.lang.Object) xmlFactory64);
-        java.lang.Class<com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature> featureClass66 = xmlFactory64.getFormatWriteFeatureType();
-        com.fasterxml.jackson.databind.JavaType javaType67 = serializerProvider44.constructType((java.lang.reflect.Type) featureClass66);
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder<?> wildcardTypeResolverBuilder68 = pair2.findPropertyTypeResolver((com.fasterxml.jackson.databind.cfg.MapperConfig<com.fasterxml.jackson.databind.SerializationConfig>) serializationConfig27, annotatedMember31, javaType67);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(boolean4);
-        org.junit.Assert.assertNotNull(pair12);
-        org.junit.Assert.assertNull(boolean14);
-        org.junit.Assert.assertNotNull(version20);
-        org.junit.Assert.assertNotNull(objectWriter23);
-        org.junit.Assert.assertNotNull(featureArray24);
-        org.junit.Assert.assertNotNull(objectMapper25);
-        org.junit.Assert.assertNotNull(objectMapper26);
-        org.junit.Assert.assertNotNull(serializationConfig27);
-        org.junit.Assert.assertNull(beanSerializerBuilder30);
-        org.junit.Assert.assertNotNull(version36);
-        org.junit.Assert.assertNotNull(objectWriter39);
-        org.junit.Assert.assertNotNull(featureArray40);
-        org.junit.Assert.assertNotNull(objectMapper41);
-        org.junit.Assert.assertNotNull(objectMapper42);
-        org.junit.Assert.assertNotNull(serializationConfig43);
-        org.junit.Assert.assertNotNull(serializerProvider44);
-        org.junit.Assert.assertTrue("'" + feature49 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature49.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory50);
-        org.junit.Assert.assertNotNull(version51);
-        org.junit.Assert.assertNotNull(featureClass52);
-        org.junit.Assert.assertNotNull(objJsonSerializer53);
-        org.junit.Assert.assertNotNull(version58);
-        org.junit.Assert.assertNotNull(objectWriter61);
-        org.junit.Assert.assertNotNull(objectMapper63);
-        org.junit.Assert.assertNotNull(objectReader65);
-        org.junit.Assert.assertNotNull(featureClass66);
-        org.junit.Assert.assertNotNull(javaType67);
-    }
-
-    @Test
-    public void test486() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test486");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.dataformat.xml.JacksonXmlModule jacksonXmlModule4 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3, jacksonXmlModule4);
-        byte[] byteArray10 = new byte[] { (byte) 0, (byte) -1, (byte) -1, (byte) -1 };
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.JsonParser jsonParser11 = xmlFactory3.createParser(byteArray10);
-            org.junit.Assert.fail("Expected exception of type java.io.IOException; message: java.io.CharConversionException: Invalid UTF-8 start byte 0xff (at char #2, byte #-1)");
-        } catch (java.io.IOException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(byteArray10);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray10), "[0, -1, -1, -1]");
-    }
-
-    @Test
-    public void test487() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test487");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature4 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory5 = xmlFactory3.disable(feature4);
-        com.fasterxml.jackson.core.Version version6 = xmlFactory5.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper7 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory5);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec9 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory10 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory11 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory12 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec9, xMLInputFactory10, xMLOutputFactory11);
-        com.fasterxml.jackson.core.Version version13 = xmlFactory12.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper14 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory12);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes15 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter16 = xmlMapper14.writer(characterEscapes15);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray17 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper18 = xmlMapper14.disable(featureArray17);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory19 = null;
-        com.fasterxml.jackson.databind.ObjectReader objectReader20 = xmlMapper14.reader(jsonNodeFactory19);
-        javax.xml.stream.XMLInputFactory xMLInputFactory21 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper22 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory21);
-        com.fasterxml.jackson.databind.type.TypeFactory typeFactory23 = xmlMapper22.getTypeFactory();
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper24 = xmlMapper14.setTypeFactory(typeFactory23);
-        com.fasterxml.jackson.core.JsonParser jsonParser25 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec26 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory27 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory28 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory29 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec26, xMLInputFactory27, xMLOutputFactory28);
-        com.fasterxml.jackson.core.Version version30 = xmlFactory29.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper31 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory29);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes32 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter33 = xmlMapper31.writer(characterEscapes32);
-        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider34 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter35 = xmlMapper31.writer(filterProvider34);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec36 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory37 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory38 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory39 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec36, xMLInputFactory37, xMLOutputFactory38);
-        com.fasterxml.jackson.core.Version version40 = xmlFactory39.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper41 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory39);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes42 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter43 = xmlMapper41.writer(characterEscapes42);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec44 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory45 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory46 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory47 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec44, xMLInputFactory45, xMLOutputFactory46);
-        com.fasterxml.jackson.core.Version version48 = xmlFactory47.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper49 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory47);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes50 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter51 = xmlMapper49.writer(characterEscapes50);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory52 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper53 = xmlMapper49.setNodeFactory(jsonNodeFactory52);
-        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider54 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper55 = xmlMapper49.setFilterProvider(filterProvider54);
-        com.fasterxml.jackson.core.JsonParser jsonParser56 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec57 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory58 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory59 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory60 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec57, xMLInputFactory58, xMLOutputFactory59);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature61 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory62 = xmlFactory60.disable(feature61);
-        com.fasterxml.jackson.core.Version version63 = xmlFactory62.version();
-        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass64 = xmlFactory62.getFormatReadFeatureType();
-        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor65 = objectMapper55.readValues(jsonParser56, featureClass64);
-        boolean boolean66 = xmlMapper41.canSerialize(featureClass64);
-        boolean boolean67 = com.fasterxml.jackson.dataformat.xml.util.TypeUtil.isIndexedType(featureClass64);
-        com.fasterxml.jackson.databind.JavaType javaType68 = xmlMapper31.constructType((java.lang.reflect.Type) featureClass64);
-        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.core.TreeCodec> treeCodecItor69 = xmlMapper14.readValues(jsonParser25, javaType68);
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper70 = xmlMapper7.readValue("JSON", javaType68);
-            org.junit.Assert.fail("Expected exception of type java.io.IOException; message: com.ctc.wstx.exc.WstxUnexpectedCharException: Unexpected character 'J' (code 74) in prolog; expected '<'? at [row,col {unknown-source}]: [1,1]");
-        } catch (java.io.IOException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + feature4 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature4.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory5);
-        org.junit.Assert.assertNotNull(version6);
-        org.junit.Assert.assertNotNull(version13);
-        org.junit.Assert.assertNotNull(objectWriter16);
-        org.junit.Assert.assertNotNull(featureArray17);
-        org.junit.Assert.assertNotNull(objectMapper18);
-        org.junit.Assert.assertNotNull(objectReader20);
-        org.junit.Assert.assertNotNull(typeFactory23);
-        org.junit.Assert.assertNotNull(objectMapper24);
-        org.junit.Assert.assertNotNull(version30);
-        org.junit.Assert.assertNotNull(objectWriter33);
-        org.junit.Assert.assertNotNull(objectWriter35);
-        org.junit.Assert.assertNotNull(version40);
-        org.junit.Assert.assertNotNull(objectWriter43);
-        org.junit.Assert.assertNotNull(version48);
-        org.junit.Assert.assertNotNull(objectWriter51);
-        org.junit.Assert.assertNotNull(objectMapper53);
-        org.junit.Assert.assertNotNull(objectMapper55);
-        org.junit.Assert.assertTrue("'" + feature61 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature61.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory62);
-        org.junit.Assert.assertNotNull(version63);
-        org.junit.Assert.assertNotNull(featureClass64);
-        org.junit.Assert.assertNotNull(featureItor65);
-        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + true + "'", boolean66 == true);
-        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + false + "'", boolean67 == false);
-        org.junit.Assert.assertNotNull(javaType68);
-        org.junit.Assert.assertNotNull(treeCodecItor69);
-    }
-
-    @Test
-    public void test488() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test488");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper10 = objectMapper9.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig11 = objectMapper9.getSerializationConfig();
-        com.fasterxml.jackson.databind.SerializerProvider serializerProvider12 = objectMapper9.getSerializerProviderInstance();
-        com.fasterxml.jackson.databind.type.TypeFactory typeFactory13 = serializerProvider12.getTypeFactory();
-        boolean boolean15 = serializerProvider12.hasSerializationFeatures(2);
-        java.util.TimeZone timeZone16 = serializerProvider12.getTimeZone();
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(featureArray8);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectMapper10);
-        org.junit.Assert.assertNotNull(serializationConfig11);
-        org.junit.Assert.assertNotNull(serializerProvider12);
-        org.junit.Assert.assertNotNull(typeFactory13);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(timeZone16);
-        org.junit.Assert.assertEquals(timeZone16.getDisplayName(), "Coordinated Universal Time");
-    }
-
-    @Test
-    public void test489() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test489");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory8 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.setNodeFactory(jsonNodeFactory8);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper10 = xmlMapper5.findAndRegisterModules();
-        com.fasterxml.jackson.databind.SerializerProvider serializerProvider11 = objectMapper10.getSerializerProvider();
-        com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder xmlTypeResolverBuilder12 = new com.fasterxml.jackson.dataformat.xml.XmlTypeResolverBuilder();
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper13 = objectMapper10.setDefaultTyping((com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder<com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder>) xmlTypeResolverBuilder12);
-        com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder stdTypeResolverBuilder15 = xmlTypeResolverBuilder12.typeIdVisibility(true);
-        com.fasterxml.jackson.annotation.JsonTypeInfo.Id id16 = null;
-        com.fasterxml.jackson.databind.jsontype.TypeIdResolver typeIdResolver17 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder stdTypeResolverBuilder18 = xmlTypeResolverBuilder12.init(id16, typeIdResolver17);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: idType can not be null");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectMapper10);
-        org.junit.Assert.assertNotNull(serializerProvider11);
-        org.junit.Assert.assertNotNull(objectMapper13);
-        org.junit.Assert.assertNotNull(stdTypeResolverBuilder15);
-    }
-
-    @Test
-    public void test490() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test490");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature4 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        boolean boolean5 = xmlFactory3.isEnabled(feature4);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory7 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory8 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory9 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec6, xMLInputFactory7, xMLOutputFactory8);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature10 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory11 = xmlFactory9.disable(feature10);
-        com.fasterxml.jackson.core.Version version12 = xmlFactory11.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper13 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory11);
-        boolean boolean14 = xmlFactory11.requiresCustomCodec();
-        javax.xml.stream.XMLInputFactory xMLInputFactory15 = xmlFactory11.getXMLInputFactory();
-        xmlFactory3.setXMLInputFactory(xMLInputFactory15);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature17 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean18 = xmlFactory3.isEnabled(feature17);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + feature4 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature4.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + feature10 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature10.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory11);
-        org.junit.Assert.assertNotNull(version12);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
-        org.junit.Assert.assertNotNull(xMLInputFactory15);
-    }
-
-    @Test
-    public void test491() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test491");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
-        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping10 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper12 = objectMapper9.enableDefaultTypingAsProperty(defaultTyping10, "XML");
-        com.fasterxml.jackson.databind.PropertyNamingStrategy propertyNamingStrategy13 = objectMapper9.getPropertyNamingStrategy();
-        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider14 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter15 = objectMapper9.writer(filterProvider14);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec16 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory17 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory18 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory19 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec16, xMLInputFactory17, xMLOutputFactory18);
-        com.fasterxml.jackson.core.Version version20 = xmlFactory19.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper21 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory19);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes22 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter23 = xmlMapper21.writer(characterEscapes22);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray24 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper25 = xmlMapper21.disable(featureArray24);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper26 = objectMapper25.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig27 = objectMapper25.getSerializationConfig();
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper28 = objectMapper9.setConfig(serializationConfig27);
-        com.fasterxml.jackson.databind.DeserializationFeature deserializationFeature29 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.databind.ObjectReader objectReader30 = objectMapper9.reader(deserializationFeature29);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(featureArray8);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectMapper12);
-        org.junit.Assert.assertNull(propertyNamingStrategy13);
-        org.junit.Assert.assertNotNull(objectWriter15);
-        org.junit.Assert.assertNotNull(version20);
-        org.junit.Assert.assertNotNull(objectWriter23);
-        org.junit.Assert.assertNotNull(featureArray24);
-        org.junit.Assert.assertNotNull(objectMapper25);
-        org.junit.Assert.assertNotNull(objectMapper26);
-        org.junit.Assert.assertNotNull(serializationConfig27);
-        org.junit.Assert.assertNotNull(objectMapper28);
-    }
-
-    @Test
-    public void test492() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test492");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper10 = objectMapper9.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig11 = objectMapper9.getSerializationConfig();
-        com.fasterxml.jackson.databind.SerializerProvider serializerProvider12 = objectMapper9.getSerializerProviderInstance();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec13 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory14 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory15 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory16 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec13, xMLInputFactory14, xMLOutputFactory15);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature17 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory18 = xmlFactory16.disable(feature17);
-        com.fasterxml.jackson.core.Version version19 = xmlFactory18.version();
-        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass20 = xmlFactory18.getFormatReadFeatureType();
-        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer21 = serializerProvider12.getUnknownTypeSerializer(featureClass20);
-        java.util.TimeZone timeZone22 = serializerProvider12.getTimeZone();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec23 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory24 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory25 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory26 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec23, xMLInputFactory24, xMLOutputFactory25);
-        com.fasterxml.jackson.core.Version version27 = xmlFactory26.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper28 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory26);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes29 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter30 = xmlMapper28.writer(characterEscapes29);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec31 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory32 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory33 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory34 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec31, xMLInputFactory32, xMLOutputFactory33);
-        com.fasterxml.jackson.core.Version version35 = xmlFactory34.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper36 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory34);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes37 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter38 = xmlMapper36.writer(characterEscapes37);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory39 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper40 = xmlMapper36.setNodeFactory(jsonNodeFactory39);
-        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider41 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper42 = xmlMapper36.setFilterProvider(filterProvider41);
-        com.fasterxml.jackson.core.JsonParser jsonParser43 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec44 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory45 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory46 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory47 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec44, xMLInputFactory45, xMLOutputFactory46);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature48 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory49 = xmlFactory47.disable(feature48);
-        com.fasterxml.jackson.core.Version version50 = xmlFactory49.version();
-        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass51 = xmlFactory49.getFormatReadFeatureType();
-        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor52 = objectMapper42.readValues(jsonParser43, featureClass51);
-        boolean boolean53 = xmlMapper28.canSerialize(featureClass51);
-        com.fasterxml.jackson.databind.JavaType javaType54 = serializerProvider12.constructType((java.lang.reflect.Type) featureClass51);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec55 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory56 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory57 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory58 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec55, xMLInputFactory56, xMLOutputFactory57);
-        com.fasterxml.jackson.core.Version version59 = xmlFactory58.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper60 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory58);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes61 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter62 = xmlMapper60.writer(characterEscapes61);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray63 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper64 = xmlMapper60.disable(featureArray63);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper65 = objectMapper64.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig66 = objectMapper64.getSerializationConfig();
-        com.fasterxml.jackson.databind.SerializerProvider serializerProvider67 = objectMapper64.getSerializerProviderInstance();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec68 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory69 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory70 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory71 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec68, xMLInputFactory69, xMLOutputFactory70);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature72 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory73 = xmlFactory71.disable(feature72);
-        com.fasterxml.jackson.core.Version version74 = xmlFactory73.version();
-        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass75 = xmlFactory73.getFormatReadFeatureType();
-        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer76 = serializerProvider67.getUnknownTypeSerializer(featureClass75);
-        java.util.TimeZone timeZone77 = serializerProvider67.getTimeZone();
-        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer78 = serializerProvider67.getDefaultNullValueSerializer();
-        com.fasterxml.jackson.databind.BeanProperty beanProperty79 = null;
-        com.fasterxml.jackson.databind.JsonSerializer<?> wildcardJsonSerializer80 = serializerProvider12.handlePrimaryContextualization(objJsonSerializer78, beanProperty79);
-        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer81 = serializerProvider12.getDefaultNullValueSerializer();
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(featureArray8);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectMapper10);
-        org.junit.Assert.assertNotNull(serializationConfig11);
-        org.junit.Assert.assertNotNull(serializerProvider12);
-        org.junit.Assert.assertTrue("'" + feature17 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature17.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory18);
-        org.junit.Assert.assertNotNull(version19);
-        org.junit.Assert.assertNotNull(featureClass20);
-        org.junit.Assert.assertNotNull(objJsonSerializer21);
-        org.junit.Assert.assertNotNull(timeZone22);
-        org.junit.Assert.assertEquals(timeZone22.getDisplayName(), "Coordinated Universal Time");
-        org.junit.Assert.assertNotNull(version27);
-        org.junit.Assert.assertNotNull(objectWriter30);
-        org.junit.Assert.assertNotNull(version35);
-        org.junit.Assert.assertNotNull(objectWriter38);
-        org.junit.Assert.assertNotNull(objectMapper40);
-        org.junit.Assert.assertNotNull(objectMapper42);
-        org.junit.Assert.assertTrue("'" + feature48 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature48.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory49);
-        org.junit.Assert.assertNotNull(version50);
-        org.junit.Assert.assertNotNull(featureClass51);
-        org.junit.Assert.assertNotNull(featureItor52);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + true + "'", boolean53 == true);
-        org.junit.Assert.assertNotNull(javaType54);
-        org.junit.Assert.assertNotNull(version59);
-        org.junit.Assert.assertNotNull(objectWriter62);
-        org.junit.Assert.assertNotNull(featureArray63);
-        org.junit.Assert.assertNotNull(objectMapper64);
-        org.junit.Assert.assertNotNull(objectMapper65);
-        org.junit.Assert.assertNotNull(serializationConfig66);
-        org.junit.Assert.assertNotNull(serializerProvider67);
-        org.junit.Assert.assertTrue("'" + feature72 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature72.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory73);
-        org.junit.Assert.assertNotNull(version74);
-        org.junit.Assert.assertNotNull(featureClass75);
-        org.junit.Assert.assertNotNull(objJsonSerializer76);
-        org.junit.Assert.assertNotNull(timeZone77);
-        org.junit.Assert.assertEquals(timeZone77.getDisplayName(), "Coordinated Universal Time");
-        org.junit.Assert.assertNotNull(objJsonSerializer78);
-        org.junit.Assert.assertNotNull(wildcardJsonSerializer80);
-        org.junit.Assert.assertNotNull(objJsonSerializer81);
-    }
-
-    @Test
-    public void test493() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test493");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory8 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.setNodeFactory(jsonNodeFactory8);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper10 = xmlMapper5.findAndRegisterModules();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = xmlMapper5.getJsonFactory();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec12 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory13 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory14 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory15 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec12, xMLInputFactory13, xMLOutputFactory14);
-        com.fasterxml.jackson.core.Version version16 = xmlFactory15.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper17 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory15);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes18 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter19 = xmlMapper17.writer(characterEscapes18);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray20 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper21 = xmlMapper17.disable(featureArray20);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper22 = objectMapper21.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig23 = objectMapper21.getSerializationConfig();
-        com.fasterxml.jackson.databind.SerializerProvider serializerProvider24 = objectMapper21.getSerializerProviderInstance();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec25 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory26 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory27 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory28 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec25, xMLInputFactory26, xMLOutputFactory27);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature29 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory30 = xmlFactory28.disable(feature29);
-        com.fasterxml.jackson.core.Version version31 = xmlFactory30.version();
-        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass32 = xmlFactory30.getFormatReadFeatureType();
-        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer33 = serializerProvider24.getUnknownTypeSerializer(featureClass32);
-        java.util.TimeZone timeZone34 = serializerProvider24.getTimeZone();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec35 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory36 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory37 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory38 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec35, xMLInputFactory36, xMLOutputFactory37);
-        com.fasterxml.jackson.core.Version version39 = xmlFactory38.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper40 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory38);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes41 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter42 = xmlMapper40.writer(characterEscapes41);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec43 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory44 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory45 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory46 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec43, xMLInputFactory44, xMLOutputFactory45);
-        com.fasterxml.jackson.core.Version version47 = xmlFactory46.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper48 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory46);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes49 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter50 = xmlMapper48.writer(characterEscapes49);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory51 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper52 = xmlMapper48.setNodeFactory(jsonNodeFactory51);
-        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider53 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper54 = xmlMapper48.setFilterProvider(filterProvider53);
-        com.fasterxml.jackson.core.JsonParser jsonParser55 = null;
-        com.fasterxml.jackson.core.ObjectCodec objectCodec56 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory57 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory58 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory59 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec56, xMLInputFactory57, xMLOutputFactory58);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature60 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory61 = xmlFactory59.disable(feature60);
-        com.fasterxml.jackson.core.Version version62 = xmlFactory61.version();
-        java.lang.Class<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureClass63 = xmlFactory61.getFormatReadFeatureType();
-        com.fasterxml.jackson.databind.MappingIterator<com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature> featureItor64 = objectMapper54.readValues(jsonParser55, featureClass63);
-        boolean boolean65 = xmlMapper40.canSerialize(featureClass63);
-        com.fasterxml.jackson.databind.BeanProperty beanProperty66 = null;
-        com.fasterxml.jackson.databind.JsonSerializer<java.lang.Object> objJsonSerializer67 = serializerProvider24.findKeySerializer(featureClass63, beanProperty66);
-        com.fasterxml.jackson.databind.ObjectReader objectReader68 = xmlMapper5.readerWithView(featureClass63);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec69 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory70 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory71 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory72 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec69, xMLInputFactory70, xMLOutputFactory71);
-        com.fasterxml.jackson.core.Version version73 = xmlFactory72.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper74 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory72);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes75 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter76 = xmlMapper74.writer(characterEscapes75);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray77 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper78 = xmlMapper74.disable(featureArray77);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper79 = objectMapper78.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig80 = objectMapper78.getSerializationConfig();
-        com.fasterxml.jackson.databind.SerializerProvider serializerProvider81 = objectMapper78.getSerializerProviderInstance();
-        com.fasterxml.jackson.core.JsonParser.Feature[] featureArray82 = new com.fasterxml.jackson.core.JsonParser.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper83 = objectMapper78.enable(featureArray82);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper84 = xmlMapper5.disable(featureArray82);
-        com.fasterxml.jackson.databind.SerializationFeature serializationFeature85 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean86 = objectMapper84.isEnabled(serializationFeature85);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectMapper10);
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertNotNull(version16);
-        org.junit.Assert.assertNotNull(objectWriter19);
-        org.junit.Assert.assertNotNull(featureArray20);
-        org.junit.Assert.assertNotNull(objectMapper21);
-        org.junit.Assert.assertNotNull(objectMapper22);
-        org.junit.Assert.assertNotNull(serializationConfig23);
-        org.junit.Assert.assertNotNull(serializerProvider24);
-        org.junit.Assert.assertTrue("'" + feature29 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature29.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory30);
-        org.junit.Assert.assertNotNull(version31);
-        org.junit.Assert.assertNotNull(featureClass32);
-        org.junit.Assert.assertNotNull(objJsonSerializer33);
-        org.junit.Assert.assertNotNull(timeZone34);
-        org.junit.Assert.assertEquals(timeZone34.getDisplayName(), "Coordinated Universal Time");
-        org.junit.Assert.assertNotNull(version39);
-        org.junit.Assert.assertNotNull(objectWriter42);
-        org.junit.Assert.assertNotNull(version47);
-        org.junit.Assert.assertNotNull(objectWriter50);
-        org.junit.Assert.assertNotNull(objectMapper52);
-        org.junit.Assert.assertNotNull(objectMapper54);
-        org.junit.Assert.assertTrue("'" + feature60 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature60.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory61);
-        org.junit.Assert.assertNotNull(version62);
-        org.junit.Assert.assertNotNull(featureClass63);
-        org.junit.Assert.assertNotNull(featureItor64);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + true + "'", boolean65 == true);
-        org.junit.Assert.assertNotNull(objJsonSerializer67);
-        org.junit.Assert.assertNotNull(objectReader68);
-        org.junit.Assert.assertNotNull(version73);
-        org.junit.Assert.assertNotNull(objectWriter76);
-        org.junit.Assert.assertNotNull(featureArray77);
-        org.junit.Assert.assertNotNull(objectMapper78);
-        org.junit.Assert.assertNotNull(objectMapper79);
-        org.junit.Assert.assertNotNull(serializationConfig80);
-        org.junit.Assert.assertNotNull(serializerProvider81);
-        org.junit.Assert.assertNotNull(featureArray82);
-        org.junit.Assert.assertNotNull(objectMapper83);
-        org.junit.Assert.assertNotNull(objectMapper84);
-    }
-
-    @Test
-    public void test494() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test494");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory8 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.setNodeFactory(jsonNodeFactory8);
-        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider10 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper11 = xmlMapper5.setFilterProvider(filterProvider10);
-        com.fasterxml.jackson.databind.DeserializationContext deserializationContext12 = xmlMapper5.getDeserializationContext();
-        com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser.Feature feature13 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.databind.ObjectMapper objectMapper14 = xmlMapper5.enable(feature13);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectMapper11);
-        org.junit.Assert.assertNotNull(deserializationContext12);
-    }
-
-    @Test
-    public void test495() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test495");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature4 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        boolean boolean5 = xmlFactory3.isEnabled(feature4);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec6 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory7 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory8 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory9 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec6, xMLInputFactory7, xMLOutputFactory8);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature10 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory11 = xmlFactory9.disable(feature10);
-        com.fasterxml.jackson.core.Version version12 = xmlFactory11.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper13 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory11);
-        com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature feature14 = com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper15 = xmlMapper13.disable(feature14);
-        boolean boolean16 = feature14.enabledByDefault();
-        boolean boolean17 = xmlFactory3.isEnabled(feature14);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec18 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory19 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory20 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory21 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec18, xMLInputFactory19, xMLOutputFactory20);
-        com.fasterxml.jackson.core.Version version22 = xmlFactory21.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper23 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory21);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes24 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter25 = xmlMapper23.writer(characterEscapes24);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray26 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper27 = xmlMapper23.disable(featureArray26);
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter28 = xmlMapper23.writer();
-        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider29 = null;
-        xmlMapper23.setFilters(filterProvider29);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper31 = xmlMapper23.disableDefaultTyping();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec32 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory33 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory34 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory35 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec32, xMLInputFactory33, xMLOutputFactory34);
-        com.fasterxml.jackson.core.Version version36 = xmlFactory35.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper37 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory35);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes38 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter39 = xmlMapper37.writer(characterEscapes38);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray40 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper41 = xmlMapper37.disable(featureArray40);
-        com.fasterxml.jackson.databind.DeserializationContext deserializationContext42 = xmlMapper37.getDeserializationContext();
-        com.fasterxml.jackson.databind.jsontype.SubtypeResolver subtypeResolver43 = xmlMapper37.getSubtypeResolver();
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper44 = objectMapper31.setSubtypeResolver(subtypeResolver43);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper45 = objectMapper44.enableDefaultTyping();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = xmlFactory3.setCodec((com.fasterxml.jackson.core.ObjectCodec) objectMapper44);
-        org.junit.Assert.assertTrue("'" + feature4 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature4.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + feature10 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature10.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(xmlFactory11);
-        org.junit.Assert.assertNotNull(version12);
-        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1 + "'", feature14.equals(com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_1_1));
-        org.junit.Assert.assertNotNull(objectMapper15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNotNull(version22);
-        org.junit.Assert.assertNotNull(objectWriter25);
-        org.junit.Assert.assertNotNull(featureArray26);
-        org.junit.Assert.assertNotNull(objectMapper27);
-        org.junit.Assert.assertNotNull(objectWriter28);
-        org.junit.Assert.assertNotNull(objectMapper31);
-        org.junit.Assert.assertNotNull(version36);
-        org.junit.Assert.assertNotNull(objectWriter39);
-        org.junit.Assert.assertNotNull(featureArray40);
-        org.junit.Assert.assertNotNull(objectMapper41);
-        org.junit.Assert.assertNotNull(deserializationContext42);
-        org.junit.Assert.assertNotNull(subtypeResolver43);
-        org.junit.Assert.assertNotNull(objectMapper44);
-        org.junit.Assert.assertNotNull(objectMapper45);
-        org.junit.Assert.assertNotNull(jsonFactory46);
-    }
-
-    @Test
-    public void test496() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test496");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper10 = objectMapper9.disableDefaultTyping();
-        com.fasterxml.jackson.databind.SerializationConfig serializationConfig11 = objectMapper9.getSerializationConfig();
-        com.fasterxml.jackson.databind.node.ArrayNode arrayNode12 = objectMapper9.createArrayNode();
-        com.fasterxml.jackson.core.JsonParser.Feature feature13 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean14 = objectMapper9.isEnabled(feature13);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(featureArray8);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectMapper10);
-        org.junit.Assert.assertNotNull(serializationConfig11);
-        org.junit.Assert.assertNotNull(arrayNode12);
-    }
-
-    @Test
-    public void test497() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test497");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
-        com.fasterxml.jackson.databind.node.JsonNodeFactory jsonNodeFactory10 = null;
-        com.fasterxml.jackson.databind.ObjectReader objectReader11 = xmlMapper5.reader(jsonNodeFactory10);
-        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping12 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper14 = xmlMapper5.enableDefaultTypingAsProperty(defaultTyping12, "<null/>");
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(featureArray8);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectReader11);
-        org.junit.Assert.assertNotNull(objectMapper14);
-    }
-
-    @Test
-    public void test498() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test498");
-        javax.xml.stream.XMLInputFactory xMLInputFactory0 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory1 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper2 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xMLInputFactory0, xMLOutputFactory1);
-        com.fasterxml.jackson.annotation.JsonInclude.Value value3 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper4 = xmlMapper2.setPropertyInclusion(value3);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper5 = xmlMapper2.findAndRegisterModules();
-        com.fasterxml.jackson.databind.InjectableValues injectableValues6 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper7 = objectMapper5.setInjectableValues(injectableValues6);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = objectMapper7.getJsonFactory();
-        org.junit.Assert.assertNotNull(objectMapper4);
-        org.junit.Assert.assertNotNull(objectMapper5);
-        org.junit.Assert.assertNotNull(objectMapper7);
-        org.junit.Assert.assertNotNull(jsonFactory8);
-    }
-
-    @Test
-    public void test499() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test499");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter10 = xmlMapper5.writer();
-        com.fasterxml.jackson.databind.ser.FilterProvider filterProvider11 = null;
-        xmlMapper5.setFilters(filterProvider11);
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper13 = xmlMapper5.disableDefaultTyping();
-        com.fasterxml.jackson.databind.ser.SerializerFactory serializerFactory14 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper15 = xmlMapper5.setSerializerFactory(serializerFactory14);
-        java.text.DateFormat dateFormat16 = xmlMapper5.getDateFormat();
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(featureArray8);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(objectWriter10);
-        org.junit.Assert.assertNotNull(objectMapper13);
-        org.junit.Assert.assertNotNull(objectMapper15);
-        org.junit.Assert.assertNotNull(dateFormat16);
-    }
-
-    @Test
-    public void test500() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test500");
-        com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
-        javax.xml.stream.XMLInputFactory xMLInputFactory1 = null;
-        javax.xml.stream.XMLOutputFactory xMLOutputFactory2 = null;
-        com.fasterxml.jackson.dataformat.xml.XmlFactory xmlFactory3 = new com.fasterxml.jackson.dataformat.xml.XmlFactory(objectCodec0, xMLInputFactory1, xMLOutputFactory2);
-        com.fasterxml.jackson.core.Version version4 = xmlFactory3.version();
-        com.fasterxml.jackson.dataformat.xml.XmlMapper xmlMapper5 = new com.fasterxml.jackson.dataformat.xml.XmlMapper(xmlFactory3);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes6 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter7 = xmlMapper5.writer(characterEscapes6);
-        com.fasterxml.jackson.core.JsonGenerator.Feature[] featureArray8 = new com.fasterxml.jackson.core.JsonGenerator.Feature[] {};
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper9 = xmlMapper5.disable(featureArray8);
-        com.fasterxml.jackson.databind.DeserializationContext deserializationContext10 = xmlMapper5.getDeserializationContext();
-        com.fasterxml.jackson.databind.jsontype.SubtypeResolver subtypeResolver11 = xmlMapper5.getSubtypeResolver();
-        com.fasterxml.jackson.core.Base64Variant base64Variant12 = null;
-        com.fasterxml.jackson.databind.ObjectWriter objectWriter13 = xmlMapper5.writer(base64Variant12);
-        org.junit.Assert.assertNotNull(version4);
-        org.junit.Assert.assertNotNull(objectWriter7);
-        org.junit.Assert.assertNotNull(featureArray8);
-        org.junit.Assert.assertNotNull(objectMapper9);
-        org.junit.Assert.assertNotNull(deserializationContext10);
-        org.junit.Assert.assertNotNull(subtypeResolver11);
-        org.junit.Assert.assertNotNull(objectWriter13);
     }
 }
 

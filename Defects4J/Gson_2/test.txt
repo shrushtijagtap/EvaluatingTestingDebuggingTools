@@ -1,1 +1,2 @@
-com.google.gson.functional.DefaultTypeAdaptersTest.testJsonElementTypeMismatch
+com.google.gson.internal.bind.EvosuiteTypeAdapters_ESTest.test44
+com.google.gson.internal.bind.EvosuiteTypeAdapters_ESTest.test45

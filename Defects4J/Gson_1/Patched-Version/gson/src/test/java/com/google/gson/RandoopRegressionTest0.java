@@ -850,7 +850,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.String str21 = gson0.toJson((java.lang.Object) writer19);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: circular reference error?  Offending field: lock??  Offending object: preserveType: false, type: class java.lang.Object, obj: com.google.gson.Streams$AppendableWriter@472924f0");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: circular reference error?  Offending field: lock??  Offending object: preserveType: false, type: class java.lang.Object, obj: com.google.gson.Streams$AppendableWriter@5466e7d8");
         } catch (java.lang.IllegalStateException e) {
         // Expected exception.
         }
@@ -1035,6 +1035,72 @@ public class RandoopRegressionTest0 {
         org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
         org.junit.Assert.assertNull(mappedObjectConstructor17);
         org.junit.Assert.assertEquals("'" + str20 + "' != '" + "{\"value\":\"4\"}" + "'", str20, "{\"value\":\"4\"}");
+    }
+
+    @Test
+    public void test25() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test25");
+        java.lang.reflect.Type type0 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            com.google.gson.TypeInfoArray typeInfoArray1 = com.google.gson.TypeInfoFactory.getTypeInfoForArray(type0);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: condition failed: false");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+    }
+
+    @Test
+    public void test26() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test26");
+        com.google.gson.AnonymousAndLocalClassExclusionStrategy anonymousAndLocalClassExclusionStrategy0 = com.google.gson.Gson.DEFAULT_ANON_LOCAL_CLASS_EXCLUSION_STRATEGY;
+        com.google.gson.JavaFieldNamingPolicy javaFieldNamingPolicy1 = new com.google.gson.JavaFieldNamingPolicy();
+        com.google.gson.ObjectNavigatorFactory objectNavigatorFactory2 = new com.google.gson.ObjectNavigatorFactory((com.google.gson.ExclusionStrategy) anonymousAndLocalClassExclusionStrategy0, (com.google.gson.FieldNamingStrategy2) javaFieldNamingPolicy1);
+        java.lang.reflect.Type type4 = null;
+        java.lang.reflect.Type type5 = null;
+        java.lang.reflect.Type[] typeArray6 = new java.lang.reflect.Type[] { type5 };
+        java.lang.reflect.Type type7 = null;
+        com.google.gson.ParameterizedTypeImpl parameterizedTypeImpl8 = new com.google.gson.ParameterizedTypeImpl(type4, typeArray6, type7);
+        java.lang.annotation.Annotation[] annotationArray9 = new java.lang.annotation.Annotation[] {};
+        java.util.ArrayList<java.lang.annotation.Annotation> annotationList10 = new java.util.ArrayList<java.lang.annotation.Annotation>();
+        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.annotation.Annotation>) annotationList10, annotationArray9);
+        java.lang.String str12 = javaFieldNamingPolicy1.translateName("hi!", (java.lang.reflect.Type) parameterizedTypeImpl8, (java.util.Collection<java.lang.annotation.Annotation>) annotationList10);
+        java.lang.Object obj13 = null;
+        boolean boolean14 = parameterizedTypeImpl8.equals(obj13);
+        java.lang.reflect.Type type15 = parameterizedTypeImpl8.getRawType();
+        java.lang.reflect.Type[] typeArray16 = parameterizedTypeImpl8.getActualTypeArguments();
+        // The following exception was thrown during execution in test generation
+        try {
+            com.google.gson.TypeInfoArray typeInfoArray17 = com.google.gson.TypeInfoFactory.getTypeInfoForArray((java.lang.reflect.Type) parameterizedTypeImpl8);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: condition failed: false");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(anonymousAndLocalClassExclusionStrategy0);
+        org.junit.Assert.assertNotNull(typeArray6);
+        org.junit.Assert.assertNotNull(annotationArray9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "hi!" + "'", str12, "hi!");
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNull(type15);
+        org.junit.Assert.assertNotNull(typeArray16);
+    }
+
+    @Test
+    public void test27() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test27");
+        java.lang.reflect.Field field0 = null;
+        java.lang.reflect.Type type1 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            com.google.gson.TypeInfo typeInfo2 = com.google.gson.TypeInfoFactory.getTypeInfoForField(field0, type1);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Type 'null' is not a Class, ParameterizedType, or GenericArrayType. Can't extract class.");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
     }
 }
 

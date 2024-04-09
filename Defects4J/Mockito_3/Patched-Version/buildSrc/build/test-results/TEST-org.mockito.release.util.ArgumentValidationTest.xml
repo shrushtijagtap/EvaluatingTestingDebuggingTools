@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.util.ArgumentValidationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-04-02T18:38:27" hostname="Shrushtis-MacBook-Air.local" time="0.082">
+<testsuite name="org.mockito.release.util.ArgumentValidationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-04-07T21:44:24" hostname="Shrushtis-MacBook-Air.local" time="0.078">
   <properties/>
-  <testcase name="validates arguments" classname="org.mockito.release.util.ArgumentValidationTest" time="0.073"/>
-  <testcase name="throws exception when null found" classname="org.mockito.release.util.ArgumentValidationTest" time="0.008"/>
-  <testcase name="warns when incorrect input supplied" classname="org.mockito.release.util.ArgumentValidationTest" time="0.001"/>
+  <testcase name="validates arguments" classname="org.mockito.release.util.ArgumentValidationTest" time="0.071"/>
+  <testcase name="throws exception when null found" classname="org.mockito.release.util.ArgumentValidationTest" time="0.007"/>
+  <testcase name="warns when incorrect input supplied" classname="org.mockito.release.util.ArgumentValidationTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

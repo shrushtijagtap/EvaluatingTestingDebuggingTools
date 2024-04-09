@@ -134,113 +134,6 @@ public class RegressionTest0 {
     public void test006() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test006");
-        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D8 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D10 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean12 = vector1D10.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D14 = vector1D10.scalarMultiply((double) 1L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D15 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        double double16 = vector1D14.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D15);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D17 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (-1), vector1D4, 2.2250738585072014E-308d, vector1D8, 1.0000000000000002d, vector1D15);
-        java.lang.String str18 = vector1D15.toString();
-        org.apache.commons.math3.geometry.partitioning.Region.Location location19 = intervalsSet2.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D15);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D21 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
-        org.apache.commons.math3.geometry.Space space22 = vector1D21.getSpace();
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D24 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
-        org.apache.commons.math3.geometry.Space space25 = vector1D24.getSpace();
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D26 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (byte) 100, vector1D21, (double) 100L, vector1D24);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D28 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
-        org.apache.commons.math3.geometry.Space space29 = vector1D28.getSpace();
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D31 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
-        org.apache.commons.math3.geometry.Space space32 = vector1D31.getSpace();
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (byte) 100, vector1D28, (double) 100L, vector1D31);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D34 = vector1D26.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D28);
-        org.apache.commons.math3.geometry.partitioning.Region.Location location35 = intervalsSet2.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D28);
-        org.apache.commons.math3.geometry.euclidean.threed.Line line36 = null;
-        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet39 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D41 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean43 = vector1D41.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D45 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D47 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean49 = vector1D47.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D51 = vector1D47.scalarMultiply((double) 1L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D52 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        double double53 = vector1D51.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D52);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D54 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (-1), vector1D41, 2.2250738585072014E-308d, vector1D45, 1.0000000000000002d, vector1D52);
-        java.lang.String str55 = vector1D52.toString();
-        org.apache.commons.math3.geometry.partitioning.Region.Location location56 = intervalsSet39.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D52);
-        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector57 = intervalsSet39.getBarycenter();
-        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine58 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line36, intervalsSet39);
-        boolean boolean59 = intervalsSet2.contains((org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet39);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D61 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D63 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D65 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean67 = vector1D65.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D69 = vector1D65.scalarMultiply((double) 1L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D70 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        double double71 = vector1D69.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D70);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D73 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean75 = vector1D73.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D77 = vector1D73.scalarMultiply((double) 1L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D78 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (short) 100, vector1D61, (double) 100, vector1D63, (double) (short) 0, vector1D70, (double) 'a', vector1D73);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D80 = vector1D73.scalarMultiply(4.605170185988092d);
-        double double81 = vector1D80.getNorm1();
-        org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint orientedPoint83 = new org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint(vector1D80, false);
-        org.apache.commons.math3.geometry.partitioning.Side side84 = intervalsSet39.side((org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) orientedPoint83);
-        orientedPoint83.revertSelf();
-        org.junit.Assert.assertNotNull(vector1D4);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNotNull(vector1D8);
-        org.junit.Assert.assertNotNull(vector1D10);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertNotNull(vector1D14);
-        org.junit.Assert.assertNotNull(vector1D15);
-        org.junit.Assert.assertTrue(Double.isNaN(double16));
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "{(NaN)}" + "'", str18, "{(NaN)}");
-        org.junit.Assert.assertTrue("'" + location19 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location19.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
-        org.junit.Assert.assertNotNull(vector1D21);
-        org.junit.Assert.assertNotNull(space22);
-        org.junit.Assert.assertNotNull(vector1D24);
-        org.junit.Assert.assertNotNull(space25);
-        org.junit.Assert.assertNotNull(vector1D28);
-        org.junit.Assert.assertNotNull(space29);
-        org.junit.Assert.assertNotNull(vector1D31);
-        org.junit.Assert.assertNotNull(space32);
-        org.junit.Assert.assertNotNull(vector1D34);
-        org.junit.Assert.assertTrue("'" + location35 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location35.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
-        org.junit.Assert.assertNotNull(vector1D41);
-        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
-        org.junit.Assert.assertNotNull(vector1D45);
-        org.junit.Assert.assertNotNull(vector1D47);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
-        org.junit.Assert.assertNotNull(vector1D51);
-        org.junit.Assert.assertNotNull(vector1D52);
-        org.junit.Assert.assertTrue(Double.isNaN(double53));
-        org.junit.Assert.assertEquals("'" + str55 + "' != '" + "{(NaN)}" + "'", str55, "{(NaN)}");
-        org.junit.Assert.assertTrue("'" + location56 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location56.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
-        org.junit.Assert.assertNotNull(euclidean1DVector57);
-        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + true + "'", boolean59 == true);
-        org.junit.Assert.assertNotNull(vector1D61);
-        org.junit.Assert.assertNotNull(vector1D63);
-        org.junit.Assert.assertNotNull(vector1D65);
-        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + false + "'", boolean67 == false);
-        org.junit.Assert.assertNotNull(vector1D69);
-        org.junit.Assert.assertNotNull(vector1D70);
-        org.junit.Assert.assertTrue(Double.isNaN(double71));
-        org.junit.Assert.assertNotNull(vector1D73);
-        org.junit.Assert.assertTrue("'" + boolean75 + "' != '" + false + "'", boolean75 == false);
-        org.junit.Assert.assertNotNull(vector1D77);
-        org.junit.Assert.assertNotNull(vector1D80);
-        org.junit.Assert.assertTrue(Double.isNaN(double81));
-        org.junit.Assert.assertTrue("'" + side84 + "' != '" + org.apache.commons.math3.geometry.partitioning.Side.MINUS + "'", side84.equals(org.apache.commons.math3.geometry.partitioning.Side.MINUS));
-    }
-
-    @Test
-    public void test007() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test007");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -258,9 +151,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test008() throws Throwable {
+    public void test007() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test008");
+            System.out.format("%n%s%n", "RegressionTest0.test007");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -278,9 +171,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test009() throws Throwable {
+    public void test008() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test009");
+            System.out.format("%n%s%n", "RegressionTest0.test008");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.euclidean.threed.Line line1 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane2 = null;
@@ -343,9 +236,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test010() throws Throwable {
+    public void test009() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test010");
+            System.out.format("%n%s%n", "RegressionTest0.test009");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane0 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList1 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList1);
@@ -464,9 +357,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test011() throws Throwable {
+    public void test010() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test011");
+            System.out.format("%n%s%n", "RegressionTest0.test010");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D5 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -504,9 +397,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test012() throws Throwable {
+    public void test011() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test012");
+            System.out.format("%n%s%n", "RegressionTest0.test011");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D5 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -660,9 +553,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test013() throws Throwable {
+    public void test012() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test013");
+            System.out.format("%n%s%n", "RegressionTest0.test012");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -737,9 +630,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test014() throws Throwable {
+    public void test013() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test014");
+            System.out.format("%n%s%n", "RegressionTest0.test013");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = null;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
@@ -782,9 +675,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test015() throws Throwable {
+    public void test014() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test015");
+            System.out.format("%n%s%n", "RegressionTest0.test014");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -883,9 +776,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test016() throws Throwable {
+    public void test015() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test016");
+            System.out.format("%n%s%n", "RegressionTest0.test015");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet5 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D7 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -992,9 +885,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test017() throws Throwable {
+    public void test016() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test017");
+            System.out.format("%n%s%n", "RegressionTest0.test016");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -1131,9 +1024,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test018() throws Throwable {
+    public void test017() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test018");
+            System.out.format("%n%s%n", "RegressionTest0.test017");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -1170,9 +1063,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test019() throws Throwable {
+    public void test018() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test019");
+            System.out.format("%n%s%n", "RegressionTest0.test018");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -1310,9 +1203,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test020() throws Throwable {
+    public void test019() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test020");
+            System.out.format("%n%s%n", "RegressionTest0.test019");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane0 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList1 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList1);
@@ -1433,9 +1326,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test021() throws Throwable {
+    public void test020() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test021");
+            System.out.format("%n%s%n", "RegressionTest0.test020");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.euclidean.threed.Line line1 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane2 = null;
@@ -1495,9 +1388,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test022() throws Throwable {
+    public void test021() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test022");
+            System.out.format("%n%s%n", "RegressionTest0.test021");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -1612,9 +1505,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test023() throws Throwable {
+    public void test022() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test023");
+            System.out.format("%n%s%n", "RegressionTest0.test022");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -1740,9 +1633,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test024() throws Throwable {
+    public void test023() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test024");
+            System.out.format("%n%s%n", "RegressionTest0.test023");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         double double1 = intervalsSet0.getSize();
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D3 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
@@ -1866,9 +1759,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test025() throws Throwable {
+    public void test024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test025");
+            System.out.format("%n%s%n", "RegressionTest0.test024");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -1969,9 +1862,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test026() throws Throwable {
+    public void test025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test026");
+            System.out.format("%n%s%n", "RegressionTest0.test025");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -2038,9 +1931,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test027() throws Throwable {
+    public void test026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test027");
+            System.out.format("%n%s%n", "RegressionTest0.test026");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
         org.apache.commons.math3.geometry.partitioning.AbstractRegion<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractRegion3 = intervalsSet2.copySelf();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet6 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
@@ -2157,9 +2050,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test028() throws Throwable {
+    public void test027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test028");
+            System.out.format("%n%s%n", "RegressionTest0.test027");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         boolean boolean1 = intervalsSet0.isEmpty();
         org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector2 = intervalsSet0.getBarycenter();
@@ -2279,9 +2172,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test029() throws Throwable {
+    public void test028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test029");
+            System.out.format("%n%s%n", "RegressionTest0.test028");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -2442,9 +2335,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test030() throws Throwable {
+    public void test029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test030");
+            System.out.format("%n%s%n", "RegressionTest0.test029");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -2584,9 +2477,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test031() throws Throwable {
+    public void test030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test031");
+            System.out.format("%n%s%n", "RegressionTest0.test030");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -2629,65 +2522,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test032() throws Throwable {
+    public void test031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test032");
-        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
-        org.apache.commons.math3.geometry.euclidean.threed.Line line1 = null;
-        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane2 = null;
-        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList3 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
-        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet4 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList3);
-        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint5 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane2, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet4);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D6 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean8 = vector1D6.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D10 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D12 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D14 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean16 = vector1D14.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D18 = vector1D14.scalarMultiply((double) 1L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D19 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        double double20 = vector1D18.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D19);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D22 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean24 = vector1D22.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D26 = vector1D22.scalarMultiply((double) 1L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D27 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (short) 100, vector1D10, (double) 100, vector1D12, (double) (short) 0, vector1D19, (double) 'a', vector1D22);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D29 = vector1D22.scalarMultiply(4.605170185988092d);
-        java.lang.String str30 = vector1D29.toString();
-        double double31 = vector1D6.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D29);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = vector1D6.scalarMultiply(0.0d);
-        org.apache.commons.math3.geometry.partitioning.Region.Location location34 = intervalsSet4.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D6);
-        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector35 = null;
-        org.apache.commons.math3.geometry.partitioning.Region.Location location36 = intervalsSet4.checkPoint(euclidean1DVector35);
-        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine37 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line1, intervalsSet4);
-        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine38 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane0, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet4);
-        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane39 = subLine38.getHyperplane();
-        org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DRegion40 = subLine38.getRemainingRegion();
-        org.junit.Assert.assertNotNull(vector1D6);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(vector1D10);
-        org.junit.Assert.assertNotNull(vector1D12);
-        org.junit.Assert.assertNotNull(vector1D14);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(vector1D18);
-        org.junit.Assert.assertNotNull(vector1D19);
-        org.junit.Assert.assertTrue(Double.isNaN(double20));
-        org.junit.Assert.assertNotNull(vector1D22);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertNotNull(vector1D26);
-        org.junit.Assert.assertNotNull(vector1D29);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "{(NaN)}" + "'", str30, "{(NaN)}");
-        org.junit.Assert.assertTrue(Double.isNaN(double31));
-        org.junit.Assert.assertNotNull(vector1D33);
-        org.junit.Assert.assertTrue("'" + location34 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location34.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
-        org.junit.Assert.assertTrue("'" + location36 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location36.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
-        org.junit.Assert.assertNull(euclidean2DHyperplane39);
-        org.junit.Assert.assertNotNull(euclidean1DRegion40);
-    }
-
-    @Test
-    public void test033() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test033");
+            System.out.format("%n%s%n", "RegressionTest0.test031");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -2813,9 +2650,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test034() throws Throwable {
+    public void test032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test034");
+            System.out.format("%n%s%n", "RegressionTest0.test032");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -2923,9 +2760,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test035() throws Throwable {
+    public void test033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test035");
+            System.out.format("%n%s%n", "RegressionTest0.test033");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -3002,9 +2839,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test036() throws Throwable {
+    public void test034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test036");
+            System.out.format("%n%s%n", "RegressionTest0.test034");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         org.apache.commons.math3.geometry.partitioning.BSPTree<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DBSPTree1 = null;
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = intervalsSet0.buildNew(euclidean1DBSPTree1);
@@ -3117,9 +2954,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test037() throws Throwable {
+    public void test035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test037");
+            System.out.format("%n%s%n", "RegressionTest0.test035");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
         org.apache.commons.math3.geometry.partitioning.AbstractRegion<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractRegion3 = intervalsSet2.copySelf();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet6 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
@@ -3246,9 +3083,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test038() throws Throwable {
+    public void test036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test038");
+            System.out.format("%n%s%n", "RegressionTest0.test036");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -3331,9 +3168,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test039() throws Throwable {
+    public void test037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test039");
+            System.out.format("%n%s%n", "RegressionTest0.test037");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane0 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList1 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList1);
@@ -3451,9 +3288,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test040() throws Throwable {
+    public void test038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test040");
+            System.out.format("%n%s%n", "RegressionTest0.test038");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -3607,9 +3444,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test041() throws Throwable {
+    public void test039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test041");
+            System.out.format("%n%s%n", "RegressionTest0.test039");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -3694,9 +3531,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test042() throws Throwable {
+    public void test040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test042");
+            System.out.format("%n%s%n", "RegressionTest0.test040");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -3771,9 +3608,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test043() throws Throwable {
+    public void test041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test043");
+            System.out.format("%n%s%n", "RegressionTest0.test041");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -3923,9 +3760,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test044() throws Throwable {
+    public void test042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test044");
+            System.out.format("%n%s%n", "RegressionTest0.test042");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.euclidean.threed.Line line1 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane2 = null;
@@ -3990,9 +3827,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test045() throws Throwable {
+    public void test043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test045");
+            System.out.format("%n%s%n", "RegressionTest0.test043");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -4153,9 +3990,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test046() throws Throwable {
+    public void test044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test046");
+            System.out.format("%n%s%n", "RegressionTest0.test044");
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList0 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet1 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList0);
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet4 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
@@ -4269,9 +4106,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test047() throws Throwable {
+    public void test045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test047");
+            System.out.format("%n%s%n", "RegressionTest0.test045");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -4422,9 +4259,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test048() throws Throwable {
+    public void test046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test048");
+            System.out.format("%n%s%n", "RegressionTest0.test046");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -4511,9 +4348,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test049() throws Throwable {
+    public void test047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test049");
+            System.out.format("%n%s%n", "RegressionTest0.test047");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
         org.apache.commons.math3.geometry.partitioning.AbstractRegion<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractRegion3 = intervalsSet2.copySelf();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet6 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
@@ -4631,9 +4468,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test050() throws Throwable {
+    public void test048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test050");
+            System.out.format("%n%s%n", "RegressionTest0.test048");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -4749,9 +4586,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test051() throws Throwable {
+    public void test049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test051");
+            System.out.format("%n%s%n", "RegressionTest0.test049");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         boolean boolean1 = intervalsSet0.isEmpty();
         org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector2 = intervalsSet0.getBarycenter();
@@ -4875,9 +4712,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test052() throws Throwable {
+    public void test050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test052");
+            System.out.format("%n%s%n", "RegressionTest0.test050");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -4952,9 +4789,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test053() throws Throwable {
+    public void test051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test053");
+            System.out.format("%n%s%n", "RegressionTest0.test051");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D5 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -4988,9 +4825,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test054() throws Throwable {
+    public void test052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test054");
+            System.out.format("%n%s%n", "RegressionTest0.test052");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -5052,9 +4889,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test055() throws Throwable {
+    public void test053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test055");
+            System.out.format("%n%s%n", "RegressionTest0.test053");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -5180,9 +5017,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test056() throws Throwable {
+    public void test054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test056");
+            System.out.format("%n%s%n", "RegressionTest0.test054");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -5330,9 +5167,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test057() throws Throwable {
+    public void test055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test057");
+            System.out.format("%n%s%n", "RegressionTest0.test055");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector1 = intervalsSet0.getBarycenter();
         double double2 = intervalsSet0.getInf();
@@ -5453,9 +5290,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test058() throws Throwable {
+    public void test056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test058");
+            System.out.format("%n%s%n", "RegressionTest0.test056");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -5625,113 +5462,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test059() throws Throwable {
+    public void test057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test059");
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = vector2D2.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D3);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = vector2D5.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D6);
-        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D4, vector2D5);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D10 = vector2D5.scalarMultiply((double) (-1.0f));
-        double double11 = vector2D5.getNormInf();
-        double double12 = vector2D5.getNorm();
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = vector2D0.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D5);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D17 = vector2D15.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D16);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D18 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D19 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = vector2D18.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D19);
-        double double21 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D17, vector2D18);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = vector2D18.scalarMultiply((double) (-1.0f));
-        double double24 = vector2D18.getNormInf();
-        double double25 = vector2D18.getNorm();
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = vector2D18.normalize();
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D28 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D30 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D31 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D32 = vector2D30.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D31);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D33 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D34 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = vector2D33.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D34);
-        double double36 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D32, vector2D33);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = vector2D33.scalarMultiply((double) (-1.0f));
-        double double39 = vector2D33.getNormInf();
-        double double40 = vector2D33.getNorm();
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D41 = vector2D28.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D33);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D42 = vector2D26.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D41);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D44 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D45 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D46 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D47 = vector2D45.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D46);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D49 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = vector2D48.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D49);
-        double double51 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D47, vector2D48);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = vector2D48.scalarMultiply((double) (-1.0f));
-        double double54 = vector2D48.getNormInf();
-        double double55 = vector2D44.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D48);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D56 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) '4', vector2D26, 5.65685424949238d, vector2D44);
-        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine57 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(vector2D5, vector2D44);
-        boolean boolean58 = subLine57.isEmpty();
-        org.junit.Assert.assertNotNull(vector2D0);
-        org.junit.Assert.assertNotNull(vector2D2);
-        org.junit.Assert.assertNotNull(vector2D3);
-        org.junit.Assert.assertNotNull(vector2D4);
-        org.junit.Assert.assertNotNull(vector2D5);
-        org.junit.Assert.assertNotNull(vector2D6);
-        org.junit.Assert.assertNotNull(vector2D7);
-        org.junit.Assert.assertTrue(Double.isNaN(double8));
-        org.junit.Assert.assertNotNull(vector2D10);
-        org.junit.Assert.assertTrue("'" + double11 + "' != '" + Double.POSITIVE_INFINITY + "'", double11 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue("'" + double12 + "' != '" + Double.POSITIVE_INFINITY + "'", double12 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(vector2D13);
-        org.junit.Assert.assertNotNull(vector2D15);
-        org.junit.Assert.assertNotNull(vector2D16);
-        org.junit.Assert.assertNotNull(vector2D17);
-        org.junit.Assert.assertNotNull(vector2D18);
-        org.junit.Assert.assertNotNull(vector2D19);
-        org.junit.Assert.assertNotNull(vector2D20);
-        org.junit.Assert.assertTrue(Double.isNaN(double21));
-        org.junit.Assert.assertNotNull(vector2D23);
-        org.junit.Assert.assertTrue("'" + double24 + "' != '" + Double.POSITIVE_INFINITY + "'", double24 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue("'" + double25 + "' != '" + Double.POSITIVE_INFINITY + "'", double25 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(vector2D26);
-        org.junit.Assert.assertNotNull(vector2D28);
-        org.junit.Assert.assertNotNull(vector2D30);
-        org.junit.Assert.assertNotNull(vector2D31);
-        org.junit.Assert.assertNotNull(vector2D32);
-        org.junit.Assert.assertNotNull(vector2D33);
-        org.junit.Assert.assertNotNull(vector2D34);
-        org.junit.Assert.assertNotNull(vector2D35);
-        org.junit.Assert.assertTrue(Double.isNaN(double36));
-        org.junit.Assert.assertNotNull(vector2D38);
-        org.junit.Assert.assertTrue("'" + double39 + "' != '" + Double.POSITIVE_INFINITY + "'", double39 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue("'" + double40 + "' != '" + Double.POSITIVE_INFINITY + "'", double40 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(vector2D41);
-        org.junit.Assert.assertNotNull(vector2D42);
-        org.junit.Assert.assertNotNull(vector2D44);
-        org.junit.Assert.assertNotNull(vector2D45);
-        org.junit.Assert.assertNotNull(vector2D46);
-        org.junit.Assert.assertNotNull(vector2D47);
-        org.junit.Assert.assertNotNull(vector2D48);
-        org.junit.Assert.assertNotNull(vector2D49);
-        org.junit.Assert.assertNotNull(vector2D50);
-        org.junit.Assert.assertTrue(Double.isNaN(double51));
-        org.junit.Assert.assertNotNull(vector2D53);
-        org.junit.Assert.assertTrue("'" + double54 + "' != '" + Double.POSITIVE_INFINITY + "'", double54 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double55));
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-    }
-
-    @Test
-    public void test060() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test060");
+            System.out.format("%n%s%n", "RegressionTest0.test057");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -5830,9 +5563,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test061() throws Throwable {
+    public void test058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test061");
+            System.out.format("%n%s%n", "RegressionTest0.test058");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -5940,9 +5673,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test062() throws Throwable {
+    public void test059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test062");
+            System.out.format("%n%s%n", "RegressionTest0.test059");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -6028,9 +5761,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test063() throws Throwable {
+    public void test060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test063");
+            System.out.format("%n%s%n", "RegressionTest0.test060");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D2 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -6146,164 +5879,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test064() throws Throwable {
+    public void test061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test064");
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D3 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double4 = vector3D0.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D3);
-        boolean boolean5 = vector3D0.isNaN();
-        double double6 = vector3D0.getNormSq();
-        double[] doubleArray7 = vector3D0.toArray();
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D8 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D(doubleArray7);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D9 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D(doubleArray7);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D11 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.MINUS_K;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D14 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D15 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double16 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D14, vector3D15);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D17 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double18 = vector3D14.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D17);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D19 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double20 = vector3D19.getNorm();
-        double double21 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D14, vector3D19);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D23 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D24 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double25 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D23, vector3D24);
-        double double26 = vector3D23.getNorm1();
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D28 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D29 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double30 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D28, vector3D29);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D31 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double32 = vector3D28.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D31);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D33 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D34 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double35 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D33, vector3D34);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D36 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double37 = vector3D33.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D36);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D38 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double39 = vector3D38.getNorm();
-        double double40 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D33, vector3D38);
-        double double41 = vector3D31.distance1((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D38);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D43 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D44 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D((double) 'a', vector3D19, (double) 6, vector3D23, (double) 10.0f, vector3D38, 0.0d, vector3D43);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D45 = vector3D44.negate();
-        double double46 = vector3D45.getDelta();
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D47 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.MINUS_J;
-        double double48 = vector3D45.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D47);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D49 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D((-1.5574077246549023d), vector3D11, (double) 99.99999f, vector3D45);
-        double double50 = vector3D11.getDelta();
-        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D> euclidean3DVector51 = vector3D9.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D11);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D53 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D54 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double55 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D53, vector3D54);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D56 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double57 = vector3D53.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D56);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D58 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double59 = vector3D58.getNorm();
-        double double60 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D53, vector3D58);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D62 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D63 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double64 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D62, vector3D63);
-        double double65 = vector3D62.getNorm1();
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D67 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D68 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double69 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D67, vector3D68);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D70 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double71 = vector3D67.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D70);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D72 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D73 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double74 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D72, vector3D73);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D75 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double76 = vector3D72.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D75);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D77 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double78 = vector3D77.getNorm();
-        double double79 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D72, vector3D77);
-        double double80 = vector3D70.distance1((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D77);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D82 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D83 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D((double) 'a', vector3D58, (double) 6, vector3D62, (double) 10.0f, vector3D77, 0.0d, vector3D82);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D85 = vector3D62.scalarMultiply((double) (-1L));
-        double double86 = vector3D62.getDelta();
-        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine87 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(vector3D11, vector3D62);
-        org.junit.Assert.assertNotNull(vector3D0);
-        org.junit.Assert.assertNotNull(vector3D1);
-        org.junit.Assert.assertTrue(Double.isNaN(double2));
-        org.junit.Assert.assertNotNull(vector3D3);
-        org.junit.Assert.assertTrue(Double.isNaN(double4));
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + double6 + "' != '" + Double.POSITIVE_INFINITY + "'", double6 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(doubleArray7);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(doubleArray7), "[-Infinity, -Infinity, -Infinity]");
-        org.junit.Assert.assertNotNull(vector3D11);
-        org.junit.Assert.assertNotNull(vector3D14);
-        org.junit.Assert.assertNotNull(vector3D15);
-        org.junit.Assert.assertTrue(Double.isNaN(double16));
-        org.junit.Assert.assertNotNull(vector3D17);
-        org.junit.Assert.assertTrue(Double.isNaN(double18));
-        org.junit.Assert.assertNotNull(vector3D19);
-        org.junit.Assert.assertTrue("'" + double20 + "' != '" + Double.POSITIVE_INFINITY + "'", double20 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double21));
-        org.junit.Assert.assertNotNull(vector3D23);
-        org.junit.Assert.assertNotNull(vector3D24);
-        org.junit.Assert.assertTrue(Double.isNaN(double25));
-        org.junit.Assert.assertTrue("'" + double26 + "' != '" + Double.POSITIVE_INFINITY + "'", double26 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(vector3D28);
-        org.junit.Assert.assertNotNull(vector3D29);
-        org.junit.Assert.assertTrue(Double.isNaN(double30));
-        org.junit.Assert.assertNotNull(vector3D31);
-        org.junit.Assert.assertTrue(Double.isNaN(double32));
-        org.junit.Assert.assertNotNull(vector3D33);
-        org.junit.Assert.assertNotNull(vector3D34);
-        org.junit.Assert.assertTrue(Double.isNaN(double35));
-        org.junit.Assert.assertNotNull(vector3D36);
-        org.junit.Assert.assertTrue(Double.isNaN(double37));
-        org.junit.Assert.assertNotNull(vector3D38);
-        org.junit.Assert.assertTrue("'" + double39 + "' != '" + Double.POSITIVE_INFINITY + "'", double39 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double40));
-        org.junit.Assert.assertTrue(Double.isNaN(double41));
-        org.junit.Assert.assertNotNull(vector3D43);
-        org.junit.Assert.assertNotNull(vector3D45);
-        org.junit.Assert.assertTrue(Double.isNaN(double46));
-        org.junit.Assert.assertNotNull(vector3D47);
-        org.junit.Assert.assertTrue(Double.isNaN(double48));
-        org.junit.Assert.assertTrue("'" + double50 + "' != '" + (-1.5707963267948966d) + "'", double50 == (-1.5707963267948966d));
-        org.junit.Assert.assertNotNull(euclidean3DVector51);
-        org.junit.Assert.assertNotNull(vector3D53);
-        org.junit.Assert.assertNotNull(vector3D54);
-        org.junit.Assert.assertTrue(Double.isNaN(double55));
-        org.junit.Assert.assertNotNull(vector3D56);
-        org.junit.Assert.assertTrue(Double.isNaN(double57));
-        org.junit.Assert.assertNotNull(vector3D58);
-        org.junit.Assert.assertTrue("'" + double59 + "' != '" + Double.POSITIVE_INFINITY + "'", double59 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double60));
-        org.junit.Assert.assertNotNull(vector3D62);
-        org.junit.Assert.assertNotNull(vector3D63);
-        org.junit.Assert.assertTrue(Double.isNaN(double64));
-        org.junit.Assert.assertTrue("'" + double65 + "' != '" + Double.POSITIVE_INFINITY + "'", double65 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(vector3D67);
-        org.junit.Assert.assertNotNull(vector3D68);
-        org.junit.Assert.assertTrue(Double.isNaN(double69));
-        org.junit.Assert.assertNotNull(vector3D70);
-        org.junit.Assert.assertTrue(Double.isNaN(double71));
-        org.junit.Assert.assertNotNull(vector3D72);
-        org.junit.Assert.assertNotNull(vector3D73);
-        org.junit.Assert.assertTrue(Double.isNaN(double74));
-        org.junit.Assert.assertNotNull(vector3D75);
-        org.junit.Assert.assertTrue(Double.isNaN(double76));
-        org.junit.Assert.assertNotNull(vector3D77);
-        org.junit.Assert.assertTrue("'" + double78 + "' != '" + Double.POSITIVE_INFINITY + "'", double78 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double79));
-        org.junit.Assert.assertTrue(Double.isNaN(double80));
-        org.junit.Assert.assertNotNull(vector3D82);
-        org.junit.Assert.assertNotNull(vector3D85);
-        org.junit.Assert.assertTrue(Double.isNaN(double86));
-    }
-
-    @Test
-    public void test065() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test065");
+            System.out.format("%n%s%n", "RegressionTest0.test061");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D2 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -6424,9 +6002,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test066() throws Throwable {
+    public void test062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test066");
+            System.out.format("%n%s%n", "RegressionTest0.test062");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane0 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList1 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList1);
@@ -6547,9 +6125,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test067() throws Throwable {
+    public void test063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test067");
+            System.out.format("%n%s%n", "RegressionTest0.test063");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         double double1 = intervalsSet0.getSize();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet4 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
@@ -6675,9 +6253,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test068() throws Throwable {
+    public void test064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test068");
+            System.out.format("%n%s%n", "RegressionTest0.test064");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -6761,9 +6339,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test069() throws Throwable {
+    public void test065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test069");
+            System.out.format("%n%s%n", "RegressionTest0.test065");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -6873,9 +6451,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test070() throws Throwable {
+    public void test066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test070");
+            System.out.format("%n%s%n", "RegressionTest0.test066");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -6889,172 +6467,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test071() throws Throwable {
+    public void test067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test071");
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D3 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D4 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.crossProduct(vector3D0, vector3D3);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D5 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D6 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double7 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D5, vector3D6);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D8 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double9 = vector3D5.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D8);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D10 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D11 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double12 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D10, vector3D11);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D13 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double14 = vector3D10.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D13);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D15 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double16 = vector3D15.getNorm();
-        double double17 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D10, vector3D15);
-        double double18 = vector3D8.distance1((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D15);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D19 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D20 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double21 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D19, vector3D20);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D23 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D24 = vector3D20.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D23);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D26 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D27 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I;
-        double double28 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.angle(vector3D26, vector3D27);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D29 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D30 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double31 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D29, vector3D30);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D33 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D34 = vector3D30.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D33);
-        double double35 = vector3D27.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D30);
-        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D> euclidean3DVector36 = vector3D20.add((double) (-1), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D27);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D37 = vector3D15.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D27);
-        java.text.NumberFormat numberFormat38 = null;
-        java.lang.String str39 = vector3D37.toString(numberFormat38);
-        org.apache.commons.math3.geometry.euclidean.threed.Line line40 = new org.apache.commons.math3.geometry.euclidean.threed.Line(vector3D0, vector3D37);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D41 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D42 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double43 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D41, vector3D42);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D44 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D45 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.crossProduct(vector3D41, vector3D44);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D46 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D47 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double48 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D46, vector3D47);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D49 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double50 = vector3D46.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D49);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D51 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D52 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double53 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D51, vector3D52);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D54 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double55 = vector3D51.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D54);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D56 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double57 = vector3D56.getNorm();
-        double double58 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D51, vector3D56);
-        double double59 = vector3D49.distance1((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D56);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D60 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D61 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double62 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D60, vector3D61);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D64 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D65 = vector3D61.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D64);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D67 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D68 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I;
-        double double69 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.angle(vector3D67, vector3D68);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D70 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D71 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        double double72 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D70, vector3D71);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D74 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D75 = vector3D71.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D74);
-        double double76 = vector3D68.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D71);
-        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D> euclidean3DVector77 = vector3D61.add((double) (-1), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D68);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D78 = vector3D56.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D68);
-        java.text.NumberFormat numberFormat79 = null;
-        java.lang.String str80 = vector3D78.toString(numberFormat79);
-        org.apache.commons.math3.geometry.euclidean.threed.Line line81 = new org.apache.commons.math3.geometry.euclidean.threed.Line(vector3D41, vector3D78);
-        double double82 = line40.distance(line81);
-        org.apache.commons.math3.geometry.euclidean.threed.Line line83 = new org.apache.commons.math3.geometry.euclidean.threed.Line(line81);
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D84 = line83.getDirection();
-        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine85 = line83.wholeLine();
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D87 = line83.pointAt(0.0d);
-        org.junit.Assert.assertNotNull(vector3D0);
-        org.junit.Assert.assertNotNull(vector3D1);
-        org.junit.Assert.assertTrue(Double.isNaN(double2));
-        org.junit.Assert.assertNotNull(vector3D3);
-        org.junit.Assert.assertNotNull(vector3D4);
-        org.junit.Assert.assertNotNull(vector3D5);
-        org.junit.Assert.assertNotNull(vector3D6);
-        org.junit.Assert.assertTrue(Double.isNaN(double7));
-        org.junit.Assert.assertNotNull(vector3D8);
-        org.junit.Assert.assertTrue(Double.isNaN(double9));
-        org.junit.Assert.assertNotNull(vector3D10);
-        org.junit.Assert.assertNotNull(vector3D11);
-        org.junit.Assert.assertTrue(Double.isNaN(double12));
-        org.junit.Assert.assertNotNull(vector3D13);
-        org.junit.Assert.assertTrue(Double.isNaN(double14));
-        org.junit.Assert.assertNotNull(vector3D15);
-        org.junit.Assert.assertTrue("'" + double16 + "' != '" + Double.POSITIVE_INFINITY + "'", double16 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double17));
-        org.junit.Assert.assertTrue(Double.isNaN(double18));
-        org.junit.Assert.assertNotNull(vector3D19);
-        org.junit.Assert.assertNotNull(vector3D20);
-        org.junit.Assert.assertTrue(Double.isNaN(double21));
-        org.junit.Assert.assertNotNull(vector3D23);
-        org.junit.Assert.assertNotNull(vector3D24);
-        org.junit.Assert.assertNotNull(vector3D26);
-        org.junit.Assert.assertNotNull(vector3D27);
-        org.junit.Assert.assertTrue("'" + double28 + "' != '" + 0.0d + "'", double28 == 0.0d);
-        org.junit.Assert.assertNotNull(vector3D29);
-        org.junit.Assert.assertNotNull(vector3D30);
-        org.junit.Assert.assertTrue(Double.isNaN(double31));
-        org.junit.Assert.assertNotNull(vector3D33);
-        org.junit.Assert.assertNotNull(vector3D34);
-        org.junit.Assert.assertTrue("'" + double35 + "' != '" + Double.POSITIVE_INFINITY + "'", double35 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(euclidean3DVector36);
-        org.junit.Assert.assertNotNull(vector3D37);
-        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "{(-Infinity); (-Infinity); (-Infinity)}" + "'", str39, "{(-Infinity); (-Infinity); (-Infinity)}");
-        org.junit.Assert.assertNotNull(vector3D41);
-        org.junit.Assert.assertNotNull(vector3D42);
-        org.junit.Assert.assertTrue(Double.isNaN(double43));
-        org.junit.Assert.assertNotNull(vector3D44);
-        org.junit.Assert.assertNotNull(vector3D45);
-        org.junit.Assert.assertNotNull(vector3D46);
-        org.junit.Assert.assertNotNull(vector3D47);
-        org.junit.Assert.assertTrue(Double.isNaN(double48));
-        org.junit.Assert.assertNotNull(vector3D49);
-        org.junit.Assert.assertTrue(Double.isNaN(double50));
-        org.junit.Assert.assertNotNull(vector3D51);
-        org.junit.Assert.assertNotNull(vector3D52);
-        org.junit.Assert.assertTrue(Double.isNaN(double53));
-        org.junit.Assert.assertNotNull(vector3D54);
-        org.junit.Assert.assertTrue(Double.isNaN(double55));
-        org.junit.Assert.assertNotNull(vector3D56);
-        org.junit.Assert.assertTrue("'" + double57 + "' != '" + Double.POSITIVE_INFINITY + "'", double57 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double58));
-        org.junit.Assert.assertTrue(Double.isNaN(double59));
-        org.junit.Assert.assertNotNull(vector3D60);
-        org.junit.Assert.assertNotNull(vector3D61);
-        org.junit.Assert.assertTrue(Double.isNaN(double62));
-        org.junit.Assert.assertNotNull(vector3D64);
-        org.junit.Assert.assertNotNull(vector3D65);
-        org.junit.Assert.assertNotNull(vector3D67);
-        org.junit.Assert.assertNotNull(vector3D68);
-        org.junit.Assert.assertTrue("'" + double69 + "' != '" + 0.0d + "'", double69 == 0.0d);
-        org.junit.Assert.assertNotNull(vector3D70);
-        org.junit.Assert.assertNotNull(vector3D71);
-        org.junit.Assert.assertTrue(Double.isNaN(double72));
-        org.junit.Assert.assertNotNull(vector3D74);
-        org.junit.Assert.assertNotNull(vector3D75);
-        org.junit.Assert.assertTrue("'" + double76 + "' != '" + Double.POSITIVE_INFINITY + "'", double76 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(euclidean3DVector77);
-        org.junit.Assert.assertNotNull(vector3D78);
-        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "{(-Infinity); (-Infinity); (-Infinity)}" + "'", str80, "{(-Infinity); (-Infinity); (-Infinity)}");
-        org.junit.Assert.assertTrue(Double.isNaN(double82));
-        org.junit.Assert.assertNotNull(vector3D84);
-        org.junit.Assert.assertNotNull(subLine85);
-        org.junit.Assert.assertNotNull(vector3D87);
-    }
-
-    @Test
-    public void test072() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test072");
+            System.out.format("%n%s%n", "RegressionTest0.test067");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D5 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -7086,9 +6501,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test073() throws Throwable {
+    public void test068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test073");
+            System.out.format("%n%s%n", "RegressionTest0.test068");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -7199,9 +6614,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test074() throws Throwable {
+    public void test069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test074");
+            System.out.format("%n%s%n", "RegressionTest0.test069");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -7296,9 +6711,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test075() throws Throwable {
+    public void test070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test075");
+            System.out.format("%n%s%n", "RegressionTest0.test070");
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList0 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet1 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList0);
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList0);
@@ -7413,9 +6828,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test076() throws Throwable {
+    public void test071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test076");
+            System.out.format("%n%s%n", "RegressionTest0.test071");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -7496,9 +6911,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test077() throws Throwable {
+    public void test072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test077");
+            System.out.format("%n%s%n", "RegressionTest0.test072");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -7661,71 +7076,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test078() throws Throwable {
+    public void test073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test078");
-        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
-        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
-        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
-        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList2);
-        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint4 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane1, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet3);
-        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine5 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane0, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet3);
-        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane6 = null;
-        org.apache.commons.math3.geometry.euclidean.threed.Line line7 = null;
-        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane8 = null;
-        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList9 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
-        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet10 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList9);
-        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint11 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane8, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet10);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D12 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean14 = vector1D12.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D16 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D18 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D20 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean22 = vector1D20.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D24 = vector1D20.scalarMultiply((double) 1L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D25 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        double double26 = vector1D24.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D25);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D28 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
-        boolean boolean30 = vector1D28.equals((java.lang.Object) 10L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D32 = vector1D28.scalarMultiply((double) 1L);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (short) 100, vector1D16, (double) 100, vector1D18, (double) (short) 0, vector1D25, (double) 'a', vector1D28);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D35 = vector1D28.scalarMultiply(4.605170185988092d);
-        java.lang.String str36 = vector1D35.toString();
-        double double37 = vector1D12.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D35);
-        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D39 = vector1D12.scalarMultiply(0.0d);
-        org.apache.commons.math3.geometry.partitioning.Region.Location location40 = intervalsSet10.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D12);
-        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector41 = null;
-        org.apache.commons.math3.geometry.partitioning.Region.Location location42 = intervalsSet10.checkPoint(euclidean1DVector41);
-        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine43 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line7, intervalsSet10);
-        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine44 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane6, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet10);
-        org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean2DAbstractSubHyperplane45 = subLine5.reunite((org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) subLine44);
-        org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DRegion46 = euclidean2DAbstractSubHyperplane45.getRemainingRegion();
-        org.junit.Assert.assertNotNull(vector1D12);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(vector1D16);
-        org.junit.Assert.assertNotNull(vector1D18);
-        org.junit.Assert.assertNotNull(vector1D20);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(vector1D24);
-        org.junit.Assert.assertNotNull(vector1D25);
-        org.junit.Assert.assertTrue(Double.isNaN(double26));
-        org.junit.Assert.assertNotNull(vector1D28);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-        org.junit.Assert.assertNotNull(vector1D32);
-        org.junit.Assert.assertNotNull(vector1D35);
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "{(NaN)}" + "'", str36, "{(NaN)}");
-        org.junit.Assert.assertTrue(Double.isNaN(double37));
-        org.junit.Assert.assertNotNull(vector1D39);
-        org.junit.Assert.assertTrue("'" + location40 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location40.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
-        org.junit.Assert.assertTrue("'" + location42 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location42.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
-        org.junit.Assert.assertNotNull(euclidean2DAbstractSubHyperplane45);
-        org.junit.Assert.assertNotNull(euclidean1DRegion46);
-    }
-
-    @Test
-    public void test079() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test079");
+            System.out.format("%n%s%n", "RegressionTest0.test073");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
@@ -7832,9 +7185,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test080() throws Throwable {
+    public void test074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test080");
+            System.out.format("%n%s%n", "RegressionTest0.test074");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -8000,9 +7353,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test081() throws Throwable {
+    public void test075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test081");
+            System.out.format("%n%s%n", "RegressionTest0.test075");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         boolean boolean1 = intervalsSet0.isEmpty();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
@@ -8119,9 +7472,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test082() throws Throwable {
+    public void test076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test082");
+            System.out.format("%n%s%n", "RegressionTest0.test076");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double1 = vector3D0.getNorm();
         double double2 = vector3D0.getNorm();
@@ -8181,9 +7534,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test083() throws Throwable {
+    public void test077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test083");
+            System.out.format("%n%s%n", "RegressionTest0.test077");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -8291,9 +7644,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test084() throws Throwable {
+    public void test078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test084");
+            System.out.format("%n%s%n", "RegressionTest0.test078");
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList0 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet1 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList0);
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList0);
@@ -8408,9 +7761,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test085() throws Throwable {
+    public void test079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test085");
+            System.out.format("%n%s%n", "RegressionTest0.test079");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
         org.apache.commons.math3.geometry.partitioning.AbstractRegion<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractRegion3 = intervalsSet2.copySelf();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet6 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
@@ -8533,9 +7886,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test086() throws Throwable {
+    public void test080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test086");
+            System.out.format("%n%s%n", "RegressionTest0.test080");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -8633,9 +7986,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test087() throws Throwable {
+    public void test081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test087");
+            System.out.format("%n%s%n", "RegressionTest0.test081");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -8754,9 +8107,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test088() throws Throwable {
+    public void test082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test088");
+            System.out.format("%n%s%n", "RegressionTest0.test082");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
@@ -8864,9 +8217,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test089() throws Throwable {
+    public void test083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test089");
+            System.out.format("%n%s%n", "RegressionTest0.test083");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D5 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -8900,9 +8253,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test090() throws Throwable {
+    public void test084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test090");
+            System.out.format("%n%s%n", "RegressionTest0.test084");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -9069,9 +8422,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test091() throws Throwable {
+    public void test085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test091");
+            System.out.format("%n%s%n", "RegressionTest0.test085");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         double double1 = intervalsSet0.getSize();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet4 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
@@ -9157,9 +8510,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test092() throws Throwable {
+    public void test086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test092");
+            System.out.format("%n%s%n", "RegressionTest0.test086");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.euclidean.threed.Line line1 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane2 = null;
@@ -9223,9 +8576,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test093() throws Throwable {
+    public void test087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test093");
+            System.out.format("%n%s%n", "RegressionTest0.test087");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -9334,9 +8687,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test094() throws Throwable {
+    public void test088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test094");
+            System.out.format("%n%s%n", "RegressionTest0.test088");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -9406,9 +8759,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test095() throws Throwable {
+    public void test089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test095");
+            System.out.format("%n%s%n", "RegressionTest0.test089");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet0 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
         double double1 = intervalsSet0.getSize();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet4 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
@@ -9498,9 +8851,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test096() throws Throwable {
+    public void test090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test096");
+            System.out.format("%n%s%n", "RegressionTest0.test090");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -9677,9 +9030,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test097() throws Throwable {
+    public void test091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test097");
+            System.out.format("%n%s%n", "RegressionTest0.test091");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -9818,9 +9171,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test098() throws Throwable {
+    public void test092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test098");
+            System.out.format("%n%s%n", "RegressionTest0.test092");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -9992,9 +9345,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test099() throws Throwable {
+    public void test093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test099");
+            System.out.format("%n%s%n", "RegressionTest0.test093");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
         boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
@@ -10102,9 +9455,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test100() throws Throwable {
+    public void test094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test100");
+            System.out.format("%n%s%n", "RegressionTest0.test094");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -10253,9 +9606,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test101() throws Throwable {
+    public void test095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test101");
+            System.out.format("%n%s%n", "RegressionTest0.test095");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
@@ -10419,9 +9772,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test102() throws Throwable {
+    public void test096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test102");
+            System.out.format("%n%s%n", "RegressionTest0.test096");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -10539,9 +9892,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test103() throws Throwable {
+    public void test097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test103");
+            System.out.format("%n%s%n", "RegressionTest0.test097");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -10591,9 +9944,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test104() throws Throwable {
+    public void test098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test104");
+            System.out.format("%n%s%n", "RegressionTest0.test098");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -10751,9 +10104,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test105() throws Throwable {
+    public void test099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test105");
+            System.out.format("%n%s%n", "RegressionTest0.test099");
         org.apache.commons.math3.geometry.euclidean.threed.Line line0 = null;
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
         org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D5 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
@@ -10833,9 +10186,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test106() throws Throwable {
+    public void test100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test106");
+            System.out.format("%n%s%n", "RegressionTest0.test100");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -10979,9 +10332,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test107() throws Throwable {
+    public void test101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test107");
+            System.out.format("%n%s%n", "RegressionTest0.test101");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -11010,9 +10363,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test108() throws Throwable {
+    public void test102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test108");
+            System.out.format("%n%s%n", "RegressionTest0.test102");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
         java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
@@ -11167,9 +10520,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test109() throws Throwable {
+    public void test103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test109");
+            System.out.format("%n%s%n", "RegressionTest0.test103");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -11321,9 +10674,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test110() throws Throwable {
+    public void test104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test110");
+            System.out.format("%n%s%n", "RegressionTest0.test104");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
@@ -11452,9 +10805,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test111() throws Throwable {
+    public void test105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test111");
+            System.out.format("%n%s%n", "RegressionTest0.test105");
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
         org.apache.commons.math3.geometry.partitioning.AbstractRegion<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractRegion3 = intervalsSet2.copySelf();
         org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet6 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
@@ -11566,9 +10919,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test112() throws Throwable {
+    public void test106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test112");
+            System.out.format("%n%s%n", "RegressionTest0.test106");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double1 = vector3D0.getNorm();
         double double2 = vector3D0.getNorm();
@@ -11608,7 +10961,7 @@ public class RegressionTest0 {
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D42 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D43 = vector3D39.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D42);
         boolean boolean44 = vector3D39.isInfinite();
-        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D45 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D((double) (-1.0f), vector3D15, (-0.052645272016449085d), vector3D33, (double) 1.0f, vector3D39);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D45 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D((double) (-1.0f), vector3D15, (-0.1758772994716793d), vector3D33, (double) 1.0f, vector3D39);
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D46 = vector3D15.getZero();
         double double47 = euclidean3DVector3.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D46);
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D48 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
@@ -11706,9 +11059,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test113() throws Throwable {
+    public void test107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test113");
+            System.out.format("%n%s%n", "RegressionTest0.test107");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -11843,9 +11196,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test114() throws Throwable {
+    public void test108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test114");
+            System.out.format("%n%s%n", "RegressionTest0.test108");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double3 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D1, vector3D2);
@@ -11961,9 +11314,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test115() throws Throwable {
+    public void test109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test115");
+            System.out.format("%n%s%n", "RegressionTest0.test109");
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
@@ -12103,9 +11456,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test116() throws Throwable {
+    public void test110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test116");
+            System.out.format("%n%s%n", "RegressionTest0.test110");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
@@ -12283,155 +11636,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test117() throws Throwable {
+    public void test111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test117");
-        org.apache.commons.math3.geometry.partitioning.BSPTree<org.apache.commons.math3.geometry.Space> spaceBSPTree0 = new org.apache.commons.math3.geometry.partitioning.BSPTree<org.apache.commons.math3.geometry.Space>();
-        org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.Space> spaceSubHyperplane1 = spaceBSPTree0.getCut();
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = vector2D2.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D3);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = vector2D5.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D6);
-        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D4, vector2D5);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D9 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        double double10 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D4, vector2D9);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D12 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D14 = vector2D12.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D13);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D17 = vector2D15.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D16);
-        double double18 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D14, vector2D15);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = vector2D15.scalarMultiply((double) (-1.0f));
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D22 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D24 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D25 = vector2D23.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D24);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D27 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D28 = vector2D26.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D27);
-        double double29 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D25, vector2D26);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D31 = vector2D26.scalarMultiply((double) (-1.0f));
-        double double32 = vector2D26.getNormInf();
-        double double33 = vector2D22.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D26);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D37 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D39 = vector2D37.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D38);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D40 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D41 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D42 = vector2D40.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D41);
-        double double43 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D39, vector2D40);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D45 = vector2D40.scalarMultiply((double) (-1.0f));
-        double double46 = vector2D40.getNormInf();
-        double double47 = vector2D40.getNorm();
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = vector2D40.normalize();
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D52 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D54 = vector2D52.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D53);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D55 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D56 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D57 = vector2D55.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D56);
-        double double58 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D54, vector2D55);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D60 = vector2D55.scalarMultiply((double) (-1.0f));
-        double double61 = vector2D55.getNormInf();
-        double double62 = vector2D55.getNorm();
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D63 = vector2D50.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D55);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D64 = vector2D48.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D63);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D65 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) 1.4E-45f, vector2D20, (double) '#', vector2D26, (double) (-1023), vector2D35, 0.0d, vector2D48);
-        double double66 = vector2D9.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D48);
-        org.apache.commons.math3.geometry.euclidean.twod.Line line68 = new org.apache.commons.math3.geometry.euclidean.twod.Line(vector2D48, (double) (byte) 0);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D69 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D70 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D71 = vector2D69.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D70);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D72 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D73 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D74 = vector2D72.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D73);
-        double double75 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D71, vector2D72);
-        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D77 = vector2D72.scalarMultiply((double) (-1.0f));
-        double double78 = vector2D72.getNormInf();
-        double double79 = line68.getOffset((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D72);
-        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine80 = line68.wholeHyperplane();
-        line68.setOriginOffset((double) (-1L));
-        spaceBSPTree0.setAttribute((java.lang.Object) line68);
-        org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.Space> spaceSubHyperplane84 = null;
-        org.apache.commons.math3.geometry.partitioning.BSPTree<org.apache.commons.math3.geometry.Space> spaceBSPTree85 = spaceBSPTree0.split(spaceSubHyperplane84);
-        org.junit.Assert.assertNull(spaceSubHyperplane1);
-        org.junit.Assert.assertNotNull(vector2D2);
-        org.junit.Assert.assertNotNull(vector2D3);
-        org.junit.Assert.assertNotNull(vector2D4);
-        org.junit.Assert.assertNotNull(vector2D5);
-        org.junit.Assert.assertNotNull(vector2D6);
-        org.junit.Assert.assertNotNull(vector2D7);
-        org.junit.Assert.assertTrue(Double.isNaN(double8));
-        org.junit.Assert.assertNotNull(vector2D9);
-        org.junit.Assert.assertTrue(Double.isNaN(double10));
-        org.junit.Assert.assertNotNull(vector2D12);
-        org.junit.Assert.assertNotNull(vector2D13);
-        org.junit.Assert.assertNotNull(vector2D14);
-        org.junit.Assert.assertNotNull(vector2D15);
-        org.junit.Assert.assertNotNull(vector2D16);
-        org.junit.Assert.assertNotNull(vector2D17);
-        org.junit.Assert.assertTrue(Double.isNaN(double18));
-        org.junit.Assert.assertNotNull(vector2D20);
-        org.junit.Assert.assertNotNull(vector2D22);
-        org.junit.Assert.assertNotNull(vector2D23);
-        org.junit.Assert.assertNotNull(vector2D24);
-        org.junit.Assert.assertNotNull(vector2D25);
-        org.junit.Assert.assertNotNull(vector2D26);
-        org.junit.Assert.assertNotNull(vector2D27);
-        org.junit.Assert.assertNotNull(vector2D28);
-        org.junit.Assert.assertTrue(Double.isNaN(double29));
-        org.junit.Assert.assertNotNull(vector2D31);
-        org.junit.Assert.assertTrue("'" + double32 + "' != '" + Double.POSITIVE_INFINITY + "'", double32 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double33));
-        org.junit.Assert.assertNotNull(vector2D35);
-        org.junit.Assert.assertNotNull(vector2D37);
-        org.junit.Assert.assertNotNull(vector2D38);
-        org.junit.Assert.assertNotNull(vector2D39);
-        org.junit.Assert.assertNotNull(vector2D40);
-        org.junit.Assert.assertNotNull(vector2D41);
-        org.junit.Assert.assertNotNull(vector2D42);
-        org.junit.Assert.assertTrue(Double.isNaN(double43));
-        org.junit.Assert.assertNotNull(vector2D45);
-        org.junit.Assert.assertTrue("'" + double46 + "' != '" + Double.POSITIVE_INFINITY + "'", double46 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue("'" + double47 + "' != '" + Double.POSITIVE_INFINITY + "'", double47 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(vector2D48);
-        org.junit.Assert.assertNotNull(vector2D50);
-        org.junit.Assert.assertNotNull(vector2D52);
-        org.junit.Assert.assertNotNull(vector2D53);
-        org.junit.Assert.assertNotNull(vector2D54);
-        org.junit.Assert.assertNotNull(vector2D55);
-        org.junit.Assert.assertNotNull(vector2D56);
-        org.junit.Assert.assertNotNull(vector2D57);
-        org.junit.Assert.assertTrue(Double.isNaN(double58));
-        org.junit.Assert.assertNotNull(vector2D60);
-        org.junit.Assert.assertTrue("'" + double61 + "' != '" + Double.POSITIVE_INFINITY + "'", double61 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue("'" + double62 + "' != '" + Double.POSITIVE_INFINITY + "'", double62 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertNotNull(vector2D63);
-        org.junit.Assert.assertNotNull(vector2D64);
-        org.junit.Assert.assertTrue(Double.isNaN(double66));
-        org.junit.Assert.assertNotNull(vector2D69);
-        org.junit.Assert.assertNotNull(vector2D70);
-        org.junit.Assert.assertNotNull(vector2D71);
-        org.junit.Assert.assertNotNull(vector2D72);
-        org.junit.Assert.assertNotNull(vector2D73);
-        org.junit.Assert.assertNotNull(vector2D74);
-        org.junit.Assert.assertTrue(Double.isNaN(double75));
-        org.junit.Assert.assertNotNull(vector2D77);
-        org.junit.Assert.assertTrue("'" + double78 + "' != '" + Double.POSITIVE_INFINITY + "'", double78 == Double.POSITIVE_INFINITY);
-        org.junit.Assert.assertTrue(Double.isNaN(double79));
-        org.junit.Assert.assertNotNull(subLine80);
-        org.junit.Assert.assertNotNull(spaceBSPTree85);
-    }
-
-    @Test
-    public void test118() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test118");
+            System.out.format("%n%s%n", "RegressionTest0.test111");
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
         double double3 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D1, vector3D2);
@@ -12600,9 +11807,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test119() throws Throwable {
+    public void test112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test119");
+            System.out.format("%n%s%n", "RegressionTest0.test112");
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
         org.apache.commons.math3.geometry.euclidean.threed.Line line1 = null;
         org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane2 = null;
@@ -12673,6 +11880,879 @@ public class RegressionTest0 {
     }
 
     @Test
+    public void test113() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test113");
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = vector2D3.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D4);
+        double double6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D3);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D7);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D10 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D11 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D12 = vector2D10.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D11);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D14 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = vector2D13.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D14);
+        double double16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D12, vector2D13);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D18 = vector2D13.scalarMultiply((double) (-1.0f));
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D21 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D22 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = vector2D21.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D22);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D24 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D25 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = vector2D24.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D25);
+        double double27 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D23, vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D29 = vector2D24.scalarMultiply((double) (-1.0f));
+        double double30 = vector2D24.getNormInf();
+        double double31 = vector2D20.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D33 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D36 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D37 = vector2D35.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D36);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D39 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D40 = vector2D38.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D39);
+        double double41 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D37, vector2D38);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D43 = vector2D38.scalarMultiply((double) (-1.0f));
+        double double44 = vector2D38.getNormInf();
+        double double45 = vector2D38.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D46 = vector2D38.normalize();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D51 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D52 = vector2D50.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D51);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D54 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D55 = vector2D53.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D54);
+        double double56 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D52, vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D58 = vector2D53.scalarMultiply((double) (-1.0f));
+        double double59 = vector2D53.getNormInf();
+        double double60 = vector2D53.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D61 = vector2D48.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D62 = vector2D46.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D61);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D63 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) 1.4E-45f, vector2D18, (double) '#', vector2D24, (double) (-1023), vector2D33, 0.0d, vector2D46);
+        double double64 = vector2D7.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D46);
+        org.apache.commons.math3.geometry.euclidean.twod.Line line66 = new org.apache.commons.math3.geometry.euclidean.twod.Line(vector2D46, (double) (byte) 0);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine67 = line66.wholeHyperplane();
+        org.apache.commons.math3.geometry.euclidean.twod.Line line68 = new org.apache.commons.math3.geometry.euclidean.twod.Line(line66);
+        org.apache.commons.math3.geometry.euclidean.twod.PolygonsSet polygonsSet69 = line68.wholeSpace();
+        line68.setAngle(1.4123875581201982E-5d);
+        line68.setAngle(5.916079460698845d);
+        org.junit.Assert.assertNotNull(vector2D0);
+        org.junit.Assert.assertNotNull(vector2D1);
+        org.junit.Assert.assertNotNull(vector2D2);
+        org.junit.Assert.assertNotNull(vector2D3);
+        org.junit.Assert.assertNotNull(vector2D4);
+        org.junit.Assert.assertNotNull(vector2D5);
+        org.junit.Assert.assertTrue(Double.isNaN(double6));
+        org.junit.Assert.assertNotNull(vector2D7);
+        org.junit.Assert.assertTrue(Double.isNaN(double8));
+        org.junit.Assert.assertNotNull(vector2D10);
+        org.junit.Assert.assertNotNull(vector2D11);
+        org.junit.Assert.assertNotNull(vector2D12);
+        org.junit.Assert.assertNotNull(vector2D13);
+        org.junit.Assert.assertNotNull(vector2D14);
+        org.junit.Assert.assertNotNull(vector2D15);
+        org.junit.Assert.assertTrue(Double.isNaN(double16));
+        org.junit.Assert.assertNotNull(vector2D18);
+        org.junit.Assert.assertNotNull(vector2D20);
+        org.junit.Assert.assertNotNull(vector2D21);
+        org.junit.Assert.assertNotNull(vector2D22);
+        org.junit.Assert.assertNotNull(vector2D23);
+        org.junit.Assert.assertNotNull(vector2D24);
+        org.junit.Assert.assertNotNull(vector2D25);
+        org.junit.Assert.assertNotNull(vector2D26);
+        org.junit.Assert.assertTrue(Double.isNaN(double27));
+        org.junit.Assert.assertNotNull(vector2D29);
+        org.junit.Assert.assertTrue("'" + double30 + "' != '" + Double.POSITIVE_INFINITY + "'", double30 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double31));
+        org.junit.Assert.assertNotNull(vector2D33);
+        org.junit.Assert.assertNotNull(vector2D35);
+        org.junit.Assert.assertNotNull(vector2D36);
+        org.junit.Assert.assertNotNull(vector2D37);
+        org.junit.Assert.assertNotNull(vector2D38);
+        org.junit.Assert.assertNotNull(vector2D39);
+        org.junit.Assert.assertNotNull(vector2D40);
+        org.junit.Assert.assertTrue(Double.isNaN(double41));
+        org.junit.Assert.assertNotNull(vector2D43);
+        org.junit.Assert.assertTrue("'" + double44 + "' != '" + Double.POSITIVE_INFINITY + "'", double44 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double45 + "' != '" + Double.POSITIVE_INFINITY + "'", double45 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D46);
+        org.junit.Assert.assertNotNull(vector2D48);
+        org.junit.Assert.assertNotNull(vector2D50);
+        org.junit.Assert.assertNotNull(vector2D51);
+        org.junit.Assert.assertNotNull(vector2D52);
+        org.junit.Assert.assertNotNull(vector2D53);
+        org.junit.Assert.assertNotNull(vector2D54);
+        org.junit.Assert.assertNotNull(vector2D55);
+        org.junit.Assert.assertTrue(Double.isNaN(double56));
+        org.junit.Assert.assertNotNull(vector2D58);
+        org.junit.Assert.assertTrue("'" + double59 + "' != '" + Double.POSITIVE_INFINITY + "'", double59 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double60 + "' != '" + Double.POSITIVE_INFINITY + "'", double60 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D61);
+        org.junit.Assert.assertNotNull(vector2D62);
+        org.junit.Assert.assertTrue(Double.isNaN(double64));
+        org.junit.Assert.assertNotNull(subLine67);
+        org.junit.Assert.assertNotNull(polygonsSet69);
+    }
+
+    @Test
+    public void test114() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test114");
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = vector2D3.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D4);
+        double double6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D3);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D7);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D10 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D11 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D12 = vector2D10.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D11);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D14 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = vector2D13.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D14);
+        double double16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D12, vector2D13);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D18 = vector2D13.scalarMultiply((double) (-1.0f));
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D21 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D22 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = vector2D21.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D22);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D24 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D25 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = vector2D24.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D25);
+        double double27 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D23, vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D29 = vector2D24.scalarMultiply((double) (-1.0f));
+        double double30 = vector2D24.getNormInf();
+        double double31 = vector2D20.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D33 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D36 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D37 = vector2D35.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D36);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D39 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D40 = vector2D38.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D39);
+        double double41 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D37, vector2D38);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D43 = vector2D38.scalarMultiply((double) (-1.0f));
+        double double44 = vector2D38.getNormInf();
+        double double45 = vector2D38.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D46 = vector2D38.normalize();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D51 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D52 = vector2D50.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D51);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D54 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D55 = vector2D53.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D54);
+        double double56 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D52, vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D58 = vector2D53.scalarMultiply((double) (-1.0f));
+        double double59 = vector2D53.getNormInf();
+        double double60 = vector2D53.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D61 = vector2D48.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D62 = vector2D46.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D61);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D63 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) 1.4E-45f, vector2D18, (double) '#', vector2D24, (double) (-1023), vector2D33, 0.0d, vector2D46);
+        double double64 = vector2D7.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D46);
+        org.apache.commons.math3.geometry.euclidean.twod.Line line66 = new org.apache.commons.math3.geometry.euclidean.twod.Line(vector2D46, (double) (byte) 0);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D67 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D68 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D69 = vector2D67.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D68);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D70 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D71 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D72 = vector2D70.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D71);
+        double double73 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D69, vector2D70);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D75 = vector2D70.scalarMultiply((double) (-1.0f));
+        double double76 = vector2D70.getNormInf();
+        double double77 = line66.getOffset((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D70);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine78 = line66.wholeHyperplane();
+        line66.setOriginOffset((double) (-1L));
+        line66.revertSelf();
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine82 = line66.wholeHyperplane();
+        org.apache.commons.math3.geometry.euclidean.twod.Line line83 = line66.copySelf();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D84 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D85 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D86 = vector2D84.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D85);
+        boolean boolean87 = line66.contains(vector2D85);
+        org.junit.Assert.assertNotNull(vector2D0);
+        org.junit.Assert.assertNotNull(vector2D1);
+        org.junit.Assert.assertNotNull(vector2D2);
+        org.junit.Assert.assertNotNull(vector2D3);
+        org.junit.Assert.assertNotNull(vector2D4);
+        org.junit.Assert.assertNotNull(vector2D5);
+        org.junit.Assert.assertTrue(Double.isNaN(double6));
+        org.junit.Assert.assertNotNull(vector2D7);
+        org.junit.Assert.assertTrue(Double.isNaN(double8));
+        org.junit.Assert.assertNotNull(vector2D10);
+        org.junit.Assert.assertNotNull(vector2D11);
+        org.junit.Assert.assertNotNull(vector2D12);
+        org.junit.Assert.assertNotNull(vector2D13);
+        org.junit.Assert.assertNotNull(vector2D14);
+        org.junit.Assert.assertNotNull(vector2D15);
+        org.junit.Assert.assertTrue(Double.isNaN(double16));
+        org.junit.Assert.assertNotNull(vector2D18);
+        org.junit.Assert.assertNotNull(vector2D20);
+        org.junit.Assert.assertNotNull(vector2D21);
+        org.junit.Assert.assertNotNull(vector2D22);
+        org.junit.Assert.assertNotNull(vector2D23);
+        org.junit.Assert.assertNotNull(vector2D24);
+        org.junit.Assert.assertNotNull(vector2D25);
+        org.junit.Assert.assertNotNull(vector2D26);
+        org.junit.Assert.assertTrue(Double.isNaN(double27));
+        org.junit.Assert.assertNotNull(vector2D29);
+        org.junit.Assert.assertTrue("'" + double30 + "' != '" + Double.POSITIVE_INFINITY + "'", double30 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double31));
+        org.junit.Assert.assertNotNull(vector2D33);
+        org.junit.Assert.assertNotNull(vector2D35);
+        org.junit.Assert.assertNotNull(vector2D36);
+        org.junit.Assert.assertNotNull(vector2D37);
+        org.junit.Assert.assertNotNull(vector2D38);
+        org.junit.Assert.assertNotNull(vector2D39);
+        org.junit.Assert.assertNotNull(vector2D40);
+        org.junit.Assert.assertTrue(Double.isNaN(double41));
+        org.junit.Assert.assertNotNull(vector2D43);
+        org.junit.Assert.assertTrue("'" + double44 + "' != '" + Double.POSITIVE_INFINITY + "'", double44 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double45 + "' != '" + Double.POSITIVE_INFINITY + "'", double45 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D46);
+        org.junit.Assert.assertNotNull(vector2D48);
+        org.junit.Assert.assertNotNull(vector2D50);
+        org.junit.Assert.assertNotNull(vector2D51);
+        org.junit.Assert.assertNotNull(vector2D52);
+        org.junit.Assert.assertNotNull(vector2D53);
+        org.junit.Assert.assertNotNull(vector2D54);
+        org.junit.Assert.assertNotNull(vector2D55);
+        org.junit.Assert.assertTrue(Double.isNaN(double56));
+        org.junit.Assert.assertNotNull(vector2D58);
+        org.junit.Assert.assertTrue("'" + double59 + "' != '" + Double.POSITIVE_INFINITY + "'", double59 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double60 + "' != '" + Double.POSITIVE_INFINITY + "'", double60 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D61);
+        org.junit.Assert.assertNotNull(vector2D62);
+        org.junit.Assert.assertTrue(Double.isNaN(double64));
+        org.junit.Assert.assertNotNull(vector2D67);
+        org.junit.Assert.assertNotNull(vector2D68);
+        org.junit.Assert.assertNotNull(vector2D69);
+        org.junit.Assert.assertNotNull(vector2D70);
+        org.junit.Assert.assertNotNull(vector2D71);
+        org.junit.Assert.assertNotNull(vector2D72);
+        org.junit.Assert.assertTrue(Double.isNaN(double73));
+        org.junit.Assert.assertNotNull(vector2D75);
+        org.junit.Assert.assertTrue("'" + double76 + "' != '" + Double.POSITIVE_INFINITY + "'", double76 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double77));
+        org.junit.Assert.assertNotNull(subLine78);
+        org.junit.Assert.assertNotNull(subLine82);
+        org.junit.Assert.assertNotNull(line83);
+        org.junit.Assert.assertNotNull(vector2D84);
+        org.junit.Assert.assertNotNull(vector2D85);
+        org.junit.Assert.assertNotNull(vector2D86);
+        org.junit.Assert.assertTrue("'" + boolean87 + "' != '" + false + "'", boolean87 == false);
+    }
+
+    @Test
+    public void test115() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test115");
+        org.apache.commons.math3.geometry.partitioning.BSPTree<org.apache.commons.math3.geometry.Space> spaceBSPTree0 = new org.apache.commons.math3.geometry.partitioning.BSPTree<org.apache.commons.math3.geometry.Space>();
+        org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.Space> spaceSubHyperplane1 = spaceBSPTree0.getCut();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = vector2D2.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D3);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = vector2D5.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D6);
+        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D4, vector2D5);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D9 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        double double10 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D4, vector2D9);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D12 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D14 = vector2D12.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D13);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D17 = vector2D15.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D16);
+        double double18 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D14, vector2D15);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = vector2D15.scalarMultiply((double) (-1.0f));
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D22 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D24 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D25 = vector2D23.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D27 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D28 = vector2D26.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D27);
+        double double29 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D25, vector2D26);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D31 = vector2D26.scalarMultiply((double) (-1.0f));
+        double double32 = vector2D26.getNormInf();
+        double double33 = vector2D22.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D26);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D37 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D39 = vector2D37.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D38);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D40 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D41 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D42 = vector2D40.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D41);
+        double double43 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D39, vector2D40);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D45 = vector2D40.scalarMultiply((double) (-1.0f));
+        double double46 = vector2D40.getNormInf();
+        double double47 = vector2D40.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = vector2D40.normalize();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D52 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D54 = vector2D52.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D55 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D56 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D57 = vector2D55.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D56);
+        double double58 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D54, vector2D55);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D60 = vector2D55.scalarMultiply((double) (-1.0f));
+        double double61 = vector2D55.getNormInf();
+        double double62 = vector2D55.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D63 = vector2D50.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D55);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D64 = vector2D48.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D63);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D65 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) 1.4E-45f, vector2D20, (double) '#', vector2D26, (double) (-1023), vector2D35, 0.0d, vector2D48);
+        double double66 = vector2D9.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D48);
+        org.apache.commons.math3.geometry.euclidean.twod.Line line68 = new org.apache.commons.math3.geometry.euclidean.twod.Line(vector2D48, (double) (byte) 0);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D69 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D70 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D71 = vector2D69.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D70);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D72 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D73 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D74 = vector2D72.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D73);
+        double double75 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D71, vector2D72);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D77 = vector2D72.scalarMultiply((double) (-1.0f));
+        double double78 = vector2D72.getNormInf();
+        double double79 = line68.getOffset((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D72);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine80 = line68.wholeHyperplane();
+        line68.setOriginOffset((double) (-1L));
+        spaceBSPTree0.setAttribute((java.lang.Object) line68);
+        org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.Space> spaceSubHyperplane84 = null;
+        org.apache.commons.math3.geometry.partitioning.BSPTree<org.apache.commons.math3.geometry.Space> spaceBSPTree85 = spaceBSPTree0.split(spaceSubHyperplane84);
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.Space> spaceHyperplane86 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            boolean boolean87 = spaceBSPTree85.insertCut(spaceHyperplane86);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(spaceSubHyperplane1);
+        org.junit.Assert.assertNotNull(vector2D2);
+        org.junit.Assert.assertNotNull(vector2D3);
+        org.junit.Assert.assertNotNull(vector2D4);
+        org.junit.Assert.assertNotNull(vector2D5);
+        org.junit.Assert.assertNotNull(vector2D6);
+        org.junit.Assert.assertNotNull(vector2D7);
+        org.junit.Assert.assertTrue(Double.isNaN(double8));
+        org.junit.Assert.assertNotNull(vector2D9);
+        org.junit.Assert.assertTrue(Double.isNaN(double10));
+        org.junit.Assert.assertNotNull(vector2D12);
+        org.junit.Assert.assertNotNull(vector2D13);
+        org.junit.Assert.assertNotNull(vector2D14);
+        org.junit.Assert.assertNotNull(vector2D15);
+        org.junit.Assert.assertNotNull(vector2D16);
+        org.junit.Assert.assertNotNull(vector2D17);
+        org.junit.Assert.assertTrue(Double.isNaN(double18));
+        org.junit.Assert.assertNotNull(vector2D20);
+        org.junit.Assert.assertNotNull(vector2D22);
+        org.junit.Assert.assertNotNull(vector2D23);
+        org.junit.Assert.assertNotNull(vector2D24);
+        org.junit.Assert.assertNotNull(vector2D25);
+        org.junit.Assert.assertNotNull(vector2D26);
+        org.junit.Assert.assertNotNull(vector2D27);
+        org.junit.Assert.assertNotNull(vector2D28);
+        org.junit.Assert.assertTrue(Double.isNaN(double29));
+        org.junit.Assert.assertNotNull(vector2D31);
+        org.junit.Assert.assertTrue("'" + double32 + "' != '" + Double.POSITIVE_INFINITY + "'", double32 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double33));
+        org.junit.Assert.assertNotNull(vector2D35);
+        org.junit.Assert.assertNotNull(vector2D37);
+        org.junit.Assert.assertNotNull(vector2D38);
+        org.junit.Assert.assertNotNull(vector2D39);
+        org.junit.Assert.assertNotNull(vector2D40);
+        org.junit.Assert.assertNotNull(vector2D41);
+        org.junit.Assert.assertNotNull(vector2D42);
+        org.junit.Assert.assertTrue(Double.isNaN(double43));
+        org.junit.Assert.assertNotNull(vector2D45);
+        org.junit.Assert.assertTrue("'" + double46 + "' != '" + Double.POSITIVE_INFINITY + "'", double46 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double47 + "' != '" + Double.POSITIVE_INFINITY + "'", double47 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D48);
+        org.junit.Assert.assertNotNull(vector2D50);
+        org.junit.Assert.assertNotNull(vector2D52);
+        org.junit.Assert.assertNotNull(vector2D53);
+        org.junit.Assert.assertNotNull(vector2D54);
+        org.junit.Assert.assertNotNull(vector2D55);
+        org.junit.Assert.assertNotNull(vector2D56);
+        org.junit.Assert.assertNotNull(vector2D57);
+        org.junit.Assert.assertTrue(Double.isNaN(double58));
+        org.junit.Assert.assertNotNull(vector2D60);
+        org.junit.Assert.assertTrue("'" + double61 + "' != '" + Double.POSITIVE_INFINITY + "'", double61 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double62 + "' != '" + Double.POSITIVE_INFINITY + "'", double62 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D63);
+        org.junit.Assert.assertNotNull(vector2D64);
+        org.junit.Assert.assertTrue(Double.isNaN(double66));
+        org.junit.Assert.assertNotNull(vector2D69);
+        org.junit.Assert.assertNotNull(vector2D70);
+        org.junit.Assert.assertNotNull(vector2D71);
+        org.junit.Assert.assertNotNull(vector2D72);
+        org.junit.Assert.assertNotNull(vector2D73);
+        org.junit.Assert.assertNotNull(vector2D74);
+        org.junit.Assert.assertTrue(Double.isNaN(double75));
+        org.junit.Assert.assertNotNull(vector2D77);
+        org.junit.Assert.assertTrue("'" + double78 + "' != '" + Double.POSITIVE_INFINITY + "'", double78 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double79));
+        org.junit.Assert.assertNotNull(subLine80);
+        org.junit.Assert.assertNotNull(spaceBSPTree85);
+    }
+
+    @Test
+    public void test116() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test116");
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
+        org.apache.commons.math3.geometry.euclidean.threed.Line line1 = null;
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane2 = null;
+        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList3 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet4 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList3);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint5 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane2, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet4);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D6 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean8 = vector1D6.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D10 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D12 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D14 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean16 = vector1D14.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D18 = vector1D14.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D19 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double20 = vector1D18.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D19);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D22 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean24 = vector1D22.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D26 = vector1D22.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D27 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (short) 100, vector1D10, (double) 100, vector1D12, (double) (short) 0, vector1D19, (double) 'a', vector1D22);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D29 = vector1D22.scalarMultiply(4.605170185988092d);
+        java.lang.String str30 = vector1D29.toString();
+        double double31 = vector1D6.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D29);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = vector1D6.scalarMultiply(0.0d);
+        org.apache.commons.math3.geometry.partitioning.Region.Location location34 = intervalsSet4.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D6);
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector35 = null;
+        org.apache.commons.math3.geometry.partitioning.Region.Location location36 = intervalsSet4.checkPoint(euclidean1DVector35);
+        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine37 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line1, intervalsSet4);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine38 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane0, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet4);
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane39 = subLine38.getHyperplane();
+        org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DRegion40 = subLine38.getRemainingRegion();
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane41 = subLine38.getHyperplane();
+        org.junit.Assert.assertNotNull(vector1D6);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(vector1D10);
+        org.junit.Assert.assertNotNull(vector1D12);
+        org.junit.Assert.assertNotNull(vector1D14);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(vector1D18);
+        org.junit.Assert.assertNotNull(vector1D19);
+        org.junit.Assert.assertTrue(Double.isNaN(double20));
+        org.junit.Assert.assertNotNull(vector1D22);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertNotNull(vector1D26);
+        org.junit.Assert.assertNotNull(vector1D29);
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "{(NaN)}" + "'", str30, "{(NaN)}");
+        org.junit.Assert.assertTrue(Double.isNaN(double31));
+        org.junit.Assert.assertNotNull(vector1D33);
+        org.junit.Assert.assertTrue("'" + location34 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location34.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
+        org.junit.Assert.assertTrue("'" + location36 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location36.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
+        org.junit.Assert.assertNull(euclidean2DHyperplane39);
+        org.junit.Assert.assertNotNull(euclidean1DRegion40);
+        org.junit.Assert.assertNull(euclidean2DHyperplane41);
+    }
+
+    @Test
+    public void test117() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test117");
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
+        org.apache.commons.math3.geometry.euclidean.threed.Line line1 = null;
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane2 = null;
+        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList3 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet4 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList3);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint5 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane2, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet4);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D6 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean8 = vector1D6.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D10 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D12 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D14 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean16 = vector1D14.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D18 = vector1D14.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D19 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double20 = vector1D18.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D19);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D22 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean24 = vector1D22.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D26 = vector1D22.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D27 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (short) 100, vector1D10, (double) 100, vector1D12, (double) (short) 0, vector1D19, (double) 'a', vector1D22);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D29 = vector1D22.scalarMultiply(4.605170185988092d);
+        java.lang.String str30 = vector1D29.toString();
+        double double31 = vector1D6.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D29);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = vector1D6.scalarMultiply(0.0d);
+        org.apache.commons.math3.geometry.partitioning.Region.Location location34 = intervalsSet4.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D6);
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector35 = null;
+        org.apache.commons.math3.geometry.partitioning.Region.Location location36 = intervalsSet4.checkPoint(euclidean1DVector35);
+        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine37 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line1, intervalsSet4);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine38 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane0, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet4);
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane39 = null;
+        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList40 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet41 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList40);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint42 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane39, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet41);
+        boolean boolean43 = subOrientedPoint42.isEmpty();
+        org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractSubHyperplane44 = subOrientedPoint42.copySelf();
+        org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DSubHyperplane45 = intervalsSet4.intersection((org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) euclidean1DAbstractSubHyperplane44);
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane46 = null;
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane47 = null;
+        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList48 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet49 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList48);
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet50 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList48);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint51 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane47, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet50);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint52 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane46, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet50);
+        org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractSubHyperplane53 = euclidean1DAbstractSubHyperplane44.reunite((org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) subOrientedPoint52);
+        org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractSubHyperplane54 = subOrientedPoint52.copySelf();
+        org.junit.Assert.assertNotNull(vector1D6);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(vector1D10);
+        org.junit.Assert.assertNotNull(vector1D12);
+        org.junit.Assert.assertNotNull(vector1D14);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(vector1D18);
+        org.junit.Assert.assertNotNull(vector1D19);
+        org.junit.Assert.assertTrue(Double.isNaN(double20));
+        org.junit.Assert.assertNotNull(vector1D22);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertNotNull(vector1D26);
+        org.junit.Assert.assertNotNull(vector1D29);
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "{(NaN)}" + "'", str30, "{(NaN)}");
+        org.junit.Assert.assertTrue(Double.isNaN(double31));
+        org.junit.Assert.assertNotNull(vector1D33);
+        org.junit.Assert.assertTrue("'" + location34 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location34.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
+        org.junit.Assert.assertTrue("'" + location36 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location36.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
+        org.junit.Assert.assertNotNull(euclidean1DAbstractSubHyperplane44);
+        org.junit.Assert.assertNotNull(euclidean1DSubHyperplane45);
+        org.junit.Assert.assertNotNull(euclidean1DAbstractSubHyperplane53);
+        org.junit.Assert.assertNotNull(euclidean1DAbstractSubHyperplane54);
+    }
+
+    @Test
+    public void test118() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test118");
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = vector2D3.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D4);
+        double double6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D3);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D7);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D10 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D11 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D12 = vector2D10.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D11);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D14 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = vector2D13.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D14);
+        double double16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D12, vector2D13);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D18 = vector2D13.scalarMultiply((double) (-1.0f));
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D21 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D22 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = vector2D21.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D22);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D24 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D25 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = vector2D24.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D25);
+        double double27 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D23, vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D29 = vector2D24.scalarMultiply((double) (-1.0f));
+        double double30 = vector2D24.getNormInf();
+        double double31 = vector2D20.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D33 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D36 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D37 = vector2D35.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D36);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D39 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D40 = vector2D38.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D39);
+        double double41 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D37, vector2D38);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D43 = vector2D38.scalarMultiply((double) (-1.0f));
+        double double44 = vector2D38.getNormInf();
+        double double45 = vector2D38.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D46 = vector2D38.normalize();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D51 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D52 = vector2D50.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D51);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D54 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D55 = vector2D53.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D54);
+        double double56 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D52, vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D58 = vector2D53.scalarMultiply((double) (-1.0f));
+        double double59 = vector2D53.getNormInf();
+        double double60 = vector2D53.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D61 = vector2D48.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D62 = vector2D46.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D61);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D63 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) 1.4E-45f, vector2D18, (double) '#', vector2D24, (double) (-1023), vector2D33, 0.0d, vector2D46);
+        double double64 = vector2D7.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D46);
+        org.apache.commons.math3.geometry.euclidean.twod.Line line66 = new org.apache.commons.math3.geometry.euclidean.twod.Line(vector2D46, (double) (byte) 0);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D67 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D68 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D69 = vector2D67.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D68);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D70 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D71 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D72 = vector2D70.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D71);
+        double double73 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D69, vector2D70);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D75 = vector2D70.scalarMultiply((double) (-1.0f));
+        double double76 = vector2D70.getNormInf();
+        double double77 = line66.getOffset((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D70);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine78 = line66.wholeHyperplane();
+        org.apache.commons.math3.geometry.euclidean.twod.Line line79 = line66.copySelf();
+        org.apache.commons.math3.geometry.euclidean.twod.Line line80 = line79.copySelf();
+        org.junit.Assert.assertNotNull(vector2D0);
+        org.junit.Assert.assertNotNull(vector2D1);
+        org.junit.Assert.assertNotNull(vector2D2);
+        org.junit.Assert.assertNotNull(vector2D3);
+        org.junit.Assert.assertNotNull(vector2D4);
+        org.junit.Assert.assertNotNull(vector2D5);
+        org.junit.Assert.assertTrue(Double.isNaN(double6));
+        org.junit.Assert.assertNotNull(vector2D7);
+        org.junit.Assert.assertTrue(Double.isNaN(double8));
+        org.junit.Assert.assertNotNull(vector2D10);
+        org.junit.Assert.assertNotNull(vector2D11);
+        org.junit.Assert.assertNotNull(vector2D12);
+        org.junit.Assert.assertNotNull(vector2D13);
+        org.junit.Assert.assertNotNull(vector2D14);
+        org.junit.Assert.assertNotNull(vector2D15);
+        org.junit.Assert.assertTrue(Double.isNaN(double16));
+        org.junit.Assert.assertNotNull(vector2D18);
+        org.junit.Assert.assertNotNull(vector2D20);
+        org.junit.Assert.assertNotNull(vector2D21);
+        org.junit.Assert.assertNotNull(vector2D22);
+        org.junit.Assert.assertNotNull(vector2D23);
+        org.junit.Assert.assertNotNull(vector2D24);
+        org.junit.Assert.assertNotNull(vector2D25);
+        org.junit.Assert.assertNotNull(vector2D26);
+        org.junit.Assert.assertTrue(Double.isNaN(double27));
+        org.junit.Assert.assertNotNull(vector2D29);
+        org.junit.Assert.assertTrue("'" + double30 + "' != '" + Double.POSITIVE_INFINITY + "'", double30 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double31));
+        org.junit.Assert.assertNotNull(vector2D33);
+        org.junit.Assert.assertNotNull(vector2D35);
+        org.junit.Assert.assertNotNull(vector2D36);
+        org.junit.Assert.assertNotNull(vector2D37);
+        org.junit.Assert.assertNotNull(vector2D38);
+        org.junit.Assert.assertNotNull(vector2D39);
+        org.junit.Assert.assertNotNull(vector2D40);
+        org.junit.Assert.assertTrue(Double.isNaN(double41));
+        org.junit.Assert.assertNotNull(vector2D43);
+        org.junit.Assert.assertTrue("'" + double44 + "' != '" + Double.POSITIVE_INFINITY + "'", double44 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double45 + "' != '" + Double.POSITIVE_INFINITY + "'", double45 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D46);
+        org.junit.Assert.assertNotNull(vector2D48);
+        org.junit.Assert.assertNotNull(vector2D50);
+        org.junit.Assert.assertNotNull(vector2D51);
+        org.junit.Assert.assertNotNull(vector2D52);
+        org.junit.Assert.assertNotNull(vector2D53);
+        org.junit.Assert.assertNotNull(vector2D54);
+        org.junit.Assert.assertNotNull(vector2D55);
+        org.junit.Assert.assertTrue(Double.isNaN(double56));
+        org.junit.Assert.assertNotNull(vector2D58);
+        org.junit.Assert.assertTrue("'" + double59 + "' != '" + Double.POSITIVE_INFINITY + "'", double59 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double60 + "' != '" + Double.POSITIVE_INFINITY + "'", double60 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D61);
+        org.junit.Assert.assertNotNull(vector2D62);
+        org.junit.Assert.assertTrue(Double.isNaN(double64));
+        org.junit.Assert.assertNotNull(vector2D67);
+        org.junit.Assert.assertNotNull(vector2D68);
+        org.junit.Assert.assertNotNull(vector2D69);
+        org.junit.Assert.assertNotNull(vector2D70);
+        org.junit.Assert.assertNotNull(vector2D71);
+        org.junit.Assert.assertNotNull(vector2D72);
+        org.junit.Assert.assertTrue(Double.isNaN(double73));
+        org.junit.Assert.assertNotNull(vector2D75);
+        org.junit.Assert.assertTrue("'" + double76 + "' != '" + Double.POSITIVE_INFINITY + "'", double76 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double77));
+        org.junit.Assert.assertNotNull(subLine78);
+        org.junit.Assert.assertNotNull(line79);
+        org.junit.Assert.assertNotNull(line80);
+    }
+
+    @Test
+    public void test119() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test119");
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D3 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D4 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.crossProduct(vector3D0, vector3D3);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D5 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D6 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double7 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D5, vector3D6);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D8 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double9 = vector3D5.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D8);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D10 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D11 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double12 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D10, vector3D11);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D13 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double14 = vector3D10.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D13);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D15 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double16 = vector3D15.getNorm();
+        double double17 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D10, vector3D15);
+        double double18 = vector3D8.distance1((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D15);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D19 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D20 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double21 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D19, vector3D20);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D23 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D24 = vector3D20.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D23);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D26 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D27 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I;
+        double double28 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.angle(vector3D26, vector3D27);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D29 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D30 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double31 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D29, vector3D30);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D33 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D34 = vector3D30.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D33);
+        double double35 = vector3D27.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D30);
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D> euclidean3DVector36 = vector3D20.add((double) (-1), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D27);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D37 = vector3D15.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D27);
+        java.text.NumberFormat numberFormat38 = null;
+        java.lang.String str39 = vector3D37.toString(numberFormat38);
+        org.apache.commons.math3.geometry.euclidean.threed.Line line40 = new org.apache.commons.math3.geometry.euclidean.threed.Line(vector3D0, vector3D37);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D41 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D42 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double43 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D41, vector3D42);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D44 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D45 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.crossProduct(vector3D41, vector3D44);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D46 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D47 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double48 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D46, vector3D47);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D49 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double50 = vector3D46.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D49);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D51 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D52 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double53 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D51, vector3D52);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D54 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double55 = vector3D51.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D54);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D56 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double57 = vector3D56.getNorm();
+        double double58 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D51, vector3D56);
+        double double59 = vector3D49.distance1((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D56);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D60 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D61 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double62 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D60, vector3D61);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D64 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D65 = vector3D61.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D64);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D67 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D68 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I;
+        double double69 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.angle(vector3D67, vector3D68);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D70 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D71 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double72 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D70, vector3D71);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D74 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D75 = vector3D71.add((double) (byte) 100, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D74);
+        double double76 = vector3D68.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D71);
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D> euclidean3DVector77 = vector3D61.add((double) (-1), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D68);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D78 = vector3D56.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D68);
+        java.text.NumberFormat numberFormat79 = null;
+        java.lang.String str80 = vector3D78.toString(numberFormat79);
+        org.apache.commons.math3.geometry.euclidean.threed.Line line81 = new org.apache.commons.math3.geometry.euclidean.threed.Line(vector3D41, vector3D78);
+        double double82 = line40.distance(line81);
+        org.apache.commons.math3.geometry.euclidean.threed.Line line83 = new org.apache.commons.math3.geometry.euclidean.threed.Line(line81);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D84 = line83.getDirection();
+        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine85 = line83.wholeLine();
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D87 = line83.pointAt(0.0d);
+        org.apache.commons.math3.geometry.euclidean.threed.Line line88 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            double double89 = line83.distance(line88);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(vector3D0);
+        org.junit.Assert.assertNotNull(vector3D1);
+        org.junit.Assert.assertTrue(Double.isNaN(double2));
+        org.junit.Assert.assertNotNull(vector3D3);
+        org.junit.Assert.assertNotNull(vector3D4);
+        org.junit.Assert.assertNotNull(vector3D5);
+        org.junit.Assert.assertNotNull(vector3D6);
+        org.junit.Assert.assertTrue(Double.isNaN(double7));
+        org.junit.Assert.assertNotNull(vector3D8);
+        org.junit.Assert.assertTrue(Double.isNaN(double9));
+        org.junit.Assert.assertNotNull(vector3D10);
+        org.junit.Assert.assertNotNull(vector3D11);
+        org.junit.Assert.assertTrue(Double.isNaN(double12));
+        org.junit.Assert.assertNotNull(vector3D13);
+        org.junit.Assert.assertTrue(Double.isNaN(double14));
+        org.junit.Assert.assertNotNull(vector3D15);
+        org.junit.Assert.assertTrue("'" + double16 + "' != '" + Double.POSITIVE_INFINITY + "'", double16 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double17));
+        org.junit.Assert.assertTrue(Double.isNaN(double18));
+        org.junit.Assert.assertNotNull(vector3D19);
+        org.junit.Assert.assertNotNull(vector3D20);
+        org.junit.Assert.assertTrue(Double.isNaN(double21));
+        org.junit.Assert.assertNotNull(vector3D23);
+        org.junit.Assert.assertNotNull(vector3D24);
+        org.junit.Assert.assertNotNull(vector3D26);
+        org.junit.Assert.assertNotNull(vector3D27);
+        org.junit.Assert.assertTrue("'" + double28 + "' != '" + 0.0d + "'", double28 == 0.0d);
+        org.junit.Assert.assertNotNull(vector3D29);
+        org.junit.Assert.assertNotNull(vector3D30);
+        org.junit.Assert.assertTrue(Double.isNaN(double31));
+        org.junit.Assert.assertNotNull(vector3D33);
+        org.junit.Assert.assertNotNull(vector3D34);
+        org.junit.Assert.assertTrue("'" + double35 + "' != '" + Double.POSITIVE_INFINITY + "'", double35 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(euclidean3DVector36);
+        org.junit.Assert.assertNotNull(vector3D37);
+        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "{(-Infinity); (-Infinity); (-Infinity)}" + "'", str39, "{(-Infinity); (-Infinity); (-Infinity)}");
+        org.junit.Assert.assertNotNull(vector3D41);
+        org.junit.Assert.assertNotNull(vector3D42);
+        org.junit.Assert.assertTrue(Double.isNaN(double43));
+        org.junit.Assert.assertNotNull(vector3D44);
+        org.junit.Assert.assertNotNull(vector3D45);
+        org.junit.Assert.assertNotNull(vector3D46);
+        org.junit.Assert.assertNotNull(vector3D47);
+        org.junit.Assert.assertTrue(Double.isNaN(double48));
+        org.junit.Assert.assertNotNull(vector3D49);
+        org.junit.Assert.assertTrue(Double.isNaN(double50));
+        org.junit.Assert.assertNotNull(vector3D51);
+        org.junit.Assert.assertNotNull(vector3D52);
+        org.junit.Assert.assertTrue(Double.isNaN(double53));
+        org.junit.Assert.assertNotNull(vector3D54);
+        org.junit.Assert.assertTrue(Double.isNaN(double55));
+        org.junit.Assert.assertNotNull(vector3D56);
+        org.junit.Assert.assertTrue("'" + double57 + "' != '" + Double.POSITIVE_INFINITY + "'", double57 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double58));
+        org.junit.Assert.assertTrue(Double.isNaN(double59));
+        org.junit.Assert.assertNotNull(vector3D60);
+        org.junit.Assert.assertNotNull(vector3D61);
+        org.junit.Assert.assertTrue(Double.isNaN(double62));
+        org.junit.Assert.assertNotNull(vector3D64);
+        org.junit.Assert.assertNotNull(vector3D65);
+        org.junit.Assert.assertNotNull(vector3D67);
+        org.junit.Assert.assertNotNull(vector3D68);
+        org.junit.Assert.assertTrue("'" + double69 + "' != '" + 0.0d + "'", double69 == 0.0d);
+        org.junit.Assert.assertNotNull(vector3D70);
+        org.junit.Assert.assertNotNull(vector3D71);
+        org.junit.Assert.assertTrue(Double.isNaN(double72));
+        org.junit.Assert.assertNotNull(vector3D74);
+        org.junit.Assert.assertNotNull(vector3D75);
+        org.junit.Assert.assertTrue("'" + double76 + "' != '" + Double.POSITIVE_INFINITY + "'", double76 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(euclidean3DVector77);
+        org.junit.Assert.assertNotNull(vector3D78);
+        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "{(-Infinity); (-Infinity); (-Infinity)}" + "'", str80, "{(-Infinity); (-Infinity); (-Infinity)}");
+        org.junit.Assert.assertTrue(Double.isNaN(double82));
+        org.junit.Assert.assertNotNull(vector3D84);
+        org.junit.Assert.assertNotNull(subLine85);
+        org.junit.Assert.assertNotNull(vector3D87);
+    }
+
+    @Test
     public void test120() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test120");
@@ -12733,10 +12813,8 @@ public class RegressionTest0 {
         double double64 = vector2D7.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D46);
         org.apache.commons.math3.geometry.euclidean.twod.Line line66 = new org.apache.commons.math3.geometry.euclidean.twod.Line(vector2D46, (double) (byte) 0);
         org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine67 = line66.wholeHyperplane();
-        org.apache.commons.math3.geometry.euclidean.twod.Line line68 = new org.apache.commons.math3.geometry.euclidean.twod.Line(line66);
-        org.apache.commons.math3.geometry.euclidean.twod.PolygonsSet polygonsSet69 = line68.wholeSpace();
-        line68.setAngle(1.571417816910565E-5d);
-        line68.setAngle(5.916079460698845d);
+        line66.revertSelf();
+        org.apache.commons.math3.geometry.euclidean.twod.Line line69 = new org.apache.commons.math3.geometry.euclidean.twod.Line(line66);
         org.junit.Assert.assertNotNull(vector2D0);
         org.junit.Assert.assertNotNull(vector2D1);
         org.junit.Assert.assertNotNull(vector2D2);
@@ -12792,7 +12870,869 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(vector2D62);
         org.junit.Assert.assertTrue(Double.isNaN(double64));
         org.junit.Assert.assertNotNull(subLine67);
-        org.junit.Assert.assertNotNull(polygonsSet69);
+    }
+
+    @Test
+    public void test121() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test121");
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = vector2D3.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D4);
+        double double6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D3);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D7);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D10 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D11 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D12 = vector2D10.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D11);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D14 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = vector2D13.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D14);
+        double double16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D12, vector2D13);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D18 = vector2D13.scalarMultiply((double) (-1.0f));
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D21 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D22 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = vector2D21.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D22);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D24 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D25 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = vector2D24.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D25);
+        double double27 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D23, vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D29 = vector2D24.scalarMultiply((double) (-1.0f));
+        double double30 = vector2D24.getNormInf();
+        double double31 = vector2D20.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D33 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D36 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D37 = vector2D35.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D36);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D39 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D40 = vector2D38.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D39);
+        double double41 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D37, vector2D38);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D43 = vector2D38.scalarMultiply((double) (-1.0f));
+        double double44 = vector2D38.getNormInf();
+        double double45 = vector2D38.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D46 = vector2D38.normalize();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D51 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D52 = vector2D50.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D51);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D54 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D55 = vector2D53.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D54);
+        double double56 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D52, vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D58 = vector2D53.scalarMultiply((double) (-1.0f));
+        double double59 = vector2D53.getNormInf();
+        double double60 = vector2D53.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D61 = vector2D48.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D62 = vector2D46.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D61);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D63 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) 1.4E-45f, vector2D18, (double) '#', vector2D24, (double) (-1023), vector2D33, 0.0d, vector2D46);
+        double double64 = vector2D7.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D46);
+        org.apache.commons.math3.geometry.euclidean.twod.Line line66 = new org.apache.commons.math3.geometry.euclidean.twod.Line(vector2D46, (double) (byte) 0);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine67 = line66.wholeHyperplane();
+        line66.revertSelf();
+        org.apache.commons.math3.geometry.euclidean.twod.Line line69 = line66.copySelf();
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine70 = line66.wholeHyperplane();
+        org.junit.Assert.assertNotNull(vector2D0);
+        org.junit.Assert.assertNotNull(vector2D1);
+        org.junit.Assert.assertNotNull(vector2D2);
+        org.junit.Assert.assertNotNull(vector2D3);
+        org.junit.Assert.assertNotNull(vector2D4);
+        org.junit.Assert.assertNotNull(vector2D5);
+        org.junit.Assert.assertTrue(Double.isNaN(double6));
+        org.junit.Assert.assertNotNull(vector2D7);
+        org.junit.Assert.assertTrue(Double.isNaN(double8));
+        org.junit.Assert.assertNotNull(vector2D10);
+        org.junit.Assert.assertNotNull(vector2D11);
+        org.junit.Assert.assertNotNull(vector2D12);
+        org.junit.Assert.assertNotNull(vector2D13);
+        org.junit.Assert.assertNotNull(vector2D14);
+        org.junit.Assert.assertNotNull(vector2D15);
+        org.junit.Assert.assertTrue(Double.isNaN(double16));
+        org.junit.Assert.assertNotNull(vector2D18);
+        org.junit.Assert.assertNotNull(vector2D20);
+        org.junit.Assert.assertNotNull(vector2D21);
+        org.junit.Assert.assertNotNull(vector2D22);
+        org.junit.Assert.assertNotNull(vector2D23);
+        org.junit.Assert.assertNotNull(vector2D24);
+        org.junit.Assert.assertNotNull(vector2D25);
+        org.junit.Assert.assertNotNull(vector2D26);
+        org.junit.Assert.assertTrue(Double.isNaN(double27));
+        org.junit.Assert.assertNotNull(vector2D29);
+        org.junit.Assert.assertTrue("'" + double30 + "' != '" + Double.POSITIVE_INFINITY + "'", double30 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double31));
+        org.junit.Assert.assertNotNull(vector2D33);
+        org.junit.Assert.assertNotNull(vector2D35);
+        org.junit.Assert.assertNotNull(vector2D36);
+        org.junit.Assert.assertNotNull(vector2D37);
+        org.junit.Assert.assertNotNull(vector2D38);
+        org.junit.Assert.assertNotNull(vector2D39);
+        org.junit.Assert.assertNotNull(vector2D40);
+        org.junit.Assert.assertTrue(Double.isNaN(double41));
+        org.junit.Assert.assertNotNull(vector2D43);
+        org.junit.Assert.assertTrue("'" + double44 + "' != '" + Double.POSITIVE_INFINITY + "'", double44 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double45 + "' != '" + Double.POSITIVE_INFINITY + "'", double45 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D46);
+        org.junit.Assert.assertNotNull(vector2D48);
+        org.junit.Assert.assertNotNull(vector2D50);
+        org.junit.Assert.assertNotNull(vector2D51);
+        org.junit.Assert.assertNotNull(vector2D52);
+        org.junit.Assert.assertNotNull(vector2D53);
+        org.junit.Assert.assertNotNull(vector2D54);
+        org.junit.Assert.assertNotNull(vector2D55);
+        org.junit.Assert.assertTrue(Double.isNaN(double56));
+        org.junit.Assert.assertNotNull(vector2D58);
+        org.junit.Assert.assertTrue("'" + double59 + "' != '" + Double.POSITIVE_INFINITY + "'", double59 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double60 + "' != '" + Double.POSITIVE_INFINITY + "'", double60 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D61);
+        org.junit.Assert.assertNotNull(vector2D62);
+        org.junit.Assert.assertTrue(Double.isNaN(double64));
+        org.junit.Assert.assertNotNull(subLine67);
+        org.junit.Assert.assertNotNull(line69);
+        org.junit.Assert.assertNotNull(subLine70);
+    }
+
+    @Test
+    public void test122() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test122");
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D1 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = vector2D0.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D1);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = vector2D3.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D4);
+        double double6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D3);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D2, vector2D7);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D10 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D11 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D12 = vector2D10.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D11);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D14 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = vector2D13.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D14);
+        double double16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D12, vector2D13);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D18 = vector2D13.scalarMultiply((double) (-1.0f));
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D21 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D22 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = vector2D21.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D22);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D24 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D25 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = vector2D24.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D25);
+        double double27 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D23, vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D29 = vector2D24.scalarMultiply((double) (-1.0f));
+        double double30 = vector2D24.getNormInf();
+        double double31 = vector2D20.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D24);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D33 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D36 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D37 = vector2D35.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D36);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D39 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D40 = vector2D38.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D39);
+        double double41 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D37, vector2D38);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D43 = vector2D38.scalarMultiply((double) (-1.0f));
+        double double44 = vector2D38.getNormInf();
+        double double45 = vector2D38.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D46 = vector2D38.normalize();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D51 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D52 = vector2D50.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D51);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D54 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D55 = vector2D53.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D54);
+        double double56 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D52, vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D58 = vector2D53.scalarMultiply((double) (-1.0f));
+        double double59 = vector2D53.getNormInf();
+        double double60 = vector2D53.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D61 = vector2D48.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D53);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D62 = vector2D46.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D61);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D63 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) 1.4E-45f, vector2D18, (double) '#', vector2D24, (double) (-1023), vector2D33, 0.0d, vector2D46);
+        double double64 = vector2D7.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D46);
+        org.apache.commons.math3.geometry.euclidean.twod.Line line66 = new org.apache.commons.math3.geometry.euclidean.twod.Line(vector2D46, (double) (byte) 0);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D67 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D68 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D69 = vector2D67.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D68);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D70 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D71 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D72 = vector2D70.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D71);
+        double double73 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D69, vector2D70);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D75 = vector2D70.scalarMultiply((double) (-1.0f));
+        double double76 = vector2D70.getNormInf();
+        double double77 = line66.getOffset((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D70);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine78 = line66.wholeHyperplane();
+        line66.setOriginOffset((double) (-1L));
+        line66.revertSelf();
+        org.apache.commons.math3.geometry.euclidean.twod.Line line82 = line66.copySelf();
+        org.junit.Assert.assertNotNull(vector2D0);
+        org.junit.Assert.assertNotNull(vector2D1);
+        org.junit.Assert.assertNotNull(vector2D2);
+        org.junit.Assert.assertNotNull(vector2D3);
+        org.junit.Assert.assertNotNull(vector2D4);
+        org.junit.Assert.assertNotNull(vector2D5);
+        org.junit.Assert.assertTrue(Double.isNaN(double6));
+        org.junit.Assert.assertNotNull(vector2D7);
+        org.junit.Assert.assertTrue(Double.isNaN(double8));
+        org.junit.Assert.assertNotNull(vector2D10);
+        org.junit.Assert.assertNotNull(vector2D11);
+        org.junit.Assert.assertNotNull(vector2D12);
+        org.junit.Assert.assertNotNull(vector2D13);
+        org.junit.Assert.assertNotNull(vector2D14);
+        org.junit.Assert.assertNotNull(vector2D15);
+        org.junit.Assert.assertTrue(Double.isNaN(double16));
+        org.junit.Assert.assertNotNull(vector2D18);
+        org.junit.Assert.assertNotNull(vector2D20);
+        org.junit.Assert.assertNotNull(vector2D21);
+        org.junit.Assert.assertNotNull(vector2D22);
+        org.junit.Assert.assertNotNull(vector2D23);
+        org.junit.Assert.assertNotNull(vector2D24);
+        org.junit.Assert.assertNotNull(vector2D25);
+        org.junit.Assert.assertNotNull(vector2D26);
+        org.junit.Assert.assertTrue(Double.isNaN(double27));
+        org.junit.Assert.assertNotNull(vector2D29);
+        org.junit.Assert.assertTrue("'" + double30 + "' != '" + Double.POSITIVE_INFINITY + "'", double30 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double31));
+        org.junit.Assert.assertNotNull(vector2D33);
+        org.junit.Assert.assertNotNull(vector2D35);
+        org.junit.Assert.assertNotNull(vector2D36);
+        org.junit.Assert.assertNotNull(vector2D37);
+        org.junit.Assert.assertNotNull(vector2D38);
+        org.junit.Assert.assertNotNull(vector2D39);
+        org.junit.Assert.assertNotNull(vector2D40);
+        org.junit.Assert.assertTrue(Double.isNaN(double41));
+        org.junit.Assert.assertNotNull(vector2D43);
+        org.junit.Assert.assertTrue("'" + double44 + "' != '" + Double.POSITIVE_INFINITY + "'", double44 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double45 + "' != '" + Double.POSITIVE_INFINITY + "'", double45 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D46);
+        org.junit.Assert.assertNotNull(vector2D48);
+        org.junit.Assert.assertNotNull(vector2D50);
+        org.junit.Assert.assertNotNull(vector2D51);
+        org.junit.Assert.assertNotNull(vector2D52);
+        org.junit.Assert.assertNotNull(vector2D53);
+        org.junit.Assert.assertNotNull(vector2D54);
+        org.junit.Assert.assertNotNull(vector2D55);
+        org.junit.Assert.assertTrue(Double.isNaN(double56));
+        org.junit.Assert.assertNotNull(vector2D58);
+        org.junit.Assert.assertTrue("'" + double59 + "' != '" + Double.POSITIVE_INFINITY + "'", double59 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double60 + "' != '" + Double.POSITIVE_INFINITY + "'", double60 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D61);
+        org.junit.Assert.assertNotNull(vector2D62);
+        org.junit.Assert.assertTrue(Double.isNaN(double64));
+        org.junit.Assert.assertNotNull(vector2D67);
+        org.junit.Assert.assertNotNull(vector2D68);
+        org.junit.Assert.assertNotNull(vector2D69);
+        org.junit.Assert.assertNotNull(vector2D70);
+        org.junit.Assert.assertNotNull(vector2D71);
+        org.junit.Assert.assertNotNull(vector2D72);
+        org.junit.Assert.assertTrue(Double.isNaN(double73));
+        org.junit.Assert.assertNotNull(vector2D75);
+        org.junit.Assert.assertTrue("'" + double76 + "' != '" + Double.POSITIVE_INFINITY + "'", double76 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double77));
+        org.junit.Assert.assertNotNull(subLine78);
+        org.junit.Assert.assertNotNull(line82);
+    }
+
+    @Test
+    public void test123() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test123");
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D0 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D1 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double2 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D0, vector3D1);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D3 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double4 = vector3D0.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D3);
+        boolean boolean5 = vector3D0.isNaN();
+        double double6 = vector3D0.getNormSq();
+        double[] doubleArray7 = vector3D0.toArray();
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D8 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D(doubleArray7);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D9 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D(doubleArray7);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D11 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.MINUS_K;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D14 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D15 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double16 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D14, vector3D15);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D17 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double18 = vector3D14.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D17);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D19 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double20 = vector3D19.getNorm();
+        double double21 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D14, vector3D19);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D23 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D24 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double25 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D23, vector3D24);
+        double double26 = vector3D23.getNorm1();
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D28 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D29 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double30 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D28, vector3D29);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D31 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double32 = vector3D28.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D31);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D33 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D34 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double35 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D33, vector3D34);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D36 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double37 = vector3D33.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D36);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D38 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double39 = vector3D38.getNorm();
+        double double40 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D33, vector3D38);
+        double double41 = vector3D31.distance1((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D38);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D43 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D44 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D((double) 'a', vector3D19, (double) 6, vector3D23, (double) 10.0f, vector3D38, 0.0d, vector3D43);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D45 = vector3D44.negate();
+        double double46 = vector3D45.getDelta();
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D47 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.MINUS_J;
+        double double48 = vector3D45.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D47);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D49 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D((-1.5574077246549023d), vector3D11, (double) 99.99999f, vector3D45);
+        double double50 = vector3D11.getDelta();
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D> euclidean3DVector51 = vector3D9.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D11);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D53 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D54 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double55 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D53, vector3D54);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D56 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double57 = vector3D53.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D56);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D58 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double59 = vector3D58.getNorm();
+        double double60 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D53, vector3D58);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D62 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D63 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double64 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D62, vector3D63);
+        double double65 = vector3D62.getNorm1();
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D67 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D68 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double69 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D67, vector3D68);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D70 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double71 = vector3D67.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D70);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D72 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D73 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double74 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D72, vector3D73);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D75 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double76 = vector3D72.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D75);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D77 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        double double78 = vector3D77.getNorm();
+        double double79 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.distanceSq(vector3D72, vector3D77);
+        double double80 = vector3D70.distance1((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.threed.Euclidean3D>) vector3D77);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D82 = org.apache.commons.math3.geometry.euclidean.threed.Vector3D.NEGATIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D83 = new org.apache.commons.math3.geometry.euclidean.threed.Vector3D((double) 'a', vector3D58, (double) 6, vector3D62, (double) 10.0f, vector3D77, 0.0d, vector3D82);
+        org.apache.commons.math3.geometry.euclidean.threed.Vector3D vector3D85 = vector3D62.scalarMultiply((double) (-1L));
+        double double86 = vector3D62.getDelta();
+        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine87 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(vector3D11, vector3D62);
+        java.util.List<org.apache.commons.math3.geometry.euclidean.threed.Segment> segmentList88 = subLine87.getSegments();
+        org.junit.Assert.assertNotNull(vector3D0);
+        org.junit.Assert.assertNotNull(vector3D1);
+        org.junit.Assert.assertTrue(Double.isNaN(double2));
+        org.junit.Assert.assertNotNull(vector3D3);
+        org.junit.Assert.assertTrue(Double.isNaN(double4));
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + double6 + "' != '" + Double.POSITIVE_INFINITY + "'", double6 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(doubleArray7);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(doubleArray7), "[-Infinity, -Infinity, -Infinity]");
+        org.junit.Assert.assertNotNull(vector3D11);
+        org.junit.Assert.assertNotNull(vector3D14);
+        org.junit.Assert.assertNotNull(vector3D15);
+        org.junit.Assert.assertTrue(Double.isNaN(double16));
+        org.junit.Assert.assertNotNull(vector3D17);
+        org.junit.Assert.assertTrue(Double.isNaN(double18));
+        org.junit.Assert.assertNotNull(vector3D19);
+        org.junit.Assert.assertTrue("'" + double20 + "' != '" + Double.POSITIVE_INFINITY + "'", double20 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double21));
+        org.junit.Assert.assertNotNull(vector3D23);
+        org.junit.Assert.assertNotNull(vector3D24);
+        org.junit.Assert.assertTrue(Double.isNaN(double25));
+        org.junit.Assert.assertTrue("'" + double26 + "' != '" + Double.POSITIVE_INFINITY + "'", double26 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector3D28);
+        org.junit.Assert.assertNotNull(vector3D29);
+        org.junit.Assert.assertTrue(Double.isNaN(double30));
+        org.junit.Assert.assertNotNull(vector3D31);
+        org.junit.Assert.assertTrue(Double.isNaN(double32));
+        org.junit.Assert.assertNotNull(vector3D33);
+        org.junit.Assert.assertNotNull(vector3D34);
+        org.junit.Assert.assertTrue(Double.isNaN(double35));
+        org.junit.Assert.assertNotNull(vector3D36);
+        org.junit.Assert.assertTrue(Double.isNaN(double37));
+        org.junit.Assert.assertNotNull(vector3D38);
+        org.junit.Assert.assertTrue("'" + double39 + "' != '" + Double.POSITIVE_INFINITY + "'", double39 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double40));
+        org.junit.Assert.assertTrue(Double.isNaN(double41));
+        org.junit.Assert.assertNotNull(vector3D43);
+        org.junit.Assert.assertNotNull(vector3D45);
+        org.junit.Assert.assertTrue(Double.isNaN(double46));
+        org.junit.Assert.assertNotNull(vector3D47);
+        org.junit.Assert.assertTrue(Double.isNaN(double48));
+        org.junit.Assert.assertTrue("'" + double50 + "' != '" + (-1.5707963267948966d) + "'", double50 == (-1.5707963267948966d));
+        org.junit.Assert.assertNotNull(euclidean3DVector51);
+        org.junit.Assert.assertNotNull(vector3D53);
+        org.junit.Assert.assertNotNull(vector3D54);
+        org.junit.Assert.assertTrue(Double.isNaN(double55));
+        org.junit.Assert.assertNotNull(vector3D56);
+        org.junit.Assert.assertTrue(Double.isNaN(double57));
+        org.junit.Assert.assertNotNull(vector3D58);
+        org.junit.Assert.assertTrue("'" + double59 + "' != '" + Double.POSITIVE_INFINITY + "'", double59 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double60));
+        org.junit.Assert.assertNotNull(vector3D62);
+        org.junit.Assert.assertNotNull(vector3D63);
+        org.junit.Assert.assertTrue(Double.isNaN(double64));
+        org.junit.Assert.assertTrue("'" + double65 + "' != '" + Double.POSITIVE_INFINITY + "'", double65 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector3D67);
+        org.junit.Assert.assertNotNull(vector3D68);
+        org.junit.Assert.assertTrue(Double.isNaN(double69));
+        org.junit.Assert.assertNotNull(vector3D70);
+        org.junit.Assert.assertTrue(Double.isNaN(double71));
+        org.junit.Assert.assertNotNull(vector3D72);
+        org.junit.Assert.assertNotNull(vector3D73);
+        org.junit.Assert.assertTrue(Double.isNaN(double74));
+        org.junit.Assert.assertNotNull(vector3D75);
+        org.junit.Assert.assertTrue(Double.isNaN(double76));
+        org.junit.Assert.assertNotNull(vector3D77);
+        org.junit.Assert.assertTrue("'" + double78 + "' != '" + Double.POSITIVE_INFINITY + "'", double78 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double79));
+        org.junit.Assert.assertTrue(Double.isNaN(double80));
+        org.junit.Assert.assertNotNull(vector3D82);
+        org.junit.Assert.assertNotNull(vector3D85);
+        org.junit.Assert.assertTrue(Double.isNaN(double86));
+        org.junit.Assert.assertNotNull(segmentList88);
+    }
+
+    @Test
+    public void test124() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test124");
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D4 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean6 = vector1D4.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D8 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D10 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean12 = vector1D10.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D14 = vector1D10.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D15 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double16 = vector1D14.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D15);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D17 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (-1), vector1D4, 2.2250738585072014E-308d, vector1D8, 1.0000000000000002d, vector1D15);
+        java.lang.String str18 = vector1D15.toString();
+        org.apache.commons.math3.geometry.partitioning.Region.Location location19 = intervalsSet2.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D15);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D21 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.Space space22 = vector1D21.getSpace();
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D24 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.Space space25 = vector1D24.getSpace();
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D26 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (byte) 100, vector1D21, (double) 100L, vector1D24);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D28 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.Space space29 = vector1D28.getSpace();
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D31 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.Space space32 = vector1D31.getSpace();
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (byte) 100, vector1D28, (double) 100L, vector1D31);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D34 = vector1D26.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D28);
+        org.apache.commons.math3.geometry.partitioning.Region.Location location35 = intervalsSet2.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D28);
+        org.apache.commons.math3.geometry.euclidean.threed.Line line36 = null;
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet39 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D41 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean43 = vector1D41.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D45 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D47 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean49 = vector1D47.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D51 = vector1D47.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D52 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double53 = vector1D51.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D52);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D54 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (-1), vector1D41, 2.2250738585072014E-308d, vector1D45, 1.0000000000000002d, vector1D52);
+        java.lang.String str55 = vector1D52.toString();
+        org.apache.commons.math3.geometry.partitioning.Region.Location location56 = intervalsSet39.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D52);
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector57 = intervalsSet39.getBarycenter();
+        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine58 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line36, intervalsSet39);
+        boolean boolean59 = intervalsSet2.contains((org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet39);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D61 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D63 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D65 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean67 = vector1D65.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D69 = vector1D65.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D70 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double71 = vector1D69.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D70);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D73 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean75 = vector1D73.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D77 = vector1D73.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D78 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (short) 100, vector1D61, (double) 100, vector1D63, (double) (short) 0, vector1D70, (double) 'a', vector1D73);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D80 = vector1D73.scalarMultiply(4.605170185988092d);
+        double double81 = vector1D80.getNorm1();
+        org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint orientedPoint83 = new org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint(vector1D80, false);
+        org.apache.commons.math3.geometry.partitioning.Side side84 = intervalsSet39.side((org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) orientedPoint83);
+        orientedPoint83.revertSelf();
+        org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DSubHyperplane86 = orientedPoint83.wholeHyperplane();
+        org.junit.Assert.assertNotNull(vector1D4);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNotNull(vector1D8);
+        org.junit.Assert.assertNotNull(vector1D10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertNotNull(vector1D14);
+        org.junit.Assert.assertNotNull(vector1D15);
+        org.junit.Assert.assertTrue(Double.isNaN(double16));
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "{(NaN)}" + "'", str18, "{(NaN)}");
+        org.junit.Assert.assertTrue("'" + location19 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location19.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
+        org.junit.Assert.assertNotNull(vector1D21);
+        org.junit.Assert.assertNotNull(space22);
+        org.junit.Assert.assertNotNull(vector1D24);
+        org.junit.Assert.assertNotNull(space25);
+        org.junit.Assert.assertNotNull(vector1D28);
+        org.junit.Assert.assertNotNull(space29);
+        org.junit.Assert.assertNotNull(vector1D31);
+        org.junit.Assert.assertNotNull(space32);
+        org.junit.Assert.assertNotNull(vector1D34);
+        org.junit.Assert.assertTrue("'" + location35 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location35.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
+        org.junit.Assert.assertNotNull(vector1D41);
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
+        org.junit.Assert.assertNotNull(vector1D45);
+        org.junit.Assert.assertNotNull(vector1D47);
+        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
+        org.junit.Assert.assertNotNull(vector1D51);
+        org.junit.Assert.assertNotNull(vector1D52);
+        org.junit.Assert.assertTrue(Double.isNaN(double53));
+        org.junit.Assert.assertEquals("'" + str55 + "' != '" + "{(NaN)}" + "'", str55, "{(NaN)}");
+        org.junit.Assert.assertTrue("'" + location56 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location56.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
+        org.junit.Assert.assertNotNull(euclidean1DVector57);
+        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + true + "'", boolean59 == true);
+        org.junit.Assert.assertNotNull(vector1D61);
+        org.junit.Assert.assertNotNull(vector1D63);
+        org.junit.Assert.assertNotNull(vector1D65);
+        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + false + "'", boolean67 == false);
+        org.junit.Assert.assertNotNull(vector1D69);
+        org.junit.Assert.assertNotNull(vector1D70);
+        org.junit.Assert.assertTrue(Double.isNaN(double71));
+        org.junit.Assert.assertNotNull(vector1D73);
+        org.junit.Assert.assertTrue("'" + boolean75 + "' != '" + false + "'", boolean75 == false);
+        org.junit.Assert.assertNotNull(vector1D77);
+        org.junit.Assert.assertNotNull(vector1D80);
+        org.junit.Assert.assertTrue(Double.isNaN(double81));
+        org.junit.Assert.assertTrue("'" + side84 + "' != '" + org.apache.commons.math3.geometry.partitioning.Side.MINUS + "'", side84.equals(org.apache.commons.math3.geometry.partitioning.Side.MINUS));
+        org.junit.Assert.assertNotNull(euclidean1DSubHyperplane86);
+    }
+
+    @Test
+    public void test125() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test125");
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
+        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList2);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint4 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane1, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet3);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine5 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane0, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet3);
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane6 = null;
+        org.apache.commons.math3.geometry.euclidean.threed.Line line7 = null;
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane8 = null;
+        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList9 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet10 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList9);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint11 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane8, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet10);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D12 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean14 = vector1D12.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D16 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D18 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D20 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean22 = vector1D20.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D24 = vector1D20.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D25 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double26 = vector1D24.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D25);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D28 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean30 = vector1D28.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D32 = vector1D28.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (short) 100, vector1D16, (double) 100, vector1D18, (double) (short) 0, vector1D25, (double) 'a', vector1D28);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D35 = vector1D28.scalarMultiply(4.605170185988092d);
+        java.lang.String str36 = vector1D35.toString();
+        double double37 = vector1D12.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D35);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D39 = vector1D12.scalarMultiply(0.0d);
+        org.apache.commons.math3.geometry.partitioning.Region.Location location40 = intervalsSet10.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D12);
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector41 = null;
+        org.apache.commons.math3.geometry.partitioning.Region.Location location42 = intervalsSet10.checkPoint(euclidean1DVector41);
+        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine43 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line7, intervalsSet10);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine44 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane6, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet10);
+        org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean2DAbstractSubHyperplane45 = subLine5.reunite((org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) subLine44);
+        org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DRegion46 = euclidean2DAbstractSubHyperplane45.getRemainingRegion();
+        org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean2DAbstractSubHyperplane47 = euclidean2DAbstractSubHyperplane45.copySelf();
+        org.junit.Assert.assertNotNull(vector1D12);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(vector1D16);
+        org.junit.Assert.assertNotNull(vector1D18);
+        org.junit.Assert.assertNotNull(vector1D20);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(vector1D24);
+        org.junit.Assert.assertNotNull(vector1D25);
+        org.junit.Assert.assertTrue(Double.isNaN(double26));
+        org.junit.Assert.assertNotNull(vector1D28);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertNotNull(vector1D32);
+        org.junit.Assert.assertNotNull(vector1D35);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "{(NaN)}" + "'", str36, "{(NaN)}");
+        org.junit.Assert.assertTrue(Double.isNaN(double37));
+        org.junit.Assert.assertNotNull(vector1D39);
+        org.junit.Assert.assertTrue("'" + location40 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location40.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
+        org.junit.Assert.assertTrue("'" + location42 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location42.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
+        org.junit.Assert.assertNotNull(euclidean2DAbstractSubHyperplane45);
+        org.junit.Assert.assertNotNull(euclidean1DRegion46);
+        org.junit.Assert.assertNotNull(euclidean2DAbstractSubHyperplane47);
+    }
+
+    @Test
+    public void test126() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test126");
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane0 = null;
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane1 = null;
+        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList2 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet3 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList2);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint4 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane1, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet3);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine5 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane0, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet3);
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D> euclidean2DHyperplane6 = null;
+        org.apache.commons.math3.geometry.euclidean.threed.Line line7 = null;
+        org.apache.commons.math3.geometry.partitioning.Hyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DHyperplane8 = null;
+        java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>> euclidean1DSubHyperplaneList9 = new java.util.ArrayList<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet10 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((java.util.Collection<org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>>) euclidean1DSubHyperplaneList9);
+        org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint subOrientedPoint11 = new org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint(euclidean1DHyperplane8, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet10);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D12 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean14 = vector1D12.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D16 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D18 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D20 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean22 = vector1D20.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D24 = vector1D20.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D25 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double26 = vector1D24.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D25);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D28 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean30 = vector1D28.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D32 = vector1D28.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (short) 100, vector1D16, (double) 100, vector1D18, (double) (short) 0, vector1D25, (double) 'a', vector1D28);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D35 = vector1D28.scalarMultiply(4.605170185988092d);
+        java.lang.String str36 = vector1D35.toString();
+        double double37 = vector1D12.distance((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D35);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D39 = vector1D12.scalarMultiply(0.0d);
+        org.apache.commons.math3.geometry.partitioning.Region.Location location40 = intervalsSet10.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D12);
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector41 = null;
+        org.apache.commons.math3.geometry.partitioning.Region.Location location42 = intervalsSet10.checkPoint(euclidean1DVector41);
+        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine43 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line7, intervalsSet10);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine44 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(euclidean2DHyperplane6, (org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet10);
+        org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean2DAbstractSubHyperplane45 = subLine5.reunite((org.apache.commons.math3.geometry.partitioning.SubHyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) subLine44);
+        double double46 = subLine5.getSize();
+        org.apache.commons.math3.geometry.partitioning.Transform<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean2DTransform47 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean2DAbstractSubHyperplane48 = subLine5.applyTransform(euclidean2DTransform47);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(vector1D12);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(vector1D16);
+        org.junit.Assert.assertNotNull(vector1D18);
+        org.junit.Assert.assertNotNull(vector1D20);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(vector1D24);
+        org.junit.Assert.assertNotNull(vector1D25);
+        org.junit.Assert.assertTrue(Double.isNaN(double26));
+        org.junit.Assert.assertNotNull(vector1D28);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertNotNull(vector1D32);
+        org.junit.Assert.assertNotNull(vector1D35);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "{(NaN)}" + "'", str36, "{(NaN)}");
+        org.junit.Assert.assertTrue(Double.isNaN(double37));
+        org.junit.Assert.assertNotNull(vector1D39);
+        org.junit.Assert.assertTrue("'" + location40 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location40.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
+        org.junit.Assert.assertTrue("'" + location42 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE + "'", location42.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.INSIDE));
+        org.junit.Assert.assertNotNull(euclidean2DAbstractSubHyperplane45);
+        org.junit.Assert.assertTrue("'" + double46 + "' != '" + Double.POSITIVE_INFINITY + "'", double46 == Double.POSITIVE_INFINITY);
+    }
+
+    @Test
+    public void test127() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test127");
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D0 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D2 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D3 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D4 = vector2D2.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D3);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D5 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D6 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D7 = vector2D5.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D6);
+        double double8 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D4, vector2D5);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D10 = vector2D5.scalarMultiply((double) (-1.0f));
+        double double11 = vector2D5.getNormInf();
+        double double12 = vector2D5.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D13 = vector2D0.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D5);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D15 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D16 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D17 = vector2D15.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D16);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D18 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D19 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D20 = vector2D18.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D19);
+        double double21 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D17, vector2D18);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D23 = vector2D18.scalarMultiply((double) (-1.0f));
+        double double24 = vector2D18.getNormInf();
+        double double25 = vector2D18.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D26 = vector2D18.normalize();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D28 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D30 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D31 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D32 = vector2D30.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D31);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D33 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D34 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D35 = vector2D33.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D34);
+        double double36 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D32, vector2D33);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D38 = vector2D33.scalarMultiply((double) (-1.0f));
+        double double39 = vector2D33.getNormInf();
+        double double40 = vector2D33.getNorm();
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D41 = vector2D28.add((-1.0d), (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D33);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D42 = vector2D26.subtract(Double.NaN, (org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D41);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D44 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D45 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D46 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D47 = vector2D45.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D46);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D48 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D49 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.POSITIVE_INFINITY;
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D50 = vector2D48.add((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D49);
+        double double51 = org.apache.commons.math3.geometry.euclidean.twod.Vector2D.distanceSq(vector2D47, vector2D48);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D53 = vector2D48.scalarMultiply((double) (-1.0f));
+        double double54 = vector2D48.getNormInf();
+        double double55 = vector2D44.distanceInf((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.twod.Euclidean2D>) vector2D48);
+        org.apache.commons.math3.geometry.euclidean.twod.Vector2D vector2D56 = new org.apache.commons.math3.geometry.euclidean.twod.Vector2D((double) '4', vector2D26, 5.65685424949238d, vector2D44);
+        org.apache.commons.math3.geometry.euclidean.twod.SubLine subLine57 = new org.apache.commons.math3.geometry.euclidean.twod.SubLine(vector2D5, vector2D44);
+        boolean boolean58 = subLine57.isEmpty();
+        boolean boolean59 = subLine57.isEmpty();
+        org.junit.Assert.assertNotNull(vector2D0);
+        org.junit.Assert.assertNotNull(vector2D2);
+        org.junit.Assert.assertNotNull(vector2D3);
+        org.junit.Assert.assertNotNull(vector2D4);
+        org.junit.Assert.assertNotNull(vector2D5);
+        org.junit.Assert.assertNotNull(vector2D6);
+        org.junit.Assert.assertNotNull(vector2D7);
+        org.junit.Assert.assertTrue(Double.isNaN(double8));
+        org.junit.Assert.assertNotNull(vector2D10);
+        org.junit.Assert.assertTrue("'" + double11 + "' != '" + Double.POSITIVE_INFINITY + "'", double11 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double12 + "' != '" + Double.POSITIVE_INFINITY + "'", double12 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D13);
+        org.junit.Assert.assertNotNull(vector2D15);
+        org.junit.Assert.assertNotNull(vector2D16);
+        org.junit.Assert.assertNotNull(vector2D17);
+        org.junit.Assert.assertNotNull(vector2D18);
+        org.junit.Assert.assertNotNull(vector2D19);
+        org.junit.Assert.assertNotNull(vector2D20);
+        org.junit.Assert.assertTrue(Double.isNaN(double21));
+        org.junit.Assert.assertNotNull(vector2D23);
+        org.junit.Assert.assertTrue("'" + double24 + "' != '" + Double.POSITIVE_INFINITY + "'", double24 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double25 + "' != '" + Double.POSITIVE_INFINITY + "'", double25 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D26);
+        org.junit.Assert.assertNotNull(vector2D28);
+        org.junit.Assert.assertNotNull(vector2D30);
+        org.junit.Assert.assertNotNull(vector2D31);
+        org.junit.Assert.assertNotNull(vector2D32);
+        org.junit.Assert.assertNotNull(vector2D33);
+        org.junit.Assert.assertNotNull(vector2D34);
+        org.junit.Assert.assertNotNull(vector2D35);
+        org.junit.Assert.assertTrue(Double.isNaN(double36));
+        org.junit.Assert.assertNotNull(vector2D38);
+        org.junit.Assert.assertTrue("'" + double39 + "' != '" + Double.POSITIVE_INFINITY + "'", double39 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue("'" + double40 + "' != '" + Double.POSITIVE_INFINITY + "'", double40 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector2D41);
+        org.junit.Assert.assertNotNull(vector2D42);
+        org.junit.Assert.assertNotNull(vector2D44);
+        org.junit.Assert.assertNotNull(vector2D45);
+        org.junit.Assert.assertNotNull(vector2D46);
+        org.junit.Assert.assertNotNull(vector2D47);
+        org.junit.Assert.assertNotNull(vector2D48);
+        org.junit.Assert.assertNotNull(vector2D49);
+        org.junit.Assert.assertNotNull(vector2D50);
+        org.junit.Assert.assertTrue(Double.isNaN(double51));
+        org.junit.Assert.assertNotNull(vector2D53);
+        org.junit.Assert.assertTrue("'" + double54 + "' != '" + Double.POSITIVE_INFINITY + "'", double54 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertTrue(Double.isNaN(double55));
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + false + "'", boolean59 == false);
+    }
+
+    @Test
+    public void test128() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test128");
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet2 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet(4.605170185988092d, (double) 5);
+        org.apache.commons.math3.geometry.partitioning.AbstractRegion<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractRegion3 = intervalsSet2.copySelf();
+        org.apache.commons.math3.geometry.partitioning.AbstractRegion<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractRegion4 = euclidean1DAbstractRegion3.copySelf();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet5 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet();
+        double double6 = intervalsSet5.getSize();
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet9 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D11 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean13 = vector1D11.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D15 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D17 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean19 = vector1D17.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D21 = vector1D17.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D22 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double23 = vector1D21.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D22);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D24 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (-1), vector1D11, 2.2250738585072014E-308d, vector1D15, 1.0000000000000002d, vector1D22);
+        java.lang.String str25 = vector1D22.toString();
+        org.apache.commons.math3.geometry.partitioning.Region.Location location26 = intervalsSet9.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D22);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D28 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.Space space29 = vector1D28.getSpace();
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D31 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.Space space32 = vector1D31.getSpace();
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D33 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (byte) 100, vector1D28, (double) 100L, vector1D31);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D35 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.Space space36 = vector1D35.getSpace();
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D38 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.ONE;
+        org.apache.commons.math3.geometry.Space space39 = vector1D38.getSpace();
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D40 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (byte) 100, vector1D35, (double) 100L, vector1D38);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D41 = vector1D33.subtract((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D35);
+        org.apache.commons.math3.geometry.partitioning.Region.Location location42 = intervalsSet9.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D35);
+        org.apache.commons.math3.geometry.euclidean.threed.Line line43 = null;
+        org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet intervalsSet46 = new org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet((double) (-1L), (-0.8390715290764524d));
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D48 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean50 = vector1D48.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D52 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D54 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        boolean boolean56 = vector1D54.equals((java.lang.Object) 10L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D58 = vector1D54.scalarMultiply((double) 1L);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D59 = org.apache.commons.math3.geometry.euclidean.oned.Vector1D.NaN;
+        double double60 = vector1D58.distanceSq((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D59);
+        org.apache.commons.math3.geometry.euclidean.oned.Vector1D vector1D61 = new org.apache.commons.math3.geometry.euclidean.oned.Vector1D((double) (-1), vector1D48, 2.2250738585072014E-308d, vector1D52, 1.0000000000000002d, vector1D59);
+        java.lang.String str62 = vector1D59.toString();
+        org.apache.commons.math3.geometry.partitioning.Region.Location location63 = intervalsSet46.checkPoint((org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) vector1D59);
+        org.apache.commons.math3.geometry.Vector<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DVector64 = intervalsSet46.getBarycenter();
+        org.apache.commons.math3.geometry.euclidean.threed.SubLine subLine65 = new org.apache.commons.math3.geometry.euclidean.threed.SubLine(line43, intervalsSet46);
+        boolean boolean66 = intervalsSet9.contains((org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D>) intervalsSet46);
+        org.apache.commons.math3.geometry.partitioning.BSPTree<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DBSPTree68 = intervalsSet46.getTree(false);
+        org.apache.commons.math3.geometry.partitioning.AbstractRegion<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D, org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DAbstractRegion69 = intervalsSet5.buildNew(euclidean1DBSPTree68);
+        org.apache.commons.math3.geometry.partitioning.Region<org.apache.commons.math3.geometry.euclidean.oned.Euclidean1D> euclidean1DRegion70 = euclidean1DAbstractRegion3.buildNew(euclidean1DBSPTree68);
+        org.junit.Assert.assertNotNull(euclidean1DAbstractRegion3);
+        org.junit.Assert.assertNotNull(euclidean1DAbstractRegion4);
+        org.junit.Assert.assertTrue("'" + double6 + "' != '" + Double.POSITIVE_INFINITY + "'", double6 == Double.POSITIVE_INFINITY);
+        org.junit.Assert.assertNotNull(vector1D11);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(vector1D15);
+        org.junit.Assert.assertNotNull(vector1D17);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(vector1D21);
+        org.junit.Assert.assertNotNull(vector1D22);
+        org.junit.Assert.assertTrue(Double.isNaN(double23));
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "{(NaN)}" + "'", str25, "{(NaN)}");
+        org.junit.Assert.assertTrue("'" + location26 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location26.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
+        org.junit.Assert.assertNotNull(vector1D28);
+        org.junit.Assert.assertNotNull(space29);
+        org.junit.Assert.assertNotNull(vector1D31);
+        org.junit.Assert.assertNotNull(space32);
+        org.junit.Assert.assertNotNull(vector1D35);
+        org.junit.Assert.assertNotNull(space36);
+        org.junit.Assert.assertNotNull(vector1D38);
+        org.junit.Assert.assertNotNull(space39);
+        org.junit.Assert.assertNotNull(vector1D41);
+        org.junit.Assert.assertTrue("'" + location42 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location42.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
+        org.junit.Assert.assertNotNull(vector1D48);
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
+        org.junit.Assert.assertNotNull(vector1D52);
+        org.junit.Assert.assertNotNull(vector1D54);
+        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
+        org.junit.Assert.assertNotNull(vector1D58);
+        org.junit.Assert.assertNotNull(vector1D59);
+        org.junit.Assert.assertTrue(Double.isNaN(double60));
+        org.junit.Assert.assertEquals("'" + str62 + "' != '" + "{(NaN)}" + "'", str62, "{(NaN)}");
+        org.junit.Assert.assertTrue("'" + location63 + "' != '" + org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE + "'", location63.equals(org.apache.commons.math3.geometry.partitioning.Region.Location.OUTSIDE));
+        org.junit.Assert.assertNotNull(euclidean1DVector64);
+        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + true + "'", boolean66 == true);
+        org.junit.Assert.assertNotNull(euclidean1DBSPTree68);
+        org.junit.Assert.assertNotNull(euclidean1DAbstractRegion69);
+        org.junit.Assert.assertNotNull(euclidean1DRegion70);
     }
 }
 

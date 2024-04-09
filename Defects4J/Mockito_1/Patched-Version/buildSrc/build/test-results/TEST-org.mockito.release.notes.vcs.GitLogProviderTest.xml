@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.notes.vcs.GitLogProviderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-02T17:29:49" hostname="Shrushtis-MacBook-Air.local" time="0.035">
+<testsuite name="org.mockito.release.notes.vcs.GitLogProviderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-07T20:29:04" hostname="Shrushtis-MacBook-Air.local" time="0.031">
   <properties/>
-  <testcase name="provides log" classname="org.mockito.release.notes.vcs.GitLogProviderTest" time="0.035"/>
+  <testcase name="provides log" classname="org.mockito.release.notes.vcs.GitLogProviderTest" time="0.031"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

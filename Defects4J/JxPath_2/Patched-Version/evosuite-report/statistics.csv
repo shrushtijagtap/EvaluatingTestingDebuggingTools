@@ -1,2 +1,2 @@
 TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
-org.apache.commons.jxpath.ri.compiler.Expression,LINE;BRANCH;EXCEPTION;WEAKMUTATION;OUTPUT;METHOD;METHODNOEXCEPTION;CBRANCH,0.6846160132773405,158,135
+org.apache.commons.jxpath.ri.compiler.Expression,BRANCH,0.9130434782608695,23,21

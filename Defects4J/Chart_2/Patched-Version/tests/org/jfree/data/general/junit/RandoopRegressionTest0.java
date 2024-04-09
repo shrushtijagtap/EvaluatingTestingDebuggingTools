@@ -1449,7 +1449,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             comparableObjectSeries1.removeChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection2);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@634cfb63 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@7bd5fff6 is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -2501,7 +2501,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeries3.addChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection8);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@6e35acd2 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@6f5fcab7 is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -2589,7 +2589,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeries3.removeChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection27);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@2d8a8f5b is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@388685bf is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -3421,7 +3421,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number46 = categoryDataset21.getValue((java.lang.Comparable) xYIntervalDataItem28, (java.lang.Comparable) (short) -1);
-            org.junit.Assert.fail("Expected exception of type org.jfree.data.UnknownKeyException; message: Row key (org.jfree.data.xy.XYIntervalDataItem@cfed54c5) not recognised.");
+            org.junit.Assert.fail("Expected exception of type org.jfree.data.UnknownKeyException; message: Row key (org.jfree.data.xy.XYIntervalDataItem@2794123b) not recognised.");
         } catch (org.jfree.data.UnknownKeyException e) {
         // Expected exception.
         }
@@ -3657,7 +3657,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number73 = pieDataset23.getValue((java.lang.Comparable) comparableObjectItem72);
-            org.junit.Assert.fail("Expected exception of type org.jfree.data.UnknownKeyException; message: The key (org.jfree.data.ComparableObjectItem@1ff1c002) is not recognised.");
+            org.junit.Assert.fail("Expected exception of type org.jfree.data.UnknownKeyException; message: The key (org.jfree.data.ComparableObjectItem@3ee43fdc) is not recognised.");
         } catch (org.jfree.data.UnknownKeyException e) {
         // Expected exception.
         }
@@ -4172,7 +4172,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries35);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@603221a2 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@2f30e92e is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -4862,7 +4862,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries13);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@533f14e is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@71ab9413 is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -5368,7 +5368,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries24);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@62d1bbaf is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@6193ec97 is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -7418,7 +7418,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries23);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@461a382d is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@73646393 is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -7606,7 +7606,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             comparableObjectSeries3.removeChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection4);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@2730282c is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@1417da6 is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -8722,7 +8722,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             comparableObjectSeries3.addChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection38);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@1c31cf99 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@40b028a7 is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -8905,7 +8905,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeries3.addChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection37);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@7588152 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@79c58e5a is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -10194,7 +10194,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeries3.addChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection13);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@58137b9a is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@cf44d7a is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -12911,7 +12911,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             comparableObjectSeries9.addChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection10);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@7c9f4526 is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@511ff56a is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -13529,7 +13529,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection8.addSeries(xYIntervalSeries15);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@2a4b1262 is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@157dfff3 is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -13731,7 +13731,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries5);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@7e08f834 is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@2a170fc1 is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -14099,7 +14099,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeries3.removeChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection9);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@1755fd0c is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@d77703e is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -15661,7 +15661,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries27);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@58648397 is not of type class org.jfree.data.Range");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@6761623 is not of type class org.jfree.data.Range");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }

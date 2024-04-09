@@ -13,23 +13,6 @@ public class RandoopRegressionTest7 {
     public void test3501() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RandoopRegressionTest7.test3501");
-        char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
-        java.lang.String str9 = refinedSoundex7.soundex("");
-        java.lang.Class<?> wildcardClass10 = refinedSoundex7.getClass();
-        org.junit.Assert.assertNotNull(charArray5);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), " #aa#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), " #aa#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ , #, a, a, #]");
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-        org.junit.Assert.assertNotNull(wildcardClass10);
-    }
-
-    @Test
-    public void test3502() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3502");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -85,9 +68,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3503() throws Throwable {
+    public void test3502() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3503");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3502");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -106,9 +89,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3504() throws Throwable {
+    public void test3503() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3504");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3503");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -135,9 +118,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3505() throws Throwable {
+    public void test3504() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3505");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3504");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -163,9 +146,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3506() throws Throwable {
+    public void test3505() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3506");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3505");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -192,9 +175,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3507() throws Throwable {
+    public void test3506() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3507");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3506");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -208,9 +191,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3508() throws Throwable {
+    public void test3507() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3508");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3507");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -276,9 +259,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3509() throws Throwable {
+    public void test3508() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3509");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3508");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -335,9 +318,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3510() throws Throwable {
+    public void test3509() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3510");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3509");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -358,9 +341,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3511() throws Throwable {
+    public void test3510() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3511");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3510");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -423,9 +406,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3512() throws Throwable {
+    public void test3511() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3512");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3511");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -466,9 +449,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3513() throws Throwable {
+    public void test3512() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3513");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3512");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -491,9 +474,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3514() throws Throwable {
+    public void test3513() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3514");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3513");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -520,9 +503,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3515() throws Throwable {
+    public void test3514() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3515");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3514");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -550,27 +533,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3516() throws Throwable {
+    public void test3515() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3516");
-        char[] charArray3 = new char[] { '#', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
-        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
-        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray3);
-        int int7 = soundex6.getMaxLength();
-        java.lang.String str9 = soundex6.encode("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 4 + "'", int7 == 4);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-    }
-
-    @Test
-    public void test3517() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3517");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3515");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -590,9 +555,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3518() throws Throwable {
+    public void test3516() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3518");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3516");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -639,9 +604,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3519() throws Throwable {
+    public void test3517() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3519");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3517");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -665,9 +630,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3520() throws Throwable {
+    public void test3518() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3520");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3518");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -689,9 +654,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3521() throws Throwable {
+    public void test3519() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3521");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3519");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -711,9 +676,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3522() throws Throwable {
+    public void test3520() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3522");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3520");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode(' ');
@@ -734,9 +699,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3523() throws Throwable {
+    public void test3521() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3523");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3521");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -763,9 +728,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3524() throws Throwable {
+    public void test3522() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3524");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3522");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -797,9 +762,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3525() throws Throwable {
+    public void test3523() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3525");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3523");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -822,9 +787,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3526() throws Throwable {
+    public void test3524() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3526");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3524");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -846,9 +811,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3527() throws Throwable {
+    public void test3525() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3527");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3525");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -873,9 +838,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3528() throws Throwable {
+    public void test3526() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3528");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3526");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -896,9 +861,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3529() throws Throwable {
+    public void test3527() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3529");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3527");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -939,9 +904,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3530() throws Throwable {
+    public void test3528() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3530");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3528");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -963,9 +928,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3531() throws Throwable {
+    public void test3529() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3531");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3529");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -1002,9 +967,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3532() throws Throwable {
+    public void test3530() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3532");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3530");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -1027,9 +992,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3533() throws Throwable {
+    public void test3531() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3533");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3531");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -1047,9 +1012,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3534() throws Throwable {
+    public void test3532() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3534");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3532");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -1103,9 +1068,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3535() throws Throwable {
+    public void test3533() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3535");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3533");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -1164,9 +1129,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3536() throws Throwable {
+    public void test3534() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3536");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3534");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -1191,9 +1156,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3537() throws Throwable {
+    public void test3535() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3537");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3535");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -1214,9 +1179,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3538() throws Throwable {
+    public void test3536() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3538");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3536");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -1239,9 +1204,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3539() throws Throwable {
+    public void test3537() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3539");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3537");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -1277,9 +1242,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3540() throws Throwable {
+    public void test3538() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3540");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3538");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -1306,9 +1271,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3541() throws Throwable {
+    public void test3539() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3541");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3539");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -1351,9 +1316,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3542() throws Throwable {
+    public void test3540() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3542");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3540");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -1383,9 +1348,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3543() throws Throwable {
+    public void test3541() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3543");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3541");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -1421,9 +1386,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3544() throws Throwable {
+    public void test3542() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3544");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3542");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -1478,32 +1443,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3545() throws Throwable {
+    public void test3543() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3545");
-        char[] charArray2 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
-        java.lang.String str5 = soundex3.encode("");
-        java.lang.String str7 = soundex3.encode("");
-        soundex3.setMaxLength((int) (short) 0);
-        java.lang.String str11 = soundex3.encode("");
-        java.lang.String str13 = soundex3.encode("");
-        java.lang.String str15 = soundex3.encode("");
-        org.junit.Assert.assertNotNull(charArray2);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-    }
-
-    @Test
-    public void test3546() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3546");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3543");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -1537,9 +1479,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3547() throws Throwable {
+    public void test3544() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3547");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3544");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -1557,27 +1499,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3548() throws Throwable {
+    public void test3545() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3548");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
-        int int6 = soundex5.getMaxLength();
-        soundex5.setMaxLength((int) (short) 1);
-        java.lang.String str10 = soundex5.encode("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 4 + "'", int6 == 4);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-    }
-
-    @Test
-    public void test3549() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3549");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3545");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -1609,9 +1533,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3550() throws Throwable {
+    public void test3546() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3550");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3546");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -1626,9 +1550,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3551() throws Throwable {
+    public void test3547() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3551");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3547");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -1652,9 +1576,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3552() throws Throwable {
+    public void test3548() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3552");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3548");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -1675,9 +1599,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3553() throws Throwable {
+    public void test3549() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3553");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3549");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -1704,9 +1628,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3554() throws Throwable {
+    public void test3550() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3554");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3550");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -1737,9 +1661,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3555() throws Throwable {
+    public void test3551() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3555");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3551");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -1752,9 +1676,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3556() throws Throwable {
+    public void test3552() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3556");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3552");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -1772,9 +1696,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3557() throws Throwable {
+    public void test3553() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3557");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3553");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -1799,9 +1723,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3558() throws Throwable {
+    public void test3554() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3558");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3554");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -1830,9 +1754,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3559() throws Throwable {
+    public void test3555() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3559");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3555");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -1875,9 +1799,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3560() throws Throwable {
+    public void test3556() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3560");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3556");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -1896,9 +1820,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3561() throws Throwable {
+    public void test3557() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3561");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3557");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -1925,9 +1849,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3562() throws Throwable {
+    public void test3558() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3562");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3558");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -1949,9 +1873,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3563() throws Throwable {
+    public void test3559() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3563");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3559");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -1971,9 +1895,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3564() throws Throwable {
+    public void test3560() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3564");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3560");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -2002,9 +1926,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3565() throws Throwable {
+    public void test3561() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3565");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3561");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -2051,9 +1975,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3566() throws Throwable {
+    public void test3562() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3566");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3562");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -2084,9 +2008,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3567() throws Throwable {
+    public void test3563() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3567");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3563");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -2117,9 +2041,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3568() throws Throwable {
+    public void test3564() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3568");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3564");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -2146,9 +2070,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3569() throws Throwable {
+    public void test3565() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3569");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3565");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -2181,9 +2105,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3570() throws Throwable {
+    public void test3566() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3570");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3566");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -2209,9 +2133,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3571() throws Throwable {
+    public void test3567() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3571");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3567");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -2239,9 +2163,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3572() throws Throwable {
+    public void test3568() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3572");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3568");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -2276,100 +2200,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3573() throws Throwable {
+    public void test3569() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3573");
-        char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
-        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
-        soundex6.setMaxLength((int) (short) -1);
-        java.lang.String str10 = soundex6.encode("");
-        soundex6.setMaxLength((int) '#');
-        char[] charArray18 = new char[] { ' ', '#', 'a', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex19 = new org.apache.commons.codec.language.RefinedSoundex(charArray18);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex20 = new org.apache.commons.codec.language.RefinedSoundex(charArray18);
-        char[] charArray24 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex25 = new org.apache.commons.codec.language.RefinedSoundex(charArray24);
-        char char27 = refinedSoundex25.getMappingCode(' ');
-        char char29 = refinedSoundex25.getMappingCode(' ');
-        java.lang.String str31 = refinedSoundex25.soundex("");
-        java.lang.String str33 = refinedSoundex25.encode("");
-        int int36 = refinedSoundex25.difference("", "");
-        java.lang.String str38 = refinedSoundex25.encode("");
-        java.lang.String str40 = refinedSoundex25.encode("");
-        java.lang.Object obj41 = refinedSoundex20.encode((java.lang.Object) str40);
-        char[] charArray44 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex45 = new org.apache.commons.codec.language.Soundex(charArray44);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex46 = new org.apache.commons.codec.language.RefinedSoundex(charArray44);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex47 = new org.apache.commons.codec.language.RefinedSoundex(charArray44);
-        int int50 = refinedSoundex47.difference("", "");
-        char[] charArray53 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex54 = new org.apache.commons.codec.language.Soundex(charArray53);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex55 = new org.apache.commons.codec.language.RefinedSoundex(charArray53);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex56 = new org.apache.commons.codec.language.RefinedSoundex(charArray53);
-        int int59 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) refinedSoundex56, "", "");
-        java.lang.Object obj60 = refinedSoundex47.encode((java.lang.Object) "");
-        java.lang.String str62 = refinedSoundex47.encode("");
-        java.lang.Object obj63 = refinedSoundex20.encode((java.lang.Object) str62);
-        java.lang.Object obj64 = soundex6.encode((java.lang.Object) str62);
-        org.junit.Assert.assertNotNull(charArray5);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "#a 44");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "#a 44");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[#, a,  , 4, 4]");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertNotNull(charArray18);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray18), " #aa#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray18), " #aa#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray18), "[ , #, a, a, #]");
-        org.junit.Assert.assertNotNull(charArray24);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray24), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray24), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray24), "[4, a, #]");
-        org.junit.Assert.assertTrue("'" + char27 + "' != '" + '\000' + "'", char27 == '\000');
-        org.junit.Assert.assertTrue("'" + char29 + "' != '" + '\000' + "'", char29 == '\000');
-        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "" + "'", str31, "");
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "" + "'", str33, "");
-        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
-        org.junit.Assert.assertEquals("'" + str38 + "' != '" + "" + "'", str38, "");
-        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "" + "'", str40, "");
-        org.junit.Assert.assertEquals("'" + obj41 + "' != '" + "" + "'", obj41, "");
-        org.junit.Assert.assertNotNull(charArray44);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray44), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray44), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray44), "[ , 4]");
-        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
-        org.junit.Assert.assertNotNull(charArray53);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray53), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray53), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray53), "[ , 4]");
-        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
-        org.junit.Assert.assertEquals("'" + obj60 + "' != '" + "" + "'", obj60, "");
-        org.junit.Assert.assertEquals("'" + str62 + "' != '" + "" + "'", str62, "");
-        org.junit.Assert.assertEquals("'" + obj63 + "' != '" + "" + "'", obj63, "");
-        org.junit.Assert.assertEquals("'" + obj64 + "' != '" + "" + "'", obj64, "");
-    }
-
-    @Test
-    public void test3574() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3574");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        java.lang.String str6 = refinedSoundex4.soundex("");
-        java.lang.String str8 = refinedSoundex4.encode("");
-        java.lang.String str10 = refinedSoundex4.encode("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-    }
-
-    @Test
-    public void test3575() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3575");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3569");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -2388,9 +2221,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3576() throws Throwable {
+    public void test3570() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3576");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3570");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -2425,9 +2258,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3577() throws Throwable {
+    public void test3571() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3577");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3571");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -2449,9 +2282,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3578() throws Throwable {
+    public void test3572() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3578");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3572");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -2500,9 +2333,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3579() throws Throwable {
+    public void test3573() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3579");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3573");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -2554,9 +2387,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3580() throws Throwable {
+    public void test3574() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3580");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3574");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '#', '4', ' ' };
@@ -2591,9 +2424,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3581() throws Throwable {
+    public void test3575() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3581");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3575");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -2613,9 +2446,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3582() throws Throwable {
+    public void test3576() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3582");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3576");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -2636,9 +2469,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3583() throws Throwable {
+    public void test3577() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3583");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3577");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -2652,9 +2485,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3584() throws Throwable {
+    public void test3578() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3584");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3578");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -2720,9 +2553,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3585() throws Throwable {
+    public void test3579() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3585");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3579");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -2745,9 +2578,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3586() throws Throwable {
+    public void test3580() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3586");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3580");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -2774,9 +2607,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3587() throws Throwable {
+    public void test3581() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3587");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3581");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -2816,28 +2649,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3588() throws Throwable {
+    public void test3582() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3588");
-        char[] charArray3 = new char[] { '4', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray3);
-        soundex6.setMaxLength(0);
-        int int9 = soundex6.getMaxLength();
-        java.lang.String str11 = soundex6.soundex("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "44 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "44 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, 4,  ]");
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-    }
-
-    @Test
-    public void test3589() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3589");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3582");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -2853,9 +2667,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3590() throws Throwable {
+    public void test3583() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3590");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3583");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -2883,9 +2697,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3591() throws Throwable {
+    public void test3584() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3591");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3584");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -2914,9 +2728,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3592() throws Throwable {
+    public void test3585() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3592");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3585");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -2938,9 +2752,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3593() throws Throwable {
+    public void test3586() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3593");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3586");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -2974,9 +2788,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3594() throws Throwable {
+    public void test3587() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3594");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3587");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -3007,9 +2821,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3595() throws Throwable {
+    public void test3588() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3595");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3588");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -3030,9 +2844,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3596() throws Throwable {
+    public void test3589() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3596");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3589");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -3046,9 +2860,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3597() throws Throwable {
+    public void test3590() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3597");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3590");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -3110,9 +2924,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3598() throws Throwable {
+    public void test3591() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3598");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3591");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -3159,9 +2973,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3599() throws Throwable {
+    public void test3592() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3599");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3592");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -3180,9 +2994,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3600() throws Throwable {
+    public void test3593() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3600");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3593");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -3212,9 +3026,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3601() throws Throwable {
+    public void test3594() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3601");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3594");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -3245,9 +3059,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3602() throws Throwable {
+    public void test3595() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3602");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3595");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -3282,9 +3096,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3603() throws Throwable {
+    public void test3596() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3603");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3596");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -3333,9 +3147,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3604() throws Throwable {
+    public void test3597() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3604");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3597");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -3373,37 +3187,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3605() throws Throwable {
+    public void test3598() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3605");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        int int7 = refinedSoundex4.difference("", "");
-        char char9 = refinedSoundex4.getMappingCode('a');
-        char char11 = refinedSoundex4.getMappingCode('4');
-        java.lang.String str13 = refinedSoundex4.encode("");
-        java.lang.String str15 = refinedSoundex4.soundex("");
-        char char17 = refinedSoundex4.getMappingCode(' ');
-        int int20 = refinedSoundex4.difference("", "");
-        char char22 = refinedSoundex4.getMappingCode('a');
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertTrue("'" + char9 + "' != '" + '4' + "'", char9 == '4');
-        org.junit.Assert.assertTrue("'" + char11 + "' != '" + '\000' + "'", char11 == '\000');
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertTrue("'" + char17 + "' != '" + '\000' + "'", char17 == '\000');
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 0 + "'", int20 == 0);
-        org.junit.Assert.assertTrue("'" + char22 + "' != '" + '4' + "'", char22 == '4');
-    }
-
-    @Test
-    public void test3606() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3606");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3598");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -3425,9 +3211,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3607() throws Throwable {
+    public void test3599() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3607");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3599");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -3450,9 +3236,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3608() throws Throwable {
+    public void test3600() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3608");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3600");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength(1);
@@ -3472,9 +3258,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3609() throws Throwable {
+    public void test3601() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3609");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3601");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -3499,9 +3285,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3610() throws Throwable {
+    public void test3602() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3610");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3602");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -3540,9 +3326,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3611() throws Throwable {
+    public void test3603() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3611");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3603");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -3561,9 +3347,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3612() throws Throwable {
+    public void test3604() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3612");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3604");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -3598,9 +3384,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3613() throws Throwable {
+    public void test3605() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3613");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3605");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -3625,9 +3411,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3614() throws Throwable {
+    public void test3606() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3614");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3606");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -3649,24 +3435,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3615() throws Throwable {
+    public void test3607() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3615");
-        char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
-        org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
-        int int10 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) soundex7, "", "");
-        org.junit.Assert.assertNotNull(charArray5);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), " #aa#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), " #aa#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ , #, a, a, #]");
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
-    }
-
-    @Test
-    public void test3616() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3616");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3607");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -3691,9 +3462,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3617() throws Throwable {
+    public void test3608() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3617");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3608");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -3721,9 +3492,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3618() throws Throwable {
+    public void test3609() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3618");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3609");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -3742,9 +3513,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3619() throws Throwable {
+    public void test3610() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3619");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3610");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -3765,9 +3536,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3620() throws Throwable {
+    public void test3611() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3620");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3611");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -3803,9 +3574,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3621() throws Throwable {
+    public void test3612() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3621");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3612");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -3857,9 +3628,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3622() throws Throwable {
+    public void test3613() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3622");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3613");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -3881,9 +3652,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3623() throws Throwable {
+    public void test3614() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3623");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3614");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -3903,9 +3674,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3624() throws Throwable {
+    public void test3615() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3624");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3615");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -3926,9 +3697,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3625() throws Throwable {
+    public void test3616() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3625");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3616");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -3951,9 +3722,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3626() throws Throwable {
+    public void test3617() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3626");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3617");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -4000,9 +3771,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3627() throws Throwable {
+    public void test3618() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3627");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3618");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -4023,42 +3794,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3628() throws Throwable {
+    public void test3619() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3628");
-        char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
-        org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
-        java.lang.String str9 = soundex7.encode("");
-        int int12 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) soundex7, "", "");
-        char[] charArray16 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex17 = new org.apache.commons.codec.language.RefinedSoundex(charArray16);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex18 = new org.apache.commons.codec.language.RefinedSoundex(charArray16);
-        java.lang.String str20 = refinedSoundex18.soundex("");
-        java.lang.Object obj21 = soundex7.encode((java.lang.Object) "");
-        java.lang.String str23 = soundex7.encode("");
-        soundex7.setMaxLength((int) (byte) 10);
-        int int26 = soundex7.getMaxLength();
-        org.junit.Assert.assertNotNull(charArray5);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "   4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "   4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ ,  ,  , 4,  ]");
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
-        org.junit.Assert.assertNotNull(charArray16);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray16), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray16), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray16), "[4, a, #]");
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
-        org.junit.Assert.assertEquals("'" + obj21 + "' != '" + "" + "'", obj21, "");
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "" + "'", str23, "");
-        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 10 + "'", int26 == 10);
-    }
-
-    @Test
-    public void test3629() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3629");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3619");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -4078,9 +3816,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3630() throws Throwable {
+    public void test3620() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3630");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3620");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -4101,9 +3839,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3631() throws Throwable {
+    public void test3621() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3631");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3621");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -4134,9 +3872,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3632() throws Throwable {
+    public void test3622() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3632");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3622");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -4178,9 +3916,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3633() throws Throwable {
+    public void test3623() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3633");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3623");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -4203,9 +3941,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3634() throws Throwable {
+    public void test3624() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3634");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3624");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4239,9 +3977,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3635() throws Throwable {
+    public void test3625() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3635");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3625");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -4261,9 +3999,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3636() throws Throwable {
+    public void test3626() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3636");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3626");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -4288,9 +4026,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3637() throws Throwable {
+    public void test3627() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3637");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3627");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -4327,9 +4065,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3638() throws Throwable {
+    public void test3628() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3638");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3628");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -4372,9 +4110,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3639() throws Throwable {
+    public void test3629() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3639");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3629");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4394,9 +4132,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3640() throws Throwable {
+    public void test3630() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3640");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3630");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -4429,9 +4167,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3641() throws Throwable {
+    public void test3631() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3641");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3631");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -4453,9 +4191,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3642() throws Throwable {
+    public void test3632() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3642");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3632");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -4506,9 +4244,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3643() throws Throwable {
+    public void test3633() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3643");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3633");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -4556,9 +4294,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3644() throws Throwable {
+    public void test3634() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3644");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3634");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -4581,47 +4319,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3645() throws Throwable {
+    public void test3635() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3645");
-        char[] charArray2 = new char[] { '4', 'a' };
-        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
-        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
-        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray2);
-        char[] charArray11 = new char[] { ' ', ' ', ' ', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex12 = new org.apache.commons.codec.language.Soundex(charArray11);
-        org.apache.commons.codec.language.Soundex soundex13 = new org.apache.commons.codec.language.Soundex(charArray11);
-        java.lang.String str15 = soundex13.encode("");
-        int int18 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) soundex13, "", "");
-        char[] charArray22 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex23 = new org.apache.commons.codec.language.RefinedSoundex(charArray22);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex24 = new org.apache.commons.codec.language.RefinedSoundex(charArray22);
-        java.lang.String str26 = refinedSoundex24.soundex("");
-        java.lang.Object obj27 = soundex13.encode((java.lang.Object) "");
-        java.lang.Object obj28 = soundex5.encode(obj27);
-        org.junit.Assert.assertNotNull(charArray2);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), "4a");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), "4a");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[4, a]");
-        org.junit.Assert.assertNotNull(charArray11);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray11), "   4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray11), "   4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray11), "[ ,  ,  , 4,  ]");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
-        org.junit.Assert.assertNotNull(charArray22);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray22), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray22), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray22), "[4, a, #]");
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "" + "'", str26, "");
-        org.junit.Assert.assertEquals("'" + obj27 + "' != '" + "" + "'", obj27, "");
-        org.junit.Assert.assertEquals("'" + obj28 + "' != '" + "" + "'", obj28, "");
-    }
-
-    @Test
-    public void test3646() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3646");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3635");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4669,9 +4369,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3647() throws Throwable {
+    public void test3636() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3647");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3636");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -4691,9 +4391,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3648() throws Throwable {
+    public void test3637() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3648");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3637");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         int int5 = soundex4.getMaxLength();
@@ -4716,9 +4416,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3649() throws Throwable {
+    public void test3638() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3649");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3638");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -4771,9 +4471,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3650() throws Throwable {
+    public void test3639() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3650");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3639");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -4810,9 +4510,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3651() throws Throwable {
+    public void test3640() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3651");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3640");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -4838,9 +4538,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3652() throws Throwable {
+    public void test3641() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3652");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3641");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -4875,9 +4575,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3653() throws Throwable {
+    public void test3642() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3653");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3642");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -4927,9 +4627,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3654() throws Throwable {
+    public void test3643() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3654");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3643");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -5007,9 +4707,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3655() throws Throwable {
+    public void test3644() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3655");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3644");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -5047,9 +4747,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3656() throws Throwable {
+    public void test3645() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3656");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3645");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -5075,9 +4775,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3657() throws Throwable {
+    public void test3646() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3657");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3646");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -5109,9 +4809,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3658() throws Throwable {
+    public void test3647() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3658");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3647");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -5136,33 +4836,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3659() throws Throwable {
+    public void test3648() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3659");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        java.lang.String str6 = refinedSoundex4.soundex("");
-        java.lang.String str8 = refinedSoundex4.soundex("");
-        java.lang.String str10 = refinedSoundex4.soundex("");
-        int int13 = refinedSoundex4.difference("", "");
-        char char15 = refinedSoundex4.getMappingCode('#');
-        java.lang.String str17 = refinedSoundex4.encode("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-        org.junit.Assert.assertTrue("'" + char15 + "' != '" + '\000' + "'", char15 == '\000');
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-    }
-
-    @Test
-    public void test3660() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3660");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3648");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -5199,9 +4875,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3661() throws Throwable {
+    public void test3649() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3661");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3649");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -5222,9 +4898,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3662() throws Throwable {
+    public void test3650() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3662");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3650");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '#', '4', ' ' };
@@ -5262,9 +4938,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3663() throws Throwable {
+    public void test3651() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3663");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3651");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -5295,9 +4971,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3664() throws Throwable {
+    public void test3652() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3664");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3652");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -5322,9 +4998,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3665() throws Throwable {
+    public void test3653() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3665");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3653");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -5346,9 +5022,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3666() throws Throwable {
+    public void test3654() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3666");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3654");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -5369,9 +5045,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3667() throws Throwable {
+    public void test3655() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3667");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3655");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -5403,9 +5079,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3668() throws Throwable {
+    public void test3656() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3668");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3656");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -5428,9 +5104,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3669() throws Throwable {
+    public void test3657() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3669");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3657");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -5452,27 +5128,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3670() throws Throwable {
+    public void test3658() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3670");
-        char[] charArray3 = new char[] { '#', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
-        int int5 = soundex4.getMaxLength();
-        int int6 = soundex4.getMaxLength();
-        java.lang.String str8 = soundex4.soundex("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 4 + "'", int5 == 4);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 4 + "'", int6 == 4);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-    }
-
-    @Test
-    public void test3671() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3671");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3658");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -5492,9 +5150,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3672() throws Throwable {
+    public void test3659() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3672");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3659");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -5529,9 +5187,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3673() throws Throwable {
+    public void test3660() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3673");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3660");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -5570,34 +5228,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3674() throws Throwable {
+    public void test3661() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3674");
-        char[] charArray3 = new char[] { '#', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
-        java.lang.String str6 = soundex4.encode("");
-        java.lang.String str8 = soundex4.soundex("");
-        java.lang.String str10 = soundex4.soundex("");
-        soundex4.setMaxLength((-1));
-        int int13 = soundex4.getMaxLength();
-        java.lang.String str15 = soundex4.encode("");
-        java.lang.String str17 = soundex4.encode("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + (-1) + "'", int13 == (-1));
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-    }
-
-    @Test
-    public void test3675() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3675");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3661");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -5621,9 +5254,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3676() throws Throwable {
+    public void test3662() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3676");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3662");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '#', '4', ' ' };
@@ -5672,9 +5305,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3677() throws Throwable {
+    public void test3663() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3677");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3663");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -5728,9 +5361,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3678() throws Throwable {
+    public void test3664() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3678");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3664");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5763,9 +5396,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3679() throws Throwable {
+    public void test3665() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3679");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3665");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -5785,39 +5418,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3680() throws Throwable {
+    public void test3666() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3680");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        char char6 = refinedSoundex4.getMappingCode(' ');
-        char char8 = refinedSoundex4.getMappingCode(' ');
-        java.lang.String str10 = refinedSoundex4.soundex("");
-        java.lang.String str12 = refinedSoundex4.encode("");
-        int int15 = refinedSoundex4.difference("", "");
-        java.lang.String str17 = refinedSoundex4.soundex("");
-        java.lang.String str19 = refinedSoundex4.soundex("");
-        int int22 = refinedSoundex4.difference("", "");
-        java.lang.String str24 = refinedSoundex4.soundex("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertTrue("'" + char6 + "' != '" + '\000' + "'", char6 == '\000');
-        org.junit.Assert.assertTrue("'" + char8 + "' != '" + '\000' + "'", char8 == '\000');
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "" + "'", str19, "");
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
-    }
-
-    @Test
-    public void test3681() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3681");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3666");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -5835,9 +5438,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3682() throws Throwable {
+    public void test3667() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3682");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3667");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -5900,9 +5503,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3683() throws Throwable {
+    public void test3668() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3683");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3668");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -5937,9 +5540,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3684() throws Throwable {
+    public void test3669() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3684");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3669");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -5958,9 +5561,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3685() throws Throwable {
+    public void test3670() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3685");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3670");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -5996,9 +5599,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3686() throws Throwable {
+    public void test3671() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3686");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3671");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -6043,9 +5646,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3687() throws Throwable {
+    public void test3672() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3687");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3672");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -6090,9 +5693,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3688() throws Throwable {
+    public void test3673() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3688");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3673");
         char[] charArray3 = new char[] { '#', ' ', '#' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -6111,9 +5714,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3689() throws Throwable {
+    public void test3674() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3689");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3674");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -6157,9 +5760,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3690() throws Throwable {
+    public void test3675() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3690");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3675");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -6191,9 +5794,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3691() throws Throwable {
+    public void test3676() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3691");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3676");
         char[] charArray2 = new char[] { '4', 'a' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6212,9 +5815,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3692() throws Throwable {
+    public void test3677() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3692");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3677");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -6237,9 +5840,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3693() throws Throwable {
+    public void test3678() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3693");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3678");
         char[] charArray2 = new char[] { '4', 'a' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6258,9 +5861,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3694() throws Throwable {
+    public void test3679() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3694");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3679");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -6284,9 +5887,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3695() throws Throwable {
+    public void test3680() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3695");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3680");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -6304,9 +5907,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3696() throws Throwable {
+    public void test3681() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3696");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3681");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -6328,9 +5931,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3697() throws Throwable {
+    public void test3682() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3697");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3682");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6353,9 +5956,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3698() throws Throwable {
+    public void test3683() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3698");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3683");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6405,9 +6008,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3699() throws Throwable {
+    public void test3684() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3699");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3684");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -6430,9 +6033,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3700() throws Throwable {
+    public void test3685() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3700");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3685");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -6455,9 +6058,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3701() throws Throwable {
+    public void test3686() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3701");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3686");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -6489,9 +6092,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3702() throws Throwable {
+    public void test3687() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3702");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3687");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6515,9 +6118,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3703() throws Throwable {
+    public void test3688() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3703");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3688");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -6537,9 +6140,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3704() throws Throwable {
+    public void test3689() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3704");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3689");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6562,9 +6165,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3705() throws Throwable {
+    public void test3690() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3705");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3690");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6592,9 +6195,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3706() throws Throwable {
+    public void test3691() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3706");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3691");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6617,9 +6220,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3707() throws Throwable {
+    public void test3692() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3707");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3692");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -6634,9 +6237,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3708() throws Throwable {
+    public void test3693() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3708");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3693");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -6663,9 +6266,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3709() throws Throwable {
+    public void test3694() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3709");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3694");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -6689,9 +6292,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3710() throws Throwable {
+    public void test3695() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3710");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3695");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -6746,9 +6349,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3711() throws Throwable {
+    public void test3696() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3711");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3696");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -6774,9 +6377,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3712() throws Throwable {
+    public void test3697() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3712");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3697");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -6820,9 +6423,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3713() throws Throwable {
+    public void test3698() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3713");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3698");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -6845,9 +6448,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3714() throws Throwable {
+    public void test3699() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3714");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3699");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -6872,9 +6475,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3715() throws Throwable {
+    public void test3700() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3715");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3700");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         int int5 = soundex4.getMaxLength();
@@ -6889,9 +6492,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3716() throws Throwable {
+    public void test3701() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3716");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3701");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -6916,9 +6519,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3717() throws Throwable {
+    public void test3702() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3717");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3702");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -6944,9 +6547,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3718() throws Throwable {
+    public void test3703() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3718");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3703");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -6988,9 +6591,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3719() throws Throwable {
+    public void test3704() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3719");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3704");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -7011,9 +6614,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3720() throws Throwable {
+    public void test3705() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3720");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3705");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -7034,9 +6637,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3721() throws Throwable {
+    public void test3706() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3721");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3706");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -7075,9 +6678,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3722() throws Throwable {
+    public void test3707() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3722");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3707");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -7093,9 +6696,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3723() throws Throwable {
+    public void test3708() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3723");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3708");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -7124,9 +6727,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3724() throws Throwable {
+    public void test3709() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3724");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3709");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -7167,9 +6770,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3725() throws Throwable {
+    public void test3710() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3725");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3710");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -7196,9 +6799,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3726() throws Throwable {
+    public void test3711() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3726");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3711");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -7240,9 +6843,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3727() throws Throwable {
+    public void test3712() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3727");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3712");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -7273,9 +6876,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3728() throws Throwable {
+    public void test3713() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3728");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3713");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -7326,9 +6929,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3729() throws Throwable {
+    public void test3714() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3729");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3714");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -7351,48 +6954,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3730() throws Throwable {
+    public void test3715() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3730");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        java.lang.String str6 = refinedSoundex4.soundex("");
-        int int9 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) refinedSoundex4, "", "");
-        java.lang.String str11 = refinedSoundex4.encode("");
-        java.lang.String str13 = refinedSoundex4.encode("");
-        int int16 = refinedSoundex4.difference("", "");
-        char[] charArray19 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex20 = new org.apache.commons.codec.language.Soundex(charArray19);
-        org.apache.commons.codec.language.Soundex soundex21 = new org.apache.commons.codec.language.Soundex(charArray19);
-        org.apache.commons.codec.language.Soundex soundex22 = new org.apache.commons.codec.language.Soundex(charArray19);
-        java.lang.String str24 = soundex22.soundex("");
-        int int27 = soundex22.difference("", "");
-        soundex22.setMaxLength(100);
-        java.lang.String str31 = soundex22.soundex("");
-        java.lang.Object obj32 = refinedSoundex4.encode((java.lang.Object) "");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 0 + "'", int16 == 0);
-        org.junit.Assert.assertNotNull(charArray19);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray19), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray19), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray19), "[ , 4]");
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "" + "'", str31, "");
-        org.junit.Assert.assertEquals("'" + obj32 + "' != '" + "" + "'", obj32, "");
-    }
-
-    @Test
-    public void test3731() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3731");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3715");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -7412,9 +6976,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3732() throws Throwable {
+    public void test3716() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3732");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3716");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -7457,9 +7021,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3733() throws Throwable {
+    public void test3717() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3733");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3717");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -7505,9 +7069,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3734() throws Throwable {
+    public void test3718() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3734");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3718");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -7547,9 +7111,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3735() throws Throwable {
+    public void test3719() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3735");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3719");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -7586,9 +7150,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3736() throws Throwable {
+    public void test3720() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3736");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3720");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -7607,9 +7171,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3737() throws Throwable {
+    public void test3721() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3737");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3721");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -7630,9 +7194,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3738() throws Throwable {
+    public void test3722() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3738");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3722");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -7654,9 +7218,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3739() throws Throwable {
+    public void test3723() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3739");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3723");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -7691,9 +7255,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3740() throws Throwable {
+    public void test3724() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3740");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3724");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -7716,9 +7280,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3741() throws Throwable {
+    public void test3725() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3741");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3725");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -7740,9 +7304,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3742() throws Throwable {
+    public void test3726() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3742");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3726");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -7762,9 +7326,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3743() throws Throwable {
+    public void test3727() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3743");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3727");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -7789,32 +7353,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3744() throws Throwable {
+    public void test3728() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3744");
-        char[] charArray3 = new char[] { '#', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
-        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
-        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray3);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        java.lang.String str9 = refinedSoundex7.soundex("");
-        java.lang.String str11 = refinedSoundex7.encode("");
-        int int14 = refinedSoundex7.difference("", "");
-        java.lang.String str16 = refinedSoundex7.soundex("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
-    }
-
-    @Test
-    public void test3745() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3745");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3728");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -7839,9 +7380,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3746() throws Throwable {
+    public void test3729() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3746");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3729");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -7930,9 +7471,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3747() throws Throwable {
+    public void test3730() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3747");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3730");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -7946,9 +7487,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3748() throws Throwable {
+    public void test3731() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3748");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3731");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -7975,9 +7516,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3749() throws Throwable {
+    public void test3732() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3749");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3732");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8004,9 +7545,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3750() throws Throwable {
+    public void test3733() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3750");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3733");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8037,9 +7578,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3751() throws Throwable {
+    public void test3734() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3751");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3734");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -8076,9 +7617,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3752() throws Throwable {
+    public void test3735() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3752");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3735");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -8109,9 +7650,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3753() throws Throwable {
+    public void test3736() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3753");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3736");
         char[] charArray2 = new char[] { '4', 'a' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8131,9 +7672,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3754() throws Throwable {
+    public void test3737() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3754");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3737");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength((int) (byte) 1);
@@ -8154,9 +7695,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3755() throws Throwable {
+    public void test3738() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3755");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3738");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8178,9 +7719,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3756() throws Throwable {
+    public void test3739() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3756");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3739");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -8213,9 +7754,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3757() throws Throwable {
+    public void test3740() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3757");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3740");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -8268,9 +7809,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3758() throws Throwable {
+    public void test3741() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3758");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3741");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8324,9 +7865,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3759() throws Throwable {
+    public void test3742() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3759");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3742");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -8355,9 +7896,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3760() throws Throwable {
+    public void test3743() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3760");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3743");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -8377,9 +7918,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3761() throws Throwable {
+    public void test3744() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3761");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3744");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8401,9 +7942,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3762() throws Throwable {
+    public void test3745() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3762");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3745");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -8427,9 +7968,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3763() throws Throwable {
+    public void test3746() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3763");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3746");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8452,9 +7993,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3764() throws Throwable {
+    public void test3747() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3764");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3747");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -8479,9 +8020,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3765() throws Throwable {
+    public void test3748() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3765");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3748");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8505,9 +8046,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3766() throws Throwable {
+    public void test3749() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3766");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3749");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -8528,9 +8069,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3767() throws Throwable {
+    public void test3750() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3767");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3750");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8551,9 +8092,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3768() throws Throwable {
+    public void test3751() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3768");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3751");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -8598,9 +8139,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3769() throws Throwable {
+    public void test3752() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3769");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3752");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -8623,9 +8164,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3770() throws Throwable {
+    public void test3753() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3770");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3753");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -8656,9 +8197,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3771() throws Throwable {
+    public void test3754() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3771");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3754");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -8676,9 +8217,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3772() throws Throwable {
+    public void test3755() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3772");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3755");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -8699,9 +8240,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3773() throws Throwable {
+    public void test3756() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3773");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3756");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -8735,9 +8276,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3774() throws Throwable {
+    public void test3757() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3774");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3757");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength((int) (short) -1);
@@ -8779,9 +8320,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3775() throws Throwable {
+    public void test3758() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3775");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3758");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -8805,9 +8346,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3776() throws Throwable {
+    public void test3759() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3776");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3759");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -8835,9 +8376,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3777() throws Throwable {
+    public void test3760() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3777");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3760");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -8858,9 +8399,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3778() throws Throwable {
+    public void test3761() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3778");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3761");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -8890,9 +8431,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3779() throws Throwable {
+    public void test3762() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3779");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3762");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -8923,9 +8464,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3780() throws Throwable {
+    public void test3763() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3780");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3763");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -8951,9 +8492,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3781() throws Throwable {
+    public void test3764() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3781");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3764");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -9000,9 +8541,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3782() throws Throwable {
+    public void test3765() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3782");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3765");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode('a');
@@ -9020,9 +8561,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3783() throws Throwable {
+    public void test3766() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3783");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3766");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9038,9 +8579,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3784() throws Throwable {
+    public void test3767() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3784");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3767");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -9072,9 +8613,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3785() throws Throwable {
+    public void test3768() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3785");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3768");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -9105,57 +8646,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3786() throws Throwable {
+    public void test3769() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3786");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        java.lang.String str6 = refinedSoundex4.soundex("");
-        java.lang.String str8 = refinedSoundex4.soundex("");
-        java.lang.String str10 = refinedSoundex4.soundex("");
-        int int13 = refinedSoundex4.difference("", "");
-        char char15 = refinedSoundex4.getMappingCode('#');
-        java.lang.String str17 = refinedSoundex4.encode("");
-        char[] charArray21 = new char[] { '4', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex22 = new org.apache.commons.codec.language.Soundex(charArray21);
-        char[] charArray26 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex27 = new org.apache.commons.codec.language.RefinedSoundex(charArray26);
-        int int30 = refinedSoundex27.difference("", "");
-        java.lang.String str32 = refinedSoundex27.encode("");
-        java.lang.Object obj33 = soundex22.encode((java.lang.Object) "");
-        java.lang.Object obj34 = refinedSoundex4.encode((java.lang.Object) "");
-        java.lang.String str36 = refinedSoundex4.encode("");
-        char char38 = refinedSoundex4.getMappingCode('a');
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-        org.junit.Assert.assertTrue("'" + char15 + "' != '" + '\000' + "'", char15 == '\000');
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertNotNull(charArray21);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray21), "44 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray21), "44 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray21), "[4, 4,  ]");
-        org.junit.Assert.assertNotNull(charArray26);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray26), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray26), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray26), "[4, a, #]");
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
-        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
-        org.junit.Assert.assertEquals("'" + obj33 + "' != '" + "" + "'", obj33, "");
-        org.junit.Assert.assertEquals("'" + obj34 + "' != '" + "" + "'", obj34, "");
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "" + "'", str36, "");
-        org.junit.Assert.assertTrue("'" + char38 + "' != '" + '4' + "'", char38 == '4');
-    }
-
-    @Test
-    public void test3787() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3787");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3769");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -9180,9 +8673,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3788() throws Throwable {
+    public void test3770() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3788");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3770");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -9217,9 +8710,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3789() throws Throwable {
+    public void test3771() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3789");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3771");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -9248,9 +8741,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3790() throws Throwable {
+    public void test3772() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3790");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3772");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -9277,9 +8770,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3791() throws Throwable {
+    public void test3773() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3791");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3773");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -9300,9 +8793,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3792() throws Throwable {
+    public void test3774() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3792");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3774");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -9319,9 +8812,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3793() throws Throwable {
+    public void test3775() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3793");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3775");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -9341,9 +8834,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3794() throws Throwable {
+    public void test3776() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3794");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3776");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -9376,9 +8869,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3795() throws Throwable {
+    public void test3777() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3795");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3777");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -9426,9 +8919,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3796() throws Throwable {
+    public void test3778() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3796");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3778");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -9456,9 +8949,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3797() throws Throwable {
+    public void test3779() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3797");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3779");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -9486,9 +8979,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3798() throws Throwable {
+    public void test3780() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3798");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3780");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -9506,9 +8999,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3799() throws Throwable {
+    public void test3781() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3799");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3781");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -9535,9 +9028,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3800() throws Throwable {
+    public void test3782() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3800");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3782");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -9562,9 +9055,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3801() throws Throwable {
+    public void test3783() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3801");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3783");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9591,9 +9084,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3802() throws Throwable {
+    public void test3784() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3802");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3784");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -9654,9 +9147,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3803() throws Throwable {
+    public void test3785() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3803");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3785");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -9681,9 +9174,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3804() throws Throwable {
+    public void test3786() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3804");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3786");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -9713,9 +9206,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3805() throws Throwable {
+    public void test3787() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3805");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3787");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -9737,26 +9230,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3806() throws Throwable {
+    public void test3788() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3806");
-        char[] charArray3 = new char[] { '#', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        char char7 = refinedSoundex5.getMappingCode('4');
-        java.lang.String str9 = refinedSoundex5.encode("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
-        org.junit.Assert.assertTrue("'" + char7 + "' != '" + '\000' + "'", char7 == '\000');
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-    }
-
-    @Test
-    public void test3807() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3807");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3788");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -9800,29 +9276,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3808() throws Throwable {
+    public void test3789() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3808");
-        char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
-        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
-        int int7 = soundex6.getMaxLength();
-        int int8 = soundex6.getMaxLength();
-        int int11 = soundex6.difference("", "");
-        java.lang.String str13 = soundex6.encode("");
-        org.junit.Assert.assertNotNull(charArray5);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "#a 44");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "#a 44");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[#, a,  , 4, 4]");
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 4 + "'", int7 == 4);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-    }
-
-    @Test
-    public void test3809() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3809");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3789");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('a');
@@ -9865,9 +9321,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3810() throws Throwable {
+    public void test3790() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3810");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3790");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -9888,9 +9344,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3811() throws Throwable {
+    public void test3791() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3811");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3791");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -9912,9 +9368,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3812() throws Throwable {
+    public void test3792() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3812");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3792");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -9934,9 +9390,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3813() throws Throwable {
+    public void test3793() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3813");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3793");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode('a');
@@ -9955,9 +9411,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3814() throws Throwable {
+    public void test3794() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3814");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3794");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -9980,9 +9436,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3815() throws Throwable {
+    public void test3795() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3815");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3795");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -10023,9 +9479,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3816() throws Throwable {
+    public void test3796() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3816");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3796");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -10072,9 +9528,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3817() throws Throwable {
+    public void test3797() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3817");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3797");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength((-1));
@@ -10088,9 +9544,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3818() throws Throwable {
+    public void test3798() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3818");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3798");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -10200,9 +9656,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3819() throws Throwable {
+    public void test3799() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3819");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3799");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -10221,9 +9677,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3820() throws Throwable {
+    public void test3800() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3820");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3800");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -10272,9 +9728,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3821() throws Throwable {
+    public void test3801() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3821");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3801");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -10305,9 +9761,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3822() throws Throwable {
+    public void test3802() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3822");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3802");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -10334,9 +9790,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3823() throws Throwable {
+    public void test3803() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3823");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3803");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -10354,9 +9810,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3824() throws Throwable {
+    public void test3804() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3824");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3804");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -10400,9 +9856,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3825() throws Throwable {
+    public void test3805() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3825");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3805");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         // The following exception was thrown during execution in test generation
@@ -10419,9 +9875,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3826() throws Throwable {
+    public void test3806() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3826");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3806");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -10467,9 +9923,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3827() throws Throwable {
+    public void test3807() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3827");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3807");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -10494,9 +9950,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3828() throws Throwable {
+    public void test3808() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3828");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3808");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char[] charArray10 = new char[] { '4', 'a', '#' };
@@ -10538,9 +9994,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3829() throws Throwable {
+    public void test3809() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3829");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3809");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -10578,9 +10034,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3830() throws Throwable {
+    public void test3810() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3830");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3810");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -10627,9 +10083,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3831() throws Throwable {
+    public void test3811() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3831");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3811");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -10650,9 +10106,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3832() throws Throwable {
+    public void test3812() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3832");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3812");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -10671,9 +10127,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3833() throws Throwable {
+    public void test3813() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3833");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3813");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -10704,9 +10160,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3834() throws Throwable {
+    public void test3814() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3834");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3814");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -10734,9 +10190,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3835() throws Throwable {
+    public void test3815() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3835");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3815");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -10753,9 +10209,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3836() throws Throwable {
+    public void test3816() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3836");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3816");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -10790,9 +10246,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3837() throws Throwable {
+    public void test3817() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3837");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3817");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -10819,9 +10275,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3838() throws Throwable {
+    public void test3818() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3838");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3818");
         char[] charArray3 = new char[] { '#', ' ', '#' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -10842,9 +10298,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3839() throws Throwable {
+    public void test3819() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3839");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3819");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -10884,9 +10340,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3840() throws Throwable {
+    public void test3820() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3840");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3820");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -10914,9 +10370,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3841() throws Throwable {
+    public void test3821() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3841");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3821");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -10936,37 +10392,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3842() throws Throwable {
+    public void test3822() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3842");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        char char6 = refinedSoundex4.getMappingCode(' ');
-        char char8 = refinedSoundex4.getMappingCode(' ');
-        java.lang.String str10 = refinedSoundex4.soundex("");
-        java.lang.String str12 = refinedSoundex4.encode("");
-        int int15 = refinedSoundex4.difference("", "");
-        java.lang.String str17 = refinedSoundex4.soundex("");
-        int int20 = refinedSoundex4.difference("", "");
-        char char22 = refinedSoundex4.getMappingCode('a');
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertTrue("'" + char6 + "' != '" + '\000' + "'", char6 == '\000');
-        org.junit.Assert.assertTrue("'" + char8 + "' != '" + '\000' + "'", char8 == '\000');
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 0 + "'", int20 == 0);
-        org.junit.Assert.assertTrue("'" + char22 + "' != '" + '4' + "'", char22 == '4');
-    }
-
-    @Test
-    public void test3843() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3843");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3822");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -10987,9 +10415,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3844() throws Throwable {
+    public void test3823() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3844");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3823");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11005,9 +10433,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3845() throws Throwable {
+    public void test3824() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3845");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3824");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -11042,9 +10470,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3846() throws Throwable {
+    public void test3825() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3846");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3825");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11066,9 +10494,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3847() throws Throwable {
+    public void test3826() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3847");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3826");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -11088,9 +10516,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3848() throws Throwable {
+    public void test3827() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3848");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3827");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -11111,9 +10539,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3849() throws Throwable {
+    public void test3828() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3849");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3828");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -11134,9 +10562,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3850() throws Throwable {
+    public void test3829() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3850");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3829");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11163,31 +10591,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3851() throws Throwable {
+    public void test3830() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3851");
-        char[] charArray3 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
-        java.lang.String str6 = refinedSoundex4.soundex("");
-        java.lang.String str8 = refinedSoundex4.soundex("");
-        java.lang.String str10 = refinedSoundex4.encode("");
-        char char12 = refinedSoundex4.getMappingCode('a');
-        java.lang.String str14 = refinedSoundex4.encode("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertTrue("'" + char12 + "' != '" + '4' + "'", char12 == '4');
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-    }
-
-    @Test
-    public void test3852() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3852");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3830");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11215,9 +10621,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3853() throws Throwable {
+    public void test3831() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3853");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3831");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -11239,9 +10645,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3854() throws Throwable {
+    public void test3832() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3854");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3832");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11270,9 +10676,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3855() throws Throwable {
+    public void test3833() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3855");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3833");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -11338,9 +10744,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3856() throws Throwable {
+    public void test3834() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3856");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3834");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11380,9 +10786,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3857() throws Throwable {
+    public void test3835() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3857");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3835");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode(' ');
@@ -11400,9 +10806,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3858() throws Throwable {
+    public void test3836() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3858");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3836");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -11452,9 +10858,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3859() throws Throwable {
+    public void test3837() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3859");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3837");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -11477,9 +10883,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3860() throws Throwable {
+    public void test3838() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3860");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3838");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -11518,32 +10924,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3861() throws Throwable {
+    public void test3839() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3861");
-        char[] charArray2 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
-        java.lang.String str5 = soundex3.encode("");
-        java.lang.String str7 = soundex3.encode("");
-        soundex3.setMaxLength((int) (short) 0);
-        java.lang.String str11 = soundex3.encode("");
-        java.lang.String str13 = soundex3.encode("");
-        int int14 = soundex3.getMaxLength();
-        org.junit.Assert.assertNotNull(charArray2);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
-    }
-
-    @Test
-    public void test3862() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3862");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3839");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -11573,9 +10956,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3863() throws Throwable {
+    public void test3840() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3863");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3840");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -11606,9 +10989,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3864() throws Throwable {
+    public void test3841() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3864");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3841");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -11629,9 +11012,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3865() throws Throwable {
+    public void test3842() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3865");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3842");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -11656,9 +11039,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3866() throws Throwable {
+    public void test3843() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3866");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3843");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -11678,9 +11061,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3867() throws Throwable {
+    public void test3844() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3867");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3844");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11702,9 +11085,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3868() throws Throwable {
+    public void test3845() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3868");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3845");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -11725,9 +11108,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3869() throws Throwable {
+    public void test3846() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3869");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3846");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -11749,9 +11132,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3870() throws Throwable {
+    public void test3847() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3870");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3847");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -11773,52 +11156,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3871() throws Throwable {
+    public void test3848() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3871");
-        char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
-        char[] charArray13 = new char[] { ' ', ' ', ' ', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex14 = new org.apache.commons.codec.language.Soundex(charArray13);
-        char[] charArray18 = new char[] { '4', 'a', '#' };
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex19 = new org.apache.commons.codec.language.RefinedSoundex(charArray18);
-        char char21 = refinedSoundex19.getMappingCode(' ');
-        char char23 = refinedSoundex19.getMappingCode(' ');
-        java.lang.String str25 = refinedSoundex19.soundex("");
-        java.lang.String str27 = refinedSoundex19.encode("");
-        int int30 = refinedSoundex19.difference("", "");
-        java.lang.String str32 = refinedSoundex19.soundex("");
-        java.lang.Object obj33 = soundex14.encode((java.lang.Object) "");
-        java.lang.Object obj34 = refinedSoundex7.encode(obj33);
-        char char36 = refinedSoundex7.getMappingCode(' ');
-        org.junit.Assert.assertNotNull(charArray5);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "   4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "   4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ ,  ,  , 4,  ]");
-        org.junit.Assert.assertNotNull(charArray13);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray13), "   4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray13), "   4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray13), "[ ,  ,  , 4,  ]");
-        org.junit.Assert.assertNotNull(charArray18);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray18), "4a#");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray18), "4a#");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray18), "[4, a, #]");
-        org.junit.Assert.assertTrue("'" + char21 + "' != '" + '\000' + "'", char21 == '\000');
-        org.junit.Assert.assertTrue("'" + char23 + "' != '" + '\000' + "'", char23 == '\000');
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "" + "'", str27, "");
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
-        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
-        org.junit.Assert.assertEquals("'" + obj33 + "' != '" + "" + "'", obj33, "");
-        org.junit.Assert.assertEquals("'" + obj34 + "' != '" + "" + "'", obj34, "");
-        org.junit.Assert.assertTrue("'" + char36 + "' != '" + '\000' + "'", char36 == '\000');
-    }
-
-    @Test
-    public void test3872() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3872");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3848");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -11851,9 +11191,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3873() throws Throwable {
+    public void test3849() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3873");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3849");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11877,9 +11217,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3874() throws Throwable {
+    public void test3850() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3874");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3850");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -11902,9 +11242,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3875() throws Throwable {
+    public void test3851() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3875");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3851");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -11939,9 +11279,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3876() throws Throwable {
+    public void test3852() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3876");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3852");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -11975,9 +11315,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3877() throws Throwable {
+    public void test3853() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3877");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3853");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12017,9 +11357,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3878() throws Throwable {
+    public void test3854() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3878");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3854");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -12050,9 +11390,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3879() throws Throwable {
+    public void test3855() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3879");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3855");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -12075,9 +11415,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3880() throws Throwable {
+    public void test3856() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3880");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3856");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -12105,9 +11445,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3881() throws Throwable {
+    public void test3857() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3881");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3857");
         char[] charArray3 = new char[] { '#', ' ', '#' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -12125,9 +11465,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3882() throws Throwable {
+    public void test3858() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3882");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3858");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12178,9 +11518,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3883() throws Throwable {
+    public void test3859() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3883");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3859");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12200,9 +11540,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3884() throws Throwable {
+    public void test3860() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3884");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3860");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -12232,9 +11572,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3885() throws Throwable {
+    public void test3861() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3885");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3861");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -12256,9 +11596,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3886() throws Throwable {
+    public void test3862() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3886");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3862");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -12295,9 +11635,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3887() throws Throwable {
+    public void test3863() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3887");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3863");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12336,9 +11676,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3888() throws Throwable {
+    public void test3864() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3888");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3864");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -12379,9 +11719,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3889() throws Throwable {
+    public void test3865() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3889");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3865");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -12416,9 +11756,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3890() throws Throwable {
+    public void test3866() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3890");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3866");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -12449,9 +11789,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3891() throws Throwable {
+    public void test3867() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3891");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3867");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -12465,9 +11805,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3892() throws Throwable {
+    public void test3868() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3892");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3868");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -12485,9 +11825,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3893() throws Throwable {
+    public void test3869() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3893");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3869");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -12507,9 +11847,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3894() throws Throwable {
+    public void test3870() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3894");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3870");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12540,9 +11880,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3895() throws Throwable {
+    public void test3871() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3895");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3871");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -12575,9 +11915,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3896() throws Throwable {
+    public void test3872() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3896");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3872");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -12626,9 +11966,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3897() throws Throwable {
+    public void test3873() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3897");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3873");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -12660,9 +12000,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3898() throws Throwable {
+    public void test3874() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3898");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3874");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -12691,9 +12031,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3899() throws Throwable {
+    public void test3875() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3899");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3875");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -12711,9 +12051,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3900() throws Throwable {
+    public void test3876() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3900");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3876");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -12739,9 +12079,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3901() throws Throwable {
+    public void test3877() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3901");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3877");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12764,9 +12104,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3902() throws Throwable {
+    public void test3878() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3902");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3878");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -12799,9 +12139,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3903() throws Throwable {
+    public void test3879() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3903");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3879");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -12852,9 +12192,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3904() throws Throwable {
+    public void test3880() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3904");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3880");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -12876,9 +12216,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3905() throws Throwable {
+    public void test3881() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3905");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3881");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -12910,9 +12250,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3906() throws Throwable {
+    public void test3882() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3906");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3882");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -12955,9 +12295,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3907() throws Throwable {
+    public void test3883() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3907");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3883");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -12981,9 +12321,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3908() throws Throwable {
+    public void test3884() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3908");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3884");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -13043,9 +12383,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3909() throws Throwable {
+    public void test3885() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3909");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3885");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -13067,9 +12407,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3910() throws Throwable {
+    public void test3886() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3910");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3886");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -13098,9 +12438,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3911() throws Throwable {
+    public void test3887() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3911");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3887");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -13119,9 +12459,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3912() throws Throwable {
+    public void test3888() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3912");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3888");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -13144,9 +12484,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3913() throws Throwable {
+    public void test3889() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3913");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3889");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -13170,9 +12510,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3914() throws Throwable {
+    public void test3890() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3914");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3890");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode('#');
@@ -13193,28 +12533,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3915() throws Throwable {
+    public void test3891() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3915");
-        char[] charArray3 = new char[] { '#', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
-        int int5 = soundex4.getMaxLength();
-        java.lang.String str7 = soundex4.encode("");
-        soundex4.setMaxLength((int) (byte) 100);
-        java.lang.String str11 = soundex4.soundex("");
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 4 + "'", int5 == 4);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-    }
-
-    @Test
-    public void test3916() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3916");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3891");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -13251,9 +12572,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3917() throws Throwable {
+    public void test3892() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3917");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3892");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -13298,9 +12619,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3918() throws Throwable {
+    public void test3893() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3918");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3893");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -13323,9 +12644,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3919() throws Throwable {
+    public void test3894() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3919");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3894");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -13349,9 +12670,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3920() throws Throwable {
+    public void test3895() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3920");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3895");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -13390,9 +12711,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3921() throws Throwable {
+    public void test3896() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3921");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3896");
         char[] charArray2 = new char[] { 'a', 'a' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex3 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
         char[] charArray7 = new char[] { '4', 'a', '#' };
@@ -13425,9 +12746,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3922() throws Throwable {
+    public void test3897() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3922");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3897");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -13450,9 +12771,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3923() throws Throwable {
+    public void test3898() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3923");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3898");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -13505,9 +12826,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3924() throws Throwable {
+    public void test3899() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3924");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3899");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength((int) (short) -1);
@@ -13528,9 +12849,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3925() throws Throwable {
+    public void test3900() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3925");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3900");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -13555,9 +12876,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3926() throws Throwable {
+    public void test3901() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3926");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3901");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -13577,9 +12898,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3927() throws Throwable {
+    public void test3902() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3927");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3902");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -13621,9 +12942,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3928() throws Throwable {
+    public void test3903() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3928");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3903");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode(' ');
@@ -13646,9 +12967,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3929() throws Throwable {
+    public void test3904() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3929");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3904");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -13677,9 +12998,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3930() throws Throwable {
+    public void test3905() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3930");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3905");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -13701,9 +13022,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3931() throws Throwable {
+    public void test3906() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3931");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3906");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -13723,9 +13044,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3932() throws Throwable {
+    public void test3907() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3932");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3907");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -13744,9 +13065,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3933() throws Throwable {
+    public void test3908() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3933");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3908");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         char char8 = refinedSoundex6.getMappingCode(' ');
@@ -13769,9 +13090,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3934() throws Throwable {
+    public void test3909() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3934");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3909");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -13797,9 +13118,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3935() throws Throwable {
+    public void test3910() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3935");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3910");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -13828,9 +13149,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3936() throws Throwable {
+    public void test3911() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3936");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3911");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -13854,9 +13175,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3937() throws Throwable {
+    public void test3912() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3937");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3912");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         soundex4.setMaxLength((int) (byte) 0);
@@ -13874,9 +13195,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3938() throws Throwable {
+    public void test3913() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3938");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3913");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -13893,9 +13214,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3939() throws Throwable {
+    public void test3914() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3939");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3914");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -13934,9 +13255,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3940() throws Throwable {
+    public void test3915() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3940");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3915");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14000,9 +13321,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3941() throws Throwable {
+    public void test3916() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3941");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3916");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14031,9 +13352,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3942() throws Throwable {
+    public void test3917() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3942");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3917");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -14051,9 +13372,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3943() throws Throwable {
+    public void test3918() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3943");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3918");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14085,9 +13406,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3944() throws Throwable {
+    public void test3919() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3944");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3919");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14118,9 +13439,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3945() throws Throwable {
+    public void test3920() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3945");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3920");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14146,9 +13467,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3946() throws Throwable {
+    public void test3921() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3946");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3921");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -14174,9 +13495,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3947() throws Throwable {
+    public void test3922() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3947");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3922");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -14198,9 +13519,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3948() throws Throwable {
+    public void test3923() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3948");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3923");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         soundex6.setMaxLength((int) (short) -1);
@@ -14221,9 +13542,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3949() throws Throwable {
+    public void test3924() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3949");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3924");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         char[] charArray10 = new char[] { '4', 'a', '#' };
@@ -14258,9 +13579,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3950() throws Throwable {
+    public void test3925() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3950");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3925");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -14285,9 +13606,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3951() throws Throwable {
+    public void test3926() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3951");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3926");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -14304,9 +13625,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3952() throws Throwable {
+    public void test3927() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3952");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3927");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -14327,26 +13648,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3953() throws Throwable {
+    public void test3928() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3953");
-        char[] charArray2 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
-        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray2);
-        java.lang.String str8 = soundex6.encode("");
-        org.junit.Assert.assertNotNull(charArray2);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-    }
-
-    @Test
-    public void test3954() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3954");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3928");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -14379,9 +13683,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3955() throws Throwable {
+    public void test3929() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3955");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3929");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14404,9 +13708,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3956() throws Throwable {
+    public void test3930() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3956");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3930");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -14435,9 +13739,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3957() throws Throwable {
+    public void test3931() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3957");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3931");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14452,9 +13756,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3958() throws Throwable {
+    public void test3932() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3958");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3932");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -14477,9 +13781,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3959() throws Throwable {
+    public void test3933() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3959");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3933");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14502,9 +13806,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3960() throws Throwable {
+    public void test3934() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3960");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3934");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14531,9 +13835,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3961() throws Throwable {
+    public void test3935() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3961");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3935");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -14552,9 +13856,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3962() throws Throwable {
+    public void test3936() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3962");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3936");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -14593,9 +13897,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3963() throws Throwable {
+    public void test3937() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3963");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3937");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -14626,9 +13930,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3964() throws Throwable {
+    public void test3938() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3964");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3938");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -14648,9 +13952,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3965() throws Throwable {
+    public void test3939() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3965");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3939");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14674,9 +13978,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3966() throws Throwable {
+    public void test3940() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3966");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3940");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.encode("");
@@ -14696,9 +14000,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3967() throws Throwable {
+    public void test3941() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3967");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3941");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14729,9 +14033,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3968() throws Throwable {
+    public void test3942() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3968");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3942");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
@@ -14757,9 +14061,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3969() throws Throwable {
+    public void test3943() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3969");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3943");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         int int7 = refinedSoundex4.difference("", "");
@@ -14781,9 +14085,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3970() throws Throwable {
+    public void test3944() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3970");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3944");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -14808,9 +14112,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3971() throws Throwable {
+    public void test3945() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3971");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3945");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -14898,9 +14202,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3972() throws Throwable {
+    public void test3946() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3972");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3946");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -14919,9 +14223,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3973() throws Throwable {
+    public void test3947() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3973");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3947");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -14970,9 +14274,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3974() throws Throwable {
+    public void test3948() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3974");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3948");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -14997,9 +14301,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3975() throws Throwable {
+    public void test3949() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3975");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3949");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         char[] charArray8 = new char[] { '4', 'a', '#' };
@@ -15022,9 +14326,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3976() throws Throwable {
+    public void test3950() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3976");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3950");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -15056,9 +14360,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3977() throws Throwable {
+    public void test3951() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3977");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3951");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
@@ -15081,37 +14385,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3978() throws Throwable {
+    public void test3952() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3978");
-        char[] charArray2 = new char[] { ' ', '4' };
-        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
-        org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
-        org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray2);
-        java.lang.String str9 = soundex7.encode("");
-        char[] charArray15 = new char[] { ' ', ' ', ' ', '4', ' ' };
-        org.apache.commons.codec.language.Soundex soundex16 = new org.apache.commons.codec.language.Soundex(charArray15);
-        java.lang.String str18 = soundex16.soundex("");
-        java.lang.Object obj19 = soundex7.encode((java.lang.Object) "");
-        org.junit.Assert.assertNotNull(charArray2);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-        org.junit.Assert.assertNotNull(charArray15);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray15), "   4 ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray15), "   4 ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray15), "[ ,  ,  , 4,  ]");
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
-        org.junit.Assert.assertEquals("'" + obj19 + "' != '" + "" + "'", obj19, "");
-    }
-
-    @Test
-    public void test3979() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3979");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3952");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -15145,9 +14421,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3980() throws Throwable {
+    public void test3953() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3980");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3953");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -15168,9 +14444,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3981() throws Throwable {
+    public void test3954() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3981");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3954");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -15206,9 +14482,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3982() throws Throwable {
+    public void test3955() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3982");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3955");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -15235,9 +14511,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3983() throws Throwable {
+    public void test3956() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3983");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3956");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -15294,9 +14570,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3984() throws Throwable {
+    public void test3957() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3984");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3957");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -15341,9 +14617,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3985() throws Throwable {
+    public void test3958() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3985");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3958");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -15377,9 +14653,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3986() throws Throwable {
+    public void test3959() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3986");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3959");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -15403,9 +14679,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3987() throws Throwable {
+    public void test3960() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3987");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3960");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
@@ -15428,9 +14704,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3988() throws Throwable {
+    public void test3961() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3988");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3961");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -15453,9 +14729,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3989() throws Throwable {
+    public void test3962() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3989");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3962");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -15501,9 +14777,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3990() throws Throwable {
+    public void test3963() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3990");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3963");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         java.lang.String str5 = soundex3.encode("");
@@ -15524,9 +14800,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3991() throws Throwable {
+    public void test3964() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3991");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3964");
         char[] charArray3 = new char[] { '#', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         java.lang.String str6 = soundex4.encode("");
@@ -15553,9 +14829,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3992() throws Throwable {
+    public void test3965() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3992");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3965");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
@@ -15590,9 +14866,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3993() throws Throwable {
+    public void test3966() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3993");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3966");
         char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -15609,9 +14885,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3994() throws Throwable {
+    public void test3967() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3994");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3967");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         java.lang.String str6 = refinedSoundex4.soundex("");
@@ -15646,9 +14922,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3995() throws Throwable {
+    public void test3968() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3995");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3968");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         // The following exception was thrown during execution in test generation
@@ -15665,9 +14941,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3996() throws Throwable {
+    public void test3969() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3996");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3969");
         char[] charArray2 = new char[] { ' ', '4' };
         org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
         soundex3.setMaxLength(1);
@@ -15688,9 +14964,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3997() throws Throwable {
+    public void test3970() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3997");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3970");
         char[] charArray3 = new char[] { '4', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
@@ -15709,9 +14985,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3998() throws Throwable {
+    public void test3971() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3998");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3971");
         char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         int int7 = soundex6.getMaxLength();
@@ -15767,9 +15043,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test3999() throws Throwable {
+    public void test3972() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test3999");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3972");
         char[] charArray3 = new char[] { '4', 'a', '#' };
         org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
         char char6 = refinedSoundex4.getMappingCode(' ');
@@ -15794,9 +15070,9 @@ public class RandoopRegressionTest7 {
     }
 
     @Test
-    public void test4000() throws Throwable {
+    public void test3973() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest7.test4000");
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3973");
         char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
         org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
         org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
@@ -15821,6 +15097,927 @@ public class RandoopRegressionTest7 {
         org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
         org.junit.Assert.assertTrue("'" + char16 + "' != '" + '\000' + "'", char16 == '\000');
         org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+    }
+
+    @Test
+    public void test3974() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3974");
+        char[] charArray2 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
+        int int8 = refinedSoundex5.difference("", "");
+        char[] charArray11 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex12 = new org.apache.commons.codec.language.Soundex(charArray11);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex13 = new org.apache.commons.codec.language.RefinedSoundex(charArray11);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex14 = new org.apache.commons.codec.language.RefinedSoundex(charArray11);
+        int int17 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) refinedSoundex14, "", "");
+        java.lang.Object obj18 = refinedSoundex5.encode((java.lang.Object) "");
+        char char20 = refinedSoundex5.getMappingCode('4');
+        java.lang.String str22 = refinedSoundex5.encode("");
+        org.junit.Assert.assertNotNull(charArray2);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+        org.junit.Assert.assertNotNull(charArray11);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray11), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray11), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray11), "[ , 4]");
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertEquals("'" + obj18 + "' != '" + "" + "'", obj18, "");
+        org.junit.Assert.assertTrue("'" + char20 + "' != '" + '\000' + "'", char20 == '\000');
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
+    }
+
+    @Test
+    public void test3975() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3975");
+        char[] charArray3 = new char[] { '#', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
+        java.lang.String str6 = soundex4.encode("");
+        java.lang.String str8 = soundex4.soundex("");
+        int int11 = soundex4.difference("", "");
+        java.lang.String str13 = soundex4.encode("");
+        java.lang.String str15 = soundex4.encode("");
+        int int18 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) soundex4, "", "");
+        // The following exception was thrown during execution in test generation
+        try {
+            int int21 = soundex4.difference("hi!", "hi!");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The character is not mapped: H");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
+    }
+
+    @Test
+    public void test3976() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3976");
+        char[] charArray2 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
+        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray2);
+        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray2);
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray2);
+        soundex6.setMaxLength((int) (short) 10);
+        java.lang.String str10 = soundex6.encode("");
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str12 = soundex6.encode("hi!");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The character is not mapped: H");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray2);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+    }
+
+    @Test
+    public void test3977() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3977");
+        char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
+        java.lang.String str9 = soundex7.encode("");
+        char[] charArray13 = new char[] { '#', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex14 = new org.apache.commons.codec.language.Soundex(charArray13);
+        org.apache.commons.codec.language.Soundex soundex15 = new org.apache.commons.codec.language.Soundex(charArray13);
+        org.apache.commons.codec.language.Soundex soundex16 = new org.apache.commons.codec.language.Soundex(charArray13);
+        org.apache.commons.codec.language.Soundex soundex17 = new org.apache.commons.codec.language.Soundex(charArray13);
+        org.apache.commons.codec.language.Soundex soundex18 = new org.apache.commons.codec.language.Soundex(charArray13);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex19 = new org.apache.commons.codec.language.RefinedSoundex(charArray13);
+        org.apache.commons.codec.language.Soundex soundex20 = new org.apache.commons.codec.language.Soundex(charArray13);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj21 = soundex7.encode((java.lang.Object) charArray13);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to Soundex encode is not of type java.lang.String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), " #aa#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), " #aa#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ , #, a, a, #]");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertNotNull(charArray13);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray13), "#4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray13), "#4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray13), "[#, 4,  ]");
+    }
+
+    @Test
+    public void test3978() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3978");
+        char[] charArray2 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
+        soundex3.setMaxLength(1);
+        soundex3.setMaxLength(100);
+        int int8 = soundex3.getMaxLength();
+        java.lang.String str10 = soundex3.soundex("");
+        int int11 = soundex3.getMaxLength();
+        char[] charArray17 = new char[] { ' ', '#', 'a', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex18 = new org.apache.commons.codec.language.RefinedSoundex(charArray17);
+        char[] charArray22 = new char[] { '4', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex23 = new org.apache.commons.codec.language.Soundex(charArray22);
+        org.apache.commons.codec.language.Soundex soundex24 = new org.apache.commons.codec.language.Soundex(charArray22);
+        java.lang.String str26 = soundex24.soundex("");
+        java.lang.Object obj27 = refinedSoundex18.encode((java.lang.Object) "");
+        java.lang.Object obj28 = soundex3.encode(obj27);
+        org.junit.Assert.assertNotNull(charArray2);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 100 + "'", int8 == 100);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 100 + "'", int11 == 100);
+        org.junit.Assert.assertNotNull(charArray17);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray17), " #aa#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray17), " #aa#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray17), "[ , #, a, a, #]");
+        org.junit.Assert.assertNotNull(charArray22);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray22), "44 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray22), "44 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray22), "[4, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "" + "'", str26, "");
+        org.junit.Assert.assertEquals("'" + obj27 + "' != '" + "" + "'", obj27, "");
+        org.junit.Assert.assertEquals("'" + obj28 + "' != '" + "" + "'", obj28, "");
+    }
+
+    @Test
+    public void test3979() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3979");
+        char[] charArray3 = new char[] { '#', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
+        java.lang.String str6 = soundex4.encode("");
+        java.lang.String str8 = soundex4.soundex("");
+        java.lang.String str10 = soundex4.encode("");
+        java.lang.String str12 = soundex4.soundex("");
+        soundex4.setMaxLength((int) '#');
+        java.lang.String str16 = soundex4.encode("");
+        soundex4.setMaxLength((int) (byte) 10);
+        java.lang.String str20 = soundex4.encode("");
+        java.lang.String str22 = soundex4.soundex("");
+        java.lang.String str24 = soundex4.encode("");
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
+    }
+
+    @Test
+    public void test3980() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3980");
+        char[] charArray3 = new char[] { '#', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
+        java.lang.String str6 = soundex4.encode("");
+        java.lang.String str8 = soundex4.soundex("");
+        java.lang.String str10 = soundex4.soundex("");
+        java.lang.String str12 = soundex4.soundex("");
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str14 = soundex4.encode("hi!");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The character is not mapped: H");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+    }
+
+    @Test
+    public void test3981() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3981");
+        char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        char[] charArray11 = new char[] { '4', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex12 = new org.apache.commons.codec.language.RefinedSoundex(charArray11);
+        char char14 = refinedSoundex12.getMappingCode(' ');
+        char char16 = refinedSoundex12.getMappingCode(' ');
+        java.lang.String str18 = refinedSoundex12.soundex("");
+        java.lang.String str20 = refinedSoundex12.encode("");
+        int int23 = refinedSoundex12.difference("", "");
+        java.lang.String str25 = refinedSoundex12.encode("");
+        java.lang.String str27 = refinedSoundex12.encode("");
+        java.lang.Object obj28 = refinedSoundex7.encode((java.lang.Object) str27);
+        java.lang.String str30 = refinedSoundex7.encode("");
+        char char32 = refinedSoundex7.getMappingCode('4');
+        char[] charArray36 = new char[] { '#', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex37 = new org.apache.commons.codec.language.Soundex(charArray36);
+        java.lang.String str39 = soundex37.encode("");
+        java.lang.String str41 = soundex37.soundex("");
+        java.lang.String str43 = soundex37.soundex("");
+        soundex37.setMaxLength((-1));
+        soundex37.setMaxLength((int) (short) 1);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj48 = refinedSoundex7.encode((java.lang.Object) (short) 1);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to RefinedSoundex encode is not of type java.lang.String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), " #aa#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), " #aa#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ , #, a, a, #]");
+        org.junit.Assert.assertNotNull(charArray11);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray11), "4a#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray11), "4a#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray11), "[4, a, #]");
+        org.junit.Assert.assertTrue("'" + char14 + "' != '" + '\000' + "'", char14 == '\000');
+        org.junit.Assert.assertTrue("'" + char16 + "' != '" + '\000' + "'", char16 == '\000');
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
+        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "" + "'", str27, "");
+        org.junit.Assert.assertEquals("'" + obj28 + "' != '" + "" + "'", obj28, "");
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
+        org.junit.Assert.assertTrue("'" + char32 + "' != '" + '\000' + "'", char32 == '\000');
+        org.junit.Assert.assertNotNull(charArray36);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray36), "#4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray36), "#4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray36), "[#, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "" + "'", str39, "");
+        org.junit.Assert.assertEquals("'" + str41 + "' != '" + "" + "'", str41, "");
+        org.junit.Assert.assertEquals("'" + str43 + "' != '" + "" + "'", str43, "");
+    }
+
+    @Test
+    public void test3982() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3982");
+        char[] charArray3 = new char[] { '4', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
+        java.lang.String str6 = refinedSoundex4.soundex("");
+        java.lang.String str8 = refinedSoundex4.soundex("");
+        java.lang.String str10 = refinedSoundex4.soundex("");
+        int int13 = refinedSoundex4.difference("", "");
+        char char15 = refinedSoundex4.getMappingCode('#');
+        java.lang.String str17 = refinedSoundex4.encode("");
+        char[] charArray23 = new char[] { ' ', ' ', ' ', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex24 = new org.apache.commons.codec.language.Soundex(charArray23);
+        org.apache.commons.codec.language.Soundex soundex25 = new org.apache.commons.codec.language.Soundex(charArray23);
+        org.apache.commons.codec.language.Soundex soundex26 = new org.apache.commons.codec.language.Soundex(charArray23);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex27 = new org.apache.commons.codec.language.RefinedSoundex(charArray23);
+        int int30 = refinedSoundex27.difference("", "");
+        java.lang.String str32 = refinedSoundex27.soundex("");
+        java.lang.String str34 = refinedSoundex27.soundex("");
+        java.lang.Object obj35 = refinedSoundex4.encode((java.lang.Object) str34);
+        java.lang.Class<?> wildcardClass36 = refinedSoundex4.getClass();
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + char15 + "' != '" + '\000' + "'", char15 == '\000');
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertNotNull(charArray23);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray23), "   4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray23), "   4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray23), "[ ,  ,  , 4,  ]");
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
+        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "" + "'", str34, "");
+        org.junit.Assert.assertEquals("'" + obj35 + "' != '" + "" + "'", obj35, "");
+        org.junit.Assert.assertNotNull(wildcardClass36);
+    }
+
+    @Test
+    public void test3983() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3983");
+        char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex8 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        char char10 = refinedSoundex8.getMappingCode('a');
+        char char12 = refinedSoundex8.getMappingCode('a');
+        char char14 = refinedSoundex8.getMappingCode(' ');
+        char char16 = refinedSoundex8.getMappingCode('a');
+        int int19 = refinedSoundex8.difference("", "");
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "   4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "   4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ ,  ,  , 4,  ]");
+        org.junit.Assert.assertTrue("'" + char10 + "' != '" + ' ' + "'", char10 == ' ');
+        org.junit.Assert.assertTrue("'" + char12 + "' != '" + ' ' + "'", char12 == ' ');
+        org.junit.Assert.assertTrue("'" + char14 + "' != '" + '\000' + "'", char14 == '\000');
+        org.junit.Assert.assertTrue("'" + char16 + "' != '" + ' ' + "'", char16 == ' ');
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+    }
+
+    @Test
+    public void test3984() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3984");
+        char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex8 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        char[] charArray12 = new char[] { '#', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex13 = new org.apache.commons.codec.language.Soundex(charArray12);
+        java.lang.String str15 = soundex13.encode("");
+        java.lang.String str17 = soundex13.soundex("");
+        int int20 = soundex13.difference("", "");
+        java.lang.String str22 = soundex13.encode("");
+        soundex13.setMaxLength(1);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj25 = refinedSoundex8.encode((java.lang.Object) soundex13);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to RefinedSoundex encode is not of type java.lang.String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "#a 44");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "#a 44");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[#, a,  , 4, 4]");
+        org.junit.Assert.assertNotNull(charArray12);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray12), "#4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray12), "#4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray12), "[#, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 0 + "'", int20 == 0);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
+    }
+
+    @Test
+    public void test3985() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3985");
+        char[] charArray3 = new char[] { '#', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
+        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray3);
+        char[] charArray12 = new char[] { ' ', '#', 'a', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex13 = new org.apache.commons.codec.language.RefinedSoundex(charArray12);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex14 = new org.apache.commons.codec.language.RefinedSoundex(charArray12);
+        char[] charArray18 = new char[] { '4', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex19 = new org.apache.commons.codec.language.RefinedSoundex(charArray18);
+        char char21 = refinedSoundex19.getMappingCode(' ');
+        char char23 = refinedSoundex19.getMappingCode(' ');
+        java.lang.String str25 = refinedSoundex19.soundex("");
+        java.lang.String str27 = refinedSoundex19.encode("");
+        int int30 = refinedSoundex19.difference("", "");
+        java.lang.String str32 = refinedSoundex19.encode("");
+        java.lang.String str34 = refinedSoundex19.encode("");
+        java.lang.Object obj35 = refinedSoundex14.encode((java.lang.Object) str34);
+        java.lang.String str37 = refinedSoundex14.soundex("");
+        java.lang.Object obj38 = soundex6.encode((java.lang.Object) str37);
+        java.lang.String str40 = soundex6.encode("");
+        java.lang.Class<?> wildcardClass41 = soundex6.getClass();
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
+        org.junit.Assert.assertNotNull(charArray12);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray12), " #aa#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray12), " #aa#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray12), "[ , #, a, a, #]");
+        org.junit.Assert.assertNotNull(charArray18);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray18), "4a#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray18), "4a#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray18), "[4, a, #]");
+        org.junit.Assert.assertTrue("'" + char21 + "' != '" + '\000' + "'", char21 == '\000');
+        org.junit.Assert.assertTrue("'" + char23 + "' != '" + '\000' + "'", char23 == '\000');
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
+        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "" + "'", str27, "");
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
+        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "" + "'", str34, "");
+        org.junit.Assert.assertEquals("'" + obj35 + "' != '" + "" + "'", obj35, "");
+        org.junit.Assert.assertEquals("'" + str37 + "' != '" + "" + "'", str37, "");
+        org.junit.Assert.assertEquals("'" + obj38 + "' != '" + "" + "'", obj38, "");
+        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "" + "'", str40, "");
+        org.junit.Assert.assertNotNull(wildcardClass41);
+    }
+
+    @Test
+    public void test3986() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3986");
+        char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex8 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex9 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        char char11 = refinedSoundex9.getMappingCode('#');
+        java.lang.String str13 = refinedSoundex9.encode("");
+        char char15 = refinedSoundex9.getMappingCode(' ');
+        java.lang.String str17 = refinedSoundex9.soundex("");
+        // The following exception was thrown during execution in test generation
+        try {
+            int int20 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) refinedSoundex9, "hi!", "hi!");
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: null");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "   4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "   4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ ,  ,  , 4,  ]");
+        org.junit.Assert.assertTrue("'" + char11 + "' != '" + '\000' + "'", char11 == '\000');
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertTrue("'" + char15 + "' != '" + '\000' + "'", char15 == '\000');
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+    }
+
+    @Test
+    public void test3987() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3987");
+        char[] charArray2 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
+        java.lang.String str5 = soundex3.encode("");
+        int int6 = soundex3.getMaxLength();
+        soundex3.setMaxLength(1);
+        org.junit.Assert.assertNotNull(charArray2);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 4 + "'", int6 == 4);
+    }
+
+    @Test
+    public void test3988() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3988");
+        char[] charArray2 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
+        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray2);
+        java.lang.String str7 = soundex5.encode("");
+        int int8 = soundex5.getMaxLength();
+        java.lang.String str10 = soundex5.soundex("");
+        char[] charArray14 = new char[] { '4', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex15 = new org.apache.commons.codec.language.RefinedSoundex(charArray14);
+        java.lang.String str17 = refinedSoundex15.soundex("");
+        java.lang.String str19 = refinedSoundex15.encode("");
+        char[] charArray23 = new char[] { '4', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex24 = new org.apache.commons.codec.language.RefinedSoundex(charArray23);
+        int int27 = refinedSoundex24.difference("", "");
+        java.lang.Object obj28 = refinedSoundex15.encode((java.lang.Object) "");
+        java.lang.String str30 = refinedSoundex15.soundex("");
+        java.lang.String str32 = refinedSoundex15.soundex("");
+        java.lang.Object obj33 = soundex5.encode((java.lang.Object) str32);
+        int int34 = soundex5.getMaxLength();
+        soundex5.setMaxLength(0);
+        org.junit.Assert.assertNotNull(charArray2);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertNotNull(charArray14);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray14), "4a#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray14), "4a#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray14), "[4, a, #]");
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "" + "'", str19, "");
+        org.junit.Assert.assertNotNull(charArray23);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray23), "4a#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray23), "4a#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray23), "[4, a, #]");
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertEquals("'" + obj28 + "' != '" + "" + "'", obj28, "");
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
+        org.junit.Assert.assertEquals("'" + obj33 + "' != '" + "" + "'", obj33, "");
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 4 + "'", int34 == 4);
+    }
+
+    @Test
+    public void test3989() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3989");
+        char[] charArray3 = new char[] { '4', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
+        java.lang.String str7 = refinedSoundex5.soundex("");
+        int int10 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) refinedSoundex5, "", "");
+        char[] charArray16 = new char[] { '#', 'a', ' ', '4', '4' };
+        org.apache.commons.codec.language.Soundex soundex17 = new org.apache.commons.codec.language.Soundex(charArray16);
+        int int18 = soundex17.getMaxLength();
+        java.lang.String str20 = soundex17.soundex("");
+        soundex17.setMaxLength(0);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj23 = refinedSoundex5.encode((java.lang.Object) soundex17);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to RefinedSoundex encode is not of type java.lang.String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "44 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "44 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
+        org.junit.Assert.assertNotNull(charArray16);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray16), "#a 44");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray16), "#a 44");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray16), "[#, a,  , 4, 4]");
+        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 4 + "'", int18 == 4);
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
+    }
+
+    @Test
+    public void test3990() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3990");
+        char[] charArray2 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex5 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
+        int int8 = refinedSoundex5.difference("", "");
+        char[] charArray11 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex12 = new org.apache.commons.codec.language.Soundex(charArray11);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex13 = new org.apache.commons.codec.language.RefinedSoundex(charArray11);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex14 = new org.apache.commons.codec.language.RefinedSoundex(charArray11);
+        int int17 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) refinedSoundex14, "", "");
+        java.lang.Object obj18 = refinedSoundex5.encode((java.lang.Object) "");
+        char char20 = refinedSoundex5.getMappingCode('4');
+        char[] charArray24 = new char[] { '4', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex25 = new org.apache.commons.codec.language.RefinedSoundex(charArray24);
+        java.lang.String str27 = refinedSoundex25.soundex("");
+        java.lang.String str29 = refinedSoundex25.encode("");
+        java.lang.Object obj30 = refinedSoundex5.encode((java.lang.Object) "");
+        int int33 = refinedSoundex5.difference("", "");
+        java.lang.Class<?> wildcardClass34 = refinedSoundex5.getClass();
+        org.junit.Assert.assertNotNull(charArray2);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+        org.junit.Assert.assertNotNull(charArray11);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray11), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray11), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray11), "[ , 4]");
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertEquals("'" + obj18 + "' != '" + "" + "'", obj18, "");
+        org.junit.Assert.assertTrue("'" + char20 + "' != '" + '\000' + "'", char20 == '\000');
+        org.junit.Assert.assertNotNull(charArray24);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray24), "4a#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray24), "4a#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray24), "[4, a, #]");
+        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "" + "'", str27, "");
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "" + "'", str29, "");
+        org.junit.Assert.assertEquals("'" + obj30 + "' != '" + "" + "'", obj30, "");
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertNotNull(wildcardClass34);
+    }
+
+    @Test
+    public void test3991() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3991");
+        char[] charArray3 = new char[] { '4', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
+        int int7 = refinedSoundex4.difference("", "");
+        java.lang.String str9 = refinedSoundex4.encode("");
+        java.lang.String str11 = refinedSoundex4.encode("");
+        char char13 = refinedSoundex4.getMappingCode(' ');
+        char[] charArray16 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex17 = new org.apache.commons.codec.language.Soundex(charArray16);
+        org.apache.commons.codec.language.Soundex soundex18 = new org.apache.commons.codec.language.Soundex(charArray16);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex19 = new org.apache.commons.codec.language.RefinedSoundex(charArray16);
+        org.apache.commons.codec.language.Soundex soundex20 = new org.apache.commons.codec.language.Soundex(charArray16);
+        soundex20.setMaxLength(10);
+        int int23 = soundex20.getMaxLength();
+        java.lang.Class<?> wildcardClass24 = soundex20.getClass();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj25 = refinedSoundex4.encode((java.lang.Object) soundex20);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to RefinedSoundex encode is not of type java.lang.String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertTrue("'" + char13 + "' != '" + '\000' + "'", char13 == '\000');
+        org.junit.Assert.assertNotNull(charArray16);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray16), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray16), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray16), "[ , 4]");
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 10 + "'", int23 == 10);
+        org.junit.Assert.assertNotNull(wildcardClass24);
+    }
+
+    @Test
+    public void test3992() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3992");
+        char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
+        int int7 = soundex6.getMaxLength();
+        java.lang.String str9 = soundex6.soundex("");
+        int int10 = soundex6.getMaxLength();
+        char[] charArray13 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex14 = new org.apache.commons.codec.language.Soundex(charArray13);
+        org.apache.commons.codec.language.Soundex soundex15 = new org.apache.commons.codec.language.Soundex(charArray13);
+        org.apache.commons.codec.language.Soundex soundex16 = new org.apache.commons.codec.language.Soundex(charArray13);
+        java.lang.String str18 = soundex16.encode("");
+        java.lang.String str20 = soundex16.encode("");
+        int int21 = soundex16.getMaxLength();
+        int int24 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) soundex16, "", "");
+        int int27 = org.apache.commons.codec.language.SoundexUtils.difference((org.apache.commons.codec.StringEncoder) soundex16, "", "");
+        java.lang.Object obj28 = soundex6.encode((java.lang.Object) "");
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "   4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "   4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ ,  ,  , 4,  ]");
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 4 + "'", int7 == 4);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 4 + "'", int10 == 4);
+        org.junit.Assert.assertNotNull(charArray13);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray13), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray13), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray13), "[ , 4]");
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 4 + "'", int21 == 4);
+        org.junit.Assert.assertTrue("'" + int24 + "' != '" + 0 + "'", int24 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertEquals("'" + obj28 + "' != '" + "" + "'", obj28, "");
+    }
+
+    @Test
+    public void test3993() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3993");
+        char[] charArray3 = new char[] { '#', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
+        java.lang.String str6 = soundex4.encode("");
+        java.lang.String str8 = soundex4.soundex("");
+        java.lang.String str10 = soundex4.soundex("");
+        soundex4.setMaxLength((-1));
+        soundex4.setMaxLength((int) (short) 1);
+        soundex4.setMaxLength((int) (short) 10);
+        java.lang.String[] strArray27 = new java.lang.String[] { "" };
+        boolean boolean28 = org.apache.commons.codec.language.DoubleMetaphone.contains("", 10, (int) (short) 10, strArray27);
+        boolean boolean29 = org.apache.commons.codec.language.DoubleMetaphone.contains("hi!", (int) 'a', (int) '4', strArray27);
+        boolean boolean30 = org.apache.commons.codec.language.DoubleMetaphone.contains("hi!", (int) (short) -1, 0, strArray27);
+        java.lang.Class<?> wildcardClass31 = strArray27.getClass();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj32 = soundex4.encode((java.lang.Object) strArray27);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to Soundex encode is not of type java.lang.String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "#4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[#, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertNotNull(strArray27);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertNotNull(wildcardClass31);
+    }
+
+    @Test
+    public void test3994() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3994");
+        char[] charArray5 = new char[] { ' ', ' ', ' ', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        java.lang.String str9 = refinedSoundex7.encode("");
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "   4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "   4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ ,  ,  , 4,  ]");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+    }
+
+    @Test
+    public void test3995() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3995");
+        char[] charArray2 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray2);
+        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray2);
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray2);
+        java.lang.String str8 = soundex6.encode("");
+        soundex6.setMaxLength((int) (short) 1);
+        soundex6.setMaxLength(0);
+        java.lang.String str14 = soundex6.soundex("");
+        soundex6.setMaxLength((int) (short) 0);
+        java.lang.String str18 = soundex6.encode("");
+        java.lang.String str20 = soundex6.soundex("");
+        java.lang.Class<?> wildcardClass21 = soundex6.getClass();
+        org.junit.Assert.assertNotNull(charArray2);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
+        org.junit.Assert.assertNotNull(wildcardClass21);
+    }
+
+    @Test
+    public void test3996() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3996");
+        char[] charArray3 = new char[] { '4', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex4 = new org.apache.commons.codec.language.Soundex(charArray3);
+        org.apache.commons.codec.language.Soundex soundex5 = new org.apache.commons.codec.language.Soundex(charArray3);
+        soundex5.setMaxLength((int) '#');
+        java.lang.String str9 = soundex5.encode("");
+        char[] charArray13 = new char[] { '4', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex14 = new org.apache.commons.codec.language.Soundex(charArray13);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex15 = new org.apache.commons.codec.language.RefinedSoundex(charArray13);
+        char char17 = refinedSoundex15.getMappingCode('#');
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj18 = soundex5.encode((java.lang.Object) refinedSoundex15);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to Soundex encode is not of type java.lang.String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "44 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "44 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, 4,  ]");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertNotNull(charArray13);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray13), "44 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray13), "44 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray13), "[4, 4,  ]");
+        org.junit.Assert.assertTrue("'" + char17 + "' != '" + '\000' + "'", char17 == '\000');
+    }
+
+    @Test
+    public void test3997() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3997");
+        char[] charArray5 = new char[] { ' ', '#', 'a', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex6 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex7 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex8 = new org.apache.commons.codec.language.RefinedSoundex(charArray5);
+        char char10 = refinedSoundex8.getMappingCode('#');
+        java.lang.String str12 = refinedSoundex8.encode("");
+        java.lang.String str14 = refinedSoundex8.encode("");
+        int int17 = refinedSoundex8.difference("", "");
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str19 = refinedSoundex8.soundex("hi!");
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: null");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), " #aa#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), " #aa#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[ , #, a, a, #]");
+        org.junit.Assert.assertTrue("'" + char10 + "' != '" + '\000' + "'", char10 == '\000');
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+    }
+
+    @Test
+    public void test3998() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3998");
+        char[] charArray2 = new char[] { ' ', '4' };
+        org.apache.commons.codec.language.Soundex soundex3 = new org.apache.commons.codec.language.Soundex(charArray2);
+        java.lang.String str5 = soundex3.encode("");
+        int int6 = soundex3.getMaxLength();
+        java.lang.String str8 = soundex3.encode("");
+        int int9 = soundex3.getMaxLength();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str11 = soundex3.soundex("hi!");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The character is not mapped: H");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray2);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray2), " 4");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray2), "[ , 4]");
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 4 + "'", int6 == 4);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 4 + "'", int9 == 4);
+    }
+
+    @Test
+    public void test3999() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test3999");
+        char[] charArray3 = new char[] { '4', 'a', '#' };
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex4 = new org.apache.commons.codec.language.RefinedSoundex(charArray3);
+        char char6 = refinedSoundex4.getMappingCode('#');
+        char char8 = refinedSoundex4.getMappingCode('a');
+        char char10 = refinedSoundex4.getMappingCode('#');
+        java.lang.String str12 = refinedSoundex4.encode("");
+        org.junit.Assert.assertNotNull(charArray3);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "4a#");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "4a#");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray3), "[4, a, #]");
+        org.junit.Assert.assertTrue("'" + char6 + "' != '" + '\000' + "'", char6 == '\000');
+        org.junit.Assert.assertTrue("'" + char8 + "' != '" + '4' + "'", char8 == '4');
+        org.junit.Assert.assertTrue("'" + char10 + "' != '" + '\000' + "'", char10 == '\000');
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+    }
+
+    @Test
+    public void test4000() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest7.test4000");
+        char[] charArray5 = new char[] { '#', 'a', ' ', '4', '4' };
+        org.apache.commons.codec.language.Soundex soundex6 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.Soundex soundex7 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.Soundex soundex8 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.Soundex soundex9 = new org.apache.commons.codec.language.Soundex(charArray5);
+        org.apache.commons.codec.language.Soundex soundex10 = new org.apache.commons.codec.language.Soundex(charArray5);
+        java.lang.String str12 = soundex10.encode("");
+        soundex10.setMaxLength((int) (byte) 10);
+        char[] charArray20 = new char[] { ' ', ' ', ' ', '4', ' ' };
+        org.apache.commons.codec.language.Soundex soundex21 = new org.apache.commons.codec.language.Soundex(charArray20);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex22 = new org.apache.commons.codec.language.RefinedSoundex(charArray20);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex23 = new org.apache.commons.codec.language.RefinedSoundex(charArray20);
+        org.apache.commons.codec.language.RefinedSoundex refinedSoundex24 = new org.apache.commons.codec.language.RefinedSoundex(charArray20);
+        org.apache.commons.codec.language.Soundex soundex25 = new org.apache.commons.codec.language.Soundex(charArray20);
+        int int28 = soundex25.difference("", "");
+        java.lang.String str30 = soundex25.encode("");
+        java.lang.String str32 = soundex25.soundex("");
+        soundex25.setMaxLength(0);
+        soundex25.setMaxLength((int) (short) 10);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj37 = soundex10.encode((java.lang.Object) soundex25);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: Parameter supplied to Soundex encode is not of type java.lang.String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "#a 44");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "#a 44");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[#, a,  , 4, 4]");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertNotNull(charArray20);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray20), "   4 ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray20), "   4 ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray20), "[ ,  ,  , 4,  ]");
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
     }
 }
 

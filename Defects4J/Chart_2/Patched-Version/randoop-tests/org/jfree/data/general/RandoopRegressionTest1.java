@@ -213,29 +213,6 @@ public class RandoopRegressionTest1 {
     public void test0506() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RandoopRegressionTest1.test0506");
-        double[] doubleArray11 = new double[] { 1.0d, (byte) -1, 1.0d };
-        double[][] doubleArray12 = new double[][] { doubleArray11 };
-        org.jfree.data.category.CategoryDataset categoryDataset13 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray12);
-        org.jfree.data.category.CategoryDataset categoryDataset14 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!1", "hi!", doubleArray12);
-        org.jfree.data.category.CategoryDataset categoryDataset15 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("Range[100.0,100.0]", "org.jfree.data.event.SeriesChangeEvent[source= ]", doubleArray12);
-        org.jfree.data.category.CategoryDataset categoryDataset16 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!1", "hi!", doubleArray12);
-        org.jfree.data.Range range18 = org.jfree.data.general.DatasetUtilities.iterateRangeBounds(categoryDataset16, true);
-        int int20 = categoryDataset16.getRowIndex((java.lang.Comparable) (-6.0d));
-        org.junit.Assert.assertNotNull(doubleArray11);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(doubleArray11), "[1.0, -1.0, 1.0]");
-        org.junit.Assert.assertNotNull(doubleArray12);
-        org.junit.Assert.assertNotNull(categoryDataset13);
-        org.junit.Assert.assertNotNull(categoryDataset14);
-        org.junit.Assert.assertNotNull(categoryDataset15);
-        org.junit.Assert.assertNotNull(categoryDataset16);
-        org.junit.Assert.assertNotNull(range18);
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
-    }
-
-    @Test
-    public void test0507() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0507");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -276,9 +253,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0508() throws Throwable {
+    public void test0507() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0508");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0507");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -305,9 +282,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0509() throws Throwable {
+    public void test0508() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0509");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0508");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -372,9 +349,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0510() throws Throwable {
+    public void test0509() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0510");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0509");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -429,9 +406,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0511() throws Throwable {
+    public void test0510() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0511");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0510");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -471,39 +448,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0512() throws Throwable {
+    public void test0511() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0512");
-        java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray13 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray16 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray19 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray22 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray25 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[][] numberArray26 = new java.lang.Number[][] { numberArray10, numberArray13, numberArray16, numberArray19, numberArray22, numberArray25 };
-        org.jfree.data.category.CategoryDataset categoryDataset27 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray26);
-        org.jfree.data.category.CategoryDataset categoryDataset28 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "hi!", numberArray26);
-        org.jfree.data.category.CategoryDataset categoryDataset29 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "org.jfree.data.event.SeriesChangeEvent[source= ]", numberArray26);
-        org.jfree.data.category.CategoryDataset categoryDataset30 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("1", "hi!", numberArray26);
-        java.lang.Number number31 = org.jfree.data.general.DatasetUtilities.findMaximumRangeValue(categoryDataset30);
-        org.junit.Assert.assertNotNull(numberArray10);
-        org.junit.Assert.assertNotNull(numberArray13);
-        org.junit.Assert.assertNotNull(numberArray16);
-        org.junit.Assert.assertNotNull(numberArray19);
-        org.junit.Assert.assertNotNull(numberArray22);
-        org.junit.Assert.assertNotNull(numberArray25);
-        org.junit.Assert.assertNotNull(numberArray26);
-        org.junit.Assert.assertNotNull(categoryDataset27);
-        org.junit.Assert.assertNotNull(categoryDataset28);
-        org.junit.Assert.assertNotNull(categoryDataset29);
-        org.junit.Assert.assertNotNull(categoryDataset30);
-        org.junit.Assert.assertEquals("'" + number31 + "' != '" + 32.0d + "'", number31, 32.0d);
-    }
-
-    @Test
-    public void test0513() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0513");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0511");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -554,9 +501,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0514() throws Throwable {
+    public void test0512() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0514");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0512");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -582,9 +529,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0515() throws Throwable {
+    public void test0513() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0515");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0513");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -627,9 +574,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0516() throws Throwable {
+    public void test0514() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0516");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0514");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -720,9 +667,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0517() throws Throwable {
+    public void test0515() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0517");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0515");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -746,9 +693,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0518() throws Throwable {
+    public void test0516() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0518");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0516");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -805,9 +752,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0519() throws Throwable {
+    public void test0517() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0519");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0517");
         java.lang.Number[][] numberArray2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -819,9 +766,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0520() throws Throwable {
+    public void test0518() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0520");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0518");
         java.lang.Number[][] numberArray2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -833,9 +780,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0521() throws Throwable {
+    public void test0519() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0521");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0519");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -905,9 +852,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0522() throws Throwable {
+    public void test0520() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0522");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0520");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -931,9 +878,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0523() throws Throwable {
+    public void test0521() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0523");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0521");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -960,9 +907,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0524() throws Throwable {
+    public void test0522() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0524");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0522");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, false);
         org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState3 = xYIntervalSeriesCollection0.getSelectionState();
@@ -978,9 +925,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0525() throws Throwable {
+    public void test0523() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0525");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0523");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1006,9 +953,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0526() throws Throwable {
+    public void test0524() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0526");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0524");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -1073,9 +1020,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0527() throws Throwable {
+    public void test0525() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0527");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0525");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1099,9 +1046,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0528() throws Throwable {
+    public void test0526() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0528");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0526");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -1143,9 +1090,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0529() throws Throwable {
+    public void test0527() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0529");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0527");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1171,9 +1118,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0530() throws Throwable {
+    public void test0528() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0530");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0528");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -1221,9 +1168,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0531() throws Throwable {
+    public void test0529() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0531");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0529");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1291,9 +1238,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0532() throws Throwable {
+    public void test0530() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0532");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0530");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -1335,9 +1282,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0533() throws Throwable {
+    public void test0531() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0533");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0531");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1364,9 +1311,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0534() throws Throwable {
+    public void test0532() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0534");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0532");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -1433,9 +1380,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0535() throws Throwable {
+    public void test0533() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0535");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0533");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -1461,9 +1408,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0536() throws Throwable {
+    public void test0534() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0536");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0534");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -1475,9 +1422,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0537() throws Throwable {
+    public void test0535() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0537");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0535");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1501,9 +1448,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0538() throws Throwable {
+    public void test0536() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0538");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0536");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1559,9 +1506,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0539() throws Throwable {
+    public void test0537() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0539");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0537");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         int int2 = xYIntervalSeriesCollection0.getSeriesCount();
@@ -1572,9 +1519,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0540() throws Throwable {
+    public void test0538() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0540");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0538");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1611,9 +1558,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0541() throws Throwable {
+    public void test0539() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0541");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0539");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -1643,9 +1590,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0542() throws Throwable {
+    public void test0540() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0542");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0540");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -1666,9 +1613,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0543() throws Throwable {
+    public void test0541() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0543");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0541");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -1698,9 +1645,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0544() throws Throwable {
+    public void test0542() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0544");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0542");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -1722,9 +1669,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0545() throws Throwable {
+    public void test0543() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0545");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0543");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1755,9 +1702,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0546() throws Throwable {
+    public void test0544() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0546");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0544");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -1804,9 +1751,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0547() throws Throwable {
+    public void test0545() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0547");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0545");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -1868,9 +1815,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0548() throws Throwable {
+    public void test0546() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0548");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0546");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -1890,9 +1837,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0549() throws Throwable {
+    public void test0547() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0549");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0547");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -1924,9 +1871,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0550() throws Throwable {
+    public void test0548() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0550");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0548");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -1975,9 +1922,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0551() throws Throwable {
+    public void test0549() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0551");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0549");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2002,9 +1949,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0552() throws Throwable {
+    public void test0550() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0552");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0550");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -2032,9 +1979,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0553() throws Throwable {
+    public void test0551() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0553");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0551");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2063,9 +2010,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0554() throws Throwable {
+    public void test0552() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0554");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0552");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2095,9 +2042,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0555() throws Throwable {
+    public void test0553() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0555");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0553");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2123,9 +2070,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0556() throws Throwable {
+    public void test0554() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0556");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0554");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2151,9 +2098,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0557() throws Throwable {
+    public void test0555() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0557");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0555");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -2181,9 +2128,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0558() throws Throwable {
+    public void test0556() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0558");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0556");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2215,9 +2162,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0559() throws Throwable {
+    public void test0557() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0559");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0557");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -2282,9 +2229,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0560() throws Throwable {
+    public void test0558() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0560");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0558");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -2339,9 +2286,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0561() throws Throwable {
+    public void test0559() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0561");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0559");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2365,9 +2312,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0562() throws Throwable {
+    public void test0560() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0562");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0560");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2386,9 +2333,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0563() throws Throwable {
+    public void test0561() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0563");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0561");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -2434,9 +2381,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0564() throws Throwable {
+    public void test0562() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0564");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0562");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -2453,9 +2400,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0565() throws Throwable {
+    public void test0563() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0565");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0563");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem7 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int9 = xYIntervalDataItem7.compareTo((java.lang.Object) 1.0f);
         double double10 = xYIntervalDataItem7.getXHighValue();
@@ -2501,9 +2448,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0566() throws Throwable {
+    public void test0564() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0566");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0564");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2577,9 +2524,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0567() throws Throwable {
+    public void test0565() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0567");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0565");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -2643,9 +2590,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0568() throws Throwable {
+    public void test0566() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0568");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0566");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2720,9 +2667,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0569() throws Throwable {
+    public void test0567() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0569");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0567");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2794,9 +2741,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0570() throws Throwable {
+    public void test0568() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0570");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0568");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2820,9 +2767,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0571() throws Throwable {
+    public void test0569() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0571");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0569");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -2850,9 +2797,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0572() throws Throwable {
+    public void test0570() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0572");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0570");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2876,9 +2823,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0573() throws Throwable {
+    public void test0571() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0573");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0571");
         org.jfree.data.function.Function2D function2D0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -2890,9 +2837,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0574() throws Throwable {
+    public void test0572() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0574");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0572");
         org.jfree.data.category.CategoryDataset categoryDataset0 = null;
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
@@ -2954,9 +2901,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0575() throws Throwable {
+    public void test0573() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0575");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0573");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -2975,9 +2922,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0576() throws Throwable {
+    public void test0574() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0576");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0574");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3021,9 +2968,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0577() throws Throwable {
+    public void test0575() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0577");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0575");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -3092,9 +3039,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0578() throws Throwable {
+    public void test0576() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0578");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0576");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -3123,9 +3070,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0579() throws Throwable {
+    public void test0577() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0579");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0577");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3151,9 +3098,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0580() throws Throwable {
+    public void test0578() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0580");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0578");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3177,9 +3124,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0581() throws Throwable {
+    public void test0579() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0581");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0579");
         org.jfree.data.function.Function2D function2D0 = null;
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem10 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int12 = xYIntervalDataItem10.compareTo((java.lang.Object) 1.0f);
@@ -3207,9 +3154,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0582() throws Throwable {
+    public void test0580() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0582");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0580");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3253,9 +3200,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0583() throws Throwable {
+    public void test0581() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0583");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0581");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -3310,9 +3257,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0584() throws Throwable {
+    public void test0582() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0584");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0582");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -3361,9 +3308,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0585() throws Throwable {
+    public void test0583() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0585");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0583");
         org.jfree.data.function.Function2D function2D0 = null;
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem10 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int12 = xYIntervalDataItem10.compareTo((java.lang.Object) 1.0f);
@@ -3382,9 +3329,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0586() throws Throwable {
+    public void test0584() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0586");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0584");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -3433,9 +3380,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0587() throws Throwable {
+    public void test0585() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0587");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0585");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3474,9 +3421,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0588() throws Throwable {
+    public void test0586() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0588");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0586");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -3513,9 +3460,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0589() throws Throwable {
+    public void test0587() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0589");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0587");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3545,9 +3492,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0590() throws Throwable {
+    public void test0588() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0590");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0588");
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
@@ -3575,9 +3522,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0591() throws Throwable {
+    public void test0589() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0591");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0589");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3613,9 +3560,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0592() throws Throwable {
+    public void test0590() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0592");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0590");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -3631,9 +3578,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0593() throws Throwable {
+    public void test0591() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0593");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0591");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3677,9 +3624,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0594() throws Throwable {
+    public void test0592() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0594");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0592");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -3718,9 +3665,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0595() throws Throwable {
+    public void test0593() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0595");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0593");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -3764,9 +3711,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0596() throws Throwable {
+    public void test0594() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0596");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0594");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -3831,9 +3778,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0597() throws Throwable {
+    public void test0595() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0597");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0595");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3857,9 +3804,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0598() throws Throwable {
+    public void test0596() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0598");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0596");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -3917,9 +3864,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0599() throws Throwable {
+    public void test0597() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0599");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0597");
         org.jfree.data.ComparableObjectSeries comparableObjectSeries3 = new org.jfree.data.ComparableObjectSeries((java.lang.Comparable) 2, false, false);
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection4 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder5 = xYIntervalSeriesCollection4.getDomainOrder();
@@ -3944,7 +3891,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             comparableObjectSeries3.removeChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection4);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@29b676ff is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@573afe6e is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -3964,9 +3911,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0600() throws Throwable {
+    public void test0598() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0600");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0598");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -3978,9 +3925,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0601() throws Throwable {
+    public void test0599() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0601");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0599");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -4009,9 +3956,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0602() throws Throwable {
+    public void test0600() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0602");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0600");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -4037,9 +3984,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0603() throws Throwable {
+    public void test0601() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0603");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0601");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4113,9 +4060,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0604() throws Throwable {
+    public void test0602() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0604");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0602");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4148,9 +4095,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0605() throws Throwable {
+    public void test0603() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0605");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0603");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -4214,9 +4161,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0606() throws Throwable {
+    public void test0604() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0606");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0604");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4235,9 +4182,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0607() throws Throwable {
+    public void test0605() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0607");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0605");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -4270,9 +4217,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0608() throws Throwable {
+    public void test0606() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0608");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0606");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4333,9 +4280,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0609() throws Throwable {
+    public void test0607() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0609");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0607");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -4371,9 +4318,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0610() throws Throwable {
+    public void test0608() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0610");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0608");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -4412,9 +4359,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0611() throws Throwable {
+    public void test0609() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0611");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0609");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4453,9 +4400,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0612() throws Throwable {
+    public void test0610() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0612");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0610");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4479,9 +4426,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0613() throws Throwable {
+    public void test0611() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0613");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0611");
         double[] doubleArray9 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray10 = new double[][] { doubleArray9 };
         org.jfree.data.category.CategoryDataset categoryDataset11 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray10);
@@ -4507,9 +4454,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0614() throws Throwable {
+    public void test0612() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0614");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0612");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4536,9 +4483,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0615() throws Throwable {
+    public void test0613() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0615");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0613");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4570,9 +4517,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0616() throws Throwable {
+    public void test0614() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0616");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0614");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -4584,9 +4531,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0617() throws Throwable {
+    public void test0615() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0617");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0615");
         org.jfree.data.xy.XYInterval xYInterval5 = new org.jfree.data.xy.XYInterval((double) (byte) 10, (double) 'a', (double) (-1L), (double) (byte) 100, (double) 100);
         double double6 = xYInterval5.getXLow();
         double double7 = xYInterval5.getXHigh();
@@ -4619,9 +4566,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0618() throws Throwable {
+    public void test0616() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0618");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0616");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4681,9 +4628,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0619() throws Throwable {
+    public void test0617() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0619");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0617");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -4713,9 +4660,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0620() throws Throwable {
+    public void test0618() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0620");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0618");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -4756,9 +4703,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0621() throws Throwable {
+    public void test0619() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0621");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0619");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -4789,9 +4736,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0622() throws Throwable {
+    public void test0620() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0622");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0620");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -4815,9 +4762,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0623() throws Throwable {
+    public void test0621() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0623");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0621");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -4829,9 +4776,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0624() throws Throwable {
+    public void test0622() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0624");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0622");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -4849,9 +4796,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0625() throws Throwable {
+    public void test0623() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0625");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0623");
         double[] doubleArray9 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray10 = new double[][] { doubleArray9 };
         org.jfree.data.category.CategoryDataset categoryDataset11 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray10);
@@ -4870,9 +4817,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0626() throws Throwable {
+    public void test0624() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0626");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0624");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -4906,9 +4853,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0627() throws Throwable {
+    public void test0625() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0627");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0625");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -4952,9 +4899,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0628() throws Throwable {
+    public void test0626() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0628");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0626");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -5014,9 +4961,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0629() throws Throwable {
+    public void test0627() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0629");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0627");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -5054,9 +5001,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0630() throws Throwable {
+    public void test0628() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0630");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0628");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -5080,9 +5027,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0631() throws Throwable {
+    public void test0629() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0631");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0629");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -5116,9 +5063,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0632() throws Throwable {
+    public void test0630() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0632");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0630");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -5140,9 +5087,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0633() throws Throwable {
+    public void test0631() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0633");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0631");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -5166,9 +5113,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0634() throws Throwable {
+    public void test0632() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0634");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0632");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -5201,9 +5148,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0635() throws Throwable {
+    public void test0633() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0635");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0633");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -5269,9 +5216,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0636() throws Throwable {
+    public void test0634() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0636");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0634");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -5307,9 +5254,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0637() throws Throwable {
+    public void test0635() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0637");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0635");
         org.jfree.data.function.Function2D function2D0 = null;
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem10 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int12 = xYIntervalDataItem10.compareTo((java.lang.Object) 1.0f);
@@ -5340,9 +5287,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0638() throws Throwable {
+    public void test0636() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0638");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0636");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -5424,9 +5371,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0639() throws Throwable {
+    public void test0637() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0639");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0637");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -5438,9 +5385,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0640() throws Throwable {
+    public void test0638() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0640");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0638");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -5496,9 +5443,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0641() throws Throwable {
+    public void test0639() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0641");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0639");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -5533,9 +5480,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0642() throws Throwable {
+    public void test0640() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0642");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0640");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -5607,9 +5554,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0643() throws Throwable {
+    public void test0641() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0643");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0641");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -5671,9 +5618,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0644() throws Throwable {
+    public void test0642() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0644");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0642");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -5701,9 +5648,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0645() throws Throwable {
+    public void test0643() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0645");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0643");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -5743,9 +5690,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0646() throws Throwable {
+    public void test0644() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0646");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0644");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -5779,9 +5726,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0647() throws Throwable {
+    public void test0645() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0647");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0645");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -5803,9 +5750,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0648() throws Throwable {
+    public void test0646() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0648");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0646");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -5829,9 +5776,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0649() throws Throwable {
+    public void test0647() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0649");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0647");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -5905,9 +5852,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0650() throws Throwable {
+    public void test0648() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0650");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0648");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         org.jfree.data.Range range3 = org.jfree.data.general.DatasetUtilities.findDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -5923,9 +5870,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0651() throws Throwable {
+    public void test0649() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0651");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0649");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -5959,9 +5906,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0652() throws Throwable {
+    public void test0650() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0652");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0650");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -6013,9 +5960,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0653() throws Throwable {
+    public void test0651() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0653");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0651");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -6070,9 +6017,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0654() throws Throwable {
+    public void test0652() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0654");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0652");
         java.lang.Number[][] numberArray2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -6084,9 +6031,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0655() throws Throwable {
+    public void test0653() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0655");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0653");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -6122,9 +6069,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0656() throws Throwable {
+    public void test0654() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0656");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0654");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -6163,9 +6110,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0657() throws Throwable {
+    public void test0655() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0657");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0655");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -6195,9 +6142,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0658() throws Throwable {
+    public void test0656() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0658");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0656");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6217,9 +6164,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0659() throws Throwable {
+    public void test0657() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0659");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0657");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -6262,9 +6209,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0660() throws Throwable {
+    public void test0658() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0660");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0658");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6292,9 +6239,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0661() throws Throwable {
+    public void test0659() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0661");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0659");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6313,9 +6260,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0662() throws Throwable {
+    public void test0660() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0662");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0660");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -6354,9 +6301,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0663() throws Throwable {
+    public void test0661() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0663");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0661");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -6399,9 +6346,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0664() throws Throwable {
+    public void test0662() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0664");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0662");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -6423,9 +6370,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0665() throws Throwable {
+    public void test0663() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0665");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0663");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.DomainOrder domainOrder2 = xYIntervalSeriesCollection0.getDomainOrder();
@@ -6440,9 +6387,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0666() throws Throwable {
+    public void test0664() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0666");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0664");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -6454,9 +6401,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0667() throws Throwable {
+    public void test0665() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0667");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0665");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -6485,9 +6432,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0668() throws Throwable {
+    public void test0666() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0668");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0666");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -6550,9 +6497,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0669() throws Throwable {
+    public void test0667() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0669");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0667");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -6574,9 +6521,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0670() throws Throwable {
+    public void test0668() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0670");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0668");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6600,9 +6547,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0671() throws Throwable {
+    public void test0669() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0671");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0669");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6619,9 +6566,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0672() throws Throwable {
+    public void test0670() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0672");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0670");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -6633,9 +6580,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0673() throws Throwable {
+    public void test0671() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0673");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0671");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6676,9 +6623,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0674() throws Throwable {
+    public void test0672() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0674");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0672");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         xYIntervalSeries3.setMaximumItemCount((int) (short) 1);
         boolean boolean6 = xYIntervalSeries3.getAllowDuplicateXValues();
@@ -6714,9 +6661,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0675() throws Throwable {
+    public void test0673() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0675");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0673");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries1 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) "");
         xYIntervalSeries1.add((double) (byte) 10, (double) 1L, (double) (-1), (double) (-1), 1.0d, (double) (byte) 1);
         java.beans.PropertyChangeListener propertyChangeListener9 = null;
@@ -6736,9 +6683,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0676() throws Throwable {
+    public void test0674() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0676");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0674");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -6775,9 +6722,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0677() throws Throwable {
+    public void test0675() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0677");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0675");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -6813,9 +6760,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0678() throws Throwable {
+    public void test0676() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0678");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0676");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6846,9 +6793,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0679() throws Throwable {
+    public void test0677() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0679");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0677");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -6882,9 +6829,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0680() throws Throwable {
+    public void test0678() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0680");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0678");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6910,9 +6857,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0681() throws Throwable {
+    public void test0679() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0681");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0679");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -6941,9 +6888,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0682() throws Throwable {
+    public void test0680() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0682");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0680");
         double[] doubleArray9 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray10 = new double[][] { doubleArray9 };
         org.jfree.data.category.CategoryDataset categoryDataset11 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray10);
@@ -6966,9 +6913,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0683() throws Throwable {
+    public void test0681() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0683");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0681");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -7004,9 +6951,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0684() throws Throwable {
+    public void test0682() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0684");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0682");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -7037,7 +6984,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries51);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@794a669c is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@412ba6d9 is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -7067,9 +7014,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0685() throws Throwable {
+    public void test0683() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0685");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0683");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -7117,9 +7064,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0686() throws Throwable {
+    public void test0684() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0686");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0684");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -7145,9 +7092,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0687() throws Throwable {
+    public void test0685() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0687");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0685");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         xYIntervalSeries3.setMaximumItemCount((int) ' ');
         xYIntervalSeries3.setDescription("");
@@ -7205,9 +7152,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0688() throws Throwable {
+    public void test0686() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0688");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0686");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -7241,9 +7188,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0689() throws Throwable {
+    public void test0687() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0689");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0687");
         double[][] doubleArray2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -7255,9 +7202,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0690() throws Throwable {
+    public void test0688() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0690");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0688");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -7290,9 +7237,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0691() throws Throwable {
+    public void test0689() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0691");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0689");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -7344,9 +7291,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0692() throws Throwable {
+    public void test0690() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0692");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0690");
         org.jfree.data.function.Function2D function2D0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -7358,9 +7305,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0693() throws Throwable {
+    public void test0691() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0693");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0691");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -7394,9 +7341,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0694() throws Throwable {
+    public void test0692() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0694");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0692");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, false);
         org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState3 = xYIntervalSeriesCollection0.getSelectionState();
@@ -7412,9 +7359,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0695() throws Throwable {
+    public void test0693() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0695");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0693");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -7444,9 +7391,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0696() throws Throwable {
+    public void test0694() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0696");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0694");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) 1, 93.0d, 0.0d, 67.0d, (double) 2, (-1.0d));
         double double7 = xYIntervalDataItem6.getXLowValue();
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection8 = new org.jfree.data.xy.XYIntervalSeriesCollection();
@@ -7462,9 +7409,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0697() throws Throwable {
+    public void test0695() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0697");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0695");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         xYIntervalSeries3.clear();
         int int5 = xYIntervalSeries3.getMaximumItemCount();
@@ -7497,9 +7444,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0698() throws Throwable {
+    public void test0696() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0698");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0696");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -7523,9 +7470,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0699() throws Throwable {
+    public void test0697() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0699");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0697");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -7561,9 +7508,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0700() throws Throwable {
+    public void test0698() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0700");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0698");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -7578,9 +7525,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0701() throws Throwable {
+    public void test0699() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0701");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0699");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -7669,9 +7616,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0702() throws Throwable {
+    public void test0700() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0702");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0700");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -7698,9 +7645,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0703() throws Throwable {
+    public void test0701() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0703");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0701");
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
@@ -7724,9 +7671,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0704() throws Throwable {
+    public void test0702() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0704");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0702");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -7752,9 +7699,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0705() throws Throwable {
+    public void test0703() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0705");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0703");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -7826,9 +7773,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0706() throws Throwable {
+    public void test0704() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0706");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0704");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -7871,9 +7818,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0707() throws Throwable {
+    public void test0705() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0707");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0705");
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
@@ -7901,9 +7848,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0708() throws Throwable {
+    public void test0706() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0708");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0706");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -7993,9 +7940,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0709() throws Throwable {
+    public void test0707() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0709");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0707");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8030,9 +7977,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0710() throws Throwable {
+    public void test0708() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0710");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0708");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8056,9 +8003,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0711() throws Throwable {
+    public void test0709() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0711");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0709");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8082,9 +8029,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0712() throws Throwable {
+    public void test0710() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0712");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0710");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -8117,9 +8064,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0713() throws Throwable {
+    public void test0711() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0713");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0711");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -8153,9 +8100,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0714() throws Throwable {
+    public void test0712() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0714");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0712");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8197,9 +8144,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0715() throws Throwable {
+    public void test0713() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0715");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0713");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -8221,9 +8168,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0716() throws Throwable {
+    public void test0714() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0716");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0714");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8253,9 +8200,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0717() throws Throwable {
+    public void test0715() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0717");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0715");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -8306,9 +8253,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0718() throws Throwable {
+    public void test0716() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0718");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0716");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8340,9 +8287,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0719() throws Throwable {
+    public void test0717() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0719");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0717");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8373,9 +8320,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0720() throws Throwable {
+    public void test0718() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0720");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0718");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8404,9 +8351,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0721() throws Throwable {
+    public void test0719() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0721");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0719");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -8446,9 +8393,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0722() throws Throwable {
+    public void test0720() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0722");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0720");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -8521,9 +8468,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0723() throws Throwable {
+    public void test0721() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0723");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0721");
         org.jfree.data.general.DatasetGroup datasetGroup1 = new org.jfree.data.general.DatasetGroup("Range[100.0,100.0]");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection2 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder3 = xYIntervalSeriesCollection2.getDomainOrder();
@@ -8587,9 +8534,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0724() throws Throwable {
+    public void test0722() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0724");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0722");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -8625,9 +8572,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0725() throws Throwable {
+    public void test0723() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0725");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0723");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -8659,9 +8606,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0726() throws Throwable {
+    public void test0724() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0726");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0724");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -8713,9 +8660,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0727() throws Throwable {
+    public void test0725() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0727");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0725");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection1 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset3 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo4 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8742,9 +8689,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0728() throws Throwable {
+    public void test0726() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0728");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0726");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8796,9 +8743,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0729() throws Throwable {
+    public void test0727() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0729");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0727");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -8829,9 +8776,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0730() throws Throwable {
+    public void test0728() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0730");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0728");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -8895,9 +8842,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0731() throws Throwable {
+    public void test0729() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0731");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0729");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem(100.0d, (double) (byte) 1, (double) (byte) 1, 0.0d, 0.0d, 33.0d);
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem15 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int17 = xYIntervalDataItem15.compareTo((java.lang.Object) 1.0f);
@@ -8936,9 +8883,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0732() throws Throwable {
+    public void test0730() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0732");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0730");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -8977,9 +8924,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0733() throws Throwable {
+    public void test0731() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0733");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0731");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -9025,9 +8972,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0734() throws Throwable {
+    public void test0732() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0734");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0732");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         int int2 = xYIntervalSeriesCollection0.getSeriesCount();
@@ -9042,9 +8989,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0735() throws Throwable {
+    public void test0733() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0735");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0733");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -9077,9 +9024,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0736() throws Throwable {
+    public void test0734() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0736");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0734");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9109,9 +9056,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0737() throws Throwable {
+    public void test0735() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0737");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0735");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9155,9 +9102,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0738() throws Throwable {
+    public void test0736() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0738");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0736");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9193,9 +9140,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0739() throws Throwable {
+    public void test0737() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0739");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0737");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -9237,9 +9184,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0740() throws Throwable {
+    public void test0738() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0740");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0738");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Number number3 = org.jfree.data.general.DatasetUtilities.findMaximumRangeValue((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -9255,9 +9202,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0741() throws Throwable {
+    public void test0739() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0741");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0739");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9296,9 +9243,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0742() throws Throwable {
+    public void test0740() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0742");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0740");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         boolean boolean10 = xYIntervalDataItem6.equals((java.lang.Object) 32);
@@ -9354,9 +9301,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0743() throws Throwable {
+    public void test0741() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0743");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0741");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9404,9 +9351,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0744() throws Throwable {
+    public void test0742() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0744");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0742");
         java.lang.Comparable[] comparableArray1 = new java.lang.Comparable[] { 200.0d };
         java.lang.Comparable[] comparableArray2 = new java.lang.Comparable[] {};
         double[] doubleArray10 = new double[] { 1.0d, (byte) -1, 1.0d };
@@ -9430,9 +9377,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0745() throws Throwable {
+    public void test0743() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0745");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0743");
         org.jfree.data.xy.XYInterval xYInterval5 = new org.jfree.data.xy.XYInterval(0.0d, (double) 1.0f, (double) (-1), (double) '#', (double) 100L);
         double double6 = xYInterval5.getYHigh();
         double double7 = xYInterval5.getYLow();
@@ -9465,9 +9412,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0746() throws Throwable {
+    public void test0744() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0746");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0744");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -9512,9 +9459,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0747() throws Throwable {
+    public void test0745() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0747");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0745");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -9555,9 +9502,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0748() throws Throwable {
+    public void test0746() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0748");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0746");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -9590,9 +9537,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0749() throws Throwable {
+    public void test0747() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0749");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0747");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -9645,9 +9592,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0750() throws Throwable {
+    public void test0748() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0750");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0748");
         org.jfree.data.function.Function2D function2D0 = null;
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem10 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int12 = xYIntervalDataItem10.compareTo((java.lang.Object) 1.0f);
@@ -9662,9 +9609,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0751() throws Throwable {
+    public void test0749() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0751");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0749");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -9684,9 +9631,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0752() throws Throwable {
+    public void test0750() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0752");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0750");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -9749,9 +9696,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0753() throws Throwable {
+    public void test0751() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0753");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0751");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9781,9 +9728,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0754() throws Throwable {
+    public void test0752() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0754");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0752");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9810,9 +9757,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0755() throws Throwable {
+    public void test0753() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0755");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0753");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9841,9 +9788,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0756() throws Throwable {
+    public void test0754() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0756");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0754");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -9864,9 +9811,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0757() throws Throwable {
+    public void test0755() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0757");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0755");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -9904,9 +9851,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0758() throws Throwable {
+    public void test0756() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0758");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0756");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -9945,9 +9892,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0759() throws Throwable {
+    public void test0757() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0759");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0757");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -9975,9 +9922,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0760() throws Throwable {
+    public void test0758() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0760");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0758");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10023,9 +9970,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0761() throws Throwable {
+    public void test0759() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0761");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0759");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10046,9 +9993,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0762() throws Throwable {
+    public void test0760() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0762");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0760");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -10080,9 +10027,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0763() throws Throwable {
+    public void test0761() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0763");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0761");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10130,7 +10077,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries69);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@50018b88 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@4a74ec8a is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -10163,9 +10110,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0764() throws Throwable {
+    public void test0762() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0764");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0762");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -10223,9 +10170,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0765() throws Throwable {
+    public void test0763() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0765");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0763");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10250,9 +10197,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0766() throws Throwable {
+    public void test0764() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0766");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0764");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -10284,9 +10231,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0767() throws Throwable {
+    public void test0765() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0767");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0765");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -10328,9 +10275,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0768() throws Throwable {
+    public void test0766() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0768");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0766");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10404,9 +10351,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0769() throws Throwable {
+    public void test0767() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0769");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0767");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10469,9 +10416,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0770() throws Throwable {
+    public void test0768() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0770");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0768");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10550,9 +10497,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0771() throws Throwable {
+    public void test0769() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0771");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0769");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10583,9 +10530,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0772() throws Throwable {
+    public void test0770() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0772");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0770");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10611,9 +10558,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0773() throws Throwable {
+    public void test0771() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0773");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0771");
         org.jfree.data.general.DatasetGroup datasetGroup1 = new org.jfree.data.general.DatasetGroup("Range[100.0,100.0]");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection2 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder3 = xYIntervalSeriesCollection2.getDomainOrder();
@@ -10676,9 +10623,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0774() throws Throwable {
+    public void test0772() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0774");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0772");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -10708,9 +10655,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0775() throws Throwable {
+    public void test0773() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0775");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0773");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -10736,9 +10683,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0776() throws Throwable {
+    public void test0774() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0776");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0774");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -10772,9 +10719,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0777() throws Throwable {
+    public void test0775() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0777");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0775");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -10812,9 +10759,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0778() throws Throwable {
+    public void test0776() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0778");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0776");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -10844,9 +10791,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0779() throws Throwable {
+    public void test0777() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0779");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0777");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -10872,9 +10819,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0780() throws Throwable {
+    public void test0778() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0780");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0778");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -10930,9 +10877,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0781() throws Throwable {
+    public void test0779() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0781");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0779");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         xYIntervalSeries3.add((double) '4', (double) 1, 0.0d, (double) 10L, (double) (short) 1, (-1.0d));
         xYIntervalSeries3.setMaximumItemCount(100);
@@ -10943,7 +10890,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeries3.removeChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection22);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@7dbf8b66 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@261cb029 is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -10951,9 +10898,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0782() throws Throwable {
+    public void test0780() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0782");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0780");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -11005,9 +10952,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0783() throws Throwable {
+    public void test0781() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0783");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0781");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -11031,9 +10978,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0784() throws Throwable {
+    public void test0782() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0784");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0782");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -11078,9 +11025,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0785() throws Throwable {
+    public void test0783() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0785");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0783");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -11121,9 +11068,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0786() throws Throwable {
+    public void test0784() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0786");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0784");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -11185,9 +11132,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0787() throws Throwable {
+    public void test0785() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0787");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0785");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -11226,9 +11173,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0788() throws Throwable {
+    public void test0786() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0788");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0786");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -11290,9 +11237,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0789() throws Throwable {
+    public void test0787() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0789");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0787");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -11322,9 +11269,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0790() throws Throwable {
+    public void test0788() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0790");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0788");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -11367,9 +11314,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0791() throws Throwable {
+    public void test0789() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0791");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0789");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -11391,9 +11338,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0792() throws Throwable {
+    public void test0790() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0792");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0790");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -11421,9 +11368,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0793() throws Throwable {
+    public void test0791() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0793");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0791");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -11441,7 +11388,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries19);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@154a6831 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@7d02232b is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -11458,9 +11405,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0794() throws Throwable {
+    public void test0792() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0794");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0792");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -11486,9 +11433,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0795() throws Throwable {
+    public void test0793() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0795");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0793");
         org.jfree.data.Range range0 = null;
         org.jfree.data.Range range2 = org.jfree.data.Range.expandToInclude(range0, (double) 100);
         double double4 = range2.constrain((double) '4');
@@ -11531,9 +11478,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0796() throws Throwable {
+    public void test0794() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0796");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0794");
         double[] doubleArray11 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray12 = new double[][] { doubleArray11 };
         org.jfree.data.category.CategoryDataset categoryDataset13 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray12);
@@ -11550,9 +11497,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0797() throws Throwable {
+    public void test0795() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0797");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0795");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -11589,9 +11536,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0798() throws Throwable {
+    public void test0796() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0798");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0796");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -11646,9 +11593,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0799() throws Throwable {
+    public void test0797() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0799");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0797");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -11681,9 +11628,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0800() throws Throwable {
+    public void test0798() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0800");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0798");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -11711,9 +11658,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0801() throws Throwable {
+    public void test0799() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0801");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0799");
         org.jfree.data.ComparableObjectSeries comparableObjectSeries3 = new org.jfree.data.ComparableObjectSeries((java.lang.Comparable) (short) 0, false, true);
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem10 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int12 = xYIntervalDataItem10.compareTo((java.lang.Object) 1.0f);
@@ -11753,9 +11700,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0802() throws Throwable {
+    public void test0800() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0802");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0800");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -11779,9 +11726,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0803() throws Throwable {
+    public void test0801() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0803");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0801");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -11835,9 +11782,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0804() throws Throwable {
+    public void test0802() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0804");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0802");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -11868,9 +11815,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0805() throws Throwable {
+    public void test0803() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0805");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0803");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries4 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj6 = null;
         xYIntervalSeries4.firePropertyChange("", obj6, (java.lang.Object) "hi!");
@@ -11909,9 +11856,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0806() throws Throwable {
+    public void test0804() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0806");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0804");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -11952,9 +11899,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0807() throws Throwable {
+    public void test0805() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0807");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0805");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -11985,9 +11932,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0808() throws Throwable {
+    public void test0806() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0808");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0806");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -12030,9 +11977,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0809() throws Throwable {
+    public void test0807() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0809");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0807");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -12058,9 +12005,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0810() throws Throwable {
+    public void test0808() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0810");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0808");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -12129,9 +12076,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0811() throws Throwable {
+    public void test0809() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0811");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0809");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -12186,9 +12133,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0812() throws Throwable {
+    public void test0810() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0812");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0810");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -12228,9 +12175,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0813() throws Throwable {
+    public void test0811() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0813");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0811");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -12257,62 +12204,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0814() throws Throwable {
+    public void test0812() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0814");
-        org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
-        int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
-        double double9 = xYIntervalDataItem6.getXHighValue();
-        org.jfree.data.Range range10 = null;
-        org.jfree.data.Range range12 = org.jfree.data.Range.expandToInclude(range10, (double) 100);
-        double double14 = range12.constrain((double) '4');
-        boolean boolean15 = xYIntervalDataItem6.equals((java.lang.Object) '4');
-        org.jfree.data.Range range16 = null;
-        org.jfree.data.Range range18 = org.jfree.data.Range.expandToInclude(range16, (double) 100);
-        double double20 = range18.constrain((double) '4');
-        int int21 = xYIntervalDataItem6.compareTo((java.lang.Object) '4');
-        java.lang.Number[] numberArray28 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray31 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray34 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray37 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray40 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray43 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[][] numberArray44 = new java.lang.Number[][] { numberArray28, numberArray31, numberArray34, numberArray37, numberArray40, numberArray43 };
-        org.jfree.data.category.CategoryDataset categoryDataset45 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray44);
-        org.jfree.data.category.CategoryDataset categoryDataset46 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "hi!", numberArray44);
-        int int47 = xYIntervalDataItem6.compareTo((java.lang.Object) categoryDataset46);
-        org.jfree.data.event.DatasetChangeListener datasetChangeListener48 = null;
-        categoryDataset46.removeChangeListener(datasetChangeListener48);
-        int int50 = categoryDataset46.getColumnCount();
-        int int52 = categoryDataset46.getColumnIndex((java.lang.Comparable) 10);
-        org.jfree.data.Range range53 = org.jfree.data.general.DatasetUtilities.findCumulativeRangeBounds(categoryDataset46);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 1 + "'", int8 == 1);
-        org.junit.Assert.assertTrue("'" + double9 + "' != '" + 100.0d + "'", double9 == 100.0d);
-        org.junit.Assert.assertNotNull(range12);
-        org.junit.Assert.assertTrue("'" + double14 + "' != '" + 100.0d + "'", double14 == 100.0d);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(range18);
-        org.junit.Assert.assertTrue("'" + double20 + "' != '" + 100.0d + "'", double20 == 100.0d);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 1 + "'", int21 == 1);
-        org.junit.Assert.assertNotNull(numberArray28);
-        org.junit.Assert.assertNotNull(numberArray31);
-        org.junit.Assert.assertNotNull(numberArray34);
-        org.junit.Assert.assertNotNull(numberArray37);
-        org.junit.Assert.assertNotNull(numberArray40);
-        org.junit.Assert.assertNotNull(numberArray43);
-        org.junit.Assert.assertNotNull(numberArray44);
-        org.junit.Assert.assertNotNull(categoryDataset45);
-        org.junit.Assert.assertNotNull(categoryDataset46);
-        org.junit.Assert.assertTrue("'" + int47 + "' != '" + 1 + "'", int47 == 1);
-        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 2 + "'", int50 == 2);
-        org.junit.Assert.assertTrue("'" + int52 + "' != '" + (-1) + "'", int52 == (-1));
-        org.junit.Assert.assertNotNull(range53);
-    }
-
-    @Test
-    public void test0815() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0815");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0812");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -12340,9 +12234,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0816() throws Throwable {
+    public void test0813() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0816");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0813");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -12393,9 +12287,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0817() throws Throwable {
+    public void test0814() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0817");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0814");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -12419,9 +12313,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0818() throws Throwable {
+    public void test0815() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0818");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0815");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -12459,9 +12353,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0819() throws Throwable {
+    public void test0816() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0819");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0816");
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
@@ -12485,9 +12379,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0820() throws Throwable {
+    public void test0817() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0820");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0817");
         org.jfree.data.ComparableObjectSeries comparableObjectSeries3 = new org.jfree.data.ComparableObjectSeries((java.lang.Comparable) 0L, true, true);
         comparableObjectSeries3.fireSeriesChanged();
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
@@ -12520,9 +12414,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0821() throws Throwable {
+    public void test0818() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0821");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0818");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -12588,9 +12482,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0822() throws Throwable {
+    public void test0819() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0822");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0819");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -12615,9 +12509,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0823() throws Throwable {
+    public void test0820() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0823");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0820");
         org.jfree.data.ComparableObjectSeries comparableObjectSeries1 = new org.jfree.data.ComparableObjectSeries((java.lang.Comparable) (byte) 0);
         java.lang.Object obj2 = comparableObjectSeries1.clone();
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection3 = new org.jfree.data.xy.XYIntervalSeriesCollection();
@@ -12637,7 +12531,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             comparableObjectSeries1.removeChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection3);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@495a1f04 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@2688862c is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -12650,9 +12544,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0824() throws Throwable {
+    public void test0821() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0824");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0821");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -12717,9 +12611,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0825() throws Throwable {
+    public void test0822() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0825");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0822");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -12765,9 +12659,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0826() throws Throwable {
+    public void test0823() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0826");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0823");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -12847,9 +12741,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0827() throws Throwable {
+    public void test0824() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0827");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0824");
         org.jfree.data.xy.XYDataset xYDataset0 = null;
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
@@ -12927,18 +12821,18 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0828() throws Throwable {
+    public void test0825() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0828");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0825");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         java.lang.Number number1 = org.jfree.data.general.DatasetUtilities.findMaximumRangeValue((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
         org.junit.Assert.assertNull(number1);
     }
 
     @Test
-    public void test0829() throws Throwable {
+    public void test0826() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0829");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0826");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         int int2 = xYIntervalSeriesCollection0.getSeriesCount();
@@ -12978,9 +12872,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0830() throws Throwable {
+    public void test0827() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0830");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0827");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -13025,9 +12919,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0831() throws Throwable {
+    public void test0828() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0831");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0828");
         org.jfree.data.function.Function2D function2D0 = null;
         java.lang.Comparable comparable4 = null;
         // The following exception was thrown during execution in test generation
@@ -13040,9 +12934,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0832() throws Throwable {
+    public void test0829() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0832");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0829");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -13080,7 +12974,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Number number79 = pieDataset28.getValue((java.lang.Comparable) xYIntervalDataItem71);
-            org.junit.Assert.fail("Expected exception of type org.jfree.data.UnknownKeyException; message: The key (org.jfree.data.xy.XYIntervalDataItem@c5878ffb) is not recognised.");
+            org.junit.Assert.fail("Expected exception of type org.jfree.data.UnknownKeyException; message: The key (org.jfree.data.xy.XYIntervalDataItem@e3c13851) is not recognised.");
         } catch (org.jfree.data.UnknownKeyException e) {
         // Expected exception.
         }
@@ -13114,9 +13008,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0833() throws Throwable {
+    public void test0830() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0833");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0830");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13140,9 +13034,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0834() throws Throwable {
+    public void test0831() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0834");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0831");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -13186,9 +13080,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0835() throws Throwable {
+    public void test0832() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0835");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0832");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13212,9 +13106,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0836() throws Throwable {
+    public void test0833() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0836");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0833");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -13267,9 +13161,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0837() throws Throwable {
+    public void test0834() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0837");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0834");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -13282,9 +13176,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0838() throws Throwable {
+    public void test0835() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0838");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0835");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13308,9 +13202,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0839() throws Throwable {
+    public void test0836() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0839");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0836");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -13338,9 +13232,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0840() throws Throwable {
+    public void test0837() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0840");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0837");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -13362,9 +13256,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0841() throws Throwable {
+    public void test0838() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0841");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0838");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -13402,9 +13296,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0842() throws Throwable {
+    public void test0839() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0842");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0839");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -13458,9 +13352,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0843() throws Throwable {
+    public void test0840() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0843");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0840");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -13507,9 +13401,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0844() throws Throwable {
+    public void test0841() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0844");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0841");
         org.jfree.data.ComparableObjectSeries comparableObjectSeries3 = new org.jfree.data.ComparableObjectSeries((java.lang.Comparable) 0L, true, true);
         comparableObjectSeries3.fireSeriesChanged();
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
@@ -13580,9 +13474,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0845() throws Throwable {
+    public void test0842() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0845");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0842");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13601,9 +13495,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0846() throws Throwable {
+    public void test0843() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0846");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0843");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13651,9 +13545,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0847() throws Throwable {
+    public void test0844() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0847");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0844");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13704,9 +13598,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0848() throws Throwable {
+    public void test0845() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0848");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0845");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -13744,9 +13638,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0849() throws Throwable {
+    public void test0846() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0849");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0846");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13795,9 +13689,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0850() throws Throwable {
+    public void test0847() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0850");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0847");
         double[] doubleArray9 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray10 = new double[][] { doubleArray9 };
         org.jfree.data.category.CategoryDataset categoryDataset11 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray10);
@@ -13812,9 +13706,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0851() throws Throwable {
+    public void test0848() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0851");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0848");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13862,9 +13756,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0852() throws Throwable {
+    public void test0849() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0852");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0849");
         org.jfree.data.general.DatasetGroup datasetGroup1 = new org.jfree.data.general.DatasetGroup("hi!1");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
@@ -13895,9 +13789,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0853() throws Throwable {
+    public void test0850() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0853");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0850");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -13921,9 +13815,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0854() throws Throwable {
+    public void test0851() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0854");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0851");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -13950,9 +13844,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0855() throws Throwable {
+    public void test0852() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0855");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0852");
         double[] doubleArray9 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray10 = new double[][] { doubleArray9 };
         org.jfree.data.category.CategoryDataset categoryDataset11 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray10);
@@ -13977,9 +13871,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0856() throws Throwable {
+    public void test0853() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0856");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0853");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, false);
         org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState3 = xYIntervalSeriesCollection0.getSelectionState();
@@ -13999,9 +13893,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0857() throws Throwable {
+    public void test0854() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0857");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0854");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -14033,9 +13927,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0858() throws Throwable {
+    public void test0855() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0858");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0855");
         double[] doubleArray11 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray12 = new double[][] { doubleArray11 };
         org.jfree.data.category.CategoryDataset categoryDataset13 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray12);
@@ -14064,9 +13958,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0859() throws Throwable {
+    public void test0856() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0859");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0856");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14094,9 +13988,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0860() throws Throwable {
+    public void test0857() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0860");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0857");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -14139,9 +14033,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0861() throws Throwable {
+    public void test0858() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0861");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0858");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14178,9 +14072,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0862() throws Throwable {
+    public void test0859() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0862");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0859");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14209,9 +14103,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0863() throws Throwable {
+    public void test0860() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0863");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0860");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -14267,9 +14161,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0864() throws Throwable {
+    public void test0861() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0864");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0861");
         org.jfree.data.Range range0 = null;
         org.jfree.data.Range range2 = org.jfree.data.Range.expandToInclude(range0, (double) 100);
         double double4 = range2.constrain((double) '4');
@@ -14340,9 +14234,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0865() throws Throwable {
+    public void test0862() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0865");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0862");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -14406,9 +14300,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0866() throws Throwable {
+    public void test0863() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0866");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0863");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14452,9 +14346,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0867() throws Throwable {
+    public void test0864() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0867");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0864");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -14507,7 +14401,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeriesCollection0.addSeries(xYIntervalSeries92);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@54edd56b is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@6491073f is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -14553,9 +14447,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0868() throws Throwable {
+    public void test0865() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0868");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0865");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14608,9 +14502,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0869() throws Throwable {
+    public void test0866() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0869");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0866");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14629,9 +14523,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0870() throws Throwable {
+    public void test0867() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0870");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0867");
         double[] doubleArray7 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray8 = new double[][] { doubleArray7 };
         org.jfree.data.category.CategoryDataset categoryDataset9 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray8);
@@ -14652,9 +14546,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0871() throws Throwable {
+    public void test0868() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0871");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0868");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -14677,9 +14571,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0872() throws Throwable {
+    public void test0869() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0872");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0869");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -14715,9 +14609,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0873() throws Throwable {
+    public void test0870() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0873");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0870");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14745,9 +14639,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0874() throws Throwable {
+    public void test0871() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0874");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0871");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -14796,9 +14690,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0875() throws Throwable {
+    public void test0872() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0875");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0872");
         org.jfree.data.function.Function2D function2D0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -14810,9 +14704,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0876() throws Throwable {
+    public void test0873() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0876");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0873");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14842,9 +14736,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0877() throws Throwable {
+    public void test0874() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0877");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0874");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -14880,9 +14774,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0878() throws Throwable {
+    public void test0875() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0878");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0875");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14911,9 +14805,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0879() throws Throwable {
+    public void test0876() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0879");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0876");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -14945,9 +14839,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0880() throws Throwable {
+    public void test0877() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0880");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0877");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -14977,9 +14871,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0881() throws Throwable {
+    public void test0878() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0881");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0878");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -15009,9 +14903,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0882() throws Throwable {
+    public void test0879() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0882");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0879");
         org.jfree.data.pie.PieDataset pieDataset0 = null;
         java.lang.Comparable comparable1 = null;
         // The following exception was thrown during execution in test generation
@@ -15024,9 +14918,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0883() throws Throwable {
+    public void test0880() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0883");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0880");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -15052,9 +14946,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0884() throws Throwable {
+    public void test0881() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0884");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0881");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -15099,9 +14993,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0885() throws Throwable {
+    public void test0882() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0885");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0882");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -15130,9 +15024,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0886() throws Throwable {
+    public void test0883() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0886");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0883");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -15158,9 +15052,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0887() throws Throwable {
+    public void test0884() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0887");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0884");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -15206,9 +15100,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0888() throws Throwable {
+    public void test0885() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0888");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0885");
         double[][] doubleArray2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -15220,9 +15114,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0889() throws Throwable {
+    public void test0886() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0889");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0886");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -15267,9 +15161,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0890() throws Throwable {
+    public void test0887() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0890");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0887");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -15347,9 +15241,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0891() throws Throwable {
+    public void test0888() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0891");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0888");
         org.jfree.data.pie.PieDataset pieDataset0 = null;
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
@@ -15395,82 +15289,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0892() throws Throwable {
+    public void test0889() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0892");
-        org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
-        int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
-        double double9 = xYIntervalDataItem6.getXHighValue();
-        org.jfree.data.Range range10 = null;
-        org.jfree.data.Range range12 = org.jfree.data.Range.expandToInclude(range10, (double) 100);
-        double double14 = range12.constrain((double) '4');
-        boolean boolean15 = xYIntervalDataItem6.equals((java.lang.Object) '4');
-        org.jfree.data.Range range16 = null;
-        org.jfree.data.Range range18 = org.jfree.data.Range.expandToInclude(range16, (double) 100);
-        double double20 = range18.constrain((double) '4');
-        int int21 = xYIntervalDataItem6.compareTo((java.lang.Object) '4');
-        java.lang.Number[] numberArray28 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray31 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray34 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray37 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray40 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray43 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[][] numberArray44 = new java.lang.Number[][] { numberArray28, numberArray31, numberArray34, numberArray37, numberArray40, numberArray43 };
-        org.jfree.data.category.CategoryDataset categoryDataset45 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray44);
-        org.jfree.data.category.CategoryDataset categoryDataset46 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "hi!", numberArray44);
-        int int47 = xYIntervalDataItem6.compareTo((java.lang.Object) categoryDataset46);
-        org.jfree.data.Range range48 = org.jfree.data.general.DatasetUtilities.findStackedRangeBounds(categoryDataset46);
-        org.jfree.data.Range range49 = org.jfree.data.general.DatasetUtilities.iterateRangeBounds(categoryDataset46);
-        java.lang.Number[] numberArray54 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray57 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray60 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray63 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray66 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[] numberArray69 = new java.lang.Number[] { (short) -1, 32 };
-        java.lang.Number[][] numberArray70 = new java.lang.Number[][] { numberArray54, numberArray57, numberArray60, numberArray63, numberArray66, numberArray69 };
-        org.jfree.data.category.CategoryDataset categoryDataset71 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray70);
-        org.jfree.data.pie.PieDataset pieDataset73 = org.jfree.data.general.DatasetUtilities.createPieDatasetForRow(categoryDataset71, 1);
-        int int74 = categoryDataset71.getRowCount();
-        org.jfree.data.Range range75 = org.jfree.data.general.DatasetUtilities.findStackedRangeBounds(categoryDataset71);
-        boolean boolean76 = range49.equals((java.lang.Object) categoryDataset71);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 1 + "'", int8 == 1);
-        org.junit.Assert.assertTrue("'" + double9 + "' != '" + 100.0d + "'", double9 == 100.0d);
-        org.junit.Assert.assertNotNull(range12);
-        org.junit.Assert.assertTrue("'" + double14 + "' != '" + 100.0d + "'", double14 == 100.0d);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(range18);
-        org.junit.Assert.assertTrue("'" + double20 + "' != '" + 100.0d + "'", double20 == 100.0d);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 1 + "'", int21 == 1);
-        org.junit.Assert.assertNotNull(numberArray28);
-        org.junit.Assert.assertNotNull(numberArray31);
-        org.junit.Assert.assertNotNull(numberArray34);
-        org.junit.Assert.assertNotNull(numberArray37);
-        org.junit.Assert.assertNotNull(numberArray40);
-        org.junit.Assert.assertNotNull(numberArray43);
-        org.junit.Assert.assertNotNull(numberArray44);
-        org.junit.Assert.assertNotNull(categoryDataset45);
-        org.junit.Assert.assertNotNull(categoryDataset46);
-        org.junit.Assert.assertTrue("'" + int47 + "' != '" + 1 + "'", int47 == 1);
-        org.junit.Assert.assertNotNull(range48);
-        org.junit.Assert.assertNotNull(range49);
-        org.junit.Assert.assertNotNull(numberArray54);
-        org.junit.Assert.assertNotNull(numberArray57);
-        org.junit.Assert.assertNotNull(numberArray60);
-        org.junit.Assert.assertNotNull(numberArray63);
-        org.junit.Assert.assertNotNull(numberArray66);
-        org.junit.Assert.assertNotNull(numberArray69);
-        org.junit.Assert.assertNotNull(numberArray70);
-        org.junit.Assert.assertNotNull(categoryDataset71);
-        org.junit.Assert.assertNotNull(pieDataset73);
-        org.junit.Assert.assertTrue("'" + int74 + "' != '" + 6 + "'", int74 == 6);
-        org.junit.Assert.assertNotNull(range75);
-        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
-    }
-
-    @Test
-    public void test0893() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0893");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0889");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -15494,9 +15315,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0894() throws Throwable {
+    public void test0890() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0894");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0890");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -15536,9 +15357,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0895() throws Throwable {
+    public void test0891() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0895");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0891");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -15558,9 +15379,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0896() throws Throwable {
+    public void test0892() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0896");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0892");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -15623,9 +15444,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0897() throws Throwable {
+    public void test0893() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0897");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0893");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -15709,9 +15530,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0898() throws Throwable {
+    public void test0894() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0898");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0894");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -15732,9 +15553,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0899() throws Throwable {
+    public void test0895() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0899");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0895");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -15780,9 +15601,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0900() throws Throwable {
+    public void test0896() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0900");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0896");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -15827,9 +15648,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0901() throws Throwable {
+    public void test0897() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0901");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0897");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -15866,9 +15687,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0902() throws Throwable {
+    public void test0898() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0902");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0898");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -15892,9 +15713,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0903() throws Throwable {
+    public void test0899() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0903");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0899");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -15932,9 +15753,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0904() throws Throwable {
+    public void test0900() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0904");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0900");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -16010,9 +15831,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0905() throws Throwable {
+    public void test0901() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0905");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0901");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -16068,9 +15889,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0906() throws Throwable {
+    public void test0902() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0906");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0902");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -16105,9 +15926,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0907() throws Throwable {
+    public void test0903() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0907");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0903");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -16150,9 +15971,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0908() throws Throwable {
+    public void test0904() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0908");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0904");
         double[] doubleArray9 = new double[] { 1.0d, (byte) -1, 1.0d };
         double[][] doubleArray10 = new double[][] { doubleArray9 };
         org.jfree.data.category.CategoryDataset categoryDataset11 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "", doubleArray10);
@@ -16174,9 +15995,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0909() throws Throwable {
+    public void test0905() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0909");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0905");
         org.jfree.data.ComparableObjectSeries comparableObjectSeries1 = new org.jfree.data.ComparableObjectSeries((java.lang.Comparable) "org.jfree.data.event.DatasetChangeEvent[source=-1]");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection2 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset4 = null;
@@ -16190,7 +16011,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             comparableObjectSeries1.addChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection2);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@2f74de59 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@396a58ff is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -16201,9 +16022,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0910() throws Throwable {
+    public void test0906() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0910");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0906");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -16239,9 +16060,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0911() throws Throwable {
+    public void test0907() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0911");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0907");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -16279,9 +16100,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0912() throws Throwable {
+    public void test0908() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0912");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0908");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -16293,9 +16114,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0913() throws Throwable {
+    public void test0909() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0913");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0909");
         java.lang.Number[] numberArray6 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray9 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
@@ -16324,9 +16145,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0914() throws Throwable {
+    public void test0910() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0914");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0910");
         org.jfree.data.Range range0 = null;
         org.jfree.data.Range range2 = org.jfree.data.Range.expandToInclude(range0, (double) 100);
         double double4 = range2.constrain((double) '4');
@@ -16396,9 +16217,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0915() throws Throwable {
+    public void test0911() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0915");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0911");
         org.jfree.data.ComparableObjectSeries comparableObjectSeries3 = new org.jfree.data.ComparableObjectSeries((java.lang.Comparable) (short) 0, false, true);
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem10 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int12 = xYIntervalDataItem10.compareTo((java.lang.Object) 1.0f);
@@ -16438,9 +16259,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0916() throws Throwable {
+    public void test0912() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0916");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0912");
         org.jfree.data.xy.XYInterval xYInterval5 = new org.jfree.data.xy.XYInterval(0.0d, (double) 1.0f, (double) (-1), (double) '#', (double) 100L);
         double double6 = xYInterval5.getYHigh();
         double double7 = xYInterval5.getYLow();
@@ -16471,9 +16292,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0917() throws Throwable {
+    public void test0913() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0917");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0913");
         double[] doubleArray2 = new double[] {};
         double[] doubleArray3 = new double[] {};
         double[] doubleArray4 = new double[] {};
@@ -16504,9 +16325,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0918() throws Throwable {
+    public void test0914() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0918");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0914");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -16532,9 +16353,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0919() throws Throwable {
+    public void test0915() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0919");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0915");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -16583,9 +16404,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0920() throws Throwable {
+    public void test0916() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0920");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0916");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -16659,9 +16480,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0921() throws Throwable {
+    public void test0917() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0921");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0917");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -16690,9 +16511,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0922() throws Throwable {
+    public void test0918() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0922");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0918");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -16716,9 +16537,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0923() throws Throwable {
+    public void test0919() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0923");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0919");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -16755,9 +16576,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0924() throws Throwable {
+    public void test0920() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0924");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0920");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -16806,9 +16627,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0925() throws Throwable {
+    public void test0921() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0925");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0921");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -16861,9 +16682,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0926() throws Throwable {
+    public void test0922() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0926");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0922");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -16939,9 +16760,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0927() throws Throwable {
+    public void test0923() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0927");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0923");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17002,9 +16823,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0928() throws Throwable {
+    public void test0924() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0928");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0924");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -17033,9 +16854,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0929() throws Throwable {
+    public void test0925() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0929");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0925");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17074,9 +16895,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0930() throws Throwable {
+    public void test0926() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0930");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0926");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -17089,9 +16910,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0931() throws Throwable {
+    public void test0927() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0931");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0927");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17115,9 +16936,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0932() throws Throwable {
+    public void test0928() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0932");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0928");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -17153,9 +16974,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0933() throws Throwable {
+    public void test0929() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0933");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0929");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -17187,9 +17008,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0934() throws Throwable {
+    public void test0930() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0934");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0930");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -17215,9 +17036,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0935() throws Throwable {
+    public void test0931() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0935");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0931");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -17254,9 +17075,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0936() throws Throwable {
+    public void test0932() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0936");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0932");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -17287,9 +17108,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0937() throws Throwable {
+    public void test0933() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0937");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0933");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem7 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int9 = xYIntervalDataItem7.compareTo((java.lang.Object) 1.0f);
         double double10 = xYIntervalDataItem7.getXHighValue();
@@ -17349,9 +17170,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0938() throws Throwable {
+    public void test0934() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0938");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0934");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -17395,9 +17216,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0939() throws Throwable {
+    public void test0935() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0939");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0935");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -17447,9 +17268,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0940() throws Throwable {
+    public void test0936() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0940");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0936");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -17505,9 +17326,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0941() throws Throwable {
+    public void test0937() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0941");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0937");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -17526,9 +17347,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0942() throws Throwable {
+    public void test0938() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0942");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0938");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17554,9 +17375,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0943() throws Throwable {
+    public void test0939() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0943");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0939");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17580,9 +17401,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0944() throws Throwable {
+    public void test0940() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0944");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0940");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -17628,9 +17449,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0945() throws Throwable {
+    public void test0941() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0945");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0941");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17661,9 +17482,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0946() throws Throwable {
+    public void test0942() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0946");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0942");
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
@@ -17687,9 +17508,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0947() throws Throwable {
+    public void test0943() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0947");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0943");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -17710,9 +17531,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0948() throws Throwable {
+    public void test0944() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0948");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0944");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17734,9 +17555,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0949() throws Throwable {
+    public void test0945() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0949");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0945");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -17760,9 +17581,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0950() throws Throwable {
+    public void test0946() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0950");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0946");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17807,9 +17628,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0951() throws Throwable {
+    public void test0947() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0951");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0947");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17833,9 +17654,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0952() throws Throwable {
+    public void test0948() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0952");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0948");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -17863,9 +17684,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0953() throws Throwable {
+    public void test0949() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0953");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0949");
         org.jfree.data.function.Function2D function2D0 = null;
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem10 = new org.jfree.data.xy.XYIntervalDataItem((double) 10L, 102.0d, 0.0d, 0.0d, 0.0d, 93.0d);
         // The following exception was thrown during execution in test generation
@@ -17878,9 +17699,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0954() throws Throwable {
+    public void test0950() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0954");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0950");
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
@@ -17910,9 +17731,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0955() throws Throwable {
+    public void test0951() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0955");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0951");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17938,9 +17759,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0956() throws Throwable {
+    public void test0952() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0956");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0952");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -17983,9 +17804,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0957() throws Throwable {
+    public void test0953() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0957");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0953");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         java.lang.Object obj5 = null;
         xYIntervalSeries3.firePropertyChange("", obj5, (java.lang.Object) "hi!");
@@ -18043,9 +17864,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0958() throws Throwable {
+    public void test0954() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0958");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0954");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -18066,9 +17887,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0959() throws Throwable {
+    public void test0955() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0959");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0955");
         org.jfree.data.xy.TableXYDataset tableXYDataset0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -18080,9 +17901,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0960() throws Throwable {
+    public void test0956() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0960");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0956");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -18110,9 +17931,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0961() throws Throwable {
+    public void test0957() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0961");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0957");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -18153,9 +17974,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0962() throws Throwable {
+    public void test0958() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0962");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0958");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -18185,9 +18006,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0963() throws Throwable {
+    public void test0959() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0963");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0959");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -18225,9 +18046,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0964() throws Throwable {
+    public void test0960() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0964");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0960");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -18247,9 +18068,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0965() throws Throwable {
+    public void test0961() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0965");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0961");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -18269,9 +18090,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0966() throws Throwable {
+    public void test0962() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0966");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0962");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -18331,9 +18152,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0967() throws Throwable {
+    public void test0963() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0967");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0963");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -18360,9 +18181,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0968() throws Throwable {
+    public void test0964() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0968");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0964");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, false);
         // The following exception was thrown during execution in test generation
@@ -18376,9 +18197,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0969() throws Throwable {
+    public void test0965() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0969");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0965");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -18412,9 +18233,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0970() throws Throwable {
+    public void test0966() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0970");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0966");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -18455,9 +18276,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0971() throws Throwable {
+    public void test0967() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0971");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0967");
         double[] doubleArray2 = new double[] {};
         double[] doubleArray3 = new double[] {};
         double[] doubleArray4 = new double[] {};
@@ -18486,9 +18307,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0972() throws Throwable {
+    public void test0968() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0972");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0968");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -18510,9 +18331,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0973() throws Throwable {
+    public void test0969() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0973");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0969");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -18543,9 +18364,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0974() throws Throwable {
+    public void test0970() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0974");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0970");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -18576,9 +18397,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0975() throws Throwable {
+    public void test0971() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0975");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0971");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -18618,9 +18439,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0976() throws Throwable {
+    public void test0972() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0976");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0972");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -18646,9 +18467,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0977() throws Throwable {
+    public void test0973() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0977");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0973");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         // The following exception was thrown during execution in test generation
@@ -18662,9 +18483,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0978() throws Throwable {
+    public void test0974() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0978");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0974");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -18731,9 +18552,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0979() throws Throwable {
+    public void test0975() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0979");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0975");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -18811,9 +18632,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0980() throws Throwable {
+    public void test0976() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0980");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0976");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -18833,9 +18654,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0981() throws Throwable {
+    public void test0977() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0981");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0977");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -18872,9 +18693,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0982() throws Throwable {
+    public void test0978() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0982");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0978");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -18912,9 +18733,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0983() throws Throwable {
+    public void test0979() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0983");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0979");
         org.jfree.data.xy.XYIntervalSeries xYIntervalSeries3 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
         xYIntervalSeries3.setMaximumItemCount((int) ' ');
         xYIntervalSeries3.setDescription("");
@@ -18938,7 +18759,7 @@ public class RandoopRegressionTest1 {
         // The following exception was thrown during execution in test generation
         try {
             xYIntervalSeries3.addChangeListener((org.jfree.data.event.SeriesChangeListener) xYIntervalSeriesCollection12);
-// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@55842d81 is not of type class org.jfree.data.xy.XYIntervalSeries");
+// flaky:             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Listener org.jfree.data.xy.XYIntervalSeriesCollection@6dd9a5a8 is not of type class org.jfree.data.xy.XYIntervalSeries");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }
@@ -18953,9 +18774,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0984() throws Throwable {
+    public void test0980() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0984");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0980");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -19045,9 +18866,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0985() throws Throwable {
+    public void test0981() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0985");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0981");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -19077,9 +18898,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0986() throws Throwable {
+    public void test0982() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0986");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0982");
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
@@ -19107,9 +18928,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0987() throws Throwable {
+    public void test0983() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0987");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0983");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.iterateDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, true);
         java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
@@ -19137,9 +18958,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0988() throws Throwable {
+    public void test0984() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0988");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0984");
         org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
         int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
         double double9 = xYIntervalDataItem6.getXHighValue();
@@ -19199,9 +19020,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0989() throws Throwable {
+    public void test0985() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0989");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0985");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -19241,9 +19062,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0990() throws Throwable {
+    public void test0986() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0990");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0986");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -19279,9 +19100,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0991() throws Throwable {
+    public void test0987() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0991");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0987");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -19321,9 +19142,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0992() throws Throwable {
+    public void test0988() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0992");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0988");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -19357,9 +19178,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0993() throws Throwable {
+    public void test0989() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0993");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0989");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -19421,9 +19242,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0994() throws Throwable {
+    public void test0990() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0994");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0990");
         java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
@@ -19457,9 +19278,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0995() throws Throwable {
+    public void test0991() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0995");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0991");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
         org.jfree.data.Range range2 = org.jfree.data.general.DatasetUtilities.findRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
@@ -19510,9 +19331,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0996() throws Throwable {
+    public void test0992() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0996");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0992");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -19544,9 +19365,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0997() throws Throwable {
+    public void test0993() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0997");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0993");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -19572,9 +19393,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0998() throws Throwable {
+    public void test0994() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0998");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0994");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -19593,9 +19414,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test0999() throws Throwable {
+    public void test0995() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test0999");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0995");
         java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
         java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
@@ -19627,9 +19448,9 @@ public class RandoopRegressionTest1 {
     }
 
     @Test
-    public void test1000() throws Throwable {
+    public void test0996() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest1.test1000");
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0996");
         org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
         org.jfree.data.general.Dataset dataset2 = null;
         org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
@@ -19695,5 +19516,236 @@ public class RandoopRegressionTest1 {
         org.junit.Assert.assertTrue("'" + int63 + "' != '" + (-1) + "'", int63 == (-1));
         org.junit.Assert.assertNull(range64);
         org.junit.Assert.assertTrue("'" + int65 + "' != '" + 0 + "'", int65 == 0);
+    }
+
+    @Test
+    public void test0997() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0997");
+        org.jfree.data.xy.XYInterval xYInterval5 = new org.jfree.data.xy.XYInterval((double) 10, 93.0d, (double) (-1L), (double) 0, (double) ' ');
+        double double6 = xYInterval5.getY();
+        java.lang.Number[] numberArray12 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray15 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray18 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray21 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray24 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray27 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray28 = new java.lang.Number[][] { numberArray12, numberArray15, numberArray18, numberArray21, numberArray24, numberArray27 };
+        org.jfree.data.category.CategoryDataset categoryDataset29 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray28);
+        java.util.List list30 = categoryDataset29.getRowKeys();
+        org.jfree.data.Range range32 = org.jfree.data.general.DatasetUtilities.findRangeBounds(categoryDataset29, false);
+        int int34 = categoryDataset29.getColumnIndex((java.lang.Comparable) (-1L));
+        org.jfree.data.general.Dataset dataset36 = null;
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo37 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent38 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-1L), dataset36, datasetChangeInfo37);
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent39 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) 10L, (org.jfree.data.general.Dataset) categoryDataset29, datasetChangeInfo37);
+        org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem46 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
+        int int48 = xYIntervalDataItem46.compareTo((java.lang.Object) 1.0f);
+        int int49 = categoryDataset29.getColumnIndex((java.lang.Comparable) xYIntervalDataItem46);
+        org.jfree.data.Range range51 = org.jfree.data.general.DatasetUtilities.findRangeBounds(categoryDataset29, true);
+        boolean boolean52 = xYInterval5.equals((java.lang.Object) range51);
+        double double53 = xYInterval5.getY();
+        double double54 = xYInterval5.getY();
+        double double55 = xYInterval5.getYHigh();
+        org.junit.Assert.assertTrue("'" + double6 + "' != '" + (-1.0d) + "'", double6 == (-1.0d));
+        org.junit.Assert.assertNotNull(numberArray12);
+        org.junit.Assert.assertNotNull(numberArray15);
+        org.junit.Assert.assertNotNull(numberArray18);
+        org.junit.Assert.assertNotNull(numberArray21);
+        org.junit.Assert.assertNotNull(numberArray24);
+        org.junit.Assert.assertNotNull(numberArray27);
+        org.junit.Assert.assertNotNull(numberArray28);
+        org.junit.Assert.assertNotNull(categoryDataset29);
+        org.junit.Assert.assertNotNull(list30);
+        org.junit.Assert.assertNotNull(range32);
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + (-1) + "'", int34 == (-1));
+        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 1 + "'", int48 == 1);
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + (-1) + "'", int49 == (-1));
+        org.junit.Assert.assertNotNull(range51);
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
+        org.junit.Assert.assertTrue("'" + double53 + "' != '" + (-1.0d) + "'", double53 == (-1.0d));
+        org.junit.Assert.assertTrue("'" + double54 + "' != '" + (-1.0d) + "'", double54 == (-1.0d));
+        org.junit.Assert.assertTrue("'" + double55 + "' != '" + 32.0d + "'", double55 == 32.0d);
+    }
+
+    @Test
+    public void test0998() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0998");
+        java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray13 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray16 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray19 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray20 = new java.lang.Number[][] { numberArray4, numberArray7, numberArray10, numberArray13, numberArray16, numberArray19 };
+        org.jfree.data.category.CategoryDataset categoryDataset21 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray20);
+        java.util.List list22 = categoryDataset21.getRowKeys();
+        org.jfree.data.Range range24 = org.jfree.data.general.DatasetUtilities.findStackedRangeBounds(categoryDataset21, (double) (short) -1);
+        org.jfree.data.event.DatasetChangeListener datasetChangeListener25 = null;
+        categoryDataset21.removeChangeListener(datasetChangeListener25);
+        java.lang.Number number27 = org.jfree.data.general.DatasetUtilities.findMaximumRangeValue(categoryDataset21);
+        org.jfree.data.Range range28 = org.jfree.data.general.DatasetUtilities.iterateRangeBounds(categoryDataset21);
+        org.junit.Assert.assertNotNull(numberArray4);
+        org.junit.Assert.assertNotNull(numberArray7);
+        org.junit.Assert.assertNotNull(numberArray10);
+        org.junit.Assert.assertNotNull(numberArray13);
+        org.junit.Assert.assertNotNull(numberArray16);
+        org.junit.Assert.assertNotNull(numberArray19);
+        org.junit.Assert.assertNotNull(numberArray20);
+        org.junit.Assert.assertNotNull(categoryDataset21);
+        org.junit.Assert.assertNotNull(list22);
+        org.junit.Assert.assertNotNull(range24);
+        org.junit.Assert.assertEquals("'" + number27 + "' != '" + 32.0d + "'", number27, 32.0d);
+        org.junit.Assert.assertNotNull(range28);
+    }
+
+    @Test
+    public void test0999() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test0999");
+        java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray13 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray16 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray19 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray20 = new java.lang.Number[][] { numberArray4, numberArray7, numberArray10, numberArray13, numberArray16, numberArray19 };
+        org.jfree.data.category.CategoryDataset categoryDataset21 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray20);
+        boolean boolean22 = org.jfree.data.general.DatasetUtilities.isEmptyOrNull(categoryDataset21);
+        org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem29 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
+        int int31 = xYIntervalDataItem29.compareTo((java.lang.Object) 1.0f);
+        double double32 = xYIntervalDataItem29.getXHighValue();
+        org.jfree.data.Range range33 = null;
+        org.jfree.data.Range range35 = org.jfree.data.Range.expandToInclude(range33, (double) 100);
+        double double37 = range35.constrain((double) '4');
+        boolean boolean38 = xYIntervalDataItem29.equals((java.lang.Object) '4');
+        org.jfree.data.Range range39 = null;
+        org.jfree.data.Range range41 = org.jfree.data.Range.expandToInclude(range39, (double) 100);
+        double double43 = range41.constrain((double) '4');
+        int int44 = xYIntervalDataItem29.compareTo((java.lang.Object) '4');
+        java.lang.Number[] numberArray51 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray54 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray57 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray60 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray63 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray66 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray67 = new java.lang.Number[][] { numberArray51, numberArray54, numberArray57, numberArray60, numberArray63, numberArray66 };
+        org.jfree.data.category.CategoryDataset categoryDataset68 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray67);
+        org.jfree.data.category.CategoryDataset categoryDataset69 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "hi!", numberArray67);
+        int int70 = xYIntervalDataItem29.compareTo((java.lang.Object) categoryDataset69);
+        java.util.List list71 = categoryDataset69.getColumnKeys();
+        org.jfree.data.Range range73 = org.jfree.data.general.DatasetUtilities.iterateToFindRangeBounds(categoryDataset21, list71, true);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jfree.data.pie.PieDataset pieDataset75 = org.jfree.data.general.DatasetUtilities.createPieDatasetForRow(categoryDataset21, (int) (byte) 10);
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 10, Size: 6");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(numberArray4);
+        org.junit.Assert.assertNotNull(numberArray7);
+        org.junit.Assert.assertNotNull(numberArray10);
+        org.junit.Assert.assertNotNull(numberArray13);
+        org.junit.Assert.assertNotNull(numberArray16);
+        org.junit.Assert.assertNotNull(numberArray19);
+        org.junit.Assert.assertNotNull(numberArray20);
+        org.junit.Assert.assertNotNull(categoryDataset21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 1 + "'", int31 == 1);
+        org.junit.Assert.assertTrue("'" + double32 + "' != '" + 100.0d + "'", double32 == 100.0d);
+        org.junit.Assert.assertNotNull(range35);
+        org.junit.Assert.assertTrue("'" + double37 + "' != '" + 100.0d + "'", double37 == 100.0d);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertNotNull(range41);
+        org.junit.Assert.assertTrue("'" + double43 + "' != '" + 100.0d + "'", double43 == 100.0d);
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 1 + "'", int44 == 1);
+        org.junit.Assert.assertNotNull(numberArray51);
+        org.junit.Assert.assertNotNull(numberArray54);
+        org.junit.Assert.assertNotNull(numberArray57);
+        org.junit.Assert.assertNotNull(numberArray60);
+        org.junit.Assert.assertNotNull(numberArray63);
+        org.junit.Assert.assertNotNull(numberArray66);
+        org.junit.Assert.assertNotNull(numberArray67);
+        org.junit.Assert.assertNotNull(categoryDataset68);
+        org.junit.Assert.assertNotNull(categoryDataset69);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 1 + "'", int70 == 1);
+        org.junit.Assert.assertNotNull(list71);
+        org.junit.Assert.assertNotNull(range73);
+    }
+
+    @Test
+    public void test1000() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest1.test1000");
+        org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
+        org.jfree.data.general.Dataset dataset2 = null;
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent4 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-1L), dataset2, datasetChangeInfo3);
+        xYIntervalSeriesCollection0.notifyListeners(datasetChangeEvent4);
+        org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState6 = xYIntervalSeriesCollection0.getSelectionState();
+        org.jfree.data.Range range7 = org.jfree.data.general.DatasetUtilities.iterateXYRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
+        org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem14 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
+        int int16 = xYIntervalDataItem14.compareTo((java.lang.Object) 1.0f);
+        double double17 = xYIntervalDataItem14.getXHighValue();
+        org.jfree.data.Range range18 = null;
+        org.jfree.data.Range range20 = org.jfree.data.Range.expandToInclude(range18, (double) 100);
+        double double22 = range20.constrain((double) '4');
+        boolean boolean23 = xYIntervalDataItem14.equals((java.lang.Object) '4');
+        org.jfree.data.Range range24 = null;
+        org.jfree.data.Range range26 = org.jfree.data.Range.expandToInclude(range24, (double) 100);
+        double double28 = range26.constrain((double) '4');
+        int int29 = xYIntervalDataItem14.compareTo((java.lang.Object) '4');
+        java.lang.Number[] numberArray36 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray39 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray42 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray45 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray48 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray51 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray52 = new java.lang.Number[][] { numberArray36, numberArray39, numberArray42, numberArray45, numberArray48, numberArray51 };
+        org.jfree.data.category.CategoryDataset categoryDataset53 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray52);
+        org.jfree.data.category.CategoryDataset categoryDataset54 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "hi!", numberArray52);
+        int int55 = xYIntervalDataItem14.compareTo((java.lang.Object) categoryDataset54);
+        org.jfree.data.event.DatasetChangeListener datasetChangeListener56 = null;
+        categoryDataset54.removeChangeListener(datasetChangeListener56);
+        org.jfree.data.general.DatasetGroup datasetGroup58 = categoryDataset54.getGroup();
+        xYIntervalSeriesCollection0.setGroup(datasetGroup58);
+        org.jfree.data.xy.XYIntervalSeries xYIntervalSeries63 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
+        xYIntervalSeries63.setMaximumItemCount((int) ' ');
+        xYIntervalSeries63.setDescription("");
+        boolean boolean68 = xYIntervalSeries63.isEmpty();
+        xYIntervalSeries63.fireSeriesChanged();
+        xYIntervalSeriesCollection0.removeSeries(xYIntervalSeries63);
+        int int71 = xYIntervalSeriesCollection0.getSeriesCount();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Number number74 = xYIntervalSeriesCollection0.getEndX(32, (int) ' ');
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 32, Size: 0");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(xYDatasetSelectionState6);
+        org.junit.Assert.assertNull(range7);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 1 + "'", int16 == 1);
+        org.junit.Assert.assertTrue("'" + double17 + "' != '" + 100.0d + "'", double17 == 100.0d);
+        org.junit.Assert.assertNotNull(range20);
+        org.junit.Assert.assertTrue("'" + double22 + "' != '" + 100.0d + "'", double22 == 100.0d);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertNotNull(range26);
+        org.junit.Assert.assertTrue("'" + double28 + "' != '" + 100.0d + "'", double28 == 100.0d);
+        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 1 + "'", int29 == 1);
+        org.junit.Assert.assertNotNull(numberArray36);
+        org.junit.Assert.assertNotNull(numberArray39);
+        org.junit.Assert.assertNotNull(numberArray42);
+        org.junit.Assert.assertNotNull(numberArray45);
+        org.junit.Assert.assertNotNull(numberArray48);
+        org.junit.Assert.assertNotNull(numberArray51);
+        org.junit.Assert.assertNotNull(numberArray52);
+        org.junit.Assert.assertNotNull(categoryDataset53);
+        org.junit.Assert.assertNotNull(categoryDataset54);
+        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 1 + "'", int55 == 1);
+        org.junit.Assert.assertNotNull(datasetGroup58);
+        org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + true + "'", boolean68 == true);
+        org.junit.Assert.assertTrue("'" + int71 + "' != '" + 0 + "'", int71 == 0);
     }
 }

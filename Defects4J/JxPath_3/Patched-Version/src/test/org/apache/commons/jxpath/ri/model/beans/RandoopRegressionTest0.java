@@ -11378,6 +11378,23 @@ public class RandoopRegressionTest0 {
     public void test171() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RandoopRegressionTest0.test171");
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
+        org.apache.commons.jxpath.ri.QName qName1 = null;
+        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer0, qName1);
+        boolean boolean3 = nullPointer2.isDynamicPropertyDeclarationSupported();
+        boolean boolean4 = nullPointer2.isNode();
+        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer5 = nullPointer2.getPropertyPointer();
+        boolean boolean6 = propertyPointer5.isRoot();
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(propertyPointer5);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+    }
+
+    @Test
+    public void test172() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test172");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -11482,9 +11499,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test172() throws Throwable {
+    public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test172");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test173");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -11558,9 +11575,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test173() throws Throwable {
+    public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test173");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test174");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -11664,9 +11681,49 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test174() throws Throwable {
+    public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test174");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test175");
+        java.lang.Object obj0 = null;
+        java.util.Locale locale1 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
+        org.apache.commons.jxpath.ri.EvalContext evalContext3 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext5 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext3, nodeTest4);
+        org.apache.commons.jxpath.ri.EvalContext evalContext6 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest7 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext8 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext6, nodeTest7);
+        org.apache.commons.jxpath.ri.EvalContext evalContext9 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest10 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext11 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext9, nodeTest10);
+        org.apache.commons.jxpath.ri.EvalContext evalContext12 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest13 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext14 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext12, nodeTest13);
+        org.apache.commons.jxpath.ri.EvalContext evalContext15 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest16 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext17 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext15, nodeTest16);
+        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray18 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext8, evalContext9, evalContext12, evalContext15 };
+        org.apache.commons.jxpath.ri.axes.UnionContext unionContext19 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext5, evalContextArray18);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer20 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer2, (java.lang.Object) selfContext5);
+        int int21 = jDOMNodePointer20.getLength();
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer22 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer20);
+        java.lang.Object obj23 = nullPropertyPointer22.getNode();
+        boolean boolean24 = nullPropertyPointer22.isContainer();
+        java.lang.Object obj25 = nullPropertyPointer22.getImmediateNode();
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer26 = nullPropertyPointer22.getValuePointer();
+        nullPropertyPointer22.setNameAttributeValue("null");
+        org.junit.Assert.assertNotNull(evalContextArray18);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 1 + "'", int21 == 1);
+        org.junit.Assert.assertNull(obj23);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + true + "'", boolean24 == true);
+        org.junit.Assert.assertNull(obj25);
+        org.junit.Assert.assertNotNull(nodePointer26);
+    }
+
+    @Test
+    public void test176() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test176");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -11772,9 +11829,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test175() throws Throwable {
+    public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test175");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test177");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -11824,9 +11881,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test176() throws Throwable {
+    public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test176");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test178");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -11884,9 +11941,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test177() throws Throwable {
+    public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test177");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test179");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         org.apache.commons.jxpath.Functions functions2 = null;
@@ -11964,9 +12021,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test178() throws Throwable {
+    public void test180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test178");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test180");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -12074,9 +12131,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test179() throws Throwable {
+    public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test179");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test181");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.EvalContext evalContext1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
@@ -12159,9 +12216,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test180() throws Throwable {
+    public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test180");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test182");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext2 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl0, nodePointer1);
@@ -12229,9 +12286,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test181() throws Throwable {
+    public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test181");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test183");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -12286,9 +12343,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test182() throws Throwable {
+    public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test182");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test184");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -12347,9 +12404,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test183() throws Throwable {
+    public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test183");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test185");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -12369,9 +12426,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test184() throws Throwable {
+    public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test184");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test186");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext2 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl0, nodePointer1);
@@ -12382,9 +12439,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test185() throws Throwable {
+    public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test185");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test187");
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer2 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) 38, locale1);
         java.lang.Object obj3 = null;
@@ -12487,9 +12544,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test186() throws Throwable {
+    public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test186");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test188");
         org.apache.commons.jxpath.ri.parser.ParseException parseException0 = new org.apache.commons.jxpath.ri.parser.ParseException();
         java.lang.String[] strArray1 = org.apache.commons.jxpath.ri.parser.XPathParserTokenManager.lexStateNames;
         parseException0.tokenImage = strArray1;
@@ -12514,9 +12571,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test187() throws Throwable {
+    public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test187");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test189");
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory0 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -12614,9 +12671,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test188() throws Throwable {
+    public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test188");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test190");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -12715,9 +12772,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test189() throws Throwable {
+    public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test189");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test191");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         org.w3c.dom.Node node1 = null;
         java.util.Locale locale2 = null;
@@ -12765,9 +12822,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test190() throws Throwable {
+    public void test192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test190");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test192");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.ri.parser.Token token1 = new org.apache.commons.jxpath.ri.parser.Token();
         token1.image = "id('/')/namespace::<<unknown namespace>>[42]";
@@ -12865,9 +12922,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test191() throws Throwable {
+    public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test191");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test193");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -12978,9 +13035,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test192() throws Throwable {
+    public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test192");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test194");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -13048,9 +13105,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test193() throws Throwable {
+    public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test193");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test195");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -13172,9 +13229,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test194() throws Throwable {
+    public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test194");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test196");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -13228,9 +13285,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test195() throws Throwable {
+    public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test195");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test197");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         org.apache.commons.jxpath.Functions functions2 = null;
@@ -13274,9 +13331,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test196() throws Throwable {
+    public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test196");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test198");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer0, qName1);
@@ -13299,9 +13356,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test197() throws Throwable {
+    public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test197");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test199");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -13327,9 +13384,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test198() throws Throwable {
+    public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test198");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test200");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -13365,9 +13422,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test199() throws Throwable {
+    public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test199");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test201");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         org.apache.commons.jxpath.Functions functions2 = null;
@@ -13402,9 +13459,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test200() throws Throwable {
+    public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test200");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test202");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -13478,9 +13535,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test201() throws Throwable {
+    public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test201");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test203");
         org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory jDOMPointerFactory0 = new org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory();
         int int1 = jDOMPointerFactory0.getOrder();
         org.apache.commons.jxpath.Container container2 = null;
@@ -13546,9 +13603,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test202() throws Throwable {
+    public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test202");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test204");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -13570,18 +13627,18 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test203() throws Throwable {
+    public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test203");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test205");
         org.apache.commons.jxpath.JXPathTypeConversionException jXPathTypeConversionException1 = new org.apache.commons.jxpath.JXPathTypeConversionException("<<unknown namespace>>");
         java.lang.Throwable[] throwableArray2 = jXPathTypeConversionException1.getSuppressed();
         org.junit.Assert.assertNotNull(throwableArray2);
     }
 
     @Test
-    public void test204() throws Throwable {
+    public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test204");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test206");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -13597,9 +13654,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test205() throws Throwable {
+    public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test205");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test207");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         org.apache.commons.jxpath.Functions functions2 = null;
@@ -13618,9 +13675,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test206() throws Throwable {
+    public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test206");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test208");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -13665,9 +13722,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test207() throws Throwable {
+    public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test207");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test209");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -13769,9 +13826,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test208() throws Throwable {
+    public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test208");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test210");
         org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.axes.RootContext rootContext2 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl0, nodePointer1);
@@ -13873,9 +13930,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test209() throws Throwable {
+    public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test209");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test211");
         org.apache.commons.jxpath.Container container0 = null;
         java.lang.Object obj1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(obj1);
@@ -13958,9 +14015,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test210() throws Throwable {
+    public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test210");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test212");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -14016,9 +14073,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test211() throws Throwable {
+    public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test211");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test213");
         org.apache.commons.jxpath.ri.model.dom.DOMPointerFactory dOMPointerFactory0 = new org.apache.commons.jxpath.ri.model.dom.DOMPointerFactory();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         java.util.Iterator iterator3 = org.apache.commons.jxpath.util.ValueUtils.iterate((java.lang.Object) (byte) 0);
@@ -14105,9 +14162,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test212() throws Throwable {
+    public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test212");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test214");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -14172,9 +14229,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test213() throws Throwable {
+    public void test215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test213");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test215");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -14228,9 +14285,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test214() throws Throwable {
+    public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test214");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test216");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -14290,9 +14347,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test215() throws Throwable {
+    public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test215");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test217");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -14310,9 +14367,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test216() throws Throwable {
+    public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test216");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test218");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -14418,9 +14475,125 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test217() throws Throwable {
+    public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test217");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test219");
+        org.apache.commons.jxpath.Container container0 = null;
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory collectionPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory();
+        int int2 = collectionPointerFactory1.getOrder();
+        org.apache.commons.jxpath.ri.QName qName4 = new org.apache.commons.jxpath.ri.QName("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
+        java.lang.Object obj5 = null;
+        java.util.Locale locale6 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj5, locale6);
+        org.apache.commons.jxpath.ri.EvalContext evalContext8 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest9 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext10 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext8, nodeTest9);
+        org.apache.commons.jxpath.ri.EvalContext evalContext11 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest12 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext13 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext11, nodeTest12);
+        org.apache.commons.jxpath.ri.EvalContext evalContext14 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest15 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext16 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext14, nodeTest15);
+        org.apache.commons.jxpath.ri.EvalContext evalContext17 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest18 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext19 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext17, nodeTest18);
+        org.apache.commons.jxpath.ri.EvalContext evalContext20 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest21 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext22 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext20, nodeTest21);
+        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray23 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext13, evalContext14, evalContext17, evalContext20 };
+        org.apache.commons.jxpath.ri.axes.UnionContext unionContext24 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext10, evalContextArray23);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer25 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer7, (java.lang.Object) selfContext10);
+        org.w3c.dom.Node node26 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer27 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer25, node26);
+        java.lang.Object obj28 = jDOMNodePointer25.getImmediateNode();
+        java.util.Locale locale29 = null;
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer30 = collectionPointerFactory1.createNodePointer(qName4, (java.lang.Object) jDOMNodePointer25, locale29);
+        java.lang.Class class32 = null;
+        org.apache.commons.jxpath.JXPathBasicBeanInfo jXPathBasicBeanInfo33 = new org.apache.commons.jxpath.JXPathBasicBeanInfo(class32);
+        org.apache.commons.jxpath.Container container34 = null;
+        java.lang.Object obj35 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext36 = org.apache.commons.jxpath.JXPathContext.newContext(obj35);
+        org.apache.commons.jxpath.Functions functions37 = null;
+        jXPathContext36.setFunctions(functions37);
+        java.util.List list40 = jXPathContext36.selectNodes("/");
+        jXPathContext36.registerNamespace("hi!", "/");
+        java.util.Locale locale44 = jXPathContext36.getLocale();
+        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer45 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container34, locale44);
+        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer46 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName4, (java.lang.Object) 55, (org.apache.commons.jxpath.JXPathBeanInfo) jXPathBasicBeanInfo33, locale44);
+        org.apache.commons.jxpath.Container container47 = null;
+        java.util.Locale locale48 = null;
+        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer49 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container47, locale48);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer51 = containerPointer49.namespacePointer("");
+        java.lang.Object obj52 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext53 = org.apache.commons.jxpath.JXPathContext.newContext(obj52);
+        org.apache.commons.jxpath.Functions functions54 = null;
+        jXPathContext53.setFunctions(functions54);
+        java.util.Iterator iterator57 = jXPathContext53.iteratePointers("UNKNOWN");
+        java.text.DecimalFormatSymbols decimalFormatSymbols59 = jXPathContext53.getDecimalFormatSymbols("/");
+        java.text.DecimalFormatSymbols decimalFormatSymbols61 = null;
+        jXPathContext53.setDecimalFormatSymbols("", decimalFormatSymbols61);
+        boolean boolean63 = containerPointer49.equals((java.lang.Object) jXPathContext53);
+        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator64 = containerPointer49.namespaceIterator();
+        int int65 = containerPointer49.getLength();
+        org.apache.commons.jxpath.ri.QName qName66 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean67 = null;
+        java.util.Locale locale68 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer69 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName66, dynaBean67, locale68);
+        java.lang.Object obj70 = dynaBeanPointer69.getValue();
+        org.apache.commons.jxpath.ri.QName qName71 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean72 = null;
+        java.util.Locale locale73 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer74 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName71, dynaBean72, locale73);
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest75 = null;
+        boolean boolean76 = org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer.testNode((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer69, (java.lang.Object) dynaBeanPointer74, nodeTest75);
+        org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver77 = dynaBeanPointer74.getNamespaceResolver();
+        org.apache.commons.jxpath.MapDynamicPropertyHandler mapDynamicPropertyHandler78 = new org.apache.commons.jxpath.MapDynamicPropertyHandler();
+        org.apache.commons.jxpath.ri.model.dynamic.DynamicPropertyPointer dynamicPropertyPointer79 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer74, (org.apache.commons.jxpath.DynamicPropertyHandler) mapDynamicPropertyHandler78);
+        org.apache.commons.jxpath.ri.QName qName81 = new org.apache.commons.jxpath.ri.QName("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
+        org.apache.commons.beanutils.DynaBean dynaBean82 = null;
+        org.apache.commons.jxpath.Container container83 = null;
+        java.lang.Object obj84 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext85 = org.apache.commons.jxpath.JXPathContext.newContext(obj84);
+        org.apache.commons.jxpath.Functions functions86 = null;
+        jXPathContext85.setFunctions(functions86);
+        java.util.List list89 = jXPathContext85.selectNodes("/");
+        jXPathContext85.registerNamespace("hi!", "/");
+        java.util.Locale locale93 = jXPathContext85.getLocale();
+        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer94 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container83, locale93);
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer95 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName81, dynaBean82, locale93);
+        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer96 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer(qName4, (java.lang.Object) int65, (org.apache.commons.jxpath.DynamicPropertyHandler) mapDynamicPropertyHandler78, locale93);
+        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer97 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale93);
+        org.junit.Assert.assertTrue("'" + int2 + "' != '" + 10 + "'", int2 == 10);
+        org.junit.Assert.assertNotNull(evalContextArray23);
+        org.junit.Assert.assertNotNull(obj28);
+// flaky:         org.junit.Assert.assertEquals(obj28.toString(), "Empty expression context");
+// flaky:         org.junit.Assert.assertEquals(java.lang.String.valueOf(obj28), "Empty expression context");
+// flaky:         org.junit.Assert.assertEquals(java.util.Objects.toString(obj28), "Empty expression context");
+        org.junit.Assert.assertNull(nodePointer30);
+        org.junit.Assert.assertNotNull(jXPathContext36);
+        org.junit.Assert.assertNotNull(list40);
+        org.junit.Assert.assertNotNull(locale44);
+        org.junit.Assert.assertEquals(locale44.toString(), "en_US");
+        org.junit.Assert.assertNull(nodePointer51);
+        org.junit.Assert.assertNotNull(jXPathContext53);
+        org.junit.Assert.assertNotNull(iterator57);
+        org.junit.Assert.assertNull(decimalFormatSymbols59);
+        org.junit.Assert.assertTrue("'" + boolean63 + "' != '" + false + "'", boolean63 == false);
+        org.junit.Assert.assertNull(nodeIterator64);
+        org.junit.Assert.assertTrue("'" + int65 + "' != '" + 1 + "'", int65 == 1);
+        org.junit.Assert.assertNull(obj70);
+        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + true + "'", boolean76 == true);
+        org.junit.Assert.assertNull(namespaceResolver77);
+        org.junit.Assert.assertNotNull(jXPathContext85);
+        org.junit.Assert.assertNotNull(list89);
+        org.junit.Assert.assertNotNull(locale93);
+        org.junit.Assert.assertEquals(locale93.toString(), "en_US");
+    }
+
+    @Test
+    public void test220() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test220");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.literal("http://www.w3.org/XML/1998/namespace");
         java.lang.Object obj5 = treeCompiler0.qname("http://www.w3.org/XML/1998/namespace", "$null");
@@ -14531,9 +14704,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test218");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test221");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -14594,9 +14767,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test219");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test222");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -14668,9 +14841,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test220");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test223");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -14774,9 +14947,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test221");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test224");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -14846,9 +15019,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test222");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test225");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -14918,9 +15091,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test223");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test226");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -14987,9 +15160,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test224");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test227");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -15089,9 +15262,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test225() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test225");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test228");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         org.apache.commons.jxpath.Functions functions2 = null;
@@ -15205,9 +15378,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test226");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test229");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -15315,9 +15488,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test227");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test230");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -15362,9 +15535,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test228");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test231");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -15477,9 +15650,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test229() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test229");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test232");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -15589,9 +15762,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test230() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test230");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test233");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -15673,9 +15846,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test231() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test231");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test234");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -15783,9 +15956,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test232() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test232");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test235");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -15849,9 +16022,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test233() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test233");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test236");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -15892,9 +16065,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test234() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test234");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test237");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -16006,9 +16179,63 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test235() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test235");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test238");
+        org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
+        java.lang.Object obj1 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(obj1);
+        org.apache.commons.jxpath.Functions functions3 = null;
+        jXPathContext2.setFunctions(functions3);
+        org.apache.commons.jxpath.IdentityManager identityManager5 = jXPathContext2.getIdentityManager();
+        org.apache.commons.jxpath.JXPathContext jXPathContext7 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext2, (java.lang.Object) '#');
+        org.apache.commons.jxpath.Variables variables8 = jXPathContext7.getVariables();
+        java.lang.Object obj9 = null;
+        java.util.Locale locale10 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer11 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj9, locale10);
+        org.apache.commons.jxpath.ri.EvalContext evalContext12 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest13 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext14 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext12, nodeTest13);
+        org.apache.commons.jxpath.ri.EvalContext evalContext15 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest16 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext17 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext15, nodeTest16);
+        org.apache.commons.jxpath.ri.EvalContext evalContext18 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest19 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext20 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext18, nodeTest19);
+        org.apache.commons.jxpath.ri.EvalContext evalContext21 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest22 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext23 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext21, nodeTest22);
+        org.apache.commons.jxpath.ri.EvalContext evalContext24 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest25 = null;
+        org.apache.commons.jxpath.ri.axes.SelfContext selfContext26 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext24, nodeTest25);
+        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray27 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext17, evalContext18, evalContext21, evalContext24 };
+        org.apache.commons.jxpath.ri.axes.UnionContext unionContext28 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext14, evalContextArray27);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer29 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer11, (java.lang.Object) selfContext14);
+        int int30 = jDOMNodePointer29.getLength();
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer31 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer29);
+        java.lang.String str32 = jDOMNodePointer29.asPath();
+        boolean boolean33 = jDOMNodePointer29.isCollection();
+        java.lang.Object obj34 = jDOMNodePointer29.getNode();
+        org.apache.commons.jxpath.JXPathContext jXPathContext35 = jXPathContextFactoryReferenceImpl0.newContext(jXPathContext7, obj34);
+        org.junit.Assert.assertNotNull(jXPathContext2);
+        org.junit.Assert.assertNull(identityManager5);
+        org.junit.Assert.assertNotNull(jXPathContext7);
+        org.junit.Assert.assertNotNull(variables8);
+        org.junit.Assert.assertNotNull(evalContextArray27);
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 1 + "'", int30 == 1);
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+        org.junit.Assert.assertNotNull(obj34);
+// flaky:         org.junit.Assert.assertEquals(obj34.toString(), "Empty expression context");
+// flaky:         org.junit.Assert.assertEquals(java.lang.String.valueOf(obj34), "Empty expression context");
+// flaky:         org.junit.Assert.assertEquals(java.util.Objects.toString(obj34), "Empty expression context");
+        org.junit.Assert.assertNotNull(jXPathContext35);
+    }
+
+    @Test
+    public void test239() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test239");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         org.w3c.dom.Node node1 = null;
         java.util.Locale locale2 = null;
@@ -16065,9 +16292,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test236() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test236");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test240");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -16119,9 +16346,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test237() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test237");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test241");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -16181,9 +16408,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test238() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test238");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test242");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         org.w3c.dom.Node node1 = null;
         java.util.Locale locale2 = null;
@@ -16234,9 +16461,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test239() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test239");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test243");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         org.apache.commons.jxpath.Functions functions2 = null;
@@ -16256,9 +16483,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test240() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test240");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test244");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -16276,9 +16503,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test241() throws Throwable {
+    public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test241");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test245");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         org.w3c.dom.Node node1 = null;
         java.util.Locale locale2 = null;
@@ -16376,9 +16603,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test242() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test242");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test246");
         org.apache.commons.jxpath.Container container0 = null;
         java.lang.Object obj1 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(obj1);
@@ -16404,9 +16631,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test243() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test243");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test247");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -16528,9 +16755,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test244() throws Throwable {
+    public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test244");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test248");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -16548,9 +16775,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test245() throws Throwable {
+    public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test245");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test249");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -16665,9 +16892,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test246() throws Throwable {
+    public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test246");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test250");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         org.apache.commons.jxpath.Functions functions2 = null;
@@ -16739,9 +16966,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test247() throws Throwable {
+    public void test251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test247");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test251");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -16845,9 +17072,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test248() throws Throwable {
+    public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test248");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test252");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         java.lang.Object obj2 = jXPathContext1.getContextBean();
@@ -16863,9 +17090,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test249() throws Throwable {
+    public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test249");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test253");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -16902,9 +17129,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test250() throws Throwable {
+    public void test254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test250");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test254");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -17003,9 +17230,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test251() throws Throwable {
+    public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test251");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test255");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -17109,9 +17336,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test252() throws Throwable {
+    public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test252");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test256");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -17183,9 +17410,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test253() throws Throwable {
+    public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test253");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test257");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -17223,9 +17450,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test254() throws Throwable {
+    public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test254");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test258");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         org.w3c.dom.Node node1 = null;
         java.util.Locale locale2 = null;
@@ -17323,9 +17550,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test255() throws Throwable {
+    public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test255");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test259");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest1 = null;
         org.apache.commons.jxpath.ri.axes.SelfContext selfContext2 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext0, nodeTest1);
@@ -17351,9 +17578,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test256() throws Throwable {
+    public void test260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test256");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test260");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer0, qName1);
@@ -17365,9 +17592,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test257() throws Throwable {
+    public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test257");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test261");
         org.w3c.dom.Node node0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
@@ -17465,9 +17692,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test258() throws Throwable {
+    public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test258");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test262");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         jXPathContext1.registerDefaultNamespace("hi!");
@@ -17567,9 +17794,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test259() throws Throwable {
+    public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test259");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test263");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -17608,9 +17835,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test260() throws Throwable {
+    public void test264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test260");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test264");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         org.w3c.dom.Node node1 = null;
         java.util.Locale locale2 = null;
@@ -17698,9 +17925,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test261() throws Throwable {
+    public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test261");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test265");
         java.lang.Object obj0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = org.apache.commons.jxpath.JXPathContext.newContext(obj0);
         jXPathContext1.registerDefaultNamespace("hi!");
@@ -17744,9 +17971,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test262() throws Throwable {
+    public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test262");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test266");
         java.lang.Object obj0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
@@ -17781,9 +18008,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test263() throws Throwable {
+    public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test263");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test267");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -17846,9 +18073,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test264() throws Throwable {
+    public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test264");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test268");
         org.apache.commons.jxpath.Container container0 = null;
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
@@ -17956,9 +18183,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test265() throws Throwable {
+    public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test265");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test269");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer0, qName1);
@@ -18072,1178 +18299,5 @@ public class RandoopRegressionTest0 {
         org.junit.Assert.assertNotNull(nodeIterator91);
         org.junit.Assert.assertNotNull(nodeIterator92);
         org.junit.Assert.assertTrue("'" + int93 + "' != '" + 1 + "'", int93 == 1);
-    }
-
-    @Test
-    public void test266() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test266");
-        java.lang.Object obj0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
-        org.apache.commons.jxpath.ri.EvalContext evalContext3 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext5 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext3, nodeTest4);
-        org.apache.commons.jxpath.ri.EvalContext evalContext6 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest7 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext8 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext6, nodeTest7);
-        org.apache.commons.jxpath.ri.EvalContext evalContext9 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest10 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext11 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext9, nodeTest10);
-        org.apache.commons.jxpath.ri.EvalContext evalContext12 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest13 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext14 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext12, nodeTest13);
-        org.apache.commons.jxpath.ri.EvalContext evalContext15 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest16 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext17 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext15, nodeTest16);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray18 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext8, evalContext9, evalContext12, evalContext15 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext19 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext5, evalContextArray18);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer20 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer2, (java.lang.Object) selfContext5);
-        int int21 = jDOMNodePointer20.getLength();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer22 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer20);
-        java.lang.Object obj23 = nullPropertyPointer22.getNode();
-        boolean boolean24 = nullPropertyPointer22.isContainer();
-        java.lang.Object obj25 = nullPropertyPointer22.getImmediateNode();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer26 = nullPropertyPointer22.getValuePointer();
-        nullPropertyPointer22.setNameAttributeValue("null");
-        org.apache.commons.jxpath.ri.QName qName29 = nullPropertyPointer22.getName();
-        org.junit.Assert.assertNotNull(evalContextArray18);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 1 + "'", int21 == 1);
-        org.junit.Assert.assertNull(obj23);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + true + "'", boolean24 == true);
-        org.junit.Assert.assertNull(obj25);
-        org.junit.Assert.assertNotNull(nodePointer26);
-        org.junit.Assert.assertNotNull(qName29);
-    }
-
-    @Test
-    public void test267() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test267");
-        java.lang.Object obj0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
-        org.apache.commons.jxpath.ri.EvalContext evalContext3 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext5 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext3, nodeTest4);
-        org.apache.commons.jxpath.ri.EvalContext evalContext6 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest7 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext8 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext6, nodeTest7);
-        org.apache.commons.jxpath.ri.EvalContext evalContext9 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest10 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext11 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext9, nodeTest10);
-        org.apache.commons.jxpath.ri.EvalContext evalContext12 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest13 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext14 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext12, nodeTest13);
-        org.apache.commons.jxpath.ri.EvalContext evalContext15 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest16 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext17 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext15, nodeTest16);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray18 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext8, evalContext9, evalContext12, evalContext15 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext19 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext5, evalContextArray18);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer20 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer2, (java.lang.Object) selfContext5);
-        org.w3c.dom.Node node21 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer22 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer20, node21);
-        java.lang.Object obj23 = null;
-        java.util.Locale locale24 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer25 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj23, locale24);
-        org.apache.commons.jxpath.ri.EvalContext evalContext26 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest27 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext28 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext26, nodeTest27);
-        org.apache.commons.jxpath.ri.EvalContext evalContext29 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest30 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext31 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext29, nodeTest30);
-        org.apache.commons.jxpath.ri.EvalContext evalContext32 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest33 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext34 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext32, nodeTest33);
-        org.apache.commons.jxpath.ri.EvalContext evalContext35 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest36 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext37 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext35, nodeTest36);
-        org.apache.commons.jxpath.ri.EvalContext evalContext38 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest39 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext40 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext38, nodeTest39);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray41 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext31, evalContext32, evalContext35, evalContext38 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext42 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext28, evalContextArray41);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer43 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer25, (java.lang.Object) selfContext28);
-        org.apache.commons.jxpath.ri.QName qName44 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean45 = null;
-        java.util.Locale locale46 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer47 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName44, dynaBean45, locale46);
-        int int48 = dOMNodePointer22.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer25, (org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer47);
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer49 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer47);
-        org.apache.commons.jxpath.ri.QName qName50 = nullPropertyPointer49.getName();
-        org.junit.Assert.assertNotNull(evalContextArray18);
-        org.junit.Assert.assertNotNull(evalContextArray41);
-        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
-        org.junit.Assert.assertNotNull(qName50);
-    }
-
-    @Test
-    public void test268() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test268");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer0, qName1);
-        boolean boolean3 = nullPointer2.isAttribute();
-        nullPointer2.printPointerChain();
-        org.apache.commons.jxpath.ri.QName qName5 = null;
-        java.lang.Object obj6 = null;
-        java.lang.Object obj7 = null;
-        java.util.Locale locale8 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer9 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj7, locale8);
-        org.apache.commons.jxpath.ri.EvalContext evalContext10 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest11 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext12 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext10, nodeTest11);
-        org.apache.commons.jxpath.ri.EvalContext evalContext13 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest14 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext15 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext13, nodeTest14);
-        org.apache.commons.jxpath.ri.EvalContext evalContext16 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest17 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext18 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext16, nodeTest17);
-        org.apache.commons.jxpath.ri.EvalContext evalContext19 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest20 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext21 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext19, nodeTest20);
-        org.apache.commons.jxpath.ri.EvalContext evalContext22 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest23 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext24 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext22, nodeTest23);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray25 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext15, evalContext16, evalContext19, evalContext22 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext26 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext12, evalContextArray25);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer27 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer9, (java.lang.Object) selfContext12);
-        int int28 = jDOMNodePointer27.getLength();
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest29 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer31 = null;
-        org.apache.commons.jxpath.ri.QName qName32 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer33 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer31, qName32);
-        boolean boolean34 = nullPointer33.isDynamicPropertyDeclarationSupported();
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator35 = jDOMNodePointer27.childIterator(nodeTest29, true, (org.apache.commons.jxpath.ri.model.NodePointer) nullPointer33);
-        org.apache.commons.jxpath.Container container36 = null;
-        java.util.Locale locale37 = null;
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer38 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container36, locale37);
-        org.apache.commons.jxpath.MapDynamicPropertyHandler mapDynamicPropertyHandler39 = new org.apache.commons.jxpath.MapDynamicPropertyHandler();
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPropertyPointer dynamicPropertyPointer40 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) containerPointer38, (org.apache.commons.jxpath.DynamicPropertyHandler) mapDynamicPropertyHandler39);
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPropertyPointer dynamicPropertyPointer41 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullPointer33, (org.apache.commons.jxpath.DynamicPropertyHandler) mapDynamicPropertyHandler39);
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer42 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullPointer2, qName5, obj6, (org.apache.commons.jxpath.DynamicPropertyHandler) mapDynamicPropertyHandler39);
-        int int43 = dynamicPointer42.getLength();
-        boolean boolean44 = dynamicPointer42.isLeaf();
-        boolean boolean45 = dynamicPointer42.isCollection();
-        org.apache.commons.jxpath.ri.QName qName46 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean47 = null;
-        java.util.Locale locale48 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer49 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName46, dynaBean47, locale48);
-        java.lang.String str50 = dynaBeanPointer49.asPath();
-        java.lang.Object obj51 = dynaBeanPointer49.getImmediateNode();
-        java.lang.Object obj52 = dynaBeanPointer49.getImmediateNode();
-        java.lang.Object obj53 = null;
-        java.util.Locale locale54 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer55 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj53, locale54);
-        java.lang.Object obj56 = jDOMNodePointer55.getImmediateNode();
-        java.lang.Object obj57 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext58 = org.apache.commons.jxpath.JXPathContext.newContext(obj57);
-        jXPathContext58.registerDefaultNamespace("hi!");
-        java.lang.Object obj61 = null;
-        java.util.Locale locale62 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer63 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj61, locale62);
-        org.apache.commons.jxpath.ri.EvalContext evalContext64 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest65 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext66 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext64, nodeTest65);
-        org.apache.commons.jxpath.ri.EvalContext evalContext67 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest68 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext69 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext67, nodeTest68);
-        org.apache.commons.jxpath.ri.EvalContext evalContext70 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest71 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext72 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext70, nodeTest71);
-        org.apache.commons.jxpath.ri.EvalContext evalContext73 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest74 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext75 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext73, nodeTest74);
-        org.apache.commons.jxpath.ri.EvalContext evalContext76 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest77 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext78 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext76, nodeTest77);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray79 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext69, evalContext70, evalContext73, evalContext76 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext80 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext66, evalContextArray79);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer81 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer63, (java.lang.Object) selfContext66);
-        int int82 = jDOMNodePointer81.getLength();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer83 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer81);
-        java.lang.Object obj84 = nullPropertyPointer83.getNode();
-        boolean boolean85 = nullPropertyPointer83.isLeaf();
-        nullPropertyPointer83.setPropertyName("");
-        jXPathContext58.setNamespaceContextPointer((org.apache.commons.jxpath.Pointer) nullPropertyPointer83);
-        org.apache.commons.jxpath.ri.QName qName89 = nullPropertyPointer83.getName();
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator90 = jDOMNodePointer55.attributeIterator(qName89);
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator91 = dynaBeanPointer49.attributeIterator(qName89);
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator92 = dynamicPointer42.attributeIterator(qName89);
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean94 = nodeIterator92.setPosition(29);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertNotNull(evalContextArray25);
-        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 1 + "'", int28 == 1);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(nodeIterator35);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 1 + "'", int43 == 1);
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + true + "'", boolean44 == true);
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
-        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "/" + "'", str50, "/");
-        org.junit.Assert.assertNull(obj51);
-        org.junit.Assert.assertNull(obj52);
-        org.junit.Assert.assertNull(obj56);
-        org.junit.Assert.assertNotNull(jXPathContext58);
-        org.junit.Assert.assertNotNull(evalContextArray79);
-        org.junit.Assert.assertTrue("'" + int82 + "' != '" + 1 + "'", int82 == 1);
-        org.junit.Assert.assertNull(obj84);
-        org.junit.Assert.assertTrue("'" + boolean85 + "' != '" + true + "'", boolean85 == true);
-        org.junit.Assert.assertNotNull(qName89);
-        org.junit.Assert.assertNotNull(nodeIterator90);
-        org.junit.Assert.assertNotNull(nodeIterator91);
-        org.junit.Assert.assertNotNull(nodeIterator92);
-    }
-
-    @Test
-    public void test269() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test269");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
-        org.apache.commons.jxpath.ri.QName qName2 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer3 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer1, qName2);
-        boolean boolean4 = nullPointer3.isAttribute();
-        org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo5 = null;
-        java.util.Locale locale6 = null;
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer7 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName0, (java.lang.Object) nullPointer3, jXPathBeanInfo5, locale6);
-        java.lang.Object obj8 = nullPointer3.getNode();
-        boolean boolean9 = nullPointer3.isActual();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer10 = null;
-        org.apache.commons.jxpath.ri.QName qName11 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer12 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer10, qName11);
-        boolean boolean13 = nullPointer12.isAttribute();
-        boolean boolean14 = nullPointer12.isCollection();
-        java.lang.Object obj15 = nullPointer12.clone();
-        boolean boolean16 = nullPointer3.equals((java.lang.Object) nullPointer12);
-        boolean boolean17 = nullPointer3.isCollection();
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer18 = nullPointer3.getPropertyPointer();
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(obj15);
-        org.junit.Assert.assertEquals(obj15.toString(), "null()");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj15), "null()");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj15), "null()");
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNotNull(propertyPointer18);
-    }
-
-    @Test
-    public void test270() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test270");
-        org.w3c.dom.Node node0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer5 = dOMNodePointer3.namespacePointer("<<unknown namespace>>");
-        org.apache.commons.jxpath.ri.model.beans.NullElementPointer nullElementPointer7 = new org.apache.commons.jxpath.ri.model.beans.NullElementPointer(nodePointer5, 41);
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer8 = nullElementPointer7.getPropertyPointer();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory collectionPointerFactory9 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory();
-        int int10 = collectionPointerFactory9.getOrder();
-        org.apache.commons.jxpath.ri.QName qName12 = new org.apache.commons.jxpath.ri.QName("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
-        java.lang.Object obj13 = null;
-        java.util.Locale locale14 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer15 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj13, locale14);
-        org.apache.commons.jxpath.ri.EvalContext evalContext16 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest17 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext18 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext16, nodeTest17);
-        org.apache.commons.jxpath.ri.EvalContext evalContext19 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest20 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext21 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext19, nodeTest20);
-        org.apache.commons.jxpath.ri.EvalContext evalContext22 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest23 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext24 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext22, nodeTest23);
-        org.apache.commons.jxpath.ri.EvalContext evalContext25 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest26 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext27 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext25, nodeTest26);
-        org.apache.commons.jxpath.ri.EvalContext evalContext28 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest29 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext30 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext28, nodeTest29);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray31 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext21, evalContext22, evalContext25, evalContext28 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext32 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext18, evalContextArray31);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer33 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer15, (java.lang.Object) selfContext18);
-        org.w3c.dom.Node node34 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer35 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer33, node34);
-        java.lang.Object obj36 = jDOMNodePointer33.getImmediateNode();
-        java.util.Locale locale37 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer38 = collectionPointerFactory9.createNodePointer(qName12, (java.lang.Object) jDOMNodePointer33, locale37);
-        java.lang.Class class40 = null;
-        org.apache.commons.jxpath.JXPathBasicBeanInfo jXPathBasicBeanInfo41 = new org.apache.commons.jxpath.JXPathBasicBeanInfo(class40);
-        org.apache.commons.jxpath.Container container42 = null;
-        java.lang.Object obj43 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext44 = org.apache.commons.jxpath.JXPathContext.newContext(obj43);
-        org.apache.commons.jxpath.Functions functions45 = null;
-        jXPathContext44.setFunctions(functions45);
-        java.util.List list48 = jXPathContext44.selectNodes("/");
-        jXPathContext44.registerNamespace("hi!", "/");
-        java.util.Locale locale52 = jXPathContext44.getLocale();
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer53 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container42, locale52);
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer54 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName12, (java.lang.Object) 55, (org.apache.commons.jxpath.JXPathBeanInfo) jXPathBasicBeanInfo41, locale52);
-        org.apache.commons.beanutils.DynaBean dynaBean55 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer56 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullElementPointer7, qName12, dynaBean55);
-        boolean boolean57 = nullElementPointer7.isCollection();
-        boolean boolean58 = nullElementPointer7.isCollection();
-        java.lang.Object obj59 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext60 = org.apache.commons.jxpath.JXPathContext.newContext(obj59);
-        org.apache.commons.jxpath.Functions functions61 = null;
-        jXPathContext60.setFunctions(functions61);
-        org.apache.commons.jxpath.IdentityManager identityManager63 = jXPathContext60.getIdentityManager();
-        org.apache.commons.jxpath.JXPathContext jXPathContext65 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext60, (java.lang.Object) '#');
-        org.apache.commons.jxpath.Pointer pointer66 = jXPathContext65.getNamespaceContextPointer();
-        java.lang.Object obj67 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext68 = org.apache.commons.jxpath.JXPathContext.newContext(obj67);
-        org.apache.commons.jxpath.Functions functions69 = null;
-        jXPathContext68.setFunctions(functions69);
-        org.apache.commons.jxpath.IdentityManager identityManager71 = jXPathContext68.getIdentityManager();
-        org.apache.commons.jxpath.JXPathContext jXPathContext73 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext68, (java.lang.Object) '#');
-        org.apache.commons.jxpath.Variables variables74 = jXPathContext73.getVariables();
-        boolean boolean76 = variables74.isDeclaredVariable("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
-        jXPathContext65.setVariables(variables74);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.jxpath.ri.model.NodePointer nodePointer78 = nullElementPointer7.createPath(jXPathContext65);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.jxpath.JXPathException; message: Cannot create an object for path id('/')/namespace::<<unknown namespace>>/null[42], operation is not allowed for this type of node");
-        } catch (org.apache.commons.jxpath.JXPathException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(nodePointer5);
-        org.junit.Assert.assertNotNull(propertyPointer8);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 10 + "'", int10 == 10);
-        org.junit.Assert.assertNotNull(evalContextArray31);
-        org.junit.Assert.assertNotNull(obj36);
-// flaky:         org.junit.Assert.assertEquals(obj36.toString(), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.lang.String.valueOf(obj36), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.util.Objects.toString(obj36), "Empty expression context");
-        org.junit.Assert.assertNull(nodePointer38);
-        org.junit.Assert.assertNotNull(jXPathContext44);
-        org.junit.Assert.assertNotNull(list48);
-        org.junit.Assert.assertNotNull(locale52);
-        org.junit.Assert.assertEquals(locale52.toString(), "en_US");
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertNotNull(jXPathContext60);
-        org.junit.Assert.assertNull(identityManager63);
-        org.junit.Assert.assertNotNull(jXPathContext65);
-        org.junit.Assert.assertNotNull(pointer66);
-        org.junit.Assert.assertNotNull(jXPathContext68);
-        org.junit.Assert.assertNull(identityManager71);
-        org.junit.Assert.assertNotNull(jXPathContext73);
-        org.junit.Assert.assertNotNull(variables74);
-        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
-    }
-
-    @Test
-    public void test271() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test271");
-        java.lang.Object obj0 = null;
-        org.apache.commons.jxpath.Container container1 = null;
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory collectionPointerFactory2 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory();
-        int int3 = collectionPointerFactory2.getOrder();
-        org.apache.commons.jxpath.ri.QName qName5 = new org.apache.commons.jxpath.ri.QName("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
-        java.lang.Object obj6 = null;
-        java.util.Locale locale7 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer8 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj6, locale7);
-        org.apache.commons.jxpath.ri.EvalContext evalContext9 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest10 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext11 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext9, nodeTest10);
-        org.apache.commons.jxpath.ri.EvalContext evalContext12 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest13 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext14 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext12, nodeTest13);
-        org.apache.commons.jxpath.ri.EvalContext evalContext15 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest16 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext17 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext15, nodeTest16);
-        org.apache.commons.jxpath.ri.EvalContext evalContext18 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest19 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext20 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext18, nodeTest19);
-        org.apache.commons.jxpath.ri.EvalContext evalContext21 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest22 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext23 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext21, nodeTest22);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray24 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext14, evalContext15, evalContext18, evalContext21 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext25 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext11, evalContextArray24);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer26 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer8, (java.lang.Object) selfContext11);
-        org.w3c.dom.Node node27 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer28 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer26, node27);
-        java.lang.Object obj29 = jDOMNodePointer26.getImmediateNode();
-        java.util.Locale locale30 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer31 = collectionPointerFactory2.createNodePointer(qName5, (java.lang.Object) jDOMNodePointer26, locale30);
-        java.lang.Class class33 = null;
-        org.apache.commons.jxpath.JXPathBasicBeanInfo jXPathBasicBeanInfo34 = new org.apache.commons.jxpath.JXPathBasicBeanInfo(class33);
-        org.apache.commons.jxpath.Container container35 = null;
-        java.lang.Object obj36 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext37 = org.apache.commons.jxpath.JXPathContext.newContext(obj36);
-        org.apache.commons.jxpath.Functions functions38 = null;
-        jXPathContext37.setFunctions(functions38);
-        java.util.List list41 = jXPathContext37.selectNodes("/");
-        jXPathContext37.registerNamespace("hi!", "/");
-        java.util.Locale locale45 = jXPathContext37.getLocale();
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer46 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container35, locale45);
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer47 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName5, (java.lang.Object) 55, (org.apache.commons.jxpath.JXPathBeanInfo) jXPathBasicBeanInfo34, locale45);
-        org.apache.commons.jxpath.Container container48 = null;
-        java.util.Locale locale49 = null;
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer50 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container48, locale49);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer52 = containerPointer50.namespacePointer("");
-        java.lang.Object obj53 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext54 = org.apache.commons.jxpath.JXPathContext.newContext(obj53);
-        org.apache.commons.jxpath.Functions functions55 = null;
-        jXPathContext54.setFunctions(functions55);
-        java.util.Iterator iterator58 = jXPathContext54.iteratePointers("UNKNOWN");
-        java.text.DecimalFormatSymbols decimalFormatSymbols60 = jXPathContext54.getDecimalFormatSymbols("/");
-        java.text.DecimalFormatSymbols decimalFormatSymbols62 = null;
-        jXPathContext54.setDecimalFormatSymbols("", decimalFormatSymbols62);
-        boolean boolean64 = containerPointer50.equals((java.lang.Object) jXPathContext54);
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator65 = containerPointer50.namespaceIterator();
-        int int66 = containerPointer50.getLength();
-        org.apache.commons.jxpath.ri.QName qName67 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean68 = null;
-        java.util.Locale locale69 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer70 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName67, dynaBean68, locale69);
-        java.lang.Object obj71 = dynaBeanPointer70.getValue();
-        org.apache.commons.jxpath.ri.QName qName72 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean73 = null;
-        java.util.Locale locale74 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer75 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName72, dynaBean73, locale74);
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest76 = null;
-        boolean boolean77 = org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer.testNode((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer70, (java.lang.Object) dynaBeanPointer75, nodeTest76);
-        org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver78 = dynaBeanPointer75.getNamespaceResolver();
-        org.apache.commons.jxpath.MapDynamicPropertyHandler mapDynamicPropertyHandler79 = new org.apache.commons.jxpath.MapDynamicPropertyHandler();
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPropertyPointer dynamicPropertyPointer80 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer75, (org.apache.commons.jxpath.DynamicPropertyHandler) mapDynamicPropertyHandler79);
-        org.apache.commons.jxpath.ri.QName qName82 = new org.apache.commons.jxpath.ri.QName("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
-        org.apache.commons.beanutils.DynaBean dynaBean83 = null;
-        org.apache.commons.jxpath.Container container84 = null;
-        java.lang.Object obj85 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext86 = org.apache.commons.jxpath.JXPathContext.newContext(obj85);
-        org.apache.commons.jxpath.Functions functions87 = null;
-        jXPathContext86.setFunctions(functions87);
-        java.util.List list90 = jXPathContext86.selectNodes("/");
-        jXPathContext86.registerNamespace("hi!", "/");
-        java.util.Locale locale94 = jXPathContext86.getLocale();
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer95 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container84, locale94);
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer96 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName82, dynaBean83, locale94);
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer97 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer(qName5, (java.lang.Object) int66, (org.apache.commons.jxpath.DynamicPropertyHandler) mapDynamicPropertyHandler79, locale94);
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer98 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container1, locale94);
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer99 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer(obj0, locale94);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 10 + "'", int3 == 10);
-        org.junit.Assert.assertNotNull(evalContextArray24);
-        org.junit.Assert.assertNotNull(obj29);
-// flaky:         org.junit.Assert.assertEquals(obj29.toString(), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.lang.String.valueOf(obj29), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.util.Objects.toString(obj29), "Empty expression context");
-        org.junit.Assert.assertNull(nodePointer31);
-        org.junit.Assert.assertNotNull(jXPathContext37);
-        org.junit.Assert.assertNotNull(list41);
-        org.junit.Assert.assertNotNull(locale45);
-        org.junit.Assert.assertEquals(locale45.toString(), "en_US");
-        org.junit.Assert.assertNull(nodePointer52);
-        org.junit.Assert.assertNotNull(jXPathContext54);
-        org.junit.Assert.assertNotNull(iterator58);
-        org.junit.Assert.assertNull(decimalFormatSymbols60);
-        org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + false + "'", boolean64 == false);
-        org.junit.Assert.assertNull(nodeIterator65);
-        org.junit.Assert.assertTrue("'" + int66 + "' != '" + 1 + "'", int66 == 1);
-        org.junit.Assert.assertNull(obj71);
-        org.junit.Assert.assertTrue("'" + boolean77 + "' != '" + true + "'", boolean77 == true);
-        org.junit.Assert.assertNull(namespaceResolver78);
-        org.junit.Assert.assertNotNull(jXPathContext86);
-        org.junit.Assert.assertNotNull(list90);
-        org.junit.Assert.assertNotNull(locale94);
-        org.junit.Assert.assertEquals(locale94.toString(), "en_US");
-    }
-
-    @Test
-    public void test272() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test272");
-        org.w3c.dom.Node node0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer5 = dOMNodePointer3.namespacePointer("<<unknown namespace>>");
-        org.apache.commons.jxpath.ri.model.beans.NullElementPointer nullElementPointer7 = new org.apache.commons.jxpath.ri.model.beans.NullElementPointer(nodePointer5, 41);
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer8 = nullElementPointer7.getPropertyPointer();
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer9 = nullElementPointer7.getPropertyPointer();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer10 = null;
-        org.apache.commons.jxpath.ri.QName qName11 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer12 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer10, qName11);
-        boolean boolean13 = nullPointer12.isDynamicPropertyDeclarationSupported();
-        // The following exception was thrown during execution in test generation
-        try {
-            nullElementPointer7.setValue((java.lang.Object) boolean13);
-            org.junit.Assert.fail("Expected exception of type java.lang.UnsupportedOperationException; message: Collection element does not exist: id('/')/namespace::<<unknown namespace>>[42]");
-        } catch (java.lang.UnsupportedOperationException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(nodePointer5);
-        org.junit.Assert.assertNotNull(propertyPointer8);
-        org.junit.Assert.assertNotNull(propertyPointer9);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-    }
-
-    @Test
-    public void test273() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test273");
-        java.lang.Object obj0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
-        org.apache.commons.jxpath.ri.EvalContext evalContext3 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext5 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext3, nodeTest4);
-        org.apache.commons.jxpath.ri.EvalContext evalContext6 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest7 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext8 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext6, nodeTest7);
-        org.apache.commons.jxpath.ri.EvalContext evalContext9 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest10 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext11 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext9, nodeTest10);
-        org.apache.commons.jxpath.ri.EvalContext evalContext12 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest13 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext14 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext12, nodeTest13);
-        org.apache.commons.jxpath.ri.EvalContext evalContext15 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest16 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext17 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext15, nodeTest16);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray18 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext8, evalContext9, evalContext12, evalContext15 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext19 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext5, evalContextArray18);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer20 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer2, (java.lang.Object) selfContext5);
-        int int21 = jDOMNodePointer20.getLength();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer22 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer20);
-        java.lang.Object obj23 = nullPropertyPointer22.getNode();
-        org.apache.commons.jxpath.ri.QName qName24 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer25 = null;
-        org.apache.commons.jxpath.ri.QName qName26 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer27 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer25, qName26);
-        boolean boolean28 = nullPointer27.isAttribute();
-        org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo29 = null;
-        java.util.Locale locale30 = null;
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer31 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName24, (java.lang.Object) nullPointer27, jXPathBeanInfo29, locale30);
-        nullPropertyPointer22.bean = qName24;
-        int int33 = nullPropertyPointer22.getLength();
-        java.lang.Object obj34 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext35 = org.apache.commons.jxpath.JXPathContext.newContext(obj34);
-        org.apache.commons.jxpath.Functions functions36 = null;
-        jXPathContext35.setFunctions(functions36);
-        org.apache.commons.jxpath.IdentityManager identityManager38 = jXPathContext35.getIdentityManager();
-        org.apache.commons.jxpath.KeyManager keyManager39 = jXPathContext35.getKeyManager();
-        org.apache.commons.jxpath.AbstractFactory abstractFactory40 = jXPathContext35.getFactory();
-        org.apache.commons.jxpath.ri.EvalContext evalContext41 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest42 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext43 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext41, nodeTest42);
-        org.apache.commons.jxpath.ri.EvalContext evalContext44 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest45 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext46 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext44, nodeTest45);
-        org.apache.commons.jxpath.ri.EvalContext evalContext47 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest48 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext49 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext47, nodeTest48);
-        org.apache.commons.jxpath.ri.EvalContext evalContext50 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest51 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext52 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext50, nodeTest51);
-        org.apache.commons.jxpath.ri.EvalContext evalContext53 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest54 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext55 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext53, nodeTest54);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray56 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext46, evalContext47, evalContext50, evalContext53 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext57 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext43, evalContextArray56);
-        org.apache.commons.jxpath.Container container58 = null;
-        java.util.Locale locale59 = null;
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer60 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container58, locale59);
-        org.w3c.dom.Node node61 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer62 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) containerPointer60, node61);
-        boolean boolean63 = containerPointer60.isContainer();
-        boolean boolean64 = containerPointer60.isLeaf();
-        org.apache.commons.jxpath.ri.compiler.Step[] stepArray65 = new org.apache.commons.jxpath.ri.compiler.Step[] {};
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer66 = org.apache.commons.jxpath.ri.axes.SimplePathInterpreter.interpretSimpleLocationPath((org.apache.commons.jxpath.ri.EvalContext) selfContext43, (org.apache.commons.jxpath.ri.model.NodePointer) containerPointer60, stepArray65);
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest67 = null;
-        org.apache.commons.jxpath.ri.axes.AttributeContext attributeContext68 = new org.apache.commons.jxpath.ri.axes.AttributeContext((org.apache.commons.jxpath.ri.EvalContext) selfContext43, nodeTest67);
-        boolean boolean70 = selfContext43.setPosition(32);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.jxpath.ri.model.NodePointer nodePointer71 = nullPropertyPointer22.createPath(jXPathContext35, (java.lang.Object) selfContext43);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.jxpath.JXPathException; message: Factory is not set on the JXPathContext - cannot create path: ");
-        } catch (org.apache.commons.jxpath.JXPathException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(evalContextArray18);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 1 + "'", int21 == 1);
-        org.junit.Assert.assertNull(obj23);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertNotNull(jXPathContext35);
-        org.junit.Assert.assertNull(identityManager38);
-        org.junit.Assert.assertNull(keyManager39);
-        org.junit.Assert.assertNull(abstractFactory40);
-        org.junit.Assert.assertNotNull(evalContextArray56);
-        org.junit.Assert.assertTrue("'" + boolean63 + "' != '" + true + "'", boolean63 == true);
-        org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + true + "'", boolean64 == true);
-        org.junit.Assert.assertNotNull(stepArray65);
-        org.junit.Assert.assertNotNull(nodePointer66);
-        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
-    }
-
-    @Test
-    public void test274() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test274");
-        org.w3c.dom.Node node0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer5 = dOMNodePointer3.namespacePointer("<<unknown namespace>>");
-        org.apache.commons.jxpath.ri.model.beans.NullElementPointer nullElementPointer7 = new org.apache.commons.jxpath.ri.model.beans.NullElementPointer(nodePointer5, 41);
-        int int8 = nullElementPointer7.getLength();
-        boolean boolean9 = nullElementPointer7.isActual();
-        boolean boolean10 = nullElementPointer7.isLeaf();
-        int int11 = nullElementPointer7.getLength();
-        boolean boolean12 = nullElementPointer7.isContainer();
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer13 = nullElementPointer7.getPropertyPointer();
-        org.junit.Assert.assertNotNull(nodePointer5);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertNotNull(propertyPointer13);
-    }
-
-    @Test
-    public void test275() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test275");
-        org.apache.commons.jxpath.Container container0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer2 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer4 = containerPointer2.namespacePointer("");
-        java.lang.Object obj5 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext6 = org.apache.commons.jxpath.JXPathContext.newContext(obj5);
-        org.apache.commons.jxpath.Functions functions7 = null;
-        jXPathContext6.setFunctions(functions7);
-        java.util.Iterator iterator10 = jXPathContext6.iteratePointers("UNKNOWN");
-        java.text.DecimalFormatSymbols decimalFormatSymbols12 = jXPathContext6.getDecimalFormatSymbols("/");
-        java.text.DecimalFormatSymbols decimalFormatSymbols14 = null;
-        jXPathContext6.setDecimalFormatSymbols("", decimalFormatSymbols14);
-        boolean boolean16 = containerPointer2.equals((java.lang.Object) jXPathContext6);
-        java.lang.Object obj17 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext18 = org.apache.commons.jxpath.JXPathContext.newContext(obj17);
-        jXPathContext18.registerDefaultNamespace("hi!");
-        java.lang.Object obj21 = null;
-        java.util.Locale locale22 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer23 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj21, locale22);
-        org.apache.commons.jxpath.ri.EvalContext evalContext24 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest25 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext26 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext24, nodeTest25);
-        org.apache.commons.jxpath.ri.EvalContext evalContext27 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest28 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext29 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext27, nodeTest28);
-        org.apache.commons.jxpath.ri.EvalContext evalContext30 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest31 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext32 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext30, nodeTest31);
-        org.apache.commons.jxpath.ri.EvalContext evalContext33 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest34 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext35 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext33, nodeTest34);
-        org.apache.commons.jxpath.ri.EvalContext evalContext36 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest37 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext38 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext36, nodeTest37);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray39 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext29, evalContext30, evalContext33, evalContext36 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext40 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext26, evalContextArray39);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer41 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer23, (java.lang.Object) selfContext26);
-        org.w3c.dom.Node node42 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer43 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer41, node42);
-        java.lang.Object obj44 = null;
-        java.util.Locale locale45 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer46 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj44, locale45);
-        org.apache.commons.jxpath.ri.EvalContext evalContext47 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest48 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext49 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext47, nodeTest48);
-        org.apache.commons.jxpath.ri.EvalContext evalContext50 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest51 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext52 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext50, nodeTest51);
-        org.apache.commons.jxpath.ri.EvalContext evalContext53 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest54 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext55 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext53, nodeTest54);
-        org.apache.commons.jxpath.ri.EvalContext evalContext56 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest57 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext58 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext56, nodeTest57);
-        org.apache.commons.jxpath.ri.EvalContext evalContext59 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest60 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext61 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext59, nodeTest60);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray62 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext52, evalContext53, evalContext56, evalContext59 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext63 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext49, evalContextArray62);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer64 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer46, (java.lang.Object) selfContext49);
-        org.apache.commons.jxpath.ri.QName qName65 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean66 = null;
-        java.util.Locale locale67 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer68 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName65, dynaBean66, locale67);
-        int int69 = dOMNodePointer43.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer46, (org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer68);
-        jXPathContext18.setNamespaceContextPointer((org.apache.commons.jxpath.Pointer) jDOMNodePointer46);
-        org.apache.commons.jxpath.JXPathInvalidAccessException jXPathInvalidAccessException72 = new org.apache.commons.jxpath.JXPathInvalidAccessException("hi!");
-        boolean boolean73 = jDOMNodePointer46.equals((java.lang.Object) jXPathInvalidAccessException72);
-        java.util.Locale locale75 = null;
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer76 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) 38, locale75);
-        boolean boolean77 = jDOMNodePointer46.equals((java.lang.Object) collectionPointer76);
-        org.apache.commons.jxpath.Container container78 = null;
-        java.util.Locale locale79 = null;
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer80 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container78, locale79);
-        org.w3c.dom.Node node81 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer82 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) containerPointer80, node81);
-        java.lang.String str84 = dOMNodePointer82.getNamespaceURI("hi!");
-        java.lang.Object obj85 = dOMNodePointer82.getImmediateNode();
-        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl86 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext6, (java.lang.Object) jDOMNodePointer46, (org.apache.commons.jxpath.Pointer) dOMNodePointer82);
-        jXPathContextReferenceImpl86.registerNamespace("http://www.w3.org/XML/1998/namespace", "hi!");
-        jXPathContextReferenceImpl86.registerDefaultNamespace("http://www.w3.org/XML/1998/namespace");
-        org.junit.Assert.assertNull(nodePointer4);
-        org.junit.Assert.assertNotNull(jXPathContext6);
-        org.junit.Assert.assertNotNull(iterator10);
-        org.junit.Assert.assertNull(decimalFormatSymbols12);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(jXPathContext18);
-        org.junit.Assert.assertNotNull(evalContextArray39);
-        org.junit.Assert.assertNotNull(evalContextArray62);
-        org.junit.Assert.assertTrue("'" + int69 + "' != '" + 0 + "'", int69 == 0);
-        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + false + "'", boolean73 == false);
-        org.junit.Assert.assertTrue("'" + boolean77 + "' != '" + false + "'", boolean77 == false);
-        org.junit.Assert.assertNull(str84);
-        org.junit.Assert.assertNull(obj85);
-    }
-
-    @Test
-    public void test276() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test276");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
-        org.apache.commons.jxpath.ri.QName qName2 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer3 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer1, qName2);
-        boolean boolean4 = nullPointer3.isAttribute();
-        org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo5 = null;
-        java.util.Locale locale6 = null;
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer7 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName0, (java.lang.Object) nullPointer3, jXPathBeanInfo5, locale6);
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer8 = beanPointer7.getPropertyPointer();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer9 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) propertyPointer8);
-        org.apache.commons.jxpath.ri.QName qName10 = nullPropertyPointer9.getName();
-        java.lang.String str11 = nullPropertyPointer9.getPropertyName();
-        java.lang.Object obj12 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext13 = org.apache.commons.jxpath.JXPathContext.newContext(obj12);
-        org.apache.commons.jxpath.Functions functions14 = null;
-        jXPathContext13.setFunctions(functions14);
-        org.apache.commons.jxpath.IdentityManager identityManager16 = jXPathContext13.getIdentityManager();
-        org.apache.commons.jxpath.JXPathContext jXPathContext18 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext13, (java.lang.Object) '#');
-        org.apache.commons.jxpath.Variables variables19 = jXPathContext18.getVariables();
-        org.apache.commons.jxpath.ri.QName qName20 = null;
-        org.apache.commons.jxpath.ri.model.VariablePointer variablePointer21 = new org.apache.commons.jxpath.ri.model.VariablePointer(variables19, qName20);
-        java.lang.String str22 = variablePointer21.asPath();
-        org.apache.commons.jxpath.Container container23 = null;
-        java.util.Locale locale24 = null;
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer25 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container23, locale24);
-        org.w3c.dom.Node node26 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer27 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) containerPointer25, node26);
-        java.lang.String str28 = containerPointer25.asPath();
-        org.apache.commons.jxpath.Container container29 = null;
-        java.util.Locale locale30 = null;
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer31 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container29, locale30);
-        org.w3c.dom.Node node32 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer33 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) containerPointer31, node32);
-        java.lang.Object obj34 = dOMNodePointer33.getImmediateNode();
-        org.apache.commons.jxpath.ri.QName qName35 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer36 = null;
-        org.apache.commons.jxpath.ri.QName qName37 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer38 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer36, qName37);
-        boolean boolean39 = nullPointer38.isAttribute();
-        org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo40 = null;
-        java.util.Locale locale41 = null;
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer42 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName35, (java.lang.Object) nullPointer38, jXPathBeanInfo40, locale41);
-        org.apache.commons.jxpath.ri.QName qName43 = nullPointer38.getName();
-        int int44 = containerPointer25.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer33, (org.apache.commons.jxpath.ri.model.NodePointer) nullPointer38);
-        boolean boolean45 = variablePointer21.equals((java.lang.Object) int44);
-        java.lang.Object obj46 = null;
-        boolean boolean47 = variablePointer21.equals(obj46);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer48 = null;
-        org.apache.commons.jxpath.ri.QName qName49 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer50 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer48, qName49);
-        boolean boolean51 = nullPointer50.isDynamicPropertyDeclarationSupported();
-        boolean boolean52 = nullPointer50.isNode();
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer53 = nullPointer50.getPropertyPointer();
-        boolean boolean54 = propertyPointer53.isRoot();
-        // The following exception was thrown during execution in test generation
-        try {
-            int int55 = nullPropertyPointer9.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) variablePointer21, (org.apache.commons.jxpath.ri.model.NodePointer) propertyPointer53);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertNotNull(propertyPointer8);
-        org.junit.Assert.assertNotNull(qName10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "*" + "'", str11, "*");
-        org.junit.Assert.assertNotNull(jXPathContext13);
-        org.junit.Assert.assertNull(identityManager16);
-        org.junit.Assert.assertNotNull(jXPathContext18);
-        org.junit.Assert.assertNotNull(variables19);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "$null" + "'", str22, "$null");
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "/" + "'", str28, "/");
-        org.junit.Assert.assertNull(obj34);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertNull(qName43);
-        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + true + "'", boolean52 == true);
-        org.junit.Assert.assertNotNull(propertyPointer53);
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
-    }
-
-    @Test
-    public void test277() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test277");
-        org.w3c.dom.Node node0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer5 = dOMNodePointer3.namespacePointer("<<unknown namespace>>");
-        org.apache.commons.jxpath.ri.model.beans.NullElementPointer nullElementPointer7 = new org.apache.commons.jxpath.ri.model.beans.NullElementPointer(nodePointer5, 41);
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer8 = nullElementPointer7.getPropertyPointer();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory collectionPointerFactory9 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory();
-        int int10 = collectionPointerFactory9.getOrder();
-        org.apache.commons.jxpath.ri.QName qName12 = new org.apache.commons.jxpath.ri.QName("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
-        java.lang.Object obj13 = null;
-        java.util.Locale locale14 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer15 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj13, locale14);
-        org.apache.commons.jxpath.ri.EvalContext evalContext16 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest17 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext18 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext16, nodeTest17);
-        org.apache.commons.jxpath.ri.EvalContext evalContext19 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest20 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext21 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext19, nodeTest20);
-        org.apache.commons.jxpath.ri.EvalContext evalContext22 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest23 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext24 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext22, nodeTest23);
-        org.apache.commons.jxpath.ri.EvalContext evalContext25 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest26 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext27 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext25, nodeTest26);
-        org.apache.commons.jxpath.ri.EvalContext evalContext28 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest29 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext30 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext28, nodeTest29);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray31 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext21, evalContext22, evalContext25, evalContext28 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext32 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext18, evalContextArray31);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer33 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer15, (java.lang.Object) selfContext18);
-        org.w3c.dom.Node node34 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer35 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer33, node34);
-        java.lang.Object obj36 = jDOMNodePointer33.getImmediateNode();
-        java.util.Locale locale37 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer38 = collectionPointerFactory9.createNodePointer(qName12, (java.lang.Object) jDOMNodePointer33, locale37);
-        java.lang.Class class40 = null;
-        org.apache.commons.jxpath.JXPathBasicBeanInfo jXPathBasicBeanInfo41 = new org.apache.commons.jxpath.JXPathBasicBeanInfo(class40);
-        org.apache.commons.jxpath.Container container42 = null;
-        java.lang.Object obj43 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext44 = org.apache.commons.jxpath.JXPathContext.newContext(obj43);
-        org.apache.commons.jxpath.Functions functions45 = null;
-        jXPathContext44.setFunctions(functions45);
-        java.util.List list48 = jXPathContext44.selectNodes("/");
-        jXPathContext44.registerNamespace("hi!", "/");
-        java.util.Locale locale52 = jXPathContext44.getLocale();
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer53 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container42, locale52);
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer54 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName12, (java.lang.Object) 55, (org.apache.commons.jxpath.JXPathBeanInfo) jXPathBasicBeanInfo41, locale52);
-        org.apache.commons.beanutils.DynaBean dynaBean55 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer56 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullElementPointer7, qName12, dynaBean55);
-        boolean boolean57 = nullElementPointer7.isCollection();
-        boolean boolean58 = nullElementPointer7.isCollection();
-        boolean boolean59 = nullElementPointer7.isCollection();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer60 = nullElementPointer7.getValuePointer();
-        org.junit.Assert.assertNotNull(nodePointer5);
-        org.junit.Assert.assertNotNull(propertyPointer8);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 10 + "'", int10 == 10);
-        org.junit.Assert.assertNotNull(evalContextArray31);
-        org.junit.Assert.assertNotNull(obj36);
-// flaky:         org.junit.Assert.assertEquals(obj36.toString(), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.lang.String.valueOf(obj36), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.util.Objects.toString(obj36), "Empty expression context");
-        org.junit.Assert.assertNull(nodePointer38);
-        org.junit.Assert.assertNotNull(jXPathContext44);
-        org.junit.Assert.assertNotNull(list48);
-        org.junit.Assert.assertNotNull(locale52);
-        org.junit.Assert.assertEquals(locale52.toString(), "en_US");
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + false + "'", boolean59 == false);
-        org.junit.Assert.assertNotNull(nodePointer60);
-    }
-
-    @Test
-    public void test278() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test278");
-        org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory containerPointerFactory0 = new org.apache.commons.jxpath.ri.model.container.ContainerPointerFactory();
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMPointerFactory dOMPointerFactory2 = new org.apache.commons.jxpath.ri.model.dom.DOMPointerFactory();
-        java.util.Locale locale3 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer4 = containerPointerFactory0.createNodePointer(qName1, (java.lang.Object) dOMPointerFactory2, locale3);
-        org.apache.commons.jxpath.ri.QName qName5 = null;
-        org.w3c.dom.Node node7 = null;
-        org.apache.commons.jxpath.Container container8 = null;
-        java.lang.Object obj9 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext10 = org.apache.commons.jxpath.JXPathContext.newContext(obj9);
-        org.apache.commons.jxpath.Functions functions11 = null;
-        jXPathContext10.setFunctions(functions11);
-        java.util.List list14 = jXPathContext10.selectNodes("/");
-        jXPathContext10.registerNamespace("hi!", "/");
-        java.util.Locale locale18 = jXPathContext10.getLocale();
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer19 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container8, locale18);
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer21 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node7, locale18, "$null");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer22 = containerPointerFactory0.createNodePointer(qName5, (java.lang.Object) "<<unknown namespace>>", locale18);
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer24 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(locale18, "/");
-        boolean boolean25 = nullPointer24.isNode();
-        java.lang.Object obj26 = null;
-        java.util.Locale locale27 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer28 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj26, locale27);
-        org.apache.commons.jxpath.ri.EvalContext evalContext29 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest30 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext31 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext29, nodeTest30);
-        org.apache.commons.jxpath.ri.EvalContext evalContext32 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest33 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext34 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext32, nodeTest33);
-        org.apache.commons.jxpath.ri.EvalContext evalContext35 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest36 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext37 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext35, nodeTest36);
-        org.apache.commons.jxpath.ri.EvalContext evalContext38 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest39 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext40 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext38, nodeTest39);
-        org.apache.commons.jxpath.ri.EvalContext evalContext41 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest42 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext43 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext41, nodeTest42);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray44 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext34, evalContext35, evalContext38, evalContext41 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext45 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext31, evalContextArray44);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer46 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer28, (java.lang.Object) selfContext31);
-        int int47 = jDOMNodePointer46.getLength();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer48 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer46);
-        boolean boolean49 = jDOMNodePointer46.isContainer();
-        // The following exception was thrown during execution in test generation
-        try {
-            nullPointer24.setValue((java.lang.Object) jDOMNodePointer46);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(nodePointer4);
-        org.junit.Assert.assertNotNull(jXPathContext10);
-        org.junit.Assert.assertNotNull(list14);
-        org.junit.Assert.assertNotNull(locale18);
-        org.junit.Assert.assertEquals(locale18.toString(), "en_US");
-        org.junit.Assert.assertNull(nodePointer22);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
-        org.junit.Assert.assertNotNull(evalContextArray44);
-        org.junit.Assert.assertTrue("'" + int47 + "' != '" + 1 + "'", int47 == 1);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
-    }
-
-    @Test
-    public void test279() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test279");
-        org.w3c.dom.Node node0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer3 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale1, "/");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer5 = dOMNodePointer3.namespacePointer("<<unknown namespace>>");
-        org.apache.commons.jxpath.ri.model.beans.NullElementPointer nullElementPointer7 = new org.apache.commons.jxpath.ri.model.beans.NullElementPointer(nodePointer5, 41);
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer8 = nullElementPointer7.getPropertyPointer();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory collectionPointerFactory9 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointerFactory();
-        int int10 = collectionPointerFactory9.getOrder();
-        org.apache.commons.jxpath.ri.QName qName12 = new org.apache.commons.jxpath.ri.QName("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
-        java.lang.Object obj13 = null;
-        java.util.Locale locale14 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer15 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj13, locale14);
-        org.apache.commons.jxpath.ri.EvalContext evalContext16 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest17 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext18 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext16, nodeTest17);
-        org.apache.commons.jxpath.ri.EvalContext evalContext19 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest20 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext21 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext19, nodeTest20);
-        org.apache.commons.jxpath.ri.EvalContext evalContext22 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest23 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext24 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext22, nodeTest23);
-        org.apache.commons.jxpath.ri.EvalContext evalContext25 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest26 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext27 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext25, nodeTest26);
-        org.apache.commons.jxpath.ri.EvalContext evalContext28 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest29 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext30 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext28, nodeTest29);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray31 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext21, evalContext22, evalContext25, evalContext28 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext32 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext18, evalContextArray31);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer33 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer15, (java.lang.Object) selfContext18);
-        org.w3c.dom.Node node34 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer35 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer33, node34);
-        java.lang.Object obj36 = jDOMNodePointer33.getImmediateNode();
-        java.util.Locale locale37 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer38 = collectionPointerFactory9.createNodePointer(qName12, (java.lang.Object) jDOMNodePointer33, locale37);
-        java.lang.Class class40 = null;
-        org.apache.commons.jxpath.JXPathBasicBeanInfo jXPathBasicBeanInfo41 = new org.apache.commons.jxpath.JXPathBasicBeanInfo(class40);
-        org.apache.commons.jxpath.Container container42 = null;
-        java.lang.Object obj43 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext44 = org.apache.commons.jxpath.JXPathContext.newContext(obj43);
-        org.apache.commons.jxpath.Functions functions45 = null;
-        jXPathContext44.setFunctions(functions45);
-        java.util.List list48 = jXPathContext44.selectNodes("/");
-        jXPathContext44.registerNamespace("hi!", "/");
-        java.util.Locale locale52 = jXPathContext44.getLocale();
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer53 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container42, locale52);
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer54 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName12, (java.lang.Object) 55, (org.apache.commons.jxpath.JXPathBeanInfo) jXPathBasicBeanInfo41, locale52);
-        org.apache.commons.beanutils.DynaBean dynaBean55 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer56 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullElementPointer7, qName12, dynaBean55);
-        boolean boolean57 = nullElementPointer7.isCollection();
-        boolean boolean58 = nullElementPointer7.isCollection();
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer59 = nullElementPointer7.getPropertyPointer();
-        org.junit.Assert.assertNotNull(nodePointer5);
-        org.junit.Assert.assertNotNull(propertyPointer8);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 10 + "'", int10 == 10);
-        org.junit.Assert.assertNotNull(evalContextArray31);
-        org.junit.Assert.assertNotNull(obj36);
-// flaky:         org.junit.Assert.assertEquals(obj36.toString(), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.lang.String.valueOf(obj36), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.util.Objects.toString(obj36), "Empty expression context");
-        org.junit.Assert.assertNull(nodePointer38);
-        org.junit.Assert.assertNotNull(jXPathContext44);
-        org.junit.Assert.assertNotNull(list48);
-        org.junit.Assert.assertNotNull(locale52);
-        org.junit.Assert.assertEquals(locale52.toString(), "en_US");
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
-        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
-        org.junit.Assert.assertNotNull(propertyPointer59);
-    }
-
-    @Test
-    public void test280() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test280");
-        org.apache.commons.jxpath.Container container0 = null;
-        org.apache.commons.jxpath.ri.QName qName2 = new org.apache.commons.jxpath.ri.QName("org.apache.commons.jxpath.JXPathFunctionNotFoundException: ");
-        org.apache.commons.beanutils.DynaBean dynaBean3 = null;
-        org.apache.commons.jxpath.Container container4 = null;
-        java.lang.Object obj5 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext6 = org.apache.commons.jxpath.JXPathContext.newContext(obj5);
-        org.apache.commons.jxpath.Functions functions7 = null;
-        jXPathContext6.setFunctions(functions7);
-        java.util.List list10 = jXPathContext6.selectNodes("/");
-        jXPathContext6.registerNamespace("hi!", "/");
-        java.util.Locale locale14 = jXPathContext6.getLocale();
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer15 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container4, locale14);
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer16 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName2, dynaBean3, locale14);
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer17 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale14);
-        org.junit.Assert.assertNotNull(jXPathContext6);
-        org.junit.Assert.assertNotNull(list10);
-        org.junit.Assert.assertNotNull(locale14);
-        org.junit.Assert.assertEquals(locale14.toString(), "en_US");
-    }
-
-    @Test
-    public void test281() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test281");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer1 = null;
-        org.apache.commons.jxpath.ri.QName qName2 = null;
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer3 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer1, qName2);
-        boolean boolean4 = nullPointer3.isAttribute();
-        org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo5 = null;
-        java.util.Locale locale6 = null;
-        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer7 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName0, (java.lang.Object) nullPointer3, jXPathBeanInfo5, locale6);
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer8 = beanPointer7.getPropertyPointer();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer9 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) propertyPointer8);
-        org.apache.commons.jxpath.ri.QName qName10 = nullPropertyPointer9.getName();
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean12 = nullPropertyPointer9.isLanguage("null");
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertNotNull(propertyPointer8);
-        org.junit.Assert.assertNotNull(qName10);
-    }
-
-    @Test
-    public void test282() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test282");
-        java.lang.Object obj0 = null;
-        java.util.Locale locale1 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj0, locale1);
-        org.apache.commons.jxpath.ri.EvalContext evalContext3 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext5 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext3, nodeTest4);
-        org.apache.commons.jxpath.ri.EvalContext evalContext6 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest7 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext8 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext6, nodeTest7);
-        org.apache.commons.jxpath.ri.EvalContext evalContext9 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest10 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext11 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext9, nodeTest10);
-        org.apache.commons.jxpath.ri.EvalContext evalContext12 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest13 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext14 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext12, nodeTest13);
-        org.apache.commons.jxpath.ri.EvalContext evalContext15 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest16 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext17 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext15, nodeTest16);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray18 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext8, evalContext9, evalContext12, evalContext15 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext19 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext5, evalContextArray18);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer20 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer2, (java.lang.Object) selfContext5);
-        org.w3c.dom.Node node21 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer22 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer20, node21);
-        int int23 = dOMNodePointer22.getLength();
-        org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl24 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
-        java.lang.Object obj25 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext26 = org.apache.commons.jxpath.JXPathContext.newContext(obj25);
-        org.apache.commons.jxpath.Functions functions27 = null;
-        jXPathContext26.setFunctions(functions27);
-        org.apache.commons.jxpath.IdentityManager identityManager29 = jXPathContext26.getIdentityManager();
-        org.apache.commons.jxpath.JXPathContext jXPathContext31 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext26, (java.lang.Object) '#');
-        org.apache.commons.jxpath.Variables variables32 = jXPathContext31.getVariables();
-        java.lang.Object obj33 = null;
-        java.util.Locale locale34 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer35 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer(obj33, locale34);
-        org.apache.commons.jxpath.ri.EvalContext evalContext36 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest37 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext38 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext36, nodeTest37);
-        org.apache.commons.jxpath.ri.EvalContext evalContext39 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest40 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext41 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext39, nodeTest40);
-        org.apache.commons.jxpath.ri.EvalContext evalContext42 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest43 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext44 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext42, nodeTest43);
-        org.apache.commons.jxpath.ri.EvalContext evalContext45 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest46 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext47 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext45, nodeTest46);
-        org.apache.commons.jxpath.ri.EvalContext evalContext48 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest49 = null;
-        org.apache.commons.jxpath.ri.axes.SelfContext selfContext50 = new org.apache.commons.jxpath.ri.axes.SelfContext(evalContext48, nodeTest49);
-        org.apache.commons.jxpath.ri.EvalContext[] evalContextArray51 = new org.apache.commons.jxpath.ri.EvalContext[] { selfContext41, evalContext42, evalContext45, evalContext48 };
-        org.apache.commons.jxpath.ri.axes.UnionContext unionContext52 = new org.apache.commons.jxpath.ri.axes.UnionContext((org.apache.commons.jxpath.ri.EvalContext) selfContext38, evalContextArray51);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer53 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer35, (java.lang.Object) selfContext38);
-        int int54 = jDOMNodePointer53.getLength();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer55 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer53);
-        java.lang.String str56 = jDOMNodePointer53.asPath();
-        boolean boolean57 = jDOMNodePointer53.isCollection();
-        java.lang.Object obj58 = jDOMNodePointer53.getNode();
-        org.apache.commons.jxpath.JXPathContext jXPathContext59 = jXPathContextFactoryReferenceImpl24.newContext(jXPathContext31, obj58);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer60 = dOMNodePointer22.createPath(jXPathContext31);
-        org.junit.Assert.assertNotNull(evalContextArray18);
-        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 1 + "'", int23 == 1);
-        org.junit.Assert.assertNotNull(jXPathContext26);
-        org.junit.Assert.assertNull(identityManager29);
-        org.junit.Assert.assertNotNull(jXPathContext31);
-        org.junit.Assert.assertNotNull(variables32);
-        org.junit.Assert.assertNotNull(evalContextArray51);
-        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 1 + "'", int54 == 1);
-        org.junit.Assert.assertEquals("'" + str56 + "' != '" + "" + "'", str56, "");
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
-        org.junit.Assert.assertNotNull(obj58);
-// flaky:         org.junit.Assert.assertEquals(obj58.toString(), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.lang.String.valueOf(obj58), "Empty expression context");
-// flaky:         org.junit.Assert.assertEquals(java.util.Objects.toString(obj58), "Empty expression context");
-        org.junit.Assert.assertNotNull(jXPathContext59);
-        org.junit.Assert.assertNotNull(nodePointer60);
     }
 }

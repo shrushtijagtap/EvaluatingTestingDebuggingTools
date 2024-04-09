@@ -4654,6 +4654,23 @@ public class RandoopRegressionTest0 {
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
         com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
+        boolean boolean7 = jsonParser6.getValueAsBoolean();
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+    }
+
+    @Test
+    public void test0148() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0148");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
         com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
         java.lang.String str6 = jsonFactory4.getRootValueSeparator();
         com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
@@ -4692,9 +4709,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0148() throws Throwable {
+    public void test0149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0148");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0149");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4720,9 +4737,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0149() throws Throwable {
+    public void test0150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0149");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0150");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -4740,9 +4757,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0150() throws Throwable {
+    public void test0151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0150");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0151");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4769,9 +4786,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0151() throws Throwable {
+    public void test0152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0151");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0152");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4801,9 +4818,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0152() throws Throwable {
+    public void test0153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0152");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0153");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4837,9 +4854,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0153() throws Throwable {
+    public void test0154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0153");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0154");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -4962,9 +4979,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0154() throws Throwable {
+    public void test0155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0154");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0155");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -5026,9 +5043,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0155() throws Throwable {
+    public void test0156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0155");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0156");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         byte[] byteArray3 = new byte[] {};
@@ -5049,9 +5066,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0156() throws Throwable {
+    public void test0157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0156");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0157");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5078,9 +5095,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0157() throws Throwable {
+    public void test0158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0157");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0158");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5139,9 +5156,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0158() throws Throwable {
+    public void test0159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0158");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0159");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -5152,9 +5169,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0159() throws Throwable {
+    public void test0160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0159");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0160");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -5180,9 +5197,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0160() throws Throwable {
+    public void test0161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0160");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0161");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.getTextOffset();
@@ -5197,9 +5214,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0161() throws Throwable {
+    public void test0162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0161");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0162");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -5244,9 +5261,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0162() throws Throwable {
+    public void test0163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0162");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0163");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -5262,9 +5279,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0163() throws Throwable {
+    public void test0164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0163");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0164");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -5288,9 +5305,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0164() throws Throwable {
+    public void test0165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0164");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0165");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5326,9 +5343,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0165() throws Throwable {
+    public void test0166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0165");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0166");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -5342,9 +5359,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0166() throws Throwable {
+    public void test0167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0166");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0167");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5385,9 +5402,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0167() throws Throwable {
+    public void test0168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0167");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0168");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5418,9 +5435,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0168() throws Throwable {
+    public void test0169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0168");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0169");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -5437,9 +5454,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0169() throws Throwable {
+    public void test0170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0169");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0170");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -5456,9 +5473,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0170() throws Throwable {
+    public void test0171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0170");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0171");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5506,9 +5523,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0171() throws Throwable {
+    public void test0172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0171");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0172");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
@@ -5538,9 +5555,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0172() throws Throwable {
+    public void test0173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0172");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0173");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.getTextOffset();
@@ -5549,9 +5566,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0173() throws Throwable {
+    public void test0174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0173");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0174");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5576,9 +5593,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0174() throws Throwable {
+    public void test0175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0174");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0175");
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory2.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken5 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5629,9 +5646,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0175() throws Throwable {
+    public void test0176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0175");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0176");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -5675,9 +5692,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0176() throws Throwable {
+    public void test0177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0176");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0177");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -5697,9 +5714,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0177() throws Throwable {
+    public void test0178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0177");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0178");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -5727,9 +5744,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0178() throws Throwable {
+    public void test0179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0178");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0179");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5763,9 +5780,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0179() throws Throwable {
+    public void test0180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0179");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0180");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -5828,9 +5845,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0180() throws Throwable {
+    public void test0181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0180");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0181");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -5848,9 +5865,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0181() throws Throwable {
+    public void test0182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0181");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0182");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -5874,9 +5891,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0182() throws Throwable {
+    public void test0183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0182");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0183");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5907,9 +5924,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0183() throws Throwable {
+    public void test0184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0183");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0184");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -5983,9 +6000,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0184() throws Throwable {
+    public void test0185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0184");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0185");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6052,9 +6069,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0185() throws Throwable {
+    public void test0186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0185");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0186");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6089,9 +6106,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0186() throws Throwable {
+    public void test0187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0186");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0187");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -6112,9 +6129,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0187() throws Throwable {
+    public void test0188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0187");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0188");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6145,9 +6162,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0188() throws Throwable {
+    public void test0189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0188");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0189");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6181,9 +6198,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0189() throws Throwable {
+    public void test0190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0189");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0190");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6210,9 +6227,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0190() throws Throwable {
+    public void test0191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0190");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0191");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -6227,9 +6244,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0191() throws Throwable {
+    public void test0192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0191");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0192");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6258,9 +6275,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0192() throws Throwable {
+    public void test0193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0192");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0193");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -6290,9 +6307,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0193() throws Throwable {
+    public void test0194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0193");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0194");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6321,9 +6338,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0194() throws Throwable {
+    public void test0195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0194");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0195");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6339,9 +6356,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0195() throws Throwable {
+    public void test0196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0195");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0196");
         com.fasterxml.jackson.core.JsonLocation jsonLocation1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
@@ -6392,9 +6409,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0196() throws Throwable {
+    public void test0197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0196");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0197");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6424,9 +6441,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0197() throws Throwable {
+    public void test0198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0197");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0198");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -6442,9 +6459,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0198() throws Throwable {
+    public void test0199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0198");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0199");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6480,9 +6497,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0199() throws Throwable {
+    public void test0200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0199");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0200");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6511,9 +6528,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0200() throws Throwable {
+    public void test0201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0200");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0201");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -6576,9 +6593,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0201() throws Throwable {
+    public void test0202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0201");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0202");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6603,9 +6620,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0202() throws Throwable {
+    public void test0203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0202");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0203");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6641,9 +6658,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0203() throws Throwable {
+    public void test0204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0203");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0204");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -6664,9 +6681,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0204() throws Throwable {
+    public void test0205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0204");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0205");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6794,9 +6811,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0205() throws Throwable {
+    public void test0206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0205");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0206");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6876,9 +6893,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0206() throws Throwable {
+    public void test0207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0206");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0207");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
@@ -6962,9 +6979,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0207() throws Throwable {
+    public void test0208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0207");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0208");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
@@ -7047,9 +7064,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0208() throws Throwable {
+    public void test0209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0208");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0209");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -7082,9 +7099,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0209() throws Throwable {
+    public void test0210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0209");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0210");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7114,9 +7131,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0210() throws Throwable {
+    public void test0211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0210");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0211");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7156,9 +7173,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0211() throws Throwable {
+    public void test0212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0211");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0212");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -7175,9 +7192,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0212() throws Throwable {
+    public void test0213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0212");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0213");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7202,9 +7219,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0213() throws Throwable {
+    public void test0214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0213");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0214");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
@@ -7227,9 +7244,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0214() throws Throwable {
+    public void test0215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0214");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0215");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7260,9 +7277,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0215() throws Throwable {
+    public void test0216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0215");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0216");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
@@ -7287,9 +7304,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0216() throws Throwable {
+    public void test0217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0216");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0217");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -7336,9 +7353,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0217() throws Throwable {
+    public void test0218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0217");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0218");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7366,9 +7383,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0218() throws Throwable {
+    public void test0219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0218");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0219");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7405,9 +7422,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0219() throws Throwable {
+    public void test0220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0219");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0220");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7438,9 +7455,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0220() throws Throwable {
+    public void test0221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0220");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0221");
         com.fasterxml.jackson.core.JsonLocation jsonLocation1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory4.setRootValueSeparator("hi!");
@@ -7512,9 +7529,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0221() throws Throwable {
+    public void test0222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0221");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0222");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7536,9 +7553,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0222() throws Throwable {
+    public void test0223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0222");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0223");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7576,9 +7593,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0223() throws Throwable {
+    public void test0224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0223");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0224");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
         byte[][] byteArray4 = bufferRecycler2._byteBuffers;
@@ -7586,9 +7603,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0224() throws Throwable {
+    public void test0225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0224");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0225");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7610,9 +7627,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0225() throws Throwable {
+    public void test0226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0225");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0226");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -7634,9 +7651,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0226() throws Throwable {
+    public void test0227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0226");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0227");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7658,9 +7675,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0227() throws Throwable {
+    public void test0228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0227");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0228");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         boolean boolean3 = jsonFactory0.requiresPropertyOrdering();
@@ -7678,9 +7695,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0228() throws Throwable {
+    public void test0229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0228");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0229");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7702,9 +7719,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0229() throws Throwable {
+    public void test0230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0229");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0230");
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory2.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken5 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7757,9 +7774,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0230() throws Throwable {
+    public void test0231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0230");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0231");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -7783,9 +7800,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0231() throws Throwable {
+    public void test0232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0231");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0232");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7806,9 +7823,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0232() throws Throwable {
+    public void test0233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0232");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0233");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -7829,9 +7846,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0233() throws Throwable {
+    public void test0234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0233");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0234");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7862,9 +7879,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0234() throws Throwable {
+    public void test0235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0234");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0235");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7910,9 +7927,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0235() throws Throwable {
+    public void test0236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0235");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0236");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7945,9 +7962,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0236() throws Throwable {
+    public void test0237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0236");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0237");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -7994,9 +8011,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0237() throws Throwable {
+    public void test0238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0237");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0238");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8041,9 +8058,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0238() throws Throwable {
+    public void test0239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0238");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0239");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8071,9 +8088,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0239() throws Throwable {
+    public void test0240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0239");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0240");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8099,9 +8116,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0240() throws Throwable {
+    public void test0241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0240");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0241");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -8118,9 +8135,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0241() throws Throwable {
+    public void test0242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0241");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0242");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8147,9 +8164,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0242() throws Throwable {
+    public void test0243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0242");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0243");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory2.createParser("true");
@@ -8169,9 +8186,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0243() throws Throwable {
+    public void test0244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0243");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0244");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -8194,9 +8211,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0244() throws Throwable {
+    public void test0245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0244");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0245");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8223,9 +8240,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0245() throws Throwable {
+    public void test0246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0245");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0246");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         boolean boolean3 = jsonFactory0.requiresPropertyOrdering();
@@ -8243,9 +8260,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0246() throws Throwable {
+    public void test0247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0246");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0247");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8267,9 +8284,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0247() throws Throwable {
+    public void test0248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0247");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0248");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8297,9 +8314,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0248() throws Throwable {
+    public void test0249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0248");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0249");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8326,9 +8343,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0249() throws Throwable {
+    public void test0250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0249");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0250");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -8354,9 +8371,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0250() throws Throwable {
+    public void test0251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0250");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0251");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8387,9 +8404,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0251() throws Throwable {
+    public void test0252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0251");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0252");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8420,9 +8437,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0252() throws Throwable {
+    public void test0253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0252");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0253");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8442,9 +8459,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0253() throws Throwable {
+    public void test0254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0253");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0254");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8492,9 +8509,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0254() throws Throwable {
+    public void test0255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0254");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0255");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8520,9 +8537,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0255() throws Throwable {
+    public void test0256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0255");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0256");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8554,9 +8571,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0256() throws Throwable {
+    public void test0257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0256");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0257");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8587,9 +8604,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0257() throws Throwable {
+    public void test0258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0257");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0258");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -8614,9 +8631,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0258() throws Throwable {
+    public void test0259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0258");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0259");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8662,9 +8679,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0259() throws Throwable {
+    public void test0260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0259");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0260");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -8709,9 +8726,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0260() throws Throwable {
+    public void test0261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0260");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0261");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8779,9 +8796,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0261() throws Throwable {
+    public void test0262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0261");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0262");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8796,9 +8813,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0262() throws Throwable {
+    public void test0263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0262");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0263");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8828,9 +8845,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0263() throws Throwable {
+    public void test0264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0263");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0264");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -8886,9 +8903,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0264() throws Throwable {
+    public void test0265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0264");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0265");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8922,9 +8939,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0265() throws Throwable {
+    public void test0266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0265");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0266");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8957,9 +8974,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0266() throws Throwable {
+    public void test0267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0266");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0267");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8995,9 +9012,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0267() throws Throwable {
+    public void test0268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0267");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0268");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -9029,9 +9046,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0268() throws Throwable {
+    public void test0269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0268");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0269");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9057,9 +9074,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0269() throws Throwable {
+    public void test0270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0269");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0270");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -9075,9 +9092,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0270() throws Throwable {
+    public void test0271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0270");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0271");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         byte[] byteArray3 = new byte[] {};
@@ -9096,9 +9113,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0271() throws Throwable {
+    public void test0272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0271");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0272");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = textBuffer1.getTextBuffer();
@@ -9113,9 +9130,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0272() throws Throwable {
+    public void test0273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0272");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0273");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9148,9 +9165,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0273() throws Throwable {
+    public void test0274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0273");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0274");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9184,9 +9201,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0274() throws Throwable {
+    public void test0275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0274");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0275");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9217,9 +9234,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0275() throws Throwable {
+    public void test0276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0275");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0276");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9269,9 +9286,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0276() throws Throwable {
+    public void test0277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0276");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0277");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9326,18 +9343,18 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0277() throws Throwable {
+    public void test0278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0277");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0278");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
         com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
     }
 
     @Test
-    public void test0278() throws Throwable {
+    public void test0279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0278");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0279");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -9356,9 +9373,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0279() throws Throwable {
+    public void test0280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0279");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0280");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9411,9 +9428,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0280() throws Throwable {
+    public void test0281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0280");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0281");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9444,9 +9461,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0281() throws Throwable {
+    public void test0282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0281");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0282");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9477,9 +9494,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0282() throws Throwable {
+    public void test0283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0282");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0283");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9509,9 +9526,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0283() throws Throwable {
+    public void test0284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0283");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0284");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         boolean boolean3 = jsonFactory0.requiresPropertyOrdering();
@@ -9531,9 +9548,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0284() throws Throwable {
+    public void test0285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0284");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0285");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer2 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler1);
@@ -9564,9 +9581,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0285() throws Throwable {
+    public void test0286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0285");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0286");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9600,9 +9617,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0286() throws Throwable {
+    public void test0287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0286");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0287");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9639,9 +9656,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0287() throws Throwable {
+    public void test0288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0287");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0288");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9677,9 +9694,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0288() throws Throwable {
+    public void test0289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0288");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0289");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -9724,9 +9741,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0289() throws Throwable {
+    public void test0290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0289");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0290");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9757,9 +9774,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0290() throws Throwable {
+    public void test0291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0290");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0291");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.OutputStream outputStream2 = null;
@@ -9778,9 +9795,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0291() throws Throwable {
+    public void test0292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0291");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0292");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9809,9 +9826,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0292() throws Throwable {
+    public void test0293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0292");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0293");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -9842,9 +9859,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0293() throws Throwable {
+    public void test0294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0293");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0294");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -9889,9 +9906,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0294() throws Throwable {
+    public void test0295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0294");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0295");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9944,9 +9961,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0295() throws Throwable {
+    public void test0296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0295");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0296");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9978,9 +9995,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0296() throws Throwable {
+    public void test0297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0296");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0297");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory2.createParser("true");
@@ -10002,9 +10019,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0297() throws Throwable {
+    public void test0298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0297");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0298");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10033,9 +10050,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0298() throws Throwable {
+    public void test0299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0298");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0299");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -10083,9 +10100,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0299() throws Throwable {
+    public void test0300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0299");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0300");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10112,9 +10129,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0300() throws Throwable {
+    public void test0301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0300");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0301");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10147,9 +10164,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0301() throws Throwable {
+    public void test0302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0301");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0302");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -10179,9 +10196,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0302() throws Throwable {
+    public void test0303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0302");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0303");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -10205,9 +10222,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0303() throws Throwable {
+    public void test0304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0303");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0304");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -10247,9 +10264,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0304() throws Throwable {
+    public void test0305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0304");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0305");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -10269,9 +10286,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0305() throws Throwable {
+    public void test0306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0305");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0306");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.InputStream inputStream3 = null;
@@ -10292,9 +10309,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0306() throws Throwable {
+    public void test0307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0306");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0307");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10323,9 +10340,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0307() throws Throwable {
+    public void test0308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0307");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0308");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10359,9 +10376,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0308() throws Throwable {
+    public void test0309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0308");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0309");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer2 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler1);
@@ -10390,9 +10407,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0309() throws Throwable {
+    public void test0310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0309");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0310");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10450,9 +10467,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0310() throws Throwable {
+    public void test0311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0310");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0311");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10481,9 +10498,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0311() throws Throwable {
+    public void test0312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0311");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0312");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -10513,9 +10530,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0312() throws Throwable {
+    public void test0313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0312");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0313");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.OutputStream outputStream2 = null;
@@ -10535,9 +10552,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0313() throws Throwable {
+    public void test0314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0313");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0314");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10654,9 +10671,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0314() throws Throwable {
+    public void test0315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0314");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0315");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -10677,9 +10694,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0315() throws Throwable {
+    public void test0316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0315");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0316");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10735,9 +10752,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0316() throws Throwable {
+    public void test0317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0316");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0317");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10765,9 +10782,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0317() throws Throwable {
+    public void test0318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0317");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0318");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -10782,9 +10799,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0318() throws Throwable {
+    public void test0319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0318");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0319");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10813,9 +10830,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0319() throws Throwable {
+    public void test0320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0319");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0320");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10848,9 +10865,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0320() throws Throwable {
+    public void test0321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0320");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0321");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -10912,9 +10929,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0321() throws Throwable {
+    public void test0322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0321");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0322");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -10934,9 +10951,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0322() throws Throwable {
+    public void test0323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0322");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0323");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10990,9 +11007,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0323() throws Throwable {
+    public void test0324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0323");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0324");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11015,9 +11032,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0324() throws Throwable {
+    public void test0325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0324");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0325");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -11057,9 +11074,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0325() throws Throwable {
+    public void test0326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0325");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0326");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -11070,9 +11087,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0326() throws Throwable {
+    public void test0327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0326");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0327");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -11117,9 +11134,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0327() throws Throwable {
+    public void test0328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0327");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0328");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11157,9 +11174,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0328() throws Throwable {
+    public void test0329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0328");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0329");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11184,9 +11201,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0329() throws Throwable {
+    public void test0330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0329");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0330");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11205,9 +11222,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0330() throws Throwable {
+    public void test0331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0330");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0331");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11246,9 +11263,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0331() throws Throwable {
+    public void test0332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0331");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0332");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -11320,9 +11337,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0332() throws Throwable {
+    public void test0333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0332");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0333");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -11353,9 +11370,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0333() throws Throwable {
+    public void test0334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0333");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0334");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11385,9 +11402,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0334() throws Throwable {
+    public void test0335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0334");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0335");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11422,9 +11439,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0335() throws Throwable {
+    public void test0336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0335");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0336");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -11489,9 +11506,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0336() throws Throwable {
+    public void test0337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0336");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0337");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11522,9 +11539,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0337() throws Throwable {
+    public void test0338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0337");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0338");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11549,9 +11566,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0338() throws Throwable {
+    public void test0339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0338");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0339");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11577,9 +11594,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0339() throws Throwable {
+    public void test0340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0339");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0340");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         boolean boolean3 = jsonFactory0.requiresPropertyOrdering();
@@ -11598,9 +11615,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0340() throws Throwable {
+    public void test0341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0340");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0341");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11628,9 +11645,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0341() throws Throwable {
+    public void test0342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0341");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0342");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11661,9 +11678,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0342() throws Throwable {
+    public void test0343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0342");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0343");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -11711,9 +11728,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0343() throws Throwable {
+    public void test0344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0343");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0344");
         com.fasterxml.jackson.core.JsonLocation jsonLocation1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
@@ -11766,9 +11783,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0344() throws Throwable {
+    public void test0345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0344");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0345");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11798,9 +11815,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0345() throws Throwable {
+    public void test0346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0345");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0346");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11884,9 +11901,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0346() throws Throwable {
+    public void test0347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0346");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0347");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -11904,9 +11921,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0347() throws Throwable {
+    public void test0348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0347");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0348");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11930,9 +11947,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0348() throws Throwable {
+    public void test0349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0348");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0349");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11967,9 +11984,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0349() throws Throwable {
+    public void test0350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0349");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0350");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12001,9 +12018,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0350() throws Throwable {
+    public void test0351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0350");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0351");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12039,9 +12056,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0351() throws Throwable {
+    public void test0352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0351");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0352");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12062,9 +12079,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0352() throws Throwable {
+    public void test0353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0352");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0353");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12086,9 +12103,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0353() throws Throwable {
+    public void test0354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0353");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0354");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12114,9 +12131,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0354() throws Throwable {
+    public void test0355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0354");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0355");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12209,9 +12226,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0355() throws Throwable {
+    public void test0356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0355");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0356");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -12226,9 +12243,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0356() throws Throwable {
+    public void test0357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0356");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0357");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12254,9 +12271,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0357() throws Throwable {
+    public void test0358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0357");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0358");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12288,9 +12305,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0358() throws Throwable {
+    public void test0359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0358");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0359");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12318,9 +12335,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0359() throws Throwable {
+    public void test0360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0359");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0360");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -12346,9 +12363,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0360() throws Throwable {
+    public void test0361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0360");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0361");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -12404,9 +12421,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0361() throws Throwable {
+    public void test0362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0361");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0362");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -12416,9 +12433,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0362() throws Throwable {
+    public void test0363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0362");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0363");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12445,9 +12462,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0363() throws Throwable {
+    public void test0364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0363");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0364");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12515,9 +12532,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0364() throws Throwable {
+    public void test0365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0364");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0365");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12543,9 +12560,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0365() throws Throwable {
+    public void test0366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0365");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0366");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -12606,9 +12623,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0366() throws Throwable {
+    public void test0367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0366");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0367");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12665,9 +12682,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0367() throws Throwable {
+    public void test0368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0367");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0368");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12718,9 +12735,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0368() throws Throwable {
+    public void test0369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0368");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0369");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12747,9 +12764,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0369() throws Throwable {
+    public void test0370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0369");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0370");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12780,9 +12797,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0370() throws Throwable {
+    public void test0371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0370");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0371");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -12832,9 +12849,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0371() throws Throwable {
+    public void test0372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0371");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0372");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12862,9 +12879,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0372() throws Throwable {
+    public void test0373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0372");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0373");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12907,9 +12924,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0373() throws Throwable {
+    public void test0374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0373");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0374");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12945,9 +12962,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0374() throws Throwable {
+    public void test0375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0374");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0375");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12970,9 +12987,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0375() throws Throwable {
+    public void test0376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0375");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0376");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13008,9 +13025,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0376() throws Throwable {
+    public void test0377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0376");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0377");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13044,9 +13061,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0377() throws Throwable {
+    public void test0378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0377");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0378");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13094,9 +13111,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0378() throws Throwable {
+    public void test0379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0378");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0379");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13141,9 +13158,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0379() throws Throwable {
+    public void test0380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0379");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0380");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -13166,9 +13183,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0380() throws Throwable {
+    public void test0381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0380");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0381");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13196,9 +13213,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0381() throws Throwable {
+    public void test0382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0381");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0382");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13329,9 +13346,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0382() throws Throwable {
+    public void test0383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0382");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0383");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13370,9 +13387,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0383() throws Throwable {
+    public void test0384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0383");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0384");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -13386,9 +13403,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0384() throws Throwable {
+    public void test0385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0384");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0385");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -13417,9 +13434,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0385() throws Throwable {
+    public void test0386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0385");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0386");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13445,9 +13462,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0386() throws Throwable {
+    public void test0387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0386");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0387");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -13487,9 +13504,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0387() throws Throwable {
+    public void test0388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0387");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0388");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -13507,9 +13524,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0388() throws Throwable {
+    public void test0389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0388");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0389");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13536,9 +13553,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0389() throws Throwable {
+    public void test0390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0389");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0390");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13564,9 +13581,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0390() throws Throwable {
+    public void test0391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0390");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0391");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13594,9 +13611,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0391() throws Throwable {
+    public void test0392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0391");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0392");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -13668,9 +13685,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0392() throws Throwable {
+    public void test0393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0392");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0393");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer2 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler1);
@@ -13698,9 +13715,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0393() throws Throwable {
+    public void test0394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0393");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0394");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13720,9 +13737,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0394() throws Throwable {
+    public void test0395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0394");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0395");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13807,9 +13824,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0395() throws Throwable {
+    public void test0396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0395");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0396");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13835,9 +13852,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0396() throws Throwable {
+    public void test0397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0396");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0397");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -13864,9 +13881,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0397() throws Throwable {
+    public void test0398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0397");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0398");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -13883,9 +13900,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0398() throws Throwable {
+    public void test0399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0398");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0399");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13917,9 +13934,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0399() throws Throwable {
+    public void test0400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0399");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0400");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13958,9 +13975,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0400() throws Throwable {
+    public void test0401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0400");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0401");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -13987,9 +14004,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0401() throws Throwable {
+    public void test0402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0401");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0402");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14014,9 +14031,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0402() throws Throwable {
+    public void test0403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0402");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0403");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14112,9 +14129,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0403() throws Throwable {
+    public void test0404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0403");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0404");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -14162,9 +14179,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0404() throws Throwable {
+    public void test0405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0404");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0405");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14221,9 +14238,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0405() throws Throwable {
+    public void test0406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0405");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0406");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[][] byteArray3 = bufferRecycler2._byteBuffers;
         byte[][] byteArray4 = bufferRecycler2._byteBuffers;
@@ -14286,9 +14303,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0406() throws Throwable {
+    public void test0407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0406");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0407");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14342,9 +14359,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0407() throws Throwable {
+    public void test0408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0407");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0408");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -14363,9 +14380,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0408() throws Throwable {
+    public void test0409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0408");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0409");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14402,9 +14419,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0409() throws Throwable {
+    public void test0410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0409");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0410");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14529,9 +14546,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0410() throws Throwable {
+    public void test0411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0410");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0411");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14579,9 +14596,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0411() throws Throwable {
+    public void test0412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0411");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0412");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14609,9 +14626,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0412() throws Throwable {
+    public void test0413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0412");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0413");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -14648,9 +14665,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0413() throws Throwable {
+    public void test0414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0413");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0414");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14682,9 +14699,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0414() throws Throwable {
+    public void test0415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0414");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0415");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14738,9 +14755,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0415() throws Throwable {
+    public void test0416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0415");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0416");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14801,9 +14818,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0416() throws Throwable {
+    public void test0417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0416");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0417");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14877,9 +14894,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0417() throws Throwable {
+    public void test0418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0417");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0418");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14904,9 +14921,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0418() throws Throwable {
+    public void test0419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0418");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0419");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14954,9 +14971,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0419() throws Throwable {
+    public void test0420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0419");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0420");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14990,9 +15007,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0420() throws Throwable {
+    public void test0421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0420");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0421");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15045,9 +15062,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0421() throws Throwable {
+    public void test0422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0421");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0422");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -15067,9 +15084,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0422() throws Throwable {
+    public void test0423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0422");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0423");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -15094,9 +15111,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0423() throws Throwable {
+    public void test0424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0423");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0424");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -15121,9 +15138,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0424() throws Throwable {
+    public void test0425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0424");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0425");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15150,9 +15167,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0425() throws Throwable {
+    public void test0426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0425");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0426");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -15177,9 +15194,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0426() throws Throwable {
+    public void test0427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0426");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0427");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15210,9 +15227,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0427() throws Throwable {
+    public void test0428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0427");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0428");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15241,9 +15258,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0428() throws Throwable {
+    public void test0429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0428");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0429");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -15276,9 +15293,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0429() throws Throwable {
+    public void test0430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0429");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0430");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -15300,9 +15317,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0430() throws Throwable {
+    public void test0431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0430");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0431");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -15313,9 +15330,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0431() throws Throwable {
+    public void test0432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0431");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0432");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15355,9 +15372,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0432() throws Throwable {
+    public void test0433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0432");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0433");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray8 = new byte[] { (byte) 0, (byte) 10, (byte) -1, (byte) -1 };
         bufferRecycler2.releaseByteBuffer(1, byteArray8);
@@ -15390,9 +15407,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0433() throws Throwable {
+    public void test0434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0433");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0434");
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory2.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken5 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15438,9 +15455,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0434() throws Throwable {
+    public void test0435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0434");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0435");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15466,9 +15483,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0435() throws Throwable {
+    public void test0436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0435");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0436");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15504,9 +15521,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0436() throws Throwable {
+    public void test0437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0436");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0437");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15537,9 +15554,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0437() throws Throwable {
+    public void test0438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0437");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0438");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -15555,9 +15572,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0438() throws Throwable {
+    public void test0439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0438");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0439");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15595,9 +15612,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0439() throws Throwable {
+    public void test0440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0439");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0440");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -15616,9 +15633,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0440() throws Throwable {
+    public void test0441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0440");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0441");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -15655,9 +15672,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0441() throws Throwable {
+    public void test0442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0441");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0442");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -15728,9 +15745,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0442() throws Throwable {
+    public void test0443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0442");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0443");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15758,9 +15775,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0443() throws Throwable {
+    public void test0444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0443");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0444");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -15778,9 +15795,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0444() throws Throwable {
+    public void test0445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0444");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0445");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -15805,9 +15822,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0445() throws Throwable {
+    public void test0446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0445");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0446");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -15847,9 +15864,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0446() throws Throwable {
+    public void test0447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0446");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0447");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -15898,9 +15915,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0447() throws Throwable {
+    public void test0448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0447");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0448");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.OutputStream outputStream2 = null;
@@ -15920,9 +15937,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0448() throws Throwable {
+    public void test0449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0448");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0449");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16036,9 +16053,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0449() throws Throwable {
+    public void test0450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0449");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0450");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16127,9 +16144,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0450() throws Throwable {
+    public void test0451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0450");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0451");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -16152,9 +16169,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0451() throws Throwable {
+    public void test0452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0451");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0452");
         com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory4.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken7 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16275,9 +16292,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0452() throws Throwable {
+    public void test0453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0452");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0453");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -16331,9 +16348,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0453() throws Throwable {
+    public void test0454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0453");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0454");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -16357,9 +16374,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0454() throws Throwable {
+    public void test0455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0454");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0455");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -16383,9 +16400,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0455() throws Throwable {
+    public void test0456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0455");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0456");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16413,9 +16430,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0456() throws Throwable {
+    public void test0457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0456");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0457");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -16443,9 +16460,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0457() throws Throwable {
+    public void test0458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0457");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0458");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
@@ -16525,9 +16542,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0458() throws Throwable {
+    public void test0459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0458");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0459");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16647,9 +16664,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0459() throws Throwable {
+    public void test0460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0459");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0460");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16675,9 +16692,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0460() throws Throwable {
+    public void test0461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0460");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0461");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -16740,9 +16757,28 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0461() throws Throwable {
+    public void test0462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0461");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0462");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
+        jsonParser6.close();
+        com.fasterxml.jackson.core.FormatSchema formatSchema8 = null;
+        boolean boolean9 = jsonParser6.canUseSchema(formatSchema8);
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+    }
+
+    @Test
+    public void test0463() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0463");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16777,9 +16813,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0462() throws Throwable {
+    public void test0464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0462");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0464");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16818,9 +16854,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0463() throws Throwable {
+    public void test0465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0463");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0465");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16843,9 +16879,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0464() throws Throwable {
+    public void test0466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0464");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0466");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16869,9 +16905,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0465() throws Throwable {
+    public void test0467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0465");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0467");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16901,9 +16937,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0466() throws Throwable {
+    public void test0468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0466");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0468");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16937,9 +16973,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0467() throws Throwable {
+    public void test0469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0467");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0469");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16967,9 +17003,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0468() throws Throwable {
+    public void test0470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0468");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0470");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16996,9 +17032,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0469() throws Throwable {
+    public void test0471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0469");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0471");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17029,9 +17065,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0470() throws Throwable {
+    public void test0472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0470");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0472");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -17071,9 +17107,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0471() throws Throwable {
+    public void test0473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0471");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0473");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -17098,9 +17134,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0472() throws Throwable {
+    public void test0474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0472");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0474");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory2.createParser("true");
@@ -17201,9 +17237,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0473() throws Throwable {
+    public void test0475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0473");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0475");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -17218,9 +17254,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0474() throws Throwable {
+    public void test0476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0474");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0476");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -17242,9 +17278,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0475() throws Throwable {
+    public void test0477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0475");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0477");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -17274,9 +17310,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0476() throws Throwable {
+    public void test0478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0476");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0478");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -17298,9 +17334,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0477() throws Throwable {
+    public void test0479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0477");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0479");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -17316,9 +17352,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0478() throws Throwable {
+    public void test0480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0478");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0480");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -17338,9 +17374,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0479() throws Throwable {
+    public void test0481() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0479");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0481");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17378,9 +17414,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0480() throws Throwable {
+    public void test0482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0480");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0482");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -17410,9 +17446,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0481() throws Throwable {
+    public void test0483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0481");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0483");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -17465,9 +17501,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0482() throws Throwable {
+    public void test0484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0482");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0484");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17506,9 +17542,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0483() throws Throwable {
+    public void test0485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0483");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0485");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17537,9 +17573,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0484() throws Throwable {
+    public void test0486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0484");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0486");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken6 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17655,9 +17691,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0485() throws Throwable {
+    public void test0487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0485");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0487");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17684,9 +17720,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0486() throws Throwable {
+    public void test0488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0486");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0488");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17755,9 +17791,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0487() throws Throwable {
+    public void test0489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0487");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0489");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17842,9 +17878,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0488() throws Throwable {
+    public void test0490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0488");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0490");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17872,9 +17908,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0489() throws Throwable {
+    public void test0491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0489");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0491");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -17909,9 +17945,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0490() throws Throwable {
+    public void test0492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0490");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0492");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -17931,9 +17967,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0491() throws Throwable {
+    public void test0493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0491");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0493");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -17969,9 +18005,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0492() throws Throwable {
+    public void test0494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0492");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0494");
         com.fasterxml.jackson.core.JsonLocation jsonLocation1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
@@ -18074,9 +18110,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0493() throws Throwable {
+    public void test0495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0493");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0495");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -18122,9 +18158,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0494() throws Throwable {
+    public void test0496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0494");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0496");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -18138,9 +18174,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0495() throws Throwable {
+    public void test0497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0495");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0497");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer2 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler1);
@@ -18170,9 +18206,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0496() throws Throwable {
+    public void test0498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0496");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0498");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -18219,9 +18255,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0497() throws Throwable {
+    public void test0499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0497");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0499");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -18251,9 +18287,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test0498() throws Throwable {
+    public void test0500() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0498");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test0500");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -18288,79 +18324,6 @@ public class RandoopRegressionTest0 {
         org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
         org.junit.Assert.assertNotNull(jsonParser16);
         org.junit.Assert.assertNull(jsonToken19);
-    }
-
-    @Test
-    public void test0499() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0499");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        java.lang.String str6 = jsonFactory4.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator8 = jsonFactory7.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory7.configure(feature9, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory11.createParser("");
-        com.fasterxml.jackson.core.JsonFactory.Feature feature14 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean15 = feature14.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory11.enable(feature14);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory4.configure(feature14, false);
-        java.io.Writer writer19 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator20 = jsonFactory4.createJsonGenerator(writer19);
-        java.io.InputStream inputStream21 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory4.createParser(inputStream21);
-        int int24 = jsonParser22.nextIntValue(8);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec25 = jsonParser22.getCodec();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + " " + "'", str6, " ");
-        org.junit.Assert.assertNull(outputDecorator8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature14.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
-        org.junit.Assert.assertNotNull(jsonFactory16);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(jsonGenerator20);
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertTrue("'" + int24 + "' != '" + 8 + "'", int24 == 8);
-        org.junit.Assert.assertNull(objectCodec25);
-    }
-
-    @Test
-    public void test0500() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test0500");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        jsonParser6.close();
-        java.lang.Object obj8 = jsonParser6.getEmbeddedObject();
-        double double9 = jsonParser6.getValueAsDouble();
-        int int11 = jsonParser6.nextIntValue(0);
-        int int13 = jsonParser6.getValueAsInt((int) (short) 0);
-        java.lang.Object obj14 = jsonParser6.getObjectId();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertTrue("'" + double9 + "' != '" + 0.0d + "'", double9 == 0.0d);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 1 + "'", int13 == 1);
-        org.junit.Assert.assertNull(obj14);
     }
 }
 

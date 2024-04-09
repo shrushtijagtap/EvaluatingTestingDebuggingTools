@@ -1,2 +1,14 @@
-com.fasterxml.jackson.core.json.TestParserErrorHandling.testMangledNumbersBytes
-com.fasterxml.jackson.core.json.TestParserErrorHandling.testMangledNumbersChars
+
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test057
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test059
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test062
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test063
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test046
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test047
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test049
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test044
+com.fasterxml.jackson.core.json.EvosuiteReaderBasedJsonParser_ESTest.test045
+com.fasterxml.jackson.core.json.EvosuiteUTF8StreamJsonParser_ESTest.test34
+com.fasterxml.jackson.core.json.EvosuiteUTF8StreamJsonParser_ESTest.test33
+com.fasterxml.jackson.core.json.EvosuiteUTF8StreamJsonParser_ESTest.test32
+com.fasterxml.jackson.core.json.EvosuiteUTF8StreamJsonParser_ESTest.test35

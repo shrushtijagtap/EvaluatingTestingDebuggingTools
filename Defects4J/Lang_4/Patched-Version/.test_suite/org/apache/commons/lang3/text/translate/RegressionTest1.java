@@ -13,763 +13,6 @@ public class RegressionTest1 {
     public void test501() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test501");
-        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
-        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
-        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
-        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
-        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.lang.CharSequence[][] charSequenceArray22 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
-        java.io.Writer writer26 = null;
-        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
-        java.lang.CharSequence[][] charSequenceArray28 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
-        java.io.Writer writer36 = null;
-        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
-        java.lang.CharSequence[][] charSequenceArray38 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator46 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator47 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = aggregateTranslator48.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator51 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator21.with(charSequenceTranslatorArray49);
-        java.io.Writer writer55 = null;
-        int int56 = charSequenceTranslator52.translate((java.lang.CharSequence) "0", (int) '4', writer55);
-        org.junit.Assert.assertNotNull(charSequenceArray4);
-        org.junit.Assert.assertNotNull(charSequenceArray9);
-        org.junit.Assert.assertNotNull(charSequenceArray14);
-        org.junit.Assert.assertNotNull(charSequenceArray19);
-        org.junit.Assert.assertNotNull(charSequenceArray20);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
-        org.junit.Assert.assertNotNull(charSequenceTranslator45);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
-        org.junit.Assert.assertNotNull(charSequenceTranslator50);
-        org.junit.Assert.assertNotNull(charSequenceTranslator52);
-        org.junit.Assert.assertTrue("'" + int56 + "' != '" + 0 + "'", int56 == 0);
-    }
-
-    @Test
-    public void test502() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test502");
-        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.io.Writer writer25 = null;
-        int int26 = lookupTranslator22.translate((java.lang.CharSequence) "", (int) (byte) 1, writer25);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray27 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator22.with(charSequenceTranslatorArray27);
-        java.io.Writer writer30 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            charSequenceTranslator28.translate((java.lang.CharSequence) "0", writer30);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(charSequenceArray4);
-        org.junit.Assert.assertNotNull(charSequenceArray9);
-        org.junit.Assert.assertNotNull(charSequenceArray14);
-        org.junit.Assert.assertNotNull(charSequenceArray19);
-        org.junit.Assert.assertNotNull(charSequenceArray20);
-        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray27);
-        org.junit.Assert.assertNotNull(charSequenceTranslator28);
-    }
-
-    @Test
-    public void test503() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test503");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.lang.CharSequence[][] charSequenceArray2 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
-        java.lang.CharSequence[][] charSequenceArray4 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
-        java.io.Writer writer8 = null;
-        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
-        java.lang.CharSequence[][] charSequenceArray10 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
-        java.io.Writer writer18 = null;
-        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
-        java.lang.CharSequence[][] charSequenceArray20 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.io.Writer writer24 = null;
-        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
-        java.io.Writer writer32 = null;
-        int int33 = charSequenceTranslator29.translate((java.lang.CharSequence) "23", (int) (byte) 100, writer32);
-        java.io.Writer writer36 = null;
-        int int37 = charSequenceTranslator29.translate((java.lang.CharSequence) "1", (int) ' ', writer36);
-        java.lang.CharSequence[][] charSequenceArray38 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
-        java.lang.String str45 = lookupTranslator39.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer48 = null;
-        int int49 = lookupTranslator39.translate((java.lang.CharSequence) "hi!", (int) '4', writer48);
-        java.lang.CharSequence[][] charSequenceArray50 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator51 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
-        java.io.Writer writer54 = null;
-        int int55 = lookupTranslator51.translate((java.lang.CharSequence) "", 0, writer54);
-        java.io.Writer writer58 = null;
-        int int59 = lookupTranslator51.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer58);
-        java.lang.String str61 = lookupTranslator51.translate((java.lang.CharSequence) "hi!");
-        java.lang.CharSequence[] charSequenceArray66 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray71 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray76 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray81 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray82 = new java.lang.CharSequence[][] { charSequenceArray66, charSequenceArray71, charSequenceArray76, charSequenceArray81 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator83 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray82);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator84 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray82);
-        java.io.Writer writer87 = null;
-        int int88 = lookupTranslator84.translate((java.lang.CharSequence) "", (int) (byte) 1, writer87);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray89 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator90 = lookupTranslator84.with(charSequenceTranslatorArray89);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator91 = lookupTranslator51.with(charSequenceTranslatorArray89);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator92 = lookupTranslator39.with(charSequenceTranslatorArray89);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator93 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray89);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator94 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray89);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator95 = charSequenceTranslator29.with(charSequenceTranslatorArray89);
-        java.io.Writer writer97 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            charSequenceTranslator29.translate((java.lang.CharSequence) "hi!", writer97);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
-        org.junit.Assert.assertNotNull(charSequenceTranslator27);
-        org.junit.Assert.assertNotNull(charSequenceTranslator28);
-        org.junit.Assert.assertNotNull(charSequenceTranslator29);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "hi!" + "'", str45, "hi!");
-        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
-        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
-        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
-        org.junit.Assert.assertEquals("'" + str61 + "' != '" + "hi!" + "'", str61, "hi!");
-        org.junit.Assert.assertNotNull(charSequenceArray66);
-        org.junit.Assert.assertNotNull(charSequenceArray71);
-        org.junit.Assert.assertNotNull(charSequenceArray76);
-        org.junit.Assert.assertNotNull(charSequenceArray81);
-        org.junit.Assert.assertNotNull(charSequenceArray82);
-        org.junit.Assert.assertTrue("'" + int88 + "' != '" + 0 + "'", int88 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray89);
-        org.junit.Assert.assertNotNull(charSequenceTranslator90);
-        org.junit.Assert.assertNotNull(charSequenceTranslator91);
-        org.junit.Assert.assertNotNull(charSequenceTranslator92);
-        org.junit.Assert.assertNotNull(charSequenceTranslator95);
-    }
-
-    @Test
-    public void test504() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test504");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator1.translate((java.lang.CharSequence) "0", (int) ' ', writer14);
-        java.lang.String str17 = lookupTranslator1.translate((java.lang.CharSequence) "0");
-        java.lang.CharSequence[][] charSequenceArray18 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator19 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray18);
-        java.io.Writer writer22 = null;
-        int int23 = lookupTranslator19.translate((java.lang.CharSequence) "", 0, writer22);
-        java.io.Writer writer26 = null;
-        int int27 = lookupTranslator19.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer26);
-        java.lang.CharSequence[] charSequenceArray32 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray37 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray42 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray47 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray48 = new java.lang.CharSequence[][] { charSequenceArray32, charSequenceArray37, charSequenceArray42, charSequenceArray47 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator49 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray48);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray48);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator51 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray48);
-        java.lang.CharSequence[][] charSequenceArray52 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator53 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray52);
-        java.io.Writer writer56 = null;
-        int int57 = lookupTranslator53.translate((java.lang.CharSequence) "", 0, writer56);
-        java.lang.CharSequence[][] charSequenceArray58 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator59 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray58);
-        java.io.Writer writer62 = null;
-        int int63 = lookupTranslator59.translate((java.lang.CharSequence) "", 0, writer62);
-        java.io.Writer writer66 = null;
-        int int67 = lookupTranslator59.translate((java.lang.CharSequence) "", (int) '#', writer66);
-        java.lang.CharSequence[][] charSequenceArray68 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator69 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray68);
-        java.io.Writer writer72 = null;
-        int int73 = lookupTranslator69.translate((java.lang.CharSequence) "", 0, writer72);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray74 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator59, lookupTranslator69 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator75 = lookupTranslator53.with(charSequenceTranslatorArray74);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator76 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray74);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator77 = lookupTranslator51.with(charSequenceTranslatorArray74);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator78 = lookupTranslator19.with(charSequenceTranslatorArray74);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator79 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray74);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator80 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray74);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator81 = lookupTranslator1.with(charSequenceTranslatorArray74);
-        java.lang.String str83 = lookupTranslator1.translate((java.lang.CharSequence) "64");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "0" + "'", str17, "0");
-        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertNotNull(charSequenceArray32);
-        org.junit.Assert.assertNotNull(charSequenceArray37);
-        org.junit.Assert.assertNotNull(charSequenceArray42);
-        org.junit.Assert.assertNotNull(charSequenceArray47);
-        org.junit.Assert.assertNotNull(charSequenceArray48);
-        org.junit.Assert.assertTrue("'" + int57 + "' != '" + 0 + "'", int57 == 0);
-        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
-        org.junit.Assert.assertTrue("'" + int67 + "' != '" + 0 + "'", int67 == 0);
-        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 0 + "'", int73 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray74);
-        org.junit.Assert.assertNotNull(charSequenceTranslator75);
-        org.junit.Assert.assertNotNull(charSequenceTranslator77);
-        org.junit.Assert.assertNotNull(charSequenceTranslator78);
-        org.junit.Assert.assertNotNull(charSequenceTranslator81);
-        org.junit.Assert.assertEquals("'" + str83 + "' != '" + "64" + "'", str83, "64");
-    }
-
-    @Test
-    public void test505() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test505");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.io.Writer writer8 = null;
-        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
-        java.lang.CharSequence[][] charSequenceArray10 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
-        java.lang.CharSequence[][] charSequenceArray16 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
-        java.io.Writer writer24 = null;
-        int int25 = lookupTranslator17.translate((java.lang.CharSequence) "", (int) '#', writer24);
-        java.lang.CharSequence[][] charSequenceArray26 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
-        java.io.Writer writer30 = null;
-        int int31 = lookupTranslator27.translate((java.lang.CharSequence) "", 0, writer30);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray32 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator17, lookupTranslator27 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator33 = lookupTranslator11.with(charSequenceTranslatorArray32);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator34 = lookupTranslator1.with(charSequenceTranslatorArray32);
-        java.lang.String str36 = charSequenceTranslator34.translate((java.lang.CharSequence) "A");
-        java.lang.String str38 = charSequenceTranslator34.translate((java.lang.CharSequence) "23");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray32);
-        org.junit.Assert.assertNotNull(charSequenceTranslator33);
-        org.junit.Assert.assertNotNull(charSequenceTranslator34);
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "A" + "'", str36, "A");
-        org.junit.Assert.assertEquals("'" + str38 + "' != '" + "23" + "'", str38, "23");
-    }
-
-    @Test
-    public void test506() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test506");
-        java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
-        java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
-        java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
-        java.lang.CharSequence[] charSequenceArray15 = new java.lang.CharSequence[] { "hi!", "1", "23" };
-        java.lang.CharSequence[][] charSequenceArray16 = new java.lang.CharSequence[][] { charSequenceArray3, charSequenceArray7, charSequenceArray11, charSequenceArray15 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        java.lang.String str19 = lookupTranslator17.translate((java.lang.CharSequence) "hi!");
-        java.lang.CharSequence[][] charSequenceArray20 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.io.Writer writer24 = null;
-        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
-        java.lang.CharSequence[][] charSequenceArray26 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
-        java.io.Writer writer30 = null;
-        int int31 = lookupTranslator27.translate((java.lang.CharSequence) "", 0, writer30);
-        java.io.Writer writer34 = null;
-        int int35 = lookupTranslator27.translate((java.lang.CharSequence) "", (int) '#', writer34);
-        java.lang.CharSequence[][] charSequenceArray36 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator37 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray36);
-        java.io.Writer writer40 = null;
-        int int41 = lookupTranslator37.translate((java.lang.CharSequence) "", 0, writer40);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray42 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator27, lookupTranslator37 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator43 = lookupTranslator21.with(charSequenceTranslatorArray42);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator44 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray42);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator45 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray42);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator46 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray42);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray47 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator48 = aggregateTranslator46.with(charSequenceTranslatorArray47);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator49 = lookupTranslator17.with(charSequenceTranslatorArray47);
-        java.io.Writer writer51 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            charSequenceTranslator49.translate((java.lang.CharSequence) "FFFFFFFF", writer51);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(charSequenceArray3);
-        org.junit.Assert.assertNotNull(charSequenceArray7);
-        org.junit.Assert.assertNotNull(charSequenceArray11);
-        org.junit.Assert.assertNotNull(charSequenceArray15);
-        org.junit.Assert.assertNotNull(charSequenceArray16);
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "1" + "'", str19, "1");
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray42);
-        org.junit.Assert.assertNotNull(charSequenceTranslator43);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray47);
-        org.junit.Assert.assertNotNull(charSequenceTranslator48);
-        org.junit.Assert.assertNotNull(charSequenceTranslator49);
-    }
-
-    @Test
-    public void test507() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test507");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.lang.CharSequence[][] charSequenceArray12 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
-        java.io.Writer writer16 = null;
-        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
-        java.lang.String str23 = lookupTranslator13.translate((java.lang.CharSequence) "hi!");
-        java.lang.CharSequence[] charSequenceArray28 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray33 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray38 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray43 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray44 = new java.lang.CharSequence[][] { charSequenceArray28, charSequenceArray33, charSequenceArray38, charSequenceArray43 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator45 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray44);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator46 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray44);
-        java.io.Writer writer49 = null;
-        int int50 = lookupTranslator46.translate((java.lang.CharSequence) "", (int) (byte) 1, writer49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray51 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator46.with(charSequenceTranslatorArray51);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator13.with(charSequenceTranslatorArray51);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator54 = lookupTranslator1.with(charSequenceTranslatorArray51);
-        java.io.Writer writer57 = null;
-        int int58 = lookupTranslator1.translate((java.lang.CharSequence) "A", (int) '#', writer57);
-        java.lang.String str60 = lookupTranslator1.translate((java.lang.CharSequence) "64");
-        java.io.Writer writer63 = null;
-        int int64 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (-1), writer63);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray65 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator66 = lookupTranslator1.with(charSequenceTranslatorArray65);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "hi!" + "'", str23, "hi!");
-        org.junit.Assert.assertNotNull(charSequenceArray28);
-        org.junit.Assert.assertNotNull(charSequenceArray33);
-        org.junit.Assert.assertNotNull(charSequenceArray38);
-        org.junit.Assert.assertNotNull(charSequenceArray43);
-        org.junit.Assert.assertNotNull(charSequenceArray44);
-        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray51);
-        org.junit.Assert.assertNotNull(charSequenceTranslator52);
-        org.junit.Assert.assertNotNull(charSequenceTranslator53);
-        org.junit.Assert.assertNotNull(charSequenceTranslator54);
-        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
-        org.junit.Assert.assertEquals("'" + str60 + "' != '" + "64" + "'", str60, "64");
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
-    }
-
-    @Test
-    public void test508() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test508");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.lang.CharSequence[][] charSequenceArray12 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
-        java.io.Writer writer16 = null;
-        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
-        java.lang.CharSequence[][] charSequenceArray22 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
-        java.io.Writer writer26 = null;
-        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
-        java.lang.CharSequence[][] charSequenceArray28 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
-        java.io.Writer writer36 = null;
-        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
-        java.lang.CharSequence[][] charSequenceArray38 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        java.lang.CharSequence[][] charSequenceArray49 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
-        java.io.Writer writer53 = null;
-        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
-        java.lang.CharSequence[][] charSequenceArray55 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
-        java.io.Writer writer59 = null;
-        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
-        java.io.Writer writer63 = null;
-        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
-        java.lang.CharSequence[][] charSequenceArray65 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
-        java.io.Writer writer69 = null;
-        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
-        java.io.Writer writer77 = null;
-        int int78 = aggregateTranslator48.translate((java.lang.CharSequence) "23", (int) (byte) 100, writer77);
-        java.lang.Class<?> wildcardClass79 = aggregateTranslator48.getClass();
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
-        org.junit.Assert.assertNotNull(charSequenceTranslator45);
-        org.junit.Assert.assertNotNull(charSequenceTranslator46);
-        org.junit.Assert.assertNotNull(charSequenceTranslator47);
-        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
-        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
-        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
-        org.junit.Assert.assertNotNull(charSequenceTranslator72);
-        org.junit.Assert.assertNotNull(charSequenceTranslator74);
-        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
-        org.junit.Assert.assertNotNull(wildcardClass79);
-    }
-
-    @Test
-    public void test509() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test509");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator1.translate((java.lang.CharSequence) "0", (int) ' ', writer14);
-        java.io.Writer writer18 = null;
-        int int19 = lookupTranslator1.translate((java.lang.CharSequence) "20", (int) (byte) -1, writer18);
-        java.lang.CharSequence[][] charSequenceArray20 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.io.Writer writer24 = null;
-        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
-        java.lang.String str27 = lookupTranslator21.translate((java.lang.CharSequence) "hi!");
-        java.lang.String str29 = lookupTranslator21.translate((java.lang.CharSequence) "FFFFFFFF");
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator21.translate((java.lang.CharSequence) "FFFFFFFF", (int) (byte) 0, writer32);
-        java.lang.CharSequence[][] charSequenceArray34 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator35 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray34);
-        java.io.Writer writer38 = null;
-        int int39 = lookupTranslator35.translate((java.lang.CharSequence) "", 0, writer38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator35.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer42);
-        java.lang.CharSequence[] charSequenceArray48 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray53 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray58 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray63 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray64 = new java.lang.CharSequence[][] { charSequenceArray48, charSequenceArray53, charSequenceArray58, charSequenceArray63 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator65 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray64);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray64);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator67 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray64);
-        java.lang.CharSequence[][] charSequenceArray68 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator69 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray68);
-        java.io.Writer writer72 = null;
-        int int73 = lookupTranslator69.translate((java.lang.CharSequence) "", 0, writer72);
-        java.lang.CharSequence[][] charSequenceArray74 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator75 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray74);
-        java.io.Writer writer78 = null;
-        int int79 = lookupTranslator75.translate((java.lang.CharSequence) "", 0, writer78);
-        java.io.Writer writer82 = null;
-        int int83 = lookupTranslator75.translate((java.lang.CharSequence) "", (int) '#', writer82);
-        java.lang.CharSequence[][] charSequenceArray84 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator85 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray84);
-        java.io.Writer writer88 = null;
-        int int89 = lookupTranslator85.translate((java.lang.CharSequence) "", 0, writer88);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray90 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator75, lookupTranslator85 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator91 = lookupTranslator69.with(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator92 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator93 = lookupTranslator67.with(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator94 = lookupTranslator35.with(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator95 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator96 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator97 = lookupTranslator21.with(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator98 = lookupTranslator1.with(charSequenceTranslatorArray90);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "hi!" + "'", str27, "hi!");
-        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "FFFFFFFF" + "'", str29, "FFFFFFFF");
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(charSequenceArray48);
-        org.junit.Assert.assertNotNull(charSequenceArray53);
-        org.junit.Assert.assertNotNull(charSequenceArray58);
-        org.junit.Assert.assertNotNull(charSequenceArray63);
-        org.junit.Assert.assertNotNull(charSequenceArray64);
-        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 0 + "'", int73 == 0);
-        org.junit.Assert.assertTrue("'" + int79 + "' != '" + 0 + "'", int79 == 0);
-        org.junit.Assert.assertTrue("'" + int83 + "' != '" + 0 + "'", int83 == 0);
-        org.junit.Assert.assertTrue("'" + int89 + "' != '" + 0 + "'", int89 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray90);
-        org.junit.Assert.assertNotNull(charSequenceTranslator91);
-        org.junit.Assert.assertNotNull(charSequenceTranslator93);
-        org.junit.Assert.assertNotNull(charSequenceTranslator94);
-        org.junit.Assert.assertNotNull(charSequenceTranslator97);
-        org.junit.Assert.assertNotNull(charSequenceTranslator98);
-    }
-
-    @Test
-    public void test510() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test510");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.lang.CharSequence[][] charSequenceArray12 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
-        java.io.Writer writer16 = null;
-        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
-        java.lang.CharSequence[][] charSequenceArray22 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
-        java.io.Writer writer26 = null;
-        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
-        java.lang.CharSequence[][] charSequenceArray28 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
-        java.io.Writer writer36 = null;
-        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
-        java.lang.CharSequence[][] charSequenceArray38 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        java.lang.CharSequence[][] charSequenceArray49 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
-        java.io.Writer writer53 = null;
-        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
-        java.lang.CharSequence[][] charSequenceArray55 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
-        java.io.Writer writer59 = null;
-        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
-        java.io.Writer writer63 = null;
-        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
-        java.lang.CharSequence[][] charSequenceArray65 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
-        java.io.Writer writer69 = null;
-        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
-        java.io.Writer writer77 = null;
-        int int78 = aggregateTranslator48.translate((java.lang.CharSequence) "1", 0, writer77);
-        java.lang.String str80 = aggregateTranslator48.translate((java.lang.CharSequence) "FFFFFFFF");
-        java.io.Writer writer83 = null;
-        int int84 = aggregateTranslator48.translate((java.lang.CharSequence) "34", (int) (byte) 0, writer83);
-        java.io.Writer writer86 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            aggregateTranslator48.translate((java.lang.CharSequence) "23", writer86);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
-        org.junit.Assert.assertNotNull(charSequenceTranslator45);
-        org.junit.Assert.assertNotNull(charSequenceTranslator46);
-        org.junit.Assert.assertNotNull(charSequenceTranslator47);
-        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
-        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
-        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
-        org.junit.Assert.assertNotNull(charSequenceTranslator72);
-        org.junit.Assert.assertNotNull(charSequenceTranslator74);
-        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
-        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "FFFFFFFF" + "'", str80, "FFFFFFFF");
-        org.junit.Assert.assertTrue("'" + int84 + "' != '" + 0 + "'", int84 == 0);
-    }
-
-    @Test
-    public void test511() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test511");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.io.Writer writer8 = null;
-        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
-        java.lang.CharSequence[][] charSequenceArray10 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
-        java.lang.CharSequence[][] charSequenceArray16 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
-        java.io.Writer writer24 = null;
-        int int25 = lookupTranslator17.translate((java.lang.CharSequence) "", (int) '#', writer24);
-        java.lang.CharSequence[][] charSequenceArray26 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
-        java.io.Writer writer30 = null;
-        int int31 = lookupTranslator27.translate((java.lang.CharSequence) "", 0, writer30);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray32 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator17, lookupTranslator27 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator33 = lookupTranslator11.with(charSequenceTranslatorArray32);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator34 = lookupTranslator1.with(charSequenceTranslatorArray32);
-        java.lang.String str36 = charSequenceTranslator34.translate((java.lang.CharSequence) "hi!");
-        java.lang.CharSequence[] charSequenceArray41 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray46 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray51 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray56 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray57 = new java.lang.CharSequence[][] { charSequenceArray41, charSequenceArray46, charSequenceArray51, charSequenceArray56 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator58 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray57);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator59 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray57);
-        java.io.Writer writer62 = null;
-        int int63 = lookupTranslator59.translate((java.lang.CharSequence) "", (int) (byte) 1, writer62);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray64 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator65 = lookupTranslator59.with(charSequenceTranslatorArray64);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator66 = charSequenceTranslator34.with(charSequenceTranslatorArray64);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator67 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray64);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator68 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray64);
-        java.io.Writer writer71 = null;
-        int int72 = aggregateTranslator68.translate((java.lang.CharSequence) "", 0, writer71);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray73 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator68.with(charSequenceTranslatorArray73);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray32);
-        org.junit.Assert.assertNotNull(charSequenceTranslator33);
-        org.junit.Assert.assertNotNull(charSequenceTranslator34);
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "hi!" + "'", str36, "hi!");
-        org.junit.Assert.assertNotNull(charSequenceArray41);
-        org.junit.Assert.assertNotNull(charSequenceArray46);
-        org.junit.Assert.assertNotNull(charSequenceArray51);
-        org.junit.Assert.assertNotNull(charSequenceArray56);
-        org.junit.Assert.assertNotNull(charSequenceArray57);
-        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray64);
-        org.junit.Assert.assertNotNull(charSequenceTranslator65);
-        org.junit.Assert.assertNotNull(charSequenceTranslator66);
-        org.junit.Assert.assertTrue("'" + int72 + "' != '" + 0 + "'", int72 == 0);
-    }
-
-    @Test
-    public void test512() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test512");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -809,9 +52,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test513() throws Throwable {
+    public void test502() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test513");
+            System.out.format("%n%s%n", "RegressionTest1.test502");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -837,9 +80,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test514() throws Throwable {
+    public void test503() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test514");
+            System.out.format("%n%s%n", "RegressionTest1.test503");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -875,9 +118,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test515() throws Throwable {
+    public void test504() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test515");
+            System.out.format("%n%s%n", "RegressionTest1.test504");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -930,9 +173,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test516() throws Throwable {
+    public void test505() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test516");
+            System.out.format("%n%s%n", "RegressionTest1.test505");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -1022,9 +265,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test517() throws Throwable {
+    public void test506() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test517");
+            System.out.format("%n%s%n", "RegressionTest1.test506");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -1045,9 +288,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test518() throws Throwable {
+    public void test507() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test518");
+            System.out.format("%n%s%n", "RegressionTest1.test507");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -1119,9 +362,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test519() throws Throwable {
+    public void test508() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test519");
+            System.out.format("%n%s%n", "RegressionTest1.test508");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -1172,9 +415,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test520() throws Throwable {
+    public void test509() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test520");
+            System.out.format("%n%s%n", "RegressionTest1.test509");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -1196,9 +439,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test521() throws Throwable {
+    public void test510() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test521");
+            System.out.format("%n%s%n", "RegressionTest1.test510");
         java.lang.CharSequence[] charSequenceArray5 = new java.lang.CharSequence[] { "34", "", "hi!", "1", "hi!" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "34", "", "hi!", "1", "hi!" };
         java.lang.CharSequence[][] charSequenceArray12 = new java.lang.CharSequence[][] { charSequenceArray5, charSequenceArray11 };
@@ -1222,9 +465,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test522() throws Throwable {
+    public void test511() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test522");
+            System.out.format("%n%s%n", "RegressionTest1.test511");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -1296,9 +539,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test523() throws Throwable {
+    public void test512() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test523");
+            System.out.format("%n%s%n", "RegressionTest1.test512");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -1317,9 +560,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test524() throws Throwable {
+    public void test513() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test524");
+            System.out.format("%n%s%n", "RegressionTest1.test513");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -1333,9 +576,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test525() throws Throwable {
+    public void test514() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test525");
+            System.out.format("%n%s%n", "RegressionTest1.test514");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -1407,9 +650,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test526() throws Throwable {
+    public void test515() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test526");
+            System.out.format("%n%s%n", "RegressionTest1.test515");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -1451,9 +694,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test527() throws Throwable {
+    public void test516() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test527");
+            System.out.format("%n%s%n", "RegressionTest1.test516");
         java.lang.CharSequence[] charSequenceArray5 = new java.lang.CharSequence[] { "34", "", "hi!", "1", "hi!" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "34", "", "hi!", "1", "hi!" };
         java.lang.CharSequence[][] charSequenceArray12 = new java.lang.CharSequence[][] { charSequenceArray5, charSequenceArray11 };
@@ -1468,9 +711,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test528() throws Throwable {
+    public void test517() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test528");
+            System.out.format("%n%s%n", "RegressionTest1.test517");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -1493,9 +736,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test529() throws Throwable {
+    public void test518() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test529");
+            System.out.format("%n%s%n", "RegressionTest1.test518");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -1520,9 +763,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test530() throws Throwable {
+    public void test519() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test530");
+            System.out.format("%n%s%n", "RegressionTest1.test519");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -1599,9 +842,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test531() throws Throwable {
+    public void test520() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test531");
+            System.out.format("%n%s%n", "RegressionTest1.test520");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -1697,9 +940,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test532() throws Throwable {
+    public void test521() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test532");
+            System.out.format("%n%s%n", "RegressionTest1.test521");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -1738,9 +981,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test533() throws Throwable {
+    public void test522() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test533");
+            System.out.format("%n%s%n", "RegressionTest1.test522");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -1800,9 +1043,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test534() throws Throwable {
+    public void test523() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test534");
+            System.out.format("%n%s%n", "RegressionTest1.test523");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -1841,9 +1084,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test535() throws Throwable {
+    public void test524() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test535");
+            System.out.format("%n%s%n", "RegressionTest1.test524");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -1871,9 +1114,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test536() throws Throwable {
+    public void test525() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test536");
+            System.out.format("%n%s%n", "RegressionTest1.test525");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -1895,9 +1138,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test537() throws Throwable {
+    public void test526() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test537");
+            System.out.format("%n%s%n", "RegressionTest1.test526");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -1932,9 +1175,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test538() throws Throwable {
+    public void test527() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test538");
+            System.out.format("%n%s%n", "RegressionTest1.test527");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -1972,9 +1215,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test539() throws Throwable {
+    public void test528() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test539");
+            System.out.format("%n%s%n", "RegressionTest1.test528");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -2002,9 +1245,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test540() throws Throwable {
+    public void test529() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test540");
+            System.out.format("%n%s%n", "RegressionTest1.test529");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -2060,9 +1303,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test541() throws Throwable {
+    public void test530() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test541");
+            System.out.format("%n%s%n", "RegressionTest1.test530");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -2082,9 +1325,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test542() throws Throwable {
+    public void test531() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test542");
+            System.out.format("%n%s%n", "RegressionTest1.test531");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -2168,9 +1411,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test543() throws Throwable {
+    public void test532() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test543");
+            System.out.format("%n%s%n", "RegressionTest1.test532");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -2185,9 +1428,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test544() throws Throwable {
+    public void test533() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test544");
+            System.out.format("%n%s%n", "RegressionTest1.test533");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -2204,9 +1447,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test545() throws Throwable {
+    public void test534() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test545");
+            System.out.format("%n%s%n", "RegressionTest1.test534");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -2286,9 +1529,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test546() throws Throwable {
+    public void test535() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test546");
+            System.out.format("%n%s%n", "RegressionTest1.test535");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -2364,9 +1607,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test547() throws Throwable {
+    public void test536() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test547");
+            System.out.format("%n%s%n", "RegressionTest1.test536");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -2447,9 +1690,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test548() throws Throwable {
+    public void test537() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test548");
+            System.out.format("%n%s%n", "RegressionTest1.test537");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -2501,9 +1744,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test549() throws Throwable {
+    public void test538() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test549");
+            System.out.format("%n%s%n", "RegressionTest1.test538");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -2558,9 +1801,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test550() throws Throwable {
+    public void test539() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test550");
+            System.out.format("%n%s%n", "RegressionTest1.test539");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -2572,9 +1815,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test551() throws Throwable {
+    public void test540() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test551");
+            System.out.format("%n%s%n", "RegressionTest1.test540");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
@@ -2594,9 +1837,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test552() throws Throwable {
+    public void test541() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test552");
+            System.out.format("%n%s%n", "RegressionTest1.test541");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "34", "20", "61", "23" };
         java.lang.CharSequence[][] charSequenceArray5 = new java.lang.CharSequence[][] { charSequenceArray4 };
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator6 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray5);
@@ -2610,9 +1853,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test553() throws Throwable {
+    public void test542() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test553");
+            System.out.format("%n%s%n", "RegressionTest1.test542");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -2637,9 +1880,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test554() throws Throwable {
+    public void test543() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test554");
+            System.out.format("%n%s%n", "RegressionTest1.test543");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -2717,9 +1960,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test555() throws Throwable {
+    public void test544() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test555");
+            System.out.format("%n%s%n", "RegressionTest1.test544");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -2799,9 +2042,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test556() throws Throwable {
+    public void test545() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test556");
+            System.out.format("%n%s%n", "RegressionTest1.test545");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -2880,9 +2123,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test557() throws Throwable {
+    public void test546() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test557");
+            System.out.format("%n%s%n", "RegressionTest1.test546");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -2924,9 +2167,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test558() throws Throwable {
+    public void test547() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test558");
+            System.out.format("%n%s%n", "RegressionTest1.test547");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -3006,9 +2249,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test559() throws Throwable {
+    public void test548() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test559");
+            System.out.format("%n%s%n", "RegressionTest1.test548");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -3069,9 +2312,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test560() throws Throwable {
+    public void test549() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test560");
+            System.out.format("%n%s%n", "RegressionTest1.test549");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -3151,9 +2394,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test561() throws Throwable {
+    public void test550() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test561");
+            System.out.format("%n%s%n", "RegressionTest1.test550");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -3232,9 +2475,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test562() throws Throwable {
+    public void test551() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test562");
+            System.out.format("%n%s%n", "RegressionTest1.test551");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -3273,9 +2516,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test563() throws Throwable {
+    public void test552() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test563");
+            System.out.format("%n%s%n", "RegressionTest1.test552");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -3369,9 +2612,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test564() throws Throwable {
+    public void test553() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test564");
+            System.out.format("%n%s%n", "RegressionTest1.test553");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -3414,9 +2657,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test565() throws Throwable {
+    public void test554() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test565");
+            System.out.format("%n%s%n", "RegressionTest1.test554");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -3479,9 +2722,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test566() throws Throwable {
+    public void test555() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test566");
+            System.out.format("%n%s%n", "RegressionTest1.test555");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -3495,9 +2738,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test567() throws Throwable {
+    public void test556() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test567");
+            System.out.format("%n%s%n", "RegressionTest1.test556");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -3558,9 +2801,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test568() throws Throwable {
+    public void test557() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test568");
+            System.out.format("%n%s%n", "RegressionTest1.test557");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -3646,9 +2889,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test569() throws Throwable {
+    public void test558() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test569");
+            System.out.format("%n%s%n", "RegressionTest1.test558");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -3702,9 +2945,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test570() throws Throwable {
+    public void test559() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test570");
+            System.out.format("%n%s%n", "RegressionTest1.test559");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -3745,9 +2988,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test571() throws Throwable {
+    public void test560() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test571");
+            System.out.format("%n%s%n", "RegressionTest1.test560");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -3765,9 +3008,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test572() throws Throwable {
+    public void test561() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test572");
+            System.out.format("%n%s%n", "RegressionTest1.test561");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -3782,9 +3025,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test573() throws Throwable {
+    public void test562() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test573");
+            System.out.format("%n%s%n", "RegressionTest1.test562");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -3823,9 +3066,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test574() throws Throwable {
+    public void test563() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test574");
+            System.out.format("%n%s%n", "RegressionTest1.test563");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -3870,9 +3113,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test575() throws Throwable {
+    public void test564() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test575");
+            System.out.format("%n%s%n", "RegressionTest1.test564");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -3922,9 +3165,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test576() throws Throwable {
+    public void test565() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test576");
+            System.out.format("%n%s%n", "RegressionTest1.test565");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -4000,9 +3243,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test577() throws Throwable {
+    public void test566() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test577");
+            System.out.format("%n%s%n", "RegressionTest1.test566");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -4082,9 +3325,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test578() throws Throwable {
+    public void test567() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test578");
+            System.out.format("%n%s%n", "RegressionTest1.test567");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -4118,9 +3361,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test579() throws Throwable {
+    public void test568() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test579");
+            System.out.format("%n%s%n", "RegressionTest1.test568");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -4165,9 +3408,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test580() throws Throwable {
+    public void test569() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test580");
+            System.out.format("%n%s%n", "RegressionTest1.test569");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -4249,9 +3492,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test581() throws Throwable {
+    public void test570() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test581");
+            System.out.format("%n%s%n", "RegressionTest1.test570");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -4332,9 +3575,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test582() throws Throwable {
+    public void test571() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test582");
+            System.out.format("%n%s%n", "RegressionTest1.test571");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -4366,9 +3609,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test583() throws Throwable {
+    public void test572() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test583");
+            System.out.format("%n%s%n", "RegressionTest1.test572");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -4428,9 +3671,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test584() throws Throwable {
+    public void test573() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test584");
+            System.out.format("%n%s%n", "RegressionTest1.test573");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -4481,9 +3724,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test585() throws Throwable {
+    public void test574() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test585");
+            System.out.format("%n%s%n", "RegressionTest1.test574");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -4565,9 +3808,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test586() throws Throwable {
+    public void test575() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test586");
+            System.out.format("%n%s%n", "RegressionTest1.test575");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -4588,9 +3831,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test587() throws Throwable {
+    public void test576() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test587");
+            System.out.format("%n%s%n", "RegressionTest1.test576");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -4682,9 +3925,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test588() throws Throwable {
+    public void test577() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test588");
+            System.out.format("%n%s%n", "RegressionTest1.test577");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -4768,9 +4011,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test589() throws Throwable {
+    public void test578() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test589");
+            System.out.format("%n%s%n", "RegressionTest1.test578");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
@@ -4789,9 +4032,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test590() throws Throwable {
+    public void test579() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test590");
+            System.out.format("%n%s%n", "RegressionTest1.test579");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -4813,9 +4056,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test591() throws Throwable {
+    public void test580() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test591");
+            System.out.format("%n%s%n", "RegressionTest1.test580");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -4862,9 +4105,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test592() throws Throwable {
+    public void test581() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test592");
+            System.out.format("%n%s%n", "RegressionTest1.test581");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -4944,9 +4187,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test593() throws Throwable {
+    public void test582() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test593");
+            System.out.format("%n%s%n", "RegressionTest1.test582");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -5013,9 +4256,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test594() throws Throwable {
+    public void test583() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test594");
+            System.out.format("%n%s%n", "RegressionTest1.test583");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -5041,9 +4284,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test595() throws Throwable {
+    public void test584() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test595");
+            System.out.format("%n%s%n", "RegressionTest1.test584");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -5135,9 +4378,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test596() throws Throwable {
+    public void test585() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test596");
+            System.out.format("%n%s%n", "RegressionTest1.test585");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -5218,9 +4461,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test597() throws Throwable {
+    public void test586() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test597");
+            System.out.format("%n%s%n", "RegressionTest1.test586");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -5269,9 +4512,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test598() throws Throwable {
+    public void test587() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test598");
+            System.out.format("%n%s%n", "RegressionTest1.test587");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -5315,9 +4558,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test599() throws Throwable {
+    public void test588() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test599");
+            System.out.format("%n%s%n", "RegressionTest1.test588");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -5408,37 +4651,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test600() throws Throwable {
+    public void test589() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test600");
-        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator25 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "23", (int) 'a', writer32);
-        org.junit.Assert.assertNotNull(charSequenceArray4);
-        org.junit.Assert.assertNotNull(charSequenceArray9);
-        org.junit.Assert.assertNotNull(charSequenceArray14);
-        org.junit.Assert.assertNotNull(charSequenceArray19);
-        org.junit.Assert.assertNotNull(charSequenceArray20);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-    }
-
-    @Test
-    public void test601() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test601");
+            System.out.format("%n%s%n", "RegressionTest1.test589");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -5461,9 +4676,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test602() throws Throwable {
+    public void test590() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test602");
+            System.out.format("%n%s%n", "RegressionTest1.test590");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -5521,93 +4736,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test603() throws Throwable {
+    public void test591() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test603");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.lang.CharSequence[][] charSequenceArray12 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
-        java.io.Writer writer16 = null;
-        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
-        java.lang.CharSequence[][] charSequenceArray22 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
-        java.io.Writer writer26 = null;
-        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
-        java.lang.CharSequence[][] charSequenceArray28 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
-        java.io.Writer writer36 = null;
-        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
-        java.lang.CharSequence[][] charSequenceArray38 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        java.lang.CharSequence[][] charSequenceArray49 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
-        java.io.Writer writer53 = null;
-        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
-        java.lang.CharSequence[][] charSequenceArray55 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
-        java.io.Writer writer59 = null;
-        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
-        java.io.Writer writer63 = null;
-        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
-        java.lang.CharSequence[][] charSequenceArray65 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
-        java.io.Writer writer69 = null;
-        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
-        java.io.Writer writer77 = null;
-        int int78 = aggregateTranslator48.translate((java.lang.CharSequence) "", (int) '#', writer77);
-        java.lang.String str80 = aggregateTranslator48.translate((java.lang.CharSequence) "0");
-        java.lang.CharSequence charSequence81 = null;
-        java.lang.String str82 = aggregateTranslator48.translate(charSequence81);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
-        org.junit.Assert.assertNotNull(charSequenceTranslator45);
-        org.junit.Assert.assertNotNull(charSequenceTranslator46);
-        org.junit.Assert.assertNotNull(charSequenceTranslator47);
-        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
-        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
-        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
-        org.junit.Assert.assertNotNull(charSequenceTranslator72);
-        org.junit.Assert.assertNotNull(charSequenceTranslator74);
-        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
-        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "0" + "'", str80, "0");
-        org.junit.Assert.assertNull(str82);
-    }
-
-    @Test
-    public void test604() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test604");
+            System.out.format("%n%s%n", "RegressionTest1.test591");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -5635,9 +4766,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test605() throws Throwable {
+    public void test592() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test605");
+            System.out.format("%n%s%n", "RegressionTest1.test592");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -5681,9 +4812,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test606() throws Throwable {
+    public void test593() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test606");
+            System.out.format("%n%s%n", "RegressionTest1.test593");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -5779,9 +4910,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test607() throws Throwable {
+    public void test594() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test607");
+            System.out.format("%n%s%n", "RegressionTest1.test594");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -5857,9 +4988,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test608() throws Throwable {
+    public void test595() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test608");
+            System.out.format("%n%s%n", "RegressionTest1.test595");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -5909,9 +5040,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test609() throws Throwable {
+    public void test596() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test609");
+            System.out.format("%n%s%n", "RegressionTest1.test596");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -5966,9 +5097,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test610() throws Throwable {
+    public void test597() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test610");
+            System.out.format("%n%s%n", "RegressionTest1.test597");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -6017,65 +5148,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test611() throws Throwable {
+    public void test598() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test611");
-        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.lang.CharSequence[][] charSequenceArray23 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray23);
-        java.lang.CharSequence[][] charSequenceArray25 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray25);
-        java.lang.CharSequence[][] charSequenceArray27 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray27);
-        java.io.Writer writer31 = null;
-        int int32 = lookupTranslator28.translate((java.lang.CharSequence) "", 0, writer31);
-        java.lang.CharSequence[][] charSequenceArray33 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator34 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray33);
-        java.io.Writer writer37 = null;
-        int int38 = lookupTranslator34.translate((java.lang.CharSequence) "", 0, writer37);
-        java.io.Writer writer41 = null;
-        int int42 = lookupTranslator34.translate((java.lang.CharSequence) "", (int) '#', writer41);
-        java.lang.CharSequence[][] charSequenceArray43 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator44 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray43);
-        java.io.Writer writer47 = null;
-        int int48 = lookupTranslator44.translate((java.lang.CharSequence) "", 0, writer47);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator34, lookupTranslator44 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = lookupTranslator28.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator51 = lookupTranslator26.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator24.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator22.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator54 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray49);
-        java.io.Writer writer57 = null;
-        int int58 = aggregateTranslator54.translate((java.lang.CharSequence) "64", (int) (short) 0, writer57);
-        java.lang.String str60 = aggregateTranslator54.translate((java.lang.CharSequence) "34");
-        org.junit.Assert.assertNotNull(charSequenceArray4);
-        org.junit.Assert.assertNotNull(charSequenceArray9);
-        org.junit.Assert.assertNotNull(charSequenceArray14);
-        org.junit.Assert.assertNotNull(charSequenceArray19);
-        org.junit.Assert.assertNotNull(charSequenceArray20);
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
-        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
-        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
-        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
-        org.junit.Assert.assertNotNull(charSequenceTranslator50);
-        org.junit.Assert.assertNotNull(charSequenceTranslator51);
-        org.junit.Assert.assertNotNull(charSequenceTranslator52);
-        org.junit.Assert.assertNotNull(charSequenceTranslator53);
-        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
-        org.junit.Assert.assertEquals("'" + str60 + "' != '" + "34" + "'", str60, "34");
-    }
-
-    @Test
-    public void test612() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test612");
+            System.out.format("%n%s%n", "RegressionTest1.test598");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -6113,9 +5188,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test613() throws Throwable {
+    public void test599() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test613");
+            System.out.format("%n%s%n", "RegressionTest1.test599");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -6203,9 +5278,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test614() throws Throwable {
+    public void test600() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test614");
+            System.out.format("%n%s%n", "RegressionTest1.test600");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -6220,9 +5295,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test615() throws Throwable {
+    public void test601() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test615");
+            System.out.format("%n%s%n", "RegressionTest1.test601");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -6256,9 +5331,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test616() throws Throwable {
+    public void test602() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test616");
+            System.out.format("%n%s%n", "RegressionTest1.test602");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -6336,9 +5411,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test617() throws Throwable {
+    public void test603() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test617");
+            System.out.format("%n%s%n", "RegressionTest1.test603");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -6407,9 +5482,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test618() throws Throwable {
+    public void test604() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test618");
+            System.out.format("%n%s%n", "RegressionTest1.test604");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -6478,9 +5553,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test619() throws Throwable {
+    public void test605() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test619");
+            System.out.format("%n%s%n", "RegressionTest1.test605");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -6507,9 +5582,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test620() throws Throwable {
+    public void test606() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test620");
+            System.out.format("%n%s%n", "RegressionTest1.test606");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -6579,9 +5654,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test621() throws Throwable {
+    public void test607() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test621");
+            System.out.format("%n%s%n", "RegressionTest1.test607");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -6671,9 +5746,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test622() throws Throwable {
+    public void test608() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test622");
+            System.out.format("%n%s%n", "RegressionTest1.test608");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -6691,9 +5766,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test623() throws Throwable {
+    public void test609() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test623");
+            System.out.format("%n%s%n", "RegressionTest1.test609");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -6772,44 +5847,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test624() throws Throwable {
+    public void test610() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test624");
-        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.io.Writer writer25 = null;
-        int int26 = lookupTranslator22.translate((java.lang.CharSequence) "", (int) (byte) 1, writer25);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray27 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator22.with(charSequenceTranslatorArray27);
-        java.io.Writer writer31 = null;
-        int int32 = lookupTranslator22.translate((java.lang.CharSequence) "64", 10, writer31);
-        java.lang.CharSequence charSequence33 = null;
-        java.lang.String str34 = lookupTranslator22.translate(charSequence33);
-        java.lang.String str36 = lookupTranslator22.translate((java.lang.CharSequence) "");
-        java.lang.String str38 = lookupTranslator22.translate((java.lang.CharSequence) "61");
-        org.junit.Assert.assertNotNull(charSequenceArray4);
-        org.junit.Assert.assertNotNull(charSequenceArray9);
-        org.junit.Assert.assertNotNull(charSequenceArray14);
-        org.junit.Assert.assertNotNull(charSequenceArray19);
-        org.junit.Assert.assertNotNull(charSequenceArray20);
-        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray27);
-        org.junit.Assert.assertNotNull(charSequenceTranslator28);
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
-        org.junit.Assert.assertNull(str34);
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "" + "'", str36, "");
-        org.junit.Assert.assertEquals("'" + str38 + "' != '" + "61" + "'", str38, "61");
-    }
-
-    @Test
-    public void test625() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test625");
+            System.out.format("%n%s%n", "RegressionTest1.test610");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -6857,9 +5897,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test626() throws Throwable {
+    public void test611() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test626");
+            System.out.format("%n%s%n", "RegressionTest1.test611");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -6939,9 +5979,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test627() throws Throwable {
+    public void test612() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test627");
+            System.out.format("%n%s%n", "RegressionTest1.test612");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -6968,9 +6008,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test628() throws Throwable {
+    public void test613() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test628");
+            System.out.format("%n%s%n", "RegressionTest1.test613");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -7012,9 +6052,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test629() throws Throwable {
+    public void test614() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test629");
+            System.out.format("%n%s%n", "RegressionTest1.test614");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -7059,9 +6099,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test630() throws Throwable {
+    public void test615() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test630");
+            System.out.format("%n%s%n", "RegressionTest1.test615");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -7148,9 +6188,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test631() throws Throwable {
+    public void test616() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test631");
+            System.out.format("%n%s%n", "RegressionTest1.test616");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -7177,9 +6217,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test632() throws Throwable {
+    public void test617() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test632");
+            System.out.format("%n%s%n", "RegressionTest1.test617");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -7221,9 +6261,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test633() throws Throwable {
+    public void test618() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test633");
+            System.out.format("%n%s%n", "RegressionTest1.test618");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -7304,9 +6344,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test634() throws Throwable {
+    public void test619() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test634");
+            System.out.format("%n%s%n", "RegressionTest1.test619");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -7346,9 +6386,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test635() throws Throwable {
+    public void test620() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test635");
+            System.out.format("%n%s%n", "RegressionTest1.test620");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -7397,9 +6437,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test636() throws Throwable {
+    public void test621() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test636");
+            System.out.format("%n%s%n", "RegressionTest1.test621");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -7434,9 +6474,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test637() throws Throwable {
+    public void test622() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test637");
+            System.out.format("%n%s%n", "RegressionTest1.test622");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -7482,9 +6522,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test638() throws Throwable {
+    public void test623() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test638");
+            System.out.format("%n%s%n", "RegressionTest1.test623");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -7526,9 +6566,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test639() throws Throwable {
+    public void test624() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test639");
+            System.out.format("%n%s%n", "RegressionTest1.test624");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -7616,9 +6656,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test640() throws Throwable {
+    public void test625() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test640");
+            System.out.format("%n%s%n", "RegressionTest1.test625");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -7654,9 +6694,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test641() throws Throwable {
+    public void test626() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test641");
+            System.out.format("%n%s%n", "RegressionTest1.test626");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -7676,9 +6716,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test642() throws Throwable {
+    public void test627() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test642");
+            System.out.format("%n%s%n", "RegressionTest1.test627");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -7732,9 +6772,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test643() throws Throwable {
+    public void test628() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test643");
+            System.out.format("%n%s%n", "RegressionTest1.test628");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -7792,9 +6832,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test644() throws Throwable {
+    public void test629() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test644");
+            System.out.format("%n%s%n", "RegressionTest1.test629");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -7821,9 +6861,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test645() throws Throwable {
+    public void test630() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test645");
+            System.out.format("%n%s%n", "RegressionTest1.test630");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -7900,9 +6940,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test646() throws Throwable {
+    public void test631() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test646");
+            System.out.format("%n%s%n", "RegressionTest1.test631");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -7991,9 +7031,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test647() throws Throwable {
+    public void test632() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test647");
+            System.out.format("%n%s%n", "RegressionTest1.test632");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -8022,9 +7062,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test648() throws Throwable {
+    public void test633() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test648");
+            System.out.format("%n%s%n", "RegressionTest1.test633");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -8068,9 +7108,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test649() throws Throwable {
+    public void test634() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test649");
+            System.out.format("%n%s%n", "RegressionTest1.test634");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -8162,9 +7202,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test650() throws Throwable {
+    public void test635() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test650");
+            System.out.format("%n%s%n", "RegressionTest1.test635");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -8236,9 +7276,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test651() throws Throwable {
+    public void test636() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test651");
+            System.out.format("%n%s%n", "RegressionTest1.test636");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -8288,9 +7328,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test652() throws Throwable {
+    public void test637() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test652");
+            System.out.format("%n%s%n", "RegressionTest1.test637");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -8328,9 +7368,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test653() throws Throwable {
+    public void test638() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test653");
+            System.out.format("%n%s%n", "RegressionTest1.test638");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -8422,9 +7462,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test654() throws Throwable {
+    public void test639() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test654");
+            System.out.format("%n%s%n", "RegressionTest1.test639");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -8518,9 +7558,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test655() throws Throwable {
+    public void test640() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test655");
+            System.out.format("%n%s%n", "RegressionTest1.test640");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -8543,9 +7583,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test656() throws Throwable {
+    public void test641() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test656");
+            System.out.format("%n%s%n", "RegressionTest1.test641");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -8623,9 +7663,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test657() throws Throwable {
+    public void test642() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test657");
+            System.out.format("%n%s%n", "RegressionTest1.test642");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -8650,9 +7690,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test658() throws Throwable {
+    public void test643() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test658");
+            System.out.format("%n%s%n", "RegressionTest1.test643");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -8737,9 +7777,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test659() throws Throwable {
+    public void test644() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test659");
+            System.out.format("%n%s%n", "RegressionTest1.test644");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -8799,9 +7839,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test660() throws Throwable {
+    public void test645() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test660");
+            System.out.format("%n%s%n", "RegressionTest1.test645");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -8856,9 +7896,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test661() throws Throwable {
+    public void test646() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test661");
+            System.out.format("%n%s%n", "RegressionTest1.test646");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -8903,9 +7943,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test662() throws Throwable {
+    public void test647() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test662");
+            System.out.format("%n%s%n", "RegressionTest1.test647");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -8943,9 +7983,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test663() throws Throwable {
+    public void test648() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test663");
+            System.out.format("%n%s%n", "RegressionTest1.test648");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -9034,9 +8074,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test664() throws Throwable {
+    public void test649() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test664");
+            System.out.format("%n%s%n", "RegressionTest1.test649");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -9059,92 +8099,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test665() throws Throwable {
+    public void test650() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test665");
-        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
-        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
-        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
-        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
-        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.lang.CharSequence[][] charSequenceArray22 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
-        java.io.Writer writer26 = null;
-        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
-        java.lang.CharSequence[][] charSequenceArray28 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
-        java.io.Writer writer36 = null;
-        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
-        java.lang.CharSequence[][] charSequenceArray38 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator46 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator47 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = aggregateTranslator48.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator51 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator21.with(charSequenceTranslatorArray49);
-        java.lang.CharSequence[][] charSequenceArray53 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator54 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray53);
-        java.io.Writer writer57 = null;
-        int int58 = lookupTranslator54.translate((java.lang.CharSequence) "", 0, writer57);
-        java.io.Writer writer61 = null;
-        int int62 = lookupTranslator54.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer61);
-        java.lang.CharSequence[][] charSequenceArray63 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator64 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray63);
-        java.io.Writer writer67 = null;
-        int int68 = lookupTranslator64.translate((java.lang.CharSequence) "", 0, writer67);
-        java.lang.CharSequence[][] charSequenceArray69 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator70 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray69);
-        java.io.Writer writer73 = null;
-        int int74 = lookupTranslator70.translate((java.lang.CharSequence) "", 0, writer73);
-        java.io.Writer writer77 = null;
-        int int78 = lookupTranslator70.translate((java.lang.CharSequence) "", (int) '#', writer77);
-        java.lang.CharSequence[][] charSequenceArray79 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator80 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray79);
-        java.io.Writer writer83 = null;
-        int int84 = lookupTranslator80.translate((java.lang.CharSequence) "", 0, writer83);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray85 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator70, lookupTranslator80 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator86 = lookupTranslator64.with(charSequenceTranslatorArray85);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator87 = lookupTranslator54.with(charSequenceTranslatorArray85);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator88 = lookupTranslator21.with(charSequenceTranslatorArray85);
-        org.junit.Assert.assertNotNull(charSequenceArray4);
-        org.junit.Assert.assertNotNull(charSequenceArray9);
-        org.junit.Assert.assertNotNull(charSequenceArray14);
-        org.junit.Assert.assertNotNull(charSequenceArray19);
-        org.junit.Assert.assertNotNull(charSequenceArray20);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
-        org.junit.Assert.assertNotNull(charSequenceTranslator45);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
-        org.junit.Assert.assertNotNull(charSequenceTranslator50);
-        org.junit.Assert.assertNotNull(charSequenceTranslator52);
-        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
-        org.junit.Assert.assertTrue("'" + int62 + "' != '" + 0 + "'", int62 == 0);
-        org.junit.Assert.assertTrue("'" + int68 + "' != '" + 0 + "'", int68 == 0);
-        org.junit.Assert.assertTrue("'" + int74 + "' != '" + 0 + "'", int74 == 0);
-        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
-        org.junit.Assert.assertTrue("'" + int84 + "' != '" + 0 + "'", int84 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray85);
-        org.junit.Assert.assertNotNull(charSequenceTranslator86);
-        org.junit.Assert.assertNotNull(charSequenceTranslator87);
-        org.junit.Assert.assertNotNull(charSequenceTranslator88);
-    }
-
-    @Test
-    public void test666() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test666");
+            System.out.format("%n%s%n", "RegressionTest1.test650");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -9223,9 +8180,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test667() throws Throwable {
+    public void test651() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test667");
+            System.out.format("%n%s%n", "RegressionTest1.test651");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -9329,9 +8286,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test668() throws Throwable {
+    public void test652() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test668");
+            System.out.format("%n%s%n", "RegressionTest1.test652");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -9426,9 +8383,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test669() throws Throwable {
+    public void test653() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test669");
+            System.out.format("%n%s%n", "RegressionTest1.test653");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -9482,9 +8439,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test670() throws Throwable {
+    public void test654() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test670");
+            System.out.format("%n%s%n", "RegressionTest1.test654");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -9519,9 +8476,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test671() throws Throwable {
+    public void test655() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test671");
+            System.out.format("%n%s%n", "RegressionTest1.test655");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -9569,9 +8526,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test672() throws Throwable {
+    public void test656() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test672");
+            System.out.format("%n%s%n", "RegressionTest1.test656");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
@@ -9620,9 +8577,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test673() throws Throwable {
+    public void test657() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test673");
+            System.out.format("%n%s%n", "RegressionTest1.test657");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -9710,9 +8667,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test674() throws Throwable {
+    public void test658() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test674");
+            System.out.format("%n%s%n", "RegressionTest1.test658");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -9749,9 +8706,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test675() throws Throwable {
+    public void test659() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test675");
+            System.out.format("%n%s%n", "RegressionTest1.test659");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -9811,9 +8768,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test676() throws Throwable {
+    public void test660() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test676");
+            System.out.format("%n%s%n", "RegressionTest1.test660");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -9881,9 +8838,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test677() throws Throwable {
+    public void test661() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test677");
+            System.out.format("%n%s%n", "RegressionTest1.test661");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -9926,9 +8883,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test678() throws Throwable {
+    public void test662() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test678");
+            System.out.format("%n%s%n", "RegressionTest1.test662");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -10017,9 +8974,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test679() throws Throwable {
+    public void test663() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test679");
+            System.out.format("%n%s%n", "RegressionTest1.test663");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -10071,9 +9028,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test680() throws Throwable {
+    public void test664() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test680");
+            System.out.format("%n%s%n", "RegressionTest1.test664");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -10160,9 +9117,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test681() throws Throwable {
+    public void test665() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test681");
+            System.out.format("%n%s%n", "RegressionTest1.test665");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -10217,9 +9174,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test682() throws Throwable {
+    public void test666() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test682");
+            System.out.format("%n%s%n", "RegressionTest1.test666");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -10263,9 +9220,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test683() throws Throwable {
+    public void test667() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test683");
+            System.out.format("%n%s%n", "RegressionTest1.test667");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -10282,9 +9239,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test684() throws Throwable {
+    public void test668() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test684");
+            System.out.format("%n%s%n", "RegressionTest1.test668");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -10306,9 +9263,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test685() throws Throwable {
+    public void test669() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test685");
+            System.out.format("%n%s%n", "RegressionTest1.test669");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "34", "20", "61", "23" };
         java.lang.CharSequence[][] charSequenceArray5 = new java.lang.CharSequence[][] { charSequenceArray4 };
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator6 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray5);
@@ -10319,9 +9276,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test686() throws Throwable {
+    public void test670() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test686");
+            System.out.format("%n%s%n", "RegressionTest1.test670");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -10413,9 +9370,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test687() throws Throwable {
+    public void test671() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test687");
+            System.out.format("%n%s%n", "RegressionTest1.test671");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -10438,9 +9395,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test688() throws Throwable {
+    public void test672() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test688");
+            System.out.format("%n%s%n", "RegressionTest1.test672");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -10512,9 +9469,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test689() throws Throwable {
+    public void test673() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test689");
+            System.out.format("%n%s%n", "RegressionTest1.test673");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -10542,9 +9499,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test690() throws Throwable {
+    public void test674() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test690");
+            System.out.format("%n%s%n", "RegressionTest1.test674");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -10593,9 +9550,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test691() throws Throwable {
+    public void test675() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test691");
+            System.out.format("%n%s%n", "RegressionTest1.test675");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -10684,9 +9641,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test692() throws Throwable {
+    public void test676() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test692");
+            System.out.format("%n%s%n", "RegressionTest1.test676");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -10771,9 +9728,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test693() throws Throwable {
+    public void test677() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test693");
+            System.out.format("%n%s%n", "RegressionTest1.test677");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -10805,9 +9762,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test694() throws Throwable {
+    public void test678() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test694");
+            System.out.format("%n%s%n", "RegressionTest1.test678");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -10830,9 +9787,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test695() throws Throwable {
+    public void test679() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test695");
+            System.out.format("%n%s%n", "RegressionTest1.test679");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -10895,66 +9852,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test696() throws Throwable {
+    public void test680() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test696");
-        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
-        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.lang.CharSequence[][] charSequenceArray23 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray23);
-        java.lang.CharSequence[][] charSequenceArray25 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray25);
-        java.lang.CharSequence[][] charSequenceArray27 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray27);
-        java.io.Writer writer31 = null;
-        int int32 = lookupTranslator28.translate((java.lang.CharSequence) "", 0, writer31);
-        java.lang.CharSequence[][] charSequenceArray33 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator34 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray33);
-        java.io.Writer writer37 = null;
-        int int38 = lookupTranslator34.translate((java.lang.CharSequence) "", 0, writer37);
-        java.io.Writer writer41 = null;
-        int int42 = lookupTranslator34.translate((java.lang.CharSequence) "", (int) '#', writer41);
-        java.lang.CharSequence[][] charSequenceArray43 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator44 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray43);
-        java.io.Writer writer47 = null;
-        int int48 = lookupTranslator44.translate((java.lang.CharSequence) "", 0, writer47);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator34, lookupTranslator44 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = lookupTranslator28.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator51 = lookupTranslator26.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator24.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator22.with(charSequenceTranslatorArray49);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator54 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray49);
-        java.io.Writer writer57 = null;
-        int int58 = aggregateTranslator54.translate((java.lang.CharSequence) "A", (int) 'a', writer57);
-        java.io.Writer writer61 = null;
-        int int62 = aggregateTranslator54.translate((java.lang.CharSequence) "A", 10, writer61);
-        org.junit.Assert.assertNotNull(charSequenceArray4);
-        org.junit.Assert.assertNotNull(charSequenceArray9);
-        org.junit.Assert.assertNotNull(charSequenceArray14);
-        org.junit.Assert.assertNotNull(charSequenceArray19);
-        org.junit.Assert.assertNotNull(charSequenceArray20);
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
-        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
-        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
-        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
-        org.junit.Assert.assertNotNull(charSequenceTranslator50);
-        org.junit.Assert.assertNotNull(charSequenceTranslator51);
-        org.junit.Assert.assertNotNull(charSequenceTranslator52);
-        org.junit.Assert.assertNotNull(charSequenceTranslator53);
-        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
-        org.junit.Assert.assertTrue("'" + int62 + "' != '" + 0 + "'", int62 == 0);
-    }
-
-    @Test
-    public void test697() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test697");
+            System.out.format("%n%s%n", "RegressionTest1.test680");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -11050,9 +9950,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test698() throws Throwable {
+    public void test681() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test698");
+            System.out.format("%n%s%n", "RegressionTest1.test681");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -11095,9 +9995,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test699() throws Throwable {
+    public void test682() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test699");
+            System.out.format("%n%s%n", "RegressionTest1.test682");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -11153,9 +10053,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test700() throws Throwable {
+    public void test683() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test700");
+            System.out.format("%n%s%n", "RegressionTest1.test683");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -11249,9 +10149,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test701() throws Throwable {
+    public void test684() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test701");
+            System.out.format("%n%s%n", "RegressionTest1.test684");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -11268,9 +10168,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test702() throws Throwable {
+    public void test685() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test702");
+            System.out.format("%n%s%n", "RegressionTest1.test685");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -11345,9 +10245,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test703() throws Throwable {
+    public void test686() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test703");
+            System.out.format("%n%s%n", "RegressionTest1.test686");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -11443,9 +10343,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test704() throws Throwable {
+    public void test687() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test704");
+            System.out.format("%n%s%n", "RegressionTest1.test687");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -11531,9 +10431,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test705() throws Throwable {
+    public void test688() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test705");
+            System.out.format("%n%s%n", "RegressionTest1.test688");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -11627,9 +10527,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test706() throws Throwable {
+    public void test689() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test706");
+            System.out.format("%n%s%n", "RegressionTest1.test689");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -11670,9 +10570,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test707() throws Throwable {
+    public void test690() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test707");
+            System.out.format("%n%s%n", "RegressionTest1.test690");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -11706,9 +10606,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test708() throws Throwable {
+    public void test691() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test708");
+            System.out.format("%n%s%n", "RegressionTest1.test691");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -11773,9 +10673,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test709() throws Throwable {
+    public void test692() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test709");
+            System.out.format("%n%s%n", "RegressionTest1.test692");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -11879,9 +10779,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test710() throws Throwable {
+    public void test693() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test710");
+            System.out.format("%n%s%n", "RegressionTest1.test693");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -11924,9 +10824,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test711() throws Throwable {
+    public void test694() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test711");
+            System.out.format("%n%s%n", "RegressionTest1.test694");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -12017,9 +10917,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test712() throws Throwable {
+    public void test695() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test712");
+            System.out.format("%n%s%n", "RegressionTest1.test695");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -12060,9 +10960,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test713() throws Throwable {
+    public void test696() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test713");
+            System.out.format("%n%s%n", "RegressionTest1.test696");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -12081,9 +10981,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test714() throws Throwable {
+    public void test697() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test714");
+            System.out.format("%n%s%n", "RegressionTest1.test697");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -12177,9 +11077,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test715() throws Throwable {
+    public void test698() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test715");
+            System.out.format("%n%s%n", "RegressionTest1.test698");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -12256,9 +11156,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test716() throws Throwable {
+    public void test699() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test716");
+            System.out.format("%n%s%n", "RegressionTest1.test699");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -12304,9 +11204,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test717() throws Throwable {
+    public void test700() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test717");
+            System.out.format("%n%s%n", "RegressionTest1.test700");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -12388,9 +11288,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test718() throws Throwable {
+    public void test701() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test718");
+            System.out.format("%n%s%n", "RegressionTest1.test701");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -12458,9 +11358,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test719() throws Throwable {
+    public void test702() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test719");
+            System.out.format("%n%s%n", "RegressionTest1.test702");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -12518,9 +11418,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test720() throws Throwable {
+    public void test703() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test720");
+            System.out.format("%n%s%n", "RegressionTest1.test703");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -12606,9 +11506,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test721() throws Throwable {
+    public void test704() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test721");
+            System.out.format("%n%s%n", "RegressionTest1.test704");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -12650,9 +11550,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test722() throws Throwable {
+    public void test705() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test722");
+            System.out.format("%n%s%n", "RegressionTest1.test705");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -12707,9 +11607,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test723() throws Throwable {
+    public void test706() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test723");
+            System.out.format("%n%s%n", "RegressionTest1.test706");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -12799,9 +11699,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test724() throws Throwable {
+    public void test707() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test724");
+            System.out.format("%n%s%n", "RegressionTest1.test707");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -12893,9 +11793,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test725() throws Throwable {
+    public void test708() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test725");
+            System.out.format("%n%s%n", "RegressionTest1.test708");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -12928,9 +11828,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test726() throws Throwable {
+    public void test709() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test726");
+            System.out.format("%n%s%n", "RegressionTest1.test709");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -13006,9 +11906,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test727() throws Throwable {
+    public void test710() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test727");
+            System.out.format("%n%s%n", "RegressionTest1.test710");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -13108,36 +12008,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test728() throws Throwable {
+    public void test711() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test728");
-        java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
-        java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
-        java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
-        java.lang.CharSequence[] charSequenceArray15 = new java.lang.CharSequence[] { "hi!", "1", "23" };
-        java.lang.CharSequence[][] charSequenceArray16 = new java.lang.CharSequence[][] { charSequenceArray3, charSequenceArray7, charSequenceArray11, charSequenceArray15 };
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator18 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator19 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator20 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator25 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        org.junit.Assert.assertNotNull(charSequenceArray3);
-        org.junit.Assert.assertNotNull(charSequenceArray7);
-        org.junit.Assert.assertNotNull(charSequenceArray11);
-        org.junit.Assert.assertNotNull(charSequenceArray15);
-        org.junit.Assert.assertNotNull(charSequenceArray16);
-    }
-
-    @Test
-    public void test729() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test729");
+            System.out.format("%n%s%n", "RegressionTest1.test711");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -13225,9 +12098,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test730() throws Throwable {
+    public void test712() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test730");
+            System.out.format("%n%s%n", "RegressionTest1.test712");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -13284,9 +12157,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test731() throws Throwable {
+    public void test713() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test731");
+            System.out.format("%n%s%n", "RegressionTest1.test713");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -13311,9 +12184,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test732() throws Throwable {
+    public void test714() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test732");
+            System.out.format("%n%s%n", "RegressionTest1.test714");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -13349,45 +12222,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test733() throws Throwable {
+    public void test715() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test733");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.CharSequence[][] charSequenceArray6 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
-        java.lang.CharSequence[][] charSequenceArray16 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator24 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator25 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator26 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator27 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator28 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator29 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator30 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator31 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
-        org.junit.Assert.assertNotNull(charSequenceTranslator23);
-    }
-
-    @Test
-    public void test734() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test734");
+            System.out.format("%n%s%n", "RegressionTest1.test715");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -13414,9 +12251,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test735() throws Throwable {
+    public void test716() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test735");
+            System.out.format("%n%s%n", "RegressionTest1.test716");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -13460,9 +12297,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test736() throws Throwable {
+    public void test717() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test736");
+            System.out.format("%n%s%n", "RegressionTest1.test717");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -13496,9 +12333,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test737() throws Throwable {
+    public void test718() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test737");
+            System.out.format("%n%s%n", "RegressionTest1.test718");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -13591,9 +12428,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test738() throws Throwable {
+    public void test719() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test738");
+            System.out.format("%n%s%n", "RegressionTest1.test719");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -13643,9 +12480,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test739() throws Throwable {
+    public void test720() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test739");
+            System.out.format("%n%s%n", "RegressionTest1.test720");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -13705,34 +12542,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test740() throws Throwable {
+    public void test721() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test740");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator1.translate((java.lang.CharSequence) "0", (int) ' ', writer14);
-        java.io.Writer writer18 = null;
-        int int19 = lookupTranslator1.translate((java.lang.CharSequence) "1", 0, writer18);
-        java.io.Writer writer22 = null;
-        int int23 = lookupTranslator1.translate((java.lang.CharSequence) "", (int) 'a', writer22);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
-        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
-    }
-
-    @Test
-    public void test741() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test741");
+            System.out.format("%n%s%n", "RegressionTest1.test721");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -13823,9 +12635,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test742() throws Throwable {
+    public void test722() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test742");
+            System.out.format("%n%s%n", "RegressionTest1.test722");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -13911,9 +12723,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test743() throws Throwable {
+    public void test723() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test743");
+            System.out.format("%n%s%n", "RegressionTest1.test723");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -13950,9 +12762,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test744() throws Throwable {
+    public void test724() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test744");
+            System.out.format("%n%s%n", "RegressionTest1.test724");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -13990,9 +12802,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test745() throws Throwable {
+    public void test725() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test745");
+            System.out.format("%n%s%n", "RegressionTest1.test725");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -14074,9 +12886,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test746() throws Throwable {
+    public void test726() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test746");
+            System.out.format("%n%s%n", "RegressionTest1.test726");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -14100,9 +12912,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test747() throws Throwable {
+    public void test727() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test747");
+            System.out.format("%n%s%n", "RegressionTest1.test727");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -14186,9 +12998,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test748() throws Throwable {
+    public void test728() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test748");
+            System.out.format("%n%s%n", "RegressionTest1.test728");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -14236,9 +13048,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test749() throws Throwable {
+    public void test729() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test749");
+            System.out.format("%n%s%n", "RegressionTest1.test729");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -14313,9 +13125,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test750() throws Throwable {
+    public void test730() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test750");
+            System.out.format("%n%s%n", "RegressionTest1.test730");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -14396,9 +13208,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test751() throws Throwable {
+    public void test731() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test751");
+            System.out.format("%n%s%n", "RegressionTest1.test731");
         java.lang.CharSequence[] charSequenceArray6 = new java.lang.CharSequence[] { "", "61", "0", "64", "61", "61" };
         java.lang.CharSequence[] charSequenceArray13 = new java.lang.CharSequence[] { "", "61", "0", "64", "61", "61" };
         java.lang.CharSequence[][] charSequenceArray14 = new java.lang.CharSequence[][] { charSequenceArray6, charSequenceArray13 };
@@ -14410,9 +13222,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test752() throws Throwable {
+    public void test732() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test752");
+            System.out.format("%n%s%n", "RegressionTest1.test732");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -14445,9 +13257,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test753() throws Throwable {
+    public void test733() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test753");
+            System.out.format("%n%s%n", "RegressionTest1.test733");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -14508,9 +13320,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test754() throws Throwable {
+    public void test734() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test754");
+            System.out.format("%n%s%n", "RegressionTest1.test734");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -14532,9 +13344,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test755() throws Throwable {
+    public void test735() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test755");
+            System.out.format("%n%s%n", "RegressionTest1.test735");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -14616,9 +13428,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test756() throws Throwable {
+    public void test736() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test756");
+            System.out.format("%n%s%n", "RegressionTest1.test736");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -14709,9 +13521,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test757() throws Throwable {
+    public void test737() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test757");
+            System.out.format("%n%s%n", "RegressionTest1.test737");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -14793,9 +13605,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test758() throws Throwable {
+    public void test738() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test758");
+            System.out.format("%n%s%n", "RegressionTest1.test738");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -14885,9 +13697,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test759() throws Throwable {
+    public void test739() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test759");
+            System.out.format("%n%s%n", "RegressionTest1.test739");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -14975,9 +13787,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test760() throws Throwable {
+    public void test740() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test760");
+            System.out.format("%n%s%n", "RegressionTest1.test740");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -14998,9 +13810,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test761() throws Throwable {
+    public void test741() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test761");
+            System.out.format("%n%s%n", "RegressionTest1.test741");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -15056,9 +13868,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test762() throws Throwable {
+    public void test742() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test762");
+            System.out.format("%n%s%n", "RegressionTest1.test742");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -15078,9 +13890,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test763() throws Throwable {
+    public void test743() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test763");
+            System.out.format("%n%s%n", "RegressionTest1.test743");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -15154,9 +13966,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test764() throws Throwable {
+    public void test744() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test764");
+            System.out.format("%n%s%n", "RegressionTest1.test744");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -15200,9 +14012,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test765() throws Throwable {
+    public void test745() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test765");
+            System.out.format("%n%s%n", "RegressionTest1.test745");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -15241,9 +14053,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test766() throws Throwable {
+    public void test746() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test766");
+            System.out.format("%n%s%n", "RegressionTest1.test746");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -15317,9 +14129,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test767() throws Throwable {
+    public void test747() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test767");
+            System.out.format("%n%s%n", "RegressionTest1.test747");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -15405,9 +14217,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test768() throws Throwable {
+    public void test748() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test768");
+            System.out.format("%n%s%n", "RegressionTest1.test748");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -15484,9 +14296,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test769() throws Throwable {
+    public void test749() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test769");
+            System.out.format("%n%s%n", "RegressionTest1.test749");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -15575,9 +14387,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test770() throws Throwable {
+    public void test750() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test770");
+            System.out.format("%n%s%n", "RegressionTest1.test750");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -15665,9 +14477,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test771() throws Throwable {
+    public void test751() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test771");
+            System.out.format("%n%s%n", "RegressionTest1.test751");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -15711,9 +14523,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test772() throws Throwable {
+    public void test752() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test772");
+            System.out.format("%n%s%n", "RegressionTest1.test752");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -15782,9 +14594,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test773() throws Throwable {
+    public void test753() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test773");
+            System.out.format("%n%s%n", "RegressionTest1.test753");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -15815,9 +14627,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test774() throws Throwable {
+    public void test754() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test774");
+            System.out.format("%n%s%n", "RegressionTest1.test754");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -15841,9 +14653,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test775() throws Throwable {
+    public void test755() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test775");
+            System.out.format("%n%s%n", "RegressionTest1.test755");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -15885,9 +14697,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test776() throws Throwable {
+    public void test756() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test776");
+            System.out.format("%n%s%n", "RegressionTest1.test756");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -15931,9 +14743,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test777() throws Throwable {
+    public void test757() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test777");
+            System.out.format("%n%s%n", "RegressionTest1.test757");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -15996,9 +14808,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test778() throws Throwable {
+    public void test758() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test778");
+            System.out.format("%n%s%n", "RegressionTest1.test758");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -16043,9 +14855,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test779() throws Throwable {
+    public void test759() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test779");
+            System.out.format("%n%s%n", "RegressionTest1.test759");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -16097,9 +14909,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test780() throws Throwable {
+    public void test760() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test780");
+            System.out.format("%n%s%n", "RegressionTest1.test760");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -16176,9 +14988,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test781() throws Throwable {
+    public void test761() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test781");
+            System.out.format("%n%s%n", "RegressionTest1.test761");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -16225,9 +15037,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test782() throws Throwable {
+    public void test762() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test782");
+            System.out.format("%n%s%n", "RegressionTest1.test762");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -16308,9 +15120,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test783() throws Throwable {
+    public void test763() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test783");
+            System.out.format("%n%s%n", "RegressionTest1.test763");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -16372,9 +15184,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test784() throws Throwable {
+    public void test764() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test784");
+            System.out.format("%n%s%n", "RegressionTest1.test764");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -16437,9 +15249,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test785() throws Throwable {
+    public void test765() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test785");
+            System.out.format("%n%s%n", "RegressionTest1.test765");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -16537,9 +15349,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test786() throws Throwable {
+    public void test766() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test786");
+            System.out.format("%n%s%n", "RegressionTest1.test766");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -16629,103 +15441,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test787() throws Throwable {
+    public void test767() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test787");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.lang.CharSequence[][] charSequenceArray12 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
-        java.io.Writer writer16 = null;
-        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
-        java.lang.CharSequence[][] charSequenceArray22 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
-        java.io.Writer writer26 = null;
-        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
-        java.lang.CharSequence[][] charSequenceArray28 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
-        java.io.Writer writer36 = null;
-        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
-        java.lang.CharSequence[][] charSequenceArray38 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
-        java.io.Writer writer50 = null;
-        int int51 = charSequenceTranslator47.translate((java.lang.CharSequence) "", (int) (byte) 0, writer50);
-        java.io.Writer writer54 = null;
-        int int55 = charSequenceTranslator47.translate((java.lang.CharSequence) "0", 0, writer54);
-        java.lang.String str57 = charSequenceTranslator47.translate((java.lang.CharSequence) "A");
-        java.lang.CharSequence[][] charSequenceArray58 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator59 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray58);
-        java.io.Writer writer62 = null;
-        int int63 = lookupTranslator59.translate((java.lang.CharSequence) "", 0, writer62);
-        java.io.Writer writer66 = null;
-        int int67 = lookupTranslator59.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer66);
-        java.lang.CharSequence[][] charSequenceArray68 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator69 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray68);
-        java.io.Writer writer72 = null;
-        int int73 = lookupTranslator69.translate((java.lang.CharSequence) "", 0, writer72);
-        java.lang.CharSequence[][] charSequenceArray74 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator75 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray74);
-        java.io.Writer writer78 = null;
-        int int79 = lookupTranslator75.translate((java.lang.CharSequence) "", 0, writer78);
-        java.io.Writer writer82 = null;
-        int int83 = lookupTranslator75.translate((java.lang.CharSequence) "", (int) '#', writer82);
-        java.lang.CharSequence[][] charSequenceArray84 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator85 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray84);
-        java.io.Writer writer88 = null;
-        int int89 = lookupTranslator85.translate((java.lang.CharSequence) "", 0, writer88);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray90 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator75, lookupTranslator85 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator91 = lookupTranslator69.with(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator92 = lookupTranslator59.with(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator93 = charSequenceTranslator47.with(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator94 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray90);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator95 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray90);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
-        org.junit.Assert.assertNotNull(charSequenceTranslator45);
-        org.junit.Assert.assertNotNull(charSequenceTranslator46);
-        org.junit.Assert.assertNotNull(charSequenceTranslator47);
-        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
-        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
-        org.junit.Assert.assertEquals("'" + str57 + "' != '" + "A" + "'", str57, "A");
-        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
-        org.junit.Assert.assertTrue("'" + int67 + "' != '" + 0 + "'", int67 == 0);
-        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 0 + "'", int73 == 0);
-        org.junit.Assert.assertTrue("'" + int79 + "' != '" + 0 + "'", int79 == 0);
-        org.junit.Assert.assertTrue("'" + int83 + "' != '" + 0 + "'", int83 == 0);
-        org.junit.Assert.assertTrue("'" + int89 + "' != '" + 0 + "'", int89 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray90);
-        org.junit.Assert.assertNotNull(charSequenceTranslator91);
-        org.junit.Assert.assertNotNull(charSequenceTranslator92);
-        org.junit.Assert.assertNotNull(charSequenceTranslator93);
-    }
-
-    @Test
-    public void test788() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test788");
+            System.out.format("%n%s%n", "RegressionTest1.test767");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -16767,9 +15485,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test789() throws Throwable {
+    public void test768() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test789");
+            System.out.format("%n%s%n", "RegressionTest1.test768");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -16799,9 +15517,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test790() throws Throwable {
+    public void test769() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test790");
+            System.out.format("%n%s%n", "RegressionTest1.test769");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -16874,9 +15592,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test791() throws Throwable {
+    public void test770() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test791");
+            System.out.format("%n%s%n", "RegressionTest1.test770");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -16970,9 +15688,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test792() throws Throwable {
+    public void test771() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test792");
+            System.out.format("%n%s%n", "RegressionTest1.test771");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -17052,9 +15770,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test793() throws Throwable {
+    public void test772() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test793");
+            System.out.format("%n%s%n", "RegressionTest1.test772");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -17133,59 +15851,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test794() throws Throwable {
+    public void test773() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test794");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.CharSequence[][] charSequenceArray6 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
-        java.lang.CharSequence[][] charSequenceArray16 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator24 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
-        java.io.Writer writer27 = null;
-        int int28 = aggregateTranslator24.translate((java.lang.CharSequence) "23", (int) (short) 0, writer27);
-        java.io.Writer writer31 = null;
-        int int32 = aggregateTranslator24.translate((java.lang.CharSequence) "hi!", (int) (short) 10, writer31);
-        java.io.Writer writer35 = null;
-        int int36 = aggregateTranslator24.translate((java.lang.CharSequence) "hi!", (int) (short) 0, writer35);
-        java.io.Writer writer39 = null;
-        int int40 = aggregateTranslator24.translate((java.lang.CharSequence) "34", 0, writer39);
-        java.io.Writer writer43 = null;
-        int int44 = aggregateTranslator24.translate((java.lang.CharSequence) "64", (int) '#', writer43);
-        java.io.Writer writer47 = null;
-        int int48 = aggregateTranslator24.translate((java.lang.CharSequence) "64", (int) (byte) 0, writer47);
-        java.io.Writer writer51 = null;
-        int int52 = aggregateTranslator24.translate((java.lang.CharSequence) "64", 10, writer51);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
-        org.junit.Assert.assertNotNull(charSequenceTranslator23);
-        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
-        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
-        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
-        org.junit.Assert.assertTrue("'" + int40 + "' != '" + 0 + "'", int40 == 0);
-        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
-        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
-        org.junit.Assert.assertTrue("'" + int52 + "' != '" + 0 + "'", int52 == 0);
-    }
-
-    @Test
-    public void test795() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test795");
+            System.out.format("%n%s%n", "RegressionTest1.test773");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -17234,9 +15902,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test796() throws Throwable {
+    public void test774() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test796");
+            System.out.format("%n%s%n", "RegressionTest1.test774");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -17314,9 +15982,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test797() throws Throwable {
+    public void test775() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test797");
+            System.out.format("%n%s%n", "RegressionTest1.test775");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -17397,9 +16065,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test798() throws Throwable {
+    public void test776() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test798");
+            System.out.format("%n%s%n", "RegressionTest1.test776");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
@@ -17416,9 +16084,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test799() throws Throwable {
+    public void test777() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test799");
+            System.out.format("%n%s%n", "RegressionTest1.test777");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -17445,9 +16113,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test800() throws Throwable {
+    public void test778() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test800");
+            System.out.format("%n%s%n", "RegressionTest1.test778");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -17535,9 +16203,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test801() throws Throwable {
+    public void test779() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test801");
+            System.out.format("%n%s%n", "RegressionTest1.test779");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -17595,9 +16263,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test802() throws Throwable {
+    public void test780() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test802");
+            System.out.format("%n%s%n", "RegressionTest1.test780");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -17623,9 +16291,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test803() throws Throwable {
+    public void test781() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test803");
+            System.out.format("%n%s%n", "RegressionTest1.test781");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -17712,9 +16380,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test804() throws Throwable {
+    public void test782() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test804");
+            System.out.format("%n%s%n", "RegressionTest1.test782");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -17804,9 +16472,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test805() throws Throwable {
+    public void test783() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test805");
+            System.out.format("%n%s%n", "RegressionTest1.test783");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -17896,9 +16564,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test806() throws Throwable {
+    public void test784() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test806");
+            System.out.format("%n%s%n", "RegressionTest1.test784");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -17979,9 +16647,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test807() throws Throwable {
+    public void test785() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test807");
+            System.out.format("%n%s%n", "RegressionTest1.test785");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -18042,9 +16710,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test808() throws Throwable {
+    public void test786() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test808");
+            System.out.format("%n%s%n", "RegressionTest1.test786");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -18120,9 +16788,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test809() throws Throwable {
+    public void test787() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test809");
+            System.out.format("%n%s%n", "RegressionTest1.test787");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -18219,9 +16887,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test810() throws Throwable {
+    public void test788() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test810");
+            System.out.format("%n%s%n", "RegressionTest1.test788");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -18265,9 +16933,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test811() throws Throwable {
+    public void test789() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test811");
+            System.out.format("%n%s%n", "RegressionTest1.test789");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -18339,92 +17007,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test812() throws Throwable {
+    public void test790() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test812");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.io.Writer writer10 = null;
-        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
-        java.lang.CharSequence[][] charSequenceArray12 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
-        java.io.Writer writer16 = null;
-        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
-        java.io.Writer writer20 = null;
-        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
-        java.lang.CharSequence[][] charSequenceArray22 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
-        java.io.Writer writer26 = null;
-        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
-        java.lang.CharSequence[][] charSequenceArray28 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
-        java.io.Writer writer32 = null;
-        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
-        java.io.Writer writer36 = null;
-        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
-        java.lang.CharSequence[][] charSequenceArray38 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
-        java.io.Writer writer42 = null;
-        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
-        java.lang.CharSequence[][] charSequenceArray49 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
-        java.io.Writer writer53 = null;
-        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
-        java.lang.CharSequence[][] charSequenceArray55 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
-        java.io.Writer writer59 = null;
-        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
-        java.io.Writer writer63 = null;
-        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
-        java.lang.CharSequence[][] charSequenceArray65 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
-        java.io.Writer writer69 = null;
-        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
-        java.io.Writer writer77 = null;
-        int int78 = aggregateTranslator48.translate((java.lang.CharSequence) "1", 0, writer77);
-        java.lang.String str80 = aggregateTranslator48.translate((java.lang.CharSequence) "FFFFFFFF");
-        java.lang.String str82 = aggregateTranslator48.translate((java.lang.CharSequence) "1");
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
-        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
-        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
-        org.junit.Assert.assertNotNull(charSequenceTranslator45);
-        org.junit.Assert.assertNotNull(charSequenceTranslator46);
-        org.junit.Assert.assertNotNull(charSequenceTranslator47);
-        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
-        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
-        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
-        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
-        org.junit.Assert.assertNotNull(charSequenceTranslator72);
-        org.junit.Assert.assertNotNull(charSequenceTranslator74);
-        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
-        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "FFFFFFFF" + "'", str80, "FFFFFFFF");
-        org.junit.Assert.assertEquals("'" + str82 + "' != '" + "1" + "'", str82, "1");
-    }
-
-    @Test
-    public void test813() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test813");
+            System.out.format("%n%s%n", "RegressionTest1.test790");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -18510,9 +17095,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test814() throws Throwable {
+    public void test791() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test814");
+            System.out.format("%n%s%n", "RegressionTest1.test791");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -18567,9 +17152,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test815() throws Throwable {
+    public void test792() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test815");
+            System.out.format("%n%s%n", "RegressionTest1.test792");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -18587,9 +17172,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test816() throws Throwable {
+    public void test793() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test816");
+            System.out.format("%n%s%n", "RegressionTest1.test793");
         java.lang.CharSequence[] charSequenceArray5 = new java.lang.CharSequence[] { "34", "", "hi!", "1", "hi!" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "34", "", "hi!", "1", "hi!" };
         java.lang.CharSequence[][] charSequenceArray12 = new java.lang.CharSequence[][] { charSequenceArray5, charSequenceArray11 };
@@ -18605,9 +17190,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test817() throws Throwable {
+    public void test794() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test817");
+            System.out.format("%n%s%n", "RegressionTest1.test794");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -18639,9 +17224,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test818() throws Throwable {
+    public void test795() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test818");
+            System.out.format("%n%s%n", "RegressionTest1.test795");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -18702,9 +17287,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test819() throws Throwable {
+    public void test796() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test819");
+            System.out.format("%n%s%n", "RegressionTest1.test796");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -18740,9 +17325,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test820() throws Throwable {
+    public void test797() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test820");
+            System.out.format("%n%s%n", "RegressionTest1.test797");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -18760,9 +17345,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test821() throws Throwable {
+    public void test798() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test821");
+            System.out.format("%n%s%n", "RegressionTest1.test798");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -18835,9 +17420,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test822() throws Throwable {
+    public void test799() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test822");
+            System.out.format("%n%s%n", "RegressionTest1.test799");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -18923,9 +17508,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test823() throws Throwable {
+    public void test800() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test823");
+            System.out.format("%n%s%n", "RegressionTest1.test800");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -18994,9 +17579,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test824() throws Throwable {
+    public void test801() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test824");
+            System.out.format("%n%s%n", "RegressionTest1.test801");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -19024,9 +17609,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test825() throws Throwable {
+    public void test802() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test825");
+            System.out.format("%n%s%n", "RegressionTest1.test802");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -19068,9 +17653,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test826() throws Throwable {
+    public void test803() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test826");
+            System.out.format("%n%s%n", "RegressionTest1.test803");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -19092,9 +17677,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test827() throws Throwable {
+    public void test804() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test827");
+            System.out.format("%n%s%n", "RegressionTest1.test804");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -19161,9 +17746,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test828() throws Throwable {
+    public void test805() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test828");
+            System.out.format("%n%s%n", "RegressionTest1.test805");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -19218,9 +17803,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test829() throws Throwable {
+    public void test806() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test829");
+            System.out.format("%n%s%n", "RegressionTest1.test806");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -19272,9 +17857,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test830() throws Throwable {
+    public void test807() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test830");
+            System.out.format("%n%s%n", "RegressionTest1.test807");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -19358,9 +17943,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test831() throws Throwable {
+    public void test808() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test831");
+            System.out.format("%n%s%n", "RegressionTest1.test808");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
@@ -19410,9 +17995,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test832() throws Throwable {
+    public void test809() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test832");
+            System.out.format("%n%s%n", "RegressionTest1.test809");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -19463,9 +18048,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test833() throws Throwable {
+    public void test810() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test833");
+            System.out.format("%n%s%n", "RegressionTest1.test810");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -19537,9 +18122,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test834() throws Throwable {
+    public void test811() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test834");
+            System.out.format("%n%s%n", "RegressionTest1.test811");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -19581,9 +18166,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test835() throws Throwable {
+    public void test812() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test835");
+            System.out.format("%n%s%n", "RegressionTest1.test812");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -19618,9 +18203,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test836() throws Throwable {
+    public void test813() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test836");
+            System.out.format("%n%s%n", "RegressionTest1.test813");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -19691,9 +18276,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test837() throws Throwable {
+    public void test814() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test837");
+            System.out.format("%n%s%n", "RegressionTest1.test814");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -19784,9 +18369,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test838() throws Throwable {
+    public void test815() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test838");
+            System.out.format("%n%s%n", "RegressionTest1.test815");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -19866,9 +18451,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test839() throws Throwable {
+    public void test816() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test839");
+            System.out.format("%n%s%n", "RegressionTest1.test816");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -19890,9 +18475,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test840() throws Throwable {
+    public void test817() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test840");
+            System.out.format("%n%s%n", "RegressionTest1.test817");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -19971,9 +18556,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test841() throws Throwable {
+    public void test818() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test841");
+            System.out.format("%n%s%n", "RegressionTest1.test818");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -20009,9 +18594,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test842() throws Throwable {
+    public void test819() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test842");
+            System.out.format("%n%s%n", "RegressionTest1.test819");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -20067,9 +18652,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test843() throws Throwable {
+    public void test820() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test843");
+            System.out.format("%n%s%n", "RegressionTest1.test820");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -20128,9 +18713,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test844() throws Throwable {
+    public void test821() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test844");
+            System.out.format("%n%s%n", "RegressionTest1.test821");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -20212,9 +18797,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test845() throws Throwable {
+    public void test822() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test845");
+            System.out.format("%n%s%n", "RegressionTest1.test822");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20253,9 +18838,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test846() throws Throwable {
+    public void test823() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test846");
+            System.out.format("%n%s%n", "RegressionTest1.test823");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20337,9 +18922,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test847() throws Throwable {
+    public void test824() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test847");
+            System.out.format("%n%s%n", "RegressionTest1.test824");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20386,9 +18971,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test848() throws Throwable {
+    public void test825() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test848");
+            System.out.format("%n%s%n", "RegressionTest1.test825");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20464,9 +19049,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test849() throws Throwable {
+    public void test826() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test849");
+            System.out.format("%n%s%n", "RegressionTest1.test826");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20513,9 +19098,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test850() throws Throwable {
+    public void test827() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test850");
+            System.out.format("%n%s%n", "RegressionTest1.test827");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -20604,9 +19189,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test851() throws Throwable {
+    public void test828() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test851");
+            System.out.format("%n%s%n", "RegressionTest1.test828");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20650,9 +19235,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test852() throws Throwable {
+    public void test829() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test852");
+            System.out.format("%n%s%n", "RegressionTest1.test829");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -20678,9 +19263,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test853() throws Throwable {
+    public void test830() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test853");
+            System.out.format("%n%s%n", "RegressionTest1.test830");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20713,9 +19298,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test854() throws Throwable {
+    public void test831() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test854");
+            System.out.format("%n%s%n", "RegressionTest1.test831");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20795,9 +19380,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test855() throws Throwable {
+    public void test832() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test855");
+            System.out.format("%n%s%n", "RegressionTest1.test832");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -20844,9 +19429,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test856() throws Throwable {
+    public void test833() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test856");
+            System.out.format("%n%s%n", "RegressionTest1.test833");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20885,9 +19470,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test857() throws Throwable {
+    public void test834() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test857");
+            System.out.format("%n%s%n", "RegressionTest1.test834");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -20930,9 +19515,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test858() throws Throwable {
+    public void test835() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test858");
+            System.out.format("%n%s%n", "RegressionTest1.test835");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -20980,9 +19565,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test859() throws Throwable {
+    public void test836() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test859");
+            System.out.format("%n%s%n", "RegressionTest1.test836");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -21026,9 +19611,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test860() throws Throwable {
+    public void test837() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test860");
+            System.out.format("%n%s%n", "RegressionTest1.test837");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -21117,55 +19702,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test861() throws Throwable {
+    public void test838() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test861");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.lang.CharSequence[][] charSequenceArray2 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
-        java.lang.CharSequence[][] charSequenceArray4 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
-        java.io.Writer writer8 = null;
-        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
-        java.lang.CharSequence[][] charSequenceArray10 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
-        java.io.Writer writer18 = null;
-        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
-        java.lang.CharSequence[][] charSequenceArray20 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.io.Writer writer24 = null;
-        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator30 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray26);
-        java.io.Writer writer33 = null;
-        int int34 = aggregateTranslator30.translate((java.lang.CharSequence) "A", 0, writer33);
-        java.io.Writer writer37 = null;
-        int int38 = aggregateTranslator30.translate((java.lang.CharSequence) "64", (int) (short) 0, writer37);
-        java.lang.CharSequence charSequence39 = null;
-        java.lang.String str40 = aggregateTranslator30.translate(charSequence39);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
-        org.junit.Assert.assertNotNull(charSequenceTranslator27);
-        org.junit.Assert.assertNotNull(charSequenceTranslator28);
-        org.junit.Assert.assertNotNull(charSequenceTranslator29);
-        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
-        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
-        org.junit.Assert.assertNull(str40);
-    }
-
-    @Test
-    public void test862() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test862");
+            System.out.format("%n%s%n", "RegressionTest1.test838");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -21254,9 +19793,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test863() throws Throwable {
+    public void test839() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test863");
+            System.out.format("%n%s%n", "RegressionTest1.test839");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -21305,9 +19844,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test864() throws Throwable {
+    public void test840() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test864");
+            System.out.format("%n%s%n", "RegressionTest1.test840");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -21367,9 +19906,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test865() throws Throwable {
+    public void test841() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test865");
+            System.out.format("%n%s%n", "RegressionTest1.test841");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -21421,9 +19960,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test866() throws Throwable {
+    public void test842() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test866");
+            System.out.format("%n%s%n", "RegressionTest1.test842");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -21434,9 +19973,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test867() throws Throwable {
+    public void test843() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test867");
+            System.out.format("%n%s%n", "RegressionTest1.test843");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -21465,9 +20004,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test868() throws Throwable {
+    public void test844() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test868");
+            System.out.format("%n%s%n", "RegressionTest1.test844");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -21508,48 +20047,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test869() throws Throwable {
+    public void test845() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test869");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.lang.CharSequence[][] charSequenceArray2 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
-        java.lang.CharSequence[][] charSequenceArray4 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
-        java.io.Writer writer8 = null;
-        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
-        java.lang.CharSequence[][] charSequenceArray10 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
-        java.io.Writer writer14 = null;
-        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
-        java.io.Writer writer18 = null;
-        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
-        java.lang.CharSequence[][] charSequenceArray20 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
-        java.io.Writer writer24 = null;
-        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
-        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
-        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator30 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray26);
-        java.lang.String str32 = aggregateTranslator30.translate((java.lang.CharSequence) "23");
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
-        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
-        org.junit.Assert.assertNotNull(charSequenceTranslator27);
-        org.junit.Assert.assertNotNull(charSequenceTranslator28);
-        org.junit.Assert.assertNotNull(charSequenceTranslator29);
-        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "23" + "'", str32, "23");
-    }
-
-    @Test
-    public void test870() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test870");
+            System.out.format("%n%s%n", "RegressionTest1.test845");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -21607,9 +20107,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test871() throws Throwable {
+    public void test846() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test871");
+            System.out.format("%n%s%n", "RegressionTest1.test846");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -21672,9 +20172,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test872() throws Throwable {
+    public void test847() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test872");
+            System.out.format("%n%s%n", "RegressionTest1.test847");
         java.lang.CharSequence[] charSequenceArray6 = new java.lang.CharSequence[] { "A", "23", "20", "", "hi!", "20" };
         java.lang.CharSequence[] charSequenceArray13 = new java.lang.CharSequence[] { "A", "23", "20", "", "hi!", "20" };
         java.lang.CharSequence[] charSequenceArray20 = new java.lang.CharSequence[] { "A", "23", "20", "", "hi!", "20" };
@@ -21696,9 +20196,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test873() throws Throwable {
+    public void test848() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test873");
+            System.out.format("%n%s%n", "RegressionTest1.test848");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -21786,9 +20286,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test874() throws Throwable {
+    public void test849() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test874");
+            System.out.format("%n%s%n", "RegressionTest1.test849");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -21835,9 +20335,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test875() throws Throwable {
+    public void test850() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test875");
+            System.out.format("%n%s%n", "RegressionTest1.test850");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -21875,32 +20375,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test876() throws Throwable {
+    public void test851() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test876");
-        java.lang.CharSequence[][] charSequenceArray0 = null;
-        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
-        java.io.Writer writer4 = null;
-        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
-        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
-        java.lang.String str9 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF");
-        java.io.Writer writer12 = null;
-        int int13 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF", (int) (byte) 0, writer12);
-        java.lang.String str15 = lookupTranslator1.translate((java.lang.CharSequence) "61");
-        java.io.Writer writer18 = null;
-        int int19 = lookupTranslator1.translate((java.lang.CharSequence) "A", 1, writer18);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "FFFFFFFF" + "'", str9, "FFFFFFFF");
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "61" + "'", str15, "61");
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
-    }
-
-    @Test
-    public void test877() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test877");
+            System.out.format("%n%s%n", "RegressionTest1.test851");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -21990,9 +20467,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test878() throws Throwable {
+    public void test852() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test878");
+            System.out.format("%n%s%n", "RegressionTest1.test852");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -22053,9 +20530,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test879() throws Throwable {
+    public void test853() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test879");
+            System.out.format("%n%s%n", "RegressionTest1.test853");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -22117,9 +20594,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test880() throws Throwable {
+    public void test854() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test880");
+            System.out.format("%n%s%n", "RegressionTest1.test854");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -22149,9 +20626,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test881() throws Throwable {
+    public void test855() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test881");
+            System.out.format("%n%s%n", "RegressionTest1.test855");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -22173,9 +20650,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test882() throws Throwable {
+    public void test856() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test882");
+            System.out.format("%n%s%n", "RegressionTest1.test856");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -22254,9 +20731,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test883() throws Throwable {
+    public void test857() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test883");
+            System.out.format("%n%s%n", "RegressionTest1.test857");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -22286,9 +20763,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test884() throws Throwable {
+    public void test858() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test884");
+            System.out.format("%n%s%n", "RegressionTest1.test858");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -22336,9 +20813,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test885() throws Throwable {
+    public void test859() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test885");
+            System.out.format("%n%s%n", "RegressionTest1.test859");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -22394,9 +20871,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test886() throws Throwable {
+    public void test860() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test886");
+            System.out.format("%n%s%n", "RegressionTest1.test860");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -22436,9 +20913,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test887() throws Throwable {
+    public void test861() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test887");
+            System.out.format("%n%s%n", "RegressionTest1.test861");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -22486,9 +20963,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test888() throws Throwable {
+    public void test862() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test888");
+            System.out.format("%n%s%n", "RegressionTest1.test862");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -22539,9 +21016,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test889() throws Throwable {
+    public void test863() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test889");
+            System.out.format("%n%s%n", "RegressionTest1.test863");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -22570,9 +21047,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test890() throws Throwable {
+    public void test864() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test890");
+            System.out.format("%n%s%n", "RegressionTest1.test864");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -22582,9 +21059,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test891() throws Throwable {
+    public void test865() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test891");
+            System.out.format("%n%s%n", "RegressionTest1.test865");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -22629,9 +21106,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test892() throws Throwable {
+    public void test866() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test892");
+            System.out.format("%n%s%n", "RegressionTest1.test866");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -22672,9 +21149,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test893() throws Throwable {
+    public void test867() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test893");
+            System.out.format("%n%s%n", "RegressionTest1.test867");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -22725,9 +21202,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test894() throws Throwable {
+    public void test868() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test894");
+            System.out.format("%n%s%n", "RegressionTest1.test868");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -22756,9 +21233,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test895() throws Throwable {
+    public void test869() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test895");
+            System.out.format("%n%s%n", "RegressionTest1.test869");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -22777,9 +21254,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test896() throws Throwable {
+    public void test870() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test896");
+            System.out.format("%n%s%n", "RegressionTest1.test870");
         java.lang.CharSequence[] charSequenceArray5 = new java.lang.CharSequence[] { "34", "", "hi!", "1", "hi!" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "34", "", "hi!", "1", "hi!" };
         java.lang.CharSequence[][] charSequenceArray12 = new java.lang.CharSequence[][] { charSequenceArray5, charSequenceArray11 };
@@ -22796,9 +21273,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test897() throws Throwable {
+    public void test871() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test897");
+            System.out.format("%n%s%n", "RegressionTest1.test871");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -22884,9 +21361,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test898() throws Throwable {
+    public void test872() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test898");
+            System.out.format("%n%s%n", "RegressionTest1.test872");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -22937,9 +21414,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test899() throws Throwable {
+    public void test873() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test899");
+            System.out.format("%n%s%n", "RegressionTest1.test873");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23033,9 +21510,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test900() throws Throwable {
+    public void test874() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test900");
+            System.out.format("%n%s%n", "RegressionTest1.test874");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23071,9 +21548,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test901() throws Throwable {
+    public void test875() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test901");
+            System.out.format("%n%s%n", "RegressionTest1.test875");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -23124,9 +21601,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test902() throws Throwable {
+    public void test876() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test902");
+            System.out.format("%n%s%n", "RegressionTest1.test876");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23218,9 +21695,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test903() throws Throwable {
+    public void test877() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test903");
+            System.out.format("%n%s%n", "RegressionTest1.test877");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -23305,9 +21782,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test904() throws Throwable {
+    public void test878() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test904");
+            System.out.format("%n%s%n", "RegressionTest1.test878");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23355,9 +21832,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test905() throws Throwable {
+    public void test879() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test905");
+            System.out.format("%n%s%n", "RegressionTest1.test879");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23395,9 +21872,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test906() throws Throwable {
+    public void test880() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test906");
+            System.out.format("%n%s%n", "RegressionTest1.test880");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -23449,9 +21926,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test907() throws Throwable {
+    public void test881() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test907");
+            System.out.format("%n%s%n", "RegressionTest1.test881");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23494,9 +21971,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test908() throws Throwable {
+    public void test882() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test908");
+            System.out.format("%n%s%n", "RegressionTest1.test882");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23587,9 +22064,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test909() throws Throwable {
+    public void test883() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test909");
+            System.out.format("%n%s%n", "RegressionTest1.test883");
         java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
         java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
@@ -23612,9 +22089,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test910() throws Throwable {
+    public void test884() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test910");
+            System.out.format("%n%s%n", "RegressionTest1.test884");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -23697,9 +22174,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test911() throws Throwable {
+    public void test885() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test911");
+            System.out.format("%n%s%n", "RegressionTest1.test885");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23737,9 +22214,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test912() throws Throwable {
+    public void test886() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test912");
+            System.out.format("%n%s%n", "RegressionTest1.test886");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23760,9 +22237,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test913() throws Throwable {
+    public void test887() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test913");
+            System.out.format("%n%s%n", "RegressionTest1.test887");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -23840,9 +22317,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test914() throws Throwable {
+    public void test888() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test914");
+            System.out.format("%n%s%n", "RegressionTest1.test888");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -23923,9 +22400,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test915() throws Throwable {
+    public void test889() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test915");
+            System.out.format("%n%s%n", "RegressionTest1.test889");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -24013,9 +22490,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test916() throws Throwable {
+    public void test890() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test916");
+            System.out.format("%n%s%n", "RegressionTest1.test890");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -24106,9 +22583,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test917() throws Throwable {
+    public void test891() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test917");
+            System.out.format("%n%s%n", "RegressionTest1.test891");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -24199,9 +22676,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test918() throws Throwable {
+    public void test892() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test918");
+            System.out.format("%n%s%n", "RegressionTest1.test892");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -24224,9 +22701,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test919() throws Throwable {
+    public void test893() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test919");
+            System.out.format("%n%s%n", "RegressionTest1.test893");
         java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
@@ -24302,9 +22779,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test920() throws Throwable {
+    public void test894() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test920");
+            System.out.format("%n%s%n", "RegressionTest1.test894");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -24397,9 +22874,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test921() throws Throwable {
+    public void test895() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test921");
+            System.out.format("%n%s%n", "RegressionTest1.test895");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.io.Writer writer4 = null;
@@ -24476,9 +22953,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test922() throws Throwable {
+    public void test896() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test922");
+            System.out.format("%n%s%n", "RegressionTest1.test896");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -24556,9 +23033,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test923() throws Throwable {
+    public void test897() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test923");
+            System.out.format("%n%s%n", "RegressionTest1.test897");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -24628,9 +23105,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test924() throws Throwable {
+    public void test898() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test924");
+            System.out.format("%n%s%n", "RegressionTest1.test898");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -24706,9 +23183,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test925() throws Throwable {
+    public void test899() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test925");
+            System.out.format("%n%s%n", "RegressionTest1.test899");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -24790,9 +23267,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test926() throws Throwable {
+    public void test900() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test926");
+            System.out.format("%n%s%n", "RegressionTest1.test900");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -24875,9 +23352,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test927() throws Throwable {
+    public void test901() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test927");
+            System.out.format("%n%s%n", "RegressionTest1.test901");
         java.lang.CharSequence[][] charSequenceArray0 = null;
         org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
         java.lang.CharSequence[][] charSequenceArray2 = null;
@@ -24952,9 +23429,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test928() throws Throwable {
+    public void test902() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test928");
+            System.out.format("%n%s%n", "RegressionTest1.test902");
         java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
         java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
@@ -25018,6 +23495,3304 @@ public class RegressionTest1 {
         org.junit.Assert.assertNotNull(charSequenceTranslator76);
         org.junit.Assert.assertNotNull(charSequenceTranslator77);
         org.junit.Assert.assertTrue("'" + int82 + "' != '" + 0 + "'", int82 == 0);
+    }
+
+    @Test
+    public void test903() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test903");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator17.translate((java.lang.CharSequence) "", (int) '#', writer24);
+        java.lang.CharSequence[][] charSequenceArray26 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        java.io.Writer writer30 = null;
+        int int31 = lookupTranslator27.translate((java.lang.CharSequence) "", 0, writer30);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray32 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator17, lookupTranslator27 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator33 = lookupTranslator11.with(charSequenceTranslatorArray32);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator34 = lookupTranslator1.with(charSequenceTranslatorArray32);
+        java.lang.String str36 = charSequenceTranslator34.translate((java.lang.CharSequence) "hi!");
+        java.lang.CharSequence[] charSequenceArray41 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray46 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray51 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray56 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray57 = new java.lang.CharSequence[][] { charSequenceArray41, charSequenceArray46, charSequenceArray51, charSequenceArray56 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator58 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray57);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator59 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray57);
+        java.io.Writer writer62 = null;
+        int int63 = lookupTranslator59.translate((java.lang.CharSequence) "", (int) (byte) 1, writer62);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray64 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator65 = lookupTranslator59.with(charSequenceTranslatorArray64);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator66 = charSequenceTranslator34.with(charSequenceTranslatorArray64);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator67 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray64);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator68 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray64);
+        java.io.Writer writer71 = null;
+        int int72 = aggregateTranslator68.translate((java.lang.CharSequence) "", 0, writer71);
+        java.io.Writer writer75 = null;
+        int int76 = aggregateTranslator68.translate((java.lang.CharSequence) "20", 1, writer75);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray32);
+        org.junit.Assert.assertNotNull(charSequenceTranslator33);
+        org.junit.Assert.assertNotNull(charSequenceTranslator34);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "hi!" + "'", str36, "hi!");
+        org.junit.Assert.assertNotNull(charSequenceArray41);
+        org.junit.Assert.assertNotNull(charSequenceArray46);
+        org.junit.Assert.assertNotNull(charSequenceArray51);
+        org.junit.Assert.assertNotNull(charSequenceArray56);
+        org.junit.Assert.assertNotNull(charSequenceArray57);
+        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray64);
+        org.junit.Assert.assertNotNull(charSequenceTranslator65);
+        org.junit.Assert.assertNotNull(charSequenceTranslator66);
+        org.junit.Assert.assertTrue("'" + int72 + "' != '" + 0 + "'", int72 == 0);
+        org.junit.Assert.assertTrue("'" + int76 + "' != '" + 0 + "'", int76 == 0);
+    }
+
+    @Test
+    public void test904() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test904");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator17.translate((java.lang.CharSequence) "", (int) '#', writer24);
+        java.lang.CharSequence[][] charSequenceArray26 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        java.io.Writer writer30 = null;
+        int int31 = lookupTranslator27.translate((java.lang.CharSequence) "", 0, writer30);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray32 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator17, lookupTranslator27 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator33 = lookupTranslator11.with(charSequenceTranslatorArray32);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator34 = lookupTranslator1.with(charSequenceTranslatorArray32);
+        java.lang.String str36 = charSequenceTranslator34.translate((java.lang.CharSequence) "hi!");
+        java.lang.CharSequence[] charSequenceArray41 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray46 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray51 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray56 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray57 = new java.lang.CharSequence[][] { charSequenceArray41, charSequenceArray46, charSequenceArray51, charSequenceArray56 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator58 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray57);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator59 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray57);
+        java.io.Writer writer62 = null;
+        int int63 = lookupTranslator59.translate((java.lang.CharSequence) "", (int) (byte) 1, writer62);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray64 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator65 = lookupTranslator59.with(charSequenceTranslatorArray64);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator66 = charSequenceTranslator34.with(charSequenceTranslatorArray64);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator67 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray64);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator68 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray64);
+        java.io.Writer writer71 = null;
+        int int72 = aggregateTranslator68.translate((java.lang.CharSequence) "34", (int) (short) 0, writer71);
+        java.io.Writer writer75 = null;
+        int int76 = aggregateTranslator68.translate((java.lang.CharSequence) "64", (int) (short) -1, writer75);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray32);
+        org.junit.Assert.assertNotNull(charSequenceTranslator33);
+        org.junit.Assert.assertNotNull(charSequenceTranslator34);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "hi!" + "'", str36, "hi!");
+        org.junit.Assert.assertNotNull(charSequenceArray41);
+        org.junit.Assert.assertNotNull(charSequenceArray46);
+        org.junit.Assert.assertNotNull(charSequenceArray51);
+        org.junit.Assert.assertNotNull(charSequenceArray56);
+        org.junit.Assert.assertNotNull(charSequenceArray57);
+        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray64);
+        org.junit.Assert.assertNotNull(charSequenceTranslator65);
+        org.junit.Assert.assertNotNull(charSequenceTranslator66);
+        org.junit.Assert.assertTrue("'" + int72 + "' != '" + 0 + "'", int72 == 0);
+        org.junit.Assert.assertTrue("'" + int76 + "' != '" + 0 + "'", int76 == 0);
+    }
+
+    @Test
+    public void test905() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test905");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator46 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator47 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = aggregateTranslator48.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator51 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator21.with(charSequenceTranslatorArray49);
+        java.lang.CharSequence[][] charSequenceArray53 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator54 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray53);
+        java.io.Writer writer57 = null;
+        int int58 = lookupTranslator54.translate((java.lang.CharSequence) "", 0, writer57);
+        java.io.Writer writer61 = null;
+        int int62 = lookupTranslator54.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer61);
+        java.lang.CharSequence[][] charSequenceArray63 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator64 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray63);
+        java.io.Writer writer67 = null;
+        int int68 = lookupTranslator64.translate((java.lang.CharSequence) "", 0, writer67);
+        java.lang.CharSequence[][] charSequenceArray69 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator70 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray69);
+        java.io.Writer writer73 = null;
+        int int74 = lookupTranslator70.translate((java.lang.CharSequence) "", 0, writer73);
+        java.io.Writer writer77 = null;
+        int int78 = lookupTranslator70.translate((java.lang.CharSequence) "", (int) '#', writer77);
+        java.lang.CharSequence[][] charSequenceArray79 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator80 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray79);
+        java.io.Writer writer83 = null;
+        int int84 = lookupTranslator80.translate((java.lang.CharSequence) "", 0, writer83);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray85 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator70, lookupTranslator80 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator86 = lookupTranslator64.with(charSequenceTranslatorArray85);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator87 = lookupTranslator54.with(charSequenceTranslatorArray85);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator88 = lookupTranslator21.with(charSequenceTranslatorArray85);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator89 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray85);
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
+        org.junit.Assert.assertNotNull(charSequenceTranslator50);
+        org.junit.Assert.assertNotNull(charSequenceTranslator52);
+        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
+        org.junit.Assert.assertTrue("'" + int62 + "' != '" + 0 + "'", int62 == 0);
+        org.junit.Assert.assertTrue("'" + int68 + "' != '" + 0 + "'", int68 == 0);
+        org.junit.Assert.assertTrue("'" + int74 + "' != '" + 0 + "'", int74 == 0);
+        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
+        org.junit.Assert.assertTrue("'" + int84 + "' != '" + 0 + "'", int84 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray85);
+        org.junit.Assert.assertNotNull(charSequenceTranslator86);
+        org.junit.Assert.assertNotNull(charSequenceTranslator87);
+        org.junit.Assert.assertNotNull(charSequenceTranslator88);
+    }
+
+    @Test
+    public void test906() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test906");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "34", "20", "61", "23" };
+        java.lang.CharSequence[][] charSequenceArray5 = new java.lang.CharSequence[][] { charSequenceArray4 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator6 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray5);
+        java.lang.Class<?> wildcardClass7 = lookupTranslator6.getClass();
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray5);
+        org.junit.Assert.assertNotNull(wildcardClass7);
+    }
+
+    @Test
+    public void test907() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test907");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer25 = null;
+        int int26 = lookupTranslator22.translate((java.lang.CharSequence) "", (int) (byte) 1, writer25);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray27 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator22.with(charSequenceTranslatorArray27);
+        java.io.Writer writer31 = null;
+        int int32 = lookupTranslator22.translate((java.lang.CharSequence) "64", 10, writer31);
+        java.lang.CharSequence charSequence33 = null;
+        java.lang.String str34 = lookupTranslator22.translate(charSequence33);
+        java.lang.String str36 = lookupTranslator22.translate((java.lang.CharSequence) "");
+        java.lang.String str38 = lookupTranslator22.translate((java.lang.CharSequence) "61");
+        java.io.Writer writer41 = null;
+        int int42 = lookupTranslator22.translate((java.lang.CharSequence) "", (int) (byte) -1, writer41);
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertNull(str34);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "" + "'", str36, "");
+        org.junit.Assert.assertEquals("'" + str38 + "' != '" + "61" + "'", str38, "61");
+        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
+    }
+
+    @Test
+    public void test908() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test908");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        java.io.Writer writer50 = null;
+        int int51 = lookupTranslator1.translate((java.lang.CharSequence) "34", (int) (short) 10, writer50);
+        java.io.Writer writer54 = null;
+        int int55 = lookupTranslator1.translate((java.lang.CharSequence) "A", (int) (short) 100, writer54);
+        java.io.Writer writer58 = null;
+        int int59 = lookupTranslator1.translate((java.lang.CharSequence) "61", (int) (byte) 100, writer58);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+    }
+
+    @Test
+    public void test909() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test909");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence charSequence12 = null;
+        java.io.Writer writer14 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            int int15 = lookupTranslator1.translate(charSequence12, 0, writer14);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+    }
+
+    @Test
+    public void test910() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test910");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.lang.CharSequence[][] charSequenceArray4 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
+        java.lang.CharSequence[][] charSequenceArray20 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator30 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray26);
+        java.io.Writer writer33 = null;
+        int int34 = aggregateTranslator30.translate((java.lang.CharSequence) "23", (int) (short) 0, writer33);
+        java.lang.String str36 = aggregateTranslator30.translate((java.lang.CharSequence) "20");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
+        org.junit.Assert.assertNotNull(charSequenceTranslator27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertNotNull(charSequenceTranslator29);
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "20" + "'", str36, "20");
+    }
+
+    @Test
+    public void test911() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test911");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator24 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        java.io.Writer writer27 = null;
+        int int28 = aggregateTranslator24.translate((java.lang.CharSequence) "23", (int) (byte) 1, writer27);
+        java.io.Writer writer31 = null;
+        int int32 = aggregateTranslator24.translate((java.lang.CharSequence) "20", 1, writer31);
+        java.io.Writer writer35 = null;
+        int int36 = aggregateTranslator24.translate((java.lang.CharSequence) "61", 100, writer35);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
+    }
+
+    @Test
+    public void test912() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test912");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.lang.CharSequence[][] charSequenceArray4 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
+        java.lang.CharSequence[][] charSequenceArray20 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
+        java.io.Writer writer32 = null;
+        int int33 = charSequenceTranslator29.translate((java.lang.CharSequence) "23", (int) (byte) 100, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = charSequenceTranslator29.translate((java.lang.CharSequence) "1", (int) ' ', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        java.lang.String str45 = lookupTranslator39.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer48 = null;
+        int int49 = lookupTranslator39.translate((java.lang.CharSequence) "hi!", (int) '4', writer48);
+        java.lang.CharSequence[][] charSequenceArray50 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator51 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
+        java.io.Writer writer54 = null;
+        int int55 = lookupTranslator51.translate((java.lang.CharSequence) "", 0, writer54);
+        java.io.Writer writer58 = null;
+        int int59 = lookupTranslator51.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer58);
+        java.lang.String str61 = lookupTranslator51.translate((java.lang.CharSequence) "hi!");
+        java.lang.CharSequence[] charSequenceArray66 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray71 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray76 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray81 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray82 = new java.lang.CharSequence[][] { charSequenceArray66, charSequenceArray71, charSequenceArray76, charSequenceArray81 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator83 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray82);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator84 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray82);
+        java.io.Writer writer87 = null;
+        int int88 = lookupTranslator84.translate((java.lang.CharSequence) "", (int) (byte) 1, writer87);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray89 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator90 = lookupTranslator84.with(charSequenceTranslatorArray89);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator91 = lookupTranslator51.with(charSequenceTranslatorArray89);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator92 = lookupTranslator39.with(charSequenceTranslatorArray89);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator93 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray89);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator94 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray89);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator95 = charSequenceTranslator29.with(charSequenceTranslatorArray89);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator96 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray89);
+        java.lang.String str98 = aggregateTranslator96.translate((java.lang.CharSequence) "FFFFFFFF");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
+        org.junit.Assert.assertNotNull(charSequenceTranslator27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertNotNull(charSequenceTranslator29);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "hi!" + "'", str45, "hi!");
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertEquals("'" + str61 + "' != '" + "hi!" + "'", str61, "hi!");
+        org.junit.Assert.assertNotNull(charSequenceArray66);
+        org.junit.Assert.assertNotNull(charSequenceArray71);
+        org.junit.Assert.assertNotNull(charSequenceArray76);
+        org.junit.Assert.assertNotNull(charSequenceArray81);
+        org.junit.Assert.assertNotNull(charSequenceArray82);
+        org.junit.Assert.assertTrue("'" + int88 + "' != '" + 0 + "'", int88 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray89);
+        org.junit.Assert.assertNotNull(charSequenceTranslator90);
+        org.junit.Assert.assertNotNull(charSequenceTranslator91);
+        org.junit.Assert.assertNotNull(charSequenceTranslator92);
+        org.junit.Assert.assertNotNull(charSequenceTranslator95);
+        org.junit.Assert.assertEquals("'" + str98 + "' != '" + "FFFFFFFF" + "'", str98, "FFFFFFFF");
+    }
+
+    @Test
+    public void test913() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test913");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
+        java.lang.String str11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) ' ', writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF", (int) (short) 100, writer18);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "hi!" + "'", str11, "hi!");
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+    }
+
+    @Test
+    public void test914() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test914");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator24 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        java.io.Writer writer27 = null;
+        int int28 = aggregateTranslator24.translate((java.lang.CharSequence) "23", (int) (short) 0, writer27);
+        java.io.Writer writer31 = null;
+        int int32 = aggregateTranslator24.translate((java.lang.CharSequence) "34", (int) '4', writer31);
+        java.io.Writer writer35 = null;
+        int int36 = aggregateTranslator24.translate((java.lang.CharSequence) "23", (int) (short) -1, writer35);
+        java.lang.Class<?> wildcardClass37 = aggregateTranslator24.getClass();
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
+        org.junit.Assert.assertNotNull(wildcardClass37);
+    }
+
+    @Test
+    public void test915() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test915");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.io.Writer writer6 = null;
+        int int7 = lookupTranslator3.translate((java.lang.CharSequence) "", 0, writer6);
+        java.lang.CharSequence[][] charSequenceArray8 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator9 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray8);
+        java.io.Writer writer12 = null;
+        int int13 = lookupTranslator9.translate((java.lang.CharSequence) "", 0, writer12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator9.translate((java.lang.CharSequence) "", (int) '#', writer16);
+        java.lang.CharSequence[][] charSequenceArray18 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator19 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray18);
+        java.io.Writer writer22 = null;
+        int int23 = lookupTranslator19.translate((java.lang.CharSequence) "", 0, writer22);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray24 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator9, lookupTranslator19 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator25 = lookupTranslator3.with(charSequenceTranslatorArray24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator26 = lookupTranslator1.with(charSequenceTranslatorArray24);
+        java.io.Writer writer29 = null;
+        int int30 = lookupTranslator1.translate((java.lang.CharSequence) "", (int) (short) 10, writer29);
+        java.io.Writer writer33 = null;
+        int int34 = lookupTranslator1.translate((java.lang.CharSequence) "64", (-1), writer33);
+        java.io.Writer writer37 = null;
+        int int38 = lookupTranslator1.translate((java.lang.CharSequence) "23", 1, writer37);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray24);
+        org.junit.Assert.assertNotNull(charSequenceTranslator25);
+        org.junit.Assert.assertNotNull(charSequenceTranslator26);
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+    }
+
+    @Test
+    public void test916() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test916");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        java.io.Writer writer50 = null;
+        int int51 = lookupTranslator1.translate((java.lang.CharSequence) "34", (int) (short) 10, writer50);
+        java.io.Writer writer54 = null;
+        int int55 = lookupTranslator1.translate((java.lang.CharSequence) "23", (int) (byte) 10, writer54);
+        java.io.Writer writer58 = null;
+        int int59 = lookupTranslator1.translate((java.lang.CharSequence) "61", (int) (short) 1, writer58);
+        java.io.Writer writer62 = null;
+        int int63 = lookupTranslator1.translate((java.lang.CharSequence) "20", 0, writer62);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
+    }
+
+    @Test
+    public void test917() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test917");
+        java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator4 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.String str6 = lookupTranslator4.translate((java.lang.CharSequence) "FFFFFFFF");
+        java.lang.CharSequence[][] charSequenceArray7 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator8 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray7);
+        java.io.Writer writer11 = null;
+        int int12 = lookupTranslator8.translate((java.lang.CharSequence) "", 0, writer11);
+        java.io.Writer writer15 = null;
+        int int16 = lookupTranslator8.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer15);
+        java.lang.CharSequence[][] charSequenceArray17 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator18 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray17);
+        java.io.Writer writer21 = null;
+        int int22 = lookupTranslator18.translate((java.lang.CharSequence) "", 0, writer21);
+        java.lang.String str24 = lookupTranslator18.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer27 = null;
+        int int28 = lookupTranslator18.translate((java.lang.CharSequence) "hi!", (int) '4', writer27);
+        java.lang.CharSequence[][] charSequenceArray29 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator30 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray29);
+        java.io.Writer writer33 = null;
+        int int34 = lookupTranslator30.translate((java.lang.CharSequence) "", 0, writer33);
+        java.io.Writer writer37 = null;
+        int int38 = lookupTranslator30.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer37);
+        java.lang.CharSequence[][] charSequenceArray39 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator40 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray39);
+        java.io.Writer writer43 = null;
+        int int44 = lookupTranslator40.translate((java.lang.CharSequence) "", 0, writer43);
+        java.lang.CharSequence[][] charSequenceArray45 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator46 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray45);
+        java.io.Writer writer49 = null;
+        int int50 = lookupTranslator46.translate((java.lang.CharSequence) "", 0, writer49);
+        java.io.Writer writer53 = null;
+        int int54 = lookupTranslator46.translate((java.lang.CharSequence) "", (int) '#', writer53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray61 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator46, lookupTranslator56 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator62 = lookupTranslator40.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator63 = lookupTranslator30.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator64 = lookupTranslator18.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator65 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator66 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator67 = lookupTranslator8.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator68 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator69 = lookupTranslator4.with(charSequenceTranslatorArray61);
+        java.io.Writer writer72 = null;
+        int int73 = charSequenceTranslator69.translate((java.lang.CharSequence) "", (-1), writer72);
+        java.io.Writer writer75 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            charSequenceTranslator69.translate((java.lang.CharSequence) "20", writer75);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charSequenceArray0);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "FFFFFFFF" + "'", str6, "FFFFFFFF");
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 0 + "'", int16 == 0);
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "hi!" + "'", str24, "hi!");
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
+        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray61);
+        org.junit.Assert.assertNotNull(charSequenceTranslator62);
+        org.junit.Assert.assertNotNull(charSequenceTranslator63);
+        org.junit.Assert.assertNotNull(charSequenceTranslator64);
+        org.junit.Assert.assertNotNull(charSequenceTranslator67);
+        org.junit.Assert.assertNotNull(charSequenceTranslator69);
+        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 0 + "'", int73 == 0);
+    }
+
+    @Test
+    public void test918() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test918");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator17.translate((java.lang.CharSequence) "", (int) '#', writer24);
+        java.lang.CharSequence[][] charSequenceArray26 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        java.io.Writer writer30 = null;
+        int int31 = lookupTranslator27.translate((java.lang.CharSequence) "", 0, writer30);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray32 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator17, lookupTranslator27 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator33 = lookupTranslator11.with(charSequenceTranslatorArray32);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator34 = lookupTranslator1.with(charSequenceTranslatorArray32);
+        java.lang.String str36 = charSequenceTranslator34.translate((java.lang.CharSequence) "A");
+        java.lang.String str38 = charSequenceTranslator34.translate((java.lang.CharSequence) "23");
+        java.io.Writer writer40 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            charSequenceTranslator34.translate((java.lang.CharSequence) "64", writer40);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray32);
+        org.junit.Assert.assertNotNull(charSequenceTranslator33);
+        org.junit.Assert.assertNotNull(charSequenceTranslator34);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "A" + "'", str36, "A");
+        org.junit.Assert.assertEquals("'" + str38 + "' != '" + "23" + "'", str38, "23");
+    }
+
+    @Test
+    public void test919() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test919");
+        java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray15 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[][] charSequenceArray16 = new java.lang.CharSequence[][] { charSequenceArray3, charSequenceArray7, charSequenceArray11, charSequenceArray15 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator18 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator19 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator20 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator25 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.junit.Assert.assertNotNull(charSequenceArray3);
+        org.junit.Assert.assertNotNull(charSequenceArray7);
+        org.junit.Assert.assertNotNull(charSequenceArray11);
+        org.junit.Assert.assertNotNull(charSequenceArray15);
+        org.junit.Assert.assertNotNull(charSequenceArray16);
+    }
+
+    @Test
+    public void test920() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test920");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.lang.CharSequence[][] charSequenceArray24 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator25 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray24);
+        java.io.Writer writer28 = null;
+        int int29 = lookupTranslator25.translate((java.lang.CharSequence) "", 0, writer28);
+        java.lang.CharSequence[][] charSequenceArray30 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator31 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray30);
+        java.io.Writer writer34 = null;
+        int int35 = lookupTranslator31.translate((java.lang.CharSequence) "", 0, writer34);
+        java.io.Writer writer38 = null;
+        int int39 = lookupTranslator31.translate((java.lang.CharSequence) "", (int) '#', writer38);
+        java.lang.CharSequence[][] charSequenceArray40 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator41 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray40);
+        java.io.Writer writer44 = null;
+        int int45 = lookupTranslator41.translate((java.lang.CharSequence) "", 0, writer44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray46 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator31, lookupTranslator41 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator25.with(charSequenceTranslatorArray46);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray46);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator49 = lookupTranslator23.with(charSequenceTranslatorArray46);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator50 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray46);
+        java.io.Writer writer53 = null;
+        int int54 = aggregateTranslator50.translate((java.lang.CharSequence) "hi!", (int) (short) 10, writer53);
+        java.io.Writer writer57 = null;
+        int int58 = aggregateTranslator50.translate((java.lang.CharSequence) "20", (-1), writer57);
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 0 + "'", int29 == 0);
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
+        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
+        org.junit.Assert.assertTrue("'" + int45 + "' != '" + 0 + "'", int45 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertNotNull(charSequenceTranslator49);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
+    }
+
+    @Test
+    public void test921() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test921");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.lang.CharSequence[][] charSequenceArray23 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray23);
+        java.lang.CharSequence[][] charSequenceArray25 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray25);
+        java.lang.CharSequence[][] charSequenceArray27 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray27);
+        java.io.Writer writer31 = null;
+        int int32 = lookupTranslator28.translate((java.lang.CharSequence) "", 0, writer31);
+        java.lang.CharSequence[][] charSequenceArray33 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator34 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray33);
+        java.io.Writer writer37 = null;
+        int int38 = lookupTranslator34.translate((java.lang.CharSequence) "", 0, writer37);
+        java.io.Writer writer41 = null;
+        int int42 = lookupTranslator34.translate((java.lang.CharSequence) "", (int) '#', writer41);
+        java.lang.CharSequence[][] charSequenceArray43 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator44 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray43);
+        java.io.Writer writer47 = null;
+        int int48 = lookupTranslator44.translate((java.lang.CharSequence) "", 0, writer47);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator34, lookupTranslator44 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = lookupTranslator28.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator51 = lookupTranslator26.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator24.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator22.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator54 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray49);
+        java.io.Writer writer57 = null;
+        int int58 = aggregateTranslator54.translate((java.lang.CharSequence) "A", (int) 'a', writer57);
+        java.io.Writer writer61 = null;
+        int int62 = aggregateTranslator54.translate((java.lang.CharSequence) "A", 10, writer61);
+        java.lang.Class<?> wildcardClass63 = aggregateTranslator54.getClass();
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
+        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
+        org.junit.Assert.assertNotNull(charSequenceTranslator50);
+        org.junit.Assert.assertNotNull(charSequenceTranslator51);
+        org.junit.Assert.assertNotNull(charSequenceTranslator52);
+        org.junit.Assert.assertNotNull(charSequenceTranslator53);
+        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
+        org.junit.Assert.assertTrue("'" + int62 + "' != '" + 0 + "'", int62 == 0);
+        org.junit.Assert.assertNotNull(wildcardClass63);
+    }
+
+    @Test
+    public void test922() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test922");
+        java.lang.CharSequence[] charSequenceArray3 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray7 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray11 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray15 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[][] charSequenceArray16 = new java.lang.CharSequence[][] { charSequenceArray3, charSequenceArray7, charSequenceArray11, charSequenceArray15 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator18 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer21 = null;
+        int int22 = lookupTranslator18.translate((java.lang.CharSequence) "64", (int) '#', writer21);
+        java.io.Writer writer25 = null;
+        int int26 = lookupTranslator18.translate((java.lang.CharSequence) "0", (int) (byte) -1, writer25);
+        org.junit.Assert.assertNotNull(charSequenceArray3);
+        org.junit.Assert.assertNotNull(charSequenceArray7);
+        org.junit.Assert.assertNotNull(charSequenceArray11);
+        org.junit.Assert.assertNotNull(charSequenceArray15);
+        org.junit.Assert.assertNotNull(charSequenceArray16);
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
+    }
+
+    @Test
+    public void test923() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test923");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.lang.String str9 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF");
+        java.io.Writer writer12 = null;
+        int int13 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF", (int) (byte) 0, writer12);
+        java.lang.String str15 = lookupTranslator1.translate((java.lang.CharSequence) "61");
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator1.translate((java.lang.CharSequence) "A", 1, writer18);
+        java.io.Writer writer22 = null;
+        int int23 = lookupTranslator1.translate((java.lang.CharSequence) "1", (int) (short) 0, writer22);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "FFFFFFFF" + "'", str9, "FFFFFFFF");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "61" + "'", str15, "61");
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+    }
+
+    @Test
+    public void test924() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test924");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        java.io.Writer writer50 = null;
+        int int51 = lookupTranslator1.translate((java.lang.CharSequence) "34", (int) (short) 10, writer50);
+        java.io.Writer writer54 = null;
+        int int55 = lookupTranslator1.translate((java.lang.CharSequence) "61", 0, writer54);
+        java.io.Writer writer58 = null;
+        int int59 = lookupTranslator1.translate((java.lang.CharSequence) "64", 0, writer58);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+    }
+
+    @Test
+    public void test925() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test925");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.String str23 = lookupTranslator13.translate((java.lang.CharSequence) "hi!");
+        java.lang.CharSequence[] charSequenceArray28 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray33 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray38 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray43 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray44 = new java.lang.CharSequence[][] { charSequenceArray28, charSequenceArray33, charSequenceArray38, charSequenceArray43 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator45 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray44);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator46 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray44);
+        java.io.Writer writer49 = null;
+        int int50 = lookupTranslator46.translate((java.lang.CharSequence) "", (int) (byte) 1, writer49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray51 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator46.with(charSequenceTranslatorArray51);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator13.with(charSequenceTranslatorArray51);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator54 = lookupTranslator1.with(charSequenceTranslatorArray51);
+        java.io.Writer writer56 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            charSequenceTranslator54.translate((java.lang.CharSequence) "hi!", writer56);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "hi!" + "'", str23, "hi!");
+        org.junit.Assert.assertNotNull(charSequenceArray28);
+        org.junit.Assert.assertNotNull(charSequenceArray33);
+        org.junit.Assert.assertNotNull(charSequenceArray38);
+        org.junit.Assert.assertNotNull(charSequenceArray43);
+        org.junit.Assert.assertNotNull(charSequenceArray44);
+        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray51);
+        org.junit.Assert.assertNotNull(charSequenceTranslator52);
+        org.junit.Assert.assertNotNull(charSequenceTranslator53);
+        org.junit.Assert.assertNotNull(charSequenceTranslator54);
+    }
+
+    @Test
+    public void test926() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test926");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "0", (int) (short) 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "34");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "34" + "'", str7, "34");
+    }
+
+    @Test
+    public void test927() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test927");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.lang.CharSequence[][] charSequenceArray4 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
+        java.lang.CharSequence[][] charSequenceArray20 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator1.translate((java.lang.CharSequence) "20", (int) (byte) -1, writer32);
+        java.lang.String str35 = lookupTranslator1.translate((java.lang.CharSequence) "1");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
+        org.junit.Assert.assertNotNull(charSequenceTranslator27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertNotNull(charSequenceTranslator29);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertEquals("'" + str35 + "' != '" + "1" + "'", str35, "1");
+    }
+
+    @Test
+    public void test928() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test928");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator17.translate((java.lang.CharSequence) "", (int) '#', writer24);
+        java.lang.CharSequence[][] charSequenceArray26 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        java.io.Writer writer30 = null;
+        int int31 = lookupTranslator27.translate((java.lang.CharSequence) "", 0, writer30);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray32 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator17, lookupTranslator27 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator33 = lookupTranslator11.with(charSequenceTranslatorArray32);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator34 = lookupTranslator1.with(charSequenceTranslatorArray32);
+        java.lang.CharSequence charSequence35 = null;
+        java.lang.String str36 = lookupTranslator1.translate(charSequence35);
+        java.io.Writer writer39 = null;
+        int int40 = lookupTranslator1.translate((java.lang.CharSequence) "1", (int) (short) 0, writer39);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray32);
+        org.junit.Assert.assertNotNull(charSequenceTranslator33);
+        org.junit.Assert.assertNotNull(charSequenceTranslator34);
+        org.junit.Assert.assertNull(str36);
+        org.junit.Assert.assertTrue("'" + int40 + "' != '" + 0 + "'", int40 == 0);
+    }
+
+    @Test
+    public void test929() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test929");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator1.translate((java.lang.CharSequence) "0", (int) ' ', writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator1.translate((java.lang.CharSequence) "1", 0, writer18);
+        java.io.Writer writer22 = null;
+        int int23 = lookupTranslator1.translate((java.lang.CharSequence) "", (int) 'a', writer22);
+        java.lang.String str25 = lookupTranslator1.translate((java.lang.CharSequence) "1");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "1" + "'", str25, "1");
+    }
+
+    @Test
+    public void test930() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test930");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.lang.CharSequence[][] charSequenceArray23 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray23);
+        java.lang.CharSequence[][] charSequenceArray25 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray25);
+        java.lang.CharSequence[][] charSequenceArray27 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray27);
+        java.io.Writer writer31 = null;
+        int int32 = lookupTranslator28.translate((java.lang.CharSequence) "", 0, writer31);
+        java.lang.CharSequence[][] charSequenceArray33 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator34 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray33);
+        java.io.Writer writer37 = null;
+        int int38 = lookupTranslator34.translate((java.lang.CharSequence) "", 0, writer37);
+        java.io.Writer writer41 = null;
+        int int42 = lookupTranslator34.translate((java.lang.CharSequence) "", (int) '#', writer41);
+        java.lang.CharSequence[][] charSequenceArray43 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator44 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray43);
+        java.io.Writer writer47 = null;
+        int int48 = lookupTranslator44.translate((java.lang.CharSequence) "", 0, writer47);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator34, lookupTranslator44 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = lookupTranslator28.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator51 = lookupTranslator26.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator24.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator22.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator54 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray49);
+        java.io.Writer writer57 = null;
+        int int58 = aggregateTranslator54.translate((java.lang.CharSequence) "64", (int) (short) 0, writer57);
+        java.lang.String str60 = aggregateTranslator54.translate((java.lang.CharSequence) "34");
+        java.io.Writer writer63 = null;
+        int int64 = aggregateTranslator54.translate((java.lang.CharSequence) "61", (int) ' ', writer63);
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
+        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
+        org.junit.Assert.assertNotNull(charSequenceTranslator50);
+        org.junit.Assert.assertNotNull(charSequenceTranslator51);
+        org.junit.Assert.assertNotNull(charSequenceTranslator52);
+        org.junit.Assert.assertNotNull(charSequenceTranslator53);
+        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
+        org.junit.Assert.assertEquals("'" + str60 + "' != '" + "34" + "'", str60, "34");
+        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
+    }
+
+    @Test
+    public void test931() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test931");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
+        java.lang.CharSequence[][] charSequenceArray49 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
+        java.io.Writer writer53 = null;
+        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        java.io.Writer writer63 = null;
+        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
+        java.lang.CharSequence[][] charSequenceArray65 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
+        java.io.Writer writer69 = null;
+        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
+        java.lang.String str76 = aggregateTranslator48.translate((java.lang.CharSequence) "0");
+        java.io.Writer writer78 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            aggregateTranslator48.translate((java.lang.CharSequence) "64", writer78);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
+        org.junit.Assert.assertNotNull(charSequenceTranslator72);
+        org.junit.Assert.assertNotNull(charSequenceTranslator74);
+        org.junit.Assert.assertEquals("'" + str76 + "' != '" + "0" + "'", str76, "0");
+    }
+
+    @Test
+    public void test932() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test932");
+        java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator4 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.String str6 = lookupTranslator4.translate((java.lang.CharSequence) "FFFFFFFF");
+        java.lang.CharSequence[][] charSequenceArray7 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator8 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray7);
+        java.io.Writer writer11 = null;
+        int int12 = lookupTranslator8.translate((java.lang.CharSequence) "", 0, writer11);
+        java.io.Writer writer15 = null;
+        int int16 = lookupTranslator8.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer15);
+        java.lang.CharSequence[][] charSequenceArray17 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator18 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray17);
+        java.io.Writer writer21 = null;
+        int int22 = lookupTranslator18.translate((java.lang.CharSequence) "", 0, writer21);
+        java.lang.String str24 = lookupTranslator18.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer27 = null;
+        int int28 = lookupTranslator18.translate((java.lang.CharSequence) "hi!", (int) '4', writer27);
+        java.lang.CharSequence[][] charSequenceArray29 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator30 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray29);
+        java.io.Writer writer33 = null;
+        int int34 = lookupTranslator30.translate((java.lang.CharSequence) "", 0, writer33);
+        java.io.Writer writer37 = null;
+        int int38 = lookupTranslator30.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer37);
+        java.lang.CharSequence[][] charSequenceArray39 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator40 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray39);
+        java.io.Writer writer43 = null;
+        int int44 = lookupTranslator40.translate((java.lang.CharSequence) "", 0, writer43);
+        java.lang.CharSequence[][] charSequenceArray45 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator46 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray45);
+        java.io.Writer writer49 = null;
+        int int50 = lookupTranslator46.translate((java.lang.CharSequence) "", 0, writer49);
+        java.io.Writer writer53 = null;
+        int int54 = lookupTranslator46.translate((java.lang.CharSequence) "", (int) '#', writer53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray61 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator46, lookupTranslator56 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator62 = lookupTranslator40.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator63 = lookupTranslator30.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator64 = lookupTranslator18.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator65 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator66 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator67 = lookupTranslator8.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator68 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator69 = lookupTranslator4.with(charSequenceTranslatorArray61);
+        java.io.Writer writer72 = null;
+        int int73 = charSequenceTranslator69.translate((java.lang.CharSequence) "", (-1), writer72);
+        java.io.Writer writer75 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            charSequenceTranslator69.translate((java.lang.CharSequence) "hi!", writer75);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charSequenceArray0);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "FFFFFFFF" + "'", str6, "FFFFFFFF");
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 0 + "'", int16 == 0);
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "hi!" + "'", str24, "hi!");
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
+        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray61);
+        org.junit.Assert.assertNotNull(charSequenceTranslator62);
+        org.junit.Assert.assertNotNull(charSequenceTranslator63);
+        org.junit.Assert.assertNotNull(charSequenceTranslator64);
+        org.junit.Assert.assertNotNull(charSequenceTranslator67);
+        org.junit.Assert.assertNotNull(charSequenceTranslator69);
+        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 0 + "'", int73 == 0);
+    }
+
+    @Test
+    public void test933() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test933");
+        java.lang.CharSequence[][] charSequenceArray0 = new java.lang.CharSequence[][] {};
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator2 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator4 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[] charSequenceArray10 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray15 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray20 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray25 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray26 = new java.lang.CharSequence[][] { charSequenceArray10, charSequenceArray15, charSequenceArray20, charSequenceArray25 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        java.lang.CharSequence[][] charSequenceArray30 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator31 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray30);
+        java.io.Writer writer34 = null;
+        int int35 = lookupTranslator31.translate((java.lang.CharSequence) "", 0, writer34);
+        java.lang.CharSequence[][] charSequenceArray36 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator37 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray36);
+        java.io.Writer writer40 = null;
+        int int41 = lookupTranslator37.translate((java.lang.CharSequence) "", 0, writer40);
+        java.io.Writer writer44 = null;
+        int int45 = lookupTranslator37.translate((java.lang.CharSequence) "", (int) '#', writer44);
+        java.lang.CharSequence[][] charSequenceArray46 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator47 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray46);
+        java.io.Writer writer50 = null;
+        int int51 = lookupTranslator47.translate((java.lang.CharSequence) "", 0, writer50);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray52 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator37, lookupTranslator47 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator31.with(charSequenceTranslatorArray52);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator54 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray52);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator55 = lookupTranslator29.with(charSequenceTranslatorArray52);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator56 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray52);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator57 = lookupTranslator5.with(charSequenceTranslatorArray52);
+        java.io.Writer writer59 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            charSequenceTranslator57.translate((java.lang.CharSequence) "", writer59);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charSequenceArray0);
+        org.junit.Assert.assertNotNull(charSequenceArray10);
+        org.junit.Assert.assertNotNull(charSequenceArray15);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertNotNull(charSequenceArray25);
+        org.junit.Assert.assertNotNull(charSequenceArray26);
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
+        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 0 + "'", int41 == 0);
+        org.junit.Assert.assertTrue("'" + int45 + "' != '" + 0 + "'", int45 == 0);
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray52);
+        org.junit.Assert.assertNotNull(charSequenceTranslator53);
+        org.junit.Assert.assertNotNull(charSequenceTranslator55);
+        org.junit.Assert.assertNotNull(charSequenceTranslator57);
+    }
+
+    @Test
+    public void test934() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test934");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.lang.CharSequence[][] charSequenceArray4 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
+        java.lang.CharSequence[][] charSequenceArray20 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
+        java.lang.String str31 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF");
+        java.io.Writer writer34 = null;
+        int int35 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (short) 0, writer34);
+        java.io.Writer writer38 = null;
+        int int39 = lookupTranslator1.translate((java.lang.CharSequence) "1", (int) (short) -1, writer38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator1.translate((java.lang.CharSequence) "0", (-1), writer42);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
+        org.junit.Assert.assertNotNull(charSequenceTranslator27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertNotNull(charSequenceTranslator29);
+        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "FFFFFFFF" + "'", str31, "FFFFFFFF");
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
+        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+    }
+
+    @Test
+    public void test935() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test935");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.lang.CharSequence[][] charSequenceArray23 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray23);
+        java.lang.CharSequence[][] charSequenceArray25 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray25);
+        java.lang.CharSequence[][] charSequenceArray27 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray27);
+        java.io.Writer writer31 = null;
+        int int32 = lookupTranslator28.translate((java.lang.CharSequence) "", 0, writer31);
+        java.lang.CharSequence[][] charSequenceArray33 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator34 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray33);
+        java.io.Writer writer37 = null;
+        int int38 = lookupTranslator34.translate((java.lang.CharSequence) "", 0, writer37);
+        java.io.Writer writer41 = null;
+        int int42 = lookupTranslator34.translate((java.lang.CharSequence) "", (int) '#', writer41);
+        java.lang.CharSequence[][] charSequenceArray43 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator44 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray43);
+        java.io.Writer writer47 = null;
+        int int48 = lookupTranslator44.translate((java.lang.CharSequence) "", 0, writer47);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator34, lookupTranslator44 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = lookupTranslator28.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator51 = lookupTranslator26.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator24.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator22.with(charSequenceTranslatorArray49);
+        java.lang.String str55 = lookupTranslator22.translate((java.lang.CharSequence) "0");
+        java.io.Writer writer58 = null;
+        int int59 = lookupTranslator22.translate((java.lang.CharSequence) "20", 1, writer58);
+        java.io.Writer writer62 = null;
+        int int63 = lookupTranslator22.translate((java.lang.CharSequence) "34", (int) '4', writer62);
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
+        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
+        org.junit.Assert.assertNotNull(charSequenceTranslator50);
+        org.junit.Assert.assertNotNull(charSequenceTranslator51);
+        org.junit.Assert.assertNotNull(charSequenceTranslator52);
+        org.junit.Assert.assertNotNull(charSequenceTranslator53);
+        org.junit.Assert.assertEquals("'" + str55 + "' != '" + "0" + "'", str55, "0");
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
+    }
+
+    @Test
+    public void test936() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test936");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
+        java.lang.CharSequence[][] charSequenceArray49 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
+        java.io.Writer writer53 = null;
+        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        java.io.Writer writer63 = null;
+        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
+        java.lang.CharSequence[][] charSequenceArray65 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
+        java.io.Writer writer69 = null;
+        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
+        java.io.Writer writer77 = null;
+        int int78 = aggregateTranslator48.translate((java.lang.CharSequence) "hi!", 100, writer77);
+        java.io.Writer writer81 = null;
+        int int82 = aggregateTranslator48.translate((java.lang.CharSequence) "0", (int) (byte) 100, writer81);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
+        org.junit.Assert.assertNotNull(charSequenceTranslator72);
+        org.junit.Assert.assertNotNull(charSequenceTranslator74);
+        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
+        org.junit.Assert.assertTrue("'" + int82 + "' != '" + 0 + "'", int82 == 0);
+    }
+
+    @Test
+    public void test937() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test937");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        java.io.Writer writer50 = null;
+        int int51 = charSequenceTranslator47.translate((java.lang.CharSequence) "1", (int) (short) 1, writer50);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+    }
+
+    @Test
+    public void test938() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test938");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF", (int) '4', writer26);
+        java.io.Writer writer30 = null;
+        int int31 = lookupTranslator1.translate((java.lang.CharSequence) "0", 0, writer30);
+        java.lang.CharSequence charSequence32 = null;
+        java.io.Writer writer34 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            int int35 = lookupTranslator1.translate(charSequence32, (int) (short) -1, writer34);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
+    }
+
+    @Test
+    public void test939() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test939");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
+        java.lang.String str11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.lang.CharSequence[] charSequenceArray16 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray21 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray26 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray31 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray32 = new java.lang.CharSequence[][] { charSequenceArray16, charSequenceArray21, charSequenceArray26, charSequenceArray31 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator33 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray32);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator34 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray32);
+        java.io.Writer writer37 = null;
+        int int38 = lookupTranslator34.translate((java.lang.CharSequence) "", (int) (byte) 1, writer37);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray39 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator40 = lookupTranslator34.with(charSequenceTranslatorArray39);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator41 = lookupTranslator1.with(charSequenceTranslatorArray39);
+        java.io.Writer writer44 = null;
+        int int45 = lookupTranslator1.translate((java.lang.CharSequence) "61", (int) 'a', writer44);
+        java.io.Writer writer48 = null;
+        int int49 = lookupTranslator1.translate((java.lang.CharSequence) "20", 0, writer48);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "hi!" + "'", str11, "hi!");
+        org.junit.Assert.assertNotNull(charSequenceArray16);
+        org.junit.Assert.assertNotNull(charSequenceArray21);
+        org.junit.Assert.assertNotNull(charSequenceArray26);
+        org.junit.Assert.assertNotNull(charSequenceArray31);
+        org.junit.Assert.assertNotNull(charSequenceArray32);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray39);
+        org.junit.Assert.assertNotNull(charSequenceTranslator40);
+        org.junit.Assert.assertNotNull(charSequenceTranslator41);
+        org.junit.Assert.assertTrue("'" + int45 + "' != '" + 0 + "'", int45 == 0);
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+    }
+
+    @Test
+    public void test940() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test940");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator24 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        java.io.Writer writer27 = null;
+        int int28 = aggregateTranslator24.translate((java.lang.CharSequence) "23", (int) (byte) 1, writer27);
+        java.io.Writer writer31 = null;
+        int int32 = aggregateTranslator24.translate((java.lang.CharSequence) "", (int) (byte) 0, writer31);
+        java.io.Writer writer35 = null;
+        int int36 = aggregateTranslator24.translate((java.lang.CharSequence) "", (int) (byte) 1, writer35);
+        java.io.Writer writer39 = null;
+        int int40 = aggregateTranslator24.translate((java.lang.CharSequence) "1", (int) (short) 1, writer39);
+        java.io.Writer writer43 = null;
+        int int44 = aggregateTranslator24.translate((java.lang.CharSequence) "64", (int) '#', writer43);
+        java.io.Writer writer47 = null;
+        int int48 = aggregateTranslator24.translate((java.lang.CharSequence) "23", 0, writer47);
+        java.io.Writer writer51 = null;
+        int int52 = aggregateTranslator24.translate((java.lang.CharSequence) "FFFFFFFF", (int) '4', writer51);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
+        org.junit.Assert.assertTrue("'" + int40 + "' != '" + 0 + "'", int40 == 0);
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
+        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
+        org.junit.Assert.assertTrue("'" + int52 + "' != '" + 0 + "'", int52 == 0);
+    }
+
+    @Test
+    public void test941() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test941");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        java.lang.CharSequence[][] charSequenceArray24 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator25 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray24);
+        java.lang.CharSequence[][] charSequenceArray26 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.lang.CharSequence[][] charSequenceArray34 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator35 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray34);
+        java.io.Writer writer38 = null;
+        int int39 = lookupTranslator35.translate((java.lang.CharSequence) "", 0, writer38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator35.translate((java.lang.CharSequence) "", (int) '#', writer42);
+        java.lang.CharSequence[][] charSequenceArray44 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator45 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray44);
+        java.io.Writer writer48 = null;
+        int int49 = lookupTranslator45.translate((java.lang.CharSequence) "", 0, writer48);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray50 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator35, lookupTranslator45 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator51 = lookupTranslator29.with(charSequenceTranslatorArray50);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator27.with(charSequenceTranslatorArray50);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator25.with(charSequenceTranslatorArray50);
+        java.lang.String str55 = lookupTranslator25.translate((java.lang.CharSequence) "FFFFFFFF");
+        java.io.Writer writer58 = null;
+        int int59 = lookupTranslator25.translate((java.lang.CharSequence) "1", (int) (byte) 0, writer58);
+        java.lang.String str61 = lookupTranslator25.translate((java.lang.CharSequence) "23");
+        java.lang.CharSequence[][] charSequenceArray62 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator63 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray62);
+        java.io.Writer writer66 = null;
+        int int67 = lookupTranslator63.translate((java.lang.CharSequence) "", 0, writer66);
+        java.lang.CharSequence[][] charSequenceArray68 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator69 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray68);
+        java.io.Writer writer72 = null;
+        int int73 = lookupTranslator69.translate((java.lang.CharSequence) "", 0, writer72);
+        java.io.Writer writer76 = null;
+        int int77 = lookupTranslator69.translate((java.lang.CharSequence) "", (int) '#', writer76);
+        java.lang.CharSequence[][] charSequenceArray78 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator79 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray78);
+        java.io.Writer writer82 = null;
+        int int83 = lookupTranslator79.translate((java.lang.CharSequence) "", 0, writer82);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray84 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator69, lookupTranslator79 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator85 = lookupTranslator63.with(charSequenceTranslatorArray84);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator86 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray84);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator87 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray84);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator88 = lookupTranslator25.with(charSequenceTranslatorArray84);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator89 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray84);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator90 = charSequenceTranslator23.with(charSequenceTranslatorArray84);
+        java.lang.Class<?> wildcardClass91 = charSequenceTranslator23.getClass();
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray50);
+        org.junit.Assert.assertNotNull(charSequenceTranslator51);
+        org.junit.Assert.assertNotNull(charSequenceTranslator52);
+        org.junit.Assert.assertNotNull(charSequenceTranslator53);
+        org.junit.Assert.assertEquals("'" + str55 + "' != '" + "FFFFFFFF" + "'", str55, "FFFFFFFF");
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertEquals("'" + str61 + "' != '" + "23" + "'", str61, "23");
+        org.junit.Assert.assertTrue("'" + int67 + "' != '" + 0 + "'", int67 == 0);
+        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 0 + "'", int73 == 0);
+        org.junit.Assert.assertTrue("'" + int77 + "' != '" + 0 + "'", int77 == 0);
+        org.junit.Assert.assertTrue("'" + int83 + "' != '" + 0 + "'", int83 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray84);
+        org.junit.Assert.assertNotNull(charSequenceTranslator85);
+        org.junit.Assert.assertNotNull(charSequenceTranslator88);
+        org.junit.Assert.assertNotNull(charSequenceTranslator90);
+        org.junit.Assert.assertNotNull(wildcardClass91);
+    }
+
+    @Test
+    public void test942() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test942");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator24 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        java.io.Writer writer27 = null;
+        int int28 = aggregateTranslator24.translate((java.lang.CharSequence) "23", (int) (short) 0, writer27);
+        java.io.Writer writer31 = null;
+        int int32 = aggregateTranslator24.translate((java.lang.CharSequence) "34", (int) '4', writer31);
+        java.lang.String str34 = aggregateTranslator24.translate((java.lang.CharSequence) "34");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "34" + "'", str34, "34");
+    }
+
+    @Test
+    public void test943() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test943");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.lang.CharSequence[][] charSequenceArray4 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
+        java.lang.CharSequence[][] charSequenceArray20 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator30 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray26);
+        java.io.Writer writer33 = null;
+        int int34 = aggregateTranslator30.translate((java.lang.CharSequence) "A", 0, writer33);
+        java.io.Writer writer37 = null;
+        int int38 = aggregateTranslator30.translate((java.lang.CharSequence) "64", (int) (short) 0, writer37);
+        java.lang.CharSequence charSequence39 = null;
+        java.lang.String str40 = aggregateTranslator30.translate(charSequence39);
+        java.io.Writer writer43 = null;
+        int int44 = aggregateTranslator30.translate((java.lang.CharSequence) "23", (int) (short) 0, writer43);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
+        org.junit.Assert.assertNotNull(charSequenceTranslator27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertNotNull(charSequenceTranslator29);
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertNull(str40);
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
+    }
+
+    @Test
+    public void test944() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test944");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator17.translate((java.lang.CharSequence) "", (int) '#', writer24);
+        java.lang.CharSequence[][] charSequenceArray26 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray26);
+        java.io.Writer writer30 = null;
+        int int31 = lookupTranslator27.translate((java.lang.CharSequence) "", 0, writer30);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray32 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator17, lookupTranslator27 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator33 = lookupTranslator11.with(charSequenceTranslatorArray32);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator34 = lookupTranslator1.with(charSequenceTranslatorArray32);
+        java.lang.CharSequence[][] charSequenceArray35 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator36 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray35);
+        java.lang.CharSequence[][] charSequenceArray37 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator38 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray37);
+        java.lang.CharSequence[][] charSequenceArray39 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator40 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray39);
+        java.io.Writer writer43 = null;
+        int int44 = lookupTranslator40.translate((java.lang.CharSequence) "", 0, writer43);
+        java.lang.CharSequence[][] charSequenceArray45 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator46 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray45);
+        java.io.Writer writer49 = null;
+        int int50 = lookupTranslator46.translate((java.lang.CharSequence) "", 0, writer49);
+        java.io.Writer writer53 = null;
+        int int54 = lookupTranslator46.translate((java.lang.CharSequence) "", (int) '#', writer53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray61 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator46, lookupTranslator56 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator62 = lookupTranslator40.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator63 = lookupTranslator38.with(charSequenceTranslatorArray61);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator64 = lookupTranslator36.with(charSequenceTranslatorArray61);
+        java.io.Writer writer67 = null;
+        int int68 = charSequenceTranslator64.translate((java.lang.CharSequence) "FFFFFFFF", (int) ' ', writer67);
+        java.lang.CharSequence charSequence69 = null;
+        java.lang.String str70 = charSequenceTranslator64.translate(charSequence69);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { charSequenceTranslator64 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator1.with(charSequenceTranslatorArray71);
+        java.io.Writer writer74 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            charSequenceTranslator72.translate((java.lang.CharSequence) "1", writer74);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The Writer must not be null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + 0 + "'", int31 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray32);
+        org.junit.Assert.assertNotNull(charSequenceTranslator33);
+        org.junit.Assert.assertNotNull(charSequenceTranslator34);
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
+        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray61);
+        org.junit.Assert.assertNotNull(charSequenceTranslator62);
+        org.junit.Assert.assertNotNull(charSequenceTranslator63);
+        org.junit.Assert.assertNotNull(charSequenceTranslator64);
+        org.junit.Assert.assertTrue("'" + int68 + "' != '" + 0 + "'", int68 == 0);
+        org.junit.Assert.assertNull(str70);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
+        org.junit.Assert.assertNotNull(charSequenceTranslator72);
+    }
+
+    @Test
+    public void test945() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test945");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.lang.CharSequence[][] charSequenceArray4 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
+        java.lang.CharSequence[][] charSequenceArray20 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
+        java.lang.String str31 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF");
+        java.io.Writer writer34 = null;
+        int int35 = lookupTranslator1.translate((java.lang.CharSequence) "1", (int) (byte) 0, writer34);
+        java.lang.String str37 = lookupTranslator1.translate((java.lang.CharSequence) "23");
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        java.lang.CharSequence[][] charSequenceArray44 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator45 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray44);
+        java.io.Writer writer48 = null;
+        int int49 = lookupTranslator45.translate((java.lang.CharSequence) "", 0, writer48);
+        java.io.Writer writer52 = null;
+        int int53 = lookupTranslator45.translate((java.lang.CharSequence) "", (int) '#', writer52);
+        java.lang.CharSequence[][] charSequenceArray54 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator55 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray54);
+        java.io.Writer writer58 = null;
+        int int59 = lookupTranslator55.translate((java.lang.CharSequence) "", 0, writer58);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray60 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator45, lookupTranslator55 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator61 = lookupTranslator39.with(charSequenceTranslatorArray60);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator62 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray60);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator63 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray60);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator64 = lookupTranslator1.with(charSequenceTranslatorArray60);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator65 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray60);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator66 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray60);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
+        org.junit.Assert.assertNotNull(charSequenceTranslator27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertNotNull(charSequenceTranslator29);
+        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "FFFFFFFF" + "'", str31, "FFFFFFFF");
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
+        org.junit.Assert.assertEquals("'" + str37 + "' != '" + "23" + "'", str37, "23");
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertTrue("'" + int53 + "' != '" + 0 + "'", int53 == 0);
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray60);
+        org.junit.Assert.assertNotNull(charSequenceTranslator61);
+        org.junit.Assert.assertNotNull(charSequenceTranslator64);
+    }
+
+    @Test
+    public void test946() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test946");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.lang.CharSequence[][] charSequenceArray4 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
+        java.lang.CharSequence[][] charSequenceArray20 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator30 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray26);
+        java.io.Writer writer33 = null;
+        int int34 = aggregateTranslator30.translate((java.lang.CharSequence) "64", (int) (short) -1, writer33);
+        java.io.Writer writer37 = null;
+        int int38 = aggregateTranslator30.translate((java.lang.CharSequence) "A", (int) (short) 1, writer37);
+        java.lang.String str40 = aggregateTranslator30.translate((java.lang.CharSequence) "hi!");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
+        org.junit.Assert.assertNotNull(charSequenceTranslator27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertNotNull(charSequenceTranslator29);
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "hi!" + "'", str40, "hi!");
+    }
+
+    @Test
+    public void test947() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test947");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator24 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator25 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator26 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator27 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator28 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator29 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator30 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator31 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator32 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        java.lang.Class<?> wildcardClass33 = aggregateTranslator32.getClass();
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertNotNull(wildcardClass33);
+    }
+
+    @Test
+    public void test948() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test948");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.String str23 = lookupTranslator13.translate((java.lang.CharSequence) "hi!");
+        java.lang.CharSequence[] charSequenceArray28 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray33 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray38 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray43 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray44 = new java.lang.CharSequence[][] { charSequenceArray28, charSequenceArray33, charSequenceArray38, charSequenceArray43 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator45 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray44);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator46 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray44);
+        java.io.Writer writer49 = null;
+        int int50 = lookupTranslator46.translate((java.lang.CharSequence) "", (int) (byte) 1, writer49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray51 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator46.with(charSequenceTranslatorArray51);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator13.with(charSequenceTranslatorArray51);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator54 = lookupTranslator1.with(charSequenceTranslatorArray51);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        java.lang.CharSequence[][] charSequenceArray61 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator62 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray61);
+        java.io.Writer writer65 = null;
+        int int66 = lookupTranslator62.translate((java.lang.CharSequence) "", 0, writer65);
+        java.io.Writer writer69 = null;
+        int int70 = lookupTranslator62.translate((java.lang.CharSequence) "", (int) '#', writer69);
+        java.lang.CharSequence[][] charSequenceArray71 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator72 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray71);
+        java.io.Writer writer75 = null;
+        int int76 = lookupTranslator72.translate((java.lang.CharSequence) "", 0, writer75);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray77 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator62, lookupTranslator72 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator78 = lookupTranslator56.with(charSequenceTranslatorArray77);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator79 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray77);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator80 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray77);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator81 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray77);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray82 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator83 = aggregateTranslator81.with(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator84 = charSequenceTranslator54.with(charSequenceTranslatorArray82);
+        java.lang.String str86 = charSequenceTranslator84.translate((java.lang.CharSequence) "61");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "hi!" + "'", str23, "hi!");
+        org.junit.Assert.assertNotNull(charSequenceArray28);
+        org.junit.Assert.assertNotNull(charSequenceArray33);
+        org.junit.Assert.assertNotNull(charSequenceArray38);
+        org.junit.Assert.assertNotNull(charSequenceArray43);
+        org.junit.Assert.assertNotNull(charSequenceArray44);
+        org.junit.Assert.assertTrue("'" + int50 + "' != '" + 0 + "'", int50 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray51);
+        org.junit.Assert.assertNotNull(charSequenceTranslator52);
+        org.junit.Assert.assertNotNull(charSequenceTranslator53);
+        org.junit.Assert.assertNotNull(charSequenceTranslator54);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertTrue("'" + int66 + "' != '" + 0 + "'", int66 == 0);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
+        org.junit.Assert.assertTrue("'" + int76 + "' != '" + 0 + "'", int76 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray77);
+        org.junit.Assert.assertNotNull(charSequenceTranslator78);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray82);
+        org.junit.Assert.assertNotNull(charSequenceTranslator83);
+        org.junit.Assert.assertNotNull(charSequenceTranslator84);
+        org.junit.Assert.assertEquals("'" + str86 + "' != '" + "61" + "'", str86, "61");
+    }
+
+    @Test
+    public void test949() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test949");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
+        java.lang.CharSequence[][] charSequenceArray49 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
+        java.io.Writer writer53 = null;
+        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        java.io.Writer writer63 = null;
+        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
+        java.lang.CharSequence[][] charSequenceArray65 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
+        java.io.Writer writer69 = null;
+        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
+        java.io.Writer writer77 = null;
+        int int78 = aggregateTranslator48.translate((java.lang.CharSequence) "", (int) '#', writer77);
+        java.lang.String str80 = aggregateTranslator48.translate((java.lang.CharSequence) "0");
+        java.lang.CharSequence charSequence81 = null;
+        java.lang.String str82 = aggregateTranslator48.translate(charSequence81);
+        java.lang.Class<?> wildcardClass83 = aggregateTranslator48.getClass();
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
+        org.junit.Assert.assertNotNull(charSequenceTranslator72);
+        org.junit.Assert.assertNotNull(charSequenceTranslator74);
+        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
+        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "0" + "'", str80, "0");
+        org.junit.Assert.assertNull(str82);
+        org.junit.Assert.assertNotNull(wildcardClass83);
+    }
+
+    @Test
+    public void test950() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test950");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer27 = null;
+        int int28 = lookupTranslator24.translate((java.lang.CharSequence) "A", (int) (short) -1, writer27);
+        java.io.Writer writer31 = null;
+        int int32 = lookupTranslator24.translate((java.lang.CharSequence) "A", (int) (byte) 10, writer31);
+        java.lang.CharSequence charSequence33 = null;
+        java.io.Writer writer35 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            int int36 = lookupTranslator24.translate(charSequence33, (int) (short) 100, writer35);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+    }
+
+    @Test
+    public void test951() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test951");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
+        java.lang.CharSequence[][] charSequenceArray49 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
+        java.io.Writer writer53 = null;
+        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        java.io.Writer writer63 = null;
+        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
+        java.lang.CharSequence[][] charSequenceArray65 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
+        java.io.Writer writer69 = null;
+        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
+        java.io.Writer writer77 = null;
+        int int78 = aggregateTranslator48.translate((java.lang.CharSequence) "1", 0, writer77);
+        java.lang.String str80 = aggregateTranslator48.translate((java.lang.CharSequence) "A");
+        java.io.Writer writer83 = null;
+        int int84 = aggregateTranslator48.translate((java.lang.CharSequence) "A", (int) '#', writer83);
+        java.io.Writer writer87 = null;
+        int int88 = aggregateTranslator48.translate((java.lang.CharSequence) "64", (int) '#', writer87);
+        java.lang.String str90 = aggregateTranslator48.translate((java.lang.CharSequence) "20");
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
+        org.junit.Assert.assertNotNull(charSequenceTranslator72);
+        org.junit.Assert.assertNotNull(charSequenceTranslator74);
+        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
+        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "A" + "'", str80, "A");
+        org.junit.Assert.assertTrue("'" + int84 + "' != '" + 0 + "'", int84 == 0);
+        org.junit.Assert.assertTrue("'" + int88 + "' != '" + 0 + "'", int88 == 0);
+        org.junit.Assert.assertEquals("'" + str90 + "' != '" + "20" + "'", str90, "20");
+    }
+
+    @Test
+    public void test952() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test952");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator48 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray44);
+        java.lang.CharSequence[][] charSequenceArray49 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator50 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray49);
+        java.io.Writer writer53 = null;
+        int int54 = lookupTranslator50.translate((java.lang.CharSequence) "", 0, writer53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        java.io.Writer writer63 = null;
+        int int64 = lookupTranslator56.translate((java.lang.CharSequence) "", (int) '#', writer63);
+        java.lang.CharSequence[][] charSequenceArray65 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
+        java.io.Writer writer69 = null;
+        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray71 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator56, lookupTranslator66 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator72 = lookupTranslator50.with(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator73 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray71);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator74 = aggregateTranslator48.with(charSequenceTranslatorArray71);
+        java.io.Writer writer77 = null;
+        int int78 = aggregateTranslator48.translate((java.lang.CharSequence) "1", 0, writer77);
+        java.lang.String str80 = aggregateTranslator48.translate((java.lang.CharSequence) "FFFFFFFF");
+        java.lang.String str82 = aggregateTranslator48.translate((java.lang.CharSequence) "1");
+        java.lang.CharSequence charSequence83 = null;
+        java.io.Writer writer85 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            int int86 = aggregateTranslator48.translate(charSequence83, 0, writer85);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + 0 + "'", int54 == 0);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray71);
+        org.junit.Assert.assertNotNull(charSequenceTranslator72);
+        org.junit.Assert.assertNotNull(charSequenceTranslator74);
+        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
+        org.junit.Assert.assertEquals("'" + str80 + "' != '" + "FFFFFFFF" + "'", str80, "FFFFFFFF");
+        org.junit.Assert.assertEquals("'" + str82 + "' != '" + "1" + "'", str82, "1");
+    }
+
+    @Test
+    public void test953() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test953");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.String str7 = lookupTranslator1.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator1.translate((java.lang.CharSequence) "hi!", (int) '4', writer10);
+        java.lang.CharSequence[][] charSequenceArray12 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator13 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator13.translate((java.lang.CharSequence) "", 0, writer16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator13.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer20);
+        java.lang.CharSequence[][] charSequenceArray22 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator23.translate((java.lang.CharSequence) "", 0, writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "", (int) '#', writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray44 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator29, lookupTranslator39 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator45 = lookupTranslator23.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator46 = lookupTranslator13.with(charSequenceTranslatorArray44);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator47 = lookupTranslator1.with(charSequenceTranslatorArray44);
+        java.io.Writer writer50 = null;
+        int int51 = charSequenceTranslator47.translate((java.lang.CharSequence) "", (int) (byte) 0, writer50);
+        java.io.Writer writer54 = null;
+        int int55 = charSequenceTranslator47.translate((java.lang.CharSequence) "0", 0, writer54);
+        java.lang.String str57 = charSequenceTranslator47.translate((java.lang.CharSequence) "A");
+        java.lang.CharSequence[][] charSequenceArray58 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator59 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray58);
+        java.io.Writer writer62 = null;
+        int int63 = lookupTranslator59.translate((java.lang.CharSequence) "", 0, writer62);
+        java.io.Writer writer66 = null;
+        int int67 = lookupTranslator59.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer66);
+        java.lang.CharSequence[][] charSequenceArray68 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator69 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray68);
+        java.io.Writer writer72 = null;
+        int int73 = lookupTranslator69.translate((java.lang.CharSequence) "", 0, writer72);
+        java.lang.CharSequence[][] charSequenceArray74 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator75 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray74);
+        java.io.Writer writer78 = null;
+        int int79 = lookupTranslator75.translate((java.lang.CharSequence) "", 0, writer78);
+        java.io.Writer writer82 = null;
+        int int83 = lookupTranslator75.translate((java.lang.CharSequence) "", (int) '#', writer82);
+        java.lang.CharSequence[][] charSequenceArray84 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator85 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray84);
+        java.io.Writer writer88 = null;
+        int int89 = lookupTranslator85.translate((java.lang.CharSequence) "", 0, writer88);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray90 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator75, lookupTranslator85 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator91 = lookupTranslator69.with(charSequenceTranslatorArray90);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator92 = lookupTranslator59.with(charSequenceTranslatorArray90);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator93 = charSequenceTranslator47.with(charSequenceTranslatorArray90);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator94 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray90);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator95 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray90);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator96 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray90);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "hi!" + "'", str7, "hi!");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray44);
+        org.junit.Assert.assertNotNull(charSequenceTranslator45);
+        org.junit.Assert.assertNotNull(charSequenceTranslator46);
+        org.junit.Assert.assertNotNull(charSequenceTranslator47);
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
+        org.junit.Assert.assertEquals("'" + str57 + "' != '" + "A" + "'", str57, "A");
+        org.junit.Assert.assertTrue("'" + int63 + "' != '" + 0 + "'", int63 == 0);
+        org.junit.Assert.assertTrue("'" + int67 + "' != '" + 0 + "'", int67 == 0);
+        org.junit.Assert.assertTrue("'" + int73 + "' != '" + 0 + "'", int73 == 0);
+        org.junit.Assert.assertTrue("'" + int79 + "' != '" + 0 + "'", int79 == 0);
+        org.junit.Assert.assertTrue("'" + int83 + "' != '" + 0 + "'", int83 == 0);
+        org.junit.Assert.assertTrue("'" + int89 + "' != '" + 0 + "'", int89 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray90);
+        org.junit.Assert.assertNotNull(charSequenceTranslator91);
+        org.junit.Assert.assertNotNull(charSequenceTranslator92);
+        org.junit.Assert.assertNotNull(charSequenceTranslator93);
+    }
+
+    @Test
+    public void test954() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test954");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer25 = null;
+        int int26 = lookupTranslator22.translate((java.lang.CharSequence) "", (int) (byte) 1, writer25);
+        java.io.Writer writer29 = null;
+        int int30 = lookupTranslator22.translate((java.lang.CharSequence) "FFFFFFFF", (int) (short) 0, writer29);
+        java.io.Writer writer33 = null;
+        int int34 = lookupTranslator22.translate((java.lang.CharSequence) "hi!", (int) (byte) 1, writer33);
+        java.lang.CharSequence[] charSequenceArray39 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray44 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray49 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray54 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray55 = new java.lang.CharSequence[][] { charSequenceArray39, charSequenceArray44, charSequenceArray49, charSequenceArray54 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator57 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator58 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.lang.CharSequence[][] charSequenceArray59 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator60 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray59);
+        java.io.Writer writer63 = null;
+        int int64 = lookupTranslator60.translate((java.lang.CharSequence) "", 0, writer63);
+        java.lang.CharSequence[][] charSequenceArray65 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator66 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray65);
+        java.io.Writer writer69 = null;
+        int int70 = lookupTranslator66.translate((java.lang.CharSequence) "", 0, writer69);
+        java.io.Writer writer73 = null;
+        int int74 = lookupTranslator66.translate((java.lang.CharSequence) "", (int) '#', writer73);
+        java.lang.CharSequence[][] charSequenceArray75 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator76 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray75);
+        java.io.Writer writer79 = null;
+        int int80 = lookupTranslator76.translate((java.lang.CharSequence) "", 0, writer79);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray81 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator66, lookupTranslator76 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator82 = lookupTranslator60.with(charSequenceTranslatorArray81);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator83 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray81);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator84 = lookupTranslator58.with(charSequenceTranslatorArray81);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator85 = lookupTranslator22.with(charSequenceTranslatorArray81);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator86 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray81);
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 0 + "'", int30 == 0);
+        org.junit.Assert.assertTrue("'" + int34 + "' != '" + 0 + "'", int34 == 0);
+        org.junit.Assert.assertNotNull(charSequenceArray39);
+        org.junit.Assert.assertNotNull(charSequenceArray44);
+        org.junit.Assert.assertNotNull(charSequenceArray49);
+        org.junit.Assert.assertNotNull(charSequenceArray54);
+        org.junit.Assert.assertNotNull(charSequenceArray55);
+        org.junit.Assert.assertTrue("'" + int64 + "' != '" + 0 + "'", int64 == 0);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
+        org.junit.Assert.assertTrue("'" + int74 + "' != '" + 0 + "'", int74 == 0);
+        org.junit.Assert.assertTrue("'" + int80 + "' != '" + 0 + "'", int80 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray81);
+        org.junit.Assert.assertNotNull(charSequenceTranslator82);
+        org.junit.Assert.assertNotNull(charSequenceTranslator84);
+        org.junit.Assert.assertNotNull(charSequenceTranslator85);
+    }
+
+    @Test
+    public void test955() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test955");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.lang.CharSequence[][] charSequenceArray23 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray23);
+        java.lang.CharSequence[][] charSequenceArray25 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray25);
+        java.lang.CharSequence[][] charSequenceArray27 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray27);
+        java.io.Writer writer31 = null;
+        int int32 = lookupTranslator28.translate((java.lang.CharSequence) "", 0, writer31);
+        java.lang.CharSequence[][] charSequenceArray33 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator34 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray33);
+        java.io.Writer writer37 = null;
+        int int38 = lookupTranslator34.translate((java.lang.CharSequence) "", 0, writer37);
+        java.io.Writer writer41 = null;
+        int int42 = lookupTranslator34.translate((java.lang.CharSequence) "", (int) '#', writer41);
+        java.lang.CharSequence[][] charSequenceArray43 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator44 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray43);
+        java.io.Writer writer47 = null;
+        int int48 = lookupTranslator44.translate((java.lang.CharSequence) "", 0, writer47);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray49 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator34, lookupTranslator44 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator50 = lookupTranslator28.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator51 = lookupTranslator26.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator52 = lookupTranslator24.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator53 = lookupTranslator22.with(charSequenceTranslatorArray49);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator54 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray49);
+        java.io.Writer writer57 = null;
+        int int58 = aggregateTranslator54.translate((java.lang.CharSequence) "0", 1, writer57);
+        java.lang.Class<?> wildcardClass59 = aggregateTranslator54.getClass();
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 0 + "'", int38 == 0);
+        org.junit.Assert.assertTrue("'" + int42 + "' != '" + 0 + "'", int42 == 0);
+        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray49);
+        org.junit.Assert.assertNotNull(charSequenceTranslator50);
+        org.junit.Assert.assertNotNull(charSequenceTranslator51);
+        org.junit.Assert.assertNotNull(charSequenceTranslator52);
+        org.junit.Assert.assertNotNull(charSequenceTranslator53);
+        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 0 + "'", int58 == 0);
+        org.junit.Assert.assertNotNull(wildcardClass59);
+    }
+
+    @Test
+    public void test956() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test956");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.io.Writer writer6 = null;
+        int int7 = lookupTranslator3.translate((java.lang.CharSequence) "", 0, writer6);
+        java.lang.CharSequence[][] charSequenceArray8 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator9 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray8);
+        java.io.Writer writer12 = null;
+        int int13 = lookupTranslator9.translate((java.lang.CharSequence) "", 0, writer12);
+        java.io.Writer writer16 = null;
+        int int17 = lookupTranslator9.translate((java.lang.CharSequence) "", (int) '#', writer16);
+        java.lang.CharSequence[][] charSequenceArray18 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator19 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray18);
+        java.io.Writer writer22 = null;
+        int int23 = lookupTranslator19.translate((java.lang.CharSequence) "", 0, writer22);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray24 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator9, lookupTranslator19 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator25 = lookupTranslator3.with(charSequenceTranslatorArray24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator26 = lookupTranslator1.with(charSequenceTranslatorArray24);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator27 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray24);
+        java.lang.String str29 = aggregateTranslator27.translate((java.lang.CharSequence) "23");
+        java.io.Writer writer32 = null;
+        int int33 = aggregateTranslator27.translate((java.lang.CharSequence) "", 1, writer32);
+        java.lang.CharSequence[] charSequenceArray37 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray41 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray45 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[] charSequenceArray49 = new java.lang.CharSequence[] { "hi!", "1", "23" };
+        java.lang.CharSequence[][] charSequenceArray50 = new java.lang.CharSequence[][] { charSequenceArray37, charSequenceArray41, charSequenceArray45, charSequenceArray49 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator51 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator52 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator53 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator54 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator55 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
+        java.lang.CharSequence[][] charSequenceArray57 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator58 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray57);
+        java.io.Writer writer61 = null;
+        int int62 = lookupTranslator58.translate((java.lang.CharSequence) "", 0, writer61);
+        java.lang.CharSequence[][] charSequenceArray63 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator64 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray63);
+        java.io.Writer writer67 = null;
+        int int68 = lookupTranslator64.translate((java.lang.CharSequence) "", 0, writer67);
+        java.io.Writer writer71 = null;
+        int int72 = lookupTranslator64.translate((java.lang.CharSequence) "", (int) '#', writer71);
+        java.lang.CharSequence[][] charSequenceArray73 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator74 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray73);
+        java.io.Writer writer77 = null;
+        int int78 = lookupTranslator74.translate((java.lang.CharSequence) "", 0, writer77);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray79 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator64, lookupTranslator74 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator80 = lookupTranslator58.with(charSequenceTranslatorArray79);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator81 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray79);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator82 = lookupTranslator56.with(charSequenceTranslatorArray79);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator83 = aggregateTranslator27.with(charSequenceTranslatorArray79);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator84 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray79);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray24);
+        org.junit.Assert.assertNotNull(charSequenceTranslator25);
+        org.junit.Assert.assertNotNull(charSequenceTranslator26);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "23" + "'", str29, "23");
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertNotNull(charSequenceArray37);
+        org.junit.Assert.assertNotNull(charSequenceArray41);
+        org.junit.Assert.assertNotNull(charSequenceArray45);
+        org.junit.Assert.assertNotNull(charSequenceArray49);
+        org.junit.Assert.assertNotNull(charSequenceArray50);
+        org.junit.Assert.assertTrue("'" + int62 + "' != '" + 0 + "'", int62 == 0);
+        org.junit.Assert.assertTrue("'" + int68 + "' != '" + 0 + "'", int68 == 0);
+        org.junit.Assert.assertTrue("'" + int72 + "' != '" + 0 + "'", int72 == 0);
+        org.junit.Assert.assertTrue("'" + int78 + "' != '" + 0 + "'", int78 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray79);
+        org.junit.Assert.assertNotNull(charSequenceTranslator80);
+        org.junit.Assert.assertNotNull(charSequenceTranslator82);
+        org.junit.Assert.assertNotNull(charSequenceTranslator83);
+    }
+
+    @Test
+    public void test957() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test957");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        java.io.Writer writer26 = null;
+        int int27 = lookupTranslator1.translate((java.lang.CharSequence) "FFFFFFFF", (int) '4', writer26);
+        java.lang.CharSequence[][] charSequenceArray28 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray28);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "", 0, writer32);
+        java.io.Writer writer36 = null;
+        int int37 = lookupTranslator29.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer36);
+        java.lang.CharSequence[][] charSequenceArray38 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator39 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray38);
+        java.io.Writer writer42 = null;
+        int int43 = lookupTranslator39.translate((java.lang.CharSequence) "", 0, writer42);
+        java.lang.String str45 = lookupTranslator39.translate((java.lang.CharSequence) "hi!");
+        java.io.Writer writer48 = null;
+        int int49 = lookupTranslator39.translate((java.lang.CharSequence) "hi!", (int) '4', writer48);
+        java.lang.CharSequence[][] charSequenceArray50 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator51 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray50);
+        java.io.Writer writer54 = null;
+        int int55 = lookupTranslator51.translate((java.lang.CharSequence) "", 0, writer54);
+        java.io.Writer writer58 = null;
+        int int59 = lookupTranslator51.translate((java.lang.CharSequence) "hi!", (int) (byte) 10, writer58);
+        java.lang.CharSequence[][] charSequenceArray60 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator61 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray60);
+        java.io.Writer writer64 = null;
+        int int65 = lookupTranslator61.translate((java.lang.CharSequence) "", 0, writer64);
+        java.lang.CharSequence[][] charSequenceArray66 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator67 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray66);
+        java.io.Writer writer70 = null;
+        int int71 = lookupTranslator67.translate((java.lang.CharSequence) "", 0, writer70);
+        java.io.Writer writer74 = null;
+        int int75 = lookupTranslator67.translate((java.lang.CharSequence) "", (int) '#', writer74);
+        java.lang.CharSequence[][] charSequenceArray76 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator77 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray76);
+        java.io.Writer writer80 = null;
+        int int81 = lookupTranslator77.translate((java.lang.CharSequence) "", 0, writer80);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray82 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator67, lookupTranslator77 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator83 = lookupTranslator61.with(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator84 = lookupTranslator51.with(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator85 = lookupTranslator39.with(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator86 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator87 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator88 = lookupTranslator29.with(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator89 = lookupTranslator1.with(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator90 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray82);
+        java.io.Writer writer93 = null;
+        int int94 = aggregateTranslator90.translate((java.lang.CharSequence) "64", (int) (byte) 100, writer93);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "hi!" + "'", str45, "hi!");
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertTrue("'" + int55 + "' != '" + 0 + "'", int55 == 0);
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
+        org.junit.Assert.assertTrue("'" + int65 + "' != '" + 0 + "'", int65 == 0);
+        org.junit.Assert.assertTrue("'" + int71 + "' != '" + 0 + "'", int71 == 0);
+        org.junit.Assert.assertTrue("'" + int75 + "' != '" + 0 + "'", int75 == 0);
+        org.junit.Assert.assertTrue("'" + int81 + "' != '" + 0 + "'", int81 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray82);
+        org.junit.Assert.assertNotNull(charSequenceTranslator83);
+        org.junit.Assert.assertNotNull(charSequenceTranslator84);
+        org.junit.Assert.assertNotNull(charSequenceTranslator85);
+        org.junit.Assert.assertNotNull(charSequenceTranslator88);
+        org.junit.Assert.assertNotNull(charSequenceTranslator89);
+        org.junit.Assert.assertTrue("'" + int94 + "' != '" + 0 + "'", int94 == 0);
+    }
+
+    @Test
+    public void test958() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test958");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.io.Writer writer4 = null;
+        int int5 = lookupTranslator1.translate((java.lang.CharSequence) "", 0, writer4);
+        java.lang.CharSequence[][] charSequenceArray6 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator7 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray6);
+        java.io.Writer writer10 = null;
+        int int11 = lookupTranslator7.translate((java.lang.CharSequence) "", 0, writer10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator7.translate((java.lang.CharSequence) "", (int) '#', writer14);
+        java.lang.CharSequence[][] charSequenceArray16 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator17 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray16);
+        java.io.Writer writer20 = null;
+        int int21 = lookupTranslator17.translate((java.lang.CharSequence) "", 0, writer20);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray22 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator7, lookupTranslator17 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator23 = lookupTranslator1.with(charSequenceTranslatorArray22);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator24 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray22);
+        java.io.Writer writer27 = null;
+        int int28 = aggregateTranslator24.translate((java.lang.CharSequence) "23", (int) (short) 0, writer27);
+        java.io.Writer writer31 = null;
+        int int32 = aggregateTranslator24.translate((java.lang.CharSequence) "hi!", (int) (short) 10, writer31);
+        java.io.Writer writer35 = null;
+        int int36 = aggregateTranslator24.translate((java.lang.CharSequence) "hi!", (int) (short) 0, writer35);
+        java.io.Writer writer39 = null;
+        int int40 = aggregateTranslator24.translate((java.lang.CharSequence) "34", 0, writer39);
+        java.io.Writer writer43 = null;
+        int int44 = aggregateTranslator24.translate((java.lang.CharSequence) "64", (int) '#', writer43);
+        java.io.Writer writer47 = null;
+        int int48 = aggregateTranslator24.translate((java.lang.CharSequence) "64", (int) (byte) 0, writer47);
+        java.io.Writer writer51 = null;
+        int int52 = aggregateTranslator24.translate((java.lang.CharSequence) "64", 10, writer51);
+        java.io.Writer writer55 = null;
+        int int56 = aggregateTranslator24.translate((java.lang.CharSequence) "34", (int) (short) 100, writer55);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray22);
+        org.junit.Assert.assertNotNull(charSequenceTranslator23);
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
+        org.junit.Assert.assertTrue("'" + int40 + "' != '" + 0 + "'", int40 == 0);
+        org.junit.Assert.assertTrue("'" + int44 + "' != '" + 0 + "'", int44 == 0);
+        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
+        org.junit.Assert.assertTrue("'" + int52 + "' != '" + 0 + "'", int52 == 0);
+        org.junit.Assert.assertTrue("'" + int56 + "' != '" + 0 + "'", int56 == 0);
+    }
+
+    @Test
+    public void test959() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test959");
+        java.lang.CharSequence[] charSequenceArray4 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray9 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray14 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[] charSequenceArray19 = new java.lang.CharSequence[] { "hi!", "hi!", "23", "hi!" };
+        java.lang.CharSequence[][] charSequenceArray20 = new java.lang.CharSequence[][] { charSequenceArray4, charSequenceArray9, charSequenceArray14, charSequenceArray19 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator22 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator23 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator24 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator25 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator26 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator27 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator28 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator29 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer32 = null;
+        int int33 = lookupTranslator29.translate((java.lang.CharSequence) "23", (int) 'a', writer32);
+        java.io.Writer writer36 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            int int37 = lookupTranslator29.translate((java.lang.CharSequence) "23", (-1), writer36);
+            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1");
+        } catch (java.lang.StringIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(charSequenceArray4);
+        org.junit.Assert.assertNotNull(charSequenceArray9);
+        org.junit.Assert.assertNotNull(charSequenceArray14);
+        org.junit.Assert.assertNotNull(charSequenceArray19);
+        org.junit.Assert.assertNotNull(charSequenceArray20);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+    }
+
+    @Test
+    public void test960() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test960");
+        java.lang.CharSequence[][] charSequenceArray0 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator1 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray0);
+        java.lang.CharSequence[][] charSequenceArray2 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator3 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray2);
+        java.lang.CharSequence[][] charSequenceArray4 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator5 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray4);
+        java.io.Writer writer8 = null;
+        int int9 = lookupTranslator5.translate((java.lang.CharSequence) "", 0, writer8);
+        java.lang.CharSequence[][] charSequenceArray10 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator11 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray10);
+        java.io.Writer writer14 = null;
+        int int15 = lookupTranslator11.translate((java.lang.CharSequence) "", 0, writer14);
+        java.io.Writer writer18 = null;
+        int int19 = lookupTranslator11.translate((java.lang.CharSequence) "", (int) '#', writer18);
+        java.lang.CharSequence[][] charSequenceArray20 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator21 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray20);
+        java.io.Writer writer24 = null;
+        int int25 = lookupTranslator21.translate((java.lang.CharSequence) "", 0, writer24);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray26 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator11, lookupTranslator21 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator27 = lookupTranslator5.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator28 = lookupTranslator3.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator29 = lookupTranslator1.with(charSequenceTranslatorArray26);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator30 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray26);
+        java.lang.String str32 = aggregateTranslator30.translate((java.lang.CharSequence) "23");
+        java.lang.CharSequence[] charSequenceArray37 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
+        java.lang.CharSequence[] charSequenceArray42 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
+        java.lang.CharSequence[] charSequenceArray47 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
+        java.lang.CharSequence[] charSequenceArray52 = new java.lang.CharSequence[] { "A", "1", "A", "0" };
+        java.lang.CharSequence[][] charSequenceArray53 = new java.lang.CharSequence[][] { charSequenceArray37, charSequenceArray42, charSequenceArray47, charSequenceArray52 };
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator54 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray53);
+        java.lang.CharSequence[][] charSequenceArray55 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator56 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray55);
+        java.io.Writer writer59 = null;
+        int int60 = lookupTranslator56.translate((java.lang.CharSequence) "", 0, writer59);
+        java.lang.CharSequence[][] charSequenceArray61 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator62 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray61);
+        java.io.Writer writer65 = null;
+        int int66 = lookupTranslator62.translate((java.lang.CharSequence) "", 0, writer65);
+        java.io.Writer writer69 = null;
+        int int70 = lookupTranslator62.translate((java.lang.CharSequence) "", (int) '#', writer69);
+        java.lang.CharSequence[][] charSequenceArray71 = null;
+        org.apache.commons.lang3.text.translate.LookupTranslator lookupTranslator72 = new org.apache.commons.lang3.text.translate.LookupTranslator(charSequenceArray71);
+        java.io.Writer writer75 = null;
+        int int76 = lookupTranslator72.translate((java.lang.CharSequence) "", 0, writer75);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray77 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] { lookupTranslator62, lookupTranslator72 };
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator78 = lookupTranslator56.with(charSequenceTranslatorArray77);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator79 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray77);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator80 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray77);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator81 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray77);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator[] charSequenceTranslatorArray82 = new org.apache.commons.lang3.text.translate.CharSequenceTranslator[] {};
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator83 = aggregateTranslator81.with(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.AggregateTranslator aggregateTranslator84 = new org.apache.commons.lang3.text.translate.AggregateTranslator(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator85 = lookupTranslator54.with(charSequenceTranslatorArray82);
+        org.apache.commons.lang3.text.translate.CharSequenceTranslator charSequenceTranslator86 = aggregateTranslator30.with(charSequenceTranslatorArray82);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 0 + "'", int19 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray26);
+        org.junit.Assert.assertNotNull(charSequenceTranslator27);
+        org.junit.Assert.assertNotNull(charSequenceTranslator28);
+        org.junit.Assert.assertNotNull(charSequenceTranslator29);
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "23" + "'", str32, "23");
+        org.junit.Assert.assertNotNull(charSequenceArray37);
+        org.junit.Assert.assertNotNull(charSequenceArray42);
+        org.junit.Assert.assertNotNull(charSequenceArray47);
+        org.junit.Assert.assertNotNull(charSequenceArray52);
+        org.junit.Assert.assertNotNull(charSequenceArray53);
+        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 0 + "'", int60 == 0);
+        org.junit.Assert.assertTrue("'" + int66 + "' != '" + 0 + "'", int66 == 0);
+        org.junit.Assert.assertTrue("'" + int70 + "' != '" + 0 + "'", int70 == 0);
+        org.junit.Assert.assertTrue("'" + int76 + "' != '" + 0 + "'", int76 == 0);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray77);
+        org.junit.Assert.assertNotNull(charSequenceTranslator78);
+        org.junit.Assert.assertNotNull(charSequenceTranslatorArray82);
+        org.junit.Assert.assertNotNull(charSequenceTranslator83);
+        org.junit.Assert.assertNotNull(charSequenceTranslator85);
+        org.junit.Assert.assertNotNull(charSequenceTranslator86);
     }
 }
 

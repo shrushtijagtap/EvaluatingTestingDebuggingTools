@@ -9479,5 +9479,294 @@ public class RandoopErrorTest0 {
         boolean boolean21 = xYIntervalSeriesCollection0.hasListener(eventListener20);
         org.junit.Assert.assertTrue("Contract failed: equals-hashcode on obj3 and obj19", obj3.equals(obj19) ? obj3.hashCode() == obj19.hashCode() : true);
     }
+
+    @Test
+    public void test276() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test276");
+        org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
+        org.jfree.data.general.Dataset dataset2 = null;
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent4 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-1L), dataset2, datasetChangeInfo3);
+        xYIntervalSeriesCollection0.notifyListeners(datasetChangeEvent4);
+        org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState6 = xYIntervalSeriesCollection0.getSelectionState();
+        int int8 = xYIntervalSeriesCollection0.indexOf((java.lang.Comparable) 10.0f);
+        org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState9 = null;
+        xYIntervalSeriesCollection0.setSelectionState(xYDatasetSelectionState9);
+        org.jfree.data.xy.XYIntervalSeries xYIntervalSeries12 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 32.0d);
+        xYIntervalSeriesCollection0.removeSeries(xYIntervalSeries12);
+        boolean boolean14 = org.jfree.data.general.DatasetUtilities.isEmptyOrNull((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
+        int int15 = xYIntervalSeriesCollection0.getSeriesCount();
+        org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection16 = new org.jfree.data.xy.XYIntervalSeriesCollection();
+        org.jfree.data.general.Dataset dataset18 = null;
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo19 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent20 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-1L), dataset18, datasetChangeInfo19);
+        xYIntervalSeriesCollection16.notifyListeners(datasetChangeEvent20);
+        org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState22 = xYIntervalSeriesCollection16.getSelectionState();
+        org.jfree.data.event.DatasetChangeListener datasetChangeListener23 = null;
+        xYIntervalSeriesCollection16.removeChangeListener(datasetChangeListener23);
+        org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState25 = xYIntervalSeriesCollection16.getSelectionState();
+        org.jfree.data.event.SeriesChangeEvent seriesChangeEvent26 = new org.jfree.data.event.SeriesChangeEvent((java.lang.Object) xYIntervalSeriesCollection16);
+        xYIntervalSeriesCollection0.seriesChanged(seriesChangeEvent26);
+        org.jfree.data.general.SeriesChangeInfo seriesChangeInfo28 = seriesChangeEvent26.getSummary();
+        org.junit.Assert.assertTrue("Contract failed: equals-hashcode on xYIntervalSeriesCollection0 and xYIntervalSeriesCollection16", xYIntervalSeriesCollection0.equals(xYIntervalSeriesCollection16) ? xYIntervalSeriesCollection0.hashCode() == xYIntervalSeriesCollection16.hashCode() : true);
+    }
+
+    @Test
+    public void test277() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test277");
+        java.lang.Number[] numberArray4 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray7 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray10 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray13 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray16 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray19 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray20 = new java.lang.Number[][] { numberArray4, numberArray7, numberArray10, numberArray13, numberArray16, numberArray19 };
+        org.jfree.data.category.CategoryDataset categoryDataset21 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray20);
+        org.jfree.data.pie.PieDataset pieDataset23 = org.jfree.data.general.DatasetUtilities.createPieDatasetForRow(categoryDataset21, 1);
+        org.jfree.data.pie.PieDatasetSelectionState pieDatasetSelectionState24 = pieDataset23.getSelectionState();
+        org.jfree.data.pie.PieDataset pieDataset28 = org.jfree.data.general.DatasetUtilities.createConsolidatedPieDataset(pieDataset23, (java.lang.Comparable) 'a', (double) 10.0f, (int) (short) 10);
+        java.util.List list29 = pieDataset28.getKeys();
+        org.jfree.data.pie.PieDataset pieDataset33 = org.jfree.data.general.DatasetUtilities.createConsolidatedPieDataset(pieDataset28, (java.lang.Comparable) 100.0f, (double) (-1L), (-1));
+        boolean boolean34 = org.jfree.data.general.DatasetUtilities.isEmptyOrNull(pieDataset33);
+        org.junit.Assert.assertTrue("Contract failed: equals-hashcode on pieDataset23 and pieDataset28", pieDataset23.equals(pieDataset28) ? pieDataset23.hashCode() == pieDataset28.hashCode() : true);
+    }
+
+    @Test
+    public void test278() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test278");
+        java.lang.Number[] numberArray5 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray8 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray17 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray20 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray21 = new java.lang.Number[][] { numberArray5, numberArray8, numberArray11, numberArray14, numberArray17, numberArray20 };
+        org.jfree.data.category.CategoryDataset categoryDataset22 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray21);
+        java.util.List list23 = categoryDataset22.getRowKeys();
+        org.jfree.data.Range range25 = org.jfree.data.general.DatasetUtilities.findRangeBounds(categoryDataset22, false);
+        int int27 = categoryDataset22.getColumnIndex((java.lang.Comparable) (-1L));
+        org.jfree.data.general.Dataset dataset29 = null;
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo30 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent31 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-1L), dataset29, datasetChangeInfo30);
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent32 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) 10L, (org.jfree.data.general.Dataset) categoryDataset22, datasetChangeInfo30);
+        org.jfree.data.Range range33 = org.jfree.data.general.DatasetUtilities.findRangeBounds(categoryDataset22);
+        org.jfree.data.event.DatasetChangeListener datasetChangeListener34 = null;
+        categoryDataset22.removeChangeListener(datasetChangeListener34);
+        java.util.List list36 = categoryDataset22.getColumnKeys();
+        org.jfree.data.Range range38 = org.jfree.data.general.DatasetUtilities.iterateRangeBounds(categoryDataset22, true);
+        org.jfree.data.Range range39 = org.jfree.data.general.DatasetUtilities.findStackedRangeBounds(categoryDataset22);
+        java.lang.Number[] numberArray48 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray51 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray54 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray57 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray60 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray63 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray64 = new java.lang.Number[][] { numberArray48, numberArray51, numberArray54, numberArray57, numberArray60, numberArray63 };
+        org.jfree.data.category.CategoryDataset categoryDataset65 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray64);
+        org.jfree.data.category.CategoryDataset categoryDataset66 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "hi!", numberArray64);
+        org.jfree.data.category.CategoryDataset categoryDataset67 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("", "org.jfree.data.event.SeriesChangeEvent[source= ]", numberArray64);
+        java.lang.Comparable comparable69 = categoryDataset67.getRowKey((int) (short) 1);
+        java.lang.Number number70 = org.jfree.data.general.DatasetUtilities.findMinimumRangeValue(categoryDataset67);
+        org.jfree.data.Range range72 = org.jfree.data.general.DatasetUtilities.findStackedRangeBounds(categoryDataset67, (double) 0.0f);
+        org.jfree.data.Range range73 = org.jfree.data.Range.combine(range39, range72);
+        org.junit.Assert.assertTrue("Contract failed: equals-hashcode on categoryDataset22 and categoryDataset65", categoryDataset22.equals(categoryDataset65) ? categoryDataset22.hashCode() == categoryDataset65.hashCode() : true);
+    }
+
+    @Test
+    public void test279() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test279");
+        org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
+        org.jfree.data.general.Dataset dataset2 = null;
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent4 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-1L), dataset2, datasetChangeInfo3);
+        xYIntervalSeriesCollection0.notifyListeners(datasetChangeEvent4);
+        org.jfree.data.xy.XYIntervalSeries xYIntervalSeries9 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
+        xYIntervalSeries9.setMaximumItemCount((int) ' ');
+        org.jfree.data.Range range13 = null;
+        org.jfree.data.Range range15 = org.jfree.data.Range.expandToInclude(range13, (double) 100);
+        double double17 = range15.constrain((double) '4');
+        double double18 = range15.getLength();
+        org.jfree.data.Range range19 = null;
+        org.jfree.data.Range range21 = org.jfree.data.Range.expandToInclude(range19, (double) 100);
+        double double23 = range21.constrain((double) '4');
+        boolean boolean24 = range15.intersects(range21);
+        org.jfree.data.xy.XYIntervalSeries xYIntervalSeries28 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
+        xYIntervalSeries28.setMaximumItemCount((int) ' ');
+        org.jfree.data.general.SeriesChangeInfo seriesChangeInfo31 = null;
+        org.jfree.data.event.SeriesChangeEvent seriesChangeEvent32 = new org.jfree.data.event.SeriesChangeEvent((java.lang.Object) ' ', seriesChangeInfo31);
+        xYIntervalSeries9.firePropertyChange("", (java.lang.Object) boolean24, (java.lang.Object) ' ');
+        xYIntervalSeriesCollection0.removeSeries(xYIntervalSeries9);
+        xYIntervalSeries9.fireSeriesChanged();
+        boolean boolean36 = xYIntervalSeries9.getAllowDuplicateXValues();
+        java.lang.Number[] numberArray41 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray44 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray47 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray50 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray53 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray56 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray57 = new java.lang.Number[][] { numberArray41, numberArray44, numberArray47, numberArray50, numberArray53, numberArray56 };
+        org.jfree.data.category.CategoryDataset categoryDataset58 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray57);
+        org.jfree.data.pie.PieDataset pieDataset60 = org.jfree.data.general.DatasetUtilities.createPieDatasetForRow(categoryDataset58, 1);
+        org.jfree.data.pie.PieDatasetSelectionState pieDatasetSelectionState61 = pieDataset60.getSelectionState();
+        org.jfree.data.pie.PieDataset pieDataset65 = org.jfree.data.general.DatasetUtilities.createConsolidatedPieDataset(pieDataset60, (java.lang.Comparable) 'a', (double) 10.0f, (int) (short) 10);
+        java.lang.Number number67 = pieDataset65.getValue((int) (short) 100);
+        org.jfree.data.pie.PieDataset pieDataset70 = org.jfree.data.general.DatasetUtilities.createConsolidatedPieDataset(pieDataset65, (java.lang.Comparable) 'a', (double) 100L);
+        boolean boolean71 = xYIntervalSeries9.equals((java.lang.Object) pieDataset65);
+        boolean boolean72 = xYIntervalSeries9.getAutoSort();
+        org.junit.Assert.assertTrue("Contract failed: equals-hashcode on pieDataset60 and pieDataset65", pieDataset60.equals(pieDataset65) ? pieDataset60.hashCode() == pieDataset65.hashCode() : true);
+    }
+
+    @Test
+    public void test280() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test280");
+        org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem6 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
+        int int8 = xYIntervalDataItem6.compareTo((java.lang.Object) 1.0f);
+        double double9 = xYIntervalDataItem6.getXHighValue();
+        java.lang.Object obj10 = xYIntervalDataItem6.clone();
+        boolean boolean12 = xYIntervalDataItem6.equals((java.lang.Object) 0);
+        java.lang.Number[] numberArray17 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray20 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray23 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray26 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray29 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray32 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray33 = new java.lang.Number[][] { numberArray17, numberArray20, numberArray23, numberArray26, numberArray29, numberArray32 };
+        org.jfree.data.category.CategoryDataset categoryDataset34 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray33);
+        org.jfree.data.pie.PieDataset pieDataset36 = org.jfree.data.general.DatasetUtilities.createPieDatasetForRow(categoryDataset34, 1);
+        org.jfree.data.pie.PieDatasetSelectionState pieDatasetSelectionState37 = pieDataset36.getSelectionState();
+        org.jfree.data.pie.PieDataset pieDataset41 = org.jfree.data.general.DatasetUtilities.createConsolidatedPieDataset(pieDataset36, (java.lang.Comparable) (short) 0, (double) (short) 100, (int) ' ');
+        org.jfree.data.category.CategoryDataset categoryDataset42 = org.jfree.data.general.DatasetUtilities.createCategoryDataset((java.lang.Comparable) xYIntervalDataItem6, (org.jfree.data.KeyedValues) pieDataset41);
+        boolean boolean43 = org.jfree.data.general.DatasetUtilities.isEmptyOrNull(pieDataset41);
+        org.jfree.data.xy.XYIntervalDataItem xYIntervalDataItem50 = new org.jfree.data.xy.XYIntervalDataItem((double) (-1L), (double) (short) 1, (double) (byte) 100, (double) 0L, (double) (short) 100, (double) 100.0f);
+        int int52 = xYIntervalDataItem50.compareTo((java.lang.Object) 1.0f);
+        boolean boolean54 = xYIntervalDataItem50.equals((java.lang.Object) 32);
+        double double55 = xYIntervalDataItem50.getYValue();
+        org.jfree.data.pie.PieDataset pieDataset58 = org.jfree.data.general.DatasetUtilities.createConsolidatedPieDataset(pieDataset41, (java.lang.Comparable) xYIntervalDataItem50, (double) (byte) 1, (int) (short) 0);
+        java.lang.Object obj59 = null;
+        boolean boolean60 = xYIntervalDataItem50.equals(obj59);
+        org.junit.Assert.assertTrue("Contract failed: equals-hashcode on pieDataset36 and pieDataset41", pieDataset36.equals(pieDataset41) ? pieDataset36.hashCode() == pieDataset41.hashCode() : true);
+    }
+
+    @Test
+    public void test281() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test281");
+        org.jfree.data.xy.XYInterval xYInterval5 = new org.jfree.data.xy.XYInterval((double) (byte) 10, (double) 'a', (double) (-1L), (double) (byte) 100, (double) 100);
+        double double6 = xYInterval5.getXLow();
+        java.lang.Number[] numberArray11 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray14 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray17 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray20 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray23 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray26 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray27 = new java.lang.Number[][] { numberArray11, numberArray14, numberArray17, numberArray20, numberArray23, numberArray26 };
+        org.jfree.data.category.CategoryDataset categoryDataset28 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray27);
+        java.util.List list29 = categoryDataset28.getRowKeys();
+        org.jfree.data.Range range31 = org.jfree.data.general.DatasetUtilities.findRangeBounds(categoryDataset28, false);
+        boolean boolean32 = org.jfree.data.general.DatasetUtilities.isEmptyOrNull(categoryDataset28);
+        org.jfree.data.Range range34 = org.jfree.data.general.DatasetUtilities.iterateRangeBounds(categoryDataset28, true);
+        boolean boolean36 = range34.contains((double) (byte) 1);
+        org.jfree.data.Range range39 = org.jfree.data.Range.shift(range34, 1.0d, true);
+        org.jfree.data.Range range40 = null;
+        org.jfree.data.Range range42 = org.jfree.data.Range.expandToInclude(range40, (double) 100);
+        double double44 = range42.constrain((double) '4');
+        org.jfree.data.Range range47 = org.jfree.data.Range.shift(range42, (double) (byte) 1, false);
+        org.jfree.data.Range range48 = org.jfree.data.Range.combine(range34, range47);
+        org.jfree.data.Range range49 = null;
+        org.jfree.data.Range range51 = org.jfree.data.Range.expandToInclude(range49, (double) 100);
+        double double53 = range51.constrain((double) '4');
+        double double54 = range51.getLength();
+        org.jfree.data.Range range57 = org.jfree.data.Range.shift(range51, (double) 100, false);
+        org.jfree.data.Range range58 = org.jfree.data.Range.combine(range47, range51);
+        org.jfree.data.event.SeriesChangeEvent seriesChangeEvent59 = new org.jfree.data.event.SeriesChangeEvent((java.lang.Object) range47);
+        org.jfree.data.general.SeriesChangeInfo seriesChangeInfo60 = null;
+        seriesChangeEvent59.setSummary(seriesChangeInfo60);
+        boolean boolean62 = xYInterval5.equals((java.lang.Object) seriesChangeEvent59);
+        java.lang.Number[] numberArray67 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray70 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray73 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray76 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray79 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[] numberArray82 = new java.lang.Number[] { (short) -1, 32 };
+        java.lang.Number[][] numberArray83 = new java.lang.Number[][] { numberArray67, numberArray70, numberArray73, numberArray76, numberArray79, numberArray82 };
+        org.jfree.data.category.CategoryDataset categoryDataset84 = org.jfree.data.general.DatasetUtilities.createCategoryDataset("hi!", "", numberArray83);
+        org.jfree.data.pie.PieDataset pieDataset86 = org.jfree.data.general.DatasetUtilities.createPieDatasetForRow(categoryDataset84, 1);
+        org.jfree.data.pie.PieDatasetSelectionState pieDatasetSelectionState87 = pieDataset86.getSelectionState();
+        org.jfree.data.pie.PieDataset pieDataset91 = org.jfree.data.general.DatasetUtilities.createConsolidatedPieDataset(pieDataset86, (java.lang.Comparable) 'a', (double) 10.0f, (int) (short) 10);
+        java.lang.Number number93 = pieDataset91.getValue((int) (short) 100);
+        boolean boolean94 = xYInterval5.equals((java.lang.Object) (short) 100);
+        org.junit.Assert.assertTrue("Contract failed: equals-hashcode on categoryDataset28 and categoryDataset84", categoryDataset28.equals(categoryDataset84) ? categoryDataset28.hashCode() == categoryDataset84.hashCode() : true);
+    }
+
+    @Test
+    public void test282() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test282");
+        org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
+        org.jfree.data.DomainOrder domainOrder1 = xYIntervalSeriesCollection0.getDomainOrder();
+        org.jfree.data.DomainOrder domainOrder2 = xYIntervalSeriesCollection0.getDomainOrder();
+        java.lang.Object obj3 = xYIntervalSeriesCollection0.clone();
+        java.lang.Object obj4 = xYIntervalSeriesCollection0.clone();
+        org.jfree.data.Range range6 = org.jfree.data.general.DatasetUtilities.findDomainBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0, false);
+        org.junit.Assert.assertTrue("Contract failed: equals-hashcode on obj3 and obj4", obj3.equals(obj4) ? obj3.hashCode() == obj4.hashCode() : true);
+    }
+
+    @Test
+    public void test283() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test283");
+        org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection0 = new org.jfree.data.xy.XYIntervalSeriesCollection();
+        org.jfree.data.general.Dataset dataset2 = null;
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo3 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent4 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-1L), dataset2, datasetChangeInfo3);
+        xYIntervalSeriesCollection0.notifyListeners(datasetChangeEvent4);
+        org.jfree.data.Range range6 = org.jfree.data.general.DatasetUtilities.iterateRangeBounds((org.jfree.data.xy.XYDataset) xYIntervalSeriesCollection0);
+        int int7 = xYIntervalSeriesCollection0.getSeriesCount();
+        org.jfree.data.general.DatasetGroup datasetGroup8 = xYIntervalSeriesCollection0.getGroup();
+        org.jfree.data.xy.XYIntervalSeriesCollection xYIntervalSeriesCollection9 = new org.jfree.data.xy.XYIntervalSeriesCollection();
+        org.jfree.data.general.Dataset dataset11 = null;
+        org.jfree.chart.event.DatasetChangeInfo datasetChangeInfo12 = new org.jfree.chart.event.DatasetChangeInfo();
+        org.jfree.data.event.DatasetChangeEvent datasetChangeEvent13 = new org.jfree.data.event.DatasetChangeEvent((java.lang.Object) (-1L), dataset11, datasetChangeInfo12);
+        xYIntervalSeriesCollection9.notifyListeners(datasetChangeEvent13);
+        org.jfree.data.xy.XYDatasetSelectionState xYDatasetSelectionState15 = xYIntervalSeriesCollection9.getSelectionState();
+        int int17 = xYIntervalSeriesCollection9.indexOf((java.lang.Comparable) 10.0f);
+        java.lang.Object obj18 = xYIntervalSeriesCollection9.clone();
+        int int19 = xYIntervalSeriesCollection9.getSeriesCount();
+        org.jfree.data.xy.XYIntervalSeries xYIntervalSeries23 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
+        boolean boolean24 = xYIntervalSeries23.getNotify();
+        int int25 = xYIntervalSeries23.getItemCount();
+        boolean boolean26 = xYIntervalSeries23.getAutoSort();
+        xYIntervalSeries23.fireSeriesChanged();
+        org.jfree.data.xy.XYIntervalSeries xYIntervalSeries32 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
+        java.lang.Object obj34 = null;
+        xYIntervalSeries32.firePropertyChange("", obj34, (java.lang.Object) "hi!");
+        org.jfree.data.xy.XYIntervalSeries xYIntervalSeries40 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
+        xYIntervalSeries40.setMaximumItemCount((int) ' ');
+        org.jfree.data.Range range44 = null;
+        org.jfree.data.Range range46 = org.jfree.data.Range.expandToInclude(range44, (double) 100);
+        double double48 = range46.constrain((double) '4');
+        double double49 = range46.getLength();
+        org.jfree.data.Range range50 = null;
+        org.jfree.data.Range range52 = org.jfree.data.Range.expandToInclude(range50, (double) 100);
+        double double54 = range52.constrain((double) '4');
+        boolean boolean55 = range46.intersects(range52);
+        org.jfree.data.xy.XYIntervalSeries xYIntervalSeries59 = new org.jfree.data.xy.XYIntervalSeries((java.lang.Comparable) 10, false, false);
+        xYIntervalSeries59.setMaximumItemCount((int) ' ');
+        org.jfree.data.general.SeriesChangeInfo seriesChangeInfo62 = null;
+        org.jfree.data.event.SeriesChangeEvent seriesChangeEvent63 = new org.jfree.data.event.SeriesChangeEvent((java.lang.Object) ' ', seriesChangeInfo62);
+        xYIntervalSeries40.firePropertyChange("", (java.lang.Object) boolean55, (java.lang.Object) ' ');
+        xYIntervalSeries40.fireSeriesChanged();
+        xYIntervalSeries23.firePropertyChange("org.jfree.data.event.DatasetChangeEvent[source=-1]", (java.lang.Object) "hi!", (java.lang.Object) xYIntervalSeries40);
+        xYIntervalSeriesCollection9.removeSeries(xYIntervalSeries23);
+        boolean boolean68 = xYIntervalSeriesCollection0.hasListener((java.util.EventListener) xYIntervalSeriesCollection9);
+        org.jfree.data.event.DatasetChangeListener datasetChangeListener69 = null;
+        xYIntervalSeriesCollection0.removeChangeListener(datasetChangeListener69);
+        org.junit.Assert.assertTrue("Contract failed: equals-hashcode on xYIntervalSeriesCollection9 and obj18", xYIntervalSeriesCollection9.equals(obj18) ? xYIntervalSeriesCollection9.hashCode() == obj18.hashCode() : true);
+    }
 }
 

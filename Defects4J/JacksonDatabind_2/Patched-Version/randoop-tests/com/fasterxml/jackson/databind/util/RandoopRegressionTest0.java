@@ -18,36 +18,6 @@ public class RandoopRegressionTest0 {
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
         com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
-        com.fasterxml.jackson.databind.introspect.NopAnnotationIntrospector nopAnnotationIntrospector5 = com.fasterxml.jackson.databind.introspect.NopAnnotationIntrospector.instance;
-        java.lang.reflect.Field field6 = null;
-        com.fasterxml.jackson.databind.introspect.AnnotationMap annotationMap7 = new com.fasterxml.jackson.databind.introspect.AnnotationMap();
-        com.fasterxml.jackson.databind.introspect.AnnotatedField annotatedField8 = new com.fasterxml.jackson.databind.introspect.AnnotatedField(field6, annotationMap7);
-        com.fasterxml.jackson.databind.introspect.AnnotationMap annotationMap9 = null;
-        com.fasterxml.jackson.databind.introspect.Annotated annotated10 = annotatedField8.withAnnotations(annotationMap9);
-        com.fasterxml.jackson.annotation.JsonInclude.Include include11 = null;
-        com.fasterxml.jackson.annotation.JsonInclude.Include include12 = nopAnnotationIntrospector5.findSerializationInclusion(annotated10, include11);
-        java.lang.reflect.Field field13 = null;
-        com.fasterxml.jackson.databind.introspect.AnnotationMap annotationMap14 = new com.fasterxml.jackson.databind.introspect.AnnotationMap();
-        com.fasterxml.jackson.databind.introspect.AnnotatedField annotatedField15 = new com.fasterxml.jackson.databind.introspect.AnnotatedField(field13, annotationMap14);
-        java.lang.Object obj16 = nopAnnotationIntrospector5.findFilterId((com.fasterxml.jackson.databind.introspect.Annotated) annotatedField15);
-        tokenBuffer4.writeObjectId((java.lang.Object) annotatedField15);
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertNotNull(jsonFactory3);
-        org.junit.Assert.assertNotNull(nopAnnotationIntrospector5);
-        org.junit.Assert.assertNotNull(annotated10);
-        org.junit.Assert.assertNull(include12);
-        org.junit.Assert.assertNull(obj16);
-    }
-
-    @Test
-    public void test02() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test02");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
-        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
         boolean boolean5 = tokenBuffer4._closed;
         boolean boolean6 = tokenBuffer4.canWriteObjectId();
         com.fasterxml.jackson.core.SerializableString serializableString7 = null;
@@ -65,9 +35,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test03() throws Throwable {
+    public void test02() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test03");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test02");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
         com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
@@ -92,28 +62,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test04() throws Throwable {
+    public void test03() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test04");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
-        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
-        boolean boolean5 = tokenBuffer4._closed;
-        boolean boolean6 = tokenBuffer4.canWriteObjectId();
-        java.lang.Object obj7 = tokenBuffer4.getOutputTarget();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertNotNull(jsonFactory3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNull(obj7);
-    }
-
-    @Test
-    public void test05() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test05");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test03");
         com.fasterxml.jackson.databind.ser.std.StdJdkSerializers.AtomicLongSerializer atomicLongSerializer0 = new com.fasterxml.jackson.databind.ser.std.StdJdkSerializers.AtomicLongSerializer();
         boolean boolean1 = atomicLongSerializer0.isUnwrappingSerializer();
         java.lang.Class<java.util.concurrent.atomic.AtomicLong> atomicLongClass2 = atomicLongSerializer0.handledType();
@@ -203,9 +154,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test06() throws Throwable {
+    public void test04() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test06");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test04");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
         com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
@@ -246,9 +197,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test07() throws Throwable {
+    public void test05() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test07");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test05");
         java.text.DateFormat dateFormat0 = java.text.DateFormat.getDateTimeInstance();
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = null;
         com.fasterxml.jackson.databind.ObjectMapper objectMapper2 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory1);
@@ -294,9 +245,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test08() throws Throwable {
+    public void test06() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test08");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test06");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
         com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
@@ -318,9 +269,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test09() throws Throwable {
+    public void test07() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test09");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test07");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
         com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
@@ -336,9 +287,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test10() throws Throwable {
+    public void test08() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test10");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test08");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
         com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
@@ -354,54 +305,9 @@ public class RandoopRegressionTest0 {
     }
 
     @Test
-    public void test11() throws Throwable {
+    public void test09() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test11");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
-        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
-        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
-        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment5 = new com.fasterxml.jackson.databind.util.TokenBuffer.Segment();
-        java.lang.Object obj7 = segment5.get(12);
-        com.fasterxml.jackson.databind.node.BooleanNode booleanNode10 = com.fasterxml.jackson.databind.node.BooleanNode.valueOf(true);
-        com.fasterxml.jackson.core.JsonToken jsonToken11 = booleanNode10.asToken();
-        com.fasterxml.jackson.databind.node.IntNode intNode13 = new com.fasterxml.jackson.databind.node.IntNode(0);
-        java.math.BigDecimal bigDecimal14 = intNode13.decimalValue();
-        boolean boolean15 = intNode13.isContainerNode();
-        long long16 = intNode13.longValue();
-        com.fasterxml.jackson.databind.node.JsonNodeType jsonNodeType17 = intNode13.getNodeType();
-        com.fasterxml.jackson.databind.cfg.ContextAttributes contextAttributes18 = com.fasterxml.jackson.databind.cfg.ContextAttributes.Impl.getEmpty();
-        java.lang.Object obj19 = null;
-        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment20 = segment5.append(0, jsonToken11, (java.lang.Object) jsonNodeType17, (java.lang.Object) contextAttributes18, obj19);
-        java.util.TreeMap<java.lang.Integer, java.lang.Object> intMap21 = segment5._nativeIds;
-        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment22 = segment5.next();
-        long long23 = segment5._tokenTypes;
-        tokenBuffer4._first = segment5;
-        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment25 = tokenBuffer4._first;
-        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment26 = segment25._next;
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertNotNull(jsonFactory3);
-        org.junit.Assert.assertNull(obj7);
-        org.junit.Assert.assertNotNull(booleanNode10);
-        org.junit.Assert.assertTrue("'" + jsonToken11 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken11.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertNotNull(bigDecimal14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + long16 + "' != '" + 0L + "'", long16 == 0L);
-        org.junit.Assert.assertTrue("'" + jsonNodeType17 + "' != '" + com.fasterxml.jackson.databind.node.JsonNodeType.NUMBER + "'", jsonNodeType17.equals(com.fasterxml.jackson.databind.node.JsonNodeType.NUMBER));
-        org.junit.Assert.assertNotNull(contextAttributes18);
-        org.junit.Assert.assertNull(segment20);
-        org.junit.Assert.assertNotNull(intMap21);
-        org.junit.Assert.assertNull(segment22);
-        org.junit.Assert.assertTrue("'" + long23 + "' != '" + 10L + "'", long23 == 10L);
-        org.junit.Assert.assertNotNull(segment25);
-        org.junit.Assert.assertNull(segment26);
-    }
-
-    @Test
-    public void test12() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest0.test12");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test09");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
         com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
@@ -441,6 +347,281 @@ public class RandoopRegressionTest0 {
         org.junit.Assert.assertTrue("'" + defaultTyping17 + "' != '" + com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS + "'", defaultTyping17.equals(com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS));
         org.junit.Assert.assertNotNull(objectMapper19);
         org.junit.Assert.assertNotNull(objectMapper21);
+    }
+
+    @Test
+    public void test10() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test10");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
+        boolean boolean5 = tokenBuffer4._closed;
+        boolean boolean6 = tokenBuffer4._hasNativeObjectIds;
+        tokenBuffer4._appendAt = (short) 10;
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertNotNull(jsonFactory3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+    }
+
+    @Test
+    public void test11() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test11");
+        java.math.BigInteger bigInteger0 = null;
+        com.fasterxml.jackson.databind.node.BigIntegerNode bigIntegerNode1 = com.fasterxml.jackson.databind.node.BigIntegerNode.valueOf(bigInteger0);
+        java.lang.Number number2 = bigIntegerNode1.numberValue();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper4 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory3);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = objectMapper4.getJsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = objectMapper4.getJsonFactory();
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer7 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper4);
+        boolean boolean8 = tokenBuffer7._closed;
+        tokenBuffer7.writeNumber((short) -1);
+        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment11 = new com.fasterxml.jackson.databind.util.TokenBuffer.Segment();
+        long long12 = segment11._tokenTypes;
+        tokenBuffer7._last = segment11;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper15 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory14);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = objectMapper15.getJsonFactory();
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter17 = objectMapper15.writerWithDefaultPrettyPrinter();
+        com.fasterxml.jackson.core.FormatSchema formatSchema18 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter19 = objectMapper15.writer(formatSchema18);
+        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping20 = com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper22 = objectMapper15.enableDefaultTypingAsProperty(defaultTyping20, "hi!");
+        com.fasterxml.jackson.databind.PropertyNamingStrategy propertyNamingStrategy23 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper24 = objectMapper22.setPropertyNamingStrategy(propertyNamingStrategy23);
+        tokenBuffer7._objectId = objectMapper24;
+        com.fasterxml.jackson.databind.ser.std.NumberSerializer numberSerializer26 = new com.fasterxml.jackson.databind.ser.std.NumberSerializer();
+        com.fasterxml.jackson.databind.SerializerProvider serializerProvider27 = null;
+        com.fasterxml.jackson.databind.PropertyName propertyName28 = null;
+        com.fasterxml.jackson.databind.JavaType javaType29 = com.fasterxml.jackson.databind.type.TypeBindings.UNBOUND;
+        com.fasterxml.jackson.databind.BeanProperty beanProperty30 = null;
+        com.fasterxml.jackson.databind.ser.std.EnumSetSerializer enumSetSerializer31 = new com.fasterxml.jackson.databind.ser.std.EnumSetSerializer(javaType29, beanProperty30);
+        com.fasterxml.jackson.databind.node.IntNode intNode33 = new com.fasterxml.jackson.databind.node.IntNode(0);
+        java.util.Spliterator<com.fasterxml.jackson.databind.JsonNode> jsonNodeSpliterator34 = intNode33.spliterator();
+        java.util.List<java.lang.String> strList36 = null;
+        java.util.List<java.lang.String> strList37 = intNode33.findValuesAsText("hi!", strList36);
+        com.fasterxml.jackson.databind.JavaType javaType38 = javaType29.withValueHandler((java.lang.Object) intNode33);
+        com.fasterxml.jackson.databind.PropertyName propertyName39 = null;
+        com.fasterxml.jackson.databind.util.Annotations annotations40 = null;
+        java.lang.reflect.Field field41 = null;
+        com.fasterxml.jackson.databind.introspect.AnnotationMap annotationMap42 = new com.fasterxml.jackson.databind.introspect.AnnotationMap();
+        com.fasterxml.jackson.databind.introspect.AnnotatedField annotatedField43 = new com.fasterxml.jackson.databind.introspect.AnnotatedField(field41, annotationMap42);
+        com.fasterxml.jackson.databind.PropertyMetadata propertyMetadata44 = null;
+        com.fasterxml.jackson.databind.BeanProperty.Std std45 = new com.fasterxml.jackson.databind.BeanProperty.Std(propertyName28, javaType29, propertyName39, annotations40, (com.fasterxml.jackson.databind.introspect.AnnotatedMember) annotatedField43, propertyMetadata44);
+        com.fasterxml.jackson.databind.JsonNode jsonNode47 = numberSerializer26.getSchema(serializerProvider27, (java.lang.reflect.Type) javaType29, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory48 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper49 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory48);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory50 = objectMapper49.getJsonFactory();
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter51 = objectMapper49.writerWithDefaultPrettyPrinter();
+        com.fasterxml.jackson.core.FormatSchema formatSchema52 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter53 = objectMapper49.writer(formatSchema52);
+        com.fasterxml.jackson.databind.SerializerProvider serializerProvider54 = objectMapper49.getSerializerProvider();
+        java.lang.reflect.Type type55 = null;
+        com.fasterxml.jackson.databind.JsonNode jsonNode57 = numberSerializer26.getSchema(serializerProvider54, type55, false);
+        bigIntegerNode1.serialize((com.fasterxml.jackson.core.JsonGenerator) tokenBuffer7, serializerProvider54);
+        org.junit.Assert.assertNotNull(bigIntegerNode1);
+        org.junit.Assert.assertNull(number2);
+        org.junit.Assert.assertNotNull(jsonFactory5);
+        org.junit.Assert.assertNotNull(jsonFactory6);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + long12 + "' != '" + 0L + "'", long12 == 0L);
+        org.junit.Assert.assertNotNull(jsonFactory16);
+        org.junit.Assert.assertNotNull(objectWriter17);
+        org.junit.Assert.assertNotNull(objectWriter19);
+        org.junit.Assert.assertTrue("'" + defaultTyping20 + "' != '" + com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS + "'", defaultTyping20.equals(com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS));
+        org.junit.Assert.assertNotNull(objectMapper22);
+        org.junit.Assert.assertNotNull(objectMapper24);
+        org.junit.Assert.assertNotNull(javaType29);
+        org.junit.Assert.assertNotNull(jsonNodeSpliterator34);
+        org.junit.Assert.assertNull(strList37);
+        org.junit.Assert.assertNotNull(javaType38);
+        org.junit.Assert.assertNotNull(jsonNode47);
+        org.junit.Assert.assertNotNull(jsonFactory50);
+        org.junit.Assert.assertNotNull(objectWriter51);
+        org.junit.Assert.assertNotNull(objectWriter53);
+        org.junit.Assert.assertNotNull(serializerProvider54);
+        org.junit.Assert.assertNotNull(jsonNode57);
+    }
+
+    @Test
+    public void test12() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test12");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
+        boolean boolean5 = tokenBuffer4._closed;
+        tokenBuffer4.writeNumber((short) -1);
+        tokenBuffer4.writeNumber((double) (short) -1);
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertNotNull(jsonFactory3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+    }
+
+    @Test
+    public void test13() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test13");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
+        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment5 = new com.fasterxml.jackson.databind.util.TokenBuffer.Segment();
+        java.lang.Object obj7 = segment5.get(12);
+        com.fasterxml.jackson.databind.node.BooleanNode booleanNode10 = com.fasterxml.jackson.databind.node.BooleanNode.valueOf(true);
+        com.fasterxml.jackson.core.JsonToken jsonToken11 = booleanNode10.asToken();
+        com.fasterxml.jackson.databind.node.IntNode intNode13 = new com.fasterxml.jackson.databind.node.IntNode(0);
+        java.math.BigDecimal bigDecimal14 = intNode13.decimalValue();
+        boolean boolean15 = intNode13.isContainerNode();
+        long long16 = intNode13.longValue();
+        com.fasterxml.jackson.databind.node.JsonNodeType jsonNodeType17 = intNode13.getNodeType();
+        com.fasterxml.jackson.databind.cfg.ContextAttributes contextAttributes18 = com.fasterxml.jackson.databind.cfg.ContextAttributes.Impl.getEmpty();
+        java.lang.Object obj19 = null;
+        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment20 = segment5.append(0, jsonToken11, (java.lang.Object) jsonNodeType17, (java.lang.Object) contextAttributes18, obj19);
+        java.util.TreeMap<java.lang.Integer, java.lang.Object> intMap21 = segment5._nativeIds;
+        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment22 = segment5.next();
+        long long23 = segment5._tokenTypes;
+        tokenBuffer4._first = segment5;
+        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment25 = tokenBuffer4._first;
+        com.fasterxml.jackson.databind.util.TokenBuffer.Segment segment26 = segment25._next;
+        // The following exception was thrown during execution in test generation
+        try {
+            com.fasterxml.jackson.core.JsonToken jsonToken28 = segment26.type((int) (short) 1);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertNotNull(jsonFactory3);
+        org.junit.Assert.assertNull(obj7);
+        org.junit.Assert.assertNotNull(booleanNode10);
+        org.junit.Assert.assertTrue("'" + jsonToken11 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken11.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertNotNull(bigDecimal14);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + long16 + "' != '" + 0L + "'", long16 == 0L);
+        org.junit.Assert.assertTrue("'" + jsonNodeType17 + "' != '" + com.fasterxml.jackson.databind.node.JsonNodeType.NUMBER + "'", jsonNodeType17.equals(com.fasterxml.jackson.databind.node.JsonNodeType.NUMBER));
+        org.junit.Assert.assertNotNull(contextAttributes18);
+        org.junit.Assert.assertNull(segment20);
+        org.junit.Assert.assertNotNull(intMap21);
+        org.junit.Assert.assertNull(segment22);
+        org.junit.Assert.assertTrue("'" + long23 + "' != '" + 10L + "'", long23 == 10L);
+        org.junit.Assert.assertNotNull(segment25);
+        org.junit.Assert.assertNull(segment26);
+    }
+
+    @Test
+    public void test14() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test14");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
+        boolean boolean5 = tokenBuffer4._closed;
+        boolean boolean6 = tokenBuffer4.canWriteObjectId();
+        java.lang.Object obj7 = tokenBuffer4.getOutputTarget();
+        int int8 = tokenBuffer4._appendAt;
+        com.fasterxml.jackson.core.FormatSchema formatSchema9 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            tokenBuffer4.setSchema(formatSchema9);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertNotNull(jsonFactory3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNull(obj7);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 0 + "'", int8 == 0);
+    }
+
+    @Test
+    public void test15() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test15");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
+        boolean boolean5 = tokenBuffer4._closed;
+        boolean boolean6 = tokenBuffer4._hasNativeTypeIds;
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertNotNull(jsonFactory3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+    }
+
+    @Test
+    public void test16() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test16");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter3 = objectMapper1.writerWithDefaultPrettyPrinter();
+        com.fasterxml.jackson.core.FormatSchema formatSchema4 = null;
+        com.fasterxml.jackson.databind.ObjectWriter objectWriter5 = objectMapper1.writer(formatSchema4);
+        com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping defaultTyping6 = com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper8 = objectMapper1.enableDefaultTypingAsProperty(defaultTyping6, "hi!");
+        com.fasterxml.jackson.databind.PropertyNamingStrategy propertyNamingStrategy9 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper10 = objectMapper8.setPropertyNamingStrategy(propertyNamingStrategy9);
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer11 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper8);
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertNotNull(objectWriter3);
+        org.junit.Assert.assertNotNull(objectWriter5);
+        org.junit.Assert.assertTrue("'" + defaultTyping6 + "' != '" + com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS + "'", defaultTyping6.equals(com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_CONCRETE_AND_ARRAYS));
+        org.junit.Assert.assertNotNull(objectMapper8);
+        org.junit.Assert.assertNotNull(objectMapper10);
+    }
+
+    @Test
+    public void test17() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test17");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = null;
+        com.fasterxml.jackson.databind.ObjectMapper objectMapper1 = new com.fasterxml.jackson.databind.ObjectMapper(jsonFactory0);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = objectMapper1.getJsonFactory();
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer4 = new com.fasterxml.jackson.databind.util.TokenBuffer((com.fasterxml.jackson.core.ObjectCodec) objectMapper1);
+        com.fasterxml.jackson.databind.introspect.NopAnnotationIntrospector nopAnnotationIntrospector5 = com.fasterxml.jackson.databind.introspect.NopAnnotationIntrospector.instance;
+        java.lang.reflect.Field field6 = null;
+        com.fasterxml.jackson.databind.introspect.AnnotationMap annotationMap7 = new com.fasterxml.jackson.databind.introspect.AnnotationMap();
+        com.fasterxml.jackson.databind.introspect.AnnotatedField annotatedField8 = new com.fasterxml.jackson.databind.introspect.AnnotatedField(field6, annotationMap7);
+        com.fasterxml.jackson.databind.introspect.AnnotationMap annotationMap9 = null;
+        com.fasterxml.jackson.databind.introspect.Annotated annotated10 = annotatedField8.withAnnotations(annotationMap9);
+        com.fasterxml.jackson.annotation.JsonInclude.Include include11 = null;
+        com.fasterxml.jackson.annotation.JsonInclude.Include include12 = nopAnnotationIntrospector5.findSerializationInclusion(annotated10, include11);
+        java.lang.reflect.Field field13 = null;
+        com.fasterxml.jackson.databind.introspect.AnnotationMap annotationMap14 = new com.fasterxml.jackson.databind.introspect.AnnotationMap();
+        com.fasterxml.jackson.databind.introspect.AnnotatedField annotatedField15 = new com.fasterxml.jackson.databind.introspect.AnnotatedField(field13, annotationMap14);
+        java.lang.Object obj16 = nopAnnotationIntrospector5.findFilterId((com.fasterxml.jackson.databind.introspect.Annotated) annotatedField15);
+        tokenBuffer4.writeObjectId((java.lang.Object) annotatedField15);
+        com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer18 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            com.fasterxml.jackson.databind.util.TokenBuffer tokenBuffer19 = tokenBuffer4.append(tokenBuffer18);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertNotNull(jsonFactory3);
+        org.junit.Assert.assertNotNull(nopAnnotationIntrospector5);
+        org.junit.Assert.assertNotNull(annotated10);
+        org.junit.Assert.assertNull(include12);
+        org.junit.Assert.assertNull(obj16);
     }
 }
 

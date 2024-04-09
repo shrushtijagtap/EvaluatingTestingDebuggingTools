@@ -1,2 +1,1 @@
-com.fasterxml.jackson.core.json.TestLocation.testOffsetWithInputOffset
 com.fasterxml.jackson.core.json.RandoopRegressionTest0.test335

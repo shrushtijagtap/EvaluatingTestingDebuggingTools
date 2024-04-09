@@ -1283,7 +1283,7 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0122");
         double double0 = org.apache.commons.math3.util.FastMath.random();
-// flaky:         org.junit.Assert.assertTrue("'" + double0 + "' != '" + 0.27016433863457534d + "'", double0 == 0.27016433863457534d);
+// flaky:         org.junit.Assert.assertTrue("'" + double0 + "' != '" + 0.7531561307599642d + "'", double0 == 0.7531561307599642d);
     }
 
     @Test
@@ -4610,36 +4610,6 @@ public class RegressionTest0 {
     public void test0361() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0361");
-        org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_QUARTERS;
-        long long1 = bigFraction0.longValue();
-        org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
-        java.math.BigInteger bigInteger3 = bigFraction2.getNumerator();
-        org.apache.commons.math3.fraction.BigFraction bigFraction4 = new org.apache.commons.math3.fraction.BigFraction(bigInteger3);
-        org.apache.commons.math3.fraction.BigFraction bigFraction5 = new org.apache.commons.math3.fraction.BigFraction(bigInteger3);
-        org.apache.commons.math3.fraction.BigFraction bigFraction6 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
-        java.math.BigInteger bigInteger7 = bigFraction6.getNumerator();
-        java.math.BigInteger bigInteger9 = org.apache.commons.math3.util.ArithmeticUtils.pow(bigInteger7, (long) 100);
-        java.math.BigInteger bigInteger10 = org.apache.commons.math3.util.ArithmeticUtils.pow(bigInteger3, bigInteger7);
-        org.apache.commons.math3.fraction.BigFraction bigFraction11 = bigFraction0.divide(bigInteger3);
-        org.apache.commons.math3.fraction.BigFraction bigFraction13 = bigFraction11.divide((long) 341642464);
-        org.apache.commons.math3.fraction.BigFraction bigFraction14 = bigFraction11.abs();
-        org.junit.Assert.assertNotNull(bigFraction0);
-        org.junit.Assert.assertTrue("'" + long1 + "' != '" + 0L + "'", long1 == 0L);
-        org.junit.Assert.assertNotNull(bigFraction2);
-        org.junit.Assert.assertNotNull(bigInteger3);
-        org.junit.Assert.assertNotNull(bigFraction6);
-        org.junit.Assert.assertNotNull(bigInteger7);
-        org.junit.Assert.assertNotNull(bigInteger9);
-        org.junit.Assert.assertNotNull(bigInteger10);
-        org.junit.Assert.assertNotNull(bigFraction11);
-        org.junit.Assert.assertNotNull(bigFraction13);
-        org.junit.Assert.assertNotNull(bigFraction14);
-    }
-
-    @Test
-    public void test0362() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0362");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.THREE_FIFTHS;
         float float1 = fraction0.floatValue();
         org.apache.commons.math3.fraction.Fraction fraction3 = fraction0.multiply(1072693248);
@@ -4651,9 +4621,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0363() throws Throwable {
+    public void test0362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0363");
+            System.out.format("%n%s%n", "RegressionTest0.test0362");
         // The following exception was thrown during execution in test generation
         try {
             org.apache.commons.math3.fraction.Fraction fraction3 = new org.apache.commons.math3.fraction.Fraction(1.5422326689561368d, (-1.1752011936438014d), (int) ' ');
@@ -4664,16 +4634,16 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0364() throws Throwable {
+    public void test0363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0364");
+            System.out.format("%n%s%n", "RegressionTest0.test0363");
         org.apache.commons.math3.fraction.Fraction fraction1 = new org.apache.commons.math3.fraction.Fraction(1072693248);
     }
 
     @Test
-    public void test0365() throws Throwable {
+    public void test0364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0365");
+            System.out.format("%n%s%n", "RegressionTest0.test0364");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = bigFraction0.reciprocal();
         org.apache.commons.math3.fraction.BigFraction bigFraction3 = bigFraction0.add((long) (short) 0);
@@ -4689,17 +4659,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0366() throws Throwable {
+    public void test0365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0366");
+            System.out.format("%n%s%n", "RegressionTest0.test0365");
         double double2 = org.apache.commons.math3.util.FastMath.hypot((double) 7101169760L, 0.0d);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 7.10116976E9d + "'", double2 == 7.10116976E9d);
     }
 
     @Test
-    public void test0367() throws Throwable {
+    public void test0366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0367");
+            System.out.format("%n%s%n", "RegressionTest0.test0366");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField2 = fraction1.getField();
@@ -4731,9 +4701,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0368() throws Throwable {
+    public void test0367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0368");
+            System.out.format("%n%s%n", "RegressionTest0.test0367");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.MINUS_ONE;
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = bigFraction0.subtract((int) 'a');
         double double3 = bigFraction0.doubleValue();
@@ -4771,9 +4741,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0369() throws Throwable {
+    public void test0368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0369");
+            System.out.format("%n%s%n", "RegressionTest0.test0368");
         // The following exception was thrown during execution in test generation
         try {
             long long2 = org.apache.commons.math3.util.ArithmeticUtils.stirlingS2(1078591488, 18);
@@ -4784,17 +4754,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0370() throws Throwable {
+    public void test0369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0370");
+            System.out.format("%n%s%n", "RegressionTest0.test0369");
         short short2 = org.apache.commons.math3.util.MathUtils.copySign((short) (byte) 10, (short) 10);
         org.junit.Assert.assertTrue("'" + short2 + "' != '" + (short) 10 + "'", short2 == (short) 10);
     }
 
     @Test
-    public void test0371() throws Throwable {
+    public void test0370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0371");
+            System.out.format("%n%s%n", "RegressionTest0.test0370");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         java.math.BigInteger bigInteger3 = org.apache.commons.math3.util.ArithmeticUtils.pow(bigInteger1, (long) 100);
@@ -4806,17 +4776,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0372() throws Throwable {
+    public void test0371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0372");
+            System.out.format("%n%s%n", "RegressionTest0.test0371");
         double double2 = org.apache.commons.math3.util.FastMath.atan2(0.0d, 12.000000059604645d);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.0d + "'", double2 == 0.0d);
     }
 
     @Test
-    public void test0373() throws Throwable {
+    public void test0372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0373");
+            System.out.format("%n%s%n", "RegressionTest0.test0372");
         // The following exception was thrown during execution in test generation
         try {
             int int2 = org.apache.commons.math3.util.ArithmeticUtils.pow((int) (byte) 100, (-1L));
@@ -4827,9 +4797,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0374() throws Throwable {
+    public void test0373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0374");
+            System.out.format("%n%s%n", "RegressionTest0.test0373");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.MINUS_ONE;
         int int1 = bigFraction0.intValue();
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
@@ -4871,89 +4841,56 @@ public class RegressionTest0 {
     }
 
     @Test
+    public void test0374() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test0374");
+        double double2 = org.apache.commons.math3.util.FastMath.max(1.2840254166877412d, (double) 1.07859149E9f);
+        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 1.078591488E9d + "'", double2 == 1.078591488E9d);
+    }
+
+    @Test
     public void test0375() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0375");
-        double double2 = org.apache.commons.math3.util.FastMath.max(1.2840254166877412d, (double) 1.07859149E9f);
-        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 1.078591488E9d + "'", double2 == 1.078591488E9d);
+        double double2 = org.apache.commons.math3.util.FastMath.hypot((-0.9251475365964139d), (double) 15L);
+        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 15.028502851730455d + "'", double2 == 15.028502851730455d);
     }
 
     @Test
     public void test0376() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0376");
-        double double2 = org.apache.commons.math3.util.FastMath.hypot((-0.9251475365964139d), (double) 15L);
-        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 15.028502851730455d + "'", double2 == 15.028502851730455d);
+        double double2 = org.apache.commons.math3.util.FastMath.scalb(0.0d, 1420233952);
+        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.0d + "'", double2 == 0.0d);
     }
 
     @Test
     public void test0377() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0377");
-        double double2 = org.apache.commons.math3.util.FastMath.scalb(0.0d, 1420233952);
-        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.0d + "'", double2 == 0.0d);
+        int int1 = org.apache.commons.math3.util.FastMath.getExponent((float) 1078591494L);
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 30 + "'", int1 == 30);
     }
 
     @Test
     public void test0378() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0378");
-        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
-        long long2 = bigFraction1.longValue();
-        java.math.BigDecimal bigDecimal4 = bigFraction1.bigDecimalValue((int) (short) 0);
-        org.apache.commons.math3.fraction.BigFraction bigFraction5 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
-        java.math.BigInteger bigInteger6 = bigFraction5.getNumerator();
-        org.apache.commons.math3.fraction.BigFraction bigFraction7 = bigFraction5.reduce();
-        org.apache.commons.math3.fraction.BigFraction bigFraction8 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
-        java.math.BigInteger bigInteger9 = bigFraction8.getNumerator();
-        org.apache.commons.math3.fraction.BigFraction bigFraction10 = bigFraction5.pow(bigInteger9);
-        java.math.BigInteger bigInteger11 = bigFraction10.getNumerator();
-        org.apache.commons.math3.fraction.BigFraction bigFraction12 = bigFraction1.pow(bigInteger11);
-        org.apache.commons.math3.fraction.BigFraction bigFraction13 = bigFraction12.negate();
-        org.apache.commons.math3.fraction.BigFraction bigFraction15 = bigFraction12.pow((long) (byte) 100);
-        org.apache.commons.math3.fraction.BigFraction bigFraction17 = bigFraction15.pow((-160));
-        org.junit.Assert.assertTrue("'" + long2 + "' != '" + 100L + "'", long2 == 100L);
-        org.junit.Assert.assertNotNull(bigDecimal4);
-        org.junit.Assert.assertNotNull(bigFraction5);
-        org.junit.Assert.assertNotNull(bigInteger6);
-        org.junit.Assert.assertNotNull(bigFraction7);
-        org.junit.Assert.assertNotNull(bigFraction8);
-        org.junit.Assert.assertNotNull(bigInteger9);
-        org.junit.Assert.assertNotNull(bigFraction10);
-        org.junit.Assert.assertNotNull(bigInteger11);
-        org.junit.Assert.assertNotNull(bigFraction12);
-        org.junit.Assert.assertNotNull(bigFraction13);
-        org.junit.Assert.assertNotNull(bigFraction15);
-        org.junit.Assert.assertNotNull(bigFraction17);
+        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((-1769765864));
     }
 
     @Test
     public void test0379() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0379");
-        int int1 = org.apache.commons.math3.util.FastMath.getExponent((float) 1078591494L);
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 30 + "'", int1 == 30);
+        org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.ELITISM_RATE;
+        org.junit.Assert.assertTrue("'" + localizedFormats0 + "' != '" + org.apache.commons.math3.exception.util.LocalizedFormats.ELITISM_RATE + "'", localizedFormats0.equals(org.apache.commons.math3.exception.util.LocalizedFormats.ELITISM_RATE));
     }
 
     @Test
     public void test0380() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0380");
-        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((-1769765864));
-    }
-
-    @Test
-    public void test0381() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0381");
-        org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.ELITISM_RATE;
-        org.junit.Assert.assertTrue("'" + localizedFormats0 + "' != '" + org.apache.commons.math3.exception.util.LocalizedFormats.ELITISM_RATE + "'", localizedFormats0.equals(org.apache.commons.math3.exception.util.LocalizedFormats.ELITISM_RATE));
-    }
-
-    @Test
-    public void test0382() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0382");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
         long long2 = bigFraction1.longValue();
         java.math.BigDecimal bigDecimal4 = bigFraction1.bigDecimalValue((int) (short) 0);
@@ -4990,9 +4927,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0383() throws Throwable {
+    public void test0381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0383");
+            System.out.format("%n%s%n", "RegressionTest0.test0381");
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.CANNOT_FORMAT_INSTANCE_AS_3D_VECTOR;
         org.apache.commons.math3.exception.util.Localizable localizable1 = null;
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats2 = org.apache.commons.math3.exception.util.LocalizedFormats.ZERO_NORM_FOR_ROTATION_DEFINING_VECTOR;
@@ -5014,30 +4951,30 @@ public class RegressionTest0 {
     }
 
     @Test
+    public void test0382() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test0382");
+        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((-0.9999999999999999d));
+    }
+
+    @Test
+    public void test0383() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test0383");
+        org.apache.commons.math3.fraction.BigFraction bigFraction3 = new org.apache.commons.math3.fraction.BigFraction((double) (-1769765864), (double) (byte) 2, 160);
+    }
+
+    @Test
     public void test0384() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0384");
-        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((-0.9999999999999999d));
+        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction(0.0d);
     }
 
     @Test
     public void test0385() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test0385");
-        org.apache.commons.math3.fraction.BigFraction bigFraction3 = new org.apache.commons.math3.fraction.BigFraction((double) (-1769765864), (double) (byte) 2, 160);
-    }
-
-    @Test
-    public void test0386() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0386");
-        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction(0.0d);
-    }
-
-    @Test
-    public void test0387() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0387");
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.EXPONENT;
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats1 = org.apache.commons.math3.exception.util.LocalizedFormats.CARDAN_ANGLES_SINGULARITY;
         org.apache.commons.math3.exception.util.Localizable localizable2 = null;
@@ -5058,9 +4995,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0388() throws Throwable {
+    public void test0386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0388");
+            System.out.format("%n%s%n", "RegressionTest0.test0386");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger2 = bigFraction1.getNumerator();
@@ -5076,9 +5013,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0389() throws Throwable {
+    public void test0387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0389");
+            System.out.format("%n%s%n", "RegressionTest0.test0387");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((long) 0);
         double double3 = bigFraction1.pow((double) 160);
         org.apache.commons.math3.fraction.BigFraction bigFraction4 = bigFraction1.negate();
@@ -5104,17 +5041,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0390() throws Throwable {
+    public void test0388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0390");
+            System.out.format("%n%s%n", "RegressionTest0.test0388");
         int int1 = org.apache.commons.math3.util.FastMath.getExponent((float) '#');
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 5 + "'", int1 == 5);
     }
 
     @Test
-    public void test0391() throws Throwable {
+    public void test0389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0391");
+            System.out.format("%n%s%n", "RegressionTest0.test0389");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -5138,25 +5075,25 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0392() throws Throwable {
+    public void test0390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0392");
+            System.out.format("%n%s%n", "RegressionTest0.test0390");
         org.apache.commons.math3.fraction.Fraction fraction2 = org.apache.commons.math3.fraction.Fraction.getReducedFraction((-1769765864), 2);
         org.junit.Assert.assertNotNull(fraction2);
     }
 
     @Test
-    public void test0393() throws Throwable {
+    public void test0391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0393");
+            System.out.format("%n%s%n", "RegressionTest0.test0391");
         double double2 = org.apache.commons.math3.util.FastMath.nextAfter((double) 20, 0.0d);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 19.999999999999996d + "'", double2 == 19.999999999999996d);
     }
 
     @Test
-    public void test0394() throws Throwable {
+    public void test0392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0394");
+            System.out.format("%n%s%n", "RegressionTest0.test0392");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -5194,17 +5131,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0395() throws Throwable {
+    public void test0393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0395");
+            System.out.format("%n%s%n", "RegressionTest0.test0393");
         int int1 = org.apache.commons.math3.util.FastMath.getExponent((float) 95);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 6 + "'", int1 == 6);
     }
 
     @Test
-    public void test0396() throws Throwable {
+    public void test0394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0396");
+            System.out.format("%n%s%n", "RegressionTest0.test0394");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((long) 0);
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
         float float3 = bigFraction2.floatValue();
@@ -5230,34 +5167,34 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0397() throws Throwable {
+    public void test0395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0397");
+            System.out.format("%n%s%n", "RegressionTest0.test0395");
         float float1 = org.apache.commons.math3.util.FastMath.ulp((float) 149L);
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 1.5258789E-5f + "'", float1 == 1.5258789E-5f);
     }
 
     @Test
-    public void test0398() throws Throwable {
+    public void test0396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0398");
+            System.out.format("%n%s%n", "RegressionTest0.test0396");
         int int2 = org.apache.commons.math3.util.ArithmeticUtils.addAndCheck(28, (int) (short) 100);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 128 + "'", int2 == 128);
     }
 
     @Test
-    public void test0399() throws Throwable {
+    public void test0397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0399");
+            System.out.format("%n%s%n", "RegressionTest0.test0397");
         org.apache.commons.math3.fraction.Fraction fraction2 = new org.apache.commons.math3.fraction.Fraction((int) '4', (int) 'a');
         byte byte3 = fraction2.byteValue();
         org.junit.Assert.assertTrue("'" + byte3 + "' != '" + (byte) 0 + "'", byte3 == (byte) 0);
     }
 
     @Test
-    public void test0400() throws Throwable {
+    public void test0398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0400");
+            System.out.format("%n%s%n", "RegressionTest0.test0398");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = new org.apache.commons.math3.fraction.BigFraction(bigInteger1);
@@ -5273,9 +5210,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0401() throws Throwable {
+    public void test0399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0401");
+            System.out.format("%n%s%n", "RegressionTest0.test0399");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         org.apache.commons.math3.fraction.BigFraction bigFraction3 = bigFraction0.subtract(1L);
@@ -5289,9 +5226,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0402() throws Throwable {
+    public void test0400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0402");
+            System.out.format("%n%s%n", "RegressionTest0.test0400");
         // The following exception was thrown during execution in test generation
         try {
             long long1 = org.apache.commons.math3.util.ArithmeticUtils.factorial(52);
@@ -5302,9 +5239,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0403() throws Throwable {
+    public void test0401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0403");
+            System.out.format("%n%s%n", "RegressionTest0.test0401");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((long) 0);
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
         float float3 = bigFraction2.floatValue();
@@ -5321,9 +5258,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0404() throws Throwable {
+    public void test0402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0404");
+            System.out.format("%n%s%n", "RegressionTest0.test0402");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.ONE;
         int int1 = fraction0.getNumerator();
         byte byte2 = fraction0.byteValue();
@@ -5333,9 +5270,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0405() throws Throwable {
+    public void test0403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0405");
+            System.out.format("%n%s%n", "RegressionTest0.test0403");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.THREE_FIFTHS;
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger2 = bigFraction1.getNumerator();
@@ -5364,9 +5301,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0406() throws Throwable {
+    public void test0404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0406");
+            System.out.format("%n%s%n", "RegressionTest0.test0404");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -5402,17 +5339,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0407() throws Throwable {
+    public void test0405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0407");
+            System.out.format("%n%s%n", "RegressionTest0.test0405");
         double double1 = org.apache.commons.math3.util.FastMath.acosh(35.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 4.248291097914389d + "'", double1 == 4.248291097914389d);
     }
 
     @Test
-    public void test0408() throws Throwable {
+    public void test0406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0408");
+            System.out.format("%n%s%n", "RegressionTest0.test0406");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField2 = fraction1.getField();
@@ -5434,17 +5371,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0409() throws Throwable {
+    public void test0407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0409");
+            System.out.format("%n%s%n", "RegressionTest0.test0407");
         int int1 = org.apache.commons.math3.util.FastMath.getExponent(101.00000000000001d);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 6 + "'", int1 == 6);
     }
 
     @Test
-    public void test0410() throws Throwable {
+    public void test0408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0410");
+            System.out.format("%n%s%n", "RegressionTest0.test0408");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((long) 0);
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
         float float3 = bigFraction2.floatValue();
@@ -5478,9 +5415,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0411() throws Throwable {
+    public void test0409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0411");
+            System.out.format("%n%s%n", "RegressionTest0.test0409");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
         long long2 = bigFraction1.longValue();
         java.math.BigDecimal bigDecimal4 = bigFraction1.bigDecimalValue((int) (short) 0);
@@ -5539,17 +5476,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0412() throws Throwable {
+    public void test0410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0412");
+            System.out.format("%n%s%n", "RegressionTest0.test0410");
         double double2 = org.apache.commons.math3.util.ArithmeticUtils.binomialCoefficientLog(1420233952, 0);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.0d + "'", double2 == 0.0d);
     }
 
     @Test
-    public void test0413() throws Throwable {
+    public void test0411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0413");
+            System.out.format("%n%s%n", "RegressionTest0.test0411");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -5565,9 +5502,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0414() throws Throwable {
+    public void test0412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0414");
+            System.out.format("%n%s%n", "RegressionTest0.test0412");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField2 = fraction1.getField();
@@ -5589,25 +5526,25 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0415() throws Throwable {
+    public void test0413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0415");
+            System.out.format("%n%s%n", "RegressionTest0.test0413");
         long long2 = org.apache.commons.math3.util.ArithmeticUtils.binomialCoefficient(128, (int) (byte) 0);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 1L + "'", long2 == 1L);
     }
 
     @Test
-    public void test0416() throws Throwable {
+    public void test0414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0416");
+            System.out.format("%n%s%n", "RegressionTest0.test0414");
         int int2 = org.apache.commons.math3.util.ArithmeticUtils.lcm(1420233952, (int) (byte) 1);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 1420233952 + "'", int2 == 1420233952);
     }
 
     @Test
-    public void test0417() throws Throwable {
+    public void test0415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0417");
+            System.out.format("%n%s%n", "RegressionTest0.test0415");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
         org.apache.commons.math3.fraction.BigFraction bigFraction3 = bigFraction1.multiply((long) 341642467);
         // The following exception was thrown during execution in test generation
@@ -5621,17 +5558,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0418() throws Throwable {
+    public void test0416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0418");
+            System.out.format("%n%s%n", "RegressionTest0.test0416");
         double double1 = org.apache.commons.math3.util.FastMath.log((double) ' ');
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 3.4657359027997265d + "'", double1 == 3.4657359027997265d);
     }
 
     @Test
-    public void test0419() throws Throwable {
+    public void test0417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0419");
+            System.out.format("%n%s%n", "RegressionTest0.test0417");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -5647,9 +5584,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0420() throws Throwable {
+    public void test0418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0420");
+            System.out.format("%n%s%n", "RegressionTest0.test0418");
         java.lang.Object obj0 = null;
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats1 = org.apache.commons.math3.exception.util.LocalizedFormats.COLUMN_INDEX_OUT_OF_RANGE;
         java.lang.String str2 = localizedFormats1.getSourceString();
@@ -5677,58 +5614,24 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0421() throws Throwable {
+    public void test0419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0421");
+            System.out.format("%n%s%n", "RegressionTest0.test0419");
         org.apache.commons.math3.fraction.Fraction fraction3 = new org.apache.commons.math3.fraction.Fraction(35.0d, (double) 341642467, 52);
     }
 
     @Test
-    public void test0422() throws Throwable {
+    public void test0420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0422");
+            System.out.format("%n%s%n", "RegressionTest0.test0420");
         double double1 = org.apache.commons.math3.util.FastMath.cos((double) 1.5258789E-5f);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.9999999998835847d + "'", double1 == 0.9999999998835847d);
     }
 
     @Test
-    public void test0423() throws Throwable {
+    public void test0421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0423");
-        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
-        long long2 = bigFraction1.longValue();
-        java.math.BigDecimal bigDecimal4 = bigFraction1.bigDecimalValue((int) (short) 0);
-        org.apache.commons.math3.fraction.BigFraction bigFraction5 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
-        java.math.BigInteger bigInteger6 = bigFraction5.getNumerator();
-        org.apache.commons.math3.fraction.BigFraction bigFraction7 = bigFraction5.reduce();
-        org.apache.commons.math3.fraction.BigFraction bigFraction8 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
-        java.math.BigInteger bigInteger9 = bigFraction8.getNumerator();
-        org.apache.commons.math3.fraction.BigFraction bigFraction10 = bigFraction5.pow(bigInteger9);
-        java.math.BigInteger bigInteger11 = bigFraction10.getNumerator();
-        org.apache.commons.math3.fraction.BigFraction bigFraction12 = bigFraction1.pow(bigInteger11);
-        org.apache.commons.math3.fraction.BigFraction bigFraction13 = bigFraction12.negate();
-        java.lang.Object obj14 = null;
-        boolean boolean15 = bigFraction13.equals(obj14);
-        int int16 = bigFraction13.getDenominatorAsInt();
-        org.junit.Assert.assertTrue("'" + long2 + "' != '" + 100L + "'", long2 == 100L);
-        org.junit.Assert.assertNotNull(bigDecimal4);
-        org.junit.Assert.assertNotNull(bigFraction5);
-        org.junit.Assert.assertNotNull(bigInteger6);
-        org.junit.Assert.assertNotNull(bigFraction7);
-        org.junit.Assert.assertNotNull(bigFraction8);
-        org.junit.Assert.assertNotNull(bigInteger9);
-        org.junit.Assert.assertNotNull(bigFraction10);
-        org.junit.Assert.assertNotNull(bigInteger11);
-        org.junit.Assert.assertNotNull(bigFraction12);
-        org.junit.Assert.assertNotNull(bigFraction13);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 1 + "'", int16 == 1);
-    }
-
-    @Test
-    public void test0424() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0424");
+            System.out.format("%n%s%n", "RegressionTest0.test0421");
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.NON_POSITIVE_DEFINITE_OPERATOR;
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats2 = org.apache.commons.math3.exception.util.LocalizedFormats.CARDAN_ANGLES_SINGULARITY;
         org.apache.commons.math3.exception.util.Localizable localizable3 = null;
@@ -5750,9 +5653,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0425() throws Throwable {
+    public void test0422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0425");
+            System.out.format("%n%s%n", "RegressionTest0.test0422");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField1 = fraction0.getField();
         org.apache.commons.math3.fraction.Fraction fraction2 = fractionField1.getZero();
@@ -5809,32 +5712,32 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0426() throws Throwable {
+    public void test0423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0426");
+            System.out.format("%n%s%n", "RegressionTest0.test0423");
         double double1 = org.apache.commons.math3.util.FastMath.sin((double) 30);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-0.9880316240928618d) + "'", double1 == (-0.9880316240928618d));
     }
 
     @Test
-    public void test0427() throws Throwable {
+    public void test0424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0427");
+            System.out.format("%n%s%n", "RegressionTest0.test0424");
         double double2 = org.apache.commons.math3.util.FastMath.IEEEremainder((double) 149L, (double) 5);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + (-1.0d) + "'", double2 == (-1.0d));
     }
 
     @Test
-    public void test0428() throws Throwable {
+    public void test0425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0428");
+            System.out.format("%n%s%n", "RegressionTest0.test0425");
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = new org.apache.commons.math3.fraction.BigFraction(0L, (long) 128);
     }
 
     @Test
-    public void test0429() throws Throwable {
+    public void test0426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0429");
+            System.out.format("%n%s%n", "RegressionTest0.test0426");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField1 = fraction0.getField();
         org.apache.commons.math3.fraction.Fraction fraction2 = fractionField1.getZero();
@@ -5888,25 +5791,25 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0430() throws Throwable {
+    public void test0427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0430");
+            System.out.format("%n%s%n", "RegressionTest0.test0427");
         double double1 = org.apache.commons.math3.util.FastMath.abs(1.560895660206908d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 1.560895660206908d + "'", double1 == 1.560895660206908d);
     }
 
     @Test
-    public void test0431() throws Throwable {
+    public void test0428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0431");
+            System.out.format("%n%s%n", "RegressionTest0.test0428");
         long long2 = org.apache.commons.math3.util.ArithmeticUtils.gcd((long) 1078591488, 32L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 32L + "'", long2 == 32L);
     }
 
     @Test
-    public void test0432() throws Throwable {
+    public void test0429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0432");
+            System.out.format("%n%s%n", "RegressionTest0.test0429");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((long) 0);
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
         float float3 = bigFraction2.floatValue();
@@ -5921,18 +5824,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0433() throws Throwable {
+    public void test0430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0433");
+            System.out.format("%n%s%n", "RegressionTest0.test0430");
         org.apache.commons.math3.fraction.FractionConversionException fractionConversionException2 = new org.apache.commons.math3.fraction.FractionConversionException(5.298342365610589d, (-1891596483));
         org.apache.commons.math3.exception.util.ExceptionContext exceptionContext3 = fractionConversionException2.getContext();
         org.junit.Assert.assertNotNull(exceptionContext3);
     }
 
     @Test
-    public void test0434() throws Throwable {
+    public void test0431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0434");
+            System.out.format("%n%s%n", "RegressionTest0.test0431");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -5947,25 +5850,25 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0435() throws Throwable {
+    public void test0432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0435");
+            System.out.format("%n%s%n", "RegressionTest0.test0432");
         long long2 = org.apache.commons.math3.util.ArithmeticUtils.pow(0L, 5L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 0L + "'", long2 == 0L);
     }
 
     @Test
-    public void test0436() throws Throwable {
+    public void test0433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0436");
+            System.out.format("%n%s%n", "RegressionTest0.test0433");
         int int2 = org.apache.commons.math3.util.ArithmeticUtils.pow((int) ' ', 52);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
     }
 
     @Test
-    public void test0437() throws Throwable {
+    public void test0434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0437");
+            System.out.format("%n%s%n", "RegressionTest0.test0434");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -5979,9 +5882,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0438() throws Throwable {
+    public void test0435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0438");
+            System.out.format("%n%s%n", "RegressionTest0.test0435");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
         long long2 = bigFraction1.longValue();
         java.math.BigDecimal bigDecimal4 = bigFraction1.bigDecimalValue((int) (short) 0);
@@ -6014,17 +5917,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0439() throws Throwable {
+    public void test0436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0439");
+            System.out.format("%n%s%n", "RegressionTest0.test0436");
         double double1 = org.apache.commons.math3.util.FastMath.floor((double) 300);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 300.0d + "'", double1 == 300.0d);
     }
 
     @Test
-    public void test0440() throws Throwable {
+    public void test0437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0440");
+            System.out.format("%n%s%n", "RegressionTest0.test0437");
         org.apache.commons.math3.exception.MathArithmeticException mathArithmeticException0 = new org.apache.commons.math3.exception.MathArithmeticException();
         org.apache.commons.math3.exception.util.ExceptionContext exceptionContext1 = mathArithmeticException0.getContext();
         org.apache.commons.math3.exception.util.ExceptionContext exceptionContext2 = mathArithmeticException0.getContext();
@@ -6037,23 +5940,23 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0441() throws Throwable {
+    public void test0438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0441");
+            System.out.format("%n%s%n", "RegressionTest0.test0438");
         org.apache.commons.math3.fraction.Fraction fraction1 = new org.apache.commons.math3.fraction.Fraction((double) 3.0f);
     }
 
     @Test
-    public void test0442() throws Throwable {
+    public void test0439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0442");
+            System.out.format("%n%s%n", "RegressionTest0.test0439");
         org.apache.commons.math3.fraction.Fraction fraction3 = new org.apache.commons.math3.fraction.Fraction(19.999999999999996d, (double) 6, 30);
     }
 
     @Test
-    public void test0443() throws Throwable {
+    public void test0440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0443");
+            System.out.format("%n%s%n", "RegressionTest0.test0440");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
         long long2 = bigFraction1.longValue();
         java.math.BigDecimal bigDecimal4 = bigFraction1.bigDecimalValue((int) (short) 0);
@@ -6082,17 +5985,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0444() throws Throwable {
+    public void test0441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0444");
+            System.out.format("%n%s%n", "RegressionTest0.test0441");
         long long2 = org.apache.commons.math3.util.ArithmeticUtils.gcd((long) 52, (long) 15);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 1L + "'", long2 == 1L);
     }
 
     @Test
-    public void test0445() throws Throwable {
+    public void test0442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0445");
+            System.out.format("%n%s%n", "RegressionTest0.test0442");
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.NON_POSITIVE_POLYNOMIAL_DEGREE;
         java.util.Locale locale1 = null;
         // The following exception was thrown during execution in test generation
@@ -6106,9 +6009,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0446() throws Throwable {
+    public void test0443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0446");
+            System.out.format("%n%s%n", "RegressionTest0.test0443");
         org.apache.commons.math3.fraction.Fraction fraction2 = new org.apache.commons.math3.fraction.Fraction(10, (int) '4');
         org.apache.commons.math3.fraction.Fraction fraction3 = null;
         // The following exception was thrown during execution in test generation
@@ -6121,9 +6024,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0447() throws Throwable {
+    public void test0444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0447");
+            System.out.format("%n%s%n", "RegressionTest0.test0444");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField1 = fraction0.getField();
         org.apache.commons.math3.fraction.Fraction fraction2 = fractionField1.getZero();
@@ -6152,9 +6055,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0448() throws Throwable {
+    public void test0445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0448");
+            System.out.format("%n%s%n", "RegressionTest0.test0445");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         org.apache.commons.math3.fraction.BigFraction bigFraction3 = bigFraction0.multiply(0);
@@ -6166,17 +6069,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0449() throws Throwable {
+    public void test0446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0449");
+            System.out.format("%n%s%n", "RegressionTest0.test0446");
         long long2 = org.apache.commons.math3.util.ArithmeticUtils.gcd(281392772376L, (long) (short) 10);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 2L + "'", long2 == 2L);
     }
 
     @Test
-    public void test0450() throws Throwable {
+    public void test0447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0450");
+            System.out.format("%n%s%n", "RegressionTest0.test0447");
         java.lang.Throwable throwable0 = null;
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats1 = org.apache.commons.math3.exception.util.LocalizedFormats.NUMERATOR_FORMAT;
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats2 = org.apache.commons.math3.exception.util.LocalizedFormats.NOT_STRICTLY_INCREASING_SEQUENCE;
@@ -6232,25 +6135,25 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0451() throws Throwable {
+    public void test0448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0451");
+            System.out.format("%n%s%n", "RegressionTest0.test0448");
         float float1 = org.apache.commons.math3.util.FastMath.signum(0.0f);
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 0.0f + "'", float1 == 0.0f);
     }
 
     @Test
-    public void test0452() throws Throwable {
+    public void test0449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0452");
+            System.out.format("%n%s%n", "RegressionTest0.test0449");
         float float2 = org.apache.commons.math3.util.FastMath.nextAfter(Float.POSITIVE_INFINITY, 1.5366081077201645E42d);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 3.4028235E38f + "'", float2 == 3.4028235E38f);
     }
 
     @Test
-    public void test0453() throws Throwable {
+    public void test0450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0453");
+            System.out.format("%n%s%n", "RegressionTest0.test0450");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = new org.apache.commons.math3.fraction.BigFraction(bigInteger1);
@@ -6265,28 +6168,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0454() throws Throwable {
+    public void test0451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0454");
+            System.out.format("%n%s%n", "RegressionTest0.test0451");
         double double2 = org.apache.commons.math3.util.FastMath.min((double) 3.4028235E38f, 0.9999999998835847d);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.9999999998835847d + "'", double2 == 0.9999999998835847d);
     }
 
     @Test
-    public void test0455() throws Throwable {
+    public void test0452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0455");
-        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
-        long long2 = bigFraction1.longValue();
-        org.apache.commons.math3.fraction.BigFraction bigFraction4 = bigFraction1.subtract(0);
-        org.junit.Assert.assertTrue("'" + long2 + "' != '" + 100L + "'", long2 == 100L);
-        org.junit.Assert.assertNotNull(bigFraction4);
-    }
-
-    @Test
-    public void test0456() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0456");
+            System.out.format("%n%s%n", "RegressionTest0.test0452");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
         long long2 = bigFraction1.longValue();
         java.math.BigDecimal bigDecimal4 = bigFraction1.bigDecimalValue((int) (short) 0);
@@ -6361,17 +6253,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0457() throws Throwable {
+    public void test0453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0457");
+            System.out.format("%n%s%n", "RegressionTest0.test0453");
         int int2 = org.apache.commons.math3.util.ArithmeticUtils.pow(1995483777, 34326183936L);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 1 + "'", int2 == 1);
     }
 
     @Test
-    public void test0458() throws Throwable {
+    public void test0454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0458");
+            System.out.format("%n%s%n", "RegressionTest0.test0454");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         org.apache.commons.math3.fraction.BigFraction bigFraction3 = bigFraction0.multiply(0);
@@ -6412,18 +6304,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0459() throws Throwable {
+    public void test0455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0459");
+            System.out.format("%n%s%n", "RegressionTest0.test0455");
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.ZERO_NORM_FOR_ROTATION_AXIS;
         org.apache.commons.math3.util.MathUtils.checkNotNull((java.lang.Object) localizedFormats0);
         org.junit.Assert.assertTrue("'" + localizedFormats0 + "' != '" + org.apache.commons.math3.exception.util.LocalizedFormats.ZERO_NORM_FOR_ROTATION_AXIS + "'", localizedFormats0.equals(org.apache.commons.math3.exception.util.LocalizedFormats.ZERO_NORM_FOR_ROTATION_AXIS));
     }
 
     @Test
-    public void test0460() throws Throwable {
+    public void test0456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0460");
+            System.out.format("%n%s%n", "RegressionTest0.test0456");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -6439,9 +6331,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0461() throws Throwable {
+    public void test0457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0461");
+            System.out.format("%n%s%n", "RegressionTest0.test0457");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = new org.apache.commons.math3.fraction.BigFraction(bigInteger1);
@@ -6472,17 +6364,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0462() throws Throwable {
+    public void test0458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0462");
+            System.out.format("%n%s%n", "RegressionTest0.test0458");
         long long1 = org.apache.commons.math3.util.FastMath.abs((long) 21);
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + 21L + "'", long1 == 21L);
     }
 
     @Test
-    public void test0463() throws Throwable {
+    public void test0459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0463");
+            System.out.format("%n%s%n", "RegressionTest0.test0459");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = new org.apache.commons.math3.fraction.BigFraction(bigInteger1);
@@ -6495,9 +6387,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0464() throws Throwable {
+    public void test0460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0464");
+            System.out.format("%n%s%n", "RegressionTest0.test0460");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.ONE;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
@@ -6516,17 +6408,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0465() throws Throwable {
+    public void test0461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0465");
+            System.out.format("%n%s%n", "RegressionTest0.test0461");
         int int2 = org.apache.commons.math3.util.MathUtils.copySign((int) (byte) -1, (int) (short) -1);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + (-1) + "'", int2 == (-1));
     }
 
     @Test
-    public void test0466() throws Throwable {
+    public void test0462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0466");
+            System.out.format("%n%s%n", "RegressionTest0.test0462");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger2 = bigFraction1.getNumerator();
@@ -6547,9 +6439,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0467() throws Throwable {
+    public void test0463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0467");
+            System.out.format("%n%s%n", "RegressionTest0.test0463");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
         long long2 = bigFraction1.longValue();
         java.math.BigDecimal bigDecimal4 = bigFraction1.bigDecimalValue((int) (short) 0);
@@ -6581,18 +6473,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0468() throws Throwable {
+    public void test0464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0468");
+            System.out.format("%n%s%n", "RegressionTest0.test0464");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction(341642467);
         org.apache.commons.math3.fraction.BigFraction bigFraction3 = bigFraction1.subtract((long) 5);
         org.junit.Assert.assertNotNull(bigFraction3);
     }
 
     @Test
-    public void test0469() throws Throwable {
+    public void test0465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0469");
+            System.out.format("%n%s%n", "RegressionTest0.test0465");
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.DENOMINATOR;
         java.lang.String str1 = localizedFormats0.getSourceString();
         org.junit.Assert.assertTrue("'" + localizedFormats0 + "' != '" + org.apache.commons.math3.exception.util.LocalizedFormats.DENOMINATOR + "'", localizedFormats0.equals(org.apache.commons.math3.exception.util.LocalizedFormats.DENOMINATOR));
@@ -6600,9 +6492,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0470() throws Throwable {
+    public void test0466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0470");
+            System.out.format("%n%s%n", "RegressionTest0.test0466");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -6771,17 +6663,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0471() throws Throwable {
+    public void test0467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0471");
+            System.out.format("%n%s%n", "RegressionTest0.test0467");
         float float2 = org.apache.commons.math3.util.FastMath.max((float) 100L, (float) (-1769765864));
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 100.0f + "'", float2 == 100.0f);
     }
 
     @Test
-    public void test0472() throws Throwable {
+    public void test0468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0472");
+            System.out.format("%n%s%n", "RegressionTest0.test0468");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((int) (byte) 100);
         org.apache.commons.math3.fraction.BigFraction bigFraction3 = bigFraction1.pow(0);
         int int4 = bigFraction1.intValue();
@@ -6796,9 +6688,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0473() throws Throwable {
+    public void test0469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0473");
+            System.out.format("%n%s%n", "RegressionTest0.test0469");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField1 = fraction0.getField();
         int int2 = fraction0.getDenominator();
@@ -6812,17 +6704,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0474() throws Throwable {
+    public void test0470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0474");
+            System.out.format("%n%s%n", "RegressionTest0.test0470");
         double double2 = org.apache.commons.math3.util.ArithmeticUtils.binomialCoefficientLog(5, 0);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.0d + "'", double2 == 0.0d);
     }
 
     @Test
-    public void test0475() throws Throwable {
+    public void test0471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0475");
+            System.out.format("%n%s%n", "RegressionTest0.test0471");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField1 = fraction0.getField();
         int int2 = fraction0.getDenominator();
@@ -6844,17 +6736,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0476() throws Throwable {
+    public void test0472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0476");
+            System.out.format("%n%s%n", "RegressionTest0.test0472");
         int int2 = org.apache.commons.math3.util.ArithmeticUtils.pow(0, 1072693248);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
     }
 
     @Test
-    public void test0477() throws Throwable {
+    public void test0473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0477");
+            System.out.format("%n%s%n", "RegressionTest0.test0473");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((long) 0);
         double double3 = bigFraction1.pow((double) 160);
         org.apache.commons.math3.fraction.BigFraction bigFraction4 = bigFraction1.abs();
@@ -6863,17 +6755,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0478() throws Throwable {
+    public void test0474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0478");
+            System.out.format("%n%s%n", "RegressionTest0.test0474");
         float float2 = org.apache.commons.math3.util.FastMath.max((float) 34326183936L, (float) 3);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + 3.43261839E10f + "'", float2 == 3.43261839E10f);
     }
 
     @Test
-    public void test0479() throws Throwable {
+    public void test0475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0479");
+            System.out.format("%n%s%n", "RegressionTest0.test0475");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         double double3 = bigFraction0.pow((double) (byte) 10);
@@ -6887,9 +6779,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0480() throws Throwable {
+    public void test0476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0480");
+            System.out.format("%n%s%n", "RegressionTest0.test0476");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = fraction0.divide(fraction1);
@@ -6941,9 +6833,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0481() throws Throwable {
+    public void test0477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0481");
+            System.out.format("%n%s%n", "RegressionTest0.test0477");
         org.apache.commons.math3.fraction.BigFraction bigFraction0 = org.apache.commons.math3.fraction.BigFraction.TWO_FIFTHS;
         java.math.BigInteger bigInteger1 = bigFraction0.getNumerator();
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = new org.apache.commons.math3.fraction.BigFraction(bigInteger1);
@@ -6988,9 +6880,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0482() throws Throwable {
+    public void test0478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0482");
+            System.out.format("%n%s%n", "RegressionTest0.test0478");
         // The following exception was thrown during execution in test generation
         try {
             long long1 = org.apache.commons.math3.util.ArithmeticUtils.factorial(1165029885);
@@ -7001,9 +6893,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0483() throws Throwable {
+    public void test0479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0483");
+            System.out.format("%n%s%n", "RegressionTest0.test0479");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField1 = fraction0.getField();
         int int2 = fraction0.getDenominator();
@@ -7027,33 +6919,33 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0484() throws Throwable {
+    public void test0480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0484");
+            System.out.format("%n%s%n", "RegressionTest0.test0480");
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.TOO_LARGE_TOURNAMENT_ARITY;
         org.junit.Assert.assertTrue("'" + localizedFormats0 + "' != '" + org.apache.commons.math3.exception.util.LocalizedFormats.TOO_LARGE_TOURNAMENT_ARITY + "'", localizedFormats0.equals(org.apache.commons.math3.exception.util.LocalizedFormats.TOO_LARGE_TOURNAMENT_ARITY));
     }
 
     @Test
-    public void test0485() throws Throwable {
+    public void test0481() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0485");
+            System.out.format("%n%s%n", "RegressionTest0.test0481");
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.getReducedFraction(1995483777, (int) (short) 10);
         org.junit.Assert.assertNotNull(bigFraction2);
     }
 
     @Test
-    public void test0486() throws Throwable {
+    public void test0482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0486");
+            System.out.format("%n%s%n", "RegressionTest0.test0482");
         int int1 = org.apache.commons.math3.util.FastMath.getExponent(1.4E-45f);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + (-127) + "'", int1 == (-127));
     }
 
     @Test
-    public void test0487() throws Throwable {
+    public void test0483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0487");
+            System.out.format("%n%s%n", "RegressionTest0.test0483");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((long) 0);
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
         float float3 = bigFraction2.floatValue();
@@ -7070,17 +6962,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0488() throws Throwable {
+    public void test0484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0488");
+            System.out.format("%n%s%n", "RegressionTest0.test0484");
         float float2 = org.apache.commons.math3.util.FastMath.min((float) (byte) -1, 1048576.0f);
         org.junit.Assert.assertTrue("'" + float2 + "' != '" + (-1.0f) + "'", float2 == (-1.0f));
     }
 
     @Test
-    public void test0489() throws Throwable {
+    public void test0485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0489");
+            System.out.format("%n%s%n", "RegressionTest0.test0485");
         // The following exception was thrown during execution in test generation
         try {
             long long2 = org.apache.commons.math3.util.ArithmeticUtils.binomialCoefficient(1078591488, 20);
@@ -7091,17 +6983,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0490() throws Throwable {
+    public void test0486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0490");
+            System.out.format("%n%s%n", "RegressionTest0.test0486");
         double double1 = org.apache.commons.math3.util.FastMath.log1p((double) 95.0f);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 4.564348191467836d + "'", double1 == 4.564348191467836d);
     }
 
     @Test
-    public void test0491() throws Throwable {
+    public void test0487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0491");
+            System.out.format("%n%s%n", "RegressionTest0.test0487");
         org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction((long) 0);
         org.apache.commons.math3.fraction.BigFraction bigFraction2 = org.apache.commons.math3.fraction.BigFraction.ONE_QUARTER;
         float float3 = bigFraction2.floatValue();
@@ -7118,25 +7010,25 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0492() throws Throwable {
+    public void test0488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0492");
+            System.out.format("%n%s%n", "RegressionTest0.test0488");
         double double1 = org.apache.commons.math3.util.FastMath.log1p(6.283185307179586d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 1.9855683087099187d + "'", double1 == 1.9855683087099187d);
     }
 
     @Test
-    public void test0493() throws Throwable {
+    public void test0489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0493");
+            System.out.format("%n%s%n", "RegressionTest0.test0489");
         int int1 = org.apache.commons.math3.util.FastMath.getExponent((float) 21);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
     }
 
     @Test
-    public void test0494() throws Throwable {
+    public void test0490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0494");
+            System.out.format("%n%s%n", "RegressionTest0.test0490");
         org.apache.commons.math3.exception.util.LocalizedFormats localizedFormats0 = org.apache.commons.math3.exception.util.LocalizedFormats.NOT_POSITIVE_WINDOW_SIZE;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction2 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
@@ -7166,17 +7058,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0495() throws Throwable {
+    public void test0491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0495");
+            System.out.format("%n%s%n", "RegressionTest0.test0491");
         double double2 = org.apache.commons.math3.util.FastMath.scalb(1.078591488E9d, (-1));
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 5.39295744E8d + "'", double2 == 5.39295744E8d);
     }
 
     @Test
-    public void test0496() throws Throwable {
+    public void test0492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0496");
+            System.out.format("%n%s%n", "RegressionTest0.test0492");
         org.apache.commons.math3.fraction.Fraction fraction1 = new org.apache.commons.math3.fraction.Fraction(341642467);
         org.apache.commons.math3.fraction.Fraction fraction4 = new org.apache.commons.math3.fraction.Fraction(10, (int) '4');
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField5 = fraction4.getField();
@@ -7191,9 +7083,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0497() throws Throwable {
+    public void test0493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0497");
+            System.out.format("%n%s%n", "RegressionTest0.test0493");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.fraction.Fraction fraction1 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField2 = fraction1.getField();
@@ -7211,17 +7103,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0498() throws Throwable {
+    public void test0494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0498");
+            System.out.format("%n%s%n", "RegressionTest0.test0494");
         float float1 = org.apache.commons.math3.util.FastMath.abs((float) 18);
         org.junit.Assert.assertTrue("'" + float1 + "' != '" + 18.0f + "'", float1 == 18.0f);
     }
 
     @Test
-    public void test0499() throws Throwable {
+    public void test0495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0499");
+            System.out.format("%n%s%n", "RegressionTest0.test0495");
         org.apache.commons.math3.fraction.Fraction fraction0 = org.apache.commons.math3.fraction.Fraction.TWO_QUARTERS;
         org.apache.commons.math3.Field<org.apache.commons.math3.fraction.Fraction> fractionField1 = fraction0.getField();
         org.apache.commons.math3.fraction.Fraction fraction2 = fractionField1.getZero();
@@ -7237,9 +7129,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test0500() throws Throwable {
+    public void test0496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test0500");
+            System.out.format("%n%s%n", "RegressionTest0.test0496");
         double[] doubleArray0 = new double[] {};
         org.apache.commons.math3.util.MathUtils.checkFinite(doubleArray0);
         int int2 = org.apache.commons.math3.util.MathUtils.hash(doubleArray0);
@@ -7248,5 +7140,36 @@ public class RegressionTest0 {
         org.junit.Assert.assertEquals(java.util.Arrays.toString(doubleArray0), "[]");
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 1 + "'", int2 == 1);
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 1 + "'", int3 == 1);
+    }
+
+    @Test
+    public void test0497() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test0497");
+        org.apache.commons.math3.fraction.BigFraction bigFraction1 = new org.apache.commons.math3.fraction.BigFraction(52);
+    }
+
+    @Test
+    public void test0498() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test0498");
+        float float1 = org.apache.commons.math3.util.FastMath.signum(4.0f);
+        org.junit.Assert.assertTrue("'" + float1 + "' != '" + 1.0f + "'", float1 == 1.0f);
+    }
+
+    @Test
+    public void test0499() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test0499");
+        double double2 = org.apache.commons.math3.util.FastMath.scalb(0.0d, 0);
+        org.junit.Assert.assertTrue("'" + double2 + "' != '" + 0.0d + "'", double2 == 0.0d);
+    }
+
+    @Test
+    public void test0500() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test0500");
+        float float1 = org.apache.commons.math3.util.FastMath.abs((float) 310L);
+        org.junit.Assert.assertTrue("'" + float1 + "' != '" + 310.0f + "'", float1 == 310.0f);
     }
 }

@@ -13,2509 +13,6 @@ public class RegressionTest4 {
     public void test2001() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest4.test2001");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
-        document1.title("[]");
-        org.jsoup.nodes.Element element8 = document1.prependText("#document#document");
-        org.jsoup.nodes.Element element10 = element8.appendText("hi!=\"#root=&quot;hi!&quot;\"");
-        org.jsoup.select.Elements elements12 = element10.getElementsByTag("#text");
-        org.jsoup.select.Elements elements15 = element10.getElementsByAttributeValueEnding("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>#document#documentdocument", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>\n<html> \n<head> \n</head> \n<body>\n  #root  \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertNotNull(elements15);
-    }
-
-    @Test
-    public void test2002() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2002");
-        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("<?hi!>");
-        tokenQueue1.addFirst("");
-    }
-
-    @Test
-    public void test2003() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2003");
-        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("", "");
-        java.lang.String str3 = document2.nodeName();
-        java.lang.String str4 = document2.text();
-        org.jsoup.nodes.Node node7 = document2.attr("hi!=\"#root=&quot;hi!&quot;\"", "<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
-        org.jsoup.nodes.Element element9 = document2.createElement("#root");
-        org.jsoup.nodes.Element element12 = document2.attr("<html>\n<head>\n</head>\n<body>\n org.jsoup.select.selector$selectorparseexception:\n</body>\n</html>", "head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n #document\n&lt;/body&gt;\n&lt;/html&gt;\"");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertNotNull(node7);
-        org.junit.Assert.assertNotNull(element9);
-        org.junit.Assert.assertNotNull(element12);
-    }
-
-    @Test
-    public void test2004() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2004");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        org.jsoup.nodes.Element element15 = element12.append("hi!");
-        org.jsoup.nodes.Element element17 = element15.appendText("#root=\"hi!\"");
-        org.jsoup.select.Elements elements19 = element17.getElementsByIndexLessThan((-1));
-        org.jsoup.select.Elements elements22 = element17.getElementsByAttributeValueStarting("hi!", "#comment");
-        org.jsoup.select.Elements elements24 = elements22.eq(3);
-        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator25 = elements24.spliterator();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(element17);
-        org.junit.Assert.assertNotNull(elements19);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertNotNull(elements24);
-        org.junit.Assert.assertNotNull(elementSpliterator25);
-    }
-
-    @Test
-    public void test2005() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2005");
-        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
-        org.jsoup.nodes.Document document2 = document1.normalise();
-        org.jsoup.nodes.Element element3 = document2.head();
-        org.jsoup.nodes.Element element6 = document2.attr("org.jsoup.select.Selector$SelectorParseException: ", "[]");
-        org.jsoup.nodes.Element element8 = element6.appendElement("#comment");
-        org.jsoup.nodes.Element element10 = element6.prependText("#document");
-        org.jsoup.nodes.Element element12 = element6.toggleClass("<html> \n <head> \n </head> \n <body>\n   #root  \n </body>\n</html>");
-        org.jsoup.nodes.Document document14 = new org.jsoup.nodes.Document("");
-        boolean boolean15 = document14.hasText();
-        java.lang.String str16 = document14.nodeName();
-        java.lang.String[] strArray18 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet19 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean20 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet19, strArray18);
-        org.jsoup.nodes.Element element21 = document14.classNames((java.util.Set<java.lang.String>) strSet19);
-        org.jsoup.nodes.Element element23 = document14.append("#document");
-        boolean boolean24 = element12.equals((java.lang.Object) document14);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.select.Elements elements27 = document14.getElementsByAttributeValue("", "");
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated string is empty");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(element3);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "#document" + "'", str16, "#document");
-        org.junit.Assert.assertNotNull(strArray18);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNotNull(element23);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-    }
-
-    @Test
-    public void test2006() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2006");
-        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
-        org.jsoup.nodes.Document document2 = document1.normalise();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String str4 = document1.val();
-        org.jsoup.nodes.Document document6 = new org.jsoup.nodes.Document("");
-        boolean boolean7 = document6.hasText();
-        boolean boolean8 = document6.hasText();
-        org.jsoup.nodes.Document document10 = new org.jsoup.nodes.Document("");
-        boolean boolean11 = document10.hasText();
-        java.lang.String str12 = document10.nodeName();
-        java.lang.String[] strArray14 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet15 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean16 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet15, strArray14);
-        org.jsoup.nodes.Element element17 = document10.classNames((java.util.Set<java.lang.String>) strSet15);
-        org.jsoup.nodes.Element element18 = document6.classNames((java.util.Set<java.lang.String>) strSet15);
-        org.jsoup.nodes.Element element20 = document6.appendText("hi!");
-        org.jsoup.parser.Tag tag21 = document6.tag();
-        org.jsoup.nodes.Element element22 = document1.prependChild((org.jsoup.nodes.Node) document6);
-        java.lang.String str23 = document1.outerHtml();
-        org.jsoup.nodes.Element element24 = document1.head();
-        org.jsoup.nodes.Node node27 = document1.attr("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>#document#documentdocument", "<#root hi!=\"#root\">\n</#root>");
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "#document" + "'", str12, "#document");
-        org.junit.Assert.assertNotNull(strArray14);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertNotNull(element17);
-        org.junit.Assert.assertNotNull(element18);
-        org.junit.Assert.assertNotNull(element20);
-        org.junit.Assert.assertNotNull(tag21);
-        org.junit.Assert.assertNotNull(element22);
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "<#root class=\"hi!\">\nhi!\n</#root>\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>" + "'", str23, "<#root class=\"hi!\">\nhi!\n</#root>\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(element24);
-        org.junit.Assert.assertNotNull(node27);
-    }
-
-    @Test
-    public void test2007() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2007");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.select.Elements elements13 = document1.parents();
-        org.jsoup.nodes.Document document15 = new org.jsoup.nodes.Document("");
-        boolean boolean16 = document15.hasText();
-        java.lang.String str17 = document15.nodeName();
-        java.lang.String[] strArray19 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet20 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet20, strArray19);
-        org.jsoup.nodes.Element element22 = document15.classNames((java.util.Set<java.lang.String>) strSet20);
-        org.jsoup.nodes.Element element24 = element22.addClass("#document");
-        java.lang.String str25 = element24.html();
-        org.jsoup.nodes.Element element27 = element24.appendElement("#document");
-        java.lang.String str28 = element27.html();
-        java.lang.String str29 = element27.text();
-        org.jsoup.select.Elements elements31 = element27.getElementsByAttribute("org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements33 = element27.getElementsByIndexEquals((int) (byte) 1);
-        boolean boolean34 = elements13.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements33);
-        org.jsoup.nodes.Document document37 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("#data", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
-        org.jsoup.nodes.Attributes attributes38 = document37.attributes();
-        boolean boolean39 = elements13.remove((java.lang.Object) attributes38);
-        java.lang.String str40 = attributes38.toString();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(elements13);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "#document" + "'", str17, "#document");
-        org.junit.Assert.assertNotNull(strArray19);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
-        org.junit.Assert.assertNotNull(element22);
-        org.junit.Assert.assertNotNull(element24);
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
-        org.junit.Assert.assertNotNull(element27);
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "" + "'", str28, "");
-        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "" + "'", str29, "");
-        org.junit.Assert.assertNotNull(elements31);
-        org.junit.Assert.assertNotNull(elements33);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
-        org.junit.Assert.assertNotNull(document37);
-        org.junit.Assert.assertNotNull(attributes38);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "" + "'", str40, "");
-    }
-
-    @Test
-    public void test2008() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2008");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        java.lang.String str4 = elements3.val();
-        java.lang.Object obj5 = null;
-        int int6 = elements3.lastIndexOf(obj5);
-        org.jsoup.nodes.Document document8 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements10 = document8.getElementsByAttribute("hi!");
-        java.lang.String str11 = elements10.val();
-        java.lang.Object obj12 = null;
-        int int13 = elements10.lastIndexOf(obj12);
-        org.jsoup.select.Elements elements15 = elements10.eq((int) '#');
-        boolean boolean16 = elements3.retainAll((java.util.Collection<org.jsoup.nodes.Element>) elements10);
-        boolean boolean18 = elements10.is("<?>");
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.nodes.Element element20 = elements10.get(10);
-            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 10, Size: 0");
-        } catch (java.lang.IndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + (-1) + "'", int6 == (-1));
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + (-1) + "'", int13 == (-1));
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-    }
-
-    @Test
-    public void test2009() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2009");
-        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        java.lang.String str2 = tag1.getName();
-        boolean boolean3 = tag1.isInline();
-        boolean boolean4 = tag1.isEmpty();
-        org.jsoup.parser.Tag tag6 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        java.lang.String str7 = tag6.getName();
-        boolean boolean8 = tag6.isInline();
-        boolean boolean9 = tag6.isEmpty();
-        boolean boolean10 = tag6.isEmpty();
-        org.jsoup.nodes.Document document13 = org.jsoup.parser.Parser.parse("#root", "");
-        org.jsoup.nodes.Element element16 = document13.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        java.lang.String str17 = document13.tagName();
-        java.lang.String str18 = document13.text();
-        boolean boolean19 = document13.isBlock();
-        boolean boolean20 = tag6.equals((java.lang.Object) document13);
-        boolean boolean21 = tag1.isValidParent(tag6);
-        boolean boolean22 = tag1.isEmpty();
-        org.junit.Assert.assertNotNull(tag1);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str2, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertNotNull(tag6);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str7, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(document13);
-        org.junit.Assert.assertNotNull(element16);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "#root" + "'", str17, "#root");
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "#root" + "'", str18, "#root");
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-    }
-
-    @Test
-    public void test2010() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2010");
-        org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("#root", "");
-        org.jsoup.nodes.TextNode textNode4 = textNode2.text("#document");
-        org.jsoup.nodes.TextNode textNode6 = textNode2.text(" class=\"hi!\"");
-        boolean boolean8 = textNode6.hasAttr("org.jsoup.select.Selector$SelectorParseException: ");
-        java.lang.String str9 = textNode6.text();
-        java.lang.String str10 = textNode6.nodeName();
-        org.jsoup.nodes.TextNode textNode12 = textNode6.text("\n<!--#document#document-->");
-        org.junit.Assert.assertNotNull(textNode4);
-        org.junit.Assert.assertNotNull(textNode6);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + " class=&quot;hi!&quot;" + "'", str9, " class=&quot;hi!&quot;");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "#text" + "'", str10, "#text");
-        org.junit.Assert.assertNotNull(textNode12);
-    }
-
-    @Test
-    public void test2011() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2011");
-        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean2 = tag1.isData();
-        boolean boolean3 = tag1.requiresSpecificParent();
-        boolean boolean4 = tag1.isBlock();
-        org.jsoup.parser.Tag tag6 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean7 = tag6.isData();
-        boolean boolean8 = tag6.requiresSpecificParent();
-        boolean boolean9 = tag6.isBlock();
-        boolean boolean10 = tag1.canContain(tag6);
-        boolean boolean11 = tag1.isBlock();
-        boolean boolean12 = tag1.isData();
-        java.lang.String str13 = tag1.getName();
-        boolean boolean14 = tag1.requiresSpecificParent();
-        org.jsoup.parser.Tag tag15 = tag1.getImplicitParent();
-        boolean boolean16 = tag1.requiresSpecificParent();
-        org.junit.Assert.assertNotNull(tag1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertNotNull(tag6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str13, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(tag15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-    }
-
-    @Test
-    public void test2012() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2012");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("\n<!--#root-->", "#root");
-        boolean boolean3 = document2.hasText();
-        org.jsoup.nodes.Document document4 = document2.normalise();
-        org.jsoup.nodes.Attributes attributes5 = document4.attributes();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertNotNull(document4);
-        org.junit.Assert.assertNotNull(attributes5);
-    }
-
-    @Test
-    public void test2013() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2013");
-        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
-        boolean boolean3 = tokenQueue1.matches("\n<!--#root-->");
-        boolean boolean5 = tokenQueue1.matchChomp("#data");
-        boolean boolean7 = tokenQueue1.matchChomp("#document#document");
-        boolean boolean8 = tokenQueue1.matchesWord();
-        boolean boolean9 = tokenQueue1.matchesWord();
-        tokenQueue1.addFirst((java.lang.Character) '4');
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-    }
-
-    @Test
-    public void test2014() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2014");
-        org.jsoup.nodes.Evaluator evaluator0 = null;
-        org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("#root", "");
-        java.lang.String str4 = document3.outerHtml();
-        org.jsoup.nodes.Element element6 = document3.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        boolean boolean8 = element6.hasClass("#document");
-        org.jsoup.select.Elements elements10 = element6.getElementsByIndexLessThan(10);
-        org.jsoup.nodes.Element element11 = element6.empty();
-        org.jsoup.nodes.Element element13 = element11.prependText("\n<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.select.Elements elements14 = org.jsoup.select.Collector.collect(evaluator0, element11);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str4, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(element13);
-    }
-
-    @Test
-    public void test2015() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2015");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        org.jsoup.nodes.Element element15 = element12.append("hi!");
-        org.jsoup.nodes.Element element17 = element15.appendText("#root=\"hi!\"");
-        org.jsoup.select.Elements elements19 = element17.getElementsByIndexLessThan((-1));
-        org.jsoup.select.Elements elements22 = element17.getElementsByAttributeValueStarting("hi!", "#comment");
-        org.jsoup.nodes.XmlDeclaration xmlDeclaration26 = new org.jsoup.nodes.XmlDeclaration("#document#document", "\n<!--#document-->", false);
-        java.lang.String str27 = xmlDeclaration26.toString();
-        org.jsoup.nodes.Element element28 = element17.appendChild((org.jsoup.nodes.Node) xmlDeclaration26);
-        org.jsoup.select.Elements elements30 = element28.getElementsByIndexLessThan(3);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(element17);
-        org.junit.Assert.assertNotNull(elements19);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "<?#document#document>" + "'", str27, "<?#document#document>");
-        org.junit.Assert.assertNotNull(element28);
-        org.junit.Assert.assertNotNull(elements30);
-    }
-
-    @Test
-    public void test2016() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2016");
-        java.io.File file0 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse(file0, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>#document#documentdocument");
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-    }
-
-    @Test
-    public void test2017() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2017");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
-        java.lang.String str5 = document1.id();
-        org.jsoup.nodes.Element element7 = document1.append("hi!=\"#root=&quot;hi!&quot;\"");
-        java.lang.String str8 = document1.data();
-        org.jsoup.nodes.Element element10 = document1.getElementById("#text");
-        org.jsoup.nodes.Element element11 = document1.empty();
-        org.jsoup.nodes.Element element13 = element11.getElementById("\n<!--#data-->");
-        org.junit.Assert.assertNotNull(element4);
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
-        org.junit.Assert.assertNotNull(element7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNull(element10);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNull(element13);
-    }
-
-    @Test
-    public void test2018() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2018");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
-        org.jsoup.select.Selector.SelectorParseException selectorParseException6 = new org.jsoup.select.Selector.SelectorParseException("");
-        boolean boolean7 = elements4.contains((java.lang.Object) "");
-        boolean boolean9 = elements4.is("[]");
-        org.jsoup.nodes.Document document11 = new org.jsoup.nodes.Document("");
-        boolean boolean12 = document11.hasText();
-        java.lang.String str13 = document11.nodeName();
-        java.lang.String str14 = document11.val();
-        java.lang.String str15 = document11.outerHtml();
-        java.lang.String[] strArray18 = new java.lang.String[] { "\n<!--#document-->", "#data" };
-        java.util.LinkedHashSet<java.lang.String> strSet19 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean20 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet19, strArray18);
-        org.jsoup.nodes.Element element21 = document11.classNames((java.util.Set<java.lang.String>) strSet19);
-        java.util.LinkedHashSet[] linkedHashSetArray23 = new java.util.LinkedHashSet[1];
-        @SuppressWarnings("unchecked")
-        java.util.LinkedHashSet<java.lang.String>[] strSetArray24 = (java.util.LinkedHashSet<java.lang.String>[]) linkedHashSetArray23;
-        strSetArray24[0] = strSet19;
-        java.util.LinkedHashSet<java.lang.String>[] strSetArray27 = elements4.toArray(strSetArray24);
-        org.jsoup.nodes.Document document29 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements32 = document29.getElementsByAttributeValue("hi!", "hi!");
-        boolean boolean33 = document29.hasText();
-        org.jsoup.select.Elements elements35 = document29.getElementsByIndexLessThan((int) (byte) 10);
-        boolean boolean36 = elements35.isEmpty();
-        boolean boolean37 = elements4.addAll((java.util.Collection<org.jsoup.nodes.Element>) elements35);
-        boolean boolean38 = elements4.hasText();
-        org.jsoup.select.Elements elements40 = elements4.addClass("#root=\"#root=&quot;hi!&quot;\"");
-        int int41 = elements4.size();
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "#document" + "'", str13, "#document");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertNotNull(strArray18);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNotNull(linkedHashSetArray23);
-        org.junit.Assert.assertNotNull(strSetArray24);
-        org.junit.Assert.assertNotNull(strSetArray27);
-        org.junit.Assert.assertNotNull(document29);
-        org.junit.Assert.assertNotNull(elements32);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
-        org.junit.Assert.assertNotNull(elements35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + true + "'", boolean37 == true);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + true + "'", boolean38 == true);
-        org.junit.Assert.assertNotNull(elements40);
-        org.junit.Assert.assertTrue("'" + int41 + "' != '" + 4 + "'", int41 == 4);
-    }
-
-    @Test
-    public void test2019() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2019");
-        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean2 = tag1.isData();
-        org.jsoup.nodes.Attributes attributes4 = new org.jsoup.nodes.Attributes();
-        int int5 = attributes4.size();
-        java.lang.String str6 = attributes4.html();
-        org.jsoup.nodes.Element element7 = new org.jsoup.nodes.Element(tag1, "org.jsoup.select.selector$selectorparseexception:", attributes4);
-        org.jsoup.nodes.Attribute attribute10 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
-        attribute10.setKey("#root");
-        java.lang.String str13 = attribute10.html();
-        attributes4.put(attribute10);
-        java.lang.String str15 = attribute10.getValue();
-        java.lang.String str16 = attribute10.html();
-        org.junit.Assert.assertNotNull(tag1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertNotNull(attribute10);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "#root=\"hi!\"" + "'", str13, "#root=\"hi!\"");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "hi!" + "'", str15, "hi!");
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "#root=\"hi!\"" + "'", str16, "#root=\"hi!\"");
-    }
-
-    @Test
-    public void test2020() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2020");
-        org.jsoup.select.Selector.SelectorParseException selectorParseException1 = new org.jsoup.select.Selector.SelectorParseException(" #comment=\"\"");
-        java.lang.Throwable[] throwableArray2 = selectorParseException1.getSuppressed();
-        org.junit.Assert.assertNotNull(throwableArray2);
-    }
-
-    @Test
-    public void test2021() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2021");
-        java.net.URL uRL0 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse(uRL0, (int) 'o');
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-    }
-
-    @Test
-    public void test2022() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2022");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String str4 = document1.val();
-        java.lang.String str5 = document1.outerHtml();
-        java.lang.String[] strArray8 = new java.lang.String[] { "\n<!--#document-->", "#data" };
-        java.util.LinkedHashSet<java.lang.String> strSet9 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean10 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet9, strArray8);
-        org.jsoup.nodes.Element element11 = document1.classNames((java.util.Set<java.lang.String>) strSet9);
-        org.jsoup.nodes.Document document12 = document1.normalise();
-        org.jsoup.select.Elements elements15 = document12.getElementsByAttributeValueStarting("#declaration", "#document#document=\"#document#document\"");
-        org.jsoup.select.Elements elements17 = document12.getElementsByIndexGreaterThan((int) (short) 0);
-        java.lang.String str18 = elements17.val();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(document12);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertNotNull(elements17);
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
-    }
-
-    @Test
-    public void test2023() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2023");
-        org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
-        int int1 = attributes0.size();
-        org.jsoup.nodes.Document document3 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements5 = document3.getElementsByAttribute("hi!");
-        java.lang.String str6 = elements5.val();
-        java.lang.Object obj7 = null;
-        int int8 = elements5.lastIndexOf(obj7);
-        org.jsoup.select.Elements elements10 = elements5.eq((int) '#');
-        boolean boolean11 = attributes0.equals((java.lang.Object) elements10);
-        boolean boolean12 = elements10.hasText();
-        java.lang.String str13 = elements10.val();
-        org.jsoup.nodes.Document document15 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements17 = document15.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements19 = elements17.prepend("");
-        org.jsoup.nodes.Document document21 = new org.jsoup.nodes.Document("");
-        boolean boolean22 = document21.hasText();
-        boolean boolean23 = document21.hasText();
-        org.jsoup.nodes.Document document25 = new org.jsoup.nodes.Document("");
-        boolean boolean26 = document25.hasText();
-        java.lang.String str27 = document25.nodeName();
-        java.lang.String[] strArray29 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet30 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean31 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet30, strArray29);
-        org.jsoup.nodes.Element element32 = document25.classNames((java.util.Set<java.lang.String>) strSet30);
-        org.jsoup.nodes.Element element33 = document21.classNames((java.util.Set<java.lang.String>) strSet30);
-        int int34 = elements17.indexOf((java.lang.Object) element33);
-        org.jsoup.nodes.Document document36 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements38 = document36.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements40 = elements38.prepend("");
-        org.jsoup.select.Elements elements42 = elements40.removeAttr("");
-        org.jsoup.nodes.Document document44 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements46 = document44.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements48 = elements46.prepend("");
-        org.jsoup.select.Elements elements50 = elements48.removeAttr("");
-        boolean boolean51 = elements40.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements48);
-        org.jsoup.nodes.Document document53 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements55 = document53.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements57 = elements55.prepend("");
-        org.jsoup.select.Elements elements59 = elements57.removeAttr("");
-        org.jsoup.nodes.Document document61 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements63 = document61.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements65 = elements63.prepend("");
-        org.jsoup.select.Elements elements67 = elements65.removeAttr("");
-        boolean boolean68 = elements57.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements65);
-        org.jsoup.select.Elements elements70 = elements65.wrap("#root");
-        boolean boolean71 = elements48.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements70);
-        org.jsoup.select.Elements elements72 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements48);
-        boolean boolean73 = elements17.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements48);
-        org.jsoup.nodes.Element element74 = elements48.last();
-        boolean boolean75 = elements10.retainAll((java.util.Collection<org.jsoup.nodes.Element>) elements48);
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + (-1) + "'", int8 == (-1));
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertNotNull(elements17);
-        org.junit.Assert.assertNotNull(elements19);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "#document" + "'", str27, "#document");
-        org.junit.Assert.assertNotNull(strArray29);
-        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + true + "'", boolean31 == true);
-        org.junit.Assert.assertNotNull(element32);
-        org.junit.Assert.assertNotNull(element33);
-        org.junit.Assert.assertTrue("'" + int34 + "' != '" + (-1) + "'", int34 == (-1));
-        org.junit.Assert.assertNotNull(elements38);
-        org.junit.Assert.assertNotNull(elements40);
-        org.junit.Assert.assertNotNull(elements42);
-        org.junit.Assert.assertNotNull(elements46);
-        org.junit.Assert.assertNotNull(elements48);
-        org.junit.Assert.assertNotNull(elements50);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + true + "'", boolean51 == true);
-        org.junit.Assert.assertNotNull(elements55);
-        org.junit.Assert.assertNotNull(elements57);
-        org.junit.Assert.assertNotNull(elements59);
-        org.junit.Assert.assertNotNull(elements63);
-        org.junit.Assert.assertNotNull(elements65);
-        org.junit.Assert.assertNotNull(elements67);
-        org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + true + "'", boolean68 == true);
-        org.junit.Assert.assertNotNull(elements70);
-        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + true + "'", boolean71 == true);
-        org.junit.Assert.assertTrue("'" + boolean73 + "' != '" + true + "'", boolean73 == true);
-        org.junit.Assert.assertNull(element74);
-        org.junit.Assert.assertTrue("'" + boolean75 + "' != '" + false + "'", boolean75 == false);
-    }
-
-    @Test
-    public void test2024() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2024");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "body");
-        org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("#declaration");
-        org.jsoup.nodes.Element element6 = document2.prepend("");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertNotNull(element6);
-    }
-
-    @Test
-    public void test2025() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2025");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        org.jsoup.nodes.Element element15 = element12.append("hi!");
-        java.lang.String str16 = element12.html();
-        org.jsoup.nodes.Node node18 = element12.removeAttr("[#, d, o, c, u, m, e, n, t]");
-        org.jsoup.nodes.Element element20 = element12.prependElement("hi!=\"#root\"");
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "#document#documenthi!" + "'", str16, "#document#documenthi!");
-        org.junit.Assert.assertNotNull(node18);
-        org.junit.Assert.assertNotNull(element20);
-    }
-
-    @Test
-    public void test2026() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2026");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements5 = elements3.prepend("");
-        org.jsoup.select.Elements elements7 = elements5.removeAttr("");
-        org.jsoup.select.Elements elements9 = elements7.prepend("<?#document#document>");
-        org.jsoup.nodes.Attributes attributes10 = new org.jsoup.nodes.Attributes();
-        int int11 = attributes10.size();
-        org.jsoup.nodes.Document document13 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements15 = document13.getElementsByAttribute("hi!");
-        java.lang.String str16 = elements15.val();
-        java.lang.Object obj17 = null;
-        int int18 = elements15.lastIndexOf(obj17);
-        org.jsoup.select.Elements elements20 = elements15.eq((int) '#');
-        boolean boolean21 = attributes10.equals((java.lang.Object) elements20);
-        boolean boolean23 = elements20.hasClass("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.jsoup.nodes.Element element24 = elements20.last();
-        org.jsoup.select.Elements elements26 = elements20.removeClass("#root=\"hi!\"");
-        org.jsoup.select.Elements elements28 = elements26.val("");
-        boolean boolean29 = elements9.retainAll((java.util.Collection<org.jsoup.nodes.Element>) elements28);
-        // The following exception was thrown during execution in test generation
-        try {
-            java.util.ListIterator<org.jsoup.nodes.Element> elementItor31 = elements28.listIterator((int) (short) -1);
-            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: -1");
-        } catch (java.lang.IndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elements9);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + (-1) + "'", int18 == (-1));
-        org.junit.Assert.assertNotNull(elements20);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNull(element24);
-        org.junit.Assert.assertNotNull(elements26);
-        org.junit.Assert.assertNotNull(elements28);
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-    }
-
-    @Test
-    public void test2027() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2027");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator14 = attributes13.spliterator();
-        java.lang.String str16 = attributes13.get("hi!");
-        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("#root", "");
-        org.jsoup.nodes.Element element22 = document19.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        boolean boolean23 = attributes13.equals((java.lang.Object) "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.jsoup.parser.Tag tag25 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean26 = tag25.isData();
-        org.jsoup.nodes.Attributes attributes28 = new org.jsoup.nodes.Attributes();
-        int int29 = attributes28.size();
-        java.lang.String str30 = attributes28.html();
-        org.jsoup.nodes.Element element31 = new org.jsoup.nodes.Element(tag25, "org.jsoup.select.selector$selectorparseexception:", attributes28);
-        org.jsoup.nodes.Attribute attribute34 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
-        attribute34.setKey("#root");
-        java.lang.String str37 = attribute34.html();
-        attributes28.put(attribute34);
-        attributes13.addAll(attributes28);
-        org.jsoup.nodes.Document document43 = org.jsoup.parser.Parser.parse("#root", "\n<!--#root-->");
-        org.jsoup.select.Elements elements44 = org.jsoup.select.Selector.select("#declaration", (org.jsoup.nodes.Element) document43);
-        org.jsoup.nodes.Element element45 = document43.body();
-        org.jsoup.nodes.Document document47 = new org.jsoup.nodes.Document("");
-        boolean boolean48 = document47.hasText();
-        java.lang.String str49 = document47.nodeName();
-        java.lang.String[] strArray51 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet52 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean53 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet52, strArray51);
-        org.jsoup.nodes.Element element54 = document47.classNames((java.util.Set<java.lang.String>) strSet52);
-        org.jsoup.nodes.Element element56 = document47.append("#document");
-        org.jsoup.nodes.Element element58 = document47.prepend("#document");
-        org.jsoup.select.Elements elements59 = document47.parents();
-        org.jsoup.nodes.Element element60 = element45.appendChild((org.jsoup.nodes.Node) document47);
-        boolean boolean61 = attributes28.equals((java.lang.Object) element60);
-        java.util.List<org.jsoup.nodes.Attribute> attributeList62 = attributes28.asList();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(attributeSpliterator14);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
-        org.junit.Assert.assertNotNull(document19);
-        org.junit.Assert.assertNotNull(element22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(tag25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 0 + "'", int29 == 0);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
-        org.junit.Assert.assertNotNull(attribute34);
-        org.junit.Assert.assertEquals("'" + str37 + "' != '" + "#root=\"hi!\"" + "'", str37, "#root=\"hi!\"");
-        org.junit.Assert.assertNotNull(document43);
-        org.junit.Assert.assertNotNull(elements44);
-        org.junit.Assert.assertNotNull(element45);
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
-        org.junit.Assert.assertEquals("'" + str49 + "' != '" + "#document" + "'", str49, "#document");
-        org.junit.Assert.assertNotNull(strArray51);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + true + "'", boolean53 == true);
-        org.junit.Assert.assertNotNull(element54);
-        org.junit.Assert.assertNotNull(element56);
-        org.junit.Assert.assertNotNull(element58);
-        org.junit.Assert.assertNotNull(elements59);
-        org.junit.Assert.assertNotNull(element60);
-        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
-        org.junit.Assert.assertNotNull(attributeList62);
-    }
-
-    @Test
-    public void test2028() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2028");
-        org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
-        attribute2.setKey("#root");
-        java.lang.String str5 = attribute2.getKey();
-        java.lang.String str6 = attribute2.html();
-        java.lang.String str7 = attribute2.html();
-        java.lang.String str8 = attribute2.toString();
-        java.lang.String str9 = attribute2.getValue();
-        java.lang.String str10 = attribute2.toString();
-        org.junit.Assert.assertNotNull(attribute2);
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "#root" + "'", str5, "#root");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#root=\"hi!\"" + "'", str6, "#root=\"hi!\"");
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#root=\"hi!\"" + "'", str7, "#root=\"hi!\"");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "#root=\"hi!\"" + "'", str8, "#root=\"hi!\"");
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "hi!" + "'", str9, "hi!");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "#root=\"hi!\"" + "'", str10, "#root=\"hi!\"");
-    }
-
-    @Test
-    public void test2029() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2029");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
-        org.jsoup.select.Selector.SelectorParseException selectorParseException6 = new org.jsoup.select.Selector.SelectorParseException("");
-        boolean boolean7 = elements4.contains((java.lang.Object) "");
-        boolean boolean9 = elements4.is("[]");
-        org.jsoup.nodes.Document document11 = new org.jsoup.nodes.Document("");
-        boolean boolean12 = document11.hasText();
-        java.lang.String str13 = document11.nodeName();
-        java.lang.String str14 = document11.val();
-        java.lang.String str15 = document11.outerHtml();
-        java.lang.String[] strArray18 = new java.lang.String[] { "\n<!--#document-->", "#data" };
-        java.util.LinkedHashSet<java.lang.String> strSet19 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean20 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet19, strArray18);
-        org.jsoup.nodes.Element element21 = document11.classNames((java.util.Set<java.lang.String>) strSet19);
-        java.util.LinkedHashSet[] linkedHashSetArray23 = new java.util.LinkedHashSet[1];
-        @SuppressWarnings("unchecked")
-        java.util.LinkedHashSet<java.lang.String>[] strSetArray24 = (java.util.LinkedHashSet<java.lang.String>[]) linkedHashSetArray23;
-        strSetArray24[0] = strSet19;
-        java.util.LinkedHashSet<java.lang.String>[] strSetArray27 = elements4.toArray(strSetArray24);
-        org.jsoup.select.Elements elements29 = elements4.select("org.jsoup.select.Selector$SelectorParseException: \n<!--#document-->");
-        org.jsoup.nodes.Document document31 = org.jsoup.nodes.Document.createShell("hi!");
-        org.jsoup.nodes.Document document32 = document31.normalise();
-        org.jsoup.nodes.Element element33 = document31.head();
-        java.lang.String str34 = element33.id();
-        java.lang.String str36 = element33.absUrl("#document#documenthi!");
-        org.jsoup.select.Elements elements37 = element33.getAllElements();
-        org.jsoup.select.Elements elements39 = elements37.wrap("[#, d, o, c, u, m, e, n, t]");
-        org.jsoup.nodes.Document document41 = new org.jsoup.nodes.Document("");
-        boolean boolean42 = document41.hasText();
-        java.lang.String str43 = document41.nodeName();
-        java.lang.String[] strArray45 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet46 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean47 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet46, strArray45);
-        org.jsoup.nodes.Element element48 = document41.classNames((java.util.Set<java.lang.String>) strSet46);
-        org.jsoup.nodes.Element element50 = document41.append("#document");
-        org.jsoup.nodes.Element element52 = element50.html("");
-        org.jsoup.select.Elements elements55 = element50.getElementsByAttributeValueNot("#root", "org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements57 = element50.getElementsByClass("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.jsoup.nodes.Attributes attributes58 = new org.jsoup.nodes.Attributes();
-        int int59 = attributes58.size();
-        org.jsoup.nodes.Document document61 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements63 = document61.getElementsByAttribute("hi!");
-        java.lang.String str64 = elements63.val();
-        java.lang.Object obj65 = null;
-        int int66 = elements63.lastIndexOf(obj65);
-        org.jsoup.select.Elements elements68 = elements63.eq((int) '#');
-        boolean boolean69 = attributes58.equals((java.lang.Object) elements68);
-        boolean boolean71 = elements68.hasClass("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.jsoup.nodes.Element element72 = elements68.last();
-        org.jsoup.select.Elements elements74 = elements68.removeClass("#root=\"hi!\"");
-        org.jsoup.select.Elements elements76 = elements74.val("");
-        boolean boolean77 = elements57.retainAll((java.util.Collection<org.jsoup.nodes.Element>) elements76);
-        boolean boolean78 = elements39.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements57);
-        boolean boolean79 = elements4.retainAll((java.util.Collection<org.jsoup.nodes.Element>) elements39);
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "#document" + "'", str13, "#document");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertNotNull(strArray18);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNotNull(linkedHashSetArray23);
-        org.junit.Assert.assertNotNull(strSetArray24);
-        org.junit.Assert.assertNotNull(strSetArray27);
-        org.junit.Assert.assertNotNull(elements29);
-        org.junit.Assert.assertNotNull(document31);
-        org.junit.Assert.assertNotNull(document32);
-        org.junit.Assert.assertNotNull(element33);
-        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "" + "'", str34, "");
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "" + "'", str36, "");
-        org.junit.Assert.assertNotNull(elements37);
-        org.junit.Assert.assertNotNull(elements39);
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
-        org.junit.Assert.assertEquals("'" + str43 + "' != '" + "#document" + "'", str43, "#document");
-        org.junit.Assert.assertNotNull(strArray45);
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + true + "'", boolean47 == true);
-        org.junit.Assert.assertNotNull(element48);
-        org.junit.Assert.assertNotNull(element50);
-        org.junit.Assert.assertNotNull(element52);
-        org.junit.Assert.assertNotNull(elements55);
-        org.junit.Assert.assertNotNull(elements57);
-        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 0 + "'", int59 == 0);
-        org.junit.Assert.assertNotNull(elements63);
-        org.junit.Assert.assertEquals("'" + str64 + "' != '" + "" + "'", str64, "");
-        org.junit.Assert.assertTrue("'" + int66 + "' != '" + (-1) + "'", int66 == (-1));
-        org.junit.Assert.assertNotNull(elements68);
-        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
-        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
-        org.junit.Assert.assertNull(element72);
-        org.junit.Assert.assertNotNull(elements74);
-        org.junit.Assert.assertNotNull(elements76);
-        org.junit.Assert.assertTrue("'" + boolean77 + "' != '" + false + "'", boolean77 == false);
-        org.junit.Assert.assertTrue("'" + boolean78 + "' != '" + true + "'", boolean78 == true);
-        org.junit.Assert.assertTrue("'" + boolean79 + "' != '" + false + "'", boolean79 == false);
-    }
-
-    @Test
-    public void test2030() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2030");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        boolean boolean3 = document1.hasText();
-        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
-        boolean boolean6 = document5.hasText();
-        java.lang.String str7 = document5.nodeName();
-        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
-        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element15 = document1.appendText("hi!");
-        org.jsoup.parser.Tag tag16 = document1.tag();
-        boolean boolean17 = tag16.requiresSpecificParent();
-        org.jsoup.parser.Tag tag18 = tag16.getImplicitParent();
-        org.jsoup.nodes.Document document21 = new org.jsoup.nodes.Document("");
-        boolean boolean22 = document21.hasText();
-        java.lang.String str23 = document21.nodeName();
-        java.lang.String[] strArray25 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet26 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean27 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet26, strArray25);
-        org.jsoup.nodes.Element element28 = document21.classNames((java.util.Set<java.lang.String>) strSet26);
-        org.jsoup.nodes.Element element30 = document21.append("#document");
-        org.jsoup.nodes.Element element32 = document21.prepend("#document");
-        org.jsoup.nodes.Attributes attributes33 = element32.attributes();
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator34 = attributes33.spliterator();
-        java.lang.String str36 = attributes33.get("hi!");
-        org.jsoup.nodes.Document document39 = org.jsoup.parser.Parser.parse("#root", "");
-        org.jsoup.nodes.Element element42 = document39.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        boolean boolean43 = attributes33.equals((java.lang.Object) "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        java.lang.String str44 = attributes33.html();
-        attributes33.put(" class=&quot;hi!&quot;", "org.jsoup.select.Selector$SelectorParseException: \n<!--#document-->");
-        org.jsoup.nodes.Element element48 = new org.jsoup.nodes.Element(tag16, "<html> \n <head> \n </head> \n <body>\n   #root  \n </body>\n</html>", attributes33);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(tag16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNotNull(tag18);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "#document" + "'", str23, "#document");
-        org.junit.Assert.assertNotNull(strArray25);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
-        org.junit.Assert.assertNotNull(element28);
-        org.junit.Assert.assertNotNull(element30);
-        org.junit.Assert.assertNotNull(element32);
-        org.junit.Assert.assertNotNull(attributes33);
-        org.junit.Assert.assertNotNull(attributeSpliterator34);
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "" + "'", str36, "");
-        org.junit.Assert.assertNotNull(document39);
-        org.junit.Assert.assertNotNull(element42);
-        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
-        org.junit.Assert.assertEquals("'" + str44 + "' != '" + " class=\"hi!\"" + "'", str44, " class=\"hi!\"");
-    }
-
-    @Test
-    public void test2031() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2031");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        org.jsoup.nodes.Element element15 = element12.append("hi!");
-        java.lang.String str16 = element12.html();
-        java.lang.String str17 = element12.html();
-        java.lang.String str18 = element12.val();
-        org.jsoup.select.Elements elements20 = element12.getElementsByIndexGreaterThan((int) (byte) 100);
-        org.jsoup.select.Elements elements21 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elements20);
-        org.jsoup.nodes.Document document23 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements25 = document23.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements27 = elements25.prepend("");
-        org.jsoup.select.Elements elements29 = elements27.removeAttr("");
-        org.jsoup.nodes.Document document31 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements33 = document31.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements35 = elements33.prepend("");
-        org.jsoup.select.Elements elements37 = elements35.removeAttr("");
-        boolean boolean38 = elements27.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements35);
-        org.jsoup.select.Elements elements40 = elements35.wrap("#root");
-        org.jsoup.select.Elements elements41 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements40);
-        org.jsoup.select.Elements elements44 = elements41.attr("[<, ?, >, #, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, d, o, c, u, m, e, n, t]", "#document#document=\"#document#document\"");
-        boolean boolean45 = elements21.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements44);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "#document#documenthi!" + "'", str16, "#document#documenthi!");
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "#document#documenthi!" + "'", str17, "#document#documenthi!");
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
-        org.junit.Assert.assertNotNull(elements20);
-        org.junit.Assert.assertNotNull(elements25);
-        org.junit.Assert.assertNotNull(elements27);
-        org.junit.Assert.assertNotNull(elements29);
-        org.junit.Assert.assertNotNull(elements33);
-        org.junit.Assert.assertNotNull(elements35);
-        org.junit.Assert.assertNotNull(elements37);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + true + "'", boolean38 == true);
-        org.junit.Assert.assertNotNull(elements40);
-        org.junit.Assert.assertNotNull(elements44);
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + true + "'", boolean45 == true);
-    }
-
-    @Test
-    public void test2032() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2032");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        java.lang.String str4 = elements3.val();
-        java.lang.Object obj5 = null;
-        int int6 = elements3.lastIndexOf(obj5);
-        org.jsoup.select.Elements elements8 = elements3.eq((int) '#');
-        elements3.clear();
-        org.jsoup.nodes.Comment comment12 = new org.jsoup.nodes.Comment("#root", "");
-        java.lang.String str13 = comment12.nodeName();
-        java.lang.String str14 = comment12.nodeName();
-        int int15 = elements3.indexOf((java.lang.Object) comment12);
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + (-1) + "'", int6 == (-1));
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "#comment" + "'", str13, "#comment");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "#comment" + "'", str14, "#comment");
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + (-1) + "'", int15 == (-1));
-    }
-
-    @Test
-    public void test2033() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2033");
-        org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("", "\n<!--#root-->");
-        java.lang.String str3 = textNode2.getWholeText();
-        org.jsoup.nodes.TextNode textNode5 = textNode2.text("hi!");
-        java.lang.String str6 = textNode2.getWholeText();
-        java.lang.String str7 = textNode2.nodeName();
-        org.junit.Assert.assertNotNull(textNode2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "" + "'", str3, "");
-        org.junit.Assert.assertNotNull(textNode5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "hi!" + "'", str6, "hi!");
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#text" + "'", str7, "#text");
-    }
-
-    @Test
-    public void test2034() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2034");
-        org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
-        int int1 = attributes0.size();
-        org.jsoup.nodes.Document document3 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements5 = document3.getElementsByAttribute("hi!");
-        java.lang.String str6 = elements5.val();
-        java.lang.Object obj7 = null;
-        int int8 = elements5.lastIndexOf(obj7);
-        org.jsoup.select.Elements elements10 = elements5.eq((int) '#');
-        boolean boolean11 = attributes0.equals((java.lang.Object) elements10);
-        boolean boolean13 = elements10.hasClass("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        boolean boolean15 = elements10.hasAttr("#declaration");
-        org.jsoup.select.Elements elements17 = elements10.append("");
-        org.jsoup.nodes.Document document19 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements21 = document19.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements23 = elements21.prepend("");
-        org.jsoup.select.Elements elements25 = elements23.removeAttr("");
-        org.jsoup.nodes.Document document27 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements29 = document27.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements31 = elements29.prepend("");
-        org.jsoup.select.Elements elements33 = elements31.removeAttr("");
-        boolean boolean34 = elements23.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements31);
-        java.lang.Object[] objArray35 = elements23.toArray();
-        org.jsoup.nodes.Document document37 = new org.jsoup.nodes.Document("");
-        boolean boolean38 = document37.hasText();
-        java.lang.String str39 = document37.nodeName();
-        java.lang.String str40 = document37.val();
-        boolean boolean41 = elements23.add((org.jsoup.nodes.Element) document37);
-        org.jsoup.nodes.Element element43 = document37.appendText("#document#documenthi!");
-        boolean boolean44 = elements17.equals((java.lang.Object) document37);
-        org.jsoup.nodes.Document document47 = org.jsoup.parser.Parser.parse("#root", "");
-        org.jsoup.select.Elements elements48 = document47.parents();
-        org.jsoup.nodes.Node node51 = document47.attr("#declaration", "#text");
-        org.jsoup.nodes.Element element52 = document37.appendChild(node51);
-        org.jsoup.nodes.Element element54 = element52.appendText("\n<!--#root-->");
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + (-1) + "'", int8 == (-1));
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(elements17);
-        org.junit.Assert.assertNotNull(elements21);
-        org.junit.Assert.assertNotNull(elements23);
-        org.junit.Assert.assertNotNull(elements25);
-        org.junit.Assert.assertNotNull(elements29);
-        org.junit.Assert.assertNotNull(elements31);
-        org.junit.Assert.assertNotNull(elements33);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + true + "'", boolean34 == true);
-        org.junit.Assert.assertNotNull(objArray35);
-        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray35), "[]");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray35), "[]");
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "#document" + "'", str39, "#document");
-        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "" + "'", str40, "");
-        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + true + "'", boolean41 == true);
-        org.junit.Assert.assertNotNull(element43);
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
-        org.junit.Assert.assertNotNull(document47);
-        org.junit.Assert.assertNotNull(elements48);
-        org.junit.Assert.assertNotNull(node51);
-        org.junit.Assert.assertNotNull(element52);
-        org.junit.Assert.assertNotNull(element54);
-    }
-
-    @Test
-    public void test2035() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2035");
-        org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("\n<!--#document--> #data", "org.jsoup.select.selector$selectorparseexception:");
-    }
-
-    @Test
-    public void test2036() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2036");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        java.lang.String str5 = elements3.attr("#root");
-        java.lang.String str6 = elements3.text();
-        org.jsoup.select.Elements elements8 = elements3.prepend("org.jsoup.select.selector$selectorparseexception:");
-        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
-        org.jsoup.nodes.Element element13 = document11.addClass("hi!");
-        java.lang.String str14 = document11.title();
-        boolean boolean15 = elements3.add((org.jsoup.nodes.Element) document11);
-        org.jsoup.select.Elements elements17 = elements3.eq((int) (byte) 10);
-        java.util.ListIterator<org.jsoup.nodes.Element> elementItor18 = elements3.listIterator();
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(document11);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
-        org.junit.Assert.assertNotNull(elements17);
-        org.junit.Assert.assertNotNull(elementItor18);
-    }
-
-    @Test
-    public void test2037() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2037");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        boolean boolean3 = document1.hasText();
-        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
-        boolean boolean6 = document5.hasText();
-        java.lang.String str7 = document5.nodeName();
-        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
-        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element15 = document1.appendText("hi!");
-        org.jsoup.parser.Tag tag16 = document1.tag();
-        boolean boolean17 = tag16.requiresSpecificParent();
-        org.jsoup.parser.Tag tag18 = tag16.getImplicitParent();
-        boolean boolean19 = tag18.isInline();
-        boolean boolean20 = tag18.requiresSpecificParent();
-        boolean boolean21 = tag18.preserveWhitespace();
-        boolean boolean22 = tag18.preserveWhitespace();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(tag16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNotNull(tag18);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-    }
-
-    @Test
-    public void test2038() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2038");
-        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document#document=\"#document#document\"");
-        boolean boolean2 = tokenQueue1.consumeWhitespace();
-        java.lang.String str4 = tokenQueue1.chompTo("<html>\n<head>\n</head>\n<body>\n hi! \n</body>\n</html>");
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "#document#document=\"#document#document\"" + "'", str4, "#document#document=\"#document#document\"");
-    }
-
-    @Test
-    public void test2039() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2039");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("hi!");
-        boolean boolean3 = document1.hasClass("<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
-        org.jsoup.nodes.Attributes attributes4 = document1.attributes();
-        org.jsoup.nodes.Attributes attributes5 = new org.jsoup.nodes.Attributes();
-        int int6 = attributes5.size();
-        org.jsoup.nodes.Document document8 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements10 = document8.getElementsByAttribute("hi!");
-        java.lang.String str11 = elements10.val();
-        java.lang.Object obj12 = null;
-        int int13 = elements10.lastIndexOf(obj12);
-        org.jsoup.select.Elements elements15 = elements10.eq((int) '#');
-        boolean boolean16 = attributes5.equals((java.lang.Object) elements15);
-        boolean boolean18 = elements15.hasClass("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.jsoup.nodes.Element element19 = elements15.last();
-        org.jsoup.select.Elements elements21 = elements15.removeClass("#root=\"hi!\"");
-        boolean boolean22 = attributes4.equals((java.lang.Object) elements15);
-        org.jsoup.nodes.Document document24 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements26 = document24.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element28 = document24.prepend("#document");
-        org.jsoup.select.Elements elements30 = element28.getElementsByAttribute("hi!");
-        java.lang.String str31 = elements30.val();
-        boolean boolean32 = elements30.hasText();
-        boolean boolean33 = elements15.retainAll((java.util.Collection<org.jsoup.nodes.Element>) elements30);
-        java.lang.String str35 = elements15.attr("");
-        java.lang.String str36 = elements15.outerHtml();
-        java.util.ListIterator<org.jsoup.nodes.Element> elementItor38 = elements15.listIterator((int) (short) 0);
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertNotNull(attributes4);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + (-1) + "'", int13 == (-1));
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNull(element19);
-        org.junit.Assert.assertNotNull(elements21);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(elements26);
-        org.junit.Assert.assertNotNull(element28);
-        org.junit.Assert.assertNotNull(elements30);
-        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "" + "'", str31, "");
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
-        org.junit.Assert.assertEquals("'" + str35 + "' != '" + "" + "'", str35, "");
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "" + "'", str36, "");
-        org.junit.Assert.assertNotNull(elementItor38);
-    }
-
-    @Test
-    public void test2040() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2040");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element5 = document1.prepend("#document");
-        org.jsoup.nodes.Element element6 = element5.empty();
-        org.jsoup.nodes.Document document8 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements10 = document8.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements12 = elements10.prepend("");
-        org.jsoup.select.Elements elements14 = elements12.removeAttr("");
-        org.jsoup.nodes.Document document16 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements18 = document16.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements20 = elements18.prepend("");
-        org.jsoup.select.Elements elements22 = elements20.removeAttr("");
-        boolean boolean23 = elements12.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements20);
-        org.jsoup.nodes.Document document25 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements27 = document25.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements29 = elements27.prepend("");
-        org.jsoup.select.Elements elements31 = elements29.removeAttr("");
-        org.jsoup.nodes.Document document33 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements35 = document33.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements37 = elements35.prepend("");
-        org.jsoup.select.Elements elements39 = elements37.removeAttr("");
-        boolean boolean40 = elements29.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements37);
-        org.jsoup.select.Elements elements42 = elements37.wrap("#root");
-        boolean boolean43 = elements20.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements42);
-        org.jsoup.select.Elements elements44 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements20);
-        org.jsoup.nodes.Element element45 = elements20.first();
-        org.jsoup.nodes.Document document48 = org.jsoup.parser.Parser.parseBodyFragment("\n<!--#root-->", "#root");
-        org.jsoup.nodes.Element element50 = document48.removeClass("#root=\"hi!\"");
-        boolean boolean51 = elements20.add(element50);
-        org.jsoup.nodes.Element element52 = element6.appendChild((org.jsoup.nodes.Node) element50);
-        org.jsoup.select.Elements elements53 = element50.siblingElements();
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertNotNull(elements14);
-        org.junit.Assert.assertNotNull(elements18);
-        org.junit.Assert.assertNotNull(elements20);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
-        org.junit.Assert.assertNotNull(elements27);
-        org.junit.Assert.assertNotNull(elements29);
-        org.junit.Assert.assertNotNull(elements31);
-        org.junit.Assert.assertNotNull(elements35);
-        org.junit.Assert.assertNotNull(elements37);
-        org.junit.Assert.assertNotNull(elements39);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + true + "'", boolean40 == true);
-        org.junit.Assert.assertNotNull(elements42);
-        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + true + "'", boolean43 == true);
-        org.junit.Assert.assertNull(element45);
-        org.junit.Assert.assertNotNull(document48);
-        org.junit.Assert.assertNotNull(element50);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + true + "'", boolean51 == true);
-        org.junit.Assert.assertNotNull(element52);
-        org.junit.Assert.assertNotNull(elements53);
-    }
-
-    @Test
-    public void test2041() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2041");
-        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("org.jsoup.select.Selector$SelectorParseException: #document#document=\"#document#document\"", "<<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>>");
-        org.junit.Assert.assertNotNull(document2);
-    }
-
-    @Test
-    public void test2042() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2042");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
-        boolean boolean5 = document1.hasText();
-        org.jsoup.select.Elements elements7 = document1.getElementsByIndexLessThan((int) (byte) 10);
-        boolean boolean8 = elements7.isEmpty();
-        java.lang.Object obj9 = null;
-        boolean boolean10 = elements7.contains(obj9);
-        boolean boolean11 = elements7.isEmpty();
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.nodes.Element element13 = elements7.get((int) 'd');
-            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 100, Size: 4");
-        } catch (java.lang.IndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-    }
-
-    @Test
-    public void test2043() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2043");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element5 = document1.prepend("#document");
-        org.jsoup.nodes.Element element6 = element5.empty();
-        org.jsoup.select.Elements elements8 = element5.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements10 = elements8.removeClass("#root");
-        org.jsoup.select.Elements elements12 = elements8.append("");
-        org.jsoup.nodes.Document document15 = org.jsoup.parser.Parser.parse("#root", "");
-        java.lang.String str16 = document15.outerHtml();
-        org.jsoup.nodes.Element element18 = document15.createElement("#document#documenthi!");
-        boolean boolean19 = elements12.remove((java.lang.Object) document15);
-        org.jsoup.nodes.Element element21 = document15.prependElement("hi!=\"#root=&quot;hi!&quot;\"");
-        java.lang.String str22 = document15.val();
-        java.lang.String str23 = document15.outerHtml();
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertNotNull(document15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str16, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(element18);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "<hi!=\"#root=&quot;hi!&quot;\">\n</hi!=\"#root=&quot;hi!&quot;\">\n<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str23, "<hi!=\"#root=&quot;hi!&quot;\">\n</hi!=\"#root=&quot;hi!&quot;\">\n<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-    }
-
-    @Test
-    public void test2044() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2044");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("org.jsoup.select.selector$selectorparseexception:", "");
-        org.jsoup.select.Elements elements4 = document2.getElementsByIndexLessThan((int) '<');
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(elements4);
-    }
-
-    @Test
-    public void test2045() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2045");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        org.jsoup.nodes.Element element15 = element12.append("hi!");
-        org.jsoup.nodes.Document document17 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements19 = document17.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element21 = document17.prepend("#document");
-        org.jsoup.nodes.Element element22 = element21.empty();
-        org.jsoup.select.Elements elements24 = element21.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements26 = elements24.removeClass("#root");
-        org.jsoup.nodes.Document document28 = new org.jsoup.nodes.Document("");
-        boolean boolean29 = document28.hasText();
-        java.lang.String str30 = document28.nodeName();
-        java.lang.String[] strArray32 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet33 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean34 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet33, strArray32);
-        org.jsoup.nodes.Element element35 = document28.classNames((java.util.Set<java.lang.String>) strSet33);
-        org.jsoup.nodes.Element element37 = document28.append("#document");
-        org.jsoup.nodes.Element element39 = document28.prepend("#document");
-        org.jsoup.nodes.Attributes attributes40 = element39.attributes();
-        org.jsoup.nodes.Element element42 = element39.append("hi!");
-        org.jsoup.select.Elements elements44 = element42.getElementsByIndexLessThan((int) (short) 0);
-        boolean boolean45 = elements24.equals((java.lang.Object) elements44);
-        java.util.ListIterator<org.jsoup.nodes.Element> elementItor47 = elements44.listIterator(0);
-        boolean boolean48 = element15.equals((java.lang.Object) elements44);
-        org.jsoup.nodes.Element element50 = element15.append("<!--#document-->");
-        java.lang.String str51 = element15.tagName();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(elements19);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNotNull(element22);
-        org.junit.Assert.assertNotNull(elements24);
-        org.junit.Assert.assertNotNull(elements26);
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "#document" + "'", str30, "#document");
-        org.junit.Assert.assertNotNull(strArray32);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + true + "'", boolean34 == true);
-        org.junit.Assert.assertNotNull(element35);
-        org.junit.Assert.assertNotNull(element37);
-        org.junit.Assert.assertNotNull(element39);
-        org.junit.Assert.assertNotNull(attributes40);
-        org.junit.Assert.assertNotNull(element42);
-        org.junit.Assert.assertNotNull(elements44);
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + true + "'", boolean45 == true);
-        org.junit.Assert.assertNotNull(elementItor47);
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
-        org.junit.Assert.assertNotNull(element50);
-        org.junit.Assert.assertEquals("'" + str51 + "' != '" + "#root" + "'", str51, "#root");
-    }
-
-    @Test
-    public void test2046() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2046");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = element8.addClass("#document");
-        org.jsoup.nodes.Document document12 = new org.jsoup.nodes.Document("");
-        boolean boolean13 = document12.hasText();
-        boolean boolean14 = document12.hasText();
-        org.jsoup.nodes.Document document16 = new org.jsoup.nodes.Document("");
-        boolean boolean17 = document16.hasText();
-        java.lang.String str18 = document16.nodeName();
-        java.lang.String[] strArray20 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet21 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean22 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet21, strArray20);
-        org.jsoup.nodes.Element element23 = document16.classNames((java.util.Set<java.lang.String>) strSet21);
-        org.jsoup.nodes.Element element24 = document12.classNames((java.util.Set<java.lang.String>) strSet21);
-        java.util.Set<java.lang.String> strSet25 = document12.classNames();
-        org.jsoup.nodes.Element element26 = element8.classNames(strSet25);
-        org.jsoup.nodes.Element element28 = element26.toggleClass("body");
-        org.jsoup.nodes.Element element30 = element26.val("");
-        org.jsoup.nodes.Attributes attributes31 = element30.attributes();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "#document" + "'", str18, "#document");
-        org.junit.Assert.assertNotNull(strArray20);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
-        org.junit.Assert.assertNotNull(element23);
-        org.junit.Assert.assertNotNull(element24);
-        org.junit.Assert.assertNotNull(strSet25);
-        org.junit.Assert.assertNotNull(element26);
-        org.junit.Assert.assertNotNull(element28);
-        org.junit.Assert.assertNotNull(element30);
-        org.junit.Assert.assertNotNull(attributes31);
-    }
-
-    @Test
-    public void test2047() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2047");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("\n<!--#root-->", "#root");
-        org.jsoup.nodes.Element element4 = document2.removeClass("#root=\"hi!\"");
-        org.jsoup.nodes.Document document6 = new org.jsoup.nodes.Document("");
-        org.jsoup.nodes.Element element9 = document6.attr("hi!", "#root");
-        org.jsoup.nodes.Attributes attributes10 = document6.attributes();
-        org.jsoup.select.Elements elements11 = document6.children();
-        java.util.Set<java.lang.String> strSet12 = document6.classNames();
-        org.jsoup.nodes.Element element13 = element4.classNames(strSet12);
-        org.jsoup.select.Elements elements14 = element4.children();
-        org.jsoup.nodes.Document document17 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("#data", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
-        org.jsoup.nodes.Attributes attributes18 = document17.attributes();
-        int int19 = elements14.lastIndexOf((java.lang.Object) attributes18);
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(element4);
-        org.junit.Assert.assertNotNull(element9);
-        org.junit.Assert.assertNotNull(attributes10);
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertNotNull(strSet12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(elements14);
-        org.junit.Assert.assertNotNull(document17);
-        org.junit.Assert.assertNotNull(attributes18);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + (-1) + "'", int19 == (-1));
-    }
-
-    @Test
-    public void test2048() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2048");
-        org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("<!--#root-->\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>", "hi!=\"#root\"");
-        org.jsoup.nodes.Attributes attributes3 = textNode2.attributes();
-        org.junit.Assert.assertNotNull(attributes3);
-    }
-
-    @Test
-    public void test2049() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2049");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        boolean boolean3 = document1.hasText();
-        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
-        boolean boolean6 = document5.hasText();
-        java.lang.String str7 = document5.nodeName();
-        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
-        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
-        java.util.Set<java.lang.String> strSet14 = document1.classNames();
-        org.jsoup.nodes.Element element16 = document1.getElementById("#document#document");
-        java.lang.String str17 = document1.id();
-        org.jsoup.parser.Tag tag18 = document1.tag();
-        org.jsoup.nodes.TextNode textNode22 = new org.jsoup.nodes.TextNode("org.jsoup.select.Selector$SelectorParseException: ", "");
-        java.lang.String str24 = textNode22.absUrl("#data");
-        org.jsoup.nodes.TextNode textNode26 = textNode22.text("#data");
-        org.jsoup.nodes.Attributes attributes27 = textNode22.attributes();
-        org.jsoup.nodes.Element element28 = new org.jsoup.nodes.Element(tag18, "#document", attributes27);
-        org.jsoup.nodes.Attribute attribute31 = new org.jsoup.nodes.Attribute("#root", "hi!");
-        attributes27.put(attribute31);
-        java.util.List<org.jsoup.nodes.Attribute> attributeList33 = attributes27.asList();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(strSet14);
-        org.junit.Assert.assertNull(element16);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertNotNull(tag18);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
-        org.junit.Assert.assertNotNull(textNode26);
-        org.junit.Assert.assertNotNull(attributes27);
-        org.junit.Assert.assertNotNull(attributeList33);
-    }
-
-    @Test
-    public void test2050() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2050");
-        org.jsoup.nodes.Comment comment2 = new org.jsoup.nodes.Comment("\n<body>\n #document\n</body>", "org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.nodes.Document document4 = org.jsoup.nodes.Document.createShell("hi!");
-        org.jsoup.nodes.Document document5 = document4.normalise();
-        org.jsoup.nodes.Element element6 = document4.head();
-        // The following exception was thrown during execution in test generation
-        try {
-            comment2.replaceWith((org.jsoup.nodes.Node) element6);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated object is null");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document4);
-        org.junit.Assert.assertNotNull(document5);
-        org.junit.Assert.assertNotNull(element6);
-    }
-
-    @Test
-    public void test2051() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2051");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
-        java.lang.String str3 = document2.outerHtml();
-        org.jsoup.nodes.Element element5 = document2.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.jsoup.select.Elements elements8 = document2.getElementsByAttributeValueStarting("#root=\"hi!\"", "org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.nodes.Element element10 = document2.prepend("#root=\"hi!\"");
-        java.lang.String str11 = element10.id();
-        org.jsoup.nodes.Element element13 = element10.addClass("org.jsoup.select.Selector$SelectorParseException: \n<!--#document-->");
-        org.jsoup.nodes.Node node16 = element10.attr("#declaration", "\n<!--#root-->");
-        org.jsoup.nodes.Element element19 = element10.attr("\n&lt;!--#root--&gt;", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(node16);
-        org.junit.Assert.assertNotNull(element19);
-    }
-
-    @Test
-    public void test2052() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2052");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#document#document=\"#document#document\"", "body");
-        java.lang.String str3 = document2.text();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document#document=\"#document#document\"" + "'", str3, "#document#document=\"#document#document\"");
-    }
-
-    @Test
-    public void test2053() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2053");
-        org.jsoup.select.Selector.SelectorParseException selectorParseException1 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
-        java.lang.Throwable[] throwableArray2 = selectorParseException1.getSuppressed();
-        org.jsoup.select.Selector.SelectorParseException selectorParseException4 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
-        selectorParseException1.addSuppressed((java.lang.Throwable) selectorParseException4);
-        org.jsoup.select.Selector.SelectorParseException selectorParseException7 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
-        java.lang.Throwable[] throwableArray8 = selectorParseException7.getSuppressed();
-        org.jsoup.select.Selector.SelectorParseException selectorParseException10 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
-        selectorParseException7.addSuppressed((java.lang.Throwable) selectorParseException10);
-        selectorParseException1.addSuppressed((java.lang.Throwable) selectorParseException7);
-        org.jsoup.select.Selector.SelectorParseException selectorParseException14 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
-        org.jsoup.select.Selector.SelectorParseException selectorParseException16 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
-        java.lang.Throwable[] throwableArray17 = selectorParseException16.getSuppressed();
-        org.jsoup.select.Selector.SelectorParseException selectorParseException19 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
-        selectorParseException16.addSuppressed((java.lang.Throwable) selectorParseException19);
-        selectorParseException14.addSuppressed((java.lang.Throwable) selectorParseException19);
-        java.lang.Throwable[] throwableArray22 = selectorParseException14.getSuppressed();
-        selectorParseException1.addSuppressed((java.lang.Throwable) selectorParseException14);
-        java.lang.Throwable[] throwableArray24 = selectorParseException1.getSuppressed();
-        org.jsoup.select.Selector.SelectorParseException selectorParseException26 = new org.jsoup.select.Selector.SelectorParseException("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        selectorParseException1.addSuppressed((java.lang.Throwable) selectorParseException26);
-        org.junit.Assert.assertNotNull(throwableArray2);
-        org.junit.Assert.assertNotNull(throwableArray8);
-        org.junit.Assert.assertNotNull(throwableArray17);
-        org.junit.Assert.assertNotNull(throwableArray22);
-        org.junit.Assert.assertNotNull(throwableArray24);
-    }
-
-    @Test
-    public void test2054() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2054");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("# ");
-        java.lang.String str2 = document1.val();
-        java.lang.String str3 = document1.className();
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "" + "'", str3, "");
-    }
-
-    @Test
-    public void test2055() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2055");
-        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("");
-        boolean boolean3 = tokenQueue1.matchChomp("org.jsoup.select.selector$selectorparseexception:");
-        java.lang.String str4 = tokenQueue1.consumeWord();
-        java.lang.String str5 = tokenQueue1.consumeAttributeKey();
-        java.lang.String str6 = tokenQueue1.remainder();
-        java.lang.String str7 = tokenQueue1.consumeWord();
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-    }
-
-    @Test
-    public void test2056() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2056");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<?>");
-        org.junit.Assert.assertNotNull(document1);
-    }
-
-    @Test
-    public void test2057() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2057");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("\n<!--#document#document-->", "#declaration");
-        org.junit.Assert.assertNotNull(document2);
-    }
-
-    @Test
-    public void test2058() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2058");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator14 = attributes13.spliterator();
-        java.lang.String str16 = attributes13.get("hi!");
-        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("#root", "");
-        org.jsoup.nodes.Element element22 = document19.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        boolean boolean23 = attributes13.equals((java.lang.Object) "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.jsoup.parser.Tag tag25 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean26 = tag25.isData();
-        org.jsoup.nodes.Attributes attributes28 = new org.jsoup.nodes.Attributes();
-        int int29 = attributes28.size();
-        java.lang.String str30 = attributes28.html();
-        org.jsoup.nodes.Element element31 = new org.jsoup.nodes.Element(tag25, "org.jsoup.select.selector$selectorparseexception:", attributes28);
-        org.jsoup.nodes.Attribute attribute34 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
-        attribute34.setKey("#root");
-        java.lang.String str37 = attribute34.html();
-        attributes28.put(attribute34);
-        attributes13.addAll(attributes28);
-        org.jsoup.nodes.Attribute attribute42 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
-        attribute42.setKey("#root");
-        java.lang.String str45 = attribute42.getKey();
-        java.lang.String str46 = attribute42.html();
-        attributes28.put(attribute42);
-        attributes28.put("#document#documenthi!#root=&quot;hi!&quot;", "#document#documenthi!#root=&quot;hi!&quot;");
-        java.lang.String str52 = attributes28.get("#document#documentdocument=\"&lt;?hi!&gt;\"");
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(attributeSpliterator14);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
-        org.junit.Assert.assertNotNull(document19);
-        org.junit.Assert.assertNotNull(element22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(tag25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 0 + "'", int29 == 0);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
-        org.junit.Assert.assertNotNull(attribute34);
-        org.junit.Assert.assertEquals("'" + str37 + "' != '" + "#root=\"hi!\"" + "'", str37, "#root=\"hi!\"");
-        org.junit.Assert.assertNotNull(attribute42);
-        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "#root" + "'", str45, "#root");
-        org.junit.Assert.assertEquals("'" + str46 + "' != '" + "#root=\"hi!\"" + "'", str46, "#root=\"hi!\"");
-        org.junit.Assert.assertEquals("'" + str52 + "' != '" + "" + "'", str52, "");
-    }
-
-    @Test
-    public void test2059() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2059");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("\n&lt;!--#root--&gt;", "<html>\n<head>\n</head>\n<body> \n <!--#root-->\n</body>\n</html>");
-        org.jsoup.select.Elements elements4 = document2.getElementsByIndexGreaterThan(0);
-        org.jsoup.select.Elements elements7 = elements4.attr("document", "\n<#document#document class=\" org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=&quot;#root&quot;\">\n</#document#document>");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertNotNull(elements7);
-    }
-
-    @Test
-    public void test2060() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2060");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements5 = elements3.prepend("");
-        org.jsoup.select.Elements elements7 = elements5.removeAttr("");
-        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements13 = elements11.prepend("");
-        org.jsoup.select.Elements elements15 = elements13.removeAttr("");
-        boolean boolean16 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements13);
-        org.jsoup.nodes.Document document18 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements20 = document18.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements22 = elements20.prepend("");
-        org.jsoup.select.Elements elements24 = elements22.removeAttr("");
-        org.jsoup.nodes.Document document26 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements28 = document26.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements30 = elements28.prepend("");
-        org.jsoup.select.Elements elements32 = elements30.removeAttr("");
-        boolean boolean33 = elements22.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements30);
-        org.jsoup.select.Elements elements35 = elements30.wrap("#root");
-        boolean boolean36 = elements13.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements35);
-        org.jsoup.select.Elements elements38 = elements13.wrap("<hi!=\"#root=&quot;hi!&quot;\">\n</hi!=\"#root=&quot;hi!&quot;\">\n<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertNotNull(elements13);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertNotNull(elements20);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertNotNull(elements24);
-        org.junit.Assert.assertNotNull(elements28);
-        org.junit.Assert.assertNotNull(elements30);
-        org.junit.Assert.assertNotNull(elements32);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
-        org.junit.Assert.assertNotNull(elements35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + true + "'", boolean36 == true);
-        org.junit.Assert.assertNotNull(elements38);
-    }
-
-    @Test
-    public void test2061() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2061");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<?#document#document>", " text=\"#data\"");
-        java.lang.String str3 = document2.val();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "" + "'", str3, "");
-    }
-
-    @Test
-    public void test2062() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2062");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements5 = elements3.prepend("");
-        org.jsoup.select.Elements elements7 = elements5.removeAttr("");
-        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements13 = elements11.prepend("");
-        org.jsoup.select.Elements elements15 = elements13.removeAttr("");
-        boolean boolean16 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements13);
-        org.jsoup.nodes.Document document18 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements20 = document18.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements22 = elements20.prepend("");
-        org.jsoup.select.Elements elements24 = elements22.removeAttr("");
-        org.jsoup.nodes.Document document26 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements28 = document26.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements30 = elements28.prepend("");
-        org.jsoup.select.Elements elements32 = elements30.removeAttr("");
-        boolean boolean33 = elements22.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements30);
-        org.jsoup.select.Elements elements35 = elements30.wrap("#root");
-        boolean boolean36 = elements13.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements35);
-        org.jsoup.select.Elements elements37 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements13);
-        org.jsoup.nodes.Element element38 = elements13.first();
-        org.jsoup.nodes.Document document41 = org.jsoup.parser.Parser.parseBodyFragment("\n<!--#root-->", "#root");
-        org.jsoup.nodes.Element element43 = document41.removeClass("#root=\"hi!\"");
-        boolean boolean44 = elements13.add(element43);
-        org.jsoup.nodes.Node node45 = element43.parent();
-        boolean boolean46 = element43.isBlock();
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertNotNull(elements13);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertNotNull(elements20);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertNotNull(elements24);
-        org.junit.Assert.assertNotNull(elements28);
-        org.junit.Assert.assertNotNull(elements30);
-        org.junit.Assert.assertNotNull(elements32);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
-        org.junit.Assert.assertNotNull(elements35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + true + "'", boolean36 == true);
-        org.junit.Assert.assertNull(element38);
-        org.junit.Assert.assertNotNull(document41);
-        org.junit.Assert.assertNotNull(element43);
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + true + "'", boolean44 == true);
-        org.junit.Assert.assertNull(node45);
-        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
-    }
-
-    @Test
-    public void test2063() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2063");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element5 = document1.prepend("#document");
-        org.jsoup.nodes.Element element6 = element5.empty();
-        org.jsoup.select.Elements elements8 = element5.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements10 = elements8.removeClass("#root");
-        org.jsoup.nodes.Document document12 = new org.jsoup.nodes.Document("");
-        boolean boolean13 = document12.hasText();
-        java.lang.String str14 = document12.nodeName();
-        java.lang.String[] strArray16 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet17 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean18 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet17, strArray16);
-        org.jsoup.nodes.Element element19 = document12.classNames((java.util.Set<java.lang.String>) strSet17);
-        org.jsoup.nodes.Element element21 = document12.append("#document");
-        org.jsoup.nodes.Element element23 = document12.prepend("#document");
-        org.jsoup.nodes.Attributes attributes24 = element23.attributes();
-        org.jsoup.nodes.Element element26 = element23.append("hi!");
-        org.jsoup.select.Elements elements28 = element26.getElementsByIndexLessThan((int) (short) 0);
-        boolean boolean29 = elements8.equals((java.lang.Object) elements28);
-        org.jsoup.nodes.Document document32 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements34 = document32.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements36 = elements34.prepend("");
-        elements36.clear();
-        int int39 = elements36.indexOf((java.lang.Object) "org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements41 = elements36.removeClass("#data");
-        org.jsoup.select.Elements elements42 = org.jsoup.select.Selector.select("#data", (java.lang.Iterable<org.jsoup.nodes.Element>) elements41);
-        org.jsoup.nodes.Element element43 = elements42.last();
-        org.jsoup.select.Elements elements45 = elements42.html("#data");
-        boolean boolean46 = elements28.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements42);
-        org.jsoup.select.Elements elements48 = elements42.val("#document#documenthi!=\"hi!\"");
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.nodes.Element element50 = elements42.get(2);
-            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 2, Size: 0");
-        } catch (java.lang.IndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "#document" + "'", str14, "#document");
-        org.junit.Assert.assertNotNull(strArray16);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + true + "'", boolean18 == true);
-        org.junit.Assert.assertNotNull(element19);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNotNull(element23);
-        org.junit.Assert.assertNotNull(attributes24);
-        org.junit.Assert.assertNotNull(element26);
-        org.junit.Assert.assertNotNull(elements28);
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + true + "'", boolean29 == true);
-        org.junit.Assert.assertNotNull(elements34);
-        org.junit.Assert.assertNotNull(elements36);
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + (-1) + "'", int39 == (-1));
-        org.junit.Assert.assertNotNull(elements41);
-        org.junit.Assert.assertNotNull(elements42);
-        org.junit.Assert.assertNull(element43);
-        org.junit.Assert.assertNotNull(elements45);
-        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + true + "'", boolean46 == true);
-        org.junit.Assert.assertNotNull(elements48);
-    }
-
-    @Test
-    public void test2064() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2064");
-        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("\n<!--#declaration-->");
-        org.jsoup.nodes.Node node2 = document1.parent();
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Integer int3 = node2.siblingIndex();
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNull(node2);
-    }
-
-    @Test
-    public void test2065() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2065");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment(" class=\"hi!\"");
-        java.lang.String str2 = document1.text();
-        org.jsoup.nodes.Element element4 = document1.createElement(" data=\"org.jsoup.select.selector$selectorparseexception:\" <!--#document-->=\" hi!\"");
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "class=\"hi!\"" + "'", str2, "class=\"hi!\"");
-        org.junit.Assert.assertNotNull(element4);
-    }
-
-    @Test
-    public void test2066() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2066");
-        org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements6 = elements4.val("a");
-        org.jsoup.select.Elements elements8 = elements4.toggleClass("");
-        org.jsoup.select.Elements elements9 = org.jsoup.select.Selector.select("\n<!--#declaration-->", (java.lang.Iterable<org.jsoup.nodes.Element>) elements8);
-        elements9.clear();
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertNotNull(elements6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(elements9);
-    }
-
-    @Test
-    public void test2067() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2067");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        org.jsoup.nodes.Element element15 = element12.append("hi!");
-        org.jsoup.nodes.Element element17 = element15.appendText("#root=\"hi!\"");
-        org.jsoup.select.Elements elements19 = element17.getElementsByIndexLessThan((-1));
-        org.jsoup.select.Elements elements22 = element17.getElementsByAttributeValueStarting("hi!", "#comment");
-        org.jsoup.nodes.XmlDeclaration xmlDeclaration26 = new org.jsoup.nodes.XmlDeclaration("#document#document", "\n<!--#document-->", false);
-        java.lang.String str27 = xmlDeclaration26.toString();
-        org.jsoup.nodes.Element element28 = element17.appendChild((org.jsoup.nodes.Node) xmlDeclaration26);
-        org.jsoup.nodes.Node node29 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            xmlDeclaration26.replaceWith(node29);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated object is null");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(element17);
-        org.junit.Assert.assertNotNull(elements19);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "<?#document#document>" + "'", str27, "<?#document#document>");
-        org.junit.Assert.assertNotNull(element28);
-    }
-
-    @Test
-    public void test2068() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2068");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
-        org.jsoup.select.Elements elements5 = elements3.eq((int) (byte) 10);
-        org.jsoup.nodes.Attributes attributes6 = new org.jsoup.nodes.Attributes();
-        int int7 = attributes6.size();
-        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
-        java.lang.String str12 = elements11.val();
-        java.lang.Object obj13 = null;
-        int int14 = elements11.lastIndexOf(obj13);
-        org.jsoup.select.Elements elements16 = elements11.eq((int) '#');
-        boolean boolean17 = attributes6.equals((java.lang.Object) elements16);
-        boolean boolean18 = elements16.hasText();
-        java.lang.String str19 = elements16.val();
-        org.jsoup.select.Elements elements21 = elements16.append("#document#document");
-        boolean boolean22 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements21);
-        org.jsoup.nodes.Element element23 = elements5.last();
-        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator24 = elements5.spliterator();
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + (-1) + "'", int14 == (-1));
-        org.junit.Assert.assertNotNull(elements16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "" + "'", str19, "");
-        org.junit.Assert.assertNotNull(elements21);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
-        org.junit.Assert.assertNull(element23);
-        org.junit.Assert.assertNotNull(elementSpliterator24);
-    }
-
-    @Test
-    public void test2069() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2069");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("document");
-        org.jsoup.nodes.Element element2 = document1.body();
-        org.junit.Assert.assertNull(element2);
-    }
-
-    @Test
-    public void test2070() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2070");
-        org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("#declaration", " \n<!--#root-->");
-    }
-
-    @Test
-    public void test2071() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2071");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("#declaration");
-        org.junit.Assert.assertNotNull(document1);
-    }
-
-    @Test
-    public void test2072() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2072");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements5 = elements3.prepend("");
-        org.jsoup.nodes.Document document7 = new org.jsoup.nodes.Document("");
-        boolean boolean8 = document7.hasText();
-        boolean boolean9 = document7.hasText();
-        org.jsoup.nodes.Document document11 = new org.jsoup.nodes.Document("");
-        boolean boolean12 = document11.hasText();
-        java.lang.String str13 = document11.nodeName();
-        java.lang.String[] strArray15 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet16 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean17 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet16, strArray15);
-        org.jsoup.nodes.Element element18 = document11.classNames((java.util.Set<java.lang.String>) strSet16);
-        org.jsoup.nodes.Element element19 = document7.classNames((java.util.Set<java.lang.String>) strSet16);
-        int int20 = elements3.indexOf((java.lang.Object) element19);
-        org.jsoup.nodes.Document document22 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements24 = document22.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements26 = elements24.prepend("");
-        org.jsoup.select.Elements elements28 = elements26.removeAttr("");
-        org.jsoup.nodes.Document document30 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements32 = document30.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements34 = elements32.prepend("");
-        org.jsoup.select.Elements elements36 = elements34.removeAttr("");
-        boolean boolean37 = elements26.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements34);
-        org.jsoup.nodes.Document document39 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements41 = document39.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements43 = elements41.prepend("");
-        org.jsoup.select.Elements elements45 = elements43.removeAttr("");
-        org.jsoup.nodes.Document document47 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements49 = document47.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements51 = elements49.prepend("");
-        org.jsoup.select.Elements elements53 = elements51.removeAttr("");
-        boolean boolean54 = elements43.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements51);
-        org.jsoup.select.Elements elements56 = elements51.wrap("#root");
-        boolean boolean57 = elements34.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements56);
-        org.jsoup.select.Elements elements58 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements34);
-        boolean boolean59 = elements3.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements34);
-        org.jsoup.select.Elements elements61 = elements34.prepend("org.jsoup.select.selector$selectorparseexception:");
-        org.jsoup.select.Elements elements64 = elements34.attr("<html>\n<head>\n</head>\n<body>\n org.jsoup.select.selector$selectorparseexception:\n</body>\n</html>", "");
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "#document" + "'", str13, "#document");
-        org.junit.Assert.assertNotNull(strArray15);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
-        org.junit.Assert.assertNotNull(element18);
-        org.junit.Assert.assertNotNull(element19);
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
-        org.junit.Assert.assertNotNull(elements24);
-        org.junit.Assert.assertNotNull(elements26);
-        org.junit.Assert.assertNotNull(elements28);
-        org.junit.Assert.assertNotNull(elements32);
-        org.junit.Assert.assertNotNull(elements34);
-        org.junit.Assert.assertNotNull(elements36);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + true + "'", boolean37 == true);
-        org.junit.Assert.assertNotNull(elements41);
-        org.junit.Assert.assertNotNull(elements43);
-        org.junit.Assert.assertNotNull(elements45);
-        org.junit.Assert.assertNotNull(elements49);
-        org.junit.Assert.assertNotNull(elements51);
-        org.junit.Assert.assertNotNull(elements53);
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + true + "'", boolean54 == true);
-        org.junit.Assert.assertNotNull(elements56);
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + true + "'", boolean57 == true);
-        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + true + "'", boolean59 == true);
-        org.junit.Assert.assertNotNull(elements61);
-        org.junit.Assert.assertNotNull(elements64);
-    }
-
-    @Test
-    public void test2073() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2073");
-        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
-        java.lang.String str2 = tokenQueue1.consumeAttributeKey();
-        java.lang.String str4 = tokenQueue1.consumeTo("#root=\"hi!\"");
-        java.lang.String str5 = tokenQueue1.toString();
-        java.lang.String str7 = tokenQueue1.chompTo("");
-        boolean boolean8 = tokenQueue1.matchesWord();
-        boolean boolean9 = tokenQueue1.isEmpty();
-        boolean boolean11 = tokenQueue1.matches("org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "#document" + "'", str4, "#document");
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "[]" + "'", str5, "[]");
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-    }
-
-    @Test
-    public void test2074() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2074");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        boolean boolean3 = document1.hasText();
-        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
-        boolean boolean6 = document5.hasText();
-        java.lang.String str7 = document5.nodeName();
-        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
-        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
-        java.lang.String str14 = element13.text();
-        org.jsoup.nodes.Element element16 = element13.appendElement("#document#document=\"#document#document\"");
-        boolean boolean18 = element16.hasClass("#comment");
-        java.lang.String str19 = element16.text();
-        org.jsoup.select.Elements elements20 = element16.children();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertNotNull(element16);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "" + "'", str19, "");
-        org.junit.Assert.assertNotNull(elements20);
-    }
-
-    @Test
-    public void test2075() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2075");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element5 = document1.prepend("#document");
-        org.jsoup.nodes.Element element6 = element5.empty();
-        org.jsoup.select.Elements elements8 = element5.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements10 = elements8.removeClass("#root");
-        org.jsoup.select.Elements elements12 = elements8.append("");
-        boolean boolean14 = elements8.hasAttr("#document#document");
-        org.jsoup.select.Elements elements16 = elements8.toggleClass("#document#document");
-        org.jsoup.select.Elements elements19 = elements16.attr("<org.jsoup.select.selector$selectorparseexception: hi!=\"#root\">\n</org.jsoup.select.selector$selectorparseexception:>", "[<, ?, >, #, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, d, o, c, u, m, e, n, t]");
-        org.jsoup.select.Elements elements21 = elements19.append("<html> \n<head> \n</head> \n<body>\n  #root  \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(elements16);
-        org.junit.Assert.assertNotNull(elements19);
-        org.junit.Assert.assertNotNull(elements21);
-    }
-
-    @Test
-    public void test2076() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2076");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
-        org.jsoup.nodes.Element element4 = document2.addClass("hi!");
-        org.jsoup.nodes.Element element5 = document2.body();
-        org.jsoup.nodes.Document document7 = new org.jsoup.nodes.Document("");
-        boolean boolean8 = document7.hasText();
-        java.lang.String str9 = document7.nodeName();
-        java.lang.String[] strArray11 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet12 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean13 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet12, strArray11);
-        org.jsoup.nodes.Element element14 = document7.classNames((java.util.Set<java.lang.String>) strSet12);
-        org.jsoup.nodes.Element element16 = element14.addClass("#document");
-        org.jsoup.nodes.Document document18 = new org.jsoup.nodes.Document("");
-        boolean boolean19 = document18.hasText();
-        boolean boolean20 = document18.hasText();
-        org.jsoup.nodes.Document document22 = new org.jsoup.nodes.Document("");
-        boolean boolean23 = document22.hasText();
-        java.lang.String str24 = document22.nodeName();
-        java.lang.String[] strArray26 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet27 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean28 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet27, strArray26);
-        org.jsoup.nodes.Element element29 = document22.classNames((java.util.Set<java.lang.String>) strSet27);
-        org.jsoup.nodes.Element element30 = document18.classNames((java.util.Set<java.lang.String>) strSet27);
-        java.util.Set<java.lang.String> strSet31 = document18.classNames();
-        org.jsoup.nodes.Element element32 = element14.classNames(strSet31);
-        org.jsoup.nodes.Element element33 = element5.classNames(strSet31);
-        org.jsoup.nodes.Node node36 = element5.attr(" text=\"#data\"", " #root=\"hi!\"");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(element4);
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "#document" + "'", str9, "#document");
-        org.junit.Assert.assertNotNull(strArray11);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertNotNull(element14);
-        org.junit.Assert.assertNotNull(element16);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "#document" + "'", str24, "#document");
-        org.junit.Assert.assertNotNull(strArray26);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
-        org.junit.Assert.assertNotNull(element29);
-        org.junit.Assert.assertNotNull(element30);
-        org.junit.Assert.assertNotNull(strSet31);
-        org.junit.Assert.assertNotNull(element32);
-        org.junit.Assert.assertNotNull(element33);
-        org.junit.Assert.assertNotNull(node36);
-    }
-
-    @Test
-    public void test2077() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2077");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element5 = document1.prepend("#document");
-        org.jsoup.nodes.Element element6 = element5.empty();
-        org.jsoup.select.Elements elements8 = element6.getElementsByIndexLessThan(10);
-        org.jsoup.nodes.Document document10 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements12 = document10.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
-        org.jsoup.nodes.Element element13 = element6.prependChild((org.jsoup.nodes.Node) document10);
-        java.util.List<org.jsoup.nodes.Node> nodeList14 = document10.childNodes();
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(document10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(nodeList14);
-    }
-
-    @Test
-    public void test2078() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2078");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -2530,9 +27,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2079() throws Throwable {
+    public void test2002() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2079");
+            System.out.format("%n%s%n", "RegressionTest4.test2002");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         java.lang.String str5 = document1.id();
@@ -2553,9 +50,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2080() throws Throwable {
+    public void test2003() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2080");
+            System.out.format("%n%s%n", "RegressionTest4.test2003");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -2616,9 +113,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2081() throws Throwable {
+    public void test2004() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2081");
+            System.out.format("%n%s%n", "RegressionTest4.test2004");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -2650,9 +147,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2082() throws Throwable {
+    public void test2005() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2082");
+            System.out.format("%n%s%n", "RegressionTest4.test2005");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         java.lang.String str6 = document2.tagName();
@@ -2673,9 +170,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2083() throws Throwable {
+    public void test2006() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2083");
+            System.out.format("%n%s%n", "RegressionTest4.test2006");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -2709,17 +206,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2084() throws Throwable {
+    public void test2007() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2084");
+            System.out.format("%n%s%n", "RegressionTest4.test2007");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("<#root hi!=\"#root\">\n</#root>", "");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2085() throws Throwable {
+    public void test2008() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2085");
+            System.out.format("%n%s%n", "RegressionTest4.test2008");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         boolean boolean3 = tokenQueue1.matches("\n<!--#root-->");
         boolean boolean5 = tokenQueue1.matchChomp("#data");
@@ -2770,18 +267,18 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2086() throws Throwable {
+    public void test2009() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2086");
+            System.out.format("%n%s%n", "RegressionTest4.test2009");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("<html>\n<head>\n</head>\n<body>\n</body>\n</html>=\"\"");
         org.jsoup.parser.Tag tag2 = document1.tag();
         org.junit.Assert.assertNotNull(tag2);
     }
 
     @Test
-    public void test2087() throws Throwable {
+    public void test2010() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2087");
+            System.out.format("%n%s%n", "RegressionTest4.test2010");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.outerHtml();
@@ -2821,9 +318,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2088() throws Throwable {
+    public void test2011() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2088");
+            System.out.format("%n%s%n", "RegressionTest4.test2011");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -2914,9 +411,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2089() throws Throwable {
+    public void test2012() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2089");
+            System.out.format("%n%s%n", "RegressionTest4.test2012");
         java.io.File file0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -2928,9 +425,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2090() throws Throwable {
+    public void test2013() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2090");
+            System.out.format("%n%s%n", "RegressionTest4.test2013");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -2955,18 +452,18 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2091() throws Throwable {
+    public void test2014() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2091");
+            System.out.format("%n%s%n", "RegressionTest4.test2014");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n&lt;/body&gt;\n&lt;/html&gt;", " #comment=\"\"", false);
         boolean boolean5 = xmlDeclaration3.hasAttr("\n<!--org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"-->");
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
     }
 
     @Test
-    public void test2092() throws Throwable {
+    public void test2015() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2092");
+            System.out.format("%n%s%n", "RegressionTest4.test2015");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -3003,9 +500,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2093() throws Throwable {
+    public void test2016() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2093");
+            System.out.format("%n%s%n", "RegressionTest4.test2016");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -3055,17 +552,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2094() throws Throwable {
+    public void test2017() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2094");
+            System.out.format("%n%s%n", "RegressionTest4.test2017");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("\n<!--#data-->", "#root=\"hi!\"");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2095() throws Throwable {
+    public void test2018() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2095");
+            System.out.format("%n%s%n", "RegressionTest4.test2018");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
         org.jsoup.select.Elements elements5 = elements3.eq((int) (byte) 10);
@@ -3077,9 +574,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2096() throws Throwable {
+    public void test2019() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2096");
+            System.out.format("%n%s%n", "RegressionTest4.test2019");
         org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("#root", "hi!");
         org.jsoup.nodes.Document document4 = new org.jsoup.nodes.Document("");
         boolean boolean5 = document4.hasText();
@@ -3147,9 +644,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2097() throws Throwable {
+    public void test2020() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2097");
+            System.out.format("%n%s%n", "RegressionTest4.test2020");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -3171,9 +668,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2098() throws Throwable {
+    public void test2021() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2098");
+            System.out.format("%n%s%n", "RegressionTest4.test2021");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         java.lang.String str2 = tag1.getName();
         boolean boolean3 = tag1.isInline();
@@ -3201,9 +698,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2099() throws Throwable {
+    public void test2022() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2099");
+            System.out.format("%n%s%n", "RegressionTest4.test2022");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -3232,9 +729,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2100() throws Throwable {
+    public void test2023() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2100");
+            System.out.format("%n%s%n", "RegressionTest4.test2023");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         int int1 = attributes0.size();
         org.jsoup.nodes.Document document3 = new org.jsoup.nodes.Document("");
@@ -3259,9 +756,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2101() throws Throwable {
+    public void test2024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2101");
+            System.out.format("%n%s%n", "RegressionTest4.test2024");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document(" class=\"hi!\"");
         java.lang.String str2 = document1.id();
         org.jsoup.select.Elements elements5 = document1.getElementsByAttributeValueEnding("<!#declaration>", "body=\"# \"");
@@ -3273,9 +770,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2102() throws Throwable {
+    public void test2025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2102");
+            System.out.format("%n%s%n", "RegressionTest4.test2025");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         boolean boolean5 = document1.hasText();
@@ -3289,9 +786,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2103() throws Throwable {
+    public void test2026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2103");
+            System.out.format("%n%s%n", "RegressionTest4.test2026");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -3333,9 +830,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2104() throws Throwable {
+    public void test2027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2104");
+            System.out.format("%n%s%n", "RegressionTest4.test2027");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#root");
         boolean boolean2 = tag1.isInline();
         boolean boolean3 = tag1.isInline();
@@ -3389,9 +886,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2105() throws Throwable {
+    public void test2028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2105");
+            System.out.format("%n%s%n", "RegressionTest4.test2028");
         org.jsoup.nodes.Comment comment2 = new org.jsoup.nodes.Comment("#root", "#root");
         java.lang.String str3 = comment2.toString();
         org.jsoup.nodes.Node node6 = comment2.attr("[#, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, =, \", #, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, \"]", "");
@@ -3404,29 +901,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2106() throws Throwable {
+    public void test2029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2106");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
-        java.lang.String str4 = document1.nodeName();
-        org.jsoup.nodes.Element element6 = document1.appendText("\n&lt;!--#root--&gt;");
-        org.jsoup.nodes.Node node9 = document1.attr("hi!=\"#root=&quot;hi!&quot;\"", "#root=\"hi!\"");
-        org.jsoup.nodes.Document document10 = document1.normalise();
-        org.jsoup.nodes.Element element12 = document1.text("#document#documentdocument=\"&lt;?hi!&gt;\"");
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "#document" + "'", str4, "#document");
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(node9);
-        org.junit.Assert.assertNotNull(document10);
-        org.junit.Assert.assertNotNull(element12);
-    }
-
-    @Test
-    public void test2107() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2107");
+            System.out.format("%n%s%n", "RegressionTest4.test2029");
         org.jsoup.nodes.DataNode dataNode2 = org.jsoup.nodes.DataNode.createFromEncoded("org.jsoup.select.selector$selectorparseexception:", "hi!");
         java.lang.String str3 = dataNode2.getWholeData();
         java.util.List<org.jsoup.nodes.Node> nodeList4 = dataNode2.childNodes();
@@ -3447,9 +924,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2108() throws Throwable {
+    public void test2030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2108");
+            System.out.format("%n%s%n", "RegressionTest4.test2030");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#document#document=\"#document#document\"", "body");
         java.lang.String str3 = document2.baseUri();
         org.jsoup.select.Elements elements6 = document2.getElementsByAttributeValueContaining(" hi!=\"#root\"", "\n<!--#document--> #data");
@@ -3461,98 +938,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2109() throws Throwable {
+    public void test2031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2109");
-        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("<?#document#document>");
-        org.jsoup.parser.Tag tag3 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean4 = tag3.isData();
-        boolean boolean5 = tag3.requiresSpecificParent();
-        boolean boolean6 = tag3.isBlock();
-        org.jsoup.parser.Tag tag8 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean9 = tag8.isData();
-        boolean boolean10 = tag8.requiresSpecificParent();
-        boolean boolean11 = tag8.isBlock();
-        boolean boolean12 = tag3.canContain(tag8);
-        boolean boolean13 = tag3.isBlock();
-        boolean boolean14 = tag3.isData();
-        java.lang.String str15 = tag3.getName();
-        boolean boolean16 = tag3.requiresSpecificParent();
-        org.jsoup.parser.Tag tag18 = org.jsoup.parser.Tag.valueOf("#root");
-        boolean boolean19 = tag18.isInline();
-        boolean boolean20 = tag3.canContain(tag18);
-        boolean boolean21 = tag1.canContain(tag3);
-        org.jsoup.parser.Tag tag22 = tag1.getImplicitParent();
-        org.jsoup.parser.Tag tag24 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        java.lang.String str25 = tag24.getName();
-        java.lang.String str26 = tag24.toString();
-        java.lang.String str27 = tag24.getName();
-        boolean boolean28 = tag24.isInline();
-        boolean boolean29 = tag22.canContain(tag24);
-        org.junit.Assert.assertNotNull(tag1);
-        org.junit.Assert.assertNotNull(tag3);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNotNull(tag8);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str15, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(tag18);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + true + "'", boolean19 == true);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
-        org.junit.Assert.assertNotNull(tag22);
-        org.junit.Assert.assertNotNull(tag24);
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str25, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str26, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str27, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + true + "'", boolean29 == true);
-    }
-
-    @Test
-    public void test2110() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2110");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        boolean boolean3 = document1.hasText();
-        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
-        boolean boolean6 = document5.hasText();
-        java.lang.String str7 = document5.nodeName();
-        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
-        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
-        java.lang.String str14 = element13.text();
-        org.jsoup.nodes.Element element16 = element13.prependElement("#comment");
-        java.lang.String str17 = element16.id();
-        org.jsoup.select.Elements elements19 = element16.getElementsByIndexLessThan((-1));
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertNotNull(element16);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertNotNull(elements19);
-    }
-
-    @Test
-    public void test2111() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2111");
+            System.out.format("%n%s%n", "RegressionTest4.test2031");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -3573,9 +961,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2112() throws Throwable {
+    public void test2032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2112");
+            System.out.format("%n%s%n", "RegressionTest4.test2032");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         document1.title("[]");
@@ -3590,9 +978,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2113() throws Throwable {
+    public void test2033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2113");
+            System.out.format("%n%s%n", "RegressionTest4.test2033");
         org.jsoup.safety.Whitelist whitelist2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -3604,9 +992,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2114() throws Throwable {
+    public void test2034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2114");
+            System.out.format("%n%s%n", "RegressionTest4.test2034");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -3630,9 +1018,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2115() throws Throwable {
+    public void test2035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2115");
+            System.out.format("%n%s%n", "RegressionTest4.test2035");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed(" ", "#root");
         org.jsoup.nodes.Element element4 = document2.wrap("<!#declaration>");
         // The following exception was thrown during execution in test generation
@@ -3647,9 +1035,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2116() throws Throwable {
+    public void test2036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2116");
+            System.out.format("%n%s%n", "RegressionTest4.test2036");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -3666,9 +1054,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2117() throws Throwable {
+    public void test2037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2117");
+            System.out.format("%n%s%n", "RegressionTest4.test2037");
         org.jsoup.safety.Whitelist whitelist1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -3680,9 +1068,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2118() throws Throwable {
+    public void test2038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2118");
+            System.out.format("%n%s%n", "RegressionTest4.test2038");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
         java.lang.String str4 = elements3.text();
@@ -3757,9 +1145,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2119() throws Throwable {
+    public void test2039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2119");
+            System.out.format("%n%s%n", "RegressionTest4.test2039");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -3810,9 +1198,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2120() throws Throwable {
+    public void test2040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2120");
+            System.out.format("%n%s%n", "RegressionTest4.test2040");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -3863,16 +1251,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2121() throws Throwable {
+    public void test2041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2121");
+            System.out.format("%n%s%n", "RegressionTest4.test2041");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#root=&quot;hi!&quot;");
     }
 
     @Test
-    public void test2122() throws Throwable {
+    public void test2042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2122");
+            System.out.format("%n%s%n", "RegressionTest4.test2042");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         org.jsoup.select.Elements elements6 = element4.getElementsByTag("\n<!--#root-->");
@@ -3901,16 +1289,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2123() throws Throwable {
+    public void test2043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2123");
+            System.out.format("%n%s%n", "RegressionTest4.test2043");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("#document#document=\"\"");
     }
 
     @Test
-    public void test2124() throws Throwable {
+    public void test2044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2124");
+            System.out.format("%n%s%n", "RegressionTest4.test2044");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -3952,9 +1340,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2125() throws Throwable {
+    public void test2045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2125");
+            System.out.format("%n%s%n", "RegressionTest4.test2045");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         java.lang.String str5 = document1.id();
@@ -3969,9 +1357,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2126() throws Throwable {
+    public void test2046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2126");
+            System.out.format("%n%s%n", "RegressionTest4.test2046");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         java.lang.String str1 = attributes0.html();
         java.lang.String str2 = attributes0.html();
@@ -3982,9 +1370,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2127() throws Throwable {
+    public void test2047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2127");
+            System.out.format("%n%s%n", "RegressionTest4.test2047");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
         attribute2.setKey("#root");
         java.lang.String str5 = attribute2.html();
@@ -4027,9 +1415,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2128() throws Throwable {
+    public void test2048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2128");
+            System.out.format("%n%s%n", "RegressionTest4.test2048");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -4075,9 +1463,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2129() throws Throwable {
+    public void test2049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2129");
+            System.out.format("%n%s%n", "RegressionTest4.test2049");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document2 = document1.normalise();
         org.jsoup.nodes.Element element3 = document1.head();
@@ -4108,16 +1496,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2130() throws Throwable {
+    public void test2050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2130");
+            System.out.format("%n%s%n", "RegressionTest4.test2050");
         org.jsoup.nodes.DataNode dataNode2 = new org.jsoup.nodes.DataNode("class=\"hi!\"", "");
     }
 
     @Test
-    public void test2131() throws Throwable {
+    public void test2051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2131");
+            System.out.format("%n%s%n", "RegressionTest4.test2051");
         org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements6 = elements4.prepend("");
@@ -4151,34 +1539,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2132() throws Throwable {
+    public void test2052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2132");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element5 = document1.prepend("#document");
-        org.jsoup.nodes.Element element6 = element5.empty();
-        org.jsoup.select.Elements elements8 = element5.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements10 = elements8.removeClass("#root");
-        org.jsoup.select.Elements elements12 = elements8.append("");
-        java.lang.String str13 = elements12.text();
-        boolean boolean15 = elements12.is("hi!");
-        java.lang.String str17 = elements12.attr("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>\n<html> \n<head> \n</head> \n<body>\n  #root  \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-    }
-
-    @Test
-    public void test2133() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2133");
+            System.out.format("%n%s%n", "RegressionTest4.test2052");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
         java.lang.String str3 = document2.tagName();
         org.jsoup.nodes.Element element5 = document2.toggleClass("<html>\n<head>\n</head>\n<body>\n #document#document=&quot;#document#document&quot; \n</body>\n</html>");
@@ -4188,9 +1551,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2134() throws Throwable {
+    public void test2053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2134");
+            System.out.format("%n%s%n", "RegressionTest4.test2053");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -4271,9 +1634,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2135() throws Throwable {
+    public void test2054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2135");
+            System.out.format("%n%s%n", "RegressionTest4.test2054");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("<?#document#document>", "\n<!--#declaration-->");
         org.jsoup.select.Elements elements4 = document2.getElementsByTag("a");
         org.junit.Assert.assertNotNull(document2);
@@ -4281,9 +1644,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2136() throws Throwable {
+    public void test2055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2136");
+            System.out.format("%n%s%n", "RegressionTest4.test2055");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -4312,17 +1675,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2137() throws Throwable {
+    public void test2056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2137");
+            System.out.format("%n%s%n", "RegressionTest4.test2056");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("<[#, d, o, c, u, m, e, n, t]>\n</[#, d, o, c, u, m, e, n, t]>#root=&quot;hi!&quot;", "<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
         org.junit.Assert.assertNotNull(attribute2);
     }
 
     @Test
-    public void test2138() throws Throwable {
+    public void test2057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2138");
+            System.out.format("%n%s%n", "RegressionTest4.test2057");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         java.lang.String str2 = tokenQueue1.consumeAttributeKey();
         java.lang.String str4 = tokenQueue1.consumeTo("#root=\"hi!\"");
@@ -4424,28 +1787,18 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2139() throws Throwable {
+    public void test2058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2139");
+            System.out.format("%n%s%n", "RegressionTest4.test2058");
         org.jsoup.nodes.DataNode dataNode2 = new org.jsoup.nodes.DataNode("#document#document", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
         java.lang.String str3 = dataNode2.toString();
         org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document#document" + "'", str3, "#document#document");
     }
 
     @Test
-    public void test2140() throws Throwable {
+    public void test2059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2140");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("#document#document", " ");
-        org.jsoup.nodes.Element element3 = document2.parent();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(element3);
-    }
-
-    @Test
-    public void test2141() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2141");
+            System.out.format("%n%s%n", "RegressionTest4.test2059");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         boolean boolean3 = tokenQueue1.matches("\n<!--#root-->");
         boolean boolean4 = tokenQueue1.matchesWord();
@@ -4466,9 +1819,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2142() throws Throwable {
+    public void test2060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2142");
+            System.out.format("%n%s%n", "RegressionTest4.test2060");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("#document#document", "#comment");
         org.jsoup.nodes.Element element3 = document2.body();
         org.junit.Assert.assertNotNull(document2);
@@ -4476,17 +1829,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2143() throws Throwable {
+    public void test2061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2143");
+            System.out.format("%n%s%n", "RegressionTest4.test2061");
         org.jsoup.nodes.DataNode dataNode2 = org.jsoup.nodes.DataNode.createFromEncoded("head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n #document\n&lt;/body&gt;\n&lt;/html&gt;\"", "[]a#document#documentdocument");
         org.junit.Assert.assertNotNull(dataNode2);
     }
 
     @Test
-    public void test2144() throws Throwable {
+    public void test2062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2144");
+            System.out.format("%n%s%n", "RegressionTest4.test2062");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -4518,9 +1871,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2145() throws Throwable {
+    public void test2063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2145");
+            System.out.format("%n%s%n", "RegressionTest4.test2063");
         org.jsoup.safety.Whitelist whitelist1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -4532,9 +1885,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2146() throws Throwable {
+    public void test2064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2146");
+            System.out.format("%n%s%n", "RegressionTest4.test2064");
         org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("org.jsoup.select.Selector$SelectorParseException: ", "");
         java.lang.String str4 = textNode2.absUrl("#data");
         org.jsoup.nodes.TextNode textNode6 = textNode2.text("#data");
@@ -4576,9 +1929,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2147() throws Throwable {
+    public void test2065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2147");
+            System.out.format("%n%s%n", "RegressionTest4.test2065");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -4599,9 +1952,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2148() throws Throwable {
+    public void test2066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2148");
+            System.out.format("%n%s%n", "RegressionTest4.test2066");
         java.io.File file0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -4613,9 +1966,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2149() throws Throwable {
+    public void test2067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2149");
+            System.out.format("%n%s%n", "RegressionTest4.test2067");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -4658,9 +2011,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2150() throws Throwable {
+    public void test2068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2150");
+            System.out.format("%n%s%n", "RegressionTest4.test2068");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -4689,16 +2042,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2151() throws Throwable {
+    public void test2069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2151");
+            System.out.format("%n%s%n", "RegressionTest4.test2069");
         org.jsoup.nodes.DataNode dataNode2 = new org.jsoup.nodes.DataNode("[#, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, =, \", #, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, \"]", "[#, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, =, \", #, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, \"]");
     }
 
     @Test
-    public void test2152() throws Throwable {
+    public void test2070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2152");
+            System.out.format("%n%s%n", "RegressionTest4.test2070");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
         attribute2.setValue("#root=\"hi!\"");
         java.lang.String str5 = attribute2.html();
@@ -4721,17 +2074,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2153() throws Throwable {
+    public void test2071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2153");
+            System.out.format("%n%s%n", "RegressionTest4.test2071");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body>\n #document\n</body>\n</html>", " class=\"hi!\" #root=\"hi!\"");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2154() throws Throwable {
+    public void test2072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2154");
+            System.out.format("%n%s%n", "RegressionTest4.test2072");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("");
         tokenQueue1.addFirst((java.lang.Character) ' ');
         tokenQueue1.addFirst((java.lang.Character) '#');
@@ -4742,9 +2095,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2155() throws Throwable {
+    public void test2073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2155");
+            System.out.format("%n%s%n", "RegressionTest4.test2073");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -4804,68 +2157,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2156() throws Throwable {
+    public void test2074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2156");
+            System.out.format("%n%s%n", "RegressionTest4.test2074");
         org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("org.jsoup.select.selector$selectorparseexception:", "[]a#document#documentdocument");
     }
 
     @Test
-    public void test2157() throws Throwable {
+    public void test2075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2157");
-        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        java.lang.String str2 = tag1.getName();
-        boolean boolean3 = tag1.isInline();
-        org.jsoup.nodes.Document document6 = new org.jsoup.nodes.Document("");
-        boolean boolean7 = document6.hasText();
-        java.lang.String str8 = document6.nodeName();
-        java.lang.String[] strArray10 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet11 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean12 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet11, strArray10);
-        org.jsoup.nodes.Element element13 = document6.classNames((java.util.Set<java.lang.String>) strSet11);
-        org.jsoup.nodes.Element element15 = document6.append("#document");
-        org.jsoup.nodes.Element element17 = document6.prepend("#document");
-        org.jsoup.nodes.Attributes attributes18 = element17.attributes();
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator19 = attributes18.spliterator();
-        java.lang.String str21 = attributes18.get("hi!");
-        org.jsoup.nodes.Document document24 = org.jsoup.parser.Parser.parse("#root", "");
-        org.jsoup.nodes.Element element27 = document24.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        boolean boolean28 = attributes18.equals((java.lang.Object) "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        java.lang.String str29 = attributes18.html();
-        org.jsoup.nodes.Element element30 = new org.jsoup.nodes.Element(tag1, "", attributes18);
-        org.jsoup.nodes.Attribute attribute33 = new org.jsoup.nodes.Attribute("<?#document#document>", "org.jsoup.select.Selector$SelectorParseException: ");
-        attribute33.setValue("[#, d, o, c, u, m, e, n, t]");
-        attributes18.put(attribute33);
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor37 = attributes18.iterator();
-        int int38 = attributes18.size();
-        java.lang.String str40 = attributes18.get("body");
-        org.junit.Assert.assertNotNull(tag1);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str2, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "#document" + "'", str8, "#document");
-        org.junit.Assert.assertNotNull(strArray10);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(element17);
-        org.junit.Assert.assertNotNull(attributes18);
-        org.junit.Assert.assertNotNull(attributeSpliterator19);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
-        org.junit.Assert.assertNotNull(document24);
-        org.junit.Assert.assertNotNull(element27);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-        org.junit.Assert.assertEquals("'" + str29 + "' != '" + " class=\"hi!\"" + "'", str29, " class=\"hi!\"");
-        org.junit.Assert.assertNotNull(attributeItor37);
-        org.junit.Assert.assertTrue("'" + int38 + "' != '" + 2 + "'", int38 == 2);
-        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "" + "'", str40, "");
-    }
-
-    @Test
-    public void test2158() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2158");
+            System.out.format("%n%s%n", "RegressionTest4.test2075");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -4880,9 +2181,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2159() throws Throwable {
+    public void test2076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2159");
+            System.out.format("%n%s%n", "RegressionTest4.test2076");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         java.lang.String str6 = element5.id();
@@ -4910,9 +2211,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2160() throws Throwable {
+    public void test2077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2160");
+            System.out.format("%n%s%n", "RegressionTest4.test2077");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#declaration");
         java.lang.String str2 = tag1.toString();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -4948,9 +2249,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2161() throws Throwable {
+    public void test2078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2161");
+            System.out.format("%n%s%n", "RegressionTest4.test2078");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -4966,9 +2267,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2162() throws Throwable {
+    public void test2079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2162");
+            System.out.format("%n%s%n", "RegressionTest4.test2079");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -5022,9 +2323,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2163() throws Throwable {
+    public void test2080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2163");
+            System.out.format("%n%s%n", "RegressionTest4.test2080");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("<?>");
         java.lang.String str2 = tag1.toString();
         org.junit.Assert.assertNotNull(tag1);
@@ -5032,9 +2333,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2164() throws Throwable {
+    public void test2081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2164");
+            System.out.format("%n%s%n", "RegressionTest4.test2081");
         org.jsoup.select.Selector.SelectorParseException selectorParseException1 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
         org.jsoup.select.Selector.SelectorParseException selectorParseException3 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
         java.lang.Throwable[] throwableArray4 = selectorParseException3.getSuppressed();
@@ -5061,9 +2362,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2165() throws Throwable {
+    public void test2082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2165");
+            System.out.format("%n%s%n", "RegressionTest4.test2082");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document(" class=\"hi!\"");
         java.lang.String str2 = document1.id();
         org.jsoup.nodes.Element element3 = document1.head();
@@ -5078,9 +2379,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2166() throws Throwable {
+    public void test2083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2166");
+            System.out.format("%n%s%n", "RegressionTest4.test2083");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -5119,9 +2420,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2167() throws Throwable {
+    public void test2084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2167");
+            System.out.format("%n%s%n", "RegressionTest4.test2084");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -5180,9 +2481,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2168() throws Throwable {
+    public void test2085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2168");
+            System.out.format("%n%s%n", "RegressionTest4.test2085");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -5207,9 +2508,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2169() throws Throwable {
+    public void test2086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2169");
+            System.out.format("%n%s%n", "RegressionTest4.test2086");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -5224,40 +2525,24 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2170() throws Throwable {
+    public void test2087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2170");
-        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>", "<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
-        java.lang.String str3 = document2.nodeName();
-        org.jsoup.nodes.Element element5 = document2.createElement("#document#documenthi!#root=&quot;hi!&quot;");
-        org.jsoup.nodes.Element element7 = element5.text(" hi!=\"#root\"");
-        org.jsoup.select.Elements elements10 = element7.getElementsByAttributeValueContaining("[<, h, t, m, l, >, \n, <, h, e, a, d, >, \n, <, /, h, e, a, d, >, \n, <, b, o, d, y, >, \n,  , #, r, o, o, t,  , \n, <, /, b, o, d, y, >, \n, <, /, h, t, m, l, >, #, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, d, o, c, u, m, e, n, t]", "hi! #data <html>\n<head>\n</head>\n<body>\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(element5);
-        org.junit.Assert.assertNotNull(element7);
-        org.junit.Assert.assertNotNull(elements10);
-    }
-
-    @Test
-    public void test2171() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2171");
+            System.out.format("%n%s%n", "RegressionTest4.test2087");
         org.jsoup.nodes.Comment comment2 = new org.jsoup.nodes.Comment("<<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>>", "#document");
     }
 
     @Test
-    public void test2172() throws Throwable {
+    public void test2088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2172");
+            System.out.format("%n%s%n", "RegressionTest4.test2088");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("<?#document#documentdocument>");
         org.junit.Assert.assertNotNull(document1);
     }
 
     @Test
-    public void test2173() throws Throwable {
+    public void test2089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2173");
+            System.out.format("%n%s%n", "RegressionTest4.test2089");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -5338,9 +2623,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2174() throws Throwable {
+    public void test2090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2174");
+            System.out.format("%n%s%n", "RegressionTest4.test2090");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
@@ -5362,9 +2647,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2175() throws Throwable {
+    public void test2091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2175");
+            System.out.format("%n%s%n", "RegressionTest4.test2091");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.createElement("#document#documenthi!");
@@ -5380,9 +2665,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2176() throws Throwable {
+    public void test2092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2176");
+            System.out.format("%n%s%n", "RegressionTest4.test2092");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         boolean boolean5 = document1.hasClass("");
@@ -5404,9 +2689,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2177() throws Throwable {
+    public void test2093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2177");
+            System.out.format("%n%s%n", "RegressionTest4.test2093");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -5434,9 +2719,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2178() throws Throwable {
+    public void test2094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2178");
+            System.out.format("%n%s%n", "RegressionTest4.test2094");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#declaration");
         java.lang.String str2 = tag1.toString();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -5472,9 +2757,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2179() throws Throwable {
+    public void test2095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2179");
+            System.out.format("%n%s%n", "RegressionTest4.test2095");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -5510,62 +2795,25 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2180() throws Throwable {
+    public void test2096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2180");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        boolean boolean3 = document1.hasText();
-        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
-        boolean boolean6 = document5.hasText();
-        java.lang.String str7 = document5.nodeName();
-        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
-        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element15 = document1.appendText("hi!");
-        org.jsoup.parser.Tag tag16 = document1.tag();
-        org.jsoup.nodes.Element element17 = document1.head();
-        java.lang.String str18 = document1.toString();
-        org.jsoup.nodes.Element element20 = document1.createElement("#root");
-        org.jsoup.nodes.Node node22 = element20.removeAttr("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>#document#documentdocument");
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(tag16);
-        org.junit.Assert.assertNull(element17);
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "hi!" + "'", str18, "hi!");
-        org.junit.Assert.assertNotNull(element20);
-        org.junit.Assert.assertNotNull(node22);
-    }
-
-    @Test
-    public void test2181() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2181");
+            System.out.format("%n%s%n", "RegressionTest4.test2096");
         org.jsoup.nodes.DataNode dataNode2 = new org.jsoup.nodes.DataNode("\n&lt;!--#root--&gt;", "org.jsoup.select.selector$selectorparseexception:");
     }
 
     @Test
-    public void test2182() throws Throwable {
+    public void test2097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2182");
+            System.out.format("%n%s%n", "RegressionTest4.test2097");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         java.lang.String str2 = document1.outerHtml();
         org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
     }
 
     @Test
-    public void test2183() throws Throwable {
+    public void test2098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2183");
+            System.out.format("%n%s%n", "RegressionTest4.test2098");
         org.jsoup.nodes.Evaluator evaluator0 = null;
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>", "org.jsoup.select.Selector$SelectorParseException: ");
         org.jsoup.nodes.Element element5 = document3.toggleClass("<!--#document-->");
@@ -5581,9 +2829,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2184() throws Throwable {
+    public void test2099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2184");
+            System.out.format("%n%s%n", "RegressionTest4.test2099");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -5607,9 +2855,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2185() throws Throwable {
+    public void test2100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2185");
+            System.out.format("%n%s%n", "RegressionTest4.test2100");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -5745,9 +2993,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2186() throws Throwable {
+    public void test2101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2186");
+            System.out.format("%n%s%n", "RegressionTest4.test2101");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -5802,17 +3050,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2187() throws Throwable {
+    public void test2102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2187");
+            System.out.format("%n%s%n", "RegressionTest4.test2102");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("\n<!--#declaration-->", " text=\"#data\"");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2188() throws Throwable {
+    public void test2103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2188");
+            System.out.format("%n%s%n", "RegressionTest4.test2103");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element4 = elements3.first();
@@ -5899,9 +3147,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2189() throws Throwable {
+    public void test2104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2189");
+            System.out.format("%n%s%n", "RegressionTest4.test2104");
         org.jsoup.nodes.Element[] elementArray0 = new org.jsoup.nodes.Element[] {};
         org.jsoup.select.Elements elements1 = new org.jsoup.select.Elements(elementArray0);
         org.jsoup.select.Elements elements2 = new org.jsoup.select.Elements(elementArray0);
@@ -5928,9 +3176,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2190() throws Throwable {
+    public void test2105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2190");
+            System.out.format("%n%s%n", "RegressionTest4.test2105");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         java.lang.String str6 = document2.tagName();
@@ -5955,9 +3203,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2191() throws Throwable {
+    public void test2106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2191");
+            System.out.format("%n%s%n", "RegressionTest4.test2106");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -5999,9 +3247,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2192() throws Throwable {
+    public void test2107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2192");
+            System.out.format("%n%s%n", "RegressionTest4.test2107");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("body", "");
         org.jsoup.select.Elements elements4 = document2.getElementsByIndexEquals((-1));
         org.jsoup.nodes.Attribute attribute7 = new org.jsoup.nodes.Attribute("body", "org.jsoup.select.Selector$SelectorParseException:");
@@ -6035,9 +3283,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2193() throws Throwable {
+    public void test2108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2193");
+            System.out.format("%n%s%n", "RegressionTest4.test2108");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#root");
         boolean boolean2 = tag1.isInline();
         boolean boolean3 = tag1.isBlock();
@@ -6096,9 +3344,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2194() throws Throwable {
+    public void test2109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2194");
+            System.out.format("%n%s%n", "RegressionTest4.test2109");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         boolean boolean3 = tokenQueue1.matches("\n<!--#root-->");
         boolean boolean5 = tokenQueue1.matchChomp("#data");
@@ -6115,9 +3363,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2195() throws Throwable {
+    public void test2110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2195");
+            System.out.format("%n%s%n", "RegressionTest4.test2110");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -6178,9 +3426,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2196() throws Throwable {
+    public void test2111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2196");
+            System.out.format("%n%s%n", "RegressionTest4.test2111");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -6236,9 +3484,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2197() throws Throwable {
+    public void test2112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2197");
+            System.out.format("%n%s%n", "RegressionTest4.test2112");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -6289,9 +3537,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2198() throws Throwable {
+    public void test2113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2198");
+            System.out.format("%n%s%n", "RegressionTest4.test2113");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -6407,17 +3655,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2199() throws Throwable {
+    public void test2114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2199");
-        org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n&lt;/body&gt;\n&lt;/html&gt;", "a");
-        org.junit.Assert.assertNotNull(textNode2);
-    }
-
-    @Test
-    public void test2200() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2200");
+            System.out.format("%n%s%n", "RegressionTest4.test2114");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -6443,9 +3683,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2201() throws Throwable {
+    public void test2115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2201");
+            System.out.format("%n%s%n", "RegressionTest4.test2115");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("", "\n<!--#root-->");
         java.lang.String str3 = textNode2.getWholeText();
         org.jsoup.nodes.TextNode textNode5 = textNode2.text("hi!");
@@ -6465,25 +3705,25 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2202() throws Throwable {
+    public void test2116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2202");
+            System.out.format("%n%s%n", "RegressionTest4.test2116");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("", "#document");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2203() throws Throwable {
+    public void test2117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2203");
+            System.out.format("%n%s%n", "RegressionTest4.test2117");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("", "#document#document");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2204() throws Throwable {
+    public void test2118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2204");
+            System.out.format("%n%s%n", "RegressionTest4.test2118");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -6552,16 +3792,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2205() throws Throwable {
+    public void test2119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2205");
+            System.out.format("%n%s%n", "RegressionTest4.test2119");
         org.jsoup.nodes.DataNode dataNode2 = new org.jsoup.nodes.DataNode("<!--#document-->", "<!--#document-->=\"#document#document\"");
     }
 
     @Test
-    public void test2206() throws Throwable {
+    public void test2120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2206");
+            System.out.format("%n%s%n", "RegressionTest4.test2120");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -6574,9 +3814,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2207() throws Throwable {
+    public void test2121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2207");
+            System.out.format("%n%s%n", "RegressionTest4.test2121");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -6645,9 +3885,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2208() throws Throwable {
+    public void test2122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2208");
+            System.out.format("%n%s%n", "RegressionTest4.test2122");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -6666,9 +3906,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2209() throws Throwable {
+    public void test2123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2209");
+            System.out.format("%n%s%n", "RegressionTest4.test2123");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -6768,9 +4008,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2210() throws Throwable {
+    public void test2124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2210");
+            System.out.format("%n%s%n", "RegressionTest4.test2124");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -6796,9 +4036,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2211() throws Throwable {
+    public void test2125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2211");
+            System.out.format("%n%s%n", "RegressionTest4.test2125");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         java.lang.String str2 = tokenQueue1.consumeAttributeKey();
         java.lang.String str4 = tokenQueue1.consumeTo("#root=\"hi!\"");
@@ -6813,9 +4053,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2212() throws Throwable {
+    public void test2126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2212");
+            System.out.format("%n%s%n", "RegressionTest4.test2126");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
@@ -6831,9 +4071,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2213() throws Throwable {
+    public void test2127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2213");
+            System.out.format("%n%s%n", "RegressionTest4.test2127");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -6865,9 +4105,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2214() throws Throwable {
+    public void test2128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2214");
+            System.out.format("%n%s%n", "RegressionTest4.test2128");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         org.jsoup.select.Selector.SelectorParseException selectorParseException6 = new org.jsoup.select.Selector.SelectorParseException("");
@@ -6920,9 +4160,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2215() throws Throwable {
+    public void test2129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2215");
+            System.out.format("%n%s%n", "RegressionTest4.test2129");
         org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
         java.lang.String str5 = elements4.val();
@@ -6950,9 +4190,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2216() throws Throwable {
+    public void test2130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2216");
+            System.out.format("%n%s%n", "RegressionTest4.test2130");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -6986,18 +4226,18 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2217() throws Throwable {
+    public void test2131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2217");
+            System.out.format("%n%s%n", "RegressionTest4.test2131");
         org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("<?#document#document>", "org.jsoup.select.Selector$SelectorParseException: ");
         java.lang.String str3 = attribute2.getKey();
         org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<?#document#document>" + "'", str3, "<?#document#document>");
     }
 
     @Test
-    public void test2218() throws Throwable {
+    public void test2132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2218");
+            System.out.format("%n%s%n", "RegressionTest4.test2132");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -7029,9 +4269,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2219() throws Throwable {
+    public void test2133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2219");
+            System.out.format("%n%s%n", "RegressionTest4.test2133");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -7077,9 +4317,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2220() throws Throwable {
+    public void test2134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2220");
+            System.out.format("%n%s%n", "RegressionTest4.test2134");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("", "org.jsoup.select.selector$selectorparseexception:");
         java.lang.String str3 = document2.nodeName();
         org.jsoup.select.Elements elements5 = document2.getElementsByClass("#root=&quot;hi!&quot;");
@@ -7089,9 +4329,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2221() throws Throwable {
+    public void test2135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2221");
+            System.out.format("%n%s%n", "RegressionTest4.test2135");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element6 = document3.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         java.lang.String str7 = document3.tagName();
@@ -7129,26 +4369,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2222() throws Throwable {
+    public void test2136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2222");
-        org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("#root", "");
-        org.jsoup.nodes.TextNode textNode4 = textNode2.text("#document");
-        org.jsoup.nodes.TextNode textNode6 = textNode2.text(" class=\"hi!\"");
-        java.lang.String str7 = textNode6.getWholeText();
-        org.jsoup.nodes.TextNode textNode9 = textNode6.text("<html> \n <head> \n </head> \n <body>\n   #root  \n </body>\n</html>");
-        java.lang.String str10 = textNode6.nodeName();
-        org.junit.Assert.assertNotNull(textNode4);
-        org.junit.Assert.assertNotNull(textNode6);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + " class=\"hi!\"" + "'", str7, " class=\"hi!\"");
-        org.junit.Assert.assertNotNull(textNode9);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "#text" + "'", str10, "#text");
-    }
-
-    @Test
-    public void test2223() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2223");
+            System.out.format("%n%s%n", "RegressionTest4.test2136");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -7177,9 +4400,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2224() throws Throwable {
+    public void test2137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2224");
+            System.out.format("%n%s%n", "RegressionTest4.test2137");
         org.jsoup.nodes.Comment comment2 = new org.jsoup.nodes.Comment("#document#documenthi!", "\n<!--#document-->");
         java.lang.String str3 = comment2.getData();
         java.lang.String str4 = comment2.toString();
@@ -7188,9 +4411,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2225() throws Throwable {
+    public void test2138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2225");
+            System.out.format("%n%s%n", "RegressionTest4.test2138");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#root");
         org.jsoup.parser.Tag tag2 = tag1.getImplicitParent();
         org.jsoup.parser.Tag tag4 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
@@ -7241,9 +4464,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2226() throws Throwable {
+    public void test2139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2226");
+            System.out.format("%n%s%n", "RegressionTest4.test2139");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         int int1 = attributes0.size();
         java.lang.String str2 = attributes0.html();
@@ -7338,9 +4561,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2227() throws Throwable {
+    public void test2140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2227");
+            System.out.format("%n%s%n", "RegressionTest4.test2140");
         org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("org.jsoup.select.Selector$SelectorParseException: ", "");
         java.lang.String str3 = textNode2.toString();
         // The following exception was thrown during execution in test generation
@@ -7354,9 +4577,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2228() throws Throwable {
+    public void test2141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2228");
+            System.out.format("%n%s%n", "RegressionTest4.test2141");
         org.jsoup.safety.Whitelist whitelist1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -7368,9 +4591,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2229() throws Throwable {
+    public void test2142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2229");
+            System.out.format("%n%s%n", "RegressionTest4.test2142");
         org.jsoup.parser.Tag tag2 = org.jsoup.parser.Tag.valueOf("#root");
         boolean boolean3 = tag2.isInline();
         boolean boolean4 = tag2.isInline();
@@ -7438,9 +4661,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2230() throws Throwable {
+    public void test2143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2230");
+            System.out.format("%n%s%n", "RegressionTest4.test2143");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("<?#document#document>");
         org.jsoup.parser.Tag tag3 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean4 = tag3.isData();
@@ -7484,9 +4707,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2231() throws Throwable {
+    public void test2144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2231");
+            System.out.format("%n%s%n", "RegressionTest4.test2144");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -7547,9 +4770,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2232() throws Throwable {
+    public void test2145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2232");
+            System.out.format("%n%s%n", "RegressionTest4.test2145");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -7582,9 +4805,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2233() throws Throwable {
+    public void test2146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2233");
+            System.out.format("%n%s%n", "RegressionTest4.test2146");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -7620,17 +4843,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2234() throws Throwable {
+    public void test2147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2234");
-        org.jsoup.nodes.DataNode dataNode2 = org.jsoup.nodes.DataNode.createFromEncoded("<html>\n<head>\n <title>&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n #root \n&lt;/body&gt;\n&lt;/html&gt;</title>\n</head>\n<body>\n</body>\n</html>", "");
-        org.junit.Assert.assertNotNull(dataNode2);
-    }
-
-    @Test
-    public void test2235() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2235");
+            System.out.format("%n%s%n", "RegressionTest4.test2147");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         org.jsoup.nodes.Element element7 = document2.child((int) (byte) 0);
@@ -7642,9 +4857,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2236() throws Throwable {
+    public void test2148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2236");
+            System.out.format("%n%s%n", "RegressionTest4.test2148");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("\n<!--org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"-->");
         java.lang.String str2 = document1.title();
         java.lang.String str3 = document1.outerHtml();
@@ -7654,9 +4869,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2237() throws Throwable {
+    public void test2149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2237");
+            System.out.format("%n%s%n", "RegressionTest4.test2149");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -7707,9 +4922,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2238() throws Throwable {
+    public void test2150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2238");
+            System.out.format("%n%s%n", "RegressionTest4.test2150");
         org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("body", "org.jsoup.select.Selector$SelectorParseException:");
         org.jsoup.nodes.Document document4 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements6 = document4.getElementsByAttribute("hi!");
@@ -7757,9 +4972,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2239() throws Throwable {
+    public void test2151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2239");
+            System.out.format("%n%s%n", "RegressionTest4.test2151");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("body", "");
         java.lang.String str3 = document2.nodeName();
         org.jsoup.nodes.Element element5 = document2.prepend("[#,  ]");
@@ -7769,9 +4984,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2240() throws Throwable {
+    public void test2152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2240");
+            System.out.format("%n%s%n", "RegressionTest4.test2152");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("org.jsoup.select.selector$selectorparseexception:");
         java.lang.String str2 = document1.outerHtml();
         document1.setBaseUri("#root=\"hi!\"");
@@ -7780,9 +4995,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2241() throws Throwable {
+    public void test2153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2241");
+            System.out.format("%n%s%n", "RegressionTest4.test2153");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         org.jsoup.parser.Tag tag4 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean5 = tag4.isData();
@@ -7841,9 +5056,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2242() throws Throwable {
+    public void test2154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2242");
+            System.out.format("%n%s%n", "RegressionTest4.test2154");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -7866,9 +5081,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2243() throws Throwable {
+    public void test2155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2243");
+            System.out.format("%n%s%n", "RegressionTest4.test2155");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         org.jsoup.select.Selector.SelectorParseException selectorParseException6 = new org.jsoup.select.Selector.SelectorParseException("");
@@ -7918,9 +5133,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2244() throws Throwable {
+    public void test2156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2244");
+            System.out.format("%n%s%n", "RegressionTest4.test2156");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         boolean boolean3 = tokenQueue1.matches("\n<!--#root-->");
         boolean boolean5 = tokenQueue1.matchChomp("#data");
@@ -7985,92 +5200,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2245() throws Throwable {
+    public void test2157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2245");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = element8.addClass("#document");
-        java.lang.String str11 = element10.html();
-        org.jsoup.nodes.Element element13 = element10.appendElement("#document");
-        java.lang.String str14 = element13.html();
-        org.jsoup.nodes.Document document17 = org.jsoup.parser.Parser.parse("#root", "");
-        java.lang.String str18 = document17.outerHtml();
-        org.jsoup.nodes.Element element20 = document17.createElement("#document#documenthi!");
-        org.jsoup.nodes.Element element21 = element13.prependChild((org.jsoup.nodes.Node) element20);
-        java.lang.String str22 = element13.tagName();
-        org.jsoup.nodes.Document document24 = new org.jsoup.nodes.Document("");
-        boolean boolean25 = document24.hasText();
-        boolean boolean26 = document24.hasText();
-        org.jsoup.nodes.Document document28 = new org.jsoup.nodes.Document("");
-        boolean boolean29 = document28.hasText();
-        java.lang.String str30 = document28.nodeName();
-        java.lang.String[] strArray32 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet33 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean34 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet33, strArray32);
-        org.jsoup.nodes.Element element35 = document28.classNames((java.util.Set<java.lang.String>) strSet33);
-        org.jsoup.nodes.Element element36 = document24.classNames((java.util.Set<java.lang.String>) strSet33);
-        org.jsoup.nodes.Element element37 = element13.classNames((java.util.Set<java.lang.String>) strSet33);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertNotNull(document17);
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str18, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(element20);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "#document" + "'", str22, "#document");
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "#document" + "'", str30, "#document");
-        org.junit.Assert.assertNotNull(strArray32);
-        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + true + "'", boolean34 == true);
-        org.junit.Assert.assertNotNull(element35);
-        org.junit.Assert.assertNotNull(element36);
-        org.junit.Assert.assertNotNull(element37);
-    }
-
-    @Test
-    public void test2246() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2246");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        java.lang.String str4 = elements3.val();
-        java.lang.Object obj5 = null;
-        int int6 = elements3.lastIndexOf(obj5);
-        org.jsoup.select.Elements elements8 = elements3.eq((int) '#');
-        boolean boolean10 = elements3.hasAttr("#root");
-        int int12 = elements3.indexOf((java.lang.Object) (byte) 100);
-        java.lang.String str14 = elements3.attr("org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements16 = elements3.toggleClass("org.jsoup.select.Selector$SelectorParseException:");
-        org.jsoup.select.Elements elements18 = elements16.toggleClass("<html>\n<head>\n</head>\n<body>\n ocument \n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + (-1) + "'", int6 == (-1));
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + (-1) + "'", int12 == (-1));
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertNotNull(elements16);
-        org.junit.Assert.assertNotNull(elements18);
-    }
-
-    @Test
-    public void test2247() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2247");
+            System.out.format("%n%s%n", "RegressionTest4.test2157");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Attributes attributes4 = new org.jsoup.nodes.Attributes();
@@ -8096,9 +5228,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2248() throws Throwable {
+    public void test2158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2248");
+            System.out.format("%n%s%n", "RegressionTest4.test2158");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("org.jsoup.select.Selector$SelectorParseException: \n<!--#document-->", "<html> \n <head> \n </head> \n <body>\n   #root  \n </body>\n</html>");
         // The following exception was thrown during execution in test generation
         try {
@@ -8111,9 +5243,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2249() throws Throwable {
+    public void test2159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2249");
+            System.out.format("%n%s%n", "RegressionTest4.test2159");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document2 = document1.normalise();
         org.jsoup.nodes.Element element3 = document1.head();
@@ -8182,9 +5314,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2250() throws Throwable {
+    public void test2160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2250");
+            System.out.format("%n%s%n", "RegressionTest4.test2160");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -8281,9 +5413,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2251() throws Throwable {
+    public void test2161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2251");
+            System.out.format("%n%s%n", "RegressionTest4.test2161");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element6 = document2.text("#document");
@@ -8299,9 +5431,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2252() throws Throwable {
+    public void test2162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2252");
+            System.out.format("%n%s%n", "RegressionTest4.test2162");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -8328,9 +5460,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2253() throws Throwable {
+    public void test2163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2253");
+            System.out.format("%n%s%n", "RegressionTest4.test2163");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -8378,9 +5510,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2254() throws Throwable {
+    public void test2164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2254");
+            System.out.format("%n%s%n", "RegressionTest4.test2164");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("org.jsoup.select.Selector$SelectorParseException: \n<!--#document-->", "#document#document");
         org.jsoup.parser.Tag tag3 = document2.tag();
         org.junit.Assert.assertNotNull(document2);
@@ -8388,9 +5520,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2255() throws Throwable {
+    public void test2165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2255");
+            System.out.format("%n%s%n", "RegressionTest4.test2165");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -8447,9 +5579,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2256() throws Throwable {
+    public void test2166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2256");
+            System.out.format("%n%s%n", "RegressionTest4.test2166");
         org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("org.jsoup.select.Selector$SelectorParseException: ", "");
         java.lang.String str4 = textNode2.absUrl("#data");
         org.jsoup.nodes.TextNode textNode6 = textNode2.text("#data");
@@ -8466,9 +5598,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2257() throws Throwable {
+    public void test2167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2257");
+            System.out.format("%n%s%n", "RegressionTest4.test2167");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.createElement("#document#documenthi!");
@@ -8484,9 +5616,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2258() throws Throwable {
+    public void test2168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2258");
+            System.out.format("%n%s%n", "RegressionTest4.test2168");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         int int1 = attributes0.size();
         boolean boolean3 = attributes0.hasKey("");
@@ -8498,9 +5630,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2259() throws Throwable {
+    public void test2169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2259");
+            System.out.format("%n%s%n", "RegressionTest4.test2169");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = document1.nodeName();
@@ -8518,9 +5650,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2260() throws Throwable {
+    public void test2170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2260");
+            System.out.format("%n%s%n", "RegressionTest4.test2170");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         boolean boolean5 = document1.hasText();
@@ -8546,9 +5678,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2261() throws Throwable {
+    public void test2171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2261");
+            System.out.format("%n%s%n", "RegressionTest4.test2171");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -8581,9 +5713,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2262() throws Throwable {
+    public void test2172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2262");
+            System.out.format("%n%s%n", "RegressionTest4.test2172");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -8610,9 +5742,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2263() throws Throwable {
+    public void test2173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2263");
+            System.out.format("%n%s%n", "RegressionTest4.test2173");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -8653,9 +5785,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2264() throws Throwable {
+    public void test2174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2264");
+            System.out.format("%n%s%n", "RegressionTest4.test2174");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -8693,9 +5825,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2265() throws Throwable {
+    public void test2175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2265");
+            System.out.format("%n%s%n", "RegressionTest4.test2175");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -8711,9 +5843,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2266() throws Throwable {
+    public void test2176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2266");
+            System.out.format("%n%s%n", "RegressionTest4.test2176");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("\n&lt;!--#root--&gt;", "<html>\n<head>\n</head>\n<body> \n <!--#root-->\n</body>\n</html>");
         org.jsoup.select.Elements elements4 = document2.getElementsByIndexGreaterThan(0);
         java.lang.String str5 = elements4.outerHtml();
@@ -8723,9 +5855,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2267() throws Throwable {
+    public void test2177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2267");
+            System.out.format("%n%s%n", "RegressionTest4.test2177");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -8769,9 +5901,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2268() throws Throwable {
+    public void test2178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2268");
+            System.out.format("%n%s%n", "RegressionTest4.test2178");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("hi!", "#data");
         java.lang.String str3 = document2.text();
         org.jsoup.nodes.Element element4 = document2.body();
@@ -8781,9 +5913,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2269() throws Throwable {
+    public void test2179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2269");
+            System.out.format("%n%s%n", "RegressionTest4.test2179");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root=\"#root=&quot;hi!&quot;\"", "<html>\n<head>\n</head>\n<body>\n #document\n</body>\n</html>");
         org.jsoup.nodes.Element element3 = document2.body();
         org.jsoup.select.Elements elements6 = element3.getElementsByAttributeValue("<html>\n<head>\n</head>\n<body>\n</body>\n</html>\n<head>\n</head>\n<body>\n</body>\n", "body");
@@ -8793,9 +5925,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2270() throws Throwable {
+    public void test2180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2270");
+            System.out.format("%n%s%n", "RegressionTest4.test2180");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -8830,9 +5962,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2271() throws Throwable {
+    public void test2181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2271");
+            System.out.format("%n%s%n", "RegressionTest4.test2181");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("[]");
@@ -8843,9 +5975,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2272() throws Throwable {
+    public void test2182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2272");
+            System.out.format("%n%s%n", "RegressionTest4.test2182");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -8877,9 +6009,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2273() throws Throwable {
+    public void test2183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2273");
+            System.out.format("%n%s%n", "RegressionTest4.test2183");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("", "\n<!--#root-->");
         java.lang.String str3 = textNode2.getWholeText();
         org.jsoup.nodes.TextNode textNode5 = textNode2.text("hi!");
@@ -8899,17 +6031,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2274() throws Throwable {
+    public void test2184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2274");
+            System.out.format("%n%s%n", "RegressionTest4.test2184");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("<html>\n<head>\n</head>\n<body>\n []\n</body>\n</html>");
         org.junit.Assert.assertNotNull(document1);
     }
 
     @Test
-    public void test2275() throws Throwable {
+    public void test2185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2275");
+            System.out.format("%n%s%n", "RegressionTest4.test2185");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -8944,9 +6076,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2276() throws Throwable {
+    public void test2186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2276");
+            System.out.format("%n%s%n", "RegressionTest4.test2186");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         org.jsoup.select.Elements elements3 = document1.getElementsByIndexLessThan((int) (short) 10);
         org.jsoup.nodes.Document document6 = org.jsoup.Jsoup.parse(" class=&quot;hi!&quot;");
@@ -8965,17 +6097,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2277() throws Throwable {
+    public void test2187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2277");
+            System.out.format("%n%s%n", "RegressionTest4.test2187");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("\n<head>\n</head>");
         org.junit.Assert.assertNotNull(document1);
     }
 
     @Test
-    public void test2278() throws Throwable {
+    public void test2188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2278");
+            System.out.format("%n%s%n", "RegressionTest4.test2188");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.createElement("#document#documenthi!");
@@ -8990,9 +6122,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2279() throws Throwable {
+    public void test2189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2279");
+            System.out.format("%n%s%n", "RegressionTest4.test2189");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -9030,9 +6162,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2280() throws Throwable {
+    public void test2190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2280");
+            System.out.format("%n%s%n", "RegressionTest4.test2190");
         org.jsoup.parser.Tag tag2 = org.jsoup.parser.Tag.valueOf("#root");
         boolean boolean3 = tag2.isInline();
         boolean boolean4 = tag2.isInline();
@@ -9092,9 +6224,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2281() throws Throwable {
+    public void test2191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2281");
+            System.out.format("%n%s%n", "RegressionTest4.test2191");
         org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements6 = elements4.prepend("");
@@ -9154,9 +6286,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2282() throws Throwable {
+    public void test2192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2282");
+            System.out.format("%n%s%n", "RegressionTest4.test2192");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -9185,9 +6317,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2283() throws Throwable {
+    public void test2193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2283");
+            System.out.format("%n%s%n", "RegressionTest4.test2193");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("");
         boolean boolean2 = tokenQueue1.isEmpty();
         java.lang.String[] strArray6 = new java.lang.String[] { " class=\"hi!\"", "#data", "[]" };
@@ -9217,37 +6349,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2284() throws Throwable {
+    public void test2194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2284");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
-        org.jsoup.nodes.Attributes attributes5 = document1.attributes();
-        org.jsoup.nodes.Element element6 = document1.head();
-        org.jsoup.select.Elements elements7 = element6.getAllElements();
-        org.jsoup.select.Elements elements8 = element6.getAllElements();
-        java.util.ListIterator<org.jsoup.nodes.Element> elementItor9 = elements8.listIterator();
-        int int10 = elements8.size();
-        org.jsoup.nodes.Element element11 = elements8.last();
-        java.lang.String str12 = element11.toString();
-        org.jsoup.select.Elements elements14 = element11.getElementsByTag("# ");
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertNotNull(attributes5);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(elementItor9);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 1 + "'", int10 == 1);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "\n<head>\n</head>" + "'", str12, "\n<head>\n</head>");
-        org.junit.Assert.assertNotNull(elements14);
-    }
-
-    @Test
-    public void test2285() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2285");
+            System.out.format("%n%s%n", "RegressionTest4.test2194");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("#root=&quot;hi!&quot;\n<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>\n<html> \n<head> \n</head> \n<body>\n  #root  \n</body>\n</html>", "a");
         // The following exception was thrown during execution in test generation
         try {
@@ -9260,9 +6364,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2286() throws Throwable {
+    public void test2195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2286");
+            System.out.format("%n%s%n", "RegressionTest4.test2195");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("<?#document#document>", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>#document#documentdocument");
         org.jsoup.nodes.Document document3 = document2.normalise();
         java.lang.String str4 = document3.data();
@@ -9272,17 +6376,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2287() throws Throwable {
+    public void test2196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2287");
+            System.out.format("%n%s%n", "RegressionTest4.test2196");
         org.jsoup.nodes.DataNode dataNode2 = org.jsoup.nodes.DataNode.createFromEncoded("&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n #root \n&lt;/body&gt;\n&lt;/html&gt;\n&lt;html&gt; \n&lt;head&gt; \n&lt;/head&gt; \n&lt;body&gt;\n  #root  \n&lt;/body&gt;\n&lt;/html&gt;", "\n<head>\n</head>");
         org.junit.Assert.assertNotNull(dataNode2);
     }
 
     @Test
-    public void test2288() throws Throwable {
+    public void test2197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2288");
+            System.out.format("%n%s%n", "RegressionTest4.test2197");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -9316,9 +6420,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2289() throws Throwable {
+    public void test2198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2289");
+            System.out.format("%n%s%n", "RegressionTest4.test2198");
         org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements6 = elements4.val("a");
@@ -9331,9 +6435,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2290() throws Throwable {
+    public void test2199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2290");
+            System.out.format("%n%s%n", "RegressionTest4.test2199");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("#root", "\n<!--#root-->");
         org.jsoup.select.Elements elements4 = org.jsoup.select.Selector.select("#declaration", (org.jsoup.nodes.Element) document3);
         org.jsoup.nodes.Element element5 = document3.body();
@@ -9376,9 +6480,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2291() throws Throwable {
+    public void test2200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2291");
+            System.out.format("%n%s%n", "RegressionTest4.test2200");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -9398,9 +6502,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2292() throws Throwable {
+    public void test2201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2292");
+            System.out.format("%n%s%n", "RegressionTest4.test2201");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -9474,16 +6578,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2293() throws Throwable {
+    public void test2202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2293");
+            System.out.format("%n%s%n", "RegressionTest4.test2202");
         org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("&lt;?hi!&gt;", " class=\"hi!\"");
     }
 
     @Test
-    public void test2294() throws Throwable {
+    public void test2203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2294");
+            System.out.format("%n%s%n", "RegressionTest4.test2203");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -9521,9 +6625,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2295() throws Throwable {
+    public void test2204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2295");
+            System.out.format("%n%s%n", "RegressionTest4.test2204");
         org.jsoup.parser.Tag tag0 = null;
         org.jsoup.nodes.Attributes attributes2 = new org.jsoup.nodes.Attributes();
         int int3 = attributes2.size();
@@ -9540,9 +6644,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2296() throws Throwable {
+    public void test2205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2296");
+            System.out.format("%n%s%n", "RegressionTest4.test2205");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("#declaration", " ");
         org.jsoup.nodes.Element element4 = document2.createElement(" class=\"hi!\"");
         java.lang.String str6 = document2.attr("<?#document#document>");
@@ -9552,9 +6656,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2297() throws Throwable {
+    public void test2206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2297");
+            System.out.format("%n%s%n", "RegressionTest4.test2206");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -9607,9 +6711,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2298() throws Throwable {
+    public void test2207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2298");
+            System.out.format("%n%s%n", "RegressionTest4.test2207");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         boolean boolean3 = tokenQueue1.matches("\n<!--#root-->");
         boolean boolean5 = tokenQueue1.matchChomp("#data");
@@ -9630,9 +6734,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2299() throws Throwable {
+    public void test2208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2299");
+            System.out.format("%n%s%n", "RegressionTest4.test2208");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         boolean boolean5 = document1.hasText();
@@ -9648,9 +6752,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2300() throws Throwable {
+    public void test2209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2300");
+            System.out.format("%n%s%n", "RegressionTest4.test2209");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -9669,9 +6773,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2301() throws Throwable {
+    public void test2210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2301");
+            System.out.format("%n%s%n", "RegressionTest4.test2210");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -9693,9 +6797,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2302() throws Throwable {
+    public void test2211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2302");
+            System.out.format("%n%s%n", "RegressionTest4.test2211");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document2 = document1.normalise();
         org.jsoup.nodes.Element element3 = document2.head();
@@ -9715,9 +6819,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2303() throws Throwable {
+    public void test2212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2303");
+            System.out.format("%n%s%n", "RegressionTest4.test2212");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
@@ -9735,9 +6839,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2304() throws Throwable {
+    public void test2213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2304");
+            System.out.format("%n%s%n", "RegressionTest4.test2213");
         org.jsoup.select.Selector.SelectorParseException selectorParseException1 = new org.jsoup.select.Selector.SelectorParseException("#document#document=\"#document#document\"");
         org.jsoup.select.Selector.SelectorParseException selectorParseException3 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
         org.jsoup.select.Selector.SelectorParseException selectorParseException5 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
@@ -9756,9 +6860,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2305() throws Throwable {
+    public void test2214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2305");
+            System.out.format("%n%s%n", "RegressionTest4.test2214");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("hi!=\"#root=&quot;hi!&quot;\"", "");
         org.jsoup.nodes.Element element4 = document2.createElement("a");
         org.jsoup.nodes.Element element5 = document2.empty();
@@ -9774,9 +6878,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2306() throws Throwable {
+    public void test2215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2306");
+            System.out.format("%n%s%n", "RegressionTest4.test2215");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         java.lang.String str6 = document2.tagName();
@@ -9836,9 +6940,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2307() throws Throwable {
+    public void test2216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2307");
+            System.out.format("%n%s%n", "RegressionTest4.test2216");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -9867,9 +6971,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2308() throws Throwable {
+    public void test2217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2308");
+            System.out.format("%n%s%n", "RegressionTest4.test2217");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("#root");
         org.jsoup.nodes.Attributes attributes2 = document1.attributes();
         java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor3 = attributes2.iterator();
@@ -9878,9 +6982,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2309() throws Throwable {
+    public void test2218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2309");
+            System.out.format("%n%s%n", "RegressionTest4.test2218");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("#document#document", "\n<!--#document-->", false);
         java.lang.String str4 = xmlDeclaration3.toString();
         java.util.List<org.jsoup.nodes.Node> nodeList5 = xmlDeclaration3.childNodes();
@@ -9899,9 +7003,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2310() throws Throwable {
+    public void test2219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2310");
+            System.out.format("%n%s%n", "RegressionTest4.test2219");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi!=\"#root=&quot;hi!&quot;\"", "#root=\"hi!\"");
         org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValueContaining("[]", "#root");
         org.jsoup.select.Elements elements6 = elements5.parents();
@@ -9913,9 +7017,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2311() throws Throwable {
+    public void test2220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2311");
+            System.out.format("%n%s%n", "RegressionTest4.test2220");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document2 = document1.normalise();
         java.lang.String str3 = document1.nodeName();
@@ -9936,9 +7040,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2312() throws Throwable {
+    public void test2221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2312");
+            System.out.format("%n%s%n", "RegressionTest4.test2221");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Attributes attributes4 = new org.jsoup.nodes.Attributes();
@@ -9972,17 +7076,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2313() throws Throwable {
+    public void test2222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2313");
+            System.out.format("%n%s%n", "RegressionTest4.test2222");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("document", "#root=\"#root=\"hi!\"\"");
         org.junit.Assert.assertNotNull(attribute2);
     }
 
     @Test
-    public void test2314() throws Throwable {
+    public void test2223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2314");
+            System.out.format("%n%s%n", "RegressionTest4.test2223");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         org.jsoup.select.Elements elements3 = document1.getElementsByIndexLessThan((int) (short) 0);
         org.junit.Assert.assertNotNull(document1);
@@ -9990,9 +7094,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2315() throws Throwable {
+    public void test2224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2315");
+            System.out.format("%n%s%n", "RegressionTest4.test2224");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         java.lang.String str6 = document2.tagName();
@@ -10006,9 +7110,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2316() throws Throwable {
+    public void test2225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2316");
+            System.out.format("%n%s%n", "RegressionTest4.test2225");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("\n<!--#root-->");
         org.jsoup.nodes.Attributes attributes2 = document1.attributes();
         java.util.List<org.jsoup.nodes.Attribute> attributeList3 = attributes2.asList();
@@ -10018,9 +7122,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2317() throws Throwable {
+    public void test2226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2317");
+            System.out.format("%n%s%n", "RegressionTest4.test2226");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -10080,9 +7184,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2318() throws Throwable {
+    public void test2227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2318");
+            System.out.format("%n%s%n", "RegressionTest4.test2227");
         java.io.File file0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -10094,9 +7198,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2319() throws Throwable {
+    public void test2228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2319");
+            System.out.format("%n%s%n", "RegressionTest4.test2228");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -10140,9 +7244,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2320() throws Throwable {
+    public void test2229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2320");
+            System.out.format("%n%s%n", "RegressionTest4.test2229");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("#root");
         org.jsoup.nodes.Element element3 = document1.text("\n<body>\n  &lt;!--#root--&gt; \n</body>");
         org.junit.Assert.assertNotNull(document1);
@@ -10150,9 +7254,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2321() throws Throwable {
+    public void test2230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2321");
+            System.out.format("%n%s%n", "RegressionTest4.test2230");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -10176,9 +7280,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2322() throws Throwable {
+    public void test2231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2322");
+            System.out.format("%n%s%n", "RegressionTest4.test2231");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         org.jsoup.select.Elements elements5 = element4.parents();
@@ -10189,9 +7293,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2323() throws Throwable {
+    public void test2232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2323");
+            System.out.format("%n%s%n", "RegressionTest4.test2232");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -10220,9 +7324,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2324() throws Throwable {
+    public void test2233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2324");
+            System.out.format("%n%s%n", "RegressionTest4.test2233");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.createElement("#document#documenthi!");
@@ -10238,9 +7342,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2325() throws Throwable {
+    public void test2234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2325");
+            System.out.format("%n%s%n", "RegressionTest4.test2234");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -10287,17 +7391,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2326() throws Throwable {
+    public void test2235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2326");
+            System.out.format("%n%s%n", "RegressionTest4.test2235");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("<?#document#document>", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:");
         org.junit.Assert.assertNotNull(textNode2);
     }
 
     @Test
-    public void test2327() throws Throwable {
+    public void test2236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2327");
+            System.out.format("%n%s%n", "RegressionTest4.test2236");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -10327,9 +7431,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2328() throws Throwable {
+    public void test2237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2328");
+            System.out.format("%n%s%n", "RegressionTest4.test2237");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document2 = document1.normalise();
         org.jsoup.nodes.Element element3 = document2.head();
@@ -10351,9 +7455,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2329() throws Throwable {
+    public void test2238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2329");
+            System.out.format("%n%s%n", "RegressionTest4.test2238");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -10370,21 +7474,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2330() throws Throwable {
+    public void test2239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2330");
-        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi!=\"#root=&quot;hi!&quot;\"", "#root=\"hi!\"");
-        org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValueContaining("[]", "#root");
-        java.lang.String str6 = document2.nodeName();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#document" + "'", str6, "#document");
-    }
-
-    @Test
-    public void test2331() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2331");
+            System.out.format("%n%s%n", "RegressionTest4.test2239");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#root");
         org.jsoup.parser.Tag tag2 = tag1.getImplicitParent();
         org.jsoup.parser.Tag tag4 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
@@ -10422,9 +7514,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2332() throws Throwable {
+    public void test2240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2332");
+            System.out.format("%n%s%n", "RegressionTest4.test2240");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -10464,9 +7556,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2333() throws Throwable {
+    public void test2241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2333");
+            System.out.format("%n%s%n", "RegressionTest4.test2241");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         boolean boolean5 = document1.hasText();
@@ -10498,9 +7590,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2334() throws Throwable {
+    public void test2242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2334");
+            System.out.format("%n%s%n", "RegressionTest4.test2242");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -10546,9 +7638,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2335() throws Throwable {
+    public void test2243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2335");
+            System.out.format("%n%s%n", "RegressionTest4.test2243");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -10597,9 +7689,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2336() throws Throwable {
+    public void test2244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2336");
+            System.out.format("%n%s%n", "RegressionTest4.test2244");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
@@ -10615,9 +7707,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2337() throws Throwable {
+    public void test2245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2337");
+            System.out.format("%n%s%n", "RegressionTest4.test2245");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -10667,9 +7759,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2338() throws Throwable {
+    public void test2246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2338");
+            System.out.format("%n%s%n", "RegressionTest4.test2246");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -10690,9 +7782,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2339() throws Throwable {
+    public void test2247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2339");
+            System.out.format("%n%s%n", "RegressionTest4.test2247");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document#document=\"#document#document\"");
         boolean boolean2 = tokenQueue1.isEmpty();
         java.lang.String str3 = tokenQueue1.consumeCssIdentifier();
@@ -10704,9 +7796,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2340() throws Throwable {
+    public void test2248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2340");
+            System.out.format("%n%s%n", "RegressionTest4.test2248");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         java.lang.String str5 = document1.id();
@@ -10723,9 +7815,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2341() throws Throwable {
+    public void test2249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2341");
+            System.out.format("%n%s%n", "RegressionTest4.test2249");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -10794,9 +7886,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2342() throws Throwable {
+    public void test2250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2342");
+            System.out.format("%n%s%n", "RegressionTest4.test2250");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -10845,9 +7937,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2343() throws Throwable {
+    public void test2251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2343");
+            System.out.format("%n%s%n", "RegressionTest4.test2251");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         java.lang.String str5 = document1.id();
@@ -10869,9 +7961,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2344() throws Throwable {
+    public void test2252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2344");
+            System.out.format("%n%s%n", "RegressionTest4.test2252");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -10893,9 +7985,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2345() throws Throwable {
+    public void test2253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2345");
+            System.out.format("%n%s%n", "RegressionTest4.test2253");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("", "org.jsoup.select.selector$selectorparseexception:");
         boolean boolean4 = document2.hasAttr("#root");
         org.jsoup.nodes.Element element6 = document2.appendText("#root");
@@ -10926,9 +8018,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2346() throws Throwable {
+    public void test2254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2346");
+            System.out.format("%n%s%n", "RegressionTest4.test2254");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>#document#documentdocument");
         java.lang.String str2 = document1.outerHtml();
         org.junit.Assert.assertNotNull(document1);
@@ -10936,9 +8028,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2347() throws Throwable {
+    public void test2255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2347");
+            System.out.format("%n%s%n", "RegressionTest4.test2255");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -10966,17 +8058,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2348() throws Throwable {
+    public void test2256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2348");
-        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("[]a#document#documentdocument");
-        org.junit.Assert.assertNotNull(document1);
-    }
-
-    @Test
-    public void test2349() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2349");
+            System.out.format("%n%s%n", "RegressionTest4.test2256");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("\n<!--#root-->", "#root");
         org.jsoup.nodes.Element element4 = document2.removeClass("#root=\"hi!\"");
         org.jsoup.select.Elements elements6 = element4.getElementsByAttribute(" #comment=\"\"");
@@ -10986,9 +8070,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2350() throws Throwable {
+    public void test2257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2350");
+            System.out.format("%n%s%n", "RegressionTest4.test2257");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         org.jsoup.nodes.Document document3 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document4 = document3.normalise();
@@ -11066,9 +8150,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2351() throws Throwable {
+    public void test2258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2351");
+            System.out.format("%n%s%n", "RegressionTest4.test2258");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -11094,9 +8178,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2352() throws Throwable {
+    public void test2259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2352");
+            System.out.format("%n%s%n", "RegressionTest4.test2259");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         java.lang.String str2 = tokenQueue1.consumeAttributeKey();
         java.lang.String str3 = tokenQueue1.remainder();
@@ -11113,9 +8197,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2353() throws Throwable {
+    public void test2260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2353");
+            System.out.format("%n%s%n", "RegressionTest4.test2260");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -11171,9 +8255,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2354() throws Throwable {
+    public void test2261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2354");
+            System.out.format("%n%s%n", "RegressionTest4.test2261");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -11209,9 +8293,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2355() throws Throwable {
+    public void test2262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2355");
+            System.out.format("%n%s%n", "RegressionTest4.test2262");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -11281,9 +8365,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2356() throws Throwable {
+    public void test2263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2356");
+            System.out.format("%n%s%n", "RegressionTest4.test2263");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -11331,9 +8415,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2357() throws Throwable {
+    public void test2264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2357");
+            System.out.format("%n%s%n", "RegressionTest4.test2264");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -11373,78 +8457,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2358() throws Throwable {
+    public void test2265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2358");
-        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean2 = tag1.isData();
-        boolean boolean3 = tag1.requiresSpecificParent();
-        boolean boolean4 = tag1.isBlock();
-        org.jsoup.parser.Tag tag6 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean7 = tag6.isData();
-        boolean boolean8 = tag6.requiresSpecificParent();
-        boolean boolean9 = tag6.isBlock();
-        boolean boolean10 = tag1.canContain(tag6);
-        org.jsoup.nodes.Document document13 = new org.jsoup.nodes.Document("");
-        boolean boolean14 = document13.hasText();
-        java.lang.String str15 = document13.nodeName();
-        org.jsoup.nodes.Document document17 = new org.jsoup.nodes.Document("");
-        org.jsoup.nodes.Element element20 = document17.attr("hi!", "#root");
-        org.jsoup.nodes.Attributes attributes21 = document17.attributes();
-        boolean boolean22 = document13.equals((java.lang.Object) attributes21);
-        org.jsoup.nodes.Element element23 = new org.jsoup.nodes.Element(tag1, "#document#document=\"#document#document\"", attributes21);
-        java.util.Set<java.lang.String> strSet24 = element23.classNames();
-        java.lang.String str26 = element23.absUrl("hi!=\"#root=&quot;hi!&quot;\"");
-        java.lang.String str27 = element23.nodeName();
-        org.jsoup.nodes.Element element29 = element23.toggleClass("#text");
-        org.jsoup.nodes.Document document31 = new org.jsoup.nodes.Document("");
-        boolean boolean32 = document31.hasText();
-        java.lang.String str33 = document31.nodeName();
-        java.lang.String[] strArray35 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet36 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean37 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet36, strArray35);
-        org.jsoup.nodes.Element element38 = document31.classNames((java.util.Set<java.lang.String>) strSet36);
-        org.jsoup.nodes.Element element40 = document31.append("#document");
-        org.jsoup.nodes.Element element42 = document31.prepend("#document");
-        org.jsoup.select.Elements elements43 = document31.parents();
-        org.jsoup.select.Elements elements44 = document31.children();
-        org.jsoup.nodes.Element element46 = document31.createElement("org.jsoup.select.Selector$SelectorParseException:");
-        org.jsoup.nodes.Element element47 = element29.appendChild((org.jsoup.nodes.Node) element46);
-        org.junit.Assert.assertNotNull(tag1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertNotNull(tag6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "#document" + "'", str15, "#document");
-        org.junit.Assert.assertNotNull(element20);
-        org.junit.Assert.assertNotNull(attributes21);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(strSet24);
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "" + "'", str26, "");
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str27, "org.jsoup.select.selector$selectorparseexception:");
-        org.junit.Assert.assertNotNull(element29);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "#document" + "'", str33, "#document");
-        org.junit.Assert.assertNotNull(strArray35);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + true + "'", boolean37 == true);
-        org.junit.Assert.assertNotNull(element38);
-        org.junit.Assert.assertNotNull(element40);
-        org.junit.Assert.assertNotNull(element42);
-        org.junit.Assert.assertNotNull(elements43);
-        org.junit.Assert.assertNotNull(elements44);
-        org.junit.Assert.assertNotNull(element46);
-        org.junit.Assert.assertNotNull(element47);
-    }
-
-    @Test
-    public void test2359() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2359");
+            System.out.format("%n%s%n", "RegressionTest4.test2265");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         org.jsoup.nodes.Element element4 = document1.wrap("#comment");
@@ -11459,9 +8474,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2360() throws Throwable {
+    public void test2266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2360");
+            System.out.format("%n%s%n", "RegressionTest4.test2266");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -11523,9 +8538,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2361() throws Throwable {
+    public void test2267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2361");
+            System.out.format("%n%s%n", "RegressionTest4.test2267");
         org.jsoup.select.Selector.SelectorParseException selectorParseException1 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
         java.lang.Throwable[] throwableArray2 = selectorParseException1.getSuppressed();
         org.jsoup.select.Selector.SelectorParseException selectorParseException4 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
@@ -11552,9 +8567,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2362() throws Throwable {
+    public void test2268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2362");
+            System.out.format("%n%s%n", "RegressionTest4.test2268");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
@@ -11570,9 +8585,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2363() throws Throwable {
+    public void test2269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2363");
+            System.out.format("%n%s%n", "RegressionTest4.test2269");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi!=\"#root=&quot;hi!&quot;\"", "#root=\"hi!\"");
         org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValueContaining("[]", "#root");
         org.jsoup.nodes.Element element6 = elements5.first();
@@ -11584,9 +8599,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2364() throws Throwable {
+    public void test2270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2364");
+            System.out.format("%n%s%n", "RegressionTest4.test2270");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -11614,9 +8629,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2365() throws Throwable {
+    public void test2271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2365");
+            System.out.format("%n%s%n", "RegressionTest4.test2271");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -11681,9 +8696,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2366() throws Throwable {
+    public void test2272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2366");
+            System.out.format("%n%s%n", "RegressionTest4.test2272");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("#document#document", "\n<!--#document-->", false);
         java.lang.String str4 = xmlDeclaration3.getWholeDeclaration();
         java.lang.String str5 = xmlDeclaration3.toString();
@@ -11692,9 +8707,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2367() throws Throwable {
+    public void test2273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2367");
+            System.out.format("%n%s%n", "RegressionTest4.test2273");
         org.jsoup.nodes.Document document2 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document3 = document2.normalise();
         org.jsoup.nodes.Element element4 = document3.head();
@@ -11716,26 +8731,26 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2368() throws Throwable {
+    public void test2274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2368");
+            System.out.format("%n%s%n", "RegressionTest4.test2274");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi!=&quot;#root=&amp;quot;hi!&amp;quot;&quot;\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>\n\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>\n\n<head>\n</head>\n\n<body>\n</body>", "<!#declaration>");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2369() throws Throwable {
+    public void test2275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2369");
+            System.out.format("%n%s%n", "RegressionTest4.test2275");
         org.jsoup.select.Selector.SelectorParseException selectorParseException1 = new org.jsoup.select.Selector.SelectorParseException("body");
         java.lang.String str2 = selectorParseException1.toString();
         org.junit.Assert.assertEquals("'" + str2 + "' != '" + "org.jsoup.select.Selector$SelectorParseException: body" + "'", str2, "org.jsoup.select.Selector$SelectorParseException: body");
     }
 
     @Test
-    public void test2370() throws Throwable {
+    public void test2276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2370");
+            System.out.format("%n%s%n", "RegressionTest4.test2276");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         java.lang.String str5 = document1.id();
@@ -11759,9 +8774,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2371() throws Throwable {
+    public void test2277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2371");
+            System.out.format("%n%s%n", "RegressionTest4.test2277");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -11784,9 +8799,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2372() throws Throwable {
+    public void test2278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2372");
+            System.out.format("%n%s%n", "RegressionTest4.test2278");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("<#root class=\"hi!\">\nhi!\n</#root>\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration5 = new org.jsoup.nodes.XmlDeclaration("hi!", "hi!", false);
         java.lang.String str6 = xmlDeclaration5.getWholeDeclaration();
@@ -11808,9 +8823,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2373() throws Throwable {
+    public void test2279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2373");
+            System.out.format("%n%s%n", "RegressionTest4.test2279");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("#document#document=\"#document#document\"");
         org.jsoup.select.Elements elements3 = document1.select("document");
         // The following exception was thrown during execution in test generation
@@ -11825,9 +8840,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2374() throws Throwable {
+    public void test2280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2374");
+            System.out.format("%n%s%n", "RegressionTest4.test2280");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("hi!=\"#root=&quot;hi!&quot;\"", "");
         org.jsoup.nodes.Element element4 = document2.createElement("a");
         org.jsoup.nodes.Element element5 = document2.empty();
@@ -11853,9 +8868,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2375() throws Throwable {
+    public void test2281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2375");
+            System.out.format("%n%s%n", "RegressionTest4.test2281");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "body");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan(2);
@@ -11865,9 +8880,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2376() throws Throwable {
+    public void test2282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2376");
+            System.out.format("%n%s%n", "RegressionTest4.test2282");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.createElement("#document#documenthi!");
@@ -11885,9 +8900,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2377() throws Throwable {
+    public void test2283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2377");
+            System.out.format("%n%s%n", "RegressionTest4.test2283");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -11988,9 +9003,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2378() throws Throwable {
+    public void test2284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2378");
+            System.out.format("%n%s%n", "RegressionTest4.test2284");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.createElement("#document#documenthi!");
@@ -12006,9 +9021,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2379() throws Throwable {
+    public void test2285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2379");
+            System.out.format("%n%s%n", "RegressionTest4.test2285");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -12025,17 +9040,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2380() throws Throwable {
+    public void test2286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2380");
+            System.out.format("%n%s%n", "RegressionTest4.test2286");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("\n<body>\n #document\n</body>");
         org.junit.Assert.assertNotNull(document1);
     }
 
     @Test
-    public void test2381() throws Throwable {
+    public void test2287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2381");
+            System.out.format("%n%s%n", "RegressionTest4.test2287");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -12051,25 +9066,25 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2382() throws Throwable {
+    public void test2288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2382");
+            System.out.format("%n%s%n", "RegressionTest4.test2288");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#data=\"\"", "body=\"# \"");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2383() throws Throwable {
+    public void test2289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2383");
+            System.out.format("%n%s%n", "RegressionTest4.test2289");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("\n<!--#document--> #data", " class=\"hi!\"");
         org.junit.Assert.assertNotNull(attribute2);
     }
 
     @Test
-    public void test2384() throws Throwable {
+    public void test2290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2384");
+            System.out.format("%n%s%n", "RegressionTest4.test2290");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         boolean boolean3 = tokenQueue1.matches("\n<!--#root-->");
         boolean boolean5 = tokenQueue1.matchChomp("#data");
@@ -12167,9 +9182,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2385() throws Throwable {
+    public void test2291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2385");
+            System.out.format("%n%s%n", "RegressionTest4.test2291");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("#document#document=\"#document#document\"");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element8 = document5.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
@@ -12209,9 +9224,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2386() throws Throwable {
+    public void test2292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2386");
+            System.out.format("%n%s%n", "RegressionTest4.test2292");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         java.lang.String str2 = tokenQueue1.consumeAttributeKey();
         java.lang.String str4 = tokenQueue1.consumeTo("#root=\"hi!\"");
@@ -12245,9 +9260,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2387() throws Throwable {
+    public void test2293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2387");
+            System.out.format("%n%s%n", "RegressionTest4.test2293");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document2 = document1.normalise();
         java.lang.String str3 = document1.nodeName();
@@ -12323,9 +9338,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2388() throws Throwable {
+    public void test2294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2388");
+            System.out.format("%n%s%n", "RegressionTest4.test2294");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("\n<!--#root-->");
         java.lang.String str2 = document1.outerHtml();
         java.lang.String str3 = document1.title();
@@ -12335,9 +9350,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2389() throws Throwable {
+    public void test2295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2389");
+            System.out.format("%n%s%n", "RegressionTest4.test2295");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>", "");
         org.jsoup.nodes.Document document4 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements6 = document4.getElementsByAttribute("hi!");
@@ -12413,17 +9428,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2390() throws Throwable {
+    public void test2296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2390");
+            System.out.format("%n%s%n", "RegressionTest4.test2296");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<[#, d, o, c, u, m, e, n, t]>\n</[#, d, o, c, u, m, e, n, t]>", " #comment=\"\"");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2391() throws Throwable {
+    public void test2297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2391");
+            System.out.format("%n%s%n", "RegressionTest4.test2297");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         org.jsoup.select.Elements elements5 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elements4);
@@ -12432,9 +9447,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2392() throws Throwable {
+    public void test2298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2392");
+            System.out.format("%n%s%n", "RegressionTest4.test2298");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "\n<!--#root-->");
         org.jsoup.nodes.Element element3 = document2.head();
         org.jsoup.select.Elements elements4 = document2.children();
@@ -12446,9 +9461,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2393() throws Throwable {
+    public void test2299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2393");
+            System.out.format("%n%s%n", "RegressionTest4.test2299");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -12474,9 +9489,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2394() throws Throwable {
+    public void test2300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2394");
+            System.out.format("%n%s%n", "RegressionTest4.test2300");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -12511,9 +9526,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2395() throws Throwable {
+    public void test2301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2395");
+            System.out.format("%n%s%n", "RegressionTest4.test2301");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -12579,9 +9594,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2396() throws Throwable {
+    public void test2302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2396");
+            System.out.format("%n%s%n", "RegressionTest4.test2302");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         java.lang.String str6 = document2.tagName();
@@ -12595,64 +9610,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2397() throws Throwable {
+    public void test2303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2397");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        boolean boolean2 = document1.hasText();
-        java.lang.String str3 = document1.nodeName();
-        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
-        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
-        org.jsoup.nodes.Element element10 = document1.append("#document");
-        org.jsoup.nodes.Element element12 = document1.prepend("#document");
-        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator14 = attributes13.spliterator();
-        java.lang.String str16 = attributes13.get("hi!");
-        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("#root", "");
-        org.jsoup.nodes.Element element22 = document19.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        boolean boolean23 = attributes13.equals((java.lang.Object) "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
-        org.jsoup.parser.Tag tag25 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
-        boolean boolean26 = tag25.isData();
-        org.jsoup.nodes.Attributes attributes28 = new org.jsoup.nodes.Attributes();
-        int int29 = attributes28.size();
-        java.lang.String str30 = attributes28.html();
-        org.jsoup.nodes.Element element31 = new org.jsoup.nodes.Element(tag25, "org.jsoup.select.selector$selectorparseexception:", attributes28);
-        org.jsoup.nodes.Attribute attribute34 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
-        attribute34.setKey("#root");
-        java.lang.String str37 = attribute34.html();
-        attributes28.put(attribute34);
-        attributes13.addAll(attributes28);
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor40 = attributes13.iterator();
-        java.lang.String str41 = attributes13.html();
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
-        org.junit.Assert.assertNotNull(strArray5);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(attributes13);
-        org.junit.Assert.assertNotNull(attributeSpliterator14);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
-        org.junit.Assert.assertNotNull(document19);
-        org.junit.Assert.assertNotNull(element22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(tag25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 0 + "'", int29 == 0);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
-        org.junit.Assert.assertNotNull(attribute34);
-        org.junit.Assert.assertEquals("'" + str37 + "' != '" + "#root=\"hi!\"" + "'", str37, "#root=\"hi!\"");
-        org.junit.Assert.assertNotNull(attributeItor40);
-        org.junit.Assert.assertEquals("'" + str41 + "' != '" + " class=\"hi!\" #root=\"hi!\"" + "'", str41, " class=\"hi!\" #root=\"hi!\"");
-    }
-
-    @Test
-    public void test2398() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2398");
+            System.out.format("%n%s%n", "RegressionTest4.test2303");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -12693,9 +9653,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2399() throws Throwable {
+    public void test2304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2399");
+            System.out.format("%n%s%n", "RegressionTest4.test2304");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
@@ -12739,9 +9699,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2400() throws Throwable {
+    public void test2305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2400");
+            System.out.format("%n%s%n", "RegressionTest4.test2305");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -12763,9 +9723,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2401() throws Throwable {
+    public void test2306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2401");
+            System.out.format("%n%s%n", "RegressionTest4.test2306");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -12791,16 +9751,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2402() throws Throwable {
+    public void test2307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2402");
+            System.out.format("%n%s%n", "RegressionTest4.test2307");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"=\"#data\"", "<[#, d, o, c, u, m, e, n, t]>\n</[#, d, o, c, u, m, e, n, t]>#root=&quot;hi!&quot;", false);
     }
 
     @Test
-    public void test2403() throws Throwable {
+    public void test2308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2403");
+            System.out.format("%n%s%n", "RegressionTest4.test2308");
         org.jsoup.nodes.Evaluator evaluator0 = null;
         org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element5 = document2.attr("hi!", "#root");
@@ -12825,9 +9785,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2404() throws Throwable {
+    public void test2309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2404");
+            System.out.format("%n%s%n", "RegressionTest4.test2309");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
         org.jsoup.select.Elements elements5 = elements3.eq((int) (byte) 10);
@@ -12843,9 +9803,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2405() throws Throwable {
+    public void test2310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2405");
+            System.out.format("%n%s%n", "RegressionTest4.test2310");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#root");
         org.jsoup.parser.Tag tag2 = tag1.getImplicitParent();
         org.jsoup.parser.Tag tag4 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
@@ -12886,9 +9846,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2406() throws Throwable {
+    public void test2311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2406");
+            System.out.format("%n%s%n", "RegressionTest4.test2311");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "body");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements6 = document2.getElementsByAttributeValueNot("&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n&lt;/body&gt;\n&lt;/html&gt;", "#text");
@@ -12898,9 +9858,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2407() throws Throwable {
+    public void test2312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2407");
+            System.out.format("%n%s%n", "RegressionTest4.test2312");
         org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("\n<!--#root-->", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         attribute2.setValue("a");
         org.jsoup.nodes.Document document6 = new org.jsoup.nodes.Document("");
@@ -12940,57 +9900,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2408() throws Throwable {
+    public void test2313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2408");
-        org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
-        int int1 = attributes0.size();
-        java.lang.String str2 = attributes0.html();
-        java.util.List<org.jsoup.nodes.Attribute> attributeList3 = attributes0.asList();
-        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
-        boolean boolean6 = document5.hasText();
-        java.lang.String str7 = document5.nodeName();
-        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
-        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
-        org.jsoup.nodes.Element element14 = document5.append("#document");
-        org.jsoup.nodes.Element element16 = document5.prepend("#document");
-        org.jsoup.nodes.Attributes attributes17 = element16.attributes();
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator18 = attributes17.spliterator();
-        org.jsoup.nodes.Attributes attributes19 = new org.jsoup.nodes.Attributes();
-        int int20 = attributes19.size();
-        java.lang.String str21 = attributes19.html();
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor22 = attributes19.iterator();
-        boolean boolean23 = attributes17.equals((java.lang.Object) attributes19);
-        attributes0.addAll(attributes17);
-        boolean boolean26 = attributes17.hasKey("#declaration");
-        attributes17.remove("<html> \n <head> \n </head> \n <body>\n   #root  \n </body>\n</html><<?#document#document>>\n</<?#document#document>>");
-        java.lang.String str29 = attributes17.html();
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
-        org.junit.Assert.assertNotNull(attributeList3);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
-        org.junit.Assert.assertNotNull(strArray9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(element14);
-        org.junit.Assert.assertNotNull(element16);
-        org.junit.Assert.assertNotNull(attributes17);
-        org.junit.Assert.assertNotNull(attributeSpliterator18);
-        org.junit.Assert.assertTrue("'" + int20 + "' != '" + 0 + "'", int20 == 0);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
-        org.junit.Assert.assertNotNull(attributeItor22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertEquals("'" + str29 + "' != '" + " class=\"hi!\"" + "'", str29, " class=\"hi!\"");
-    }
-
-    @Test
-    public void test2409() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2409");
+            System.out.format("%n%s%n", "RegressionTest4.test2313");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -13011,9 +9923,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2410() throws Throwable {
+    public void test2314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2410");
+            System.out.format("%n%s%n", "RegressionTest4.test2314");
         org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements6 = elements4.prepend("");
@@ -13047,17 +9959,17 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2411() throws Throwable {
+    public void test2315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2411");
+            System.out.format("%n%s%n", "RegressionTest4.test2315");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("\n<!--a-->", " ");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2412() throws Throwable {
+    public void test2316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2412");
+            System.out.format("%n%s%n", "RegressionTest4.test2316");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document2 = document1.normalise();
         org.jsoup.nodes.Element element3 = document2.head();
@@ -13100,9 +10012,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2413() throws Throwable {
+    public void test2317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2413");
+            System.out.format("%n%s%n", "RegressionTest4.test2317");
         org.jsoup.safety.Whitelist whitelist1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -13114,9 +10026,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2414() throws Throwable {
+    public void test2318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2414");
+            System.out.format("%n%s%n", "RegressionTest4.test2318");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         boolean boolean3 = tag1.requiresSpecificParent();
@@ -13155,9 +10067,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2415() throws Throwable {
+    public void test2319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2415");
+            System.out.format("%n%s%n", "RegressionTest4.test2319");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
         java.lang.String str2 = tokenQueue1.consumeAttributeKey();
         java.lang.String str4 = tokenQueue1.consumeTo("#root=\"hi!\"");
@@ -13191,9 +10103,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2416() throws Throwable {
+    public void test2320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2416");
+            System.out.format("%n%s%n", "RegressionTest4.test2320");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -13217,9 +10129,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2417() throws Throwable {
+    public void test2321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2417");
+            System.out.format("%n%s%n", "RegressionTest4.test2321");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("", "\n<!--#root-->");
         java.lang.String str3 = textNode2.getWholeText();
         org.jsoup.nodes.TextNode textNode5 = textNode2.text("hi!");
@@ -13250,25 +10162,25 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2418() throws Throwable {
+    public void test2322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2418");
+            System.out.format("%n%s%n", "RegressionTest4.test2322");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("org.jsoup.select.Selector$SelectorParseException: #document#document=\"#document#document\"", "#document#document#root=&quot;#root=&amp;quot;hi!&amp;quot;&quot;");
         org.junit.Assert.assertNotNull(textNode2);
     }
 
     @Test
-    public void test2419() throws Throwable {
+    public void test2323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2419");
+            System.out.format("%n%s%n", "RegressionTest4.test2323");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("<!>", "");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test2420() throws Throwable {
+    public void test2324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2420");
+            System.out.format("%n%s%n", "RegressionTest4.test2324");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -13299,9 +10211,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2421() throws Throwable {
+    public void test2325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2421");
+            System.out.format("%n%s%n", "RegressionTest4.test2325");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#document#document", "#data");
         org.jsoup.select.Elements elements4 = document2.getElementsByIndexLessThan((int) (short) 0);
         java.lang.String str6 = document2.absUrl("#text");
@@ -13329,9 +10241,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2422() throws Throwable {
+    public void test2326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2422");
+            System.out.format("%n%s%n", "RegressionTest4.test2326");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#document#document", "#data");
         org.jsoup.select.Elements elements4 = document2.getElementsByIndexLessThan((int) (short) 0);
         org.jsoup.select.Elements elements6 = document2.getElementsByIndexEquals((int) (short) -1);
@@ -13345,9 +10257,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2423() throws Throwable {
+    public void test2327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2423");
+            System.out.format("%n%s%n", "RegressionTest4.test2327");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -13364,9 +10276,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2424() throws Throwable {
+    public void test2328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2424");
+            System.out.format("%n%s%n", "RegressionTest4.test2328");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         int int1 = attributes0.size();
         org.jsoup.nodes.Document document3 = new org.jsoup.nodes.Document("");
@@ -13395,9 +10307,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2425() throws Throwable {
+    public void test2329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2425");
+            System.out.format("%n%s%n", "RegressionTest4.test2329");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         java.lang.String str3 = document1.nodeName();
@@ -13419,9 +10331,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2426() throws Throwable {
+    public void test2330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2426");
+            System.out.format("%n%s%n", "RegressionTest4.test2330");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -13464,9 +10376,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2427() throws Throwable {
+    public void test2331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2427");
+            System.out.format("%n%s%n", "RegressionTest4.test2331");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -13543,9 +10455,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2428() throws Throwable {
+    public void test2332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2428");
+            System.out.format("%n%s%n", "RegressionTest4.test2332");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         java.lang.String str5 = document1.id();
@@ -13566,9 +10478,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2429() throws Throwable {
+    public void test2333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2429");
+            System.out.format("%n%s%n", "RegressionTest4.test2333");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -13593,9 +10505,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2430() throws Throwable {
+    public void test2334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2430");
+            System.out.format("%n%s%n", "RegressionTest4.test2334");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Attributes attributes4 = new org.jsoup.nodes.Attributes();
@@ -13625,9 +10537,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2431() throws Throwable {
+    public void test2335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2431");
+            System.out.format("%n%s%n", "RegressionTest4.test2335");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Document document4 = new org.jsoup.nodes.Document("");
@@ -13667,9 +10579,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2432() throws Throwable {
+    public void test2336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2432");
+            System.out.format("%n%s%n", "RegressionTest4.test2336");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -13704,9 +10616,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2433() throws Throwable {
+    public void test2337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2433");
+            System.out.format("%n%s%n", "RegressionTest4.test2337");
         org.jsoup.nodes.TextNode textNode2 = new org.jsoup.nodes.TextNode("#root", "");
         org.jsoup.nodes.TextNode textNode4 = textNode2.text("#document");
         org.jsoup.nodes.TextNode textNode6 = textNode2.text(" class=\"hi!\"");
@@ -13723,9 +10635,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2434() throws Throwable {
+    public void test2338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2434");
+            System.out.format("%n%s%n", "RegressionTest4.test2338");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -13746,9 +10658,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2435() throws Throwable {
+    public void test2339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2435");
+            System.out.format("%n%s%n", "RegressionTest4.test2339");
         org.jsoup.safety.Whitelist whitelist1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -13760,9 +10672,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2436() throws Throwable {
+    public void test2340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2436");
+            System.out.format("%n%s%n", "RegressionTest4.test2340");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
         java.lang.String str4 = document1.nodeName();
@@ -13776,9 +10688,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2437() throws Throwable {
+    public void test2341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2437");
+            System.out.format("%n%s%n", "RegressionTest4.test2341");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -13797,9 +10709,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2438() throws Throwable {
+    public void test2342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2438");
+            System.out.format("%n%s%n", "RegressionTest4.test2342");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
@@ -13815,9 +10727,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2439() throws Throwable {
+    public void test2343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2439");
+            System.out.format("%n%s%n", "RegressionTest4.test2343");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("hi!");
         boolean boolean3 = document1.hasClass("<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
         org.jsoup.nodes.Attributes attributes4 = document1.attributes();
@@ -13869,9 +10781,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2440() throws Throwable {
+    public void test2344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2440");
+            System.out.format("%n%s%n", "RegressionTest4.test2344");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -13944,9 +10856,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2441() throws Throwable {
+    public void test2345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2441");
+            System.out.format("%n%s%n", "RegressionTest4.test2345");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#root");
         boolean boolean2 = tag1.isInline();
         boolean boolean3 = tag1.isInline();
@@ -14012,32 +10924,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2442() throws Throwable {
+    public void test2346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2442");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
-        org.jsoup.select.Elements elements5 = elements3.eq((int) (byte) 10);
-        elements3.clear();
-        java.lang.String str7 = elements3.outerHtml();
-        java.lang.String str8 = elements3.text();
-        java.lang.String str9 = elements3.outerHtml();
-        org.jsoup.select.Elements elements11 = elements3.val("#document#documentdocument");
-        java.lang.String str12 = elements11.val();
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
-    }
-
-    @Test
-    public void test2443() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2443");
+            System.out.format("%n%s%n", "RegressionTest4.test2346");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("#root", "\n<!--#root-->");
         org.jsoup.select.Elements elements4 = org.jsoup.select.Selector.select("#declaration", (org.jsoup.nodes.Element) document3);
         org.jsoup.nodes.Element element5 = document3.body();
@@ -14073,9 +10962,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2444() throws Throwable {
+    public void test2347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2444");
+            System.out.format("%n%s%n", "RegressionTest4.test2347");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -14122,9 +11011,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2445() throws Throwable {
+    public void test2348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2445");
+            System.out.format("%n%s%n", "RegressionTest4.test2348");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
         org.jsoup.select.Elements elements5 = elements3.eq((int) (byte) 10);
@@ -14138,9 +11027,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2446() throws Throwable {
+    public void test2349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2446");
+            System.out.format("%n%s%n", "RegressionTest4.test2349");
         org.jsoup.safety.Whitelist whitelist2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -14152,9 +11041,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2447() throws Throwable {
+    public void test2350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2447");
+            System.out.format("%n%s%n", "RegressionTest4.test2350");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
         org.jsoup.select.Selector.SelectorParseException selectorParseException6 = new org.jsoup.select.Selector.SelectorParseException("");
@@ -14195,9 +11084,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2448() throws Throwable {
+    public void test2351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2448");
+            System.out.format("%n%s%n", "RegressionTest4.test2351");
         org.jsoup.nodes.Element[] elementArray0 = new org.jsoup.nodes.Element[] {};
         org.jsoup.select.Elements elements1 = new org.jsoup.select.Elements(elementArray0);
         org.jsoup.select.Elements elements2 = new org.jsoup.select.Elements(elementArray0);
@@ -14212,89 +11101,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2449() throws Throwable {
+    public void test2352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2449");
-        org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("#root", "hi!");
-        org.jsoup.nodes.Document document4 = new org.jsoup.nodes.Document("");
-        boolean boolean5 = document4.hasText();
-        java.lang.String str6 = document4.nodeName();
-        java.lang.String[] strArray8 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet9 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean10 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet9, strArray8);
-        org.jsoup.nodes.Element element11 = document4.classNames((java.util.Set<java.lang.String>) strSet9);
-        org.jsoup.nodes.Element element13 = document4.append("#document");
-        org.jsoup.nodes.Element element15 = document4.prepend("#document");
-        org.jsoup.nodes.Attributes attributes16 = element15.attributes();
-        org.jsoup.nodes.Element element18 = element15.append("hi!");
-        org.jsoup.nodes.Document document20 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements22 = document20.getElementsByAttribute("hi!");
-        org.jsoup.nodes.Element element24 = document20.prepend("#document");
-        org.jsoup.nodes.Element element25 = element24.empty();
-        org.jsoup.select.Elements elements27 = element24.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
-        org.jsoup.select.Elements elements29 = elements27.removeClass("#root");
-        org.jsoup.nodes.Document document31 = new org.jsoup.nodes.Document("");
-        boolean boolean32 = document31.hasText();
-        java.lang.String str33 = document31.nodeName();
-        java.lang.String[] strArray35 = new java.lang.String[] { "hi!" };
-        java.util.LinkedHashSet<java.lang.String> strSet36 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean37 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet36, strArray35);
-        org.jsoup.nodes.Element element38 = document31.classNames((java.util.Set<java.lang.String>) strSet36);
-        org.jsoup.nodes.Element element40 = document31.append("#document");
-        org.jsoup.nodes.Element element42 = document31.prepend("#document");
-        org.jsoup.nodes.Attributes attributes43 = element42.attributes();
-        org.jsoup.nodes.Element element45 = element42.append("hi!");
-        org.jsoup.select.Elements elements47 = element45.getElementsByIndexLessThan((int) (short) 0);
-        boolean boolean48 = elements27.equals((java.lang.Object) elements47);
-        java.util.ListIterator<org.jsoup.nodes.Element> elementItor50 = elements47.listIterator(0);
-        boolean boolean51 = element18.equals((java.lang.Object) elements47);
-        boolean boolean52 = attribute2.equals((java.lang.Object) element18);
-        java.lang.String str53 = attribute2.getKey();
-        java.lang.Object obj54 = null;
-        boolean boolean55 = attribute2.equals(obj54);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#document" + "'", str6, "#document");
-        org.junit.Assert.assertNotNull(strArray8);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(attributes16);
-        org.junit.Assert.assertNotNull(element18);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertNotNull(element24);
-        org.junit.Assert.assertNotNull(element25);
-        org.junit.Assert.assertNotNull(elements27);
-        org.junit.Assert.assertNotNull(elements29);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "#document" + "'", str33, "#document");
-        org.junit.Assert.assertNotNull(strArray35);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + true + "'", boolean37 == true);
-        org.junit.Assert.assertNotNull(element38);
-        org.junit.Assert.assertNotNull(element40);
-        org.junit.Assert.assertNotNull(element42);
-        org.junit.Assert.assertNotNull(attributes43);
-        org.junit.Assert.assertNotNull(element45);
-        org.junit.Assert.assertNotNull(elements47);
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + true + "'", boolean48 == true);
-        org.junit.Assert.assertNotNull(elementItor50);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
-        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
-        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "#root" + "'", str53, "#root");
-        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + false + "'", boolean55 == false);
-    }
-
-    @Test
-    public void test2450() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2450");
+            System.out.format("%n%s%n", "RegressionTest4.test2352");
         org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("<!--#root-->=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n #root \n&lt;/body&gt;\n&lt;/html&gt;\"", "org.jsoup.select.Selector$SelectorParseException:");
     }
 
     @Test
-    public void test2451() throws Throwable {
+    public void test2353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2451");
+            System.out.format("%n%s%n", "RegressionTest4.test2353");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Element element5 = document2.createElement("#document#documenthi!");
@@ -14310,9 +11126,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2452() throws Throwable {
+    public void test2354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2452");
+            System.out.format("%n%s%n", "RegressionTest4.test2354");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Document document2 = document1.normalise();
         org.jsoup.nodes.Element element4 = document1.prependElement("org.jsoup.select.selector$selectorparseexception:");
@@ -14372,9 +11188,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2453() throws Throwable {
+    public void test2355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2453");
+            System.out.format("%n%s%n", "RegressionTest4.test2355");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -14414,9 +11230,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2454() throws Throwable {
+    public void test2356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2454");
+            System.out.format("%n%s%n", "RegressionTest4.test2356");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#document#document", "#data");
         org.jsoup.select.Elements elements4 = document2.getElementsByIndexLessThan((int) (short) 0);
         boolean boolean6 = elements4.is(" class=\"hi!\"");
@@ -14428,48 +11244,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2455() throws Throwable {
+    public void test2357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2455");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements5 = elements3.prepend("");
-        org.jsoup.select.Elements elements7 = elements5.removeAttr("");
-        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
-        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
-        org.jsoup.select.Elements elements13 = elements11.prepend("");
-        org.jsoup.select.Elements elements15 = elements13.removeAttr("");
-        boolean boolean16 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements13);
-        java.lang.Object[] objArray17 = elements5.toArray();
-        org.jsoup.nodes.Document document19 = new org.jsoup.nodes.Document("");
-        boolean boolean20 = document19.hasText();
-        java.lang.String str21 = document19.nodeName();
-        java.lang.String str22 = document19.val();
-        boolean boolean23 = elements5.add((org.jsoup.nodes.Element) document19);
-        org.jsoup.nodes.Element element24 = document19.empty();
-        org.jsoup.nodes.Element element26 = document19.createElement("#document#document#root=&quot;#root=&amp;quot;hi!&amp;quot;&quot;");
-        org.junit.Assert.assertNotNull(elements3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertNotNull(elements13);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertNotNull(objArray17);
-        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray17), "[]");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray17), "[]");
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "#document" + "'", str21, "#document");
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
-        org.junit.Assert.assertNotNull(element24);
-        org.junit.Assert.assertNotNull(element26);
-    }
-
-    @Test
-    public void test2456() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2456");
+            System.out.format("%n%s%n", "RegressionTest4.test2357");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("<?hi!>", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:");
         org.jsoup.select.Elements elements4 = document2.getElementsByIndexEquals(3);
         org.junit.Assert.assertNotNull(document2);
@@ -14477,9 +11254,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2457() throws Throwable {
+    public void test2358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2457");
+            System.out.format("%n%s%n", "RegressionTest4.test2358");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Attributes attributes4 = new org.jsoup.nodes.Attributes();
@@ -14498,9 +11275,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2458() throws Throwable {
+    public void test2359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2458");
+            System.out.format("%n%s%n", "RegressionTest4.test2359");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("");
         boolean boolean2 = tokenQueue1.isEmpty();
         boolean boolean3 = tokenQueue1.matchesWhitespace();
@@ -14513,9 +11290,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2459() throws Throwable {
+    public void test2360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2459");
+            System.out.format("%n%s%n", "RegressionTest4.test2360");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -14569,56 +11346,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2460() throws Throwable {
+    public void test2361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2460");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
-        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
-        org.jsoup.select.Selector.SelectorParseException selectorParseException6 = new org.jsoup.select.Selector.SelectorParseException("");
-        boolean boolean7 = elements4.contains((java.lang.Object) "");
-        boolean boolean9 = elements4.is("[]");
-        org.jsoup.nodes.Document document11 = new org.jsoup.nodes.Document("");
-        boolean boolean12 = document11.hasText();
-        java.lang.String str13 = document11.nodeName();
-        java.lang.String str14 = document11.val();
-        java.lang.String str15 = document11.outerHtml();
-        java.lang.String[] strArray18 = new java.lang.String[] { "\n<!--#document-->", "#data" };
-        java.util.LinkedHashSet<java.lang.String> strSet19 = new java.util.LinkedHashSet<java.lang.String>();
-        boolean boolean20 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet19, strArray18);
-        org.jsoup.nodes.Element element21 = document11.classNames((java.util.Set<java.lang.String>) strSet19);
-        java.util.LinkedHashSet[] linkedHashSetArray23 = new java.util.LinkedHashSet[1];
-        @SuppressWarnings("unchecked")
-        java.util.LinkedHashSet<java.lang.String>[] strSetArray24 = (java.util.LinkedHashSet<java.lang.String>[]) linkedHashSetArray23;
-        strSetArray24[0] = strSet19;
-        java.util.LinkedHashSet<java.lang.String>[] strSetArray27 = elements4.toArray(strSetArray24);
-        org.jsoup.select.Elements elements29 = elements4.select("org.jsoup.select.Selector$SelectorParseException: \n<!--#document-->");
-        org.jsoup.select.Elements elements31 = elements4.val("hi!");
-        org.jsoup.select.Elements elements33 = elements4.toggleClass("\n<body class=\"hi!\">\n #document\n</body>");
-        org.jsoup.select.Elements elements35 = elements33.eq((int) '#');
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "#document" + "'", str13, "#document");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertNotNull(strArray18);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNotNull(linkedHashSetArray23);
-        org.junit.Assert.assertNotNull(strSetArray24);
-        org.junit.Assert.assertNotNull(strSetArray27);
-        org.junit.Assert.assertNotNull(elements29);
-        org.junit.Assert.assertNotNull(elements31);
-        org.junit.Assert.assertNotNull(elements33);
-        org.junit.Assert.assertNotNull(elements35);
-    }
-
-    @Test
-    public void test2461() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2461");
+            System.out.format("%n%s%n", "RegressionTest4.test2361");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
         org.jsoup.nodes.Element element4 = document2.addClass("hi!");
         org.jsoup.nodes.Element element5 = document2.body();
@@ -14636,9 +11366,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2462() throws Throwable {
+    public void test2362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2462");
+            System.out.format("%n%s%n", "RegressionTest4.test2362");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         int int1 = attributes0.size();
         java.lang.String str2 = attributes0.html();
@@ -14660,9 +11390,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2463() throws Throwable {
+    public void test2363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2463");
+            System.out.format("%n%s%n", "RegressionTest4.test2363");
         org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("<?#document#document>", "org.jsoup.select.Selector$SelectorParseException: ");
         attribute2.setValue("[#, d, o, c, u, m, e, n, t]");
         org.jsoup.nodes.Document document6 = new org.jsoup.nodes.Document("");
@@ -14703,9 +11433,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2464() throws Throwable {
+    public void test2364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2464");
+            System.out.format("%n%s%n", "RegressionTest4.test2364");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "\n<!--#root-->");
         org.jsoup.nodes.Element element3 = document2.head();
         org.jsoup.nodes.Element element6 = document2.attr("<<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>>", "org.jsoup.select.Selector$SelectorParseException:");
@@ -14715,9 +11445,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2465() throws Throwable {
+    public void test2365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2465");
+            System.out.format("%n%s%n", "RegressionTest4.test2365");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Attributes attributes4 = new org.jsoup.nodes.Attributes();
@@ -14750,9 +11480,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2466() throws Throwable {
+    public void test2366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2466");
+            System.out.format("%n%s%n", "RegressionTest4.test2366");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#declaration");
         boolean boolean2 = tag1.requiresSpecificParent();
         org.junit.Assert.assertNotNull(tag1);
@@ -14760,9 +11490,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2467() throws Throwable {
+    public void test2367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2467");
+            System.out.format("%n%s%n", "RegressionTest4.test2367");
         org.jsoup.nodes.DataNode dataNode2 = new org.jsoup.nodes.DataNode("<html>\n<head>\n</head>\n<body>\n</body>\n</html>", "hi!=\"#root=&quot;hi!&quot;\"");
         org.jsoup.nodes.Attributes attributes3 = dataNode2.attributes();
         java.lang.String str4 = attributes3.html();
@@ -14771,9 +11501,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2468() throws Throwable {
+    public void test2368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2468");
+            System.out.format("%n%s%n", "RegressionTest4.test2368");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Attributes attributes4 = new org.jsoup.nodes.Attributes();
@@ -14822,9 +11552,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2469() throws Throwable {
+    public void test2369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2469");
+            System.out.format("%n%s%n", "RegressionTest4.test2369");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -14853,9 +11583,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2470() throws Throwable {
+    public void test2370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2470");
+            System.out.format("%n%s%n", "RegressionTest4.test2370");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root=\"#root=&quot;hi!&quot;\"", "<html>\n<head>\n</head>\n<body>\n #document\n</body>\n</html>");
         org.jsoup.nodes.Element element3 = document2.body();
         org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("#root");
@@ -14888,9 +11618,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2471() throws Throwable {
+    public void test2371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2471");
+            System.out.format("%n%s%n", "RegressionTest4.test2371");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         java.lang.String str5 = document1.id();
@@ -14901,9 +11631,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2472() throws Throwable {
+    public void test2372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2472");
+            System.out.format("%n%s%n", "RegressionTest4.test2372");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements5 = elements3.prepend("");
@@ -14950,9 +11680,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2473() throws Throwable {
+    public void test2373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2473");
+            System.out.format("%n%s%n", "RegressionTest4.test2373");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str5 = elements3.attr("#root");
@@ -14977,9 +11707,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2474() throws Throwable {
+    public void test2374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2474");
+            System.out.format("%n%s%n", "RegressionTest4.test2374");
         org.jsoup.nodes.Comment comment2 = new org.jsoup.nodes.Comment("#root", "#root");
         java.lang.String str3 = comment2.getData();
         java.lang.Class<?> wildcardClass4 = comment2.getClass();
@@ -14988,9 +11718,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2475() throws Throwable {
+    public void test2375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2475");
+            System.out.format("%n%s%n", "RegressionTest4.test2375");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("hi!", "#data");
         org.jsoup.parser.Tag tag3 = document2.tag();
         boolean boolean4 = tag3.isInline();
@@ -15015,9 +11745,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2476() throws Throwable {
+    public void test2376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2476");
+            System.out.format("%n%s%n", "RegressionTest4.test2376");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.nodes.Element element6 = document3.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
         java.lang.String str7 = document3.tagName();
@@ -15055,9 +11785,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2477() throws Throwable {
+    public void test2377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2477");
+            System.out.format("%n%s%n", "RegressionTest4.test2377");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("", "\n<!--#root-->");
         org.jsoup.nodes.TextNode textNode4 = textNode2.text("\n<!--#data-->");
         java.lang.String str5 = textNode2.getWholeText();
@@ -15067,9 +11797,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2478() throws Throwable {
+    public void test2378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2478");
+            System.out.format("%n%s%n", "RegressionTest4.test2378");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         java.lang.String str2 = tag1.getName();
         org.jsoup.parser.Tag tag4 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
@@ -15172,18 +11902,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2479() throws Throwable {
+    public void test2379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2479");
-        org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("<#document#document=\"#document#document\">\n</#document#document=\"#document#document\">", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>", true);
-        java.lang.String str4 = xmlDeclaration3.nodeName();
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "#declaration" + "'", str4, "#declaration");
-    }
-
-    @Test
-    public void test2480() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2480");
+            System.out.format("%n%s%n", "RegressionTest4.test2379");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -15221,9 +11942,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2481() throws Throwable {
+    public void test2380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2481");
+            System.out.format("%n%s%n", "RegressionTest4.test2380");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#document#document=\"#document#document\"", "body");
         org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValue("[#, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, d, o, c, u, m, e, n, t]", "org.jsoup.select.Selector$SelectorParseException:");
         java.lang.String str6 = document2.outerHtml();
@@ -15237,9 +11958,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2482() throws Throwable {
+    public void test2381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2482");
+            System.out.format("%n%s%n", "RegressionTest4.test2381");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
         org.jsoup.select.Elements elements3 = document2.parents();
         org.jsoup.select.Elements elements6 = document2.getElementsByAttributeValueNot("#data", "#root");
@@ -15249,9 +11970,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2483() throws Throwable {
+    public void test2382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2483");
+            System.out.format("%n%s%n", "RegressionTest4.test2382");
         org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
         org.jsoup.select.Elements elements6 = elements4.prepend("");
@@ -15283,9 +12004,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2484() throws Throwable {
+    public void test2383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2484");
+            System.out.format("%n%s%n", "RegressionTest4.test2383");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded(" class=\"hi!\"", "org.jsoup.select.Selector$SelectorParseException: ");
         java.lang.String str3 = textNode2.toString();
         java.lang.String str4 = textNode2.nodeName();
@@ -15299,9 +12020,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2485() throws Throwable {
+    public void test2384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2485");
+            System.out.format("%n%s%n", "RegressionTest4.test2384");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -15342,9 +12063,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2486() throws Throwable {
+    public void test2385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2486");
+            System.out.format("%n%s%n", "RegressionTest4.test2385");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("hi!=\"#root=&quot;hi!&quot;\"", "");
         org.jsoup.nodes.Element element4 = document2.createElement("a");
         org.jsoup.nodes.Element element5 = document2.empty();
@@ -15356,9 +12077,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2487() throws Throwable {
+    public void test2386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2487");
+            System.out.format("%n%s%n", "RegressionTest4.test2386");
         org.jsoup.nodes.Comment comment2 = new org.jsoup.nodes.Comment("#root", "");
         comment2.setBaseUri("#document#documenthi!");
         java.lang.String str5 = comment2.getData();
@@ -15372,9 +12093,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2488() throws Throwable {
+    public void test2387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2488");
+            System.out.format("%n%s%n", "RegressionTest4.test2387");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -15433,9 +12154,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2489() throws Throwable {
+    public void test2388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2489");
+            System.out.format("%n%s%n", "RegressionTest4.test2388");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Attributes attributes4 = new org.jsoup.nodes.Attributes();
@@ -15556,9 +12277,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2490() throws Throwable {
+    public void test2389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2490");
+            System.out.format("%n%s%n", "RegressionTest4.test2389");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         java.lang.String str4 = elements3.val();
@@ -15578,9 +12299,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2491() throws Throwable {
+    public void test2390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2491");
+            System.out.format("%n%s%n", "RegressionTest4.test2390");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         int int1 = attributes0.size();
         java.lang.String str2 = attributes0.html();
@@ -15638,9 +12359,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2492() throws Throwable {
+    public void test2391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2492");
+            System.out.format("%n%s%n", "RegressionTest4.test2391");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         java.lang.String str5 = document1.id();
@@ -15655,9 +12376,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2493() throws Throwable {
+    public void test2392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2493");
+            System.out.format("%n%s%n", "RegressionTest4.test2392");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("a");
         java.lang.String str2 = tag1.toString();
         boolean boolean3 = tag1.isInline();
@@ -15669,9 +12390,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2494() throws Throwable {
+    public void test2393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2494");
+            System.out.format("%n%s%n", "RegressionTest4.test2393");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         int int1 = attributes0.size();
         org.jsoup.nodes.Document document3 = new org.jsoup.nodes.Document("");
@@ -15739,9 +12460,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2495() throws Throwable {
+    public void test2394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2495");
+            System.out.format("%n%s%n", "RegressionTest4.test2394");
         org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
         java.lang.String str6 = elements4.attr("#root");
@@ -15775,9 +12496,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2496() throws Throwable {
+    public void test2395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2496");
+            System.out.format("%n%s%n", "RegressionTest4.test2395");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         int int1 = attributes0.size();
         java.lang.String str2 = attributes0.html();
@@ -15788,16 +12509,16 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2497() throws Throwable {
+    public void test2396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2497");
+            System.out.format("%n%s%n", "RegressionTest4.test2396");
         org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("<#document#documentdocument>\n</#document#documentdocument>#document#documenthi!");
     }
 
     @Test
-    public void test2498() throws Throwable {
+    public void test2397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2498");
+            System.out.format("%n%s%n", "RegressionTest4.test2397");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         boolean boolean2 = document1.hasText();
         boolean boolean3 = document1.hasText();
@@ -15846,9 +12567,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2499() throws Throwable {
+    public void test2398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2499");
+            System.out.format("%n%s%n", "RegressionTest4.test2398");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
         org.jsoup.nodes.Element element5 = document1.prepend("#document");
@@ -15875,9 +12596,9 @@ public class RegressionTest4 {
     }
 
     @Test
-    public void test2500() throws Throwable {
+    public void test2399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest4.test2500");
+            System.out.format("%n%s%n", "RegressionTest4.test2399");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
         org.jsoup.nodes.Attributes attributes5 = document1.attributes();
@@ -15891,6 +12612,3359 @@ public class RegressionTest4 {
         org.junit.Assert.assertNotNull(element8);
         org.junit.Assert.assertNotNull(elements10);
         org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+    }
+
+    @Test
+    public void test2400() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2400");
+        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
+        java.lang.String str2 = tokenQueue1.consumeAttributeKey();
+        java.lang.String str4 = tokenQueue1.consumeTo("#root=\"hi!\"");
+        java.lang.String str5 = tokenQueue1.toString();
+        java.lang.String str7 = tokenQueue1.chompTo("");
+        boolean boolean8 = tokenQueue1.matchesWord();
+        boolean boolean10 = tokenQueue1.matchChomp("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        boolean boolean11 = tokenQueue1.matchesWord();
+        java.lang.String str12 = tokenQueue1.remainder();
+        tokenQueue1.addFirst((java.lang.Character) '4');
+        java.lang.String str15 = tokenQueue1.consumeCssIdentifier();
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "#document" + "'", str4, "#document");
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "[]" + "'", str5, "[]");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "4" + "'", str15, "4");
+    }
+
+    @Test
+    public void test2401() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2401");
+        org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("#document#document", "\n<!--#document-->", false);
+        java.lang.String str4 = xmlDeclaration3.toString();
+        java.lang.String str5 = xmlDeclaration3.nodeName();
+        java.lang.String str6 = xmlDeclaration3.nodeName();
+        java.lang.String str7 = xmlDeclaration3.getWholeDeclaration();
+        java.lang.String str8 = xmlDeclaration3.nodeName();
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "<?#document#document>" + "'", str4, "<?#document#document>");
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "#declaration" + "'", str5, "#declaration");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#declaration" + "'", str6, "#declaration");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document#document" + "'", str7, "#document#document");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "#declaration" + "'", str8, "#declaration");
+    }
+
+    @Test
+    public void test2402() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2402");
+        org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("#root", "\n<!--#root-->");
+        org.jsoup.select.Elements elements4 = org.jsoup.select.Selector.select("#declaration", (org.jsoup.nodes.Element) document3);
+        org.jsoup.nodes.Element element5 = document3.body();
+        org.jsoup.nodes.Document document7 = new org.jsoup.nodes.Document("");
+        boolean boolean8 = document7.hasText();
+        java.lang.String str9 = document7.nodeName();
+        java.lang.String[] strArray11 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet12 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean13 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet12, strArray11);
+        org.jsoup.nodes.Element element14 = document7.classNames((java.util.Set<java.lang.String>) strSet12);
+        org.jsoup.nodes.Element element16 = document7.append("#document");
+        org.jsoup.nodes.Element element18 = document7.prepend("#document");
+        org.jsoup.select.Elements elements19 = document7.parents();
+        org.jsoup.nodes.Element element20 = element5.appendChild((org.jsoup.nodes.Node) document7);
+        org.jsoup.select.Elements elements22 = element5.getElementsByIndexEquals((int) (byte) 10);
+        org.jsoup.select.Elements elements24 = elements22.val("hi!");
+        org.jsoup.select.Elements elements25 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elements24);
+        org.junit.Assert.assertNotNull(document3);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "#document" + "'", str9, "#document");
+        org.junit.Assert.assertNotNull(strArray11);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(elements19);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertNotNull(elements22);
+        org.junit.Assert.assertNotNull(elements24);
+    }
+
+    @Test
+    public void test2403() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2403");
+        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("");
+        tokenQueue1.addFirst((java.lang.Character) ' ');
+        tokenQueue1.addFirst((java.lang.Character) '#');
+        java.lang.String str7 = tokenQueue1.consumeTo("\n<!--#data-->");
+        tokenQueue1.addFirst("<!#declaration>");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "# " + "'", str7, "# ");
+    }
+
+    @Test
+    public void test2404() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2404");
+        org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded(" hi!", " \n<!--#root-->");
+        org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
+        org.jsoup.nodes.Element element7 = document5.addClass("hi!");
+        java.lang.String str8 = document5.title();
+        boolean boolean9 = attribute2.equals((java.lang.Object) str8);
+        org.junit.Assert.assertNotNull(attribute2);
+        org.junit.Assert.assertNotNull(document5);
+        org.junit.Assert.assertNotNull(element7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+    }
+
+    @Test
+    public void test2405() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2405");
+        org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
+        java.lang.String str6 = elements4.attr("#root");
+        org.jsoup.nodes.Document document8 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element[] elementArray9 = new org.jsoup.nodes.Element[] { document8 };
+        java.util.ArrayList<org.jsoup.nodes.Element> elementList10 = new java.util.ArrayList<org.jsoup.nodes.Element>();
+        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<org.jsoup.nodes.Element>) elementList10, elementArray9);
+        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator12 = elementList10.spliterator();
+        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator13 = elementList10.spliterator();
+        boolean boolean14 = elements4.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elementList10);
+        org.jsoup.select.Elements elements15 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elementList10);
+        org.jsoup.select.Elements elements16 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements15);
+        java.lang.String str17 = elements16.html();
+        org.jsoup.nodes.Document document19 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements21 = document19.getElementsByAttribute("hi!");
+        java.lang.String str23 = elements21.attr("#root");
+        org.jsoup.select.Elements elements24 = elements21.parents();
+        boolean boolean25 = elements16.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements21);
+        org.jsoup.select.Elements elements27 = elements16.eq(0);
+        org.jsoup.select.Elements elements29 = elements27.removeClass("hi!");
+        org.jsoup.select.Elements elements31 = elements29.val("#root=&quot;hi!&quot;");
+        org.jsoup.select.Elements elements32 = org.jsoup.select.Selector.select("o", (java.lang.Iterable<org.jsoup.nodes.Element>) elements29);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertNotNull(elementArray9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(elementSpliterator12);
+        org.junit.Assert.assertNotNull(elementSpliterator13);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertNotNull(elements21);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "" + "'", str23, "");
+        org.junit.Assert.assertNotNull(elements24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
+        org.junit.Assert.assertNotNull(elements27);
+        org.junit.Assert.assertNotNull(elements29);
+        org.junit.Assert.assertNotNull(elements31);
+        org.junit.Assert.assertNotNull(elements32);
+    }
+
+    @Test
+    public void test2406() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2406");
+        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>", "");
+        org.jsoup.select.Elements elements4 = document2.getElementsByIndexGreaterThan(2);
+        org.jsoup.select.Elements elements7 = elements4.attr(" hi!=\"#root\"", "<#document#document=\"#document#document\">\n</#document#document=\"#document#document\">");
+        org.jsoup.nodes.Document document10 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements12 = document10.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements14 = elements12.prepend("");
+        org.jsoup.select.Elements elements16 = elements14.removeAttr("");
+        org.jsoup.nodes.Document document18 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements20 = document18.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements22 = elements20.prepend("");
+        org.jsoup.select.Elements elements24 = elements22.removeAttr("");
+        boolean boolean25 = elements14.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements22);
+        org.jsoup.select.Elements elements27 = elements22.wrap("#root");
+        org.jsoup.select.Elements elements28 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements27);
+        org.jsoup.nodes.Document document31 = org.jsoup.parser.Parser.parse("#root", "");
+        java.lang.String str32 = document31.outerHtml();
+        org.jsoup.nodes.Element element34 = document31.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.jsoup.select.Elements elements37 = document31.getElementsByAttributeValueStarting("#root=\"hi!\"", "org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.nodes.Element element39 = document31.prepend("#root=\"hi!\"");
+        int int40 = elements28.lastIndexOf((java.lang.Object) "#root=\"hi!\"");
+        // The following exception was thrown during execution in test generation
+        try {
+            boolean boolean41 = elements4.addAll(100, (java.util.Collection<org.jsoup.nodes.Element>) elements28);
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 100, Size: 0");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertNotNull(elements12);
+        org.junit.Assert.assertNotNull(elements14);
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(elements22);
+        org.junit.Assert.assertNotNull(elements24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
+        org.junit.Assert.assertNotNull(elements27);
+        org.junit.Assert.assertNotNull(document31);
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str32, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.junit.Assert.assertNotNull(element34);
+        org.junit.Assert.assertNotNull(elements37);
+        org.junit.Assert.assertNotNull(element39);
+        org.junit.Assert.assertTrue("'" + int40 + "' != '" + (-1) + "'", int40 == (-1));
+    }
+
+    @Test
+    public void test2407() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2407");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        java.lang.String str6 = document2.tagName();
+        org.jsoup.nodes.Element element7 = document2.empty();
+        java.lang.String str9 = document2.absUrl("#data");
+        org.jsoup.nodes.Element element11 = document2.wrap("\n<!--#data-->");
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.select.Elements elements12 = element11.parents();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#root" + "'", str6, "#root");
+        org.junit.Assert.assertNotNull(element7);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertNull(element11);
+    }
+
+    @Test
+    public void test2408() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2408");
+        org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
+        int int1 = attributes0.size();
+        org.jsoup.nodes.Document document3 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements5 = document3.getElementsByAttribute("hi!");
+        java.lang.String str6 = elements5.val();
+        java.lang.Object obj7 = null;
+        int int8 = elements5.lastIndexOf(obj7);
+        org.jsoup.select.Elements elements10 = elements5.eq((int) '#');
+        boolean boolean11 = attributes0.equals((java.lang.Object) elements10);
+        boolean boolean13 = elements10.hasClass("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        // The following exception was thrown during execution in test generation
+        try {
+            java.util.List<org.jsoup.nodes.Element> elementList16 = elements10.subList((int) (short) 10, 0);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: fromIndex(10) > toIndex(0)");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + (-1) + "'", int8 == (-1));
+        org.junit.Assert.assertNotNull(elements10);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+    }
+
+    @Test
+    public void test2409() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2409");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "");
+        org.jsoup.nodes.Element element4 = document2.addClass("hi!");
+        org.jsoup.nodes.Element element5 = document2.body();
+        org.jsoup.nodes.Element element7 = document2.createElement("<org.jsoup.select.selector$selectorparseexception: hi!=\"#root\">\n</org.jsoup.select.selector$selectorparseexception:>");
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements13 = elements11.prepend("");
+        org.jsoup.nodes.Document document15 = new org.jsoup.nodes.Document("");
+        boolean boolean16 = document15.hasText();
+        boolean boolean17 = document15.hasText();
+        org.jsoup.nodes.Document document19 = new org.jsoup.nodes.Document("");
+        boolean boolean20 = document19.hasText();
+        java.lang.String str21 = document19.nodeName();
+        java.lang.String[] strArray23 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet24 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean25 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet24, strArray23);
+        org.jsoup.nodes.Element element26 = document19.classNames((java.util.Set<java.lang.String>) strSet24);
+        org.jsoup.nodes.Element element27 = document15.classNames((java.util.Set<java.lang.String>) strSet24);
+        int int28 = elements11.indexOf((java.lang.Object) element27);
+        org.jsoup.nodes.Document document30 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements32 = document30.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements34 = elements32.prepend("");
+        org.jsoup.select.Elements elements36 = elements34.removeAttr("");
+        org.jsoup.nodes.Document document38 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements40 = document38.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements42 = elements40.prepend("");
+        org.jsoup.select.Elements elements44 = elements42.removeAttr("");
+        boolean boolean45 = elements34.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements42);
+        org.jsoup.nodes.Document document47 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements49 = document47.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements51 = elements49.prepend("");
+        org.jsoup.select.Elements elements53 = elements51.removeAttr("");
+        org.jsoup.nodes.Document document55 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements57 = document55.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements59 = elements57.prepend("");
+        org.jsoup.select.Elements elements61 = elements59.removeAttr("");
+        boolean boolean62 = elements51.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements59);
+        org.jsoup.select.Elements elements64 = elements59.wrap("#root");
+        boolean boolean65 = elements42.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements64);
+        org.jsoup.select.Elements elements66 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements42);
+        boolean boolean67 = elements11.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements42);
+        org.jsoup.select.Elements elements69 = elements11.removeClass("");
+        boolean boolean70 = element7.equals((java.lang.Object) elements69);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element4);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertNotNull(element7);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "#document" + "'", str21, "#document");
+        org.junit.Assert.assertNotNull(strArray23);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
+        org.junit.Assert.assertNotNull(element26);
+        org.junit.Assert.assertNotNull(element27);
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + (-1) + "'", int28 == (-1));
+        org.junit.Assert.assertNotNull(elements32);
+        org.junit.Assert.assertNotNull(elements34);
+        org.junit.Assert.assertNotNull(elements36);
+        org.junit.Assert.assertNotNull(elements40);
+        org.junit.Assert.assertNotNull(elements42);
+        org.junit.Assert.assertNotNull(elements44);
+        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + true + "'", boolean45 == true);
+        org.junit.Assert.assertNotNull(elements49);
+        org.junit.Assert.assertNotNull(elements51);
+        org.junit.Assert.assertNotNull(elements53);
+        org.junit.Assert.assertNotNull(elements57);
+        org.junit.Assert.assertNotNull(elements59);
+        org.junit.Assert.assertNotNull(elements61);
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + true + "'", boolean62 == true);
+        org.junit.Assert.assertNotNull(elements64);
+        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + true + "'", boolean65 == true);
+        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + true + "'", boolean67 == true);
+        org.junit.Assert.assertNotNull(elements69);
+        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
+    }
+
+    @Test
+    public void test2410() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2410");
+        org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("body", "org.jsoup.select.Selector$SelectorParseException:");
+        org.jsoup.nodes.Document document4 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements6 = document4.getElementsByAttribute("hi!");
+        java.lang.String str7 = elements6.val();
+        java.lang.Object obj8 = null;
+        int int9 = elements6.lastIndexOf(obj8);
+        org.jsoup.select.Elements elements11 = elements6.eq((int) '#');
+        boolean boolean13 = elements6.hasAttr("#root");
+        int int15 = elements6.indexOf((java.lang.Object) (byte) 100);
+        java.lang.String str17 = elements6.attr("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean18 = attribute2.equals((java.lang.Object) elements6);
+        org.jsoup.select.Elements elements20 = elements6.toggleClass("#root=\"hi!\"");
+        org.jsoup.select.Elements elements22 = elements20.wrap("<?#document#document>");
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + (-1) + "'", int9 == (-1));
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + (-1) + "'", int15 == (-1));
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(elements22);
+    }
+
+    @Test
+    public void test2411() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2411");
+        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("\n<!--#root-->", "#document#documentdocument=\"&lt;?hi!&gt;\"");
+        org.jsoup.select.Elements elements4 = document2.getElementsByIndexEquals(3);
+        java.lang.String str6 = elements4.attr("[<, ?, >, #, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, d, o, c, u, m, e, n, t]");
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        boolean boolean10 = document9.hasText();
+        java.lang.String str11 = document9.nodeName();
+        java.lang.String[] strArray13 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet14 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean15 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet14, strArray13);
+        org.jsoup.nodes.Element element16 = document9.classNames((java.util.Set<java.lang.String>) strSet14);
+        org.jsoup.nodes.Element element18 = document9.append("#document");
+        org.jsoup.nodes.Element element20 = document9.prepend("#document");
+        org.jsoup.nodes.Attributes attributes21 = element20.attributes();
+        org.jsoup.nodes.Element element23 = element20.append("hi!");
+        boolean boolean25 = element20.hasClass("");
+        org.jsoup.nodes.Element element27 = element20.val("[]");
+        org.jsoup.select.Elements elements30 = element27.getElementsByAttributeValueStarting("\n<!--#document--> #data", "<html> \n<head> \n</head> \n<body>\n  #root  \n</body>\n</html>");
+        // The following exception was thrown during execution in test generation
+        try {
+            boolean boolean31 = elements4.addAll((int) '#', (java.util.Collection<org.jsoup.nodes.Element>) elements30);
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 35, Size: 0");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "#document" + "'", str11, "#document");
+        org.junit.Assert.assertNotNull(strArray13);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertNotNull(attributes21);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(element27);
+        org.junit.Assert.assertNotNull(elements30);
+    }
+
+    @Test
+    public void test2412() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2412");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        java.lang.String str5 = elements3.attr("#root");
+        org.jsoup.nodes.Document document7 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element[] elementArray8 = new org.jsoup.nodes.Element[] { document7 };
+        java.util.ArrayList<org.jsoup.nodes.Element> elementList9 = new java.util.ArrayList<org.jsoup.nodes.Element>();
+        boolean boolean10 = java.util.Collections.addAll((java.util.Collection<org.jsoup.nodes.Element>) elementList9, elementArray8);
+        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator11 = elementList9.spliterator();
+        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator12 = elementList9.spliterator();
+        boolean boolean13 = elements3.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elementList9);
+        org.jsoup.select.Elements elements14 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elementList9);
+        org.jsoup.select.Elements elements15 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements14);
+        java.lang.String str16 = elements15.html();
+        org.jsoup.nodes.Document document18 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements20 = document18.getElementsByAttribute("hi!");
+        java.lang.String str22 = elements20.attr("#root");
+        org.jsoup.select.Elements elements23 = elements20.parents();
+        boolean boolean24 = elements15.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements20);
+        org.jsoup.select.Elements elements26 = elements15.eq(0);
+        org.jsoup.select.Elements elements28 = elements26.removeClass("hi!");
+        org.jsoup.select.Elements elements30 = elements28.val("#root=&quot;hi!&quot;");
+        org.jsoup.select.Elements elements32 = elements28.addClass("<#document#document=\"#document#document\">\n</#document#document=\"#document#document\">");
+        java.lang.String str34 = elements32.attr("<html>\n<head>\n</head>\n<body>\n #document#document \n</body>\n</html>");
+        org.jsoup.nodes.Attribute attribute37 = org.jsoup.nodes.Attribute.createFromEncoded("<html>\n<head>\n</head>\n<body>\n</body>\n</html>", "");
+        boolean boolean38 = elements32.equals((java.lang.Object) attribute37);
+        java.lang.String str39 = attribute37.getValue();
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
+        org.junit.Assert.assertNotNull(elementArray8);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertNotNull(elementSpliterator11);
+        org.junit.Assert.assertNotNull(elementSpliterator12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
+        org.junit.Assert.assertNotNull(elements23);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + true + "'", boolean24 == true);
+        org.junit.Assert.assertNotNull(elements26);
+        org.junit.Assert.assertNotNull(elements28);
+        org.junit.Assert.assertNotNull(elements30);
+        org.junit.Assert.assertNotNull(elements32);
+        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "" + "'", str34, "");
+        org.junit.Assert.assertNotNull(attribute37);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "" + "'", str39, "");
+    }
+
+    @Test
+    public void test2413() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2413");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        boolean boolean3 = document1.hasText();
+        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
+        boolean boolean6 = document5.hasText();
+        java.lang.String str7 = document5.nodeName();
+        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
+        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
+        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
+        java.util.Set<java.lang.String> strSet14 = document1.classNames();
+        org.jsoup.nodes.Element element16 = document1.getElementById("#document#document");
+        org.jsoup.nodes.Element element18 = document1.prependText("");
+        org.jsoup.nodes.Element element20 = element18.prependText("[]");
+        org.jsoup.select.Elements elements23 = element20.getElementsByAttributeValueContaining("#document#document", "\n<!--#declaration-->");
+        org.jsoup.select.Elements elements25 = elements23.prepend("<html>\n<head>\n</head>\n<body>\n <html> \n  <head> \n  </head> \n  <body>\n    #root  #document#documentdocument\n  </body>\n </html>\n</body>\n</html>");
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertNotNull(strSet14);
+        org.junit.Assert.assertNull(element16);
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertNotNull(elements23);
+        org.junit.Assert.assertNotNull(elements25);
+    }
+
+    @Test
+    public void test2414() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2414");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.nodes.Element element5 = document1.prepend("#document");
+        org.jsoup.nodes.Element element6 = element5.empty();
+        org.jsoup.select.Elements elements8 = element5.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.select.Elements elements10 = elements8.removeClass("#root");
+        org.jsoup.nodes.Document document12 = new org.jsoup.nodes.Document("");
+        boolean boolean13 = document12.hasText();
+        java.lang.String str14 = document12.nodeName();
+        java.lang.String[] strArray16 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet17 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean18 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet17, strArray16);
+        org.jsoup.nodes.Element element19 = document12.classNames((java.util.Set<java.lang.String>) strSet17);
+        org.jsoup.nodes.Element element21 = document12.append("#document");
+        org.jsoup.nodes.Element element23 = document12.prepend("#document");
+        org.jsoup.nodes.Attributes attributes24 = element23.attributes();
+        org.jsoup.nodes.Element element26 = element23.append("hi!");
+        org.jsoup.select.Elements elements28 = element26.getElementsByIndexLessThan((int) (short) 0);
+        boolean boolean29 = elements8.equals((java.lang.Object) elements28);
+        java.util.ListIterator<org.jsoup.nodes.Element> elementItor31 = elements28.listIterator(0);
+        org.jsoup.select.Elements elements33 = elements28.append("");
+        org.jsoup.select.Elements elements35 = elements28.html(" class=\"hi!\"");
+        java.util.Iterator<org.jsoup.nodes.Element> elementItor36 = elements28.iterator();
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertNotNull(element6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(elements10);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "#document" + "'", str14, "#document");
+        org.junit.Assert.assertNotNull(strArray16);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + true + "'", boolean18 == true);
+        org.junit.Assert.assertNotNull(element19);
+        org.junit.Assert.assertNotNull(element21);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertNotNull(attributes24);
+        org.junit.Assert.assertNotNull(element26);
+        org.junit.Assert.assertNotNull(elements28);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + true + "'", boolean29 == true);
+        org.junit.Assert.assertNotNull(elementItor31);
+        org.junit.Assert.assertNotNull(elements33);
+        org.junit.Assert.assertNotNull(elements35);
+        org.junit.Assert.assertNotNull(elementItor36);
+    }
+
+    @Test
+    public void test2415() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2415");
+        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
+        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
+        document1.title("[]");
+        org.jsoup.nodes.Element element8 = document1.prependText("#document#document");
+        org.jsoup.nodes.Node node11 = element8.attr("body=\"# \"", "");
+        boolean boolean12 = element8.hasText();
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(node11);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+    }
+
+    @Test
+    public void test2416() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2416");
+        org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
+        int int1 = attributes0.size();
+        org.jsoup.nodes.Document document3 = new org.jsoup.nodes.Document("");
+        boolean boolean4 = document3.hasText();
+        java.lang.String str5 = document3.nodeName();
+        java.lang.String[] strArray7 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet8 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean9 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet8, strArray7);
+        org.jsoup.nodes.Element element10 = document3.classNames((java.util.Set<java.lang.String>) strSet8);
+        org.jsoup.nodes.Element element12 = document3.append("#document");
+        org.jsoup.nodes.Element element14 = document3.prepend("#document");
+        org.jsoup.nodes.Attributes attributes15 = element14.attributes();
+        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator16 = attributes15.spliterator();
+        org.jsoup.nodes.Attributes attributes17 = new org.jsoup.nodes.Attributes();
+        int int18 = attributes17.size();
+        java.lang.String str19 = attributes17.html();
+        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor20 = attributes17.iterator();
+        boolean boolean21 = attributes15.equals((java.lang.Object) attributes17);
+        attributes0.addAll(attributes15);
+        int int23 = attributes0.size();
+        attributes0.put(" #comment=\"\"", "\n<body>\n #root \n</body>");
+        int int27 = attributes0.size();
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "#document" + "'", str5, "#document");
+        org.junit.Assert.assertNotNull(strArray7);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertNotNull(attributes15);
+        org.junit.Assert.assertNotNull(attributeSpliterator16);
+        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "" + "'", str19, "");
+        org.junit.Assert.assertNotNull(attributeItor20);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 1 + "'", int23 == 1);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 2 + "'", int27 == 2);
+    }
+
+    @Test
+    public void test2417() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2417");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
+        org.jsoup.nodes.Attributes attributes5 = document1.attributes();
+        org.jsoup.select.Elements elements6 = document1.children();
+        java.util.Set<java.lang.String> strSet7 = document1.classNames();
+        org.jsoup.select.Elements elements9 = document1.getElementsByIndexEquals((int) (byte) 0);
+        org.jsoup.nodes.Document document11 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements13 = document11.getElementsByAttribute("hi!");
+        org.jsoup.nodes.Element element15 = document11.prepend("#document");
+        org.jsoup.nodes.Element element16 = element15.empty();
+        org.jsoup.select.Elements elements18 = element15.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.select.Elements elements20 = elements18.removeClass("#root");
+        org.jsoup.nodes.Document document23 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("", "");
+        int int24 = elements18.lastIndexOf((java.lang.Object) "");
+        boolean boolean25 = document1.equals((java.lang.Object) "");
+        org.junit.Assert.assertNotNull(element4);
+        org.junit.Assert.assertNotNull(attributes5);
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertNotNull(strSet7);
+        org.junit.Assert.assertNotNull(elements9);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertNotNull(elements18);
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(document23);
+        org.junit.Assert.assertTrue("'" + int24 + "' != '" + (-1) + "'", int24 == (-1));
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+    }
+
+    @Test
+    public void test2418() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2418");
+        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("#data");
+        org.jsoup.nodes.Element element3 = document1.html("\n<!--#data-->");
+        java.util.List<org.jsoup.nodes.Node> nodeList4 = element3.childNodes();
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(element3);
+        org.junit.Assert.assertNotNull(nodeList4);
+    }
+
+    @Test
+    public void test2419() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2419");
+        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("\n<!--#root-->");
+        org.jsoup.nodes.Element element3 = document1.appendText("org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(element3);
+    }
+
+    @Test
+    public void test2420() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2420");
+        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        java.lang.String str2 = tag1.getName();
+        boolean boolean3 = tag1.isInline();
+        boolean boolean4 = tag1.isEmpty();
+        org.jsoup.parser.Tag tag6 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        java.lang.String str7 = tag6.getName();
+        boolean boolean8 = tag6.isInline();
+        boolean boolean9 = tag6.isEmpty();
+        boolean boolean10 = tag6.isEmpty();
+        boolean boolean11 = tag1.isValidAncestor(tag6);
+        boolean boolean12 = tag6.preserveWhitespace();
+        org.jsoup.nodes.Document document15 = new org.jsoup.nodes.Document("");
+        boolean boolean16 = document15.hasText();
+        boolean boolean17 = document15.hasText();
+        org.jsoup.nodes.Document document19 = new org.jsoup.nodes.Document("");
+        boolean boolean20 = document19.hasText();
+        java.lang.String str21 = document19.nodeName();
+        java.lang.String[] strArray23 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet24 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean25 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet24, strArray23);
+        org.jsoup.nodes.Element element26 = document19.classNames((java.util.Set<java.lang.String>) strSet24);
+        org.jsoup.nodes.Element element27 = document15.classNames((java.util.Set<java.lang.String>) strSet24);
+        org.jsoup.nodes.Element element29 = document15.appendText("hi!");
+        org.jsoup.parser.Tag tag30 = document15.tag();
+        boolean boolean31 = tag30.requiresSpecificParent();
+        org.jsoup.nodes.Document document34 = new org.jsoup.nodes.Document("");
+        boolean boolean35 = document34.hasText();
+        java.lang.String str36 = document34.nodeName();
+        java.lang.String[] strArray38 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet39 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean40 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet39, strArray38);
+        org.jsoup.nodes.Element element41 = document34.classNames((java.util.Set<java.lang.String>) strSet39);
+        org.jsoup.nodes.Element element43 = document34.append("#document");
+        org.jsoup.nodes.Element element45 = document34.prepend("#document");
+        org.jsoup.nodes.Attributes attributes46 = element45.attributes();
+        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator47 = attributes46.spliterator();
+        org.jsoup.nodes.Attributes attributes48 = new org.jsoup.nodes.Attributes();
+        int int49 = attributes48.size();
+        java.lang.String str50 = attributes48.html();
+        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor51 = attributes48.iterator();
+        boolean boolean52 = attributes46.equals((java.lang.Object) attributes48);
+        java.lang.String str53 = attributes46.toString();
+        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator54 = attributes46.spliterator();
+        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor55 = attributes46.iterator();
+        org.jsoup.parser.Tag tag57 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean58 = tag57.isData();
+        org.jsoup.nodes.Attributes attributes60 = new org.jsoup.nodes.Attributes();
+        int int61 = attributes60.size();
+        java.lang.String str62 = attributes60.html();
+        org.jsoup.nodes.Element element63 = new org.jsoup.nodes.Element(tag57, "org.jsoup.select.selector$selectorparseexception:", attributes60);
+        org.jsoup.nodes.Attribute attribute66 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
+        attribute66.setKey("#root");
+        java.lang.String str69 = attribute66.html();
+        attributes60.put(attribute66);
+        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor71 = attributes60.iterator();
+        attributes46.addAll(attributes60);
+        attributes46.remove("document");
+        org.jsoup.nodes.Element element75 = new org.jsoup.nodes.Element(tag30, "document", attributes46);
+        attributes46.remove("<html>\n<head>\n</head>\n<body>\n ocument \n</body>\n</html>");
+        org.jsoup.nodes.Element element78 = new org.jsoup.nodes.Element(tag6, "#root=\"#root=\"hi!\"\"", attributes46);
+        org.jsoup.select.Elements elements79 = element78.children();
+        org.junit.Assert.assertNotNull(tag1);
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str2, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertNotNull(tag6);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str7, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "#document" + "'", str21, "#document");
+        org.junit.Assert.assertNotNull(strArray23);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
+        org.junit.Assert.assertNotNull(element26);
+        org.junit.Assert.assertNotNull(element27);
+        org.junit.Assert.assertNotNull(element29);
+        org.junit.Assert.assertNotNull(tag30);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "#document" + "'", str36, "#document");
+        org.junit.Assert.assertNotNull(strArray38);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + true + "'", boolean40 == true);
+        org.junit.Assert.assertNotNull(element41);
+        org.junit.Assert.assertNotNull(element43);
+        org.junit.Assert.assertNotNull(element45);
+        org.junit.Assert.assertNotNull(attributes46);
+        org.junit.Assert.assertNotNull(attributeSpliterator47);
+        org.junit.Assert.assertTrue("'" + int49 + "' != '" + 0 + "'", int49 == 0);
+        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "" + "'", str50, "");
+        org.junit.Assert.assertNotNull(attributeItor51);
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + " class=\"hi!\"" + "'", str53, " class=\"hi!\"");
+        org.junit.Assert.assertNotNull(attributeSpliterator54);
+        org.junit.Assert.assertNotNull(attributeItor55);
+        org.junit.Assert.assertNotNull(tag57);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertTrue("'" + int61 + "' != '" + 0 + "'", int61 == 0);
+        org.junit.Assert.assertEquals("'" + str62 + "' != '" + "" + "'", str62, "");
+        org.junit.Assert.assertNotNull(attribute66);
+        org.junit.Assert.assertEquals("'" + str69 + "' != '" + "#root=\"hi!\"" + "'", str69, "#root=\"hi!\"");
+        org.junit.Assert.assertNotNull(attributeItor71);
+        org.junit.Assert.assertNotNull(elements79);
+    }
+
+    @Test
+    public void test2421() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2421");
+        java.io.File file0 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse(file0, "<!--#root-->\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+    }
+
+    @Test
+    public void test2422() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2422");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        java.lang.String str3 = document1.nodeName();
+        org.jsoup.select.Elements elements4 = document1.children();
+        org.jsoup.select.Elements elements6 = document1.getElementsByTag("#document#documenthi!");
+        org.jsoup.select.Elements elements8 = elements6.removeClass("#document#documentdocument");
+        org.jsoup.select.Elements elements10 = elements6.html("#text");
+        java.lang.String str11 = elements10.val();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(elements10);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+    }
+
+    @Test
+    public void test2423() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2423");
+        org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element6 = document3.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        java.lang.String str7 = document3.tagName();
+        java.lang.String str8 = document3.toString();
+        org.jsoup.nodes.Document document10 = new org.jsoup.nodes.Document("");
+        boolean boolean11 = document10.hasText();
+        java.lang.String str12 = document10.nodeName();
+        java.lang.String[] strArray14 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet15 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean16 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet15, strArray14);
+        org.jsoup.nodes.Element element17 = document10.classNames((java.util.Set<java.lang.String>) strSet15);
+        org.jsoup.nodes.Element element19 = document10.append("#document");
+        org.jsoup.nodes.Element element21 = element19.html("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.jsoup.nodes.Element element22 = document3.appendChild((org.jsoup.nodes.Node) element21);
+        org.jsoup.select.Elements elements23 = org.jsoup.select.Selector.select("#text", element21);
+        java.lang.Object[] objArray24 = elements23.toArray();
+        org.jsoup.select.Elements elements26 = elements23.removeAttr("body=\"# \"");
+        int int27 = elements23.size();
+        org.junit.Assert.assertNotNull(document3);
+        org.junit.Assert.assertNotNull(element6);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#root" + "'", str7, "#root");
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str8, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "#document" + "'", str12, "#document");
+        org.junit.Assert.assertNotNull(strArray14);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNotNull(element17);
+        org.junit.Assert.assertNotNull(element19);
+        org.junit.Assert.assertNotNull(element21);
+        org.junit.Assert.assertNotNull(element22);
+        org.junit.Assert.assertNotNull(elements23);
+        org.junit.Assert.assertNotNull(objArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray24), "[]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray24), "[]");
+        org.junit.Assert.assertNotNull(elements26);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+    }
+
+    @Test
+    public void test2424() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2424");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        java.lang.String str3 = document1.nodeName();
+        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
+        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
+        org.jsoup.nodes.Element element10 = element8.addClass("#document");
+        org.jsoup.nodes.Document document12 = new org.jsoup.nodes.Document("");
+        boolean boolean13 = document12.hasText();
+        boolean boolean14 = document12.hasText();
+        org.jsoup.nodes.Document document16 = new org.jsoup.nodes.Document("");
+        boolean boolean17 = document16.hasText();
+        java.lang.String str18 = document16.nodeName();
+        java.lang.String[] strArray20 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet21 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean22 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet21, strArray20);
+        org.jsoup.nodes.Element element23 = document16.classNames((java.util.Set<java.lang.String>) strSet21);
+        org.jsoup.nodes.Element element24 = document12.classNames((java.util.Set<java.lang.String>) strSet21);
+        java.util.Set<java.lang.String> strSet25 = document12.classNames();
+        org.jsoup.nodes.Element element26 = element8.classNames(strSet25);
+        org.jsoup.nodes.Element element28 = element26.toggleClass("body");
+        org.jsoup.nodes.Element element30 = element26.val("");
+        java.lang.String str32 = element26.absUrl("org.jsoup.select.Selector$SelectorParseException: \n<!--#document-->");
+        java.lang.String str33 = element26.className();
+        org.jsoup.select.Elements elements35 = element26.getElementsByIndexLessThan(1);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
+        org.junit.Assert.assertNotNull(strArray5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "#document" + "'", str18, "#document");
+        org.junit.Assert.assertNotNull(strArray20);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertNotNull(element24);
+        org.junit.Assert.assertNotNull(strSet25);
+        org.junit.Assert.assertNotNull(element26);
+        org.junit.Assert.assertNotNull(element28);
+        org.junit.Assert.assertNotNull(element30);
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
+        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "hi! #document body" + "'", str33, "hi! #document body");
+        org.junit.Assert.assertNotNull(elements35);
+    }
+
+    @Test
+    public void test2425() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2425");
+        org.jsoup.nodes.DataNode dataNode2 = new org.jsoup.nodes.DataNode("<?#document#documentdocument>", "<!--#document--><#root hi!=\"#root\">\n</#root>");
+    }
+
+    @Test
+    public void test2426() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2426");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements5 = elements3.prepend("");
+        org.jsoup.select.Elements elements7 = elements5.removeAttr("");
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements13 = elements11.prepend("");
+        org.jsoup.select.Elements elements15 = elements13.removeAttr("");
+        boolean boolean16 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements13);
+        java.lang.Object[] objArray17 = elements5.toArray();
+        org.jsoup.nodes.Document document19 = new org.jsoup.nodes.Document("");
+        boolean boolean20 = document19.hasText();
+        java.lang.String str21 = document19.nodeName();
+        java.lang.String str22 = document19.val();
+        boolean boolean23 = elements5.add((org.jsoup.nodes.Element) document19);
+        org.jsoup.select.Elements elements25 = elements5.prepend("");
+        org.jsoup.nodes.Document document27 = new org.jsoup.nodes.Document("");
+        boolean boolean28 = document27.hasText();
+        java.lang.String str29 = document27.nodeName();
+        java.lang.String[] strArray31 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet32 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean33 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet32, strArray31);
+        org.jsoup.nodes.Element element34 = document27.classNames((java.util.Set<java.lang.String>) strSet32);
+        org.jsoup.nodes.Element element36 = document27.append("#document");
+        org.jsoup.nodes.Element element38 = document27.prepend("#document");
+        org.jsoup.select.Elements elements39 = document27.parents();
+        org.jsoup.select.Elements elements40 = document27.children();
+        org.jsoup.nodes.Element element42 = document27.createElement("org.jsoup.select.Selector$SelectorParseException:");
+        boolean boolean43 = elements25.equals((java.lang.Object) document27);
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertNotNull(elements15);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNotNull(objArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray17), "[]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray17), "[]");
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "#document" + "'", str21, "#document");
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+        org.junit.Assert.assertNotNull(elements25);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "#document" + "'", str29, "#document");
+        org.junit.Assert.assertNotNull(strArray31);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
+        org.junit.Assert.assertNotNull(element34);
+        org.junit.Assert.assertNotNull(element36);
+        org.junit.Assert.assertNotNull(element38);
+        org.junit.Assert.assertNotNull(elements39);
+        org.junit.Assert.assertNotNull(elements40);
+        org.junit.Assert.assertNotNull(element42);
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + false + "'", boolean43 == false);
+    }
+
+    @Test
+    public void test2427() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2427");
+        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean2 = tag1.isData();
+        boolean boolean3 = tag1.requiresSpecificParent();
+        boolean boolean4 = tag1.isBlock();
+        org.jsoup.parser.Tag tag6 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean7 = tag6.isData();
+        boolean boolean8 = tag6.requiresSpecificParent();
+        boolean boolean9 = tag6.isBlock();
+        boolean boolean10 = tag1.canContain(tag6);
+        boolean boolean11 = tag1.isBlock();
+        boolean boolean12 = tag1.isData();
+        boolean boolean13 = tag1.isBlock();
+        java.lang.String str14 = tag1.getName();
+        org.jsoup.parser.Tag tag16 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        java.lang.String str17 = tag16.getName();
+        boolean boolean18 = tag16.canContainBlock();
+        boolean boolean19 = tag1.isValidParent(tag16);
+        org.jsoup.parser.Tag tag20 = tag1.getImplicitParent();
+        boolean boolean21 = tag1.requiresSpecificParent();
+        org.junit.Assert.assertNotNull(tag1);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertNotNull(tag6);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str14, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertNotNull(tag16);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str17, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + true + "'", boolean18 == true);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(tag20);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+    }
+
+    @Test
+    public void test2428() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2428");
+        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
+        org.jsoup.nodes.Document document2 = document1.normalise();
+        org.jsoup.nodes.Element element3 = document2.head();
+        org.jsoup.nodes.Element element6 = document2.attr("org.jsoup.select.Selector$SelectorParseException: ", "[]");
+        org.jsoup.nodes.Element element8 = element6.appendElement("#comment");
+        org.jsoup.nodes.Element element10 = element6.prependText("#document");
+        org.jsoup.nodes.Document document12 = new org.jsoup.nodes.Document("");
+        boolean boolean13 = document12.hasText();
+        boolean boolean14 = document12.hasText();
+        org.jsoup.nodes.Document document16 = new org.jsoup.nodes.Document("");
+        boolean boolean17 = document16.hasText();
+        java.lang.String str18 = document16.nodeName();
+        java.lang.String[] strArray20 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet21 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean22 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet21, strArray20);
+        org.jsoup.nodes.Element element23 = document16.classNames((java.util.Set<java.lang.String>) strSet21);
+        org.jsoup.nodes.Element element24 = document12.classNames((java.util.Set<java.lang.String>) strSet21);
+        org.jsoup.select.Elements elements25 = element24.getAllElements();
+        org.jsoup.nodes.Element element26 = element6.prependChild((org.jsoup.nodes.Node) element24);
+        org.jsoup.nodes.Element element28 = element26.toggleClass("#comment");
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element3);
+        org.junit.Assert.assertNotNull(element6);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "#document" + "'", str18, "#document");
+        org.junit.Assert.assertNotNull(strArray20);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertNotNull(element24);
+        org.junit.Assert.assertNotNull(elements25);
+        org.junit.Assert.assertNotNull(element26);
+        org.junit.Assert.assertNotNull(element28);
+    }
+
+    @Test
+    public void test2429() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2429");
+        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
+        org.jsoup.select.Elements elements5 = elements3.eq((int) (byte) 10);
+        org.jsoup.nodes.Attributes attributes6 = new org.jsoup.nodes.Attributes();
+        int int7 = attributes6.size();
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        java.lang.String str12 = elements11.val();
+        java.lang.Object obj13 = null;
+        int int14 = elements11.lastIndexOf(obj13);
+        org.jsoup.select.Elements elements16 = elements11.eq((int) '#');
+        boolean boolean17 = attributes6.equals((java.lang.Object) elements16);
+        boolean boolean18 = elements16.hasText();
+        java.lang.String str19 = elements16.val();
+        org.jsoup.select.Elements elements21 = elements16.append("#document#document");
+        boolean boolean22 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements21);
+        org.jsoup.nodes.Element element23 = elements5.last();
+        java.lang.String str24 = elements5.text();
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + (-1) + "'", int14 == (-1));
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "" + "'", str19, "");
+        org.junit.Assert.assertNotNull(elements21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertNull(element23);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
+    }
+
+    @Test
+    public void test2430() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2430");
+        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
+        boolean boolean3 = tokenQueue1.matches("\n<!--#root-->");
+        boolean boolean5 = tokenQueue1.matchChomp("#data");
+        java.lang.String[] strArray7 = new java.lang.String[] { "hi!=\"#root=&quot;hi!&quot;\"" };
+        java.lang.String str8 = tokenQueue1.consumeToAny(strArray7);
+        java.lang.String str9 = tokenQueue1.remainder();
+        java.lang.String str10 = tokenQueue1.remainder();
+        java.lang.String str11 = tokenQueue1.consumeAttributeKey();
+        boolean boolean12 = tokenQueue1.isEmpty();
+        java.lang.String str13 = tokenQueue1.consumeAttributeKey();
+        boolean boolean14 = tokenQueue1.isEmpty();
+        java.lang.String str16 = tokenQueue1.chompTo("<[#, d, o, c, u, m, e, n, t]>\n</[#, d, o, c, u, m, e, n, t]>#root=&quot;hi!&quot;");
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertNotNull(strArray7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "#document" + "'", str8, "#document");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+    }
+
+    @Test
+    public void test2431() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2431");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.nodes.Element element5 = document1.prepend("#document");
+        org.jsoup.nodes.Element element6 = element5.empty();
+        org.jsoup.select.Elements elements8 = element5.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.select.Elements elements10 = elements8.removeClass("#root");
+        org.jsoup.select.Elements elements12 = elements8.append("");
+        org.jsoup.nodes.Document document15 = org.jsoup.parser.Parser.parse("#root", "");
+        java.lang.String str16 = document15.outerHtml();
+        org.jsoup.nodes.Element element18 = document15.createElement("#document#documenthi!");
+        boolean boolean19 = elements12.remove((java.lang.Object) document15);
+        org.jsoup.select.Elements elements21 = document15.getElementsByIndexLessThan(4);
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertNotNull(element6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(elements10);
+        org.junit.Assert.assertNotNull(elements12);
+        org.junit.Assert.assertNotNull(document15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str16, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(elements21);
+    }
+
+    @Test
+    public void test2432() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2432");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("hi!=\"#root=&quot;hi!&quot;\"");
+        org.jsoup.nodes.Element element3 = document1.createElement("document");
+        org.jsoup.select.Elements elements5 = document1.getElementsByIndexGreaterThan((int) (byte) 1);
+        org.junit.Assert.assertNotNull(element3);
+        org.junit.Assert.assertNotNull(elements5);
+    }
+
+    @Test
+    public void test2433() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2433");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        java.lang.String str3 = document1.nodeName();
+        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
+        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
+        java.lang.String str9 = document1.tagName();
+        org.jsoup.nodes.Element element11 = document1.appendElement("#declaration");
+        org.jsoup.nodes.Document document14 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("#data", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
+        org.jsoup.nodes.Attributes attributes15 = document14.attributes();
+        java.lang.String str16 = document14.tagName();
+        org.jsoup.nodes.Element element17 = element11.prependChild((org.jsoup.nodes.Node) document14);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
+        org.junit.Assert.assertNotNull(strArray5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "#root" + "'", str9, "#root");
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNotNull(document14);
+        org.junit.Assert.assertNotNull(attributes15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "#root" + "'", str16, "#root");
+        org.junit.Assert.assertNotNull(element17);
+    }
+
+    @Test
+    public void test2434() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2434");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        boolean boolean3 = document1.hasText();
+        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
+        boolean boolean6 = document5.hasText();
+        java.lang.String str7 = document5.nodeName();
+        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
+        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
+        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
+        java.util.Set<java.lang.String> strSet14 = document1.classNames();
+        org.jsoup.nodes.Element element16 = document1.getElementById("#document#document");
+        java.lang.String str17 = document1.id();
+        java.lang.String str18 = document1.nodeName();
+        java.lang.String str20 = document1.attr("[]");
+        org.jsoup.nodes.Element element22 = document1.prependText("#document");
+        boolean boolean24 = document1.hasClass("<html> \n <head> \n </head> \n <body>\n   #root  \n </body>\n</html>");
+        java.lang.String str25 = document1.toString();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertNotNull(strSet14);
+        org.junit.Assert.assertNull(element16);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "#document" + "'", str18, "#document");
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
+        org.junit.Assert.assertNotNull(element22);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "#document" + "'", str25, "#document");
+    }
+
+    @Test
+    public void test2435() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2435");
+        org.jsoup.safety.Whitelist whitelist1 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            boolean boolean2 = org.jsoup.Jsoup.isValid("<html>\n<head>\n</head>\n<body>\n</body>\n</html>", whitelist1);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated object is null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+    }
+
+    @Test
+    public void test2436() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2436");
+        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("org.jsoup.select.selector$selectorparseexception:");
+        org.jsoup.select.Elements elements5 = elements3.eq((int) (byte) 10);
+        org.jsoup.nodes.Attributes attributes6 = new org.jsoup.nodes.Attributes();
+        int int7 = attributes6.size();
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        java.lang.String str12 = elements11.val();
+        java.lang.Object obj13 = null;
+        int int14 = elements11.lastIndexOf(obj13);
+        org.jsoup.select.Elements elements16 = elements11.eq((int) '#');
+        boolean boolean17 = attributes6.equals((java.lang.Object) elements16);
+        boolean boolean18 = elements16.hasText();
+        java.lang.String str19 = elements16.val();
+        org.jsoup.select.Elements elements21 = elements16.append("#document#document");
+        boolean boolean22 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements21);
+        boolean boolean23 = elements21.isEmpty();
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + (-1) + "'", int14 == (-1));
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "" + "'", str19, "");
+        org.junit.Assert.assertNotNull(elements21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+    }
+
+    @Test
+    public void test2437() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2437");
+        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("\n<!--#document-->");
+        java.lang.String str2 = document1.className();
+        java.lang.String str3 = document1.title();
+        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element element8 = document5.attr("hi!", "#root");
+        java.lang.String str9 = document5.id();
+        org.jsoup.nodes.Element element11 = document5.append("hi!=\"#root=&quot;hi!&quot;\"");
+        boolean boolean13 = document5.hasClass("");
+        java.lang.String str14 = document5.val();
+        org.jsoup.select.Elements elements16 = document5.getElementsByIndexLessThan((int) (short) 1);
+        java.util.Set<java.lang.String> strSet17 = document5.classNames();
+        org.jsoup.nodes.Element element18 = document1.classNames(strSet17);
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "" + "'", str3, "");
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertNotNull(strSet17);
+        org.junit.Assert.assertNotNull(element18);
+    }
+
+    @Test
+    public void test2438() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2438");
+        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("<?hi!>");
+        boolean boolean2 = tokenQueue1.isEmpty();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+    }
+
+    @Test
+    public void test2439() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2439");
+        org.jsoup.safety.Whitelist whitelist2 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.String str3 = org.jsoup.Jsoup.clean("", "#document#document=\"#document#document\"", whitelist2);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated object is null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+    }
+
+    @Test
+    public void test2440() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2440");
+        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean2 = tag1.isData();
+        boolean boolean3 = tag1.requiresSpecificParent();
+        boolean boolean4 = tag1.isBlock();
+        org.jsoup.parser.Tag tag6 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean7 = tag6.isData();
+        boolean boolean8 = tag6.requiresSpecificParent();
+        boolean boolean9 = tag6.isBlock();
+        boolean boolean10 = tag1.canContain(tag6);
+        java.lang.String str11 = tag6.getName();
+        org.jsoup.nodes.Attributes attributes13 = new org.jsoup.nodes.Attributes();
+        int int14 = attributes13.size();
+        java.lang.String str15 = attributes13.html();
+        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor16 = attributes13.iterator();
+        attributes13.put("#comment", "");
+        boolean boolean21 = attributes13.hasKey("org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
+        org.jsoup.nodes.Element element22 = new org.jsoup.nodes.Element(tag6, "<?#document#documentdocument>", attributes13);
+        org.junit.Assert.assertNotNull(tag1);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertNotNull(tag6);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str11, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertNotNull(attributeItor16);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+    }
+
+    @Test
+    public void test2441() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2441");
+        org.jsoup.safety.Whitelist whitelist1 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            boolean boolean2 = org.jsoup.Jsoup.isValid(" &lt;!--#root--&gt;=\" class=&amp;quot;hi!&amp;quot;\"", whitelist1);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated object is null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+    }
+
+    @Test
+    public void test2442() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2442");
+        org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
+        boolean boolean3 = document2.hasText();
+        boolean boolean4 = document2.hasText();
+        org.jsoup.nodes.Document document6 = new org.jsoup.nodes.Document("");
+        boolean boolean7 = document6.hasText();
+        java.lang.String str8 = document6.nodeName();
+        java.lang.String[] strArray10 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet11 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean12 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet11, strArray10);
+        org.jsoup.nodes.Element element13 = document6.classNames((java.util.Set<java.lang.String>) strSet11);
+        org.jsoup.nodes.Element element14 = document2.classNames((java.util.Set<java.lang.String>) strSet11);
+        java.util.Set<java.lang.String> strSet15 = document2.classNames();
+        org.jsoup.nodes.Element element17 = document2.getElementById("#document#document");
+        java.lang.String str18 = document2.id();
+        java.lang.String str19 = document2.nodeName();
+        java.lang.String str21 = document2.attr("[]");
+        org.jsoup.nodes.Element element23 = document2.prependText("#document");
+        boolean boolean25 = element23.hasAttr("");
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.select.Elements elements26 = org.jsoup.select.Selector.select("hi! #document body", element23);
+            org.junit.Assert.fail("Expected exception of type org.jsoup.select.Selector.SelectorParseException; message: Could not parse query hi! #document body");
+        } catch (org.jsoup.select.Selector.SelectorParseException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "#document" + "'", str8, "#document");
+        org.junit.Assert.assertNotNull(strArray10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertNotNull(strSet15);
+        org.junit.Assert.assertNull(element17);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "#document" + "'", str19, "#document");
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+    }
+
+    @Test
+    public void test2443() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2443");
+        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
+        java.lang.String str3 = document2.tagName();
+        java.lang.String str4 = document2.toString();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#root" + "'", str3, "#root");
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "<html> \n<head> \n</head> \n<body>\n  #root  \n</body>\n</html>" + "'", str4, "<html> \n<head> \n</head> \n<body>\n  #root  \n</body>\n</html>");
+    }
+
+    @Test
+    public void test2444() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2444");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        boolean boolean3 = document1.hasText();
+        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
+        boolean boolean6 = document5.hasText();
+        java.lang.String str7 = document5.nodeName();
+        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
+        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
+        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
+        org.jsoup.nodes.Element element15 = document1.appendText("hi!");
+        document1.setBaseUri("");
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.nodes.Element element19 = document1.child((int) (byte) -1);
+            org.junit.Assert.fail("Expected exception of type java.lang.ArrayIndexOutOfBoundsException; message: null");
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertNotNull(element15);
+    }
+
+    @Test
+    public void test2445() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2445");
+        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("#root");
+        boolean boolean2 = tag1.isInline();
+        boolean boolean3 = tag1.isInline();
+        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
+        boolean boolean6 = document5.hasText();
+        java.lang.String str7 = document5.nodeName();
+        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
+        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
+        org.jsoup.nodes.Element element14 = element12.addClass("#document");
+        org.jsoup.nodes.Document document16 = new org.jsoup.nodes.Document("");
+        boolean boolean17 = document16.hasText();
+        boolean boolean18 = document16.hasText();
+        org.jsoup.nodes.Document document20 = new org.jsoup.nodes.Document("");
+        boolean boolean21 = document20.hasText();
+        java.lang.String str22 = document20.nodeName();
+        java.lang.String[] strArray24 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet25 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean26 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet25, strArray24);
+        org.jsoup.nodes.Element element27 = document20.classNames((java.util.Set<java.lang.String>) strSet25);
+        org.jsoup.nodes.Element element28 = document16.classNames((java.util.Set<java.lang.String>) strSet25);
+        java.util.Set<java.lang.String> strSet29 = document16.classNames();
+        org.jsoup.nodes.Element element30 = element12.classNames(strSet29);
+        boolean boolean31 = tag1.equals((java.lang.Object) element12);
+        org.jsoup.nodes.TextNode textNode34 = org.jsoup.nodes.TextNode.createFromEncoded("#data", "#root");
+        boolean boolean35 = tag1.equals((java.lang.Object) "#data");
+        boolean boolean36 = tag1.isBlock();
+        org.jsoup.parser.Tag tag38 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean39 = tag38.isData();
+        boolean boolean40 = tag38.requiresSpecificParent();
+        boolean boolean41 = tag38.isBlock();
+        org.jsoup.parser.Tag tag43 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean44 = tag43.isData();
+        boolean boolean45 = tag43.requiresSpecificParent();
+        boolean boolean46 = tag43.isBlock();
+        boolean boolean47 = tag38.canContain(tag43);
+        boolean boolean48 = tag38.isBlock();
+        boolean boolean49 = tag38.isData();
+        java.lang.String str50 = tag38.getName();
+        boolean boolean51 = tag38.requiresSpecificParent();
+        org.jsoup.parser.Tag tag53 = org.jsoup.parser.Tag.valueOf("#root");
+        boolean boolean54 = tag53.isInline();
+        boolean boolean55 = tag38.canContain(tag53);
+        org.jsoup.parser.Tag tag56 = tag53.getImplicitParent();
+        boolean boolean57 = tag1.isValidParent(tag53);
+        org.junit.Assert.assertNotNull(tag1);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + true + "'", boolean2 == true);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "#document" + "'", str22, "#document");
+        org.junit.Assert.assertNotNull(strArray24);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
+        org.junit.Assert.assertNotNull(element27);
+        org.junit.Assert.assertNotNull(element28);
+        org.junit.Assert.assertNotNull(strSet29);
+        org.junit.Assert.assertNotNull(element30);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertNotNull(textNode34);
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
+        org.junit.Assert.assertNotNull(tag38);
+        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
+        org.junit.Assert.assertNotNull(tag43);
+        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
+        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
+        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + true + "'", boolean47 == true);
+        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
+        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
+        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str50, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
+        org.junit.Assert.assertNotNull(tag53);
+        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + true + "'", boolean54 == true);
+        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + true + "'", boolean55 == true);
+        org.junit.Assert.assertNotNull(tag56);
+        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
+    }
+
+    @Test
+    public void test2446() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2446");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document(" class=\"hi!\"");
+        java.lang.String str2 = document1.id();
+        java.lang.String str3 = document1.html();
+        java.lang.String str4 = document1.className();
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "" + "'", str3, "");
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
+    }
+
+    @Test
+    public void test2447() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2447");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("body", "org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.nodes.Element element4 = document2.val("<!--#root-->=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n #root \n&lt;/body&gt;\n&lt;/html&gt;\"");
+        // The following exception was thrown during execution in test generation
+        try {
+            document2.remove();
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated object is null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element4);
+    }
+
+    @Test
+    public void test2448() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2448");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        boolean boolean3 = document1.hasText();
+        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
+        boolean boolean6 = document5.hasText();
+        java.lang.String str7 = document5.nodeName();
+        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
+        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
+        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
+        org.jsoup.nodes.Document document15 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element element18 = document15.attr("hi!", "#root");
+        java.lang.String str19 = document15.id();
+        org.jsoup.select.Elements elements20 = document15.children();
+        org.jsoup.nodes.Element element21 = document1.prependChild((org.jsoup.nodes.Node) document15);
+        org.jsoup.nodes.Element element23 = element21.prepend("\n<!--#document-->");
+        org.jsoup.select.Elements elements24 = element23.getAllElements();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "" + "'", str19, "");
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(element21);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertNotNull(elements24);
+    }
+
+    @Test
+    public void test2449() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2449");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements5 = elements3.prepend("");
+        org.jsoup.select.Elements elements7 = elements5.removeAttr("");
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements13 = elements11.prepend("");
+        org.jsoup.select.Elements elements15 = elements13.removeAttr("");
+        boolean boolean16 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements13);
+        java.lang.Object[] objArray17 = elements5.toArray();
+        org.jsoup.select.Elements elements19 = elements5.select("#document#document");
+        org.jsoup.select.Elements elements22 = elements19.attr("#comment", " #comment=\"\"");
+        elements19.clear();
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertNotNull(elements15);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNotNull(objArray17);
+        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray17), "[]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray17), "[]");
+        org.junit.Assert.assertNotNull(elements19);
+        org.junit.Assert.assertNotNull(elements22);
+    }
+
+    @Test
+    public void test2450() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2450");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("\n&lt;!--#root--&gt;", "o");
+        org.junit.Assert.assertNotNull(document2);
+    }
+
+    @Test
+    public void test2451() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2451");
+        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("#root=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n #root \n&lt;/body&gt;\n&lt;/html&gt;\"", "");
+        org.junit.Assert.assertNotNull(document2);
+    }
+
+    @Test
+    public void test2452() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2452");
+        org.jsoup.parser.Tag tag2 = org.jsoup.parser.Tag.valueOf("#root");
+        boolean boolean3 = tag2.isInline();
+        boolean boolean4 = tag2.isInline();
+        org.jsoup.nodes.Document document6 = new org.jsoup.nodes.Document("");
+        boolean boolean7 = document6.hasText();
+        java.lang.String str8 = document6.nodeName();
+        java.lang.String[] strArray10 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet11 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean12 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet11, strArray10);
+        org.jsoup.nodes.Element element13 = document6.classNames((java.util.Set<java.lang.String>) strSet11);
+        org.jsoup.nodes.Element element15 = element13.addClass("#document");
+        org.jsoup.nodes.Document document17 = new org.jsoup.nodes.Document("");
+        boolean boolean18 = document17.hasText();
+        boolean boolean19 = document17.hasText();
+        org.jsoup.nodes.Document document21 = new org.jsoup.nodes.Document("");
+        boolean boolean22 = document21.hasText();
+        java.lang.String str23 = document21.nodeName();
+        java.lang.String[] strArray25 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet26 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean27 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet26, strArray25);
+        org.jsoup.nodes.Element element28 = document21.classNames((java.util.Set<java.lang.String>) strSet26);
+        org.jsoup.nodes.Element element29 = document17.classNames((java.util.Set<java.lang.String>) strSet26);
+        java.util.Set<java.lang.String> strSet30 = document17.classNames();
+        org.jsoup.nodes.Element element31 = element13.classNames(strSet30);
+        boolean boolean32 = tag2.equals((java.lang.Object) element13);
+        org.jsoup.select.Elements elements33 = org.jsoup.select.Selector.select("body", element13);
+        org.jsoup.select.Elements elements35 = elements33.removeClass("");
+        org.jsoup.select.Elements elements37 = elements33.addClass("#declaration");
+        org.jsoup.select.Elements elements38 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements37);
+        org.jsoup.nodes.Document document40 = org.jsoup.nodes.Document.createShell("hi!");
+        org.jsoup.nodes.Document document41 = document40.normalise();
+        org.jsoup.nodes.Element element42 = document41.head();
+        org.jsoup.nodes.Element element45 = document41.attr("org.jsoup.select.Selector$SelectorParseException: ", "[]");
+        java.lang.String str46 = document41.outerHtml();
+        org.jsoup.nodes.Element element47 = document41.body();
+        org.jsoup.nodes.Element element48 = document41.head();
+        org.jsoup.select.Elements elements50 = element48.getElementsByAttribute("#comment");
+        int int51 = elements50.size();
+        boolean boolean52 = elements38.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements50);
+        org.junit.Assert.assertNotNull(tag2);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "#document" + "'", str8, "#document");
+        org.junit.Assert.assertNotNull(strArray10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "#document" + "'", str23, "#document");
+        org.junit.Assert.assertNotNull(strArray25);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
+        org.junit.Assert.assertNotNull(element28);
+        org.junit.Assert.assertNotNull(element29);
+        org.junit.Assert.assertNotNull(strSet30);
+        org.junit.Assert.assertNotNull(element31);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
+        org.junit.Assert.assertNotNull(elements33);
+        org.junit.Assert.assertNotNull(elements35);
+        org.junit.Assert.assertNotNull(elements37);
+        org.junit.Assert.assertNotNull(document40);
+        org.junit.Assert.assertNotNull(document41);
+        org.junit.Assert.assertNotNull(element42);
+        org.junit.Assert.assertNotNull(element45);
+        org.junit.Assert.assertEquals("'" + str46 + "' != '" + "<html>\n<head>\n</head>\n<body>\n</body>\n</html>" + "'", str46, "<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(element47);
+        org.junit.Assert.assertNotNull(element48);
+        org.junit.Assert.assertNotNull(elements50);
+        org.junit.Assert.assertTrue("'" + int51 + "' != '" + 0 + "'", int51 == 0);
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
+    }
+
+    @Test
+    public void test2453() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2453");
+        org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("<html>\n<head>\n</head>\n<body>\n []\n</body>\n</html>", "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
+        java.lang.String str3 = textNode2.toString();
+        java.lang.String str4 = textNode2.text();
+        org.junit.Assert.assertNotNull(textNode2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n []\n&lt;/body&gt;\n&lt;/html&gt;" + "'", str3, "&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n []\n&lt;/body&gt;\n&lt;/html&gt;");
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n []\n&lt;/body&gt;\n&lt;/html&gt;" + "'", str4, "&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n []\n&lt;/body&gt;\n&lt;/html&gt;");
+    }
+
+    @Test
+    public void test2454() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2454");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        java.lang.String str3 = document1.nodeName();
+        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
+        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
+        org.jsoup.nodes.Element element10 = document1.append("#document");
+        org.jsoup.nodes.Element element12 = document1.prepend("#document");
+        java.util.List<org.jsoup.nodes.Node> nodeList13 = element12.childNodes();
+        java.lang.String str14 = element12.nodeName();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
+        org.junit.Assert.assertNotNull(strArray5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(nodeList13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "#document" + "'", str14, "#document");
+    }
+
+    @Test
+    public void test2455() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2455");
+        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("\n<body class=\"hi!\">\n #document\n</body>", "<#root class=\"hi!\">\nhi!\n</#root>\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document2);
+    }
+
+    @Test
+    public void test2456() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2456");
+        org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements6 = elements4.prepend("");
+        org.jsoup.select.Elements elements8 = elements6.removeAttr("");
+        org.jsoup.nodes.Document document10 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements12 = document10.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements14 = elements12.prepend("");
+        org.jsoup.select.Elements elements16 = elements14.removeAttr("");
+        boolean boolean17 = elements6.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements14);
+        org.jsoup.select.Elements elements19 = elements14.wrap("#root");
+        org.jsoup.select.Elements elements20 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements19);
+        org.jsoup.nodes.Document document22 = org.jsoup.nodes.Document.createShell("hi!");
+        boolean boolean23 = elements20.add((org.jsoup.nodes.Element) document22);
+        boolean boolean25 = elements20.hasClass("<html>\n<head>\n</head>\n<body>\n</body>\n</html>\n<head>\n</head>\n<body>\n</body>\n");
+        org.jsoup.select.Elements elements26 = org.jsoup.select.Selector.select("o", (java.lang.Iterable<org.jsoup.nodes.Element>) elements20);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(elements12);
+        org.junit.Assert.assertNotNull(elements14);
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
+        org.junit.Assert.assertNotNull(elements19);
+        org.junit.Assert.assertNotNull(document22);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(elements26);
+    }
+
+    @Test
+    public void test2457() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2457");
+        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("org.jsoup.select.Selector$SelectorParseException: \n<!--#document-->", "#document#documentdocument");
+        org.jsoup.nodes.Document document4 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements6 = document4.getElementsByAttribute("hi!");
+        org.jsoup.nodes.Element element8 = document4.prepend("#document");
+        org.jsoup.nodes.Element element9 = element8.empty();
+        boolean boolean11 = element9.hasClass("<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
+        org.jsoup.nodes.Document document13 = org.jsoup.nodes.Document.createShell("hi!");
+        org.jsoup.nodes.Document document14 = document13.normalise();
+        org.jsoup.nodes.Element element15 = document14.head();
+        org.jsoup.nodes.Element element18 = document14.attr("org.jsoup.select.Selector$SelectorParseException: ", "[]");
+        org.jsoup.nodes.Element element20 = element18.appendElement("#comment");
+        org.jsoup.nodes.Element element21 = element18.parent();
+        boolean boolean22 = element9.equals((java.lang.Object) element18);
+        org.jsoup.nodes.Element element23 = document2.prependChild((org.jsoup.nodes.Node) element18);
+        org.jsoup.nodes.Node node26 = element23.attr("#document#documenthi!", "[<, h, t, m, l, >, \n, <, h, e, a, d, >, \n, <, /, h, e, a, d, >, \n, <, b, o, d, y, >, \n,  , #, r, o, o, t,  , \n, <, /, b, o, d, y, >, \n, <, /, h, t, m, l, >, #, d, o, c, u, m, e, n, t, #, d, o, c, u, m, e, n, t, d, o, c, u, m, e, n, t]");
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(element9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNotNull(document13);
+        org.junit.Assert.assertNotNull(document14);
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertNull(element21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertNotNull(node26);
+    }
+
+    @Test
+    public void test2458() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2458");
+        org.jsoup.safety.Whitelist whitelist1 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            boolean boolean2 = org.jsoup.Jsoup.isValid("o", whitelist1);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated object is null");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+    }
+
+    @Test
+    public void test2459() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2459");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<html> \n <head> \n </head> \n <body>\n   #root  \n </body>\n</html>", "document");
+        org.jsoup.nodes.Element element4 = document2.removeClass(" class=\"hi!\"");
+        java.lang.String str5 = document2.baseUri();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element4);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "document" + "'", str5, "document");
+    }
+
+    @Test
+    public void test2460() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2460");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        java.lang.String str3 = document1.nodeName();
+        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
+        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
+        org.jsoup.nodes.Element element10 = document1.append("#document");
+        org.jsoup.nodes.Element element12 = element10.html("");
+        org.jsoup.select.Elements elements15 = element10.getElementsByAttributeValueNot("#root", "org.jsoup.select.Selector$SelectorParseException: ");
+        java.lang.String str16 = element10.val();
+        java.lang.String str17 = element10.toString();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
+        org.junit.Assert.assertNotNull(strArray5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(elements15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+    }
+
+    @Test
+    public void test2461() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2461");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        java.lang.String str3 = document1.nodeName();
+        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
+        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
+        org.jsoup.nodes.Element element10 = document1.append("#document");
+        org.jsoup.nodes.Element element12 = document1.prepend("#document");
+        org.jsoup.nodes.Attributes attributes13 = element12.attributes();
+        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator14 = attributes13.spliterator();
+        org.jsoup.nodes.Attributes attributes15 = new org.jsoup.nodes.Attributes();
+        int int16 = attributes15.size();
+        java.lang.String str17 = attributes15.html();
+        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor18 = attributes15.iterator();
+        boolean boolean19 = attributes13.equals((java.lang.Object) attributes15);
+        java.util.List<org.jsoup.nodes.Attribute> attributeList20 = attributes15.asList();
+        java.util.List<org.jsoup.nodes.Attribute> attributeList21 = attributes15.asList();
+        java.lang.String str23 = attributes15.get("<?#document#documentdocument>");
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
+        org.junit.Assert.assertNotNull(strArray5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(attributes13);
+        org.junit.Assert.assertNotNull(attributeSpliterator14);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 0 + "'", int16 == 0);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertNotNull(attributeItor18);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(attributeList20);
+        org.junit.Assert.assertNotNull(attributeList21);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "" + "'", str23, "");
+    }
+
+    @Test
+    public void test2462() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2462");
+        org.jsoup.nodes.DataNode dataNode2 = org.jsoup.nodes.DataNode.createFromEncoded("", "<org.jsoup.select.selector$selectorparseexception: hi!=\"#root\">\n</org.jsoup.select.selector$selectorparseexception:>");
+        java.lang.String str3 = dataNode2.getWholeData();
+        org.junit.Assert.assertNotNull(dataNode2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "" + "'", str3, "");
+    }
+
+    @Test
+    public void test2463() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2463");
+        org.jsoup.parser.TokenQueue tokenQueue1 = new org.jsoup.parser.TokenQueue("#document");
+        java.lang.String str2 = tokenQueue1.consumeAttributeKey();
+        java.lang.String str4 = tokenQueue1.consumeTo("#root=\"hi!\"");
+        java.lang.String str5 = tokenQueue1.toString();
+        java.lang.String str7 = tokenQueue1.chompTo("");
+        boolean boolean8 = tokenQueue1.matchesWord();
+        boolean boolean9 = tokenQueue1.isEmpty();
+        java.lang.String str11 = tokenQueue1.chompTo("#document");
+        java.lang.String str12 = tokenQueue1.consumeWord();
+        org.jsoup.nodes.Attributes attributes13 = new org.jsoup.nodes.Attributes();
+        int int14 = attributes13.size();
+        java.lang.String str15 = attributes13.html();
+        java.lang.String str16 = attributes13.html();
+        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator17 = attributes13.spliterator();
+        attributes13.put("\n&lt;!--#root--&gt;", " class=&quot;hi!&quot;");
+        org.jsoup.nodes.TextNode textNode23 = org.jsoup.nodes.TextNode.createFromEncoded("body", "<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
+        java.lang.String str24 = textNode23.nodeName();
+        boolean boolean25 = attributes13.equals((java.lang.Object) textNode23);
+        org.jsoup.nodes.Element[] elementArray26 = new org.jsoup.nodes.Element[] {};
+        org.jsoup.select.Elements elements27 = new org.jsoup.select.Elements(elementArray26);
+        org.jsoup.select.Elements elements28 = new org.jsoup.select.Elements(elementArray26);
+        org.jsoup.select.Elements elements29 = new org.jsoup.select.Elements(elementArray26);
+        org.jsoup.nodes.Document document31 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element element34 = document31.attr("hi!", "#root");
+        org.jsoup.select.Elements elements36 = element34.getElementsByTag("\n<!--#root-->");
+        boolean boolean38 = elements36.hasAttr("\n<!--#root-->");
+        org.jsoup.nodes.Document document40 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements42 = document40.getElementsByAttribute("hi!");
+        java.lang.String str44 = elements42.attr("#root");
+        java.lang.String str45 = elements42.text();
+        org.jsoup.select.Elements elements47 = elements42.eq((int) (short) 10);
+        boolean boolean48 = elements36.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements42);
+        org.jsoup.parser.TokenQueue tokenQueue50 = new org.jsoup.parser.TokenQueue("#document");
+        java.lang.String str51 = tokenQueue50.consumeAttributeKey();
+        java.lang.String str53 = tokenQueue50.consumeTo("#root=\"hi!\"");
+        boolean boolean54 = tokenQueue50.matchesWhitespace();
+        org.jsoup.parser.TokenQueue tokenQueue56 = new org.jsoup.parser.TokenQueue("");
+        boolean boolean58 = tokenQueue56.matchChomp("org.jsoup.select.selector$selectorparseexception:");
+        java.lang.String str59 = tokenQueue56.consumeWord();
+        org.jsoup.parser.TokenQueue tokenQueue61 = new org.jsoup.parser.TokenQueue("");
+        boolean boolean62 = tokenQueue61.isEmpty();
+        java.lang.String[] strArray66 = new java.lang.String[] { " class=\"hi!\"", "#data", "[]" };
+        java.lang.String str67 = tokenQueue61.consumeToAny(strArray66);
+        java.lang.String str68 = tokenQueue56.consumeToAny(strArray66);
+        boolean boolean69 = tokenQueue50.matchesAny(strArray66);
+        java.io.Serializable[] serializableArray70 = elements36.toArray((java.io.Serializable[]) strArray66);
+        java.lang.String[] strArray71 = elements29.toArray(strArray66);
+        boolean boolean72 = attributes13.equals((java.lang.Object) strArray66);
+        java.lang.String str73 = tokenQueue1.consumeToAny(strArray66);
+        org.jsoup.parser.TokenQueue tokenQueue75 = new org.jsoup.parser.TokenQueue("");
+        boolean boolean76 = tokenQueue75.isEmpty();
+        java.lang.String[] strArray80 = new java.lang.String[] { " class=\"hi!\"", "#data", "[]" };
+        java.lang.String str81 = tokenQueue75.consumeToAny(strArray80);
+        java.lang.String str82 = tokenQueue1.consumeToAny(strArray80);
+        boolean boolean84 = tokenQueue1.matchChomp("<html>\n<head>\n</head>\n<body>\n</body>\n</html>\n<head>\n</head>\n<body>\n</body>\n");
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "#document" + "'", str4, "#document");
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "[]" + "'", str5, "[]");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertNotNull(attributeSpliterator17);
+        org.junit.Assert.assertNotNull(textNode23);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "#text" + "'", str24, "#text");
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNotNull(elementArray26);
+        org.junit.Assert.assertNotNull(element34);
+        org.junit.Assert.assertNotNull(elements36);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertNotNull(elements42);
+        org.junit.Assert.assertEquals("'" + str44 + "' != '" + "" + "'", str44, "");
+        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "" + "'", str45, "");
+        org.junit.Assert.assertNotNull(elements47);
+        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
+        org.junit.Assert.assertEquals("'" + str51 + "' != '" + "" + "'", str51, "");
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "#document" + "'", str53, "#document");
+        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertEquals("'" + str59 + "' != '" + "" + "'", str59, "");
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + true + "'", boolean62 == true);
+        org.junit.Assert.assertNotNull(strArray66);
+        org.junit.Assert.assertEquals("'" + str67 + "' != '" + "" + "'", str67, "");
+        org.junit.Assert.assertEquals("'" + str68 + "' != '" + "" + "'", str68, "");
+        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
+        org.junit.Assert.assertNotNull(serializableArray70);
+        org.junit.Assert.assertNotNull(strArray71);
+        org.junit.Assert.assertTrue("'" + boolean72 + "' != '" + false + "'", boolean72 == false);
+        org.junit.Assert.assertEquals("'" + str73 + "' != '" + "" + "'", str73, "");
+        org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + true + "'", boolean76 == true);
+        org.junit.Assert.assertNotNull(strArray80);
+        org.junit.Assert.assertEquals("'" + str81 + "' != '" + "" + "'", str81, "");
+        org.junit.Assert.assertEquals("'" + str82 + "' != '" + "" + "'", str82, "");
+        org.junit.Assert.assertTrue("'" + boolean84 + "' != '" + false + "'", boolean84 == false);
+    }
+
+    @Test
+    public void test2464() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2464");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element element4 = document1.attr("hi!", "#root");
+        org.jsoup.nodes.Attributes attributes5 = document1.attributes();
+        org.jsoup.nodes.Document document6 = document1.normalise();
+        java.lang.String str7 = document1.title();
+        org.jsoup.select.Elements elements9 = document1.getElementsByIndexEquals((int) (short) 0);
+        org.jsoup.select.Elements elements10 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elements9);
+        org.junit.Assert.assertNotNull(element4);
+        org.junit.Assert.assertNotNull(attributes5);
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+        org.junit.Assert.assertNotNull(elements9);
+    }
+
+    @Test
+    public void test2465() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2465");
+        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("# ");
+        org.junit.Assert.assertNotNull(document1);
+    }
+
+    @Test
+    public void test2466() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2466");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        boolean boolean3 = document1.hasText();
+        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
+        boolean boolean6 = document5.hasText();
+        java.lang.String str7 = document5.nodeName();
+        java.lang.String[] strArray9 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet10 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet10, strArray9);
+        org.jsoup.nodes.Element element12 = document5.classNames((java.util.Set<java.lang.String>) strSet10);
+        org.jsoup.nodes.Element element13 = document1.classNames((java.util.Set<java.lang.String>) strSet10);
+        java.lang.String str14 = element13.html();
+        org.jsoup.nodes.Document document16 = new org.jsoup.nodes.Document("");
+        boolean boolean17 = document16.hasText();
+        java.lang.String str18 = document16.nodeName();
+        java.lang.String[] strArray20 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet21 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean22 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet21, strArray20);
+        org.jsoup.nodes.Element element23 = document16.classNames((java.util.Set<java.lang.String>) strSet21);
+        org.jsoup.nodes.Element element24 = element13.classNames((java.util.Set<java.lang.String>) strSet21);
+        org.jsoup.select.Elements elements27 = element24.getElementsByAttributeValue("<?hi!>", "[]");
+        org.jsoup.select.Elements elements29 = element24.getElementsByIndexLessThan((int) (short) 0);
+        java.lang.String str30 = elements29.val();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "#document" + "'", str7, "#document");
+        org.junit.Assert.assertNotNull(strArray9);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "#document" + "'", str18, "#document");
+        org.junit.Assert.assertNotNull(strArray20);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertNotNull(element24);
+        org.junit.Assert.assertNotNull(elements27);
+        org.junit.Assert.assertNotNull(elements29);
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
+    }
+
+    @Test
+    public void test2467() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2467");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        java.lang.String str3 = document1.nodeName();
+        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
+        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
+        java.lang.String str9 = document1.outerHtml();
+        java.lang.String str11 = document1.attr("\n<!--#root-->");
+        java.lang.String str12 = document1.text();
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
+        org.junit.Assert.assertNotNull(strArray5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+    }
+
+    @Test
+    public void test2468() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2468");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#document#document", "#data");
+        org.jsoup.nodes.Element element4 = document2.toggleClass("#document#document");
+        org.jsoup.select.Elements elements6 = document2.getElementsByIndexLessThan((int) (short) 10);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element4);
+        org.junit.Assert.assertNotNull(elements6);
+    }
+
+    @Test
+    public void test2469() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2469");
+        org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("#document#documentdocument", "#document#document=\"#document#document\"", false);
+        java.lang.String str4 = xmlDeclaration3.toString();
+        java.lang.String str5 = xmlDeclaration3.nodeName();
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "<?#document#documentdocument>" + "'", str4, "<?#document#documentdocument>");
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "#declaration" + "'", str5, "#declaration");
+    }
+
+    @Test
+    public void test2470() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2470");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.nodes.Element element5 = document1.prepend("#document");
+        org.jsoup.nodes.Element element6 = element5.empty();
+        org.jsoup.select.Elements elements8 = element5.getElementsByTag("org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.select.Elements elements10 = elements8.removeClass("#root");
+        org.jsoup.select.Elements elements12 = elements8.append("");
+        boolean boolean14 = elements8.hasAttr("#document#document");
+        org.jsoup.select.Elements elements16 = elements8.eq((int) 'a');
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream17 = elements16.stream();
+        org.jsoup.nodes.Document document20 = org.jsoup.Jsoup.parse("#root=\"hi!\"", "body");
+        org.jsoup.nodes.Element element22 = document20.prependElement(" \n<!--#root-->");
+        boolean boolean23 = elements16.add((org.jsoup.nodes.Element) document20);
+        org.jsoup.nodes.Document document26 = org.jsoup.parser.Parser.parse("#root=\"#root=&quot;hi!&quot;\"", "<html>\n<head>\n</head>\n<body>\n #document\n</body>\n</html>");
+        org.jsoup.nodes.Element element27 = document20.prependChild((org.jsoup.nodes.Node) document26);
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertNotNull(element6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(elements10);
+        org.junit.Assert.assertNotNull(elements12);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertNotNull(elementStream17);
+        org.junit.Assert.assertNotNull(document20);
+        org.junit.Assert.assertNotNull(element22);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+        org.junit.Assert.assertNotNull(document26);
+        org.junit.Assert.assertNotNull(element27);
+    }
+
+    @Test
+    public void test2471() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2471");
+        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        java.lang.String str2 = tag1.getName();
+        boolean boolean3 = tag1.canContainBlock();
+        org.jsoup.parser.Tag tag5 = org.jsoup.parser.Tag.valueOf("#declaration");
+        java.lang.String str6 = tag5.toString();
+        boolean boolean7 = tag5.requiresSpecificParent();
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        java.lang.String str13 = elements11.attr("#root");
+        org.jsoup.nodes.Document document15 = new org.jsoup.nodes.Document("");
+        boolean boolean16 = document15.hasText();
+        java.lang.String str17 = document15.nodeName();
+        org.jsoup.select.Elements elements18 = document15.children();
+        org.jsoup.nodes.Element element20 = document15.prependElement("[#, d, o, c, u, m, e, n, t]");
+        int int21 = elements11.lastIndexOf((java.lang.Object) document15);
+        org.jsoup.nodes.Element element22 = document15.parent();
+        org.jsoup.nodes.Element element24 = document15.append("#root=\"hi!\"");
+        boolean boolean25 = tag5.equals((java.lang.Object) document15);
+        boolean boolean26 = tag1.isValidAncestor(tag5);
+        org.jsoup.parser.Tag tag28 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        java.lang.String str29 = tag28.getName();
+        boolean boolean30 = tag28.isInline();
+        boolean boolean31 = tag28.isEmpty();
+        org.jsoup.parser.Tag tag33 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        java.lang.String str34 = tag33.getName();
+        boolean boolean35 = tag33.isInline();
+        boolean boolean36 = tag33.isEmpty();
+        boolean boolean37 = tag33.isEmpty();
+        org.jsoup.nodes.Document document40 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element43 = document40.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        java.lang.String str44 = document40.tagName();
+        java.lang.String str45 = document40.text();
+        boolean boolean46 = document40.isBlock();
+        boolean boolean47 = tag33.equals((java.lang.Object) document40);
+        boolean boolean48 = tag28.isValidParent(tag33);
+        java.lang.String str49 = tag28.toString();
+        boolean boolean50 = tag5.isValidParent(tag28);
+        org.jsoup.nodes.Element element52 = new org.jsoup.nodes.Element(tag5, "#data=\"hi!\"");
+        org.jsoup.nodes.Element element53 = element52.parent();
+        org.junit.Assert.assertNotNull(tag1);
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str2, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
+        org.junit.Assert.assertNotNull(tag5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#declaration" + "'", str6, "#declaration");
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "#document" + "'", str17, "#document");
+        org.junit.Assert.assertNotNull(elements18);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + (-1) + "'", int21 == (-1));
+        org.junit.Assert.assertNull(element22);
+        org.junit.Assert.assertNotNull(element24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(tag28);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str29, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertNotNull(tag33);
+        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str34, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
+        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
+        org.junit.Assert.assertNotNull(document40);
+        org.junit.Assert.assertNotNull(element43);
+        org.junit.Assert.assertEquals("'" + str44 + "' != '" + "#root" + "'", str44, "#root");
+        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "#root" + "'", str45, "#root");
+        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
+        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
+        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
+        org.junit.Assert.assertEquals("'" + str49 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str49, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
+        org.junit.Assert.assertNull(element53);
+    }
+
+    @Test
+    public void test2472() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2472");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.nodes.Element element4 = elements3.first();
+        org.jsoup.select.Elements elements6 = elements3.toggleClass("#document");
+        org.jsoup.nodes.Attribute attribute9 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "hi!");
+        attribute9.setKey("#root");
+        java.lang.String str12 = attribute9.html();
+        attribute9.setKey("#data");
+        int int15 = elements3.lastIndexOf((java.lang.Object) "#data");
+        org.jsoup.nodes.Element element16 = elements3.first();
+        org.jsoup.nodes.Document document18 = new org.jsoup.nodes.Document("");
+        boolean boolean19 = document18.hasText();
+        boolean boolean20 = document18.hasText();
+        org.jsoup.nodes.Document document22 = new org.jsoup.nodes.Document("");
+        boolean boolean23 = document22.hasText();
+        java.lang.String str24 = document22.nodeName();
+        java.lang.String[] strArray26 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet27 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean28 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet27, strArray26);
+        org.jsoup.nodes.Element element29 = document22.classNames((java.util.Set<java.lang.String>) strSet27);
+        org.jsoup.nodes.Element element30 = document18.classNames((java.util.Set<java.lang.String>) strSet27);
+        java.util.Set<java.lang.String> strSet31 = document18.classNames();
+        org.jsoup.nodes.Element element33 = document18.getElementById("#document#document");
+        java.lang.String str34 = document18.id();
+        org.jsoup.parser.Tag tag35 = document18.tag();
+        org.jsoup.nodes.Document document38 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element41 = document38.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        java.lang.String str42 = element41.id();
+        java.util.Set<java.lang.String> strSet43 = element41.classNames();
+        boolean boolean44 = tag35.equals((java.lang.Object) element41);
+        org.jsoup.nodes.Element element46 = element41.appendElement("<?hi!>");
+        org.jsoup.nodes.Element element47 = element46.firstElementSibling();
+        org.jsoup.nodes.Element element49 = element46.toggleClass("document");
+        java.lang.String str50 = element46.data();
+        org.jsoup.select.Elements elements53 = element46.getElementsByAttributeValueEnding("#document#document", "<?>");
+        org.jsoup.nodes.Document document55 = new org.jsoup.nodes.Document("");
+        boolean boolean56 = document55.hasText();
+        java.lang.String str57 = document55.nodeName();
+        java.lang.String str58 = document55.outerHtml();
+        org.jsoup.parser.Tag tag59 = document55.tag();
+        java.util.Set<java.lang.String> strSet60 = document55.classNames();
+        org.jsoup.nodes.Element element61 = element46.classNames(strSet60);
+        boolean boolean62 = elements3.contains((java.lang.Object) element46);
+        java.util.function.UnaryOperator<org.jsoup.nodes.Element> elementUnaryOperator63 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            elements3.replaceAll(elementUnaryOperator63);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNull(element4);
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertNotNull(attribute9);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "#root=\"hi!\"" + "'", str12, "#root=\"hi!\"");
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + (-1) + "'", int15 == (-1));
+        org.junit.Assert.assertNull(element16);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "#document" + "'", str24, "#document");
+        org.junit.Assert.assertNotNull(strArray26);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
+        org.junit.Assert.assertNotNull(element29);
+        org.junit.Assert.assertNotNull(element30);
+        org.junit.Assert.assertNotNull(strSet31);
+        org.junit.Assert.assertNull(element33);
+        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "" + "'", str34, "");
+        org.junit.Assert.assertNotNull(tag35);
+        org.junit.Assert.assertNotNull(document38);
+        org.junit.Assert.assertNotNull(element41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "" + "'", str42, "");
+        org.junit.Assert.assertNotNull(strSet43);
+        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
+        org.junit.Assert.assertNotNull(element46);
+        org.junit.Assert.assertNotNull(element47);
+        org.junit.Assert.assertNotNull(element49);
+        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "" + "'", str50, "");
+        org.junit.Assert.assertNotNull(elements53);
+        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
+        org.junit.Assert.assertEquals("'" + str57 + "' != '" + "#document" + "'", str57, "#document");
+        org.junit.Assert.assertEquals("'" + str58 + "' != '" + "" + "'", str58, "");
+        org.junit.Assert.assertNotNull(tag59);
+        org.junit.Assert.assertNotNull(strSet60);
+        org.junit.Assert.assertNotNull(element61);
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
+    }
+
+    @Test
+    public void test2473() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2473");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        java.lang.String str5 = elements3.attr("#root");
+        org.jsoup.nodes.Document document7 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element[] elementArray8 = new org.jsoup.nodes.Element[] { document7 };
+        java.util.ArrayList<org.jsoup.nodes.Element> elementList9 = new java.util.ArrayList<org.jsoup.nodes.Element>();
+        boolean boolean10 = java.util.Collections.addAll((java.util.Collection<org.jsoup.nodes.Element>) elementList9, elementArray8);
+        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator11 = elementList9.spliterator();
+        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator12 = elementList9.spliterator();
+        boolean boolean13 = elements3.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elementList9);
+        org.jsoup.select.Elements elements14 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elementList9);
+        org.jsoup.select.Elements elements15 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements14);
+        java.lang.String str16 = elements15.html();
+        org.jsoup.nodes.Element element17 = elements15.last();
+        org.jsoup.select.Elements elements19 = elements15.toggleClass("a");
+        org.jsoup.nodes.Comment comment22 = new org.jsoup.nodes.Comment("org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"", "[#, d, o, c, u, m, e, n, t]");
+        java.lang.String str23 = comment22.nodeName();
+        int int24 = elements15.lastIndexOf((java.lang.Object) str23);
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
+        org.junit.Assert.assertNotNull(elementArray8);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertNotNull(elementSpliterator11);
+        org.junit.Assert.assertNotNull(elementSpliterator12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertNotNull(element17);
+        org.junit.Assert.assertNotNull(elements19);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "#comment" + "'", str23, "#comment");
+        org.junit.Assert.assertTrue("'" + int24 + "' != '" + (-1) + "'", int24 == (-1));
+    }
+
+    @Test
+    public void test2474() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2474");
+        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.nodes.Document document3 = org.jsoup.nodes.Document.createShell("hi!");
+        org.jsoup.nodes.Document document4 = document3.normalise();
+        org.jsoup.nodes.Element element5 = document3.head();
+        org.jsoup.nodes.Element element7 = element5.append("<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
+        org.jsoup.nodes.Element element9 = element5.wrap("#text");
+        boolean boolean10 = tag1.equals((java.lang.Object) element9);
+        boolean boolean11 = tag1.preserveWhitespace();
+        org.jsoup.parser.Tag tag13 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean14 = tag13.isData();
+        boolean boolean15 = tag13.requiresSpecificParent();
+        boolean boolean16 = tag13.isBlock();
+        org.jsoup.parser.Tag tag18 = org.jsoup.parser.Tag.valueOf("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean19 = tag18.isData();
+        boolean boolean20 = tag18.requiresSpecificParent();
+        boolean boolean21 = tag18.isBlock();
+        boolean boolean22 = tag13.canContain(tag18);
+        boolean boolean23 = tag13.isBlock();
+        boolean boolean24 = tag13.isData();
+        java.lang.String str25 = tag13.getName();
+        boolean boolean26 = tag13.requiresSpecificParent();
+        org.jsoup.parser.Tag tag28 = org.jsoup.parser.Tag.valueOf("#root");
+        boolean boolean29 = tag28.isInline();
+        boolean boolean30 = tag13.canContain(tag28);
+        org.jsoup.parser.Tag tag31 = tag28.getImplicitParent();
+        org.jsoup.parser.Tag tag32 = tag28.getImplicitParent();
+        boolean boolean33 = tag1.canContain(tag28);
+        boolean boolean34 = tag1.preserveWhitespace();
+        boolean boolean35 = tag1.preserveWhitespace();
+        org.junit.Assert.assertNotNull(tag1);
+        org.junit.Assert.assertNotNull(document3);
+        org.junit.Assert.assertNotNull(document4);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertNotNull(element7);
+        org.junit.Assert.assertNull(element9);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNotNull(tag13);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(tag18);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str25, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(tag28);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + true + "'", boolean29 == true);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
+        org.junit.Assert.assertNotNull(tag31);
+        org.junit.Assert.assertNotNull(tag32);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
+    }
+
+    @Test
+    public void test2475() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2475");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements5 = elements3.val("a");
+        org.jsoup.nodes.Document document7 = new org.jsoup.nodes.Document("");
+        boolean boolean8 = document7.hasText();
+        java.lang.String str9 = document7.nodeName();
+        java.lang.String[] strArray11 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet12 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean13 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet12, strArray11);
+        org.jsoup.nodes.Element element14 = document7.classNames((java.util.Set<java.lang.String>) strSet12);
+        org.jsoup.nodes.Element element16 = document7.append("#document");
+        org.jsoup.nodes.Element element18 = document7.prepend("#document");
+        org.jsoup.nodes.Attributes attributes19 = element18.attributes();
+        org.jsoup.nodes.Element element21 = element18.append("hi!");
+        org.jsoup.nodes.Element element23 = element21.appendText("#root=\"hi!\"");
+        java.lang.String str24 = element21.toString();
+        org.jsoup.nodes.Document document26 = new org.jsoup.nodes.Document("");
+        boolean boolean27 = document26.hasText();
+        java.lang.String str28 = document26.nodeName();
+        java.lang.String str29 = document26.outerHtml();
+        org.jsoup.parser.Tag tag30 = document26.tag();
+        java.util.Set<java.lang.String> strSet31 = document26.classNames();
+        org.jsoup.nodes.Element element32 = element21.classNames(strSet31);
+        int int33 = elements3.lastIndexOf((java.lang.Object) element21);
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "#document" + "'", str9, "#document");
+        org.junit.Assert.assertNotNull(strArray11);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(attributes19);
+        org.junit.Assert.assertNotNull(element21);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "#document#documenthi!#root=&quot;hi!&quot;" + "'", str24, "#document#documenthi!#root=&quot;hi!&quot;");
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "#document" + "'", str28, "#document");
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "" + "'", str29, "");
+        org.junit.Assert.assertNotNull(tag30);
+        org.junit.Assert.assertNotNull(strSet31);
+        org.junit.Assert.assertNotNull(element32);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + (-1) + "'", int33 == (-1));
+    }
+
+    @Test
+    public void test2476() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2476");
+        org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("#document#document", "");
+        attribute2.setValue("org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:");
+        java.lang.String str5 = attribute2.getKey();
+        org.junit.Assert.assertNotNull(attribute2);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "#document#document" + "'", str5, "#document#document");
+    }
+
+    @Test
+    public void test2477() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2477");
+        org.jsoup.nodes.DataNode dataNode2 = org.jsoup.nodes.DataNode.createFromEncoded("#document#documenthi!", "#comment");
+        java.lang.String str3 = dataNode2.nodeName();
+        org.junit.Assert.assertNotNull(dataNode2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#data" + "'", str3, "#data");
+    }
+
+    @Test
+    public void test2478() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2478");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("org.jsoup.select.Selector$SelectorParseException: org.jsoup.select.selector$selectorparseexception:", "#document#document=\"#document#document\"");
+        org.jsoup.parser.Tag tag3 = document2.tag();
+        org.jsoup.nodes.Document document5 = new org.jsoup.nodes.Document("");
+        boolean boolean6 = document5.hasText();
+        boolean boolean7 = document5.hasText();
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        boolean boolean10 = document9.hasText();
+        java.lang.String str11 = document9.nodeName();
+        java.lang.String[] strArray13 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet14 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean15 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet14, strArray13);
+        org.jsoup.nodes.Element element16 = document9.classNames((java.util.Set<java.lang.String>) strSet14);
+        org.jsoup.nodes.Element element17 = document5.classNames((java.util.Set<java.lang.String>) strSet14);
+        java.util.Set<java.lang.String> strSet18 = document5.classNames();
+        org.jsoup.nodes.Element element20 = document5.getElementById("#document#document");
+        java.lang.String str21 = document5.id();
+        org.jsoup.parser.Tag tag22 = document5.tag();
+        org.jsoup.parser.Tag tag24 = org.jsoup.parser.Tag.valueOf("#declaration");
+        java.lang.String str25 = tag24.toString();
+        boolean boolean26 = tag22.isValidParent(tag24);
+        org.jsoup.nodes.Element element28 = new org.jsoup.nodes.Element(tag22, "");
+        java.lang.String str29 = tag22.getName();
+        boolean boolean30 = tag22.isInline();
+        boolean boolean31 = tag3.isValidAncestor(tag22);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(tag3);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "#document" + "'", str11, "#document");
+        org.junit.Assert.assertNotNull(strArray13);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertNotNull(element17);
+        org.junit.Assert.assertNotNull(strSet18);
+        org.junit.Assert.assertNull(element20);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
+        org.junit.Assert.assertNotNull(tag22);
+        org.junit.Assert.assertNotNull(tag24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "#declaration" + "'", str25, "#declaration");
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "#root" + "'", str29, "#root");
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+    }
+
+    @Test
+    public void test2479() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2479");
+        org.jsoup.nodes.Element[] elementArray0 = new org.jsoup.nodes.Element[] {};
+        org.jsoup.select.Elements elements1 = new org.jsoup.select.Elements(elementArray0);
+        org.jsoup.select.Elements elements2 = new org.jsoup.select.Elements(elementArray0);
+        org.jsoup.select.Elements elements3 = new org.jsoup.select.Elements(elementArray0);
+        org.jsoup.select.Elements elements5 = elements3.toggleClass("#document#documentdocument");
+        org.jsoup.select.Elements elements6 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements5);
+        org.jsoup.select.Elements elements8 = elements6.removeAttr("org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
+        org.jsoup.select.Elements elements11 = elements6.attr("<html>\n<head>\n</head>\n<body>\n hi! \n</body>\n</html>", "#root=\"#root=&quot;hi!&quot;\"");
+        org.jsoup.select.Elements elements12 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elements11);
+        org.junit.Assert.assertNotNull(elementArray0);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(elements11);
+    }
+
+    @Test
+    public void test2480() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2480");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        java.lang.String str6 = document2.tagName();
+        org.jsoup.nodes.Element element7 = document2.parent();
+        org.jsoup.nodes.Element element9 = document2.text("#root");
+        org.jsoup.nodes.Element element11 = document2.addClass("# ");
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#root" + "'", str6, "#root");
+        org.junit.Assert.assertNull(element7);
+        org.junit.Assert.assertNotNull(element9);
+        org.junit.Assert.assertNotNull(element11);
+    }
+
+    @Test
+    public void test2481() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2481");
+        org.jsoup.select.Selector.SelectorParseException selectorParseException1 = new org.jsoup.select.Selector.SelectorParseException("<html>\n<head>\n</head>\n<body>\n ocument \n</body>\n</html>");
+    }
+
+    @Test
+    public void test2482() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2482");
+        org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("org.jsoup.select.Selector$SelectorParseException: org.jsoup.select.selector$selectorparseexception:", "#root");
+        java.lang.String str3 = attribute2.toString();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element9 = document6.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        java.lang.String str10 = document6.tagName();
+        org.jsoup.nodes.Element element11 = document6.empty();
+        org.jsoup.select.Elements elements12 = element11.children();
+        boolean boolean13 = attribute2.equals((java.lang.Object) elements12);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.util.ListIterator<org.jsoup.nodes.Element> elementItor15 = elements12.listIterator((int) 'o');
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 111");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(attribute2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"" + "'", str3, "org.jsoup.select.selector$selectorparseexception: org.jsoup.select.selector$selectorparseexception:=\"#root\"");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNotNull(element9);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "#root" + "'", str10, "#root");
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNotNull(elements12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+    }
+
+    @Test
+    public void test2483() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2483");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("#root", "<!--#document-->=\"#document#document\"");
+        org.junit.Assert.assertNotNull(document2);
+    }
+
+    @Test
+    public void test2484() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2484");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        java.lang.String str6 = document2.tagName();
+        org.jsoup.nodes.Element element7 = document2.empty();
+        org.jsoup.select.Elements elements8 = element7.children();
+        java.lang.Object[] objArray9 = elements8.toArray();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#root" + "'", str6, "#root");
+        org.junit.Assert.assertNotNull(element7);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(objArray9);
+        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray9), "[]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray9), "[]");
+    }
+
+    @Test
+    public void test2485() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2485");
+        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
+        org.jsoup.nodes.Document document2 = document1.normalise();
+        org.jsoup.nodes.Element element3 = document1.head();
+        org.jsoup.nodes.Element element5 = element3.append("<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
+        boolean boolean7 = element5.equals((java.lang.Object) "#root=\"hi!\"");
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        boolean boolean10 = document9.hasText();
+        java.lang.String str11 = document9.nodeName();
+        java.lang.String str12 = document9.val();
+        java.lang.String str13 = document9.outerHtml();
+        java.lang.String[] strArray16 = new java.lang.String[] { "\n<!--#document-->", "#data" };
+        java.util.LinkedHashSet<java.lang.String> strSet17 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean18 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet17, strArray16);
+        org.jsoup.nodes.Element element19 = document9.classNames((java.util.Set<java.lang.String>) strSet17);
+        org.jsoup.nodes.Element element20 = element5.classNames((java.util.Set<java.lang.String>) strSet17);
+        org.jsoup.nodes.Element element22 = element20.val("#document");
+        org.jsoup.select.Elements elements24 = element22.getElementsByIndexEquals((int) (byte) -1);
+        org.jsoup.parser.TokenQueue tokenQueue26 = new org.jsoup.parser.TokenQueue("");
+        tokenQueue26.addFirst((java.lang.Character) ' ');
+        boolean boolean29 = tokenQueue26.matchesWord();
+        boolean boolean30 = tokenQueue26.matchesWord();
+        boolean boolean31 = elements24.equals((java.lang.Object) tokenQueue26);
+        java.lang.String str32 = tokenQueue26.consumeAttributeKey();
+        java.lang.String str33 = tokenQueue26.consumeAttributeKey();
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element3);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "#document" + "'", str11, "#document");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertNotNull(strArray16);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + true + "'", boolean18 == true);
+        org.junit.Assert.assertNotNull(element19);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertNotNull(element22);
+        org.junit.Assert.assertNotNull(elements24);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
+        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "" + "'", str33, "");
+    }
+
+    @Test
+    public void test2486() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2486");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements5 = elements3.prepend("");
+        org.jsoup.select.Elements elements7 = elements5.removeAttr("");
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements13 = elements11.prepend("");
+        org.jsoup.select.Elements elements15 = elements13.removeAttr("");
+        boolean boolean16 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements13);
+        org.jsoup.nodes.Document document18 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements20 = document18.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements22 = elements20.prepend("");
+        org.jsoup.select.Elements elements24 = elements22.removeAttr("");
+        org.jsoup.nodes.Document document26 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements28 = document26.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements30 = elements28.prepend("");
+        org.jsoup.select.Elements elements32 = elements30.removeAttr("");
+        boolean boolean33 = elements22.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements30);
+        org.jsoup.select.Elements elements35 = elements30.wrap("#root");
+        boolean boolean36 = elements13.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements35);
+        org.jsoup.select.Elements elements38 = elements13.removeClass("");
+        org.jsoup.select.Elements elements39 = elements13.parents();
+        org.jsoup.nodes.Document document42 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements44 = document42.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements46 = elements44.prepend("");
+        org.jsoup.select.Elements elements48 = elements46.removeAttr("");
+        org.jsoup.nodes.Document document50 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements52 = document50.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements54 = elements52.prepend("");
+        org.jsoup.select.Elements elements56 = elements54.removeAttr("");
+        boolean boolean57 = elements46.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements54);
+        java.lang.Object[] objArray58 = elements46.toArray();
+        org.jsoup.nodes.Document document60 = new org.jsoup.nodes.Document("");
+        boolean boolean61 = document60.hasText();
+        java.lang.String str62 = document60.nodeName();
+        java.lang.String str63 = document60.val();
+        boolean boolean64 = elements46.add((org.jsoup.nodes.Element) document60);
+        org.jsoup.nodes.Element element66 = document60.appendText("#document#documenthi!");
+        org.jsoup.select.Elements elements68 = element66.getElementsByClass("#data");
+        org.jsoup.nodes.Element element70 = element66.prependElement("#document#documentdocument");
+        java.lang.String str71 = element66.toString();
+        // The following exception was thrown during execution in test generation
+        try {
+            elements39.add((int) (short) 10, element66);
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 10, Size: 0");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertNotNull(elements15);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(elements22);
+        org.junit.Assert.assertNotNull(elements24);
+        org.junit.Assert.assertNotNull(elements28);
+        org.junit.Assert.assertNotNull(elements30);
+        org.junit.Assert.assertNotNull(elements32);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
+        org.junit.Assert.assertNotNull(elements35);
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + true + "'", boolean36 == true);
+        org.junit.Assert.assertNotNull(elements38);
+        org.junit.Assert.assertNotNull(elements39);
+        org.junit.Assert.assertNotNull(elements44);
+        org.junit.Assert.assertNotNull(elements46);
+        org.junit.Assert.assertNotNull(elements48);
+        org.junit.Assert.assertNotNull(elements52);
+        org.junit.Assert.assertNotNull(elements54);
+        org.junit.Assert.assertNotNull(elements56);
+        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + true + "'", boolean57 == true);
+        org.junit.Assert.assertNotNull(objArray58);
+        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray58), "[]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray58), "[]");
+        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
+        org.junit.Assert.assertEquals("'" + str62 + "' != '" + "#document" + "'", str62, "#document");
+        org.junit.Assert.assertEquals("'" + str63 + "' != '" + "" + "'", str63, "");
+        org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + true + "'", boolean64 == true);
+        org.junit.Assert.assertNotNull(element66);
+        org.junit.Assert.assertNotNull(elements68);
+        org.junit.Assert.assertNotNull(element70);
+        org.junit.Assert.assertEquals("'" + str71 + "' != '" + "<#document#documentdocument>\n</#document#documentdocument>#document#documenthi!" + "'", str71, "<#document#documentdocument>\n</#document#documentdocument>#document#documenthi!");
+    }
+
+    @Test
+    public void test2487() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2487");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragmentRelaxed("body", "");
+        org.jsoup.select.Elements elements4 = document2.getElementsByIndexEquals((-1));
+        org.jsoup.nodes.Attribute attribute7 = new org.jsoup.nodes.Attribute("body", "org.jsoup.select.Selector$SelectorParseException:");
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        java.lang.String str12 = elements11.val();
+        java.lang.Object obj13 = null;
+        int int14 = elements11.lastIndexOf(obj13);
+        org.jsoup.select.Elements elements16 = elements11.eq((int) '#');
+        boolean boolean18 = elements11.hasAttr("#root");
+        int int20 = elements11.indexOf((java.lang.Object) (byte) 100);
+        java.lang.String str22 = elements11.attr("org.jsoup.select.Selector$SelectorParseException: ");
+        boolean boolean23 = attribute7.equals((java.lang.Object) elements11);
+        boolean boolean24 = elements4.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements11);
+        org.jsoup.nodes.DataNode dataNode27 = new org.jsoup.nodes.DataNode("<?#document#document>", "<?>");
+        org.jsoup.nodes.DataNode dataNode30 = new org.jsoup.nodes.DataNode("<html>\n<head>\n</head>\n<body>\n</body>\n</html>", "hi!=\"#root=&quot;hi!&quot;\"");
+        java.lang.String str31 = dataNode30.toString();
+        java.lang.String str32 = dataNode30.nodeName();
+        java.lang.String str33 = dataNode30.nodeName();
+        org.jsoup.nodes.DataNode dataNode36 = new org.jsoup.nodes.DataNode("#root=\"hi!\"", "\n<!--#root-->");
+        java.lang.String str37 = dataNode36.getWholeData();
+        java.lang.String str38 = dataNode36.nodeName();
+        org.jsoup.nodes.DataNode dataNode41 = org.jsoup.nodes.DataNode.createFromEncoded("org.jsoup.select.selector$selectorparseexception:", "hi!");
+        java.lang.String str42 = dataNode41.getWholeData();
+        java.lang.String str43 = dataNode41.nodeName();
+        org.jsoup.nodes.DataNode dataNode46 = org.jsoup.nodes.DataNode.createFromEncoded("[]", "#document#documentdocument");
+        java.lang.String str47 = dataNode46.toString();
+        java.lang.String str48 = dataNode46.getWholeData();
+        org.jsoup.nodes.DataNode[] dataNodeArray49 = new org.jsoup.nodes.DataNode[] { dataNode27, dataNode30, dataNode36, dataNode41, dataNode46 };
+        org.jsoup.nodes.DataNode[] dataNodeArray50 = elements11.toArray(dataNodeArray49);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + (-1) + "'", int14 == (-1));
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertTrue("'" + int20 + "' != '" + (-1) + "'", int20 == (-1));
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "<html>\n<head>\n</head>\n<body>\n</body>\n</html>" + "'", str31, "<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
+        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "#data" + "'", str32, "#data");
+        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "#data" + "'", str33, "#data");
+        org.junit.Assert.assertEquals("'" + str37 + "' != '" + "#root=\"hi!\"" + "'", str37, "#root=\"hi!\"");
+        org.junit.Assert.assertEquals("'" + str38 + "' != '" + "#data" + "'", str38, "#data");
+        org.junit.Assert.assertNotNull(dataNode41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "org.jsoup.select.selector$selectorparseexception:" + "'", str42, "org.jsoup.select.selector$selectorparseexception:");
+        org.junit.Assert.assertEquals("'" + str43 + "' != '" + "#data" + "'", str43, "#data");
+        org.junit.Assert.assertNotNull(dataNode46);
+        org.junit.Assert.assertEquals("'" + str47 + "' != '" + "[]" + "'", str47, "[]");
+        org.junit.Assert.assertEquals("'" + str48 + "' != '" + "[]" + "'", str48, "[]");
+        org.junit.Assert.assertNotNull(dataNodeArray49);
+        org.junit.Assert.assertNotNull(dataNodeArray50);
+    }
+
+    @Test
+    public void test2488() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2488");
+        org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded(" class=\"hi!\"", "org.jsoup.select.Selector$SelectorParseException: ");
+        java.lang.String str3 = textNode2.toString();
+        java.lang.String str4 = textNode2.baseUri();
+        java.lang.String str5 = textNode2.text();
+        java.lang.String str6 = textNode2.getWholeText();
+        org.junit.Assert.assertNotNull(textNode2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + " class=&quot;hi!&quot;" + "'", str3, " class=&quot;hi!&quot;");
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "org.jsoup.select.Selector$SelectorParseException:" + "'", str4, "org.jsoup.select.Selector$SelectorParseException:");
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + " class=&quot;hi!&quot;" + "'", str5, " class=&quot;hi!&quot;");
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + " class=\"hi!\"" + "'", str6, " class=\"hi!\"");
+    }
+
+    @Test
+    public void test2489() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2489");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        java.lang.String str5 = elements3.attr("#root");
+        org.jsoup.nodes.Document document7 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element[] elementArray8 = new org.jsoup.nodes.Element[] { document7 };
+        java.util.ArrayList<org.jsoup.nodes.Element> elementList9 = new java.util.ArrayList<org.jsoup.nodes.Element>();
+        boolean boolean10 = java.util.Collections.addAll((java.util.Collection<org.jsoup.nodes.Element>) elementList9, elementArray8);
+        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator11 = elementList9.spliterator();
+        java.util.Spliterator<org.jsoup.nodes.Element> elementSpliterator12 = elementList9.spliterator();
+        boolean boolean13 = elements3.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elementList9);
+        org.jsoup.select.Elements elements15 = elements3.prepend("#root=\"hi!\"");
+        org.jsoup.nodes.Document document17 = new org.jsoup.nodes.Document("");
+        org.jsoup.nodes.Element element20 = document17.attr("hi!", "#root");
+        java.lang.String str21 = document17.id();
+        boolean boolean23 = document17.hasAttr("#root");
+        org.jsoup.nodes.Element element25 = document17.addClass("");
+        boolean boolean26 = elements15.add((org.jsoup.nodes.Element) document17);
+        boolean boolean27 = elements15.hasText();
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.select.Elements elements29 = elements15.select(" <?hi!>=\"#data\"");
+            org.junit.Assert.fail("Expected exception of type org.jsoup.select.Selector.SelectorParseException; message: Could not parse query <?hi!>=\"#data\"");
+        } catch (org.jsoup.select.Selector.SelectorParseException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
+        org.junit.Assert.assertNotNull(elementArray8);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertNotNull(elementSpliterator11);
+        org.junit.Assert.assertNotNull(elementSpliterator12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(elements15);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertNotNull(element25);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+    }
+
+    @Test
+    public void test2490() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2490");
+        org.jsoup.nodes.Document document2 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements6 = elements4.prepend("");
+        org.jsoup.select.Elements elements8 = elements6.removeAttr("");
+        org.jsoup.nodes.Document document10 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements12 = document10.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements14 = elements12.prepend("");
+        org.jsoup.select.Elements elements16 = elements14.removeAttr("");
+        boolean boolean17 = elements6.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements14);
+        java.lang.Object[] objArray18 = elements6.toArray();
+        org.jsoup.select.Elements elements20 = elements6.select("#document#document");
+        org.jsoup.select.Elements elements21 = org.jsoup.select.Selector.select("hi!", (java.lang.Iterable<org.jsoup.nodes.Element>) elements6);
+        org.jsoup.select.Elements elements24 = elements6.attr("", "");
+        java.lang.String str25 = elements6.outerHtml();
+        java.util.Iterator<org.jsoup.nodes.Element> elementItor26 = elements6.iterator();
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(elements12);
+        org.junit.Assert.assertNotNull(elements14);
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
+        org.junit.Assert.assertNotNull(objArray18);
+        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray18), "[]");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray18), "[]");
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(elements21);
+        org.junit.Assert.assertNotNull(elements24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
+        org.junit.Assert.assertNotNull(elementItor26);
+    }
+
+    @Test
+    public void test2491() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2491");
+        org.jsoup.select.Selector.SelectorParseException selectorParseException1 = new org.jsoup.select.Selector.SelectorParseException("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.jsoup.select.Selector.SelectorParseException selectorParseException3 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        java.lang.Throwable[] throwableArray4 = selectorParseException3.getSuppressed();
+        org.jsoup.select.Selector.SelectorParseException selectorParseException6 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
+        selectorParseException3.addSuppressed((java.lang.Throwable) selectorParseException6);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException9 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        java.lang.Throwable[] throwableArray10 = selectorParseException9.getSuppressed();
+        org.jsoup.select.Selector.SelectorParseException selectorParseException12 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
+        selectorParseException9.addSuppressed((java.lang.Throwable) selectorParseException12);
+        selectorParseException3.addSuppressed((java.lang.Throwable) selectorParseException9);
+        java.lang.Throwable[] throwableArray15 = selectorParseException3.getSuppressed();
+        selectorParseException1.addSuppressed((java.lang.Throwable) selectorParseException3);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException18 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        java.lang.Throwable[] throwableArray19 = selectorParseException18.getSuppressed();
+        selectorParseException1.addSuppressed((java.lang.Throwable) selectorParseException18);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException22 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
+        org.jsoup.select.Selector.SelectorParseException selectorParseException24 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        java.lang.Throwable[] throwableArray25 = selectorParseException24.getSuppressed();
+        selectorParseException22.addSuppressed((java.lang.Throwable) selectorParseException24);
+        selectorParseException1.addSuppressed((java.lang.Throwable) selectorParseException24);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException29 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        org.jsoup.select.Selector.SelectorParseException selectorParseException31 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        java.lang.Throwable[] throwableArray32 = selectorParseException31.getSuppressed();
+        org.jsoup.select.Selector.SelectorParseException selectorParseException34 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
+        selectorParseException31.addSuppressed((java.lang.Throwable) selectorParseException34);
+        selectorParseException29.addSuppressed((java.lang.Throwable) selectorParseException34);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException38 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        selectorParseException34.addSuppressed((java.lang.Throwable) selectorParseException38);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException41 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        selectorParseException38.addSuppressed((java.lang.Throwable) selectorParseException41);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException44 = new org.jsoup.select.Selector.SelectorParseException("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.jsoup.select.Selector.SelectorParseException selectorParseException46 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        java.lang.Throwable[] throwableArray47 = selectorParseException46.getSuppressed();
+        org.jsoup.select.Selector.SelectorParseException selectorParseException49 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
+        selectorParseException46.addSuppressed((java.lang.Throwable) selectorParseException49);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException52 = new org.jsoup.select.Selector.SelectorParseException("org.jsoup.select.selector$selectorparseexception:");
+        java.lang.Throwable[] throwableArray53 = selectorParseException52.getSuppressed();
+        org.jsoup.select.Selector.SelectorParseException selectorParseException55 = new org.jsoup.select.Selector.SelectorParseException("\n<!--#document-->");
+        selectorParseException52.addSuppressed((java.lang.Throwable) selectorParseException55);
+        selectorParseException46.addSuppressed((java.lang.Throwable) selectorParseException52);
+        java.lang.Throwable[] throwableArray58 = selectorParseException46.getSuppressed();
+        selectorParseException44.addSuppressed((java.lang.Throwable) selectorParseException46);
+        selectorParseException41.addSuppressed((java.lang.Throwable) selectorParseException46);
+        org.jsoup.select.Selector.SelectorParseException selectorParseException62 = new org.jsoup.select.Selector.SelectorParseException("\n&lt;!--#root--&gt;");
+        selectorParseException46.addSuppressed((java.lang.Throwable) selectorParseException62);
+        selectorParseException1.addSuppressed((java.lang.Throwable) selectorParseException46);
+        org.junit.Assert.assertNotNull(throwableArray4);
+        org.junit.Assert.assertNotNull(throwableArray10);
+        org.junit.Assert.assertNotNull(throwableArray15);
+        org.junit.Assert.assertNotNull(throwableArray19);
+        org.junit.Assert.assertNotNull(throwableArray25);
+        org.junit.Assert.assertNotNull(throwableArray32);
+        org.junit.Assert.assertNotNull(throwableArray47);
+        org.junit.Assert.assertNotNull(throwableArray53);
+        org.junit.Assert.assertNotNull(throwableArray58);
+    }
+
+    @Test
+    public void test2492() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2492");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.jsoup.select.Elements elements8 = element5.getElementsByAttributeValueContaining("org.jsoup.select.selector$selectorparseexception:", "#document#documenthi!#root=&quot;hi!&quot;");
+        org.jsoup.select.Elements elements10 = elements8.eq(100);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(elements10);
+    }
+
+    @Test
+    public void test2493() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2493");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        java.lang.String str3 = document1.nodeName();
+        java.lang.String[] strArray5 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet6 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean7 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet6, strArray5);
+        org.jsoup.nodes.Element element8 = document1.classNames((java.util.Set<java.lang.String>) strSet6);
+        org.jsoup.nodes.Element element10 = element8.addClass("#document");
+        java.lang.String str11 = element10.html();
+        org.jsoup.nodes.Element element13 = element10.appendElement("#document");
+        java.lang.String str14 = element13.html();
+        org.jsoup.select.Elements elements17 = element13.getElementsByAttributeValueStarting("#root=\"hi!\"", "[#, d, o, c, u, m, e, n, t]");
+        java.lang.String str18 = element13.text();
+        org.jsoup.select.Elements elements21 = element13.getElementsByAttributeValueStarting("<html> \n <head> \n </head> \n <body>\n   #root  \n </body>\n</html>", "\n&lt;!--#root--&gt;");
+        org.jsoup.nodes.Document document24 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>", "");
+        org.jsoup.select.Elements elements26 = document24.getElementsByIndexGreaterThan(2);
+        boolean boolean27 = elements21.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements26);
+        int int28 = elements26.size();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.util.ListIterator<org.jsoup.nodes.Element> elementItor30 = elements26.listIterator((int) 'a');
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 97");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#document" + "'", str3, "#document");
+        org.junit.Assert.assertNotNull(strArray5);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
+        org.junit.Assert.assertNotNull(elements17);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+        org.junit.Assert.assertNotNull(elements21);
+        org.junit.Assert.assertNotNull(document24);
+        org.junit.Assert.assertNotNull(elements26);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertTrue("'" + int28 + "' != '" + 0 + "'", int28 == 0);
+    }
+
+    @Test
+    public void test2494() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2494");
+        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("hi!");
+        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi!", "hi!");
+        org.jsoup.nodes.Attributes attributes5 = document1.attributes();
+        org.jsoup.nodes.Element element6 = document1.head();
+        org.jsoup.select.Elements elements8 = document1.getElementsByAttribute("<?#document#document>");
+        java.lang.String str9 = elements8.outerHtml();
+        org.jsoup.select.Elements elements11 = elements8.prepend("#data");
+        org.jsoup.nodes.Document document15 = org.jsoup.parser.Parser.parse("#root", "");
+        java.lang.String str16 = document15.outerHtml();
+        org.jsoup.nodes.Element element18 = document15.append("<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.jsoup.select.Elements elements20 = document15.getElementsByIndexEquals(1);
+        org.jsoup.nodes.Element element21 = document15.body();
+        org.jsoup.select.Elements elements23 = document15.getElementsByIndexGreaterThan((int) (byte) 0);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.nodes.Element element24 = elements8.set((int) '#', (org.jsoup.nodes.Element) document15);
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 35, Size: 0");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(attributes5);
+        org.junit.Assert.assertNotNull(element6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(document15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>" + "'", str16, "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(element21);
+        org.junit.Assert.assertNotNull(elements23);
+    }
+
+    @Test
+    public void test2495() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2495");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements5 = elements3.prepend("");
+        org.jsoup.select.Elements elements7 = elements5.removeAttr("");
+        org.jsoup.nodes.Document document9 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements11 = document9.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements13 = elements11.prepend("");
+        org.jsoup.select.Elements elements15 = elements13.removeAttr("");
+        boolean boolean16 = elements5.containsAll((java.util.Collection<org.jsoup.nodes.Element>) elements13);
+        org.jsoup.select.Elements elements18 = elements5.prepend("hi!");
+        org.jsoup.select.Elements elements20 = elements5.select("org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.select.Elements elements22 = elements20.eq((int) (byte) 0);
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertNotNull(elements15);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNotNull(elements18);
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(elements22);
+    }
+
+    @Test
+    public void test2496() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2496");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.nodes.Element element5 = document2.attr("#root", "<html>\n<head>\n</head>\n<body>\n #root \n</body>\n</html>");
+        java.lang.String str6 = element5.id();
+        org.jsoup.select.Elements elements8 = element5.getElementsByIndexEquals((int) (short) 1);
+        org.jsoup.select.Elements elements9 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elements8);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertNotNull(elements8);
+    }
+
+    @Test
+    public void test2497() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2497");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        org.jsoup.select.Elements elements5 = elements3.prepend("");
+        elements5.clear();
+        int int8 = elements5.indexOf((java.lang.Object) "org.jsoup.select.Selector$SelectorParseException: ");
+        org.jsoup.select.Elements elements10 = elements5.append("#document");
+        java.util.Iterator<org.jsoup.nodes.Element> elementItor11 = elements5.iterator();
+        org.jsoup.nodes.Document document13 = org.jsoup.Jsoup.parseBodyFragment(" class=\"hi!\"");
+        boolean boolean14 = elements5.add((org.jsoup.nodes.Element) document13);
+        org.jsoup.nodes.Element element15 = elements5.first();
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + (-1) + "'", int8 == (-1));
+        org.junit.Assert.assertNotNull(elements10);
+        org.junit.Assert.assertNotNull(elementItor11);
+        org.junit.Assert.assertNotNull(document13);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
+        org.junit.Assert.assertNotNull(element15);
+    }
+
+    @Test
+    public void test2498() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2498");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        boolean boolean2 = document1.hasText();
+        org.jsoup.nodes.Element element4 = document1.addClass("\n<!--#document-->");
+        boolean boolean6 = element4.hasAttr("<#root hi!=\"#root\">\n</#root>");
+        org.jsoup.select.Elements elements9 = element4.getElementsByAttributeValueStarting("#comment", "org.jsoup.select.Selector$SelectorParseException: org.jsoup.select.selector$selectorparseexception:");
+        org.jsoup.nodes.Element element11 = element4.prependText(" ");
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertNotNull(element4);
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNotNull(elements9);
+        org.junit.Assert.assertNotNull(element11);
+    }
+
+    @Test
+    public void test2499() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2499");
+        org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("#root", "\n<!--#root-->");
+        org.jsoup.select.Elements elements4 = org.jsoup.select.Selector.select("#declaration", (org.jsoup.nodes.Element) document3);
+        org.jsoup.nodes.Element element5 = document3.body();
+        org.jsoup.nodes.Document document7 = new org.jsoup.nodes.Document("");
+        boolean boolean8 = document7.hasText();
+        java.lang.String str9 = document7.nodeName();
+        java.lang.String[] strArray11 = new java.lang.String[] { "hi!" };
+        java.util.LinkedHashSet<java.lang.String> strSet12 = new java.util.LinkedHashSet<java.lang.String>();
+        boolean boolean13 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strSet12, strArray11);
+        org.jsoup.nodes.Element element14 = document7.classNames((java.util.Set<java.lang.String>) strSet12);
+        org.jsoup.nodes.Element element16 = document7.append("#document");
+        org.jsoup.nodes.Element element18 = document7.prepend("#document");
+        org.jsoup.select.Elements elements19 = document7.parents();
+        org.jsoup.nodes.Element element20 = element5.appendChild((org.jsoup.nodes.Node) document7);
+        org.jsoup.select.Elements elements22 = document7.getElementsByAttribute("#data");
+        org.jsoup.select.Elements elements23 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements22);
+        org.jsoup.select.Elements elements25 = elements23.toggleClass("hi!=\"#root\"");
+        org.junit.Assert.assertNotNull(document3);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "#document" + "'", str9, "#document");
+        org.junit.Assert.assertNotNull(strArray11);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(elements19);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertNotNull(elements22);
+        org.junit.Assert.assertNotNull(elements25);
+    }
+
+    @Test
+    public void test2500() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest4.test2500");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements3 = document1.getElementsByAttribute("hi!");
+        boolean boolean5 = document1.hasClass("");
+        java.lang.String str6 = document1.nodeName();
+        java.lang.String str7 = document1.toString();
+        org.jsoup.nodes.Document document8 = document1.normalise();
+        org.jsoup.nodes.Element element9 = document8.body();
+        java.lang.String str10 = element9.toString();
+        org.junit.Assert.assertNotNull(elements3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "#document" + "'", str6, "#document");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+        org.junit.Assert.assertNotNull(document8);
+        org.junit.Assert.assertNotNull(element9);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "\n<body>\n</body>" + "'", str10, "\n<body>\n</body>");
     }
 }
 

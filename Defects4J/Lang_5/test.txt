@@ -1,1 +1,2 @@
-org.apache.commons.lang3.LocaleUtilsTest.testLang865
+org.apache.commons.lang3.EvosuiteLocaleUtils_ESTest.test04
+org.apache.commons.lang3.EvosuiteLocaleUtils_ESTest.test11

@@ -956,5 +956,27 @@ public class ErrorTest0 {
         // during test generation this statement threw an exception of type java.lang.NullPointerException in error
         org.jsoup.nodes.Element element8 = element5.lastElementSibling();
     }
+
+    @Test
+    public void test70() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "ErrorTest0.test70");
+        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("&lt;?#root=&quot;&amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt;&quot;&gt;", "<html>\n<head>\n</head>\n<body> #root\n</body>\n</html>");
+        org.jsoup.nodes.Element element4 = document2.appendElement("#root=&quot;&quot;");
+        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
+        org.jsoup.select.Elements elements5 = document2.siblingElements();
+    }
+
+    @Test
+    public void test71() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "ErrorTest0.test71");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#root", "");
+        org.jsoup.select.Elements elements4 = document2.getElementsByClass("<html>\n<head>\n</head>\n<body>\n #root\n</body>\n</html>");
+        org.jsoup.nodes.Element element6 = document2.html("[<, !, <, h, t, m, l, >, \n, <, h, e, a, d, >, \n, <, /, h, e, a, d, >, \n, <, b, o, d, y, >, \n, <, /, b, o, d, y, >, \n, <, /, h, t, m, l, >, h, i, !, >]");
+        java.lang.String str8 = element6.absUrl("<html>\n<head>\n</head>\n<body>\n</body>\n</html>hi!");
+        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
+        org.jsoup.nodes.Node node9 = element6.nextSibling();
+    }
 }
 

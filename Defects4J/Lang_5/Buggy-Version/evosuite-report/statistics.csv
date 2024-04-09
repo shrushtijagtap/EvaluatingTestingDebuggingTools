@@ -1,2 +1,2 @@
 TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
-org.apache.commons.lang3.LocaleUtils,LINE;BRANCH;EXCEPTION;WEAKMUTATION;OUTPUT;METHOD;METHODNOEXCEPTION;CBRANCH,0.7160209760273972,393,247
+org.apache.commons.lang3.LocaleUtils,BRANCH,1.0,65,48

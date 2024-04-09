@@ -14,6 +14,937 @@ public class RandoopRegressionTest2 {
         if (debug)
             System.out.format("%n%s%n", "RandoopRegressionTest2.test1001");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.select.Elements elements4 = document2.getAllElements();
+        org.jsoup.select.Elements elements6 = elements4.prepend("");
+        org.jsoup.nodes.Document document10 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str11 = document10.outerHtml();
+        org.jsoup.nodes.Document document14 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node15 = document14.parentNode;
+        java.lang.String str16 = document14.title();
+        org.jsoup.nodes.Element element18 = document14.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element19 = document10.appendChild((org.jsoup.nodes.Node) document14);
+        org.jsoup.nodes.Element element20 = document14.nextElementSibling();
+        org.jsoup.select.Elements elements21 = document14.siblingElements();
+        org.jsoup.nodes.Element element22 = elements4.set(1, (org.jsoup.nodes.Element) document14);
+        org.jsoup.nodes.Element element24 = document14.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
+        java.lang.String str25 = document14.val();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertNotNull(document10);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str11, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document14);
+        org.junit.Assert.assertNull(node15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(element19);
+        org.junit.Assert.assertNull(element20);
+        org.junit.Assert.assertNotNull(elements21);
+        org.junit.Assert.assertNotNull(element22);
+        org.junit.Assert.assertNotNull(element24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
+    }
+
+    @Test
+    public void test1002() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1002");
+        org.jsoup.nodes.Evaluator.AttributeWithValueContaining attributeWithValueContaining2 = new org.jsoup.nodes.Evaluator.AttributeWithValueContaining("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>", "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        attributeWithValueContaining2.value = "#document";
+        org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot7 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("<html> <head> </head> <body> hi! </body> </html> <html> <head> </head> <body> hi! </body> </html>  <html> <head> </head> <body> hi! </body> </html>", "<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Document document10 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str11 = document10.outerHtml();
+        boolean boolean12 = attributeWithValueNot7.matches((org.jsoup.nodes.Element) document10);
+        boolean boolean13 = document10.hasText();
+        boolean boolean14 = attributeWithValueContaining2.matches((org.jsoup.nodes.Element) document10);
+        org.jsoup.nodes.Element element16 = document10.val("");
+        org.junit.Assert.assertNotNull(document10);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str11, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(element16);
+    }
+
+    @Test
+    public void test1003() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1003");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
+        int int6 = elements5.size();
+        org.jsoup.select.Elements elements8 = elements5.toggleClass("#document");
+        java.lang.String str10 = elements5.attr("");
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 4 + "'", int6 == 4);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+    }
+
+    @Test
+    public void test1004() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1004");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
+        java.lang.String str6 = document2.text();
+        org.jsoup.nodes.Element element8 = document2.text("");
+        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node12 = document11.parentNode;
+        org.jsoup.select.Elements elements13 = document11.getAllElements();
+        org.jsoup.nodes.Element element15 = document11.createElement("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.select.Elements elements16 = element15.getAllElements();
+        org.jsoup.nodes.Element element17 = document2.appendChild((org.jsoup.nodes.Node) element15);
+        org.jsoup.select.Elements elements20 = document2.getElementsByAttributeValueNot("hi", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
+        java.lang.String str21 = document2.tagName();
+        org.jsoup.nodes.Document document24 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str25 = document24.outerHtml();
+        org.jsoup.nodes.Document document28 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node29 = document28.parentNode;
+        java.lang.String str30 = document28.title();
+        org.jsoup.nodes.Element element32 = document28.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element33 = document24.appendChild((org.jsoup.nodes.Node) document28);
+        java.util.Set<java.lang.String> strSet34 = document28.classNames();
+        org.jsoup.nodes.Element element35 = document2.classNames(strSet34);
+        org.jsoup.nodes.Node node36 = null;
+        org.jsoup.nodes.DataNode dataNode39 = new org.jsoup.nodes.DataNode("hi", "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        java.lang.String str40 = dataNode39.toString();
+        // The following exception was thrown during execution in test generation
+        try {
+            document2.replaceChild(node36, (org.jsoup.nodes.Node) dataNode39);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "hi!" + "'", str6, "hi!");
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(document11);
+        org.junit.Assert.assertNull(node12);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertNotNull(element17);
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "#root" + "'", str21, "#root");
+        org.junit.Assert.assertNotNull(document24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str25, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document28);
+        org.junit.Assert.assertNull(node29);
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
+        org.junit.Assert.assertNotNull(element32);
+        org.junit.Assert.assertNotNull(element33);
+        org.junit.Assert.assertNotNull(strSet34);
+        org.junit.Assert.assertNotNull(element35);
+        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "hi" + "'", str40, "hi");
+    }
+
+    @Test
+    public void test1005() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1005");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream6 = elements5.stream();
+        org.jsoup.select.Elements elements8 = elements5.addClass("hi");
+        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node12 = document11.parentNode;
+        org.jsoup.select.Elements elements14 = document11.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.select.Elements elements16 = elements14.val("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        java.lang.String str18 = elements14.attr(" hi=\"\"");
+        boolean boolean19 = elements8.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements14);
+        org.jsoup.nodes.Evaluator.IndexGreaterThan indexGreaterThan22 = new org.jsoup.nodes.Evaluator.IndexGreaterThan((int) ' ');
+        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan24 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
+        org.jsoup.nodes.Document document27 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node28 = document27.parentNode;
+        org.jsoup.select.Elements elements30 = document27.getElementsByIndexLessThan((int) 'a');
+        boolean boolean31 = indexLessThan24.matches((org.jsoup.nodes.Element) document27);
+        org.jsoup.nodes.Element element33 = document27.prepend("<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
+        boolean boolean34 = indexGreaterThan22.matches((org.jsoup.nodes.Element) document27);
+        org.jsoup.nodes.Document document37 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node38 = document37.parentNode;
+        java.lang.String str39 = document37.title();
+        org.jsoup.nodes.Attributes attributes40 = document37.attributes();
+        org.jsoup.nodes.Document document43 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node44 = document43.parentNode;
+        org.jsoup.select.Elements elements46 = document43.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.nodes.Element element47 = document37.prependChild((org.jsoup.nodes.Node) document43);
+        java.lang.String str48 = document43.baseUri();
+        org.jsoup.nodes.Document document51 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str52 = document51.outerHtml();
+        org.jsoup.nodes.Document document55 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node56 = document55.parentNode;
+        java.lang.String str57 = document55.title();
+        org.jsoup.nodes.Element element59 = document55.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element60 = document51.appendChild((org.jsoup.nodes.Node) document55);
+        org.jsoup.nodes.Attributes attributes61 = document55.attributes();
+        document43.addChild((org.jsoup.nodes.Node) document55);
+        org.jsoup.nodes.Element element64 = document55.wrap("<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        org.jsoup.select.Elements elements65 = element64.getAllElements();
+        org.jsoup.nodes.Element element67 = element64.prepend("<!---->=\"\"");
+        java.util.List<org.jsoup.nodes.Node> nodeList68 = element64.childNodes;
+        org.jsoup.nodes.Document document71 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str72 = document71.outerHtml();
+        org.jsoup.select.Elements elements73 = document71.getAllElements();
+        java.lang.String str74 = document71.data();
+        org.jsoup.nodes.Element element76 = document71.text("");
+        org.jsoup.select.Elements elements78 = element76.getElementsByIndexLessThan((int) (byte) -1);
+        org.jsoup.nodes.Element element79 = element64.prependChild((org.jsoup.nodes.Node) element76);
+        org.jsoup.nodes.Element element81 = element76.toggleClass("");
+        java.lang.String str82 = element76.data();
+        org.jsoup.select.Elements elements83 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) indexGreaterThan22, element76);
+        org.jsoup.nodes.Element element86 = element76.attr("<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "<html>\n    <head>\n    </head>\n    <body>\n     &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n    </body>\n   </html>\n<head>\n    </head>\n    <body>\n     &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n    </body>\n\n&lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;");
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.nodes.Element element87 = elements8.set(33, element86);
+            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 33, Size: 4");
+        } catch (java.lang.IndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elementStream6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(document11);
+        org.junit.Assert.assertNull(node12);
+        org.junit.Assert.assertNotNull(elements14);
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(document27);
+        org.junit.Assert.assertNull(node28);
+        org.junit.Assert.assertNotNull(elements30);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertNotNull(element33);
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(document37);
+        org.junit.Assert.assertNull(node38);
+        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "" + "'", str39, "");
+        org.junit.Assert.assertNotNull(attributes40);
+        org.junit.Assert.assertNotNull(document43);
+        org.junit.Assert.assertNull(node44);
+        org.junit.Assert.assertNotNull(elements46);
+        org.junit.Assert.assertNotNull(element47);
+        org.junit.Assert.assertEquals("'" + str48 + "' != '" + "hi!" + "'", str48, "hi!");
+        org.junit.Assert.assertNotNull(document51);
+        org.junit.Assert.assertEquals("'" + str52 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str52, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document55);
+        org.junit.Assert.assertNull(node56);
+        org.junit.Assert.assertEquals("'" + str57 + "' != '" + "" + "'", str57, "");
+        org.junit.Assert.assertNotNull(element59);
+        org.junit.Assert.assertNotNull(element60);
+        org.junit.Assert.assertNotNull(attributes61);
+        org.junit.Assert.assertNotNull(element64);
+        org.junit.Assert.assertNotNull(elements65);
+        org.junit.Assert.assertNotNull(element67);
+        org.junit.Assert.assertNotNull(nodeList68);
+        org.junit.Assert.assertNotNull(document71);
+        org.junit.Assert.assertEquals("'" + str72 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str72, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(elements73);
+        org.junit.Assert.assertEquals("'" + str74 + "' != '" + "" + "'", str74, "");
+        org.junit.Assert.assertNotNull(element76);
+        org.junit.Assert.assertNotNull(elements78);
+        org.junit.Assert.assertNotNull(element79);
+        org.junit.Assert.assertNotNull(element81);
+        org.junit.Assert.assertEquals("'" + str82 + "' != '" + "" + "'", str82, "");
+        org.junit.Assert.assertNotNull(elements83);
+        org.junit.Assert.assertNotNull(element86);
+    }
+
+    @Test
+    public void test1006() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1006");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node7 = document6.parentNode;
+        java.lang.String str8 = document6.title();
+        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
+        org.jsoup.parser.Tag tag12 = element11.tag();
+        boolean boolean13 = tag12.isInline();
+        boolean boolean14 = tag12.isInline();
+        java.lang.String str15 = tag12.toString();
+        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node19 = document18.parentNode;
+        java.lang.String str20 = document18.title();
+        org.jsoup.nodes.Element element22 = document18.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        java.lang.String str23 = document18.val();
+        boolean boolean24 = tag12.equals((java.lang.Object) str23);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNull(node7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNotNull(tag12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "#root" + "'", str15, "#root");
+        org.junit.Assert.assertNotNull(document18);
+        org.junit.Assert.assertNull(node19);
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
+        org.junit.Assert.assertNotNull(element22);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "" + "'", str23, "");
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+    }
+
+    @Test
+    public void test1007() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1007");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("<?head>", "<?head>");
+        org.junit.Assert.assertNotNull(document2);
+    }
+
+    @Test
+    public void test1008() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1008");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node7 = document6.parentNode;
+        java.lang.String str8 = document6.title();
+        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
+        org.jsoup.nodes.Element element12 = document6.head();
+        java.lang.String str13 = element12.id();
+        org.jsoup.select.Elements elements16 = element12.getElementsByAttributeValueNot("\n<!---->", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        java.util.Iterator<org.jsoup.nodes.Element> elementItor17 = elements16.iterator();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNull(node7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertNotNull(elements16);
+        org.junit.Assert.assertNotNull(elementItor17);
+    }
+
+    @Test
+    public void test1009() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1009");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node7 = document6.parentNode;
+        java.lang.String str8 = document6.title();
+        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
+        org.jsoup.nodes.Element element12 = document6.nextElementSibling();
+        org.jsoup.select.Elements elements13 = document6.siblingElements();
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream14 = elements13.stream();
+        org.jsoup.nodes.Document document17 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node18 = document17.parentNode;
+        org.jsoup.select.Elements elements20 = document17.getElementsByIndexLessThan((int) 'a');
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream21 = elements20.stream();
+        org.jsoup.select.Elements elements23 = elements20.addClass("hi");
+        java.lang.String str24 = elements23.html();
+        boolean boolean25 = elements13.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements23);
+        java.lang.String str26 = elements13.text();
+        org.jsoup.select.Elements elements28 = elements13.toggleClass("<html> <head> </head> <body> hi! </body> </html> <html> <head> </head> <body> hi! </body> </html>  <html> <head> </head> <body> hi! </body> </html>");
+        java.lang.String str29 = elements13.html();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNull(node7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNull(element12);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertNotNull(elementStream14);
+        org.junit.Assert.assertNotNull(document17);
+        org.junit.Assert.assertNull(node18);
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(elementStream21);
+        org.junit.Assert.assertNotNull(elements23);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!" + "'", str24, "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "hi! <html> <head> </head> <body> hi! </body> </html>" + "'", str26, "hi! <html> <head> </head> <body> hi! </body> </html>");
+        org.junit.Assert.assertNotNull(elements28);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "<head>\n</head>\n<body> hi!\n</body>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>" + "'", str29, "<head>\n</head>\n<body> hi!\n</body>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>");
+    }
+
+    @Test
+    public void test1010() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1010");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node7 = document6.parentNode;
+        java.lang.String str8 = document6.title();
+        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
+        org.jsoup.nodes.Document document14 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node15 = document14.parentNode;
+        java.lang.String str16 = document14.title();
+        org.jsoup.nodes.Attributes attributes17 = document14.attributes();
+        org.jsoup.nodes.Document document20 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node21 = document20.parentNode;
+        org.jsoup.select.Elements elements23 = document20.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.nodes.Element element24 = document14.prependChild((org.jsoup.nodes.Node) document20);
+        org.jsoup.select.Elements elements26 = document14.select("hi");
+        org.jsoup.nodes.Element element27 = document6.appendChild((org.jsoup.nodes.Node) document14);
+        org.jsoup.nodes.Document document30 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!", "<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
+        org.jsoup.nodes.Element[] elementArray31 = new org.jsoup.nodes.Element[] { document6, document30 };
+        org.jsoup.select.Elements elements32 = new org.jsoup.select.Elements(elementArray31);
+        org.jsoup.select.Elements elements33 = new org.jsoup.select.Elements(elementArray31);
+        org.jsoup.nodes.Element element34 = elements33.last();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNull(node7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNotNull(document14);
+        org.junit.Assert.assertNull(node15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertNotNull(attributes17);
+        org.junit.Assert.assertNotNull(document20);
+        org.junit.Assert.assertNull(node21);
+        org.junit.Assert.assertNotNull(elements23);
+        org.junit.Assert.assertNotNull(element24);
+        org.junit.Assert.assertNotNull(elements26);
+        org.junit.Assert.assertNotNull(element27);
+        org.junit.Assert.assertNotNull(document30);
+        org.junit.Assert.assertNotNull(elementArray31);
+        org.junit.Assert.assertNotNull(element34);
+    }
+
+    @Test
+    public void test1011() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1011");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream6 = elements5.stream();
+        org.jsoup.select.Elements elements8 = elements5.addClass("hi");
+        java.lang.String str9 = elements8.html();
+        java.lang.String str10 = elements8.text();
+        boolean boolean11 = elements8.hasText();
+        java.lang.String str12 = elements8.text();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elementStream6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!" + "'", str9, "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "hi! hi!  hi!" + "'", str10, "hi! hi!  hi!");
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "hi! hi!  hi!" + "'", str12, "hi! hi!  hi!");
+    }
+
+    @Test
+    public void test1012() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1012");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node7 = document6.parentNode;
+        java.lang.String str8 = document6.title();
+        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
+        org.jsoup.nodes.Element element12 = document6.head();
+        org.jsoup.nodes.Attributes attributes13 = element12.attributes;
+        org.jsoup.nodes.Element element15 = element12.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
+        org.jsoup.nodes.Node node17 = element12.removeAttr("!\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Document document20 = org.jsoup.parser.Parser.parseBodyFragment("hi! <html> <head> </head> <body> hi! </body> </html>", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
+        // The following exception was thrown during execution in test generation
+        try {
+            node17.setParentNode((org.jsoup.nodes.Node) document20);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.lang.NotImplementedException; message: Cannot (yet) move nodes in tree");
+        } catch (org.apache.commons.lang.NotImplementedException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNull(node7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(attributes13);
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertNotNull(node17);
+        org.junit.Assert.assertNotNull(document20);
+    }
+
+    @Test
+    public void test1013() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1013");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.select.Elements elements7 = elements5.val("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream8 = elements5.stream();
+        org.jsoup.select.Elements elements10 = elements5.prepend("hi");
+        java.lang.Object obj11 = null;
+        boolean boolean12 = elements5.equals(obj11);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertNotNull(elementStream8);
+        org.junit.Assert.assertNotNull(elements10);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+    }
+
+    @Test
+    public void test1014() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1014");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        java.lang.String str4 = document2.title();
+        org.jsoup.nodes.Attributes attributes5 = document2.attributes();
+        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node9 = document8.parentNode;
+        org.jsoup.select.Elements elements11 = document8.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.nodes.Element element12 = document2.prependChild((org.jsoup.nodes.Node) document8);
+        java.util.List<org.jsoup.nodes.Node> nodeList13 = document2.childNodes;
+        org.jsoup.select.Elements elements15 = document2.getElementsByTag("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.select.Elements elements17 = document2.select("#document");
+        org.jsoup.select.Elements elements19 = elements17.eq((int) 'i');
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
+        org.junit.Assert.assertNotNull(attributes5);
+        org.junit.Assert.assertNotNull(document8);
+        org.junit.Assert.assertNull(node9);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(nodeList13);
+        org.junit.Assert.assertNotNull(elements15);
+        org.junit.Assert.assertNotNull(elements17);
+        org.junit.Assert.assertNotNull(elements19);
+    }
+
+    @Test
+    public void test1015() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1015");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        java.lang.String str4 = document2.title();
+        org.jsoup.nodes.Attributes attributes5 = document2.attributes();
+        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node9 = document8.parentNode;
+        org.jsoup.select.Elements elements11 = document8.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.nodes.Element element12 = document2.prependChild((org.jsoup.nodes.Node) document8);
+        java.util.List<org.jsoup.nodes.Node> nodeList13 = document2.childNodes;
+        org.jsoup.select.Elements elements15 = document2.getElementsByTag("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str19 = document18.outerHtml();
+        org.jsoup.nodes.Document document22 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node23 = document22.parentNode;
+        java.lang.String str24 = document22.title();
+        org.jsoup.nodes.Element element26 = document22.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element27 = document18.appendChild((org.jsoup.nodes.Node) document22);
+        org.jsoup.nodes.Attributes attributes28 = document22.attributes();
+        java.lang.String str29 = document22.title();
+        int int30 = elements15.lastIndexOf((java.lang.Object) document22);
+        org.jsoup.nodes.Element element32 = document22.appendText("<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        org.jsoup.select.Elements elements34 = element32.getElementsByClass("\n<!---->");
+        org.jsoup.select.Elements elements36 = element32.getElementsByTag("#document");
+        org.jsoup.nodes.Element element38 = element32.appendElement("<!---->");
+        org.jsoup.nodes.Document document41 = org.jsoup.parser.Parser.parseBodyFragment("hi! <html> <head> </head> <body> hi! </body> </html>", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
+        org.jsoup.select.Elements elements44 = document41.getElementsByAttributeValueEnding("<html>\n<head>\n <title> !</title>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", " hi=\"\"");
+        org.jsoup.nodes.Document document47 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node48 = document47.parentNode;
+        org.jsoup.select.Elements elements50 = document47.getElementsByIndexLessThan((int) 'a');
+        java.lang.String str51 = document47.text();
+        org.jsoup.nodes.Element element53 = document47.text("");
+        org.jsoup.nodes.Document document56 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node57 = document56.parentNode;
+        org.jsoup.select.Elements elements58 = document56.getAllElements();
+        org.jsoup.nodes.Element element60 = document56.createElement("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.select.Elements elements61 = element60.getAllElements();
+        org.jsoup.nodes.Element element62 = document47.appendChild((org.jsoup.nodes.Node) element60);
+        org.jsoup.select.Elements elements65 = document47.getElementsByAttributeValueNot("hi", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
+        org.jsoup.nodes.Element element67 = document47.appendElement("hi!");
+        java.lang.String str68 = document47.outerHtml();
+        // The following exception was thrown during execution in test generation
+        try {
+            element32.replaceChild((org.jsoup.nodes.Node) document41, (org.jsoup.nodes.Node) document47);
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated expression is false");
+        } catch (java.lang.IllegalArgumentException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
+        org.junit.Assert.assertNotNull(attributes5);
+        org.junit.Assert.assertNotNull(document8);
+        org.junit.Assert.assertNull(node9);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(nodeList13);
+        org.junit.Assert.assertNotNull(elements15);
+        org.junit.Assert.assertNotNull(document18);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str19, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document22);
+        org.junit.Assert.assertNull(node23);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
+        org.junit.Assert.assertNotNull(element26);
+        org.junit.Assert.assertNotNull(element27);
+        org.junit.Assert.assertNotNull(attributes28);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "" + "'", str29, "");
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + (-1) + "'", int30 == (-1));
+        org.junit.Assert.assertNotNull(element32);
+        org.junit.Assert.assertNotNull(elements34);
+        org.junit.Assert.assertNotNull(elements36);
+        org.junit.Assert.assertNotNull(element38);
+        org.junit.Assert.assertNotNull(document41);
+        org.junit.Assert.assertNotNull(elements44);
+        org.junit.Assert.assertNotNull(document47);
+        org.junit.Assert.assertNull(node48);
+        org.junit.Assert.assertNotNull(elements50);
+        org.junit.Assert.assertEquals("'" + str51 + "' != '" + "hi!" + "'", str51, "hi!");
+        org.junit.Assert.assertNotNull(element53);
+        org.junit.Assert.assertNotNull(document56);
+        org.junit.Assert.assertNull(node57);
+        org.junit.Assert.assertNotNull(elements58);
+        org.junit.Assert.assertNotNull(element60);
+        org.junit.Assert.assertNotNull(elements61);
+        org.junit.Assert.assertNotNull(element62);
+        org.junit.Assert.assertNotNull(elements65);
+        org.junit.Assert.assertNotNull(element67);
+        org.junit.Assert.assertEquals("'" + str68 + "' != '" + "<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>><hi!>\n</hi!>" + "'", str68, "<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>><hi!>\n</hi!>");
+    }
+
+    @Test
+    public void test1016() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1016");
+        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
+        boolean boolean2 = tag1.isEmpty();
+        boolean boolean3 = tag1.preserveWhitespace();
+        org.jsoup.nodes.Document document6 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "hi");
+        boolean boolean7 = tag1.equals((java.lang.Object) "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        boolean boolean8 = tag1.isInline();
+        boolean boolean9 = tag1.isEmpty();
+        org.junit.Assert.assertNotNull(tag1);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + false + "'", boolean3 == false);
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+    }
+
+    @Test
+    public void test1017() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1017");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.select.Elements elements7 = elements5.val("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.select.Elements elements9 = elements7.append("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        java.lang.String str11 = elements9.attr("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        elements9.clear();
+        org.jsoup.select.Elements elements13 = new org.jsoup.select.Elements((java.util.List<org.jsoup.nodes.Element>) elements9);
+        org.jsoup.nodes.Element element14 = elements9.first();
+        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan16 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
+        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node20 = document19.parentNode;
+        org.jsoup.select.Elements elements22 = document19.getElementsByIndexLessThan((int) 'a');
+        boolean boolean23 = indexLessThan16.matches((org.jsoup.nodes.Element) document19);
+        org.jsoup.nodes.Document document26 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node27 = document26.parentNode;
+        org.jsoup.select.Elements elements28 = document26.getAllElements();
+        org.jsoup.select.Elements elements29 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) indexLessThan16, (org.jsoup.nodes.Element) document26);
+        org.jsoup.nodes.Element element30 = document26.body();
+        int int31 = elements9.indexOf((java.lang.Object) document26);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.select.Elements elements33 = document26.select("<html>\n  <head>\n  </head>\n  <body>\n   &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n  </body>\n </html>");
+            org.junit.Assert.fail("Expected exception of type org.jsoup.select.Selector.SelectorParseException; message: Could not parse query <html>?  <head>?  </head>?  <body>?   &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;?  </body>? </html>");
+        } catch (org.jsoup.select.Selector.SelectorParseException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertNotNull(elements9);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertNull(element14);
+        org.junit.Assert.assertNotNull(document19);
+        org.junit.Assert.assertNull(node20);
+        org.junit.Assert.assertNotNull(elements22);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertNotNull(document26);
+        org.junit.Assert.assertNull(node27);
+        org.junit.Assert.assertNotNull(elements28);
+        org.junit.Assert.assertNotNull(elements29);
+        org.junit.Assert.assertNotNull(element30);
+        org.junit.Assert.assertTrue("'" + int31 + "' != '" + (-1) + "'", int31 == (-1));
+    }
+
+    @Test
+    public void test1018() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1018");
+        org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
+        org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str6 = document5.outerHtml();
+        org.jsoup.nodes.Document document9 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node10 = document9.parentNode;
+        java.lang.String str11 = document9.title();
+        org.jsoup.nodes.Element element13 = document9.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element14 = document5.appendChild((org.jsoup.nodes.Node) document9);
+        org.jsoup.nodes.Element element15 = document9.head();
+        org.jsoup.nodes.Evaluator.Tag tag17 = new org.jsoup.nodes.Evaluator.Tag("#document");
+        org.jsoup.nodes.Document document20 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str21 = document20.outerHtml();
+        org.jsoup.nodes.Document document24 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node25 = document24.parentNode;
+        java.lang.String str26 = document24.title();
+        org.jsoup.nodes.Element element28 = document24.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element29 = document20.appendChild((org.jsoup.nodes.Node) document24);
+        org.jsoup.nodes.Element element30 = document24.head();
+        java.lang.String str31 = element30.id();
+        boolean boolean32 = tag17.matches(element30);
+        java.lang.String str33 = element30.baseUri();
+        element15.parentNode = element30;
+        boolean boolean35 = attributeWithValue2.matches(element30);
+        // The following exception was thrown during execution in test generation
+        try {
+            org.jsoup.select.Elements elements37 = element30.select("hi=\"\" hi!hi=\"\"hi=\"\"hi=\"\" hi=\"\" hi!hi=\"\"hi=\"\" hi=\"\" hi!hi=\"\"");
+            org.junit.Assert.fail("Expected exception of type org.jsoup.select.Selector.SelectorParseException; message: Could not parse query hi=\"\" hi!hi=\"\"hi=\"\"hi=\"\" hi=\"\" hi!hi=\"\"hi=\"\" hi=\"\" hi!hi=\"\"");
+        } catch (org.jsoup.select.Selector.SelectorParseException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(document5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str6, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document9);
+        org.junit.Assert.assertNull(node10);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertNotNull(document20);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str21, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document24);
+        org.junit.Assert.assertNull(node25);
+        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "" + "'", str26, "");
+        org.junit.Assert.assertNotNull(element28);
+        org.junit.Assert.assertNotNull(element29);
+        org.junit.Assert.assertNotNull(element30);
+        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "" + "'", str31, "");
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
+        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "hi!" + "'", str33, "hi!");
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
+    }
+
+    @Test
+    public void test1019() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1019");
+        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
+        org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValueStarting("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "head");
+        org.jsoup.select.Elements elements6 = elements4.html("[]");
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream7 = elements6.parallelStream();
+        org.jsoup.nodes.Document document10 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str11 = document10.outerHtml();
+        org.jsoup.nodes.Document document14 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node15 = document14.parentNode;
+        java.lang.String str16 = document14.title();
+        org.jsoup.nodes.Element element18 = document14.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element19 = document10.appendChild((org.jsoup.nodes.Node) document14);
+        org.jsoup.nodes.Element element20 = document14.nextElementSibling();
+        org.jsoup.select.Elements elements21 = document14.siblingElements();
+        boolean boolean23 = elements21.hasClass("\n<!---->");
+        boolean boolean24 = elements6.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements21);
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertNotNull(elements6);
+        org.junit.Assert.assertNotNull(elementStream7);
+        org.junit.Assert.assertNotNull(document10);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str11, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document14);
+        org.junit.Assert.assertNull(node15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(element19);
+        org.junit.Assert.assertNull(element20);
+        org.junit.Assert.assertNotNull(elements21);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+    }
+
+    @Test
+    public void test1020() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1020");
+        org.jsoup.nodes.Document document3 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
+        java.lang.String str4 = document3.baseUri();
+        org.jsoup.nodes.Element element5 = document3.head();
+        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node9 = document8.parentNode;
+        java.lang.String str10 = document8.title();
+        org.jsoup.nodes.Element element12 = document8.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        boolean boolean13 = document3.equals((java.lang.Object) element12);
+        org.jsoup.nodes.Element element15 = document3.removeClass("hi=\"\"");
+        org.jsoup.nodes.Element element17 = document3.text("#text");
+        org.jsoup.select.Elements elements18 = org.jsoup.select.Selector.select("#declaration", (org.jsoup.nodes.Element) document3);
+        org.jsoup.nodes.Element element21 = document3.attr("<html> <head> </head> <body> hi! </body> </html> hi! hi!", "#declaration");
+        org.junit.Assert.assertNotNull(document3);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "hi" + "'", str4, "hi");
+        org.junit.Assert.assertNotNull(element5);
+        org.junit.Assert.assertNotNull(document8);
+        org.junit.Assert.assertNull(node9);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertNotNull(element17);
+        org.junit.Assert.assertNotNull(elements18);
+        org.junit.Assert.assertNotNull(element21);
+    }
+
+    @Test
+    public void test1021() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1021");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node7 = document6.parentNode;
+        java.lang.String str8 = document6.title();
+        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
+        java.lang.String str12 = element11.outerHtml();
+        org.jsoup.select.Elements elements14 = element11.getElementsByIndexEquals((int) (byte) 0);
+        org.jsoup.nodes.Attributes attributes15 = element11.attributes();
+        java.lang.String str16 = attributes15.html();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNull(node7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>" + "'", str12, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
+        org.junit.Assert.assertNotNull(elements14);
+        org.junit.Assert.assertNotNull(attributes15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+    }
+
+    @Test
+    public void test1022() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1022");
+        org.jsoup.nodes.Evaluator.IndexGreaterThan indexGreaterThan1 = new org.jsoup.nodes.Evaluator.IndexGreaterThan((int) ' ');
+        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node7 = document6.parentNode;
+        org.jsoup.select.Elements elements9 = document6.getElementsByIndexLessThan((int) 'a');
+        boolean boolean10 = indexLessThan3.matches((org.jsoup.nodes.Element) document6);
+        org.jsoup.nodes.Element element12 = document6.prepend("<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
+        boolean boolean13 = indexGreaterThan1.matches((org.jsoup.nodes.Element) document6);
+        org.jsoup.nodes.Document document16 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node17 = document16.parentNode;
+        java.lang.String str18 = document16.title();
+        org.jsoup.nodes.Attributes attributes19 = document16.attributes();
+        org.jsoup.nodes.Document document22 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node23 = document22.parentNode;
+        org.jsoup.select.Elements elements25 = document22.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.nodes.Element element26 = document16.prependChild((org.jsoup.nodes.Node) document22);
+        java.lang.String str27 = document22.baseUri();
+        org.jsoup.nodes.Document document30 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str31 = document30.outerHtml();
+        org.jsoup.nodes.Document document34 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node35 = document34.parentNode;
+        java.lang.String str36 = document34.title();
+        org.jsoup.nodes.Element element38 = document34.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element39 = document30.appendChild((org.jsoup.nodes.Node) document34);
+        org.jsoup.nodes.Attributes attributes40 = document34.attributes();
+        document22.addChild((org.jsoup.nodes.Node) document34);
+        org.jsoup.nodes.Element element43 = document34.wrap("<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        org.jsoup.select.Elements elements44 = element43.getAllElements();
+        org.jsoup.nodes.Element element46 = element43.prepend("<!---->=\"\"");
+        java.util.List<org.jsoup.nodes.Node> nodeList47 = element43.childNodes;
+        org.jsoup.nodes.Document document50 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str51 = document50.outerHtml();
+        org.jsoup.select.Elements elements52 = document50.getAllElements();
+        java.lang.String str53 = document50.data();
+        org.jsoup.nodes.Element element55 = document50.text("");
+        org.jsoup.select.Elements elements57 = element55.getElementsByIndexLessThan((int) (byte) -1);
+        org.jsoup.nodes.Element element58 = element43.prependChild((org.jsoup.nodes.Node) element55);
+        org.jsoup.nodes.Element element60 = element55.toggleClass("");
+        java.lang.String str61 = element55.data();
+        org.jsoup.select.Elements elements62 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) indexGreaterThan1, element55);
+        org.jsoup.select.Elements elements65 = element55.getElementsByAttributeValueStarting("hi hi  hi", "<html>\n<head>\n #document\n</head>\n<body> hi!#document\n</body>#document\n</html>#document\n<head>\n #document\n</head>\n<body> hi!#document\n</body>#document\n#document\nhi!#document");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNull(node7);
+        org.junit.Assert.assertNotNull(elements9);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertNotNull(document16);
+        org.junit.Assert.assertNull(node17);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+        org.junit.Assert.assertNotNull(attributes19);
+        org.junit.Assert.assertNotNull(document22);
+        org.junit.Assert.assertNull(node23);
+        org.junit.Assert.assertNotNull(elements25);
+        org.junit.Assert.assertNotNull(element26);
+        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "hi!" + "'", str27, "hi!");
+        org.junit.Assert.assertNotNull(document30);
+        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str31, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document34);
+        org.junit.Assert.assertNull(node35);
+        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "" + "'", str36, "");
+        org.junit.Assert.assertNotNull(element38);
+        org.junit.Assert.assertNotNull(element39);
+        org.junit.Assert.assertNotNull(attributes40);
+        org.junit.Assert.assertNotNull(element43);
+        org.junit.Assert.assertNotNull(elements44);
+        org.junit.Assert.assertNotNull(element46);
+        org.junit.Assert.assertNotNull(nodeList47);
+        org.junit.Assert.assertNotNull(document50);
+        org.junit.Assert.assertEquals("'" + str51 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str51, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(elements52);
+        org.junit.Assert.assertEquals("'" + str53 + "' != '" + "" + "'", str53, "");
+        org.junit.Assert.assertNotNull(element55);
+        org.junit.Assert.assertNotNull(elements57);
+        org.junit.Assert.assertNotNull(element58);
+        org.junit.Assert.assertNotNull(element60);
+        org.junit.Assert.assertEquals("'" + str61 + "' != '" + "" + "'", str61, "");
+        org.junit.Assert.assertNotNull(elements62);
+        org.junit.Assert.assertNotNull(elements65);
+    }
+
+    @Test
+    public void test1023() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1023");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
         org.jsoup.nodes.Element element6 = document2.createElement("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
@@ -68,9 +999,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1002() throws Throwable {
+    public void test1024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1002");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1024");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -97,9 +1028,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1003() throws Throwable {
+    public void test1025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1003");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1025");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -149,9 +1080,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1004() throws Throwable {
+    public void test1026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1004");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1026");
         org.jsoup.nodes.Element element0 = null;
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node4 = document3.parentNode;
@@ -206,9 +1137,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1005() throws Throwable {
+    public void test1027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1005");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1027");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -241,9 +1172,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1006() throws Throwable {
+    public void test1028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1006");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1028");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi=\"\"", "#data");
         java.lang.String str5 = document1.outerHtml();
@@ -257,9 +1188,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1007() throws Throwable {
+    public void test1029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1007");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1029");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -285,9 +1216,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1008() throws Throwable {
+    public void test1030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1008");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1030");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -315,9 +1246,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1009() throws Throwable {
+    public void test1031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1009");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1031");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -346,9 +1277,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1010() throws Throwable {
+    public void test1032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1010");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1032");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -376,9 +1307,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1011() throws Throwable {
+    public void test1033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1011");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1033");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>><hi!>\n</hi!>");
         org.jsoup.nodes.Element element2 = document1.empty();
         org.junit.Assert.assertNotNull(document1);
@@ -386,17 +1317,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1012() throws Throwable {
+    public void test1034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1012");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1034");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("\n <!---->", "#declaration");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1013() throws Throwable {
+    public void test1035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1013");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1035");
         org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot2 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("<html> <head> </head> <body> hi! </body> </html> <html> <head> </head> <body> hi! </body> </html>  <html> <head> </head> <body> hi! </body> </html>", "<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -422,9 +1353,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1014() throws Throwable {
+    public void test1036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1014");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1036");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         java.lang.String[] strArray10 = new java.lang.String[] { "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n hi\n&lt;/body&gt;\n&lt;/html&gt;\"", "[ , #, d, o, c, u, m, e, n, t]", "<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>", "#data", "#declaration", "#declaration", "\n&lt;!----&gt;" };
         java.util.LinkedHashSet<java.lang.String> strSet11 = new java.util.LinkedHashSet<java.lang.String>();
@@ -441,9 +1372,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1015() throws Throwable {
+    public void test1037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1015");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1037");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -469,9 +1400,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1016() throws Throwable {
+    public void test1038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1016");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1038");
         org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -547,9 +1478,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1017() throws Throwable {
+    public void test1039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1017");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1039");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("hi!");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -571,9 +1502,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1018() throws Throwable {
+    public void test1040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1018");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1040");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -603,9 +1534,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1019() throws Throwable {
+    public void test1041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1019");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1041");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -647,9 +1578,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1020() throws Throwable {
+    public void test1042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1020");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1042");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("");
         org.jsoup.select.Elements elements3 = document1.getElementsByIndexLessThan((int) (byte) 10);
         org.junit.Assert.assertNotNull(document1);
@@ -657,9 +1588,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1021() throws Throwable {
+    public void test1043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1021");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1043");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -720,9 +1651,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1022() throws Throwable {
+    public void test1044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1022");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1044");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -751,9 +1682,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1023() throws Throwable {
+    public void test1045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1023");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1045");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -790,9 +1721,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1024() throws Throwable {
+    public void test1046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1024");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1046");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -857,9 +1788,71 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1025() throws Throwable {
+    public void test1047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1025");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1047");
+        org.jsoup.nodes.Evaluator.AttributeWithValueStarting attributeWithValueStarting2 = new org.jsoup.nodes.Evaluator.AttributeWithValueStarting("hi", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        attributeWithValueStarting2.value = "hi!";
+        java.lang.String str5 = attributeWithValueStarting2.value;
+        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node9 = document8.parentNode;
+        org.jsoup.select.Elements elements11 = document8.getElementsByIndexLessThan((int) 'a');
+        java.lang.String str12 = document8.text();
+        org.jsoup.nodes.Element element14 = document8.text("");
+        org.jsoup.nodes.Document document17 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str18 = document17.outerHtml();
+        org.jsoup.select.Elements elements19 = document17.getAllElements();
+        boolean boolean20 = element14.equals((java.lang.Object) elements19);
+        boolean boolean21 = attributeWithValueStarting2.matches(element14);
+        org.jsoup.nodes.Document document24 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str25 = document24.outerHtml();
+        org.jsoup.nodes.Document document28 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node29 = document28.parentNode;
+        java.lang.String str30 = document28.title();
+        org.jsoup.nodes.Element element32 = document28.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element33 = document24.appendChild((org.jsoup.nodes.Node) document28);
+        org.jsoup.nodes.Element element34 = document28.head();
+        boolean boolean35 = attributeWithValueStarting2.matches(element34);
+        org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding38 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
+        org.jsoup.nodes.Document document41 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str42 = document41.outerHtml();
+        document41.setBaseUri("hi");
+        boolean boolean45 = attributeWithValueEnding38.matches((org.jsoup.nodes.Element) document41);
+        org.jsoup.nodes.Element element47 = document41.prependText("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.select.Elements elements49 = element47.getElementsByIndexGreaterThan((int) (short) 100);
+        boolean boolean50 = attributeWithValueStarting2.matches(element47);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "hi!" + "'", str5, "hi!");
+        org.junit.Assert.assertNotNull(document8);
+        org.junit.Assert.assertNull(node9);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "hi!" + "'", str12, "hi!");
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertNotNull(document17);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str18, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(elements19);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertNotNull(document24);
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str25, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document28);
+        org.junit.Assert.assertNull(node29);
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "" + "'", str30, "");
+        org.junit.Assert.assertNotNull(element32);
+        org.junit.Assert.assertNotNull(element33);
+        org.junit.Assert.assertNotNull(element34);
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
+        org.junit.Assert.assertNotNull(document41);
+        org.junit.Assert.assertEquals("'" + str42 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str42, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
+        org.junit.Assert.assertNotNull(element47);
+        org.junit.Assert.assertNotNull(elements49);
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
+    }
+
+    @Test
+    public void test1048() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1048");
         org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -916,9 +1909,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1026() throws Throwable {
+    public void test1049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1026");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1049");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -970,9 +1963,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1027() throws Throwable {
+    public void test1050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1027");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1050");
         org.jsoup.nodes.Evaluator.Tag tag2 = new org.jsoup.nodes.Evaluator.Tag("#document");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan4 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document7 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -1007,9 +2000,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1028() throws Throwable {
+    public void test1051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1028");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1051");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -1053,9 +2046,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1029() throws Throwable {
+    public void test1052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1029");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1052");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -1081,9 +2074,56 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1030() throws Throwable {
+    public void test1053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1030");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1053");
+        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell(" hi=\"\"");
+        java.lang.String str2 = document1.baseUri();
+        java.lang.String str3 = document1.tagName();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str7 = document6.outerHtml();
+        org.jsoup.nodes.Document document10 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node11 = document10.parentNode;
+        java.lang.String str12 = document10.title();
+        org.jsoup.nodes.Element element14 = document10.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element15 = document6.appendChild((org.jsoup.nodes.Node) document10);
+        org.jsoup.nodes.Element element16 = document10.head();
+        java.lang.String str17 = element16.id();
+        org.jsoup.select.Elements elements20 = element16.getElementsByAttributeValueNot("\n<!---->", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Document document23 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str24 = document23.outerHtml();
+        org.jsoup.select.Elements elements25 = document23.getAllElements();
+        java.lang.String str26 = document23.data();
+        org.jsoup.nodes.Element element28 = document23.text("");
+        element16.addChild((org.jsoup.nodes.Node) document23);
+        java.util.Set<java.lang.String> strSet30 = element16.classNames();
+        org.jsoup.nodes.Element element31 = document1.classNames(strSet30);
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "hi=\"\"" + "'", str2, "hi=\"\"");
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "#root" + "'", str3, "#root");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str7, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document10);
+        org.junit.Assert.assertNull(node11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertNotNull(elements20);
+        org.junit.Assert.assertNotNull(document23);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str24, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(elements25);
+        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "" + "'", str26, "");
+        org.junit.Assert.assertNotNull(element28);
+        org.junit.Assert.assertNotNull(strSet30);
+        org.junit.Assert.assertNotNull(element31);
+    }
+
+    @Test
+    public void test1054() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1054");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!", " hi=\"\"");
         org.jsoup.nodes.Document document4 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
         org.jsoup.select.Elements elements7 = document4.getElementsByAttributeValueStarting("head", "#document");
@@ -1099,9 +2139,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1031() throws Throwable {
+    public void test1055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1031");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1055");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("[!]", "[ , !]");
         org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValueNot("<!---->", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.junit.Assert.assertNotNull(document2);
@@ -1109,9 +2149,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1032() throws Throwable {
+    public void test1056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1032");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1056");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -1158,9 +2198,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1033() throws Throwable {
+    public void test1057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1033");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1057");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -1192,9 +2232,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1034() throws Throwable {
+    public void test1058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1034");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1058");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -1210,9 +2250,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1035() throws Throwable {
+    public void test1059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1035");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1059");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -1273,17 +2313,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1036() throws Throwable {
+    public void test1060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1036");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1060");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<head>\n</head>\n<body> hi!\n</body>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>", "");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1037() throws Throwable {
+    public void test1061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1037");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1061");
         org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -1382,9 +2422,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1038() throws Throwable {
+    public void test1062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1038");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1062");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str3 = document2.baseUri();
         java.lang.String str4 = document2.html();
@@ -1453,9 +2493,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1039() throws Throwable {
+    public void test1063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1039");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1063");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -1496,9 +2536,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1040() throws Throwable {
+    public void test1064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1040");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1064");
         org.jsoup.nodes.Evaluator.IndexGreaterThan indexGreaterThan1 = new org.jsoup.nodes.Evaluator.IndexGreaterThan((int) ' ');
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -1583,9 +2623,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1041() throws Throwable {
+    public void test1065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1041");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1065");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.nodes.Document document4 = document2.normalise();
@@ -1595,9 +2635,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1042() throws Throwable {
+    public void test1066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1042");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1066");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -1698,9 +2738,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1043() throws Throwable {
+    public void test1067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1043");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1067");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -1730,9 +2770,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1044() throws Throwable {
+    public void test1068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1044");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1068");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("head", "hi!");
         java.lang.String str3 = attribute2.getKey();
         org.jsoup.nodes.Evaluator.AllElements allElements4 = new org.jsoup.nodes.Evaluator.AllElements();
@@ -1749,9 +2789,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1045() throws Throwable {
+    public void test1069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1045");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1069");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -1785,9 +2825,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1046() throws Throwable {
+    public void test1070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1046");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1070");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -1813,9 +2853,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1047() throws Throwable {
+    public void test1071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1047");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1071");
         org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -1849,9 +2889,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1048() throws Throwable {
+    public void test1072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1048");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1072");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node4 = document3.parentNode;
         org.jsoup.select.Elements elements6 = document3.getElementsByIndexLessThan((int) 'a');
@@ -1869,9 +2909,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1049() throws Throwable {
+    public void test1073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1049");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1073");
         org.jsoup.nodes.Evaluator.Attribute attribute1 = new org.jsoup.nodes.Evaluator.Attribute("#data");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -1896,9 +2936,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1050() throws Throwable {
+    public void test1074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1050");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1074");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -1917,9 +2957,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1051() throws Throwable {
+    public void test1075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1051");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1075");
         org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -1981,9 +3021,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1052() throws Throwable {
+    public void test1076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1052");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1076");
         org.jsoup.nodes.Evaluator.AllElements allElements0 = new org.jsoup.nodes.Evaluator.AllElements();
         org.jsoup.nodes.Document document3 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         boolean boolean4 = allElements0.matches((org.jsoup.nodes.Element) document3);
@@ -1996,9 +3036,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1053() throws Throwable {
+    public void test1077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1053");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1077");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("");
         document1.baseUri = "";
         org.jsoup.select.Elements elements5 = document1.getElementsByIndexEquals((int) (byte) -1);
@@ -2015,9 +3055,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1054() throws Throwable {
+    public void test1078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1054");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1078");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -2073,9 +3113,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1055() throws Throwable {
+    public void test1079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1055");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1079");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         boolean boolean2 = tag1.canContainBlock();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -2185,9 +3225,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1056() throws Throwable {
+    public void test1080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1056");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1080");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str4 = document3.outerHtml();
         org.jsoup.select.Elements elements5 = document3.getAllElements();
@@ -2232,9 +3272,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1057() throws Throwable {
+    public void test1081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1057");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1081");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         java.lang.String[] strArray10 = new java.lang.String[] { "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n hi\n&lt;/body&gt;\n&lt;/html&gt;\"", "[ , #, d, o, c, u, m, e, n, t]", "<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>", "#data", "#declaration", "#declaration", "\n&lt;!----&gt;" };
         java.util.LinkedHashSet<java.lang.String> strSet11 = new java.util.LinkedHashSet<java.lang.String>();
@@ -2263,9 +3303,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1058() throws Throwable {
+    public void test1082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1058");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1082");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("hi! <html> <head> </head> <body> hi! </body> </html>", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValueEnding("<html>\n<head>\n <title> !</title>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", " hi=\"\"");
         org.jsoup.select.Elements elements7 = elements5.val("!");
@@ -2277,9 +3317,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1059() throws Throwable {
+    public void test1083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1059");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1083");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -2377,9 +3417,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1060() throws Throwable {
+    public void test1084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1060");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1084");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -2425,9 +3465,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1061() throws Throwable {
+    public void test1085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1061");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1085");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("hi! <html> <head> </head> <body> hi! </body> </html>");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValueContaining("<html>\n<head>\n</head>\n<body>\n hi=&quot;&quot;\n</body>\n</html>", "<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>");
         java.util.List<org.jsoup.nodes.Node> nodeList5 = document1.childNodes();
@@ -2437,9 +3477,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1062() throws Throwable {
+    public void test1086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1062");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1086");
         org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "#document");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -2462,9 +3502,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1063() throws Throwable {
+    public void test1087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1063");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1087");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         int int2 = indexLessThan1.index;
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -2523,9 +3563,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1064() throws Throwable {
+    public void test1088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1064");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1088");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         java.lang.String str2 = tag1.toString();
         org.jsoup.nodes.Element element4 = new org.jsoup.nodes.Element(tag1, "hi=\"\"");
@@ -2577,9 +3617,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1065() throws Throwable {
+    public void test1089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1065");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1089");
         org.jsoup.safety.Whitelist whitelist2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -2591,9 +3631,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1066() throws Throwable {
+    public void test1090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1066");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1090");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -2646,9 +3686,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1067() throws Throwable {
+    public void test1091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1067");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1091");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -2688,9 +3728,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1068() throws Throwable {
+    public void test1092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1068");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1092");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -2737,9 +3777,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1069() throws Throwable {
+    public void test1093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1069");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1093");
         org.jsoup.nodes.Document document3 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str4 = document3.baseUri();
         org.jsoup.nodes.Element element5 = document3.head();
@@ -2767,9 +3807,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1070() throws Throwable {
+    public void test1094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1070");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1094");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -2797,9 +3837,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1071() throws Throwable {
+    public void test1095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1071");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1095");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -2817,9 +3857,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1072() throws Throwable {
+    public void test1096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1072");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1096");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValueStarting("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "head");
         java.lang.String str5 = document1.html();
@@ -2828,9 +3868,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1073() throws Throwable {
+    public void test1097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1073");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1097");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -2858,9 +3898,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1074() throws Throwable {
+    public void test1098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1074");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1098");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -2912,9 +3952,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1075() throws Throwable {
+    public void test1099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1075");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1099");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         java.lang.String str2 = document1.title();
         org.junit.Assert.assertNotNull(document1);
@@ -2922,9 +3962,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1076() throws Throwable {
+    public void test1100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1076");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1100");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -2954,9 +3994,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1077() throws Throwable {
+    public void test1101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1077");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1101");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -2977,9 +4017,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1078() throws Throwable {
+    public void test1102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1078");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1102");
         org.jsoup.safety.Whitelist whitelist2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -2991,9 +4031,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1079() throws Throwable {
+    public void test1103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1079");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1103");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -3018,9 +4058,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1080() throws Throwable {
+    public void test1104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1080");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1104");
         org.jsoup.nodes.Evaluator.IndexEquals indexEquals1 = new org.jsoup.nodes.Evaluator.IndexEquals((int) '!');
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -3080,9 +4120,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1081() throws Throwable {
+    public void test1105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1081");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1105");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("hi!", "!", false);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node7 = document6.parentNode;
@@ -3100,9 +4140,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1082() throws Throwable {
+    public void test1106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1082");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1106");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!", "<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
         org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValueStarting("<!---->=\"\"", " hi=\"\"");
         org.jsoup.nodes.Element element6 = document2.parent();
@@ -3119,9 +4159,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1083() throws Throwable {
+    public void test1107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1083");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1107");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -3150,9 +4190,71 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1084() throws Throwable {
+    public void test1108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1084");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1108");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream6 = elements5.stream();
+        org.jsoup.select.Elements elements8 = elements5.addClass("hi");
+        java.lang.String str9 = elements8.html();
+        java.lang.String str10 = elements8.val();
+        org.jsoup.select.Elements elements12 = elements8.val("hi");
+        org.jsoup.nodes.Document document15 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str16 = document15.outerHtml();
+        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node20 = document19.parentNode;
+        java.lang.String str21 = document19.title();
+        org.jsoup.nodes.Element element23 = document19.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element24 = document15.appendChild((org.jsoup.nodes.Node) document19);
+        org.jsoup.nodes.Document document27 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node28 = document27.parentNode;
+        java.lang.String str29 = document27.title();
+        org.jsoup.nodes.Attributes attributes30 = document27.attributes();
+        org.jsoup.nodes.Document document33 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node34 = document33.parentNode;
+        org.jsoup.select.Elements elements36 = document33.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.nodes.Element element37 = document27.prependChild((org.jsoup.nodes.Node) document33);
+        org.jsoup.select.Elements elements39 = document27.select("hi");
+        org.jsoup.nodes.Element element40 = document19.appendChild((org.jsoup.nodes.Node) document27);
+        org.jsoup.nodes.Element element42 = document27.addClass("#declaration");
+        boolean boolean43 = elements8.add(element42);
+        org.jsoup.select.Elements elements46 = element42.getElementsByAttributeValue("<html> \n<head> \n</head> \n<body>\n  hi!  \n</body>\n</html>", " hi=&quot;&quot;");
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(elementStream6);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!" + "'", str9, "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertNotNull(elements12);
+        org.junit.Assert.assertNotNull(document15);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str16, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document19);
+        org.junit.Assert.assertNull(node20);
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertNotNull(element24);
+        org.junit.Assert.assertNotNull(document27);
+        org.junit.Assert.assertNull(node28);
+        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "" + "'", str29, "");
+        org.junit.Assert.assertNotNull(attributes30);
+        org.junit.Assert.assertNotNull(document33);
+        org.junit.Assert.assertNull(node34);
+        org.junit.Assert.assertNotNull(elements36);
+        org.junit.Assert.assertNotNull(element37);
+        org.junit.Assert.assertNotNull(elements39);
+        org.junit.Assert.assertNotNull(element40);
+        org.junit.Assert.assertNotNull(element42);
+        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + true + "'", boolean43 == true);
+        org.junit.Assert.assertNotNull(elements46);
+    }
+
+    @Test
+    public void test1109() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1109");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -3198,9 +4300,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1085() throws Throwable {
+    public void test1110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1085");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1110");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -3300,9 +4402,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1086() throws Throwable {
+    public void test1111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1086");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1111");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("#comment", "<html> \n<head> \n</head> \n<body>\n  hi!  \n</body>\n</html>");
         boolean boolean4 = document2.hasClass("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n hi\n&lt;/body&gt;\n&lt;/html&gt;\"");
         org.junit.Assert.assertNotNull(document2);
@@ -3310,9 +4412,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1087() throws Throwable {
+    public void test1112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1087");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1112");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -3386,9 +4488,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1088() throws Throwable {
+    public void test1113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1088");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1113");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -3418,9 +4520,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1089() throws Throwable {
+    public void test1114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1089");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1114");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -3447,9 +4549,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1090() throws Throwable {
+    public void test1115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1090");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1115");
         org.jsoup.nodes.Evaluator.IndexGreaterThan indexGreaterThan1 = new org.jsoup.nodes.Evaluator.IndexGreaterThan((int) ' ');
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -3540,9 +4642,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1091() throws Throwable {
+    public void test1116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1091");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1116");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -3558,9 +4660,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1092() throws Throwable {
+    public void test1117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1092");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1117");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("hi!");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -3604,9 +4706,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1093() throws Throwable {
+    public void test1118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1093");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1118");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#declaration", "\n&lt;!----&gt;");
         org.jsoup.nodes.Document document3 = document2.normalise();
         org.junit.Assert.assertNotNull(document2);
@@ -3614,9 +4716,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1094() throws Throwable {
+    public void test1119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1094");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1119");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -3666,9 +4768,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1095() throws Throwable {
+    public void test1120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1095");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1120");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell(" hi=\"\"");
         java.lang.String str2 = document1.baseUri();
         org.jsoup.nodes.Element element4 = document1.text("a");
@@ -3678,9 +4780,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1096() throws Throwable {
+    public void test1121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1096");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1121");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -3704,9 +4806,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1097() throws Throwable {
+    public void test1122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1097");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1122");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -3753,9 +4855,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1098() throws Throwable {
+    public void test1123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1098");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1123");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -3773,9 +4875,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1099() throws Throwable {
+    public void test1124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1099");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1124");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -3803,9 +4905,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1100() throws Throwable {
+    public void test1125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1100");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1125");
         org.jsoup.safety.Whitelist whitelist1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -3817,9 +4919,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1101() throws Throwable {
+    public void test1126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1101");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1126");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -3847,9 +4949,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1102() throws Throwable {
+    public void test1127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1102");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1127");
         org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue(" hi=\"\"", "[!]");
         org.jsoup.nodes.Document document4 = org.jsoup.nodes.Document.createShell("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         java.lang.String str5 = document4.baseUri();
@@ -3864,9 +4966,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1103() throws Throwable {
+    public void test1128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1103");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1128");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -3953,9 +5055,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1104() throws Throwable {
+    public void test1129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1104");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1129");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -4001,9 +5103,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1105() throws Throwable {
+    public void test1130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1105");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1130");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -4036,9 +5138,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1106() throws Throwable {
+    public void test1131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1106");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1131");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -4071,9 +5173,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1107() throws Throwable {
+    public void test1132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1107");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1132");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -4095,9 +5197,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1108() throws Throwable {
+    public void test1133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1108");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1133");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node4 = document3.parentNode;
         org.jsoup.select.Elements elements6 = document3.getElementsByIndexLessThan((int) 'a');
@@ -4149,9 +5251,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1109() throws Throwable {
+    public void test1134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1109");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1134");
         org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -4212,9 +5314,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1110() throws Throwable {
+    public void test1135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1110");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1135");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -4248,9 +5350,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1111() throws Throwable {
+    public void test1136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1111");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1136");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -4314,9 +5416,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1112() throws Throwable {
+    public void test1137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1112");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1137");
         org.jsoup.nodes.Evaluator.AttributeWithValueStarting attributeWithValueStarting2 = new org.jsoup.nodes.Evaluator.AttributeWithValueStarting("hi", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         attributeWithValueStarting2.value = "hi!";
         java.lang.String str5 = attributeWithValueStarting2.value;
@@ -4370,9 +5472,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1113() throws Throwable {
+    public void test1138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1113");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1138");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -4395,9 +5497,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1114() throws Throwable {
+    public void test1139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1114");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1139");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -4463,9 +5565,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1115() throws Throwable {
+    public void test1140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1115");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1140");
         org.jsoup.nodes.Evaluator.Attribute attribute1 = new org.jsoup.nodes.Evaluator.Attribute("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -4505,9 +5607,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1116() throws Throwable {
+    public void test1141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1116");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1141");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str4 = document3.outerHtml();
         org.jsoup.select.Elements elements5 = document3.getAllElements();
@@ -4551,9 +5653,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1117() throws Throwable {
+    public void test1142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1117");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1142");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("hi!", "!", false);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node7 = document6.parentNode;
@@ -4571,9 +5673,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1118() throws Throwable {
+    public void test1143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1118");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1143");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -4620,9 +5722,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1119() throws Throwable {
+    public void test1144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1119");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1144");
         org.jsoup.nodes.Evaluator.IndexEquals indexEquals1 = new org.jsoup.nodes.Evaluator.IndexEquals(0);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -4655,9 +5757,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1120() throws Throwable {
+    public void test1145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1120");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1145");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.nodeName();
         org.jsoup.select.Elements elements6 = document2.getElementsByAttributeValueContaining("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", " !");
@@ -4669,9 +5771,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1121() throws Throwable {
+    public void test1146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1121");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1146");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -4719,9 +5821,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1122() throws Throwable {
+    public void test1147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1122");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1147");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -4784,9 +5886,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1123() throws Throwable {
+    public void test1148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1123");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1148");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -4901,9 +6003,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1124() throws Throwable {
+    public void test1149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1124");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1149");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -4922,9 +6024,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1125() throws Throwable {
+    public void test1150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1125");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1150");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -4955,9 +6057,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1126() throws Throwable {
+    public void test1151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1126");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1151");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell(" !");
         org.jsoup.nodes.Element element3 = document1.getElementById("\n<body>\n <!----> hi!\n</body>");
         // The following exception was thrown during execution in test generation
@@ -4972,9 +6074,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1127() throws Throwable {
+    public void test1152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1127");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1152");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.select.Elements elements3 = document2.getAllElements();
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) (short) 10);
@@ -4986,9 +6088,42 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1128() throws Throwable {
+    public void test1153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1128");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1153");
+        org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot2 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("\n<!---->", "#root");
+        org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str6 = document5.outerHtml();
+        org.jsoup.select.Elements elements7 = document5.getAllElements();
+        java.lang.String str8 = document5.data();
+        java.lang.String str9 = document5.baseUri();
+        org.jsoup.nodes.Element element11 = document5.text("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element13 = element11.val("#declaration");
+        boolean boolean14 = attributeWithValueNot2.matches(element13);
+        java.lang.String str15 = attributeWithValueNot2.value;
+        org.jsoup.nodes.Document document17 = new org.jsoup.nodes.Document("");
+        int int18 = document17.nodeDepth();
+        boolean boolean19 = attributeWithValueNot2.matches((org.jsoup.nodes.Element) document17);
+        attributeWithValueNot2.key = "&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n&lt;/body&gt;\n&lt;/html&gt;";
+        java.lang.String str22 = attributeWithValueNot2.key;
+        org.junit.Assert.assertNotNull(document5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str6, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "hi!" + "'", str9, "hi!");
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "#root" + "'", str15, "#root");
+        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + true + "'", boolean19 == true);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n&lt;/body&gt;\n&lt;/html&gt;" + "'", str22, "&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n&lt;/body&gt;\n&lt;/html&gt;");
+    }
+
+    @Test
+    public void test1154() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1154");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -5029,9 +6164,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1129() throws Throwable {
+    public void test1155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1129");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1155");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("[ , !]");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -5074,9 +6209,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1130() throws Throwable {
+    public void test1156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1130");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1156");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -5096,17 +6231,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1131() throws Throwable {
+    public void test1157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1131");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1157");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("<html>\n<head>\n</head>\n<body> #text\n</body>\n</html>\n<html> \n<head> \n</head> \n<body>\n  head  \n</body>\n</html>", "");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1132() throws Throwable {
+    public void test1158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1132");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1158");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str3 = document2.baseUri();
         org.jsoup.nodes.Element element4 = document2.head();
@@ -5130,9 +6265,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1133() throws Throwable {
+    public void test1159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1133");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1159");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell(" !");
         org.jsoup.nodes.Element element3 = document1.appendText("[!]");
         org.jsoup.nodes.Element element4 = document1.body();
@@ -5144,9 +6279,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1134() throws Throwable {
+    public void test1160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1134");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1160");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5226,9 +6361,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1135() throws Throwable {
+    public void test1161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1135");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1161");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -5243,9 +6378,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1136() throws Throwable {
+    public void test1162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1136");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1162");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Element element6 = document2.html("\n  <head>\n  </head>");
@@ -5255,9 +6390,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1137() throws Throwable {
+    public void test1163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1137");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1163");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5351,9 +6486,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1138() throws Throwable {
+    public void test1164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1138");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1164");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -5384,9 +6519,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1139() throws Throwable {
+    public void test1165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1139");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1165");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -5417,9 +6552,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1140() throws Throwable {
+    public void test1166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1140");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1166");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -5458,9 +6593,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1141() throws Throwable {
+    public void test1167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1141");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1167");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -5504,9 +6639,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1142() throws Throwable {
+    public void test1168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1142");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1168");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5534,9 +6669,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1143() throws Throwable {
+    public void test1169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1143");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1169");
         org.jsoup.nodes.Evaluator.IndexGreaterThan indexGreaterThan1 = new org.jsoup.nodes.Evaluator.IndexGreaterThan((int) ' ');
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5558,9 +6693,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1144() throws Throwable {
+    public void test1170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1144");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1170");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -5674,9 +6809,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1145() throws Throwable {
+    public void test1171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1145");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1171");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5723,9 +6858,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1146() throws Throwable {
+    public void test1172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1146");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1172");
         org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -5739,9 +6874,48 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1147() throws Throwable {
+    public void test1173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1147");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1173");
+        org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
+        org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str5 = document4.outerHtml();
+        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node9 = document8.parentNode;
+        java.lang.String str10 = document8.title();
+        org.jsoup.nodes.Element element12 = document8.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element13 = document4.appendChild((org.jsoup.nodes.Node) document8);
+        org.jsoup.nodes.Element element14 = document8.head();
+        java.lang.String str15 = element14.id();
+        boolean boolean16 = tag1.matches(element14);
+        org.jsoup.nodes.DataNode dataNode19 = org.jsoup.nodes.DataNode.createFromEncoded("<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!", "");
+        java.lang.String str20 = dataNode19.getWholeData();
+        org.jsoup.nodes.Node node22 = dataNode19.removeAttr("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        java.lang.String str23 = dataNode19.nodeName();
+        java.lang.String str24 = dataNode19.nodeName();
+        boolean boolean25 = element14.equals((java.lang.Object) dataNode19);
+        org.junit.Assert.assertNotNull(document4);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str5, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document8);
+        org.junit.Assert.assertNull(node9);
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertNotNull(element14);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(dataNode19);
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!" + "'", str20, "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
+        org.junit.Assert.assertNotNull(node22);
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "#data" + "'", str23, "#data");
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "#data" + "'", str24, "#data");
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+    }
+
+    @Test
+    public void test1174() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1174");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5830,9 +7004,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1148() throws Throwable {
+    public void test1175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1148");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1175");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5878,9 +7052,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1149() throws Throwable {
+    public void test1176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1149");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1176");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5912,9 +7086,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1150() throws Throwable {
+    public void test1177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1150");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1177");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -5944,9 +7118,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1151() throws Throwable {
+    public void test1178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1151");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1178");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -5983,9 +7157,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1152() throws Throwable {
+    public void test1179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1152");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1179");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -6023,9 +7197,26 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1153() throws Throwable {
+    public void test1180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1153");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1180");
+        org.jsoup.nodes.Evaluator.AttributeWithValueStarting attributeWithValueStarting2 = new org.jsoup.nodes.Evaluator.AttributeWithValueStarting("hi", " hi=\"\"");
+        org.jsoup.nodes.Document document5 = org.jsoup.Jsoup.parseBodyFragment("[ , !]", "hi=\"\"");
+        java.lang.String str6 = document5.html();
+        java.lang.String str7 = document5.html();
+        boolean boolean8 = attributeWithValueStarting2.matches((org.jsoup.nodes.Element) document5);
+        org.jsoup.select.Elements elements10 = document5.getElementsByTag("<html>\n  <head>\n  </head>\n  <body>\n   &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n  </body>\n </html>");
+        org.junit.Assert.assertNotNull(document5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>" + "'", str6, "<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>" + "'", str7, "<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(elements10);
+    }
+
+    @Test
+    public void test1181() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1181");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -6081,9 +7272,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1154() throws Throwable {
+    public void test1182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1154");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1182");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -6116,9 +7307,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1155() throws Throwable {
+    public void test1183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1155");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1183");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -6140,9 +7331,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1156() throws Throwable {
+    public void test1184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1156");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1184");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -6173,9 +7364,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1157() throws Throwable {
+    public void test1185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1157");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1185");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -6238,9 +7429,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1158() throws Throwable {
+    public void test1186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1158");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1186");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         java.lang.String str2 = document1.outerHtml();
         org.junit.Assert.assertNotNull(document1);
@@ -6248,9 +7439,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1159() throws Throwable {
+    public void test1187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1159");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1187");
         org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("[]", "[ , #, d, o, c, u, m, e, n, t]");
         org.jsoup.nodes.Document document4 = org.jsoup.Jsoup.parseBodyFragment("#data");
         org.jsoup.nodes.Node node5 = document4.parent();
@@ -6263,9 +7454,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1160() throws Throwable {
+    public void test1188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1160");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1188");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -6292,9 +7483,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1161() throws Throwable {
+    public void test1189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1161");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1189");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -6321,9 +7512,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1162() throws Throwable {
+    public void test1190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1162");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1190");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -6379,9 +7570,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1163() throws Throwable {
+    public void test1191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1163");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1191");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValueStarting("head", "#document");
         java.lang.Object[] objArray5 = elements4.toArray();
@@ -6401,17 +7592,77 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1164() throws Throwable {
+    public void test1192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1164");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1192");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("[ , #, d, o, c, u, m, e, n, t]");
         org.junit.Assert.assertNotNull(document1);
     }
 
     @Test
-    public void test1165() throws Throwable {
+    public void test1193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1165");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1193");
+        org.jsoup.nodes.Attribute attribute2 = new org.jsoup.nodes.Attribute("<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>", "<html>\n<head>\n</head>\n<body>\n &lt;#root&gt; \n <html> \n  <head> \n  </head> \n  <body>\n    hi!    \n   <html> \n    <head> \n    </head> \n    <body>\n      hi!  \n    </body>\n   </html>\n  </body>\n </html>\n</body>\n</html><&lt;!----&gt;>\n</&lt;!----&gt;>");
+        org.jsoup.nodes.Evaluator.Tag tag4 = new org.jsoup.nodes.Evaluator.Tag("#document");
+        org.jsoup.nodes.Document document7 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str8 = document7.outerHtml();
+        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node12 = document11.parentNode;
+        java.lang.String str13 = document11.title();
+        org.jsoup.nodes.Element element15 = document11.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element16 = document7.appendChild((org.jsoup.nodes.Node) document11);
+        org.jsoup.nodes.Element element17 = document11.head();
+        java.lang.String str18 = element17.id();
+        boolean boolean19 = tag4.matches(element17);
+        org.jsoup.nodes.Evaluator.Tag tag21 = new org.jsoup.nodes.Evaluator.Tag("#document");
+        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan23 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
+        org.jsoup.nodes.Document document26 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node27 = document26.parentNode;
+        org.jsoup.select.Elements elements29 = document26.getElementsByIndexLessThan((int) 'a');
+        boolean boolean30 = indexLessThan23.matches((org.jsoup.nodes.Element) document26);
+        org.jsoup.nodes.Document document33 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node34 = document33.parentNode;
+        org.jsoup.select.Elements elements35 = document33.getAllElements();
+        org.jsoup.select.Elements elements36 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) indexLessThan23, (org.jsoup.nodes.Element) document33);
+        boolean boolean37 = tag21.matches((org.jsoup.nodes.Element) document33);
+        document33.baseUri = "hi=\"\"";
+        org.jsoup.nodes.Element element41 = document33.appendText("");
+        org.jsoup.nodes.Element element43 = element41.prependText(" !");
+        org.jsoup.nodes.Element element45 = element43.addClass("\n<!---->");
+        element43.baseUri = "<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>";
+        org.jsoup.select.Elements elements48 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) tag4, element43);
+        boolean boolean49 = attribute2.equals((java.lang.Object) element43);
+        org.junit.Assert.assertNotNull(document7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str8, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document11);
+        org.junit.Assert.assertNull(node12);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertNotNull(element15);
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertNotNull(element17);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(document26);
+        org.junit.Assert.assertNull(node27);
+        org.junit.Assert.assertNotNull(elements29);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+        org.junit.Assert.assertNotNull(document33);
+        org.junit.Assert.assertNull(node34);
+        org.junit.Assert.assertNotNull(elements35);
+        org.junit.Assert.assertNotNull(elements36);
+        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
+        org.junit.Assert.assertNotNull(element41);
+        org.junit.Assert.assertNotNull(element43);
+        org.junit.Assert.assertNotNull(element45);
+        org.junit.Assert.assertNotNull(elements48);
+        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + false + "'", boolean49 == false);
+    }
+
+    @Test
+    public void test1194() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1194");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<html> <head> </head> <body> hi! </body> </html> <html> <head> </head> <body> hi! </body> </html>  <html> <head> </head> <body> hi! </body> </html>", "<html>\n<head>\n hi=&quot;&quot;\n</head>\n<body> hi!hi=&quot;&quot;\n</body>hi=&quot;&quot;\n</html>hi=&quot;&quot;\n\n<html>\n<head>\n hi=&quot;&quot;\n</head>\n<body> hi!hi=&quot;&quot;\n</body>hi=&quot;&quot;\n</html>\n\n<head>\n hi=&quot;&quot;\n</head>\n\n<body> hi!hi=&quot;&quot;\n</body>");
         org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValueNot("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n hi\n&lt;/body&gt;\n&lt;/html&gt;\"", "<html>\n<head>\n</head>\n<body>\n &lt;#root&gt; \n <html> \n  <head> \n  </head> \n  <body>\n    hi!    \n   <html> \n    <head> \n    </head> \n    <body>\n      hi!  \n    </body>\n   </html>\n  </body>\n </html>\n</body>\n</html>");
         org.junit.Assert.assertNotNull(document2);
@@ -6419,9 +7670,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1166() throws Throwable {
+    public void test1195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1166");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1195");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -6453,9 +7704,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1167() throws Throwable {
+    public void test1196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1167");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1196");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -6520,9 +7771,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1168() throws Throwable {
+    public void test1197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1168");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1197");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -6572,9 +7823,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1169() throws Throwable {
+    public void test1198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1169");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1198");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -6594,9 +7845,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1170() throws Throwable {
+    public void test1199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1170");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1199");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -6622,9 +7873,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1171() throws Throwable {
+    public void test1200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1171");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1200");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -6666,9 +7917,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1172() throws Throwable {
+    public void test1201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1172");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1201");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValueStarting("head", "#document");
         java.lang.Object[] objArray5 = elements4.toArray();
@@ -6730,9 +7981,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1173() throws Throwable {
+    public void test1202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1173");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1202");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -6754,9 +8005,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1174() throws Throwable {
+    public void test1203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1174");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1203");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -6835,9 +8086,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1175() throws Throwable {
+    public void test1204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1175");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1204");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -6900,9 +8151,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1176() throws Throwable {
+    public void test1205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1176");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1205");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -6968,9 +8219,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1177() throws Throwable {
+    public void test1206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1177");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1206");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -7012,9 +8263,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1178() throws Throwable {
+    public void test1207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1178");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1207");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -7040,9 +8291,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1179() throws Throwable {
+    public void test1208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1179");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1208");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -7082,9 +8333,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1180() throws Throwable {
+    public void test1209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1180");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1209");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -7102,9 +8353,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1181() throws Throwable {
+    public void test1210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1181");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1210");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -7132,9 +8383,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1182() throws Throwable {
+    public void test1211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1182");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1211");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -7199,9 +8450,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1183() throws Throwable {
+    public void test1212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1183");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1212");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -7275,9 +8526,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1184() throws Throwable {
+    public void test1213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1184");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1213");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("");
         document1.baseUri = "";
         org.jsoup.select.Elements elements5 = document1.getElementsByIndexEquals((int) (byte) -1);
@@ -7290,9 +8541,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1185() throws Throwable {
+    public void test1214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1185");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1214");
         org.jsoup.nodes.Evaluator.AttributeWithValueStarting attributeWithValueStarting2 = new org.jsoup.nodes.Evaluator.AttributeWithValueStarting("hi", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         attributeWithValueStarting2.value = "hi!";
         java.lang.String str5 = attributeWithValueStarting2.value;
@@ -7326,9 +8577,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1186() throws Throwable {
+    public void test1215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1186");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1215");
         org.jsoup.nodes.Element element0 = null;
         org.jsoup.nodes.Element[] elementArray1 = new org.jsoup.nodes.Element[] { element0 };
         org.jsoup.select.Elements elements2 = new org.jsoup.select.Elements(elementArray1);
@@ -7363,9 +8614,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1187() throws Throwable {
+    public void test1216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1187");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1216");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -7387,9 +8638,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1188() throws Throwable {
+    public void test1217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1188");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1217");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi=\"\"", "#data");
         org.jsoup.parser.Tag tag5 = document1.tag();
@@ -7403,9 +8654,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1189() throws Throwable {
+    public void test1218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1189");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1218");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node6 = document5.parentNode;
@@ -7500,9 +8751,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1190() throws Throwable {
+    public void test1219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1190");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1219");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -7545,9 +8796,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1191() throws Throwable {
+    public void test1220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1191");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1220");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) '<');
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -7570,9 +8821,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1192() throws Throwable {
+    public void test1221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1192");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1221");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -7624,9 +8875,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1193() throws Throwable {
+    public void test1222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1193");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1222");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -7656,9 +8907,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1194() throws Throwable {
+    public void test1223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1194");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1223");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("org.jsoup.select.Selector$SelectorParseException: <html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "#data");
         boolean boolean3 = document2.isBlock();
         org.junit.Assert.assertNotNull(document2);
@@ -7666,9 +8917,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1195() throws Throwable {
+    public void test1224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1195");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1224");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -7693,9 +8944,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1196() throws Throwable {
+    public void test1225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1196");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1225");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -7721,9 +8972,46 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1197() throws Throwable {
+    public void test1226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1197");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1226");
+        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("");
+        document1.baseUri = "";
+        org.jsoup.select.Elements elements5 = document1.getElementsByIndexEquals((int) (byte) -1);
+        org.jsoup.nodes.Element element7 = document1.append("#document");
+        org.jsoup.select.Elements elements8 = document1.getAllElements();
+        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str12 = document11.outerHtml();
+        org.jsoup.nodes.Document document15 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node16 = document15.parentNode;
+        java.lang.String str17 = document15.title();
+        org.jsoup.nodes.Element element19 = document15.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element20 = document11.appendChild((org.jsoup.nodes.Node) document15);
+        org.jsoup.nodes.Element element21 = document15.head();
+        java.lang.String str22 = element21.id();
+        org.jsoup.select.Elements elements25 = element21.getElementsByAttributeValueNot("\n<!---->", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        boolean boolean26 = elements8.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements25);
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertNotNull(element7);
+        org.junit.Assert.assertNotNull(elements8);
+        org.junit.Assert.assertNotNull(document11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str12, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document15);
+        org.junit.Assert.assertNull(node16);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertNotNull(element19);
+        org.junit.Assert.assertNotNull(element20);
+        org.junit.Assert.assertNotNull(element21);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
+        org.junit.Assert.assertNotNull(elements25);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+    }
+
+    @Test
+    public void test1227() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1227");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -7788,9 +9076,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1198() throws Throwable {
+    public void test1228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1198");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1228");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -7808,9 +9096,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1199() throws Throwable {
+    public void test1229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1199");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1229");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -7838,9 +9126,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1200() throws Throwable {
+    public void test1230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1200");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1230");
         org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot2 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("\n<!---->", "#root");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -7905,9 +9193,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1201() throws Throwable {
+    public void test1231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1201");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1231");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str4 = document3.outerHtml();
         org.jsoup.select.Elements elements5 = document3.getAllElements();
@@ -7945,17 +9233,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1202() throws Throwable {
+    public void test1232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1202");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1232");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment(" class=\" #declaration\"", "[]");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1203() throws Throwable {
+    public void test1233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1203");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1233");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -8042,9 +9330,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1204() throws Throwable {
+    public void test1234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1204");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1234");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         boolean boolean2 = tag1.isEmpty();
         boolean boolean3 = tag1.preserveWhitespace();
@@ -8062,9 +9350,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1205() throws Throwable {
+    public void test1235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1205");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1235");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -8157,9 +9445,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1206() throws Throwable {
+    public void test1236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1206");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1236");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("hi", "");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan4 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document7 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -8224,9 +9512,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1207() throws Throwable {
+    public void test1237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1207");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1237");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -8254,9 +9542,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1208() throws Throwable {
+    public void test1238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1208");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1238");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -8284,9 +9572,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1209() throws Throwable {
+    public void test1239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1209");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1239");
         org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -8356,9 +9644,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1210() throws Throwable {
+    public void test1240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1210");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1240");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str4 = document3.outerHtml();
         org.jsoup.nodes.Document document7 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -8407,9 +9695,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1211() throws Throwable {
+    public void test1241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1211");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1241");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.select.Elements elements3 = document2.getAllElements();
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) (short) 10);
@@ -8435,9 +9723,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1212() throws Throwable {
+    public void test1242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1212");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1242");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -8494,9 +9782,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1213() throws Throwable {
+    public void test1243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1213");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1243");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -8528,9 +9816,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1214() throws Throwable {
+    public void test1244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1214");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1244");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         // The following exception was thrown during execution in test generation
@@ -8545,9 +9833,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1215() throws Throwable {
+    public void test1245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1215");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1245");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -8603,9 +9891,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1216() throws Throwable {
+    public void test1246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1216");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1246");
         org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -8640,17 +9928,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1217() throws Throwable {
+    public void test1247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1217");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1247");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("\n<!---->", "<?<body>\n <!----> hi!\n</body>>");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1218() throws Throwable {
+    public void test1248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1218");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1248");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("hi!", "!", false);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node7 = document6.parentNode;
@@ -8664,9 +9952,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1219() throws Throwable {
+    public void test1249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1219");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1249");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -8730,9 +10018,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1220() throws Throwable {
+    public void test1250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1220");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1250");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -8758,9 +10046,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1221() throws Throwable {
+    public void test1251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1221");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1251");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -8782,9 +10070,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1222() throws Throwable {
+    public void test1252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1222");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1252");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -8818,9 +10106,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1223() throws Throwable {
+    public void test1253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1223");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1253");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -8864,9 +10152,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1224() throws Throwable {
+    public void test1254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1224");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1254");
         org.jsoup.nodes.Evaluator.Attribute attribute1 = new org.jsoup.nodes.Evaluator.Attribute("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -8912,9 +10200,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1225() throws Throwable {
+    public void test1255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1225");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1255");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -8940,9 +10228,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1226() throws Throwable {
+    public void test1256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1226");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1256");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -8966,9 +10254,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1227() throws Throwable {
+    public void test1257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1227");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1257");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node6 = document5.parentNode;
@@ -8992,9 +10280,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1228() throws Throwable {
+    public void test1258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1228");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1258");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -9067,9 +10355,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1229() throws Throwable {
+    public void test1259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1229");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1259");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -9083,9 +10371,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1230() throws Throwable {
+    public void test1260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1230");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1260");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("#document", "<body>\n <!----> hi!\n</body>");
         org.jsoup.nodes.Element element4 = document2.append("org.jsoup.select.Selector$SelectorParseException: !");
         org.junit.Assert.assertNotNull(document2);
@@ -9093,9 +10381,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1231() throws Throwable {
+    public void test1261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1231");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1261");
         org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n  <head>\n  </head>", "[]");
         org.jsoup.nodes.Document document5 = org.jsoup.Jsoup.parseBodyFragment("[ , !]", "hi=\"\"");
         org.jsoup.nodes.Element element7 = document5.removeClass("[ , #, d, o, c, u, m, e, n, t]");
@@ -9107,9 +10395,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1232() throws Throwable {
+    public void test1262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1232");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1262");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -9170,9 +10458,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1233() throws Throwable {
+    public void test1263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1233");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1263");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -9196,9 +10484,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1234() throws Throwable {
+    public void test1264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1234");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1264");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -9238,9 +10526,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1235() throws Throwable {
+    public void test1265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1235");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1265");
         org.jsoup.nodes.Evaluator.AttributeWithValueContaining attributeWithValueContaining2 = new org.jsoup.nodes.Evaluator.AttributeWithValueContaining("#document", "hi=\"\"");
         org.jsoup.nodes.Document document5 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!", "<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
         boolean boolean6 = attributeWithValueContaining2.matches((org.jsoup.nodes.Element) document5);
@@ -9299,9 +10587,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1236() throws Throwable {
+    public void test1266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1236");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1266");
         org.jsoup.nodes.Evaluator.AttributeWithValueContaining attributeWithValueContaining2 = new org.jsoup.nodes.Evaluator.AttributeWithValueContaining("<!---->=\"\"", "head");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node6 = document5.parentNode;
@@ -9359,17 +10647,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1237() throws Throwable {
+    public void test1267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1237");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1267");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse(" #document", "<head>\n  </head>");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1238() throws Throwable {
+    public void test1268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1238");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1268");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -9423,9 +10711,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1239() throws Throwable {
+    public void test1269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1239");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1269");
         org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot2 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("\n<!---->", "#root");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -9456,9 +10744,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1240() throws Throwable {
+    public void test1270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1240");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1270");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -9483,9 +10771,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1241() throws Throwable {
+    public void test1271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1241");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1271");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -9543,9 +10831,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1242() throws Throwable {
+    public void test1272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1242");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1272");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -9650,9 +10938,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1243() throws Throwable {
+    public void test1273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1243");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1273");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -9728,9 +11016,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1244() throws Throwable {
+    public void test1274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1244");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1274");
         org.jsoup.nodes.Evaluator.AllElements allElements0 = new org.jsoup.nodes.Evaluator.AllElements();
         org.jsoup.nodes.Document document3 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         boolean boolean4 = allElements0.matches((org.jsoup.nodes.Element) document3);
@@ -9744,9 +11032,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1245() throws Throwable {
+    public void test1275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1245");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1275");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -9821,9 +11109,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1246() throws Throwable {
+    public void test1276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1246");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1276");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -9853,9 +11141,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1247() throws Throwable {
+    public void test1277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1247");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1277");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -9913,9 +11201,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1248() throws Throwable {
+    public void test1278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1248");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1278");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.nodeName();
         org.jsoup.select.Elements elements5 = document2.getElementsByAttribute("\n<!---->");
@@ -9948,9 +11236,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1249() throws Throwable {
+    public void test1279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1249");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1279");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -9969,9 +11257,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1250() throws Throwable {
+    public void test1280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1250");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1280");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -9991,9 +11279,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1251() throws Throwable {
+    public void test1281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1251");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1281");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.select.Elements elements5 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements4);
@@ -10002,9 +11290,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1252() throws Throwable {
+    public void test1282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1252");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1282");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -10026,9 +11314,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1253() throws Throwable {
+    public void test1283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1253");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1283");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -10052,9 +11340,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1254() throws Throwable {
+    public void test1284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1254");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1284");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -10087,9 +11375,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1255() throws Throwable {
+    public void test1285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1255");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1285");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -10115,9 +11403,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1256() throws Throwable {
+    public void test1286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1256");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1286");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str3 = document2.baseUri();
         java.lang.String str4 = document2.html();
@@ -10176,9 +11464,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1257() throws Throwable {
+    public void test1287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1257");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1287");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -10199,9 +11487,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1258() throws Throwable {
+    public void test1288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1258");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1288");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -10220,9 +11508,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1259() throws Throwable {
+    public void test1289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1259");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1289");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!", "#declaration");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node6 = document5.parentNode;
@@ -10266,9 +11554,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1260() throws Throwable {
+    public void test1290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1260");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1290");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -10292,9 +11580,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1261() throws Throwable {
+    public void test1291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1261");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1291");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -10315,9 +11603,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1262() throws Throwable {
+    public void test1292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1262");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1292");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("hi!", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -10347,9 +11635,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1263() throws Throwable {
+    public void test1293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1263");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1293");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValue("hi=\"\"", "#data");
         org.jsoup.parser.Tag tag5 = document1.tag();
@@ -10403,9 +11691,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1264() throws Throwable {
+    public void test1294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1264");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1294");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValueStarting("head", "#document");
         org.jsoup.nodes.Element element6 = document1.append("org.jsoup.select.Selector$SelectorParseException: !");
@@ -10415,9 +11703,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1265() throws Throwable {
+    public void test1295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1265");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1295");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -10439,9 +11727,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1266() throws Throwable {
+    public void test1296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1266");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1296");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -10469,9 +11757,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1267() throws Throwable {
+    public void test1297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1267");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1297");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         java.lang.String str2 = document1.baseUri();
         java.lang.String str3 = document1.baseUri();
@@ -10485,9 +11773,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1268() throws Throwable {
+    public void test1298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1268");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1298");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         org.jsoup.nodes.Element element3 = new org.jsoup.nodes.Element(tag1, "!");
         boolean boolean4 = tag1.isData();
@@ -10541,9 +11829,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1269() throws Throwable {
+    public void test1299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1269");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1299");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -10604,9 +11892,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1270() throws Throwable {
+    public void test1300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1270");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1300");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -10644,9 +11932,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1271() throws Throwable {
+    public void test1301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1271");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1301");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -10693,9 +11981,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1272() throws Throwable {
+    public void test1302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1272");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1302");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -10729,9 +12017,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1273() throws Throwable {
+    public void test1303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1273");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1303");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -10852,9 +12140,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1274() throws Throwable {
+    public void test1304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1274");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1304");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n hi\n&lt;/body&gt;\n&lt;/html&gt;\"");
         org.jsoup.parser.Tag tag3 = document2.tag();
         org.jsoup.nodes.Element element5 = new org.jsoup.nodes.Element(tag3, "\n&lt;!----&gt;");
@@ -10887,9 +12175,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1275() throws Throwable {
+    public void test1305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1275");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1305");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -10920,9 +12208,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1276() throws Throwable {
+    public void test1306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1276");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1306");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.nodeName();
         org.jsoup.select.Elements elements6 = document2.getElementsByAttributeValueContaining("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", " !");
@@ -10942,9 +12230,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1277() throws Throwable {
+    public void test1307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1277");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1307");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -10993,9 +12281,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1278() throws Throwable {
+    public void test1308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1278");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1308");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -11031,9 +12319,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1279() throws Throwable {
+    public void test1309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1279");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1309");
         org.jsoup.nodes.Evaluator.Class class1 = new org.jsoup.nodes.Evaluator.Class("hi");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -11066,9 +12354,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1280() throws Throwable {
+    public void test1310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1280");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1310");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("[ , !]");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -11108,17 +12396,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1281() throws Throwable {
+    public void test1311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1281");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1311");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.junit.Assert.assertNotNull(document1);
     }
 
     @Test
-    public void test1282() throws Throwable {
+    public void test1312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1282");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1312");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -11223,9 +12511,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1283() throws Throwable {
+    public void test1313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1283");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1313");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.select.Elements elements3 = document2.getAllElements();
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) (short) 10);
@@ -11243,9 +12531,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1284() throws Throwable {
+    public void test1314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1284");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1314");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         boolean boolean2 = tag1.preserveWhitespace();
         java.lang.String str3 = tag1.toString();
@@ -11361,9 +12649,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1285() throws Throwable {
+    public void test1315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1285");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1315");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str3 = document2.baseUri();
         java.lang.String str4 = document2.html();
@@ -11420,9 +12708,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1286() throws Throwable {
+    public void test1316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1286");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1316");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -11519,9 +12807,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1287() throws Throwable {
+    public void test1317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1287");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1317");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#text", "");
         org.jsoup.nodes.Element element3 = document2.head();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -11559,9 +12847,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1288() throws Throwable {
+    public void test1318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1288");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1318");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         org.jsoup.nodes.Element element3 = new org.jsoup.nodes.Element(tag1, "!");
         boolean boolean4 = tag1.isData();
@@ -11618,9 +12906,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1289() throws Throwable {
+    public void test1319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1289");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1319");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
         java.lang.String str2 = document1.toString();
         org.junit.Assert.assertNotNull(document1);
@@ -11628,9 +12916,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1290() throws Throwable {
+    public void test1320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1290");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1320");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -11713,9 +13001,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1291() throws Throwable {
+    public void test1321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1291");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1321");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -11763,9 +13051,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1292() throws Throwable {
+    public void test1322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1292");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1322");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!", "#comment");
         attribute2.setValue("[ , !]=\"\"");
         org.jsoup.nodes.Document document7 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -11837,9 +13125,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1293() throws Throwable {
+    public void test1323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1293");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1323");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node4 = document3.parentNode;
         org.jsoup.select.Elements elements5 = document3.getAllElements();
@@ -11858,9 +13146,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1294() throws Throwable {
+    public void test1324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1294");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1324");
         org.jsoup.nodes.Evaluator.Id id1 = new org.jsoup.nodes.Evaluator.Id("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
         org.jsoup.nodes.Document document3 = org.jsoup.nodes.Document.createShell("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Element element5 = document3.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
@@ -11879,9 +13167,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1295() throws Throwable {
+    public void test1325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1295");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1325");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -11910,9 +13198,21 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1296() throws Throwable {
+    public void test1326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1296");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1326");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#text", "");
+        org.jsoup.nodes.Element element4 = document2.append("<html>\n<head>\n</head>\n<body>\n head\n</body>\n</html>");
+        java.lang.String str5 = element4.toString();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNotNull(element4);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "<html>\n<head>\n</head>\n<body> #text\n</body>\n</html>\n<html> \n<head> \n</head> \n<body>\n  head  \n</body>\n</html>" + "'", str5, "<html>\n<head>\n</head>\n<body> #text\n</body>\n</html>\n<html> \n<head> \n</head> \n<body>\n  head  \n</body>\n</html>");
+    }
+
+    @Test
+    public void test1327() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1327");
         org.jsoup.nodes.Evaluator.AllElements allElements0 = new org.jsoup.nodes.Evaluator.AllElements();
         org.jsoup.nodes.Element element1 = null;
         boolean boolean2 = allElements0.matches(element1);
@@ -11943,9 +13243,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1297() throws Throwable {
+    public void test1328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1297");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1328");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -11988,9 +13288,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1298() throws Throwable {
+    public void test1329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1298");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1329");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -12020,9 +13320,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1299() throws Throwable {
+    public void test1330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1299");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1330");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -12106,9 +13406,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1300() throws Throwable {
+    public void test1331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1300");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1331");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -12134,9 +13434,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1301() throws Throwable {
+    public void test1332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1301");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1332");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -12155,9 +13455,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1302() throws Throwable {
+    public void test1333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1302");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1333");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str3 = document2.baseUri();
         org.jsoup.nodes.Element element5 = document2.createElement("\n<!---->");
@@ -12203,9 +13503,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1303() throws Throwable {
+    public void test1334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1303");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1334");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -12231,9 +13531,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1304() throws Throwable {
+    public void test1335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1304");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1335");
         org.jsoup.nodes.Evaluator.AttributeWithValueContaining attributeWithValueContaining2 = new org.jsoup.nodes.Evaluator.AttributeWithValueContaining("#document", "hi=\"\"");
         org.jsoup.nodes.Document document5 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!", "<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
         boolean boolean6 = attributeWithValueContaining2.matches((org.jsoup.nodes.Element) document5);
@@ -12243,9 +13543,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1305() throws Throwable {
+    public void test1336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1305");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1336");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("hi", "");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node6 = document5.parentNode;
@@ -12281,9 +13581,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1306() throws Throwable {
+    public void test1337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1306");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1337");
         org.jsoup.nodes.Evaluator.AttributeWithValueContaining attributeWithValueContaining2 = new org.jsoup.nodes.Evaluator.AttributeWithValueContaining("hi! hi!  hi!", "org.jsoup.select.Selector$SelectorParseException: <html> <head> </head> <body> hi! </body> </html><#root> <html> <head> </head> <body> &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt; </body> </html> </#root>");
         org.jsoup.nodes.Document document5 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str6 = document5.baseUri();
@@ -12296,9 +13596,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1307() throws Throwable {
+    public void test1338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1307");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1338");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!", " hi=\"\"");
         org.jsoup.nodes.Element element4 = document2.prependElement("<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>><hi!>\n</hi!>");
         org.junit.Assert.assertNotNull(document2);
@@ -12306,9 +13606,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1308() throws Throwable {
+    public void test1339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1308");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1339");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -12337,9 +13637,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1309() throws Throwable {
+    public void test1340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1309");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1340");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node4 = document3.parentNode;
         org.jsoup.select.Elements elements6 = document3.getElementsByIndexLessThan((int) 'a');
@@ -12373,9 +13673,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1310() throws Throwable {
+    public void test1341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1310");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1341");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -12433,9 +13733,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1311() throws Throwable {
+    public void test1342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1311");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1342");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("[ , !]", "hi=\"\"");
         java.lang.String str3 = document2.html();
         org.jsoup.nodes.Element element5 = document2.appendText("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n hi\n&lt;/body&gt;\n&lt;/html&gt;\"");
@@ -12445,9 +13745,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1312() throws Throwable {
+    public void test1343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1312");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1343");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -12462,9 +13762,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1313() throws Throwable {
+    public void test1344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1313");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1344");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -12480,9 +13780,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1314() throws Throwable {
+    public void test1345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1314");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1345");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -12513,9 +13813,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1315() throws Throwable {
+    public void test1346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1315");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1346");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -12615,9 +13915,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1316() throws Throwable {
+    public void test1347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1316");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1347");
         org.jsoup.safety.Whitelist whitelist1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -12629,9 +13929,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1317() throws Throwable {
+    public void test1348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1317");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1348");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -12698,9 +13998,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1318() throws Throwable {
+    public void test1349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1318");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1349");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("hi!");
         org.jsoup.nodes.Node node2 = null;
         // The following exception was thrown during execution in test generation
@@ -12714,9 +14014,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1319() throws Throwable {
+    public void test1350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1319");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1350");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -12737,9 +14037,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1320() throws Throwable {
+    public void test1351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1320");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1351");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -12759,9 +14059,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1321() throws Throwable {
+    public void test1352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1321");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1352");
         org.jsoup.nodes.Evaluator.AttributeWithValueContaining attributeWithValueContaining2 = new org.jsoup.nodes.Evaluator.AttributeWithValueContaining("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "hi!");
         org.jsoup.nodes.Document document4 = new org.jsoup.nodes.Document("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         boolean boolean5 = attributeWithValueContaining2.matches((org.jsoup.nodes.Element) document4);
@@ -12771,9 +14071,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1322() throws Throwable {
+    public void test1353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1322");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1353");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -12815,9 +14115,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1323() throws Throwable {
+    public void test1354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1323");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1354");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -12829,17 +14129,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1324() throws Throwable {
+    public void test1355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1324");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1355");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<#root>\n  <html>\n   <head>\n   </head>\n   <body> hi!\n   </body>\n  </html>\n </#root>\n <html>\n  <head>\n  </head>\n  <body> hi!\n  </body>\n </html>");
         org.junit.Assert.assertNotNull(document1);
     }
 
     @Test
-    public void test1325() throws Throwable {
+    public void test1356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1325");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1356");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("");
         document1.baseUri = "";
         org.jsoup.select.Elements elements5 = document1.getElementsByIndexEquals((int) (byte) -1);
@@ -12856,9 +14156,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1326() throws Throwable {
+    public void test1357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1326");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1357");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -12897,9 +14197,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1327() throws Throwable {
+    public void test1358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1327");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1358");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -12927,9 +14227,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1328() throws Throwable {
+    public void test1359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1328");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1359");
         org.jsoup.nodes.Evaluator.IndexGreaterThan indexGreaterThan1 = new org.jsoup.nodes.Evaluator.IndexGreaterThan((int) '#');
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -12962,9 +14262,51 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1329() throws Throwable {
+    public void test1360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1329");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1360");
+        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
+        org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node5 = document4.parentNode;
+        org.jsoup.select.Elements elements7 = document4.getElementsByIndexLessThan((int) 'a');
+        boolean boolean8 = indexLessThan1.matches((org.jsoup.nodes.Element) document4);
+        org.jsoup.nodes.Evaluator.Attribute attribute10 = new org.jsoup.nodes.Evaluator.Attribute("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Document document13 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node14 = document13.parentNode;
+        java.lang.String str15 = document13.title();
+        org.jsoup.nodes.Attributes attributes16 = document13.attributes();
+        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node20 = document19.parentNode;
+        org.jsoup.select.Elements elements22 = document19.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.nodes.Element element23 = document13.prependChild((org.jsoup.nodes.Node) document19);
+        org.jsoup.select.Elements elements25 = document13.select("hi");
+        org.jsoup.select.Elements elements26 = document13.children();
+        boolean boolean27 = attribute10.matches((org.jsoup.nodes.Element) document13);
+        boolean boolean28 = indexLessThan1.matches((org.jsoup.nodes.Element) document13);
+        org.jsoup.select.Elements elements31 = document13.getElementsByAttributeValueEnding("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "hi! <html> <head> </head> <body> hi! </body> </html>");
+        org.junit.Assert.assertNotNull(document4);
+        org.junit.Assert.assertNull(node5);
+        org.junit.Assert.assertNotNull(elements7);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(document13);
+        org.junit.Assert.assertNull(node14);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertNotNull(attributes16);
+        org.junit.Assert.assertNotNull(document19);
+        org.junit.Assert.assertNull(node20);
+        org.junit.Assert.assertNotNull(elements22);
+        org.junit.Assert.assertNotNull(element23);
+        org.junit.Assert.assertNotNull(elements25);
+        org.junit.Assert.assertNotNull(elements26);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+        org.junit.Assert.assertNotNull(elements31);
+    }
+
+    @Test
+    public void test1361() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1361");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -13006,9 +14348,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1330() throws Throwable {
+    public void test1362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1330");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1362");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -13028,9 +14370,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1331() throws Throwable {
+    public void test1363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1331");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1363");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str4 = document3.outerHtml();
         org.jsoup.select.Elements elements5 = document3.getAllElements();
@@ -13068,9 +14410,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1332() throws Throwable {
+    public void test1364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1332");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1364");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -13109,9 +14451,19 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1333() throws Throwable {
+    public void test1365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1333");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1365");
+        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
+        java.lang.String str2 = document1.tagName();
+        org.junit.Assert.assertNotNull(document1);
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "#root" + "'", str2, "#root");
+    }
+
+    @Test
+    public void test1366() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1366");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -13138,9 +14490,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1334() throws Throwable {
+    public void test1367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1334");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1367");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -13165,17 +14517,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1335() throws Throwable {
+    public void test1368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1335");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1368");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("", "org.jsoup.select.Selector$SelectorParseException: <html>\n <head>\n </head>\n <body>\n </body>\n</html>");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1336() throws Throwable {
+    public void test1369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1336");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1369");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("<html>\n<head>\n</head>\n<body>\n head\n</body>\n</html>", "<?head>");
         org.jsoup.nodes.Element element4 = document2.getElementById("[ , !]");
         org.junit.Assert.assertNotNull(document2);
@@ -13183,9 +14535,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1337() throws Throwable {
+    public void test1370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1337");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1370");
         org.jsoup.nodes.Document document3 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str4 = document3.baseUri();
         org.jsoup.nodes.Element element5 = document3.head();
@@ -13213,9 +14565,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1338() throws Throwable {
+    public void test1371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1338");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1371");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -13269,17 +14621,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1339() throws Throwable {
+    public void test1372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1339");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1372");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("", "<html> <head> </head> <body> hi! </body> </html> <html> <head> </head> <body> hi! </body> </html>  <html> <head> </head> <body> hi! </body> </html>");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1340() throws Throwable {
+    public void test1373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1340");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1373");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -13303,9 +14655,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1341() throws Throwable {
+    public void test1374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1341");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1374");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -13346,9 +14698,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1342() throws Throwable {
+    public void test1375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1342");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1375");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("<html>\n<head>\n</head>\n<body>\n head\n</body>\n</html>");
         org.jsoup.nodes.Element element2 = document1.empty();
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -13377,9 +14729,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1343() throws Throwable {
+    public void test1376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1343");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1376");
         org.jsoup.nodes.Evaluator.AttributeWithValueStarting attributeWithValueStarting2 = new org.jsoup.nodes.Evaluator.AttributeWithValueStarting("hi", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         attributeWithValueStarting2.value = "hi!";
         java.lang.String str5 = attributeWithValueStarting2.value;
@@ -13473,9 +14825,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1344() throws Throwable {
+    public void test1377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1344");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1377");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         org.jsoup.nodes.Element element3 = new org.jsoup.nodes.Element(tag1, "!");
         boolean boolean4 = tag1.isData();
@@ -13500,9 +14852,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1345() throws Throwable {
+    public void test1378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1345");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1378");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Element element3 = document1.appendText("<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.select.Elements elements6 = document1.getElementsByAttributeValueEnding("<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!", "<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>");
@@ -13517,9 +14869,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1346() throws Throwable {
+    public void test1379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1346");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1379");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -13546,9 +14898,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1347() throws Throwable {
+    public void test1380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1347");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1380");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -13588,9 +14940,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1348() throws Throwable {
+    public void test1381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1348");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1381");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -13631,9 +14983,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1349() throws Throwable {
+    public void test1382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1349");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1382");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -13696,9 +15048,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1350() throws Throwable {
+    public void test1383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1350");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1383");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -13742,9 +15094,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1351() throws Throwable {
+    public void test1384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1351");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1384");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -13791,9 +15143,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1352() throws Throwable {
+    public void test1385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1352");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1385");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValueStarting("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "head");
         boolean boolean6 = elements4.hasAttr("<html>\n<head>\n</head>\n<body>\n</body>\n</html>");
@@ -13809,9 +15161,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1353() throws Throwable {
+    public void test1386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1353");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1386");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str3 = document2.baseUri();
         java.lang.String str4 = document2.html();
@@ -13834,9 +15186,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1354() throws Throwable {
+    public void test1387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1354");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1387");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         boolean boolean2 = tag1.preserveWhitespace();
         java.lang.String str3 = tag1.toString();
@@ -13861,9 +15213,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1355() throws Throwable {
+    public void test1388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1355");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1388");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -13889,9 +15241,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1356() throws Throwable {
+    public void test1389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1356");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1389");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -13907,9 +15259,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1357() throws Throwable {
+    public void test1390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1357");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1390");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -14007,9 +15359,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1358() throws Throwable {
+    public void test1391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1358");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1391");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -14032,9 +15384,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1359() throws Throwable {
+    public void test1392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1359");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1392");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -14098,9 +15450,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1360() throws Throwable {
+    public void test1393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1360");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1393");
         org.jsoup.nodes.Attributes attributes0 = new org.jsoup.nodes.Attributes();
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str4 = document3.outerHtml();
@@ -14163,9 +15515,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1361() throws Throwable {
+    public void test1394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1361");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1394");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("");
         document1.baseUri = "";
         org.jsoup.nodes.Element element5 = document1.html("#document");
@@ -14178,9 +15530,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1362() throws Throwable {
+    public void test1395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1362");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1395");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -14200,9 +15552,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1363() throws Throwable {
+    public void test1396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1363");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1396");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -14232,9 +15584,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1364() throws Throwable {
+    public void test1397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1364");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1397");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>");
         java.lang.Object obj2 = null;
         boolean boolean3 = tag1.equals(obj2);
@@ -14281,9 +15633,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1365() throws Throwable {
+    public void test1398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1365");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1398");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -14313,9 +15665,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1366() throws Throwable {
+    public void test1399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1366");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1399");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -14331,9 +15683,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1367() throws Throwable {
+    public void test1400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1367");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1400");
         org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot2 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!=\"#declaration\"", "<html>\n<head>\n</head>\n<body>\n hi=&quot;&quot;\n</body>\n</html>");
         org.jsoup.nodes.Evaluator.Tag tag4 = new org.jsoup.nodes.Evaluator.Tag("hi!");
         org.jsoup.nodes.Document document7 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -14378,9 +15730,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1368() throws Throwable {
+    public void test1401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1368");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1401");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -14405,9 +15757,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1369() throws Throwable {
+    public void test1402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1369");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1402");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -14425,9 +15777,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1370() throws Throwable {
+    public void test1403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1370");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1403");
         org.jsoup.safety.Whitelist whitelist2 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -14439,9 +15791,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1371() throws Throwable {
+    public void test1404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1371");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1404");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>", "");
         org.jsoup.nodes.TextNode textNode4 = textNode2.text(" hi=\"\"");
         boolean boolean5 = textNode2.isBlank();
@@ -14487,9 +15839,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1372() throws Throwable {
+    public void test1405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1372");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1405");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -14536,9 +15888,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1373() throws Throwable {
+    public void test1406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1373");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1406");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("\n<!--<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!-->", "");
         org.jsoup.select.Elements elements5 = document2.getElementsByAttributeValueNot("<html> \n<head> \n</head> \n<body> org.jsoup.select.Selector$SelectorParseException:  hi!  &lt;#root&gt; \n <html> \n  <head> \n  </head> \n  <body>\n    &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;   \n  </body>\n </html>\n</body>\n</html>", "<html>\n<head>\n</head>\n<body> #text\n</body>\n</html>\n<html> \n<head> \n</head> \n<body>\n  head  \n</body>\n</html>");
         org.jsoup.nodes.Element element7 = document2.toggleClass("hi! <html> <head> </head> <body> hi! </body> </html>");
@@ -14548,9 +15900,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1374() throws Throwable {
+    public void test1407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1374");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1407");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.select.Elements elements3 = document2.getAllElements();
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) (short) 10);
@@ -14567,9 +15919,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1375() throws Throwable {
+    public void test1408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1375");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1408");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -14634,9 +15986,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1376() throws Throwable {
+    public void test1409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1376");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1409");
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node4 = document3.parentNode;
         org.jsoup.select.Elements elements6 = document3.getElementsByIndexLessThan((int) 'a');
@@ -14653,9 +16005,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1377() throws Throwable {
+    public void test1410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1377");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1410");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         document2.baseUri = "<?hi>";
@@ -14664,9 +16016,58 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1378() throws Throwable {
+    public void test1411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1378");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1411");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
+        java.lang.String str6 = document2.text();
+        org.jsoup.nodes.Element element8 = document2.text("");
+        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str12 = document11.outerHtml();
+        org.jsoup.select.Elements elements13 = document11.getAllElements();
+        boolean boolean14 = element8.equals((java.lang.Object) elements13);
+        java.lang.String str15 = elements13.html();
+        org.jsoup.select.Selector.SelectorParseException selectorParseException17 = new org.jsoup.select.Selector.SelectorParseException("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
+        org.jsoup.select.Selector.SelectorParseException selectorParseException19 = new org.jsoup.select.Selector.SelectorParseException("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
+        selectorParseException17.addSuppressed((java.lang.Throwable) selectorParseException19);
+        java.lang.Throwable[] throwableArray21 = selectorParseException17.getSuppressed();
+        boolean boolean22 = elements13.remove((java.lang.Object) throwableArray21);
+        org.jsoup.select.Elements elements24 = elements13.html("hi! hi!  hi!");
+        org.jsoup.nodes.TextNode textNode27 = org.jsoup.nodes.TextNode.createFromEncoded("\n<!---->", "\n<!---->");
+        org.jsoup.nodes.TextNode textNode29 = textNode27.text("");
+        java.lang.String str30 = textNode27.nodeName();
+        java.lang.String str31 = textNode27.text();
+        boolean boolean32 = elements24.contains((java.lang.Object) str31);
+        org.jsoup.nodes.Element element34 = elements24.get((int) (short) 0);
+        org.jsoup.select.Elements elements36 = elements24.html("<html>\n    <head>\n    </head>\n    <body>\n     &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n    </body>\n   </html>");
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertNotNull(elements5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "hi!" + "'", str6, "hi!");
+        org.junit.Assert.assertNotNull(element8);
+        org.junit.Assert.assertNotNull(document11);
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str12, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!" + "'", str15, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
+        org.junit.Assert.assertNotNull(throwableArray21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(elements24);
+        org.junit.Assert.assertNotNull(textNode27);
+        org.junit.Assert.assertNotNull(textNode29);
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "#text" + "'", str30, "#text");
+        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "" + "'", str31, "");
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
+        org.junit.Assert.assertNotNull(element34);
+        org.junit.Assert.assertNotNull(elements36);
+    }
+
+    @Test
+    public void test1412() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1412");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -14698,9 +16099,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1379() throws Throwable {
+    public void test1413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1379");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1413");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -14763,9 +16164,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1380() throws Throwable {
+    public void test1414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1380");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1414");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -14781,9 +16182,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1381() throws Throwable {
+    public void test1415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1381");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1415");
         org.jsoup.nodes.Evaluator.IndexEquals indexEquals1 = new org.jsoup.nodes.Evaluator.IndexEquals(0);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -14828,9 +16229,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1382() throws Throwable {
+    public void test1416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1382");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1416");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -14855,16 +16256,16 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1383() throws Throwable {
+    public void test1417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1383");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1417");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("<html>\n<head>\n hi=&quot;&quot;\n</head>\n<body> hi!hi=&quot;&quot;\n</body>hi=&quot;&quot;\n</html>hi=&quot;&quot;\n\n<html>\n<head>\n hi=&quot;&quot;\n</head>\n<body> hi!hi=&quot;&quot;\n</body>hi=&quot;&quot;\n</html>\n\n<head>\n hi=&quot;&quot;\n</head>\n\n<body> hi!hi=&quot;&quot;\n</body>");
     }
 
     @Test
-    public void test1384() throws Throwable {
+    public void test1418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1384");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1418");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
         org.jsoup.select.Elements elements4 = document2.getElementsByAttribute("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         boolean boolean5 = elements4.isEmpty();
@@ -14930,9 +16331,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1385() throws Throwable {
+    public void test1419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1385");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1419");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!", "#comment");
         java.lang.String str3 = attribute2.getKey();
         java.lang.String str4 = attribute2.toString();
@@ -14947,9 +16348,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1386() throws Throwable {
+    public void test1420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1386");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1420");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -14996,9 +16397,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1387() throws Throwable {
+    public void test1421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1387");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1421");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -15056,17 +16457,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1388() throws Throwable {
+    public void test1422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1388");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1422");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("<html>\n<head>\n #document\n</head>\n<body> hi!#document\n</body>#document\n</html>#document\n<head>\n #document\n</head>\n<body> hi!#document\n</body>#document\n#document\nhi!#document", "hi! hi!  hi!");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1389() throws Throwable {
+    public void test1423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1389");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1423");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -15088,17 +16489,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1390() throws Throwable {
+    public void test1424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1390");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1424");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("[!]");
         org.junit.Assert.assertNotNull(document1);
     }
 
     @Test
-    public void test1391() throws Throwable {
+    public void test1425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1391");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1425");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -15171,9 +16572,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1392() throws Throwable {
+    public void test1426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1392");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1426");
         org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("[4]", "");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node6 = document5.parentNode;
@@ -15201,9 +16602,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1393() throws Throwable {
+    public void test1427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1393");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1427");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -15222,9 +16623,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1394() throws Throwable {
+    public void test1428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1394");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1428");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -15248,9 +16649,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1395() throws Throwable {
+    public void test1429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1395");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1429");
         org.jsoup.nodes.Evaluator.AttributeWithValueStarting attributeWithValueStarting2 = new org.jsoup.nodes.Evaluator.AttributeWithValueStarting("<?hi!>", "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!=\"#comment\"");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -15266,9 +16667,41 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1396() throws Throwable {
+    public void test1430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1396");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1430");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node7 = document6.parentNode;
+        java.lang.String str8 = document6.title();
+        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
+        org.jsoup.nodes.Element element13 = document2.removeClass("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
+        java.lang.String str14 = document2.text();
+        org.jsoup.nodes.Element element16 = document2.addClass("#document");
+        org.jsoup.nodes.Element element18 = document2.createElement("hi!");
+        org.jsoup.select.Elements elements21 = document2.getElementsByAttributeValueContaining("#comment", "#comment");
+        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream22 = elements21.parallelStream();
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(document6);
+        org.junit.Assert.assertNull(node7);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNotNull(element10);
+        org.junit.Assert.assertNotNull(element11);
+        org.junit.Assert.assertNotNull(element13);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "hi! <html> <head> </head> <body> hi! </body> </html>" + "'", str14, "hi! <html> <head> </head> <body> hi! </body> </html>");
+        org.junit.Assert.assertNotNull(element16);
+        org.junit.Assert.assertNotNull(element18);
+        org.junit.Assert.assertNotNull(elements21);
+        org.junit.Assert.assertNotNull(elementStream22);
+    }
+
+    @Test
+    public void test1431() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1431");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         boolean boolean2 = tag1.isData();
         org.jsoup.nodes.Element element4 = new org.jsoup.nodes.Element(tag1, " hi=\"\"");
@@ -15374,9 +16807,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1397() throws Throwable {
+    public void test1432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1397");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1432");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -15426,9 +16859,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1398() throws Throwable {
+    public void test1433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1398");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1433");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -15450,9 +16883,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1399() throws Throwable {
+    public void test1434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1399");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1434");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -15491,9 +16924,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1400() throws Throwable {
+    public void test1435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1400");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1435");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#text", "");
         org.jsoup.nodes.Element element4 = document2.append("<html>\n<head>\n</head>\n<body>\n head\n</body>\n</html>");
         java.lang.String str5 = document2.outerHtml();
@@ -15505,9 +16938,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1401() throws Throwable {
+    public void test1436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1401");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1436");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         document2.setBaseUri("hi");
@@ -15520,9 +16953,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1402() throws Throwable {
+    public void test1437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1402");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1437");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -15546,9 +16979,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1403() throws Throwable {
+    public void test1438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1403");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1438");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         boolean boolean2 = tag1.canContainBlock();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -15660,9 +17093,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1404() throws Throwable {
+    public void test1439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1404");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1439");
         org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue("<body>\n <!----> hi!\n</body>", "<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node6 = document5.parentNode;
@@ -15699,9 +17132,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1405() throws Throwable {
+    public void test1440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1405");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1440");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str3 = document2.baseUri();
         org.jsoup.nodes.Element element4 = document2.head();
@@ -15725,9 +17158,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1406() throws Throwable {
+    public void test1441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1406");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1441");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
@@ -15750,9 +17183,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1407() throws Throwable {
+    public void test1442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1407");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1442");
         org.jsoup.nodes.Evaluator.AllElements allElements0 = new org.jsoup.nodes.Evaluator.AllElements();
         org.jsoup.nodes.Document document3 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node4 = document3.parentNode;
@@ -15830,9 +17263,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1408() throws Throwable {
+    public void test1443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1408");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1443");
         org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("");
         org.jsoup.select.Elements elements4 = document1.getElementsByAttributeValueStarting("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "head");
         org.jsoup.select.Elements elements6 = elements4.html("[]");
@@ -15853,9 +17286,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1409() throws Throwable {
+    public void test1444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1409");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1444");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -15887,9 +17320,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1410() throws Throwable {
+    public void test1445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1410");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1445");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -15941,9 +17374,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1411() throws Throwable {
+    public void test1446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1411");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1446");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -16009,9 +17442,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1412() throws Throwable {
+    public void test1447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1412");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1447");
         org.jsoup.nodes.Evaluator.IndexEquals indexEquals1 = new org.jsoup.nodes.Evaluator.IndexEquals((int) 'i');
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -16059,9 +17492,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1413() throws Throwable {
+    public void test1448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1413");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1448");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("[ , !]");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -16096,9 +17529,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1414() throws Throwable {
+    public void test1449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1414");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1449");
         org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot2 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("<html> <head> </head> <body> hi! </body> </html> <html> <head> </head> <body> hi! </body> </html>  <html> <head> </head> <body> hi! </body> </html>", "<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -16117,9 +17550,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1415() throws Throwable {
+    public void test1450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1415");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1450");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -16143,9 +17576,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1416() throws Throwable {
+    public void test1451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1416");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1451");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         org.jsoup.nodes.Element element3 = new org.jsoup.nodes.Element(tag1, "!");
         boolean boolean4 = tag1.isData();
@@ -16172,9 +17605,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1417() throws Throwable {
+    public void test1452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1417");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1452");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -16218,9 +17651,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1418() throws Throwable {
+    public void test1453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1418");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1453");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -16281,9 +17714,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1419() throws Throwable {
+    public void test1454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1419");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1454");
         org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("<html class=\" hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<html class=\" hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<head class=\" hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n\n<body class=\" hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>", "[ , #, d, o, c, u, m, e, n, t]");
         java.lang.String str4 = textNode2.absUrl("<html> <head> </head> <body> hi! </body> </html> <head> </head> <body> hi! </body> hi!");
         boolean boolean5 = textNode2.isBlank();
@@ -16306,9 +17739,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1420() throws Throwable {
+    public void test1455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1420");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1455");
         org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot2 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>", "<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -16343,9 +17776,44 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1421() throws Throwable {
+    public void test1456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1421");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1456");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node3 = document2.parentNode;
+        java.lang.String str4 = document2.title();
+        org.jsoup.nodes.Attributes attributes5 = document2.attributes();
+        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node9 = document8.parentNode;
+        org.jsoup.select.Elements elements11 = document8.getElementsByIndexLessThan((int) 'a');
+        org.jsoup.nodes.Element element12 = document2.prependChild((org.jsoup.nodes.Node) document8);
+        org.jsoup.select.Elements elements13 = document8.children();
+        org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding16 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n  <head>\n  </head>", "[]");
+        org.jsoup.nodes.Document document19 = org.jsoup.Jsoup.parseBodyFragment("[ , !]", "hi=\"\"");
+        org.jsoup.nodes.Element element21 = document19.removeClass("[ , #, d, o, c, u, m, e, n, t]");
+        boolean boolean22 = attributeWithValueEnding16.matches(element21);
+        org.jsoup.select.Elements elements25 = element21.getElementsByAttributeValueStarting(" ", " !");
+        int int26 = elements13.indexOf((java.lang.Object) elements25);
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertNull(node3);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
+        org.junit.Assert.assertNotNull(attributes5);
+        org.junit.Assert.assertNotNull(document8);
+        org.junit.Assert.assertNull(node9);
+        org.junit.Assert.assertNotNull(elements11);
+        org.junit.Assert.assertNotNull(element12);
+        org.junit.Assert.assertNotNull(elements13);
+        org.junit.Assert.assertNotNull(document19);
+        org.junit.Assert.assertNotNull(element21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(elements25);
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + (-1) + "'", int26 == (-1));
+    }
+
+    @Test
+    public void test1457() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1457");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
         org.jsoup.nodes.Element element3 = new org.jsoup.nodes.Element(tag1, "!");
         boolean boolean4 = tag1.isData();
@@ -16388,9 +17856,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1422() throws Throwable {
+    public void test1458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1422");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1458");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -16493,9 +17961,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1423() throws Throwable {
+    public void test1459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1423");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1459");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell(" hi=\"\"");
         java.lang.String str2 = document1.baseUri();
         org.jsoup.select.Elements elements3 = document1.getAllElements();
@@ -16523,9 +17991,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1424() throws Throwable {
+    public void test1460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1424");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1460");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell(" !");
         // The following exception was thrown during execution in test generation
         try {
@@ -16538,9 +18006,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1425() throws Throwable {
+    public void test1461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1425");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1461");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -16584,9 +18052,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1426() throws Throwable {
+    public void test1462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1426");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1462");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -16634,9 +18102,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1427() throws Throwable {
+    public void test1463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1427");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1463");
         org.jsoup.nodes.Evaluator.AttributeWithValueNot attributeWithValueNot2 = new org.jsoup.nodes.Evaluator.AttributeWithValueNot("<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>", "<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parseBodyFragment("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
         boolean boolean6 = attributeWithValueNot2.matches((org.jsoup.nodes.Element) document5);
@@ -16724,9 +18192,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1428() throws Throwable {
+    public void test1464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1428");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1464");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
         java.lang.String str3 = document2.baseUri();
         org.jsoup.nodes.Element element5 = document2.createElement("\n<!---->");
@@ -16740,9 +18208,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1429() throws Throwable {
+    public void test1465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1429");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1465");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -16809,9 +18277,27 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1430() throws Throwable {
+    public void test1466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1430");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1466");
+        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        java.lang.String str3 = document2.outerHtml();
+        org.jsoup.select.Elements elements4 = document2.getAllElements();
+        java.lang.String str5 = document2.data();
+        org.jsoup.nodes.Element element7 = document2.text("");
+        org.jsoup.nodes.Element element9 = element7.val("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n hi\n&lt;/body&gt;\n&lt;/html&gt;\"");
+        org.junit.Assert.assertNotNull(document2);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        org.junit.Assert.assertNotNull(elements4);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
+        org.junit.Assert.assertNotNull(element7);
+        org.junit.Assert.assertNotNull(element9);
+    }
+
+    @Test
+    public void test1467() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1467");
         org.jsoup.nodes.Evaluator.Class class1 = new org.jsoup.nodes.Evaluator.Class("hi");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -16847,9 +18333,38 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1431() throws Throwable {
+    public void test1468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1431");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1468");
+        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
+        boolean boolean2 = tag1.preserveWhitespace();
+        java.lang.String str3 = tag1.toString();
+        org.jsoup.nodes.Document document7 = org.jsoup.parser.Parser.parse("hi!", "hi!");
+        org.jsoup.nodes.Node node8 = document7.parentNode;
+        java.lang.String str9 = document7.title();
+        org.jsoup.nodes.Attributes attributes10 = document7.attributes();
+        java.lang.String str11 = attributes10.html();
+        org.jsoup.nodes.Element element12 = new org.jsoup.nodes.Element(tag1, "!", attributes10);
+        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor13 = attributes10.iterator();
+        java.lang.String str15 = attributes10.get("<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
+        java.lang.String str16 = attributes10.toString();
+        org.junit.Assert.assertNotNull(tag1);
+        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "hi!" + "'", str3, "hi!");
+        org.junit.Assert.assertNotNull(document7);
+        org.junit.Assert.assertNull(node8);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "" + "'", str9, "");
+        org.junit.Assert.assertNotNull(attributes10);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertNotNull(attributeItor13);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+    }
+
+    @Test
+    public void test1469() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1469");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -16901,9 +18416,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1432() throws Throwable {
+    public void test1470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1432");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1470");
         org.jsoup.nodes.XmlDeclaration xmlDeclaration3 = new org.jsoup.nodes.XmlDeclaration("hi!", "!", false);
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node7 = document6.parentNode;
@@ -16919,9 +18434,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1433() throws Throwable {
+    public void test1471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1433");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1471");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -16948,9 +18463,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1434() throws Throwable {
+    public void test1472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1434");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1472");
         org.jsoup.nodes.Evaluator.Attribute attribute1 = new org.jsoup.nodes.Evaluator.Attribute("h");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -17001,9 +18516,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1435() throws Throwable {
+    public void test1473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1435");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1473");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("hi!");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -17032,9 +18547,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1436() throws Throwable {
+    public void test1474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1436");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1474");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -17075,9 +18590,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1437() throws Throwable {
+    public void test1475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1437");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1475");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -17097,9 +18612,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1438() throws Throwable {
+    public void test1476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1438");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1476");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -17130,17 +18645,17 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1439() throws Throwable {
+    public void test1477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1439");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1477");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("!\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "&lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt; &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;");
         org.junit.Assert.assertNotNull(document2);
     }
 
     @Test
-    public void test1440() throws Throwable {
+    public void test1478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1440");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1478");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
         java.lang.String str2 = document1.baseUri();
         org.jsoup.nodes.Element element4 = document1.toggleClass("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!=\"#declaration\"");
@@ -17150,9 +18665,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1441() throws Throwable {
+    public void test1479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1441");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1479");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -17230,9 +18745,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1442() throws Throwable {
+    public void test1480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1442");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1480");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("hi! <html> <head> </head> <body> hi! </body> </html>");
         java.lang.String str2 = document1.baseUri();
         org.junit.Assert.assertNotNull(document1);
@@ -17240,9 +18755,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1443() throws Throwable {
+    public void test1481() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1443");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1481");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -17266,9 +18781,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1444() throws Throwable {
+    public void test1482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1444");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1482");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>", "<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n hi\n&lt;/body&gt;\n&lt;/html&gt;\"");
         org.jsoup.parser.Tag tag3 = document2.tag();
         org.jsoup.nodes.Element element5 = new org.jsoup.nodes.Element(tag3, "\n&lt;!----&gt;");
@@ -17302,9 +18817,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1445() throws Throwable {
+    public void test1483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1445");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1483");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -17332,9 +18847,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1446() throws Throwable {
+    public void test1484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1446");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1484");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -17356,9 +18871,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1447() throws Throwable {
+    public void test1485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1447");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1485");
         org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
         java.lang.String str2 = tag1.toString();
         boolean boolean3 = tag1.isInline();
@@ -17479,9 +18994,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1448() throws Throwable {
+    public void test1486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1448");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1486");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell(" hi=\"\"");
         java.lang.String str2 = document1.baseUri();
         org.jsoup.select.Elements elements3 = document1.getAllElements();
@@ -17502,9 +19017,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1449() throws Throwable {
+    public void test1487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1449");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1487");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node3 = document2.parentNode;
         java.lang.String str4 = document2.title();
@@ -17526,9 +19041,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1450() throws Throwable {
+    public void test1488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1450");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1488");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         document2.setBaseUri("hi");
@@ -17543,9 +19058,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1451() throws Throwable {
+    public void test1489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1451");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1489");
         org.jsoup.nodes.Evaluator.IndexEquals indexEquals1 = new org.jsoup.nodes.Evaluator.IndexEquals((int) '#');
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str5 = document4.outerHtml();
@@ -17575,9 +19090,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1452() throws Throwable {
+    public void test1490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1452");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1490");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -17611,9 +19126,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1453() throws Throwable {
+    public void test1491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1453");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1491");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parseBodyFragment("&lt;html class=&quot; hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;&quot; head=&quot;&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;&quot; value=&quot;#text&quot;&gt;\n&lt;head class=&quot; hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;&quot; head=&quot;&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;&quot; value=&quot;#text&quot;&gt;\n&lt;/head&gt;\n&lt;body class=&quot; hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;&quot; head=&quot;&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;&quot; value=&quot;#text&quot;&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\n\n&lt;html class=&quot; hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;&quot; head=&quot;&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;&quot; value=&quot;#text&quot;&gt;\n&lt;head class=&quot; hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;&quot; head=&quot;&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;&quot; value=&quot;#text&quot;&gt;\n&lt;/head&gt;\n&lt;body class=&quot; hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;&quot; head=&quot;&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;&quot; value=&quot;#text&quot;&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\n\n&lt;head class=&quot; hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;&quot; head=&quot;&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;&quot; value=&quot;#text&quot;&gt;\n&lt;/head&gt;\n\n&lt;body class=&quot; hi &lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n [ , !]\n&lt;/body&gt;\n&lt;/html&gt;&quot; head=&quot;&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;&quot; value=&quot;#text&quot;&gt; hi!\n&lt;/body&gt;", " !");
         java.lang.Object obj3 = null;
         boolean boolean4 = document2.equals(obj3);
@@ -17622,9 +19137,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1454() throws Throwable {
+    public void test1492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1454");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1492");
         org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
         org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str6 = document5.outerHtml();
@@ -17663,9 +19178,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1455() throws Throwable {
+    public void test1493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1455");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1493");
         org.jsoup.safety.Whitelist whitelist1 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -17677,9 +19192,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1456() throws Throwable {
+    public void test1494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1456");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1494");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
@@ -17703,9 +19218,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1457() throws Throwable {
+    public void test1495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1457");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1495");
         org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parseBodyFragment("[ , !]", "hi=\"\"");
         java.lang.String str3 = document2.html();
         java.lang.String str4 = document2.html();
@@ -17803,9 +19318,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1458() throws Throwable {
+    public void test1496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1458");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1496");
         org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -17824,9 +19339,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1459() throws Throwable {
+    public void test1497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1459");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1497");
         org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("[ , !]");
         org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         org.jsoup.nodes.Node node5 = document4.parentNode;
@@ -17862,9 +19377,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1460() throws Throwable {
+    public void test1498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1460");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1498");
         org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell(" hi=\"\"");
         java.lang.String str2 = document1.baseUri();
         org.jsoup.select.Elements elements3 = document1.getAllElements();
@@ -17878,9 +19393,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1461() throws Throwable {
+    public void test1499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1461");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1499");
         org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>");
         org.jsoup.nodes.Element element3 = document1.createElement("<html> <head> </head> <body> hi! </body> </html> hi! hi!");
         org.junit.Assert.assertNotNull(document1);
@@ -17888,9 +19403,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1462() throws Throwable {
+    public void test1500() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1462");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1500");
         org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
         java.lang.String str3 = document2.outerHtml();
         org.jsoup.select.Elements elements4 = document2.getAllElements();
@@ -17934,1793 +19449,6 @@ public class RandoopRegressionTest2 {
         org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + true + "'", boolean30 == true);
         org.junit.Assert.assertNotNull(element32);
         org.junit.Assert.assertNotNull(element35);
-    }
-
-    @Test
-    public void test1463() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1463");
-        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
-        org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node5 = document4.parentNode;
-        org.jsoup.select.Elements elements7 = document4.getElementsByIndexLessThan((int) 'a');
-        boolean boolean8 = indexLessThan1.matches((org.jsoup.nodes.Element) document4);
-        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node12 = document11.parentNode;
-        org.jsoup.select.Elements elements13 = document11.getAllElements();
-        org.jsoup.select.Elements elements14 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) indexLessThan1, (org.jsoup.nodes.Element) document11);
-        org.jsoup.nodes.Element element15 = document11.body();
-        java.lang.StringBuilder stringBuilder16 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            element15.outerHtml(stringBuilder16);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document4);
-        org.junit.Assert.assertNull(node5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(document11);
-        org.junit.Assert.assertNull(node12);
-        org.junit.Assert.assertNotNull(elements13);
-        org.junit.Assert.assertNotNull(elements14);
-        org.junit.Assert.assertNotNull(element15);
-    }
-
-    @Test
-    public void test1464() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1464");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("#text", "");
-        org.jsoup.nodes.Element element3 = document2.body();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(element3);
-    }
-
-    @Test
-    public void test1465() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1465");
-        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("<?head>");
-        java.util.Set<java.lang.String> strSet2 = document1.classNames();
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertNotNull(strSet2);
-    }
-
-    @Test
-    public void test1466() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1466");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str3 = document2.outerHtml();
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node7 = document6.parentNode;
-        java.lang.String str8 = document6.title();
-        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
-        org.jsoup.nodes.Attributes attributes12 = document6.attributes();
-        boolean boolean14 = attributes12.hasKey("hi!");
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor15 = attributes12.iterator();
-        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node19 = document18.parentNode;
-        java.lang.String str20 = document18.title();
-        org.jsoup.nodes.Attributes attributes21 = document18.attributes();
-        java.lang.String str22 = attributes21.html();
-        attributes12.addAll(attributes21);
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor24 = attributes12.iterator();
-        org.jsoup.nodes.Document document27 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str28 = document27.outerHtml();
-        org.jsoup.nodes.Document document31 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node32 = document31.parentNode;
-        java.lang.String str33 = document31.title();
-        org.jsoup.nodes.Element element35 = document31.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element36 = document27.appendChild((org.jsoup.nodes.Node) document31);
-        org.jsoup.nodes.Attributes attributes37 = document31.attributes();
-        boolean boolean39 = attributes37.hasKey("hi!");
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor40 = attributes37.iterator();
-        org.jsoup.nodes.Document document43 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node44 = document43.parentNode;
-        java.lang.String str45 = document43.title();
-        org.jsoup.nodes.Attributes attributes46 = document43.attributes();
-        java.lang.String str47 = attributes46.html();
-        attributes37.addAll(attributes46);
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor49 = attributes46.iterator();
-        attributes12.addAll(attributes46);
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator51 = attributes46.spliterator();
-        attributes46.remove("hi!");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertNull(node7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(attributes12);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(attributeItor15);
-        org.junit.Assert.assertNotNull(document18);
-        org.junit.Assert.assertNull(node19);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
-        org.junit.Assert.assertNotNull(attributes21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertNotNull(attributeItor24);
-        org.junit.Assert.assertNotNull(document27);
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str28, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document31);
-        org.junit.Assert.assertNull(node32);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "" + "'", str33, "");
-        org.junit.Assert.assertNotNull(element35);
-        org.junit.Assert.assertNotNull(element36);
-        org.junit.Assert.assertNotNull(attributes37);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertNotNull(attributeItor40);
-        org.junit.Assert.assertNotNull(document43);
-        org.junit.Assert.assertNull(node44);
-        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "" + "'", str45, "");
-        org.junit.Assert.assertNotNull(attributes46);
-        org.junit.Assert.assertEquals("'" + str47 + "' != '" + "" + "'", str47, "");
-        org.junit.Assert.assertNotNull(attributeItor49);
-        org.junit.Assert.assertNotNull(attributeSpliterator51);
-    }
-
-    @Test
-    public void test1467() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1467");
-        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan1 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
-        org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node5 = document4.parentNode;
-        org.jsoup.select.Elements elements7 = document4.getElementsByIndexLessThan((int) 'a');
-        boolean boolean8 = indexLessThan1.matches((org.jsoup.nodes.Element) document4);
-        indexLessThan1.index = (byte) 10;
-        org.jsoup.nodes.Document document12 = org.jsoup.Jsoup.parseBodyFragment("head");
-        boolean boolean13 = indexLessThan1.matches((org.jsoup.nodes.Element) document12);
-        org.junit.Assert.assertNotNull(document4);
-        org.junit.Assert.assertNull(node5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(document12);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-    }
-
-    @Test
-    public void test1468() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1468");
-        org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
-        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node7 = document6.parentNode;
-        org.jsoup.select.Elements elements9 = document6.getElementsByIndexLessThan((int) 'a');
-        boolean boolean10 = indexLessThan3.matches((org.jsoup.nodes.Element) document6);
-        org.jsoup.nodes.Document document13 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node14 = document13.parentNode;
-        org.jsoup.select.Elements elements15 = document13.getAllElements();
-        org.jsoup.select.Elements elements16 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) indexLessThan3, (org.jsoup.nodes.Element) document13);
-        boolean boolean17 = tag1.matches((org.jsoup.nodes.Element) document13);
-        document13.baseUri = "hi=\"\"";
-        org.jsoup.nodes.Element element21 = document13.appendText("");
-        org.jsoup.nodes.Element element23 = element21.prependText(" !");
-        org.jsoup.nodes.Element element25 = element23.addClass("\n<!---->");
-        java.util.List<org.jsoup.nodes.Node> nodeList26 = element23.childNodes();
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertNull(node7);
-        org.junit.Assert.assertNotNull(elements9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(document13);
-        org.junit.Assert.assertNull(node14);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertNotNull(elements16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNotNull(element23);
-        org.junit.Assert.assertNotNull(element25);
-        org.junit.Assert.assertNotNull(nodeList26);
-    }
-
-    @Test
-    public void test1469() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1469");
-        org.jsoup.nodes.Attribute attribute2 = org.jsoup.nodes.Attribute.createFromEncoded("head", "hi!");
-        java.lang.String str3 = attribute2.getKey();
-        org.jsoup.nodes.Evaluator.AllElements allElements4 = new org.jsoup.nodes.Evaluator.AllElements();
-        org.jsoup.nodes.Document document7 = org.jsoup.Jsoup.parseBodyFragment("hi", "hi");
-        boolean boolean8 = allElements4.matches((org.jsoup.nodes.Element) document7);
-        boolean boolean9 = attribute2.equals((java.lang.Object) allElements4);
-        org.jsoup.nodes.Evaluator.Tag tag11 = new org.jsoup.nodes.Evaluator.Tag("hi");
-        org.jsoup.nodes.Document document14 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str15 = document14.outerHtml();
-        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node19 = document18.parentNode;
-        java.lang.String str20 = document18.title();
-        org.jsoup.nodes.Element element22 = document18.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element23 = document14.appendChild((org.jsoup.nodes.Node) document18);
-        org.jsoup.nodes.Document document26 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node27 = document26.parentNode;
-        java.lang.String str28 = document26.title();
-        org.jsoup.nodes.Attributes attributes29 = document26.attributes();
-        org.jsoup.nodes.Document document32 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node33 = document32.parentNode;
-        org.jsoup.select.Elements elements35 = document32.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element36 = document26.prependChild((org.jsoup.nodes.Node) document32);
-        org.jsoup.select.Elements elements38 = document26.select("hi");
-        org.jsoup.nodes.Element element39 = document18.appendChild((org.jsoup.nodes.Node) document26);
-        org.jsoup.nodes.Element element41 = element39.prependText("#document");
-        org.jsoup.nodes.Document document43 = org.jsoup.nodes.Document.createShell(" !");
-        org.jsoup.nodes.Element element44 = element41.appendChild((org.jsoup.nodes.Node) document43);
-        boolean boolean45 = tag11.matches(element41);
-        org.jsoup.nodes.DataNode dataNode48 = new org.jsoup.nodes.DataNode("", "#document");
-        org.jsoup.nodes.Element element49 = element41.prependChild((org.jsoup.nodes.Node) dataNode48);
-        boolean boolean50 = attribute2.equals((java.lang.Object) element41);
-        org.junit.Assert.assertNotNull(attribute2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "head" + "'", str3, "head");
-        org.junit.Assert.assertNotNull(document7);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertNotNull(document14);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str15, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document18);
-        org.junit.Assert.assertNull(node19);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
-        org.junit.Assert.assertNotNull(element22);
-        org.junit.Assert.assertNotNull(element23);
-        org.junit.Assert.assertNotNull(document26);
-        org.junit.Assert.assertNull(node27);
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "" + "'", str28, "");
-        org.junit.Assert.assertNotNull(attributes29);
-        org.junit.Assert.assertNotNull(document32);
-        org.junit.Assert.assertNull(node33);
-        org.junit.Assert.assertNotNull(elements35);
-        org.junit.Assert.assertNotNull(element36);
-        org.junit.Assert.assertNotNull(elements38);
-        org.junit.Assert.assertNotNull(element39);
-        org.junit.Assert.assertNotNull(element41);
-        org.junit.Assert.assertNotNull(document43);
-        org.junit.Assert.assertNotNull(element44);
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
-        org.junit.Assert.assertNotNull(element49);
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
-    }
-
-    @Test
-    public void test1470() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1470");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements4 = document2.getAllElements();
-        org.jsoup.nodes.Element element6 = document2.createElement("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements7 = element6.getAllElements();
-        java.util.List<org.jsoup.nodes.Node> nodeList8 = element6.childNodes;
-        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node12 = document11.parentNode;
-        java.lang.String str13 = document11.title();
-        org.jsoup.nodes.Attributes attributes14 = document11.attributes();
-        org.jsoup.nodes.Document document17 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node18 = document17.parentNode;
-        org.jsoup.select.Elements elements20 = document17.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element21 = document11.prependChild((org.jsoup.nodes.Node) document17);
-        java.lang.String str22 = document17.baseUri();
-        org.jsoup.nodes.Document document25 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str26 = document25.outerHtml();
-        org.jsoup.nodes.Document document29 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node30 = document29.parentNode;
-        java.lang.String str31 = document29.title();
-        org.jsoup.nodes.Element element33 = document29.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element34 = document25.appendChild((org.jsoup.nodes.Node) document29);
-        org.jsoup.nodes.Attributes attributes35 = document29.attributes();
-        document17.addChild((org.jsoup.nodes.Node) document29);
-        org.jsoup.nodes.Document document38 = org.jsoup.Jsoup.parseBodyFragment("head");
-        org.jsoup.nodes.Element element39 = document29.prependChild((org.jsoup.nodes.Node) document38);
-        element6.setParentNode((org.jsoup.nodes.Node) document38);
-        org.jsoup.nodes.Element element42 = document38.addClass("#declaration");
-        org.jsoup.select.Elements elements45 = element42.getElementsByAttributeValueContaining("<html>\n<head>\n</head>\n<body>\n [ , !]\n</body>\n</html>", "hi=\"\"");
-        java.util.Collection<org.jsoup.nodes.Element> elementCollection47 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean48 = elements45.addAll(0, elementCollection47);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(nodeList8);
-        org.junit.Assert.assertNotNull(document11);
-        org.junit.Assert.assertNull(node12);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertNotNull(attributes14);
-        org.junit.Assert.assertNotNull(document17);
-        org.junit.Assert.assertNull(node18);
-        org.junit.Assert.assertNotNull(elements20);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "hi!" + "'", str22, "hi!");
-        org.junit.Assert.assertNotNull(document25);
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str26, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document29);
-        org.junit.Assert.assertNull(node30);
-        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "" + "'", str31, "");
-        org.junit.Assert.assertNotNull(element33);
-        org.junit.Assert.assertNotNull(element34);
-        org.junit.Assert.assertNotNull(attributes35);
-        org.junit.Assert.assertNotNull(document38);
-        org.junit.Assert.assertNotNull(element39);
-        org.junit.Assert.assertNotNull(element42);
-        org.junit.Assert.assertNotNull(elements45);
-    }
-
-    @Test
-    public void test1471() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1471");
-        org.jsoup.nodes.Document document2 = org.jsoup.Jsoup.parse("#declaration", "\n<body>\n <!----> hi!\n</body>");
-        org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node6 = document5.parentNode;
-        java.lang.String str7 = document5.title();
-        org.jsoup.nodes.Attributes attributes8 = document5.attributes();
-        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node12 = document11.parentNode;
-        org.jsoup.select.Elements elements14 = document11.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element15 = document5.prependChild((org.jsoup.nodes.Node) document11);
-        java.lang.String str16 = document11.baseUri();
-        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str20 = document19.outerHtml();
-        org.jsoup.nodes.Document document23 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node24 = document23.parentNode;
-        java.lang.String str25 = document23.title();
-        org.jsoup.nodes.Element element27 = document23.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element28 = document19.appendChild((org.jsoup.nodes.Node) document23);
-        org.jsoup.nodes.Attributes attributes29 = document23.attributes();
-        document11.addChild((org.jsoup.nodes.Node) document23);
-        org.jsoup.nodes.Document document32 = org.jsoup.Jsoup.parseBodyFragment("head");
-        org.jsoup.nodes.Element element33 = document23.prependChild((org.jsoup.nodes.Node) document32);
-        org.jsoup.select.Elements elements34 = document32.siblingElements();
-        org.jsoup.nodes.Node node35 = document32.nextSibling();
-        boolean boolean37 = document32.hasClass("<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element39 = document32.prependElement("#declaration");
-        // The following exception was thrown during execution in test generation
-        try {
-            document2.replaceWith((org.jsoup.nodes.Node) document32);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated object is null");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNotNull(document5);
-        org.junit.Assert.assertNull(node6);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-        org.junit.Assert.assertNotNull(attributes8);
-        org.junit.Assert.assertNotNull(document11);
-        org.junit.Assert.assertNull(node12);
-        org.junit.Assert.assertNotNull(elements14);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "hi!" + "'", str16, "hi!");
-        org.junit.Assert.assertNotNull(document19);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str20, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document23);
-        org.junit.Assert.assertNull(node24);
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
-        org.junit.Assert.assertNotNull(element27);
-        org.junit.Assert.assertNotNull(element28);
-        org.junit.Assert.assertNotNull(attributes29);
-        org.junit.Assert.assertNotNull(document32);
-        org.junit.Assert.assertNotNull(element33);
-        org.junit.Assert.assertNotNull(elements34);
-        org.junit.Assert.assertNotNull(node35);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
-        org.junit.Assert.assertNotNull(element39);
-    }
-
-    @Test
-    public void test1472() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1472");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.select.Elements elements7 = elements5.val("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream8 = elements5.stream();
-        org.jsoup.select.Elements elements10 = elements5.toggleClass("#document");
-        java.util.Iterator<org.jsoup.nodes.Element> elementItor11 = elements10.iterator();
-        org.jsoup.select.Elements elements13 = elements10.removeAttr("#comment");
-        org.jsoup.select.Elements elements15 = elements10.append("");
-        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node19 = document18.parentNode;
-        org.jsoup.select.Elements elements21 = document18.getElementsByIndexLessThan((int) 'a');
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream22 = elements21.stream();
-        org.jsoup.select.Elements elements24 = elements21.addClass("hi");
-        org.jsoup.select.Elements elements25 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements24);
-        org.jsoup.select.Elements elements28 = elements24.attr("head", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements30 = elements28.val("#text");
-        org.jsoup.select.Elements elements32 = elements30.removeAttr("<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        boolean boolean33 = elements15.addAll((java.util.Collection<org.jsoup.nodes.Element>) elements30);
-        org.jsoup.nodes.Document document36 = org.jsoup.nodes.Document.createShell("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element38 = document36.appendText("<html> \n<head> \n</head> \n<body>\n  [ , !]  \n</body>\n</html>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements41 = document36.getElementsByAttributeValueEnding("<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!", "<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>");
-        org.jsoup.select.Elements elements44 = document36.getElementsByAttributeValueContaining(" #document", "<html>\n<head>\n</head>\n<body> #text\n</body>\n</html>\n<html> \n<head> \n</head> \n<body>\n  head  \n</body>\n</html>");
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean45 = elements15.addAll((int) '<', (java.util.Collection<org.jsoup.nodes.Element>) elements44);
-            org.junit.Assert.fail("Expected exception of type java.lang.IndexOutOfBoundsException; message: Index: 60, Size: 8");
-        } catch (java.lang.IndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elementStream8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(elementItor11);
-        org.junit.Assert.assertNotNull(elements13);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertNotNull(document18);
-        org.junit.Assert.assertNull(node19);
-        org.junit.Assert.assertNotNull(elements21);
-        org.junit.Assert.assertNotNull(elementStream22);
-        org.junit.Assert.assertNotNull(elements24);
-        org.junit.Assert.assertNotNull(elements28);
-        org.junit.Assert.assertNotNull(elements30);
-        org.junit.Assert.assertNotNull(elements32);
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
-        org.junit.Assert.assertNotNull(document36);
-        org.junit.Assert.assertNotNull(element38);
-        org.junit.Assert.assertNotNull(elements41);
-        org.junit.Assert.assertNotNull(elements44);
-    }
-
-    @Test
-    public void test1473() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1473");
-        org.jsoup.nodes.Evaluator.Attribute attribute1 = new org.jsoup.nodes.Evaluator.Attribute("#data");
-        org.jsoup.nodes.Document document4 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node5 = document4.parentNode;
-        org.jsoup.select.Elements elements6 = document4.getAllElements();
-        org.jsoup.nodes.Element element8 = document4.createElement("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements9 = element8.getAllElements();
-        java.lang.String str10 = element8.html();
-        boolean boolean11 = element8.preserveWhitespace();
-        org.jsoup.nodes.Document document14 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str15 = document14.outerHtml();
-        org.jsoup.select.Elements elements16 = document14.getAllElements();
-        java.lang.String str17 = document14.data();
-        org.jsoup.nodes.Element element19 = document14.text("");
-        org.jsoup.nodes.Node node20 = document14.parentNode;
-        org.jsoup.select.Elements elements22 = document14.getElementsByIndexGreaterThan((int) '4');
-        org.jsoup.nodes.Element element24 = document14.text("hi=\"\"");
-        boolean boolean25 = document14.hasText();
-        boolean boolean26 = element8.equals((java.lang.Object) boolean25);
-        boolean boolean27 = attribute1.matches(element8);
-        org.junit.Assert.assertNotNull(document4);
-        org.junit.Assert.assertNull(node5);
-        org.junit.Assert.assertNotNull(elements6);
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(elements9);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNotNull(document14);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str15, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements16);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertNotNull(element19);
-        org.junit.Assert.assertNull(node20);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertNotNull(element24);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-    }
-
-    @Test
-    public void test1474() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1474");
-        org.jsoup.nodes.Evaluator.AttributeWithValueContaining attributeWithValueContaining2 = new org.jsoup.nodes.Evaluator.AttributeWithValueContaining("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
-        org.jsoup.nodes.Evaluator.AttributeWithValueStarting attributeWithValueStarting5 = new org.jsoup.nodes.Evaluator.AttributeWithValueStarting("hi", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        attributeWithValueStarting5.value = "hi!";
-        attributeWithValueStarting5.key = "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>";
-        org.jsoup.nodes.Document document12 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str13 = document12.outerHtml();
-        document12.setBaseUri("hi");
-        boolean boolean16 = attributeWithValueStarting5.matches((org.jsoup.nodes.Element) document12);
-        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str20 = document19.outerHtml();
-        org.jsoup.nodes.Document document23 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node24 = document23.parentNode;
-        java.lang.String str25 = document23.title();
-        org.jsoup.nodes.Element element27 = document23.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element28 = document19.appendChild((org.jsoup.nodes.Node) document23);
-        org.jsoup.nodes.Document document31 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node32 = document31.parentNode;
-        java.lang.String str33 = document31.title();
-        org.jsoup.nodes.Attributes attributes34 = document31.attributes();
-        org.jsoup.nodes.Document document37 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node38 = document37.parentNode;
-        org.jsoup.select.Elements elements40 = document37.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element41 = document31.prependChild((org.jsoup.nodes.Node) document37);
-        org.jsoup.select.Elements elements43 = document31.select("hi");
-        org.jsoup.nodes.Element element44 = document23.appendChild((org.jsoup.nodes.Node) document31);
-        org.jsoup.nodes.Element element45 = document31.body();
-        boolean boolean46 = attributeWithValueStarting5.matches((org.jsoup.nodes.Element) document31);
-        boolean boolean47 = attributeWithValueContaining2.matches((org.jsoup.nodes.Element) document31);
-        org.jsoup.nodes.Document document50 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node51 = document50.parentNode;
-        org.jsoup.select.Elements elements52 = document50.getAllElements();
-        org.jsoup.nodes.Element element54 = document50.createElement("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements55 = element54.getAllElements();
-        java.lang.String str56 = element54.html();
-        boolean boolean57 = element54.preserveWhitespace();
-        org.jsoup.nodes.Document document60 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str61 = document60.outerHtml();
-        org.jsoup.select.Elements elements62 = document60.getAllElements();
-        java.lang.String str63 = document60.data();
-        org.jsoup.nodes.Element element65 = document60.text("");
-        org.jsoup.nodes.Node node66 = document60.parentNode;
-        org.jsoup.select.Elements elements68 = document60.getElementsByIndexGreaterThan((int) '4');
-        org.jsoup.nodes.Element element70 = document60.text("hi=\"\"");
-        boolean boolean71 = document60.hasText();
-        boolean boolean72 = element54.equals((java.lang.Object) boolean71);
-        org.jsoup.nodes.Document document75 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str76 = document75.outerHtml();
-        org.jsoup.select.Elements elements77 = document75.getAllElements();
-        java.lang.String str78 = document75.data();
-        org.jsoup.nodes.Element element80 = document75.text("");
-        boolean boolean82 = document75.hasClass("hi!");
-        boolean boolean83 = element54.equals((java.lang.Object) document75);
-        java.lang.String str85 = document75.absUrl("i");
-        boolean boolean86 = document75.hasText();
-        org.jsoup.select.Elements elements87 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) attributeWithValueContaining2, (org.jsoup.nodes.Element) document75);
-        org.junit.Assert.assertNotNull(document12);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str13, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(document19);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str20, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document23);
-        org.junit.Assert.assertNull(node24);
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
-        org.junit.Assert.assertNotNull(element27);
-        org.junit.Assert.assertNotNull(element28);
-        org.junit.Assert.assertNotNull(document31);
-        org.junit.Assert.assertNull(node32);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "" + "'", str33, "");
-        org.junit.Assert.assertNotNull(attributes34);
-        org.junit.Assert.assertNotNull(document37);
-        org.junit.Assert.assertNull(node38);
-        org.junit.Assert.assertNotNull(elements40);
-        org.junit.Assert.assertNotNull(element41);
-        org.junit.Assert.assertNotNull(elements43);
-        org.junit.Assert.assertNotNull(element44);
-        org.junit.Assert.assertNotNull(element45);
-        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
-        org.junit.Assert.assertNotNull(document50);
-        org.junit.Assert.assertNull(node51);
-        org.junit.Assert.assertNotNull(elements52);
-        org.junit.Assert.assertNotNull(element54);
-        org.junit.Assert.assertNotNull(elements55);
-        org.junit.Assert.assertEquals("'" + str56 + "' != '" + "" + "'", str56, "");
-        org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + false + "'", boolean57 == false);
-        org.junit.Assert.assertNotNull(document60);
-        org.junit.Assert.assertEquals("'" + str61 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str61, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements62);
-        org.junit.Assert.assertEquals("'" + str63 + "' != '" + "" + "'", str63, "");
-        org.junit.Assert.assertNotNull(element65);
-        org.junit.Assert.assertNull(node66);
-        org.junit.Assert.assertNotNull(elements68);
-        org.junit.Assert.assertNotNull(element70);
-        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + true + "'", boolean71 == true);
-        org.junit.Assert.assertTrue("'" + boolean72 + "' != '" + false + "'", boolean72 == false);
-        org.junit.Assert.assertNotNull(document75);
-        org.junit.Assert.assertEquals("'" + str76 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str76, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements77);
-        org.junit.Assert.assertEquals("'" + str78 + "' != '" + "" + "'", str78, "");
-        org.junit.Assert.assertNotNull(element80);
-        org.junit.Assert.assertTrue("'" + boolean82 + "' != '" + false + "'", boolean82 == false);
-        org.junit.Assert.assertTrue("'" + boolean83 + "' != '" + false + "'", boolean83 == false);
-        org.junit.Assert.assertEquals("'" + str85 + "' != '" + "" + "'", str85, "");
-        org.junit.Assert.assertTrue("'" + boolean86 + "' != '" + false + "'", boolean86 == false);
-        org.junit.Assert.assertNotNull(elements87);
-    }
-
-    @Test
-    public void test1475() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1475");
-        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
-        boolean boolean2 = tag1.preserveWhitespace();
-        java.lang.String str3 = tag1.toString();
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node7 = document6.parentNode;
-        java.lang.String str8 = document6.title();
-        org.jsoup.nodes.Attributes attributes9 = document6.attributes();
-        org.jsoup.nodes.Node node12 = document6.attr("hi!", "hi!");
-        org.jsoup.select.Elements elements13 = document6.getAllElements();
-        elements13.clear();
-        org.jsoup.select.Elements elements16 = elements13.val("<html>\n<head>\n</head>\n<body>\n head\n</body>\n</html>");
-        boolean boolean17 = tag1.equals((java.lang.Object) "<html>\n<head>\n</head>\n<body>\n head\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(tag1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "hi!" + "'", str3, "hi!");
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertNull(node7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNotNull(attributes9);
-        org.junit.Assert.assertNotNull(node12);
-        org.junit.Assert.assertNotNull(elements13);
-        org.junit.Assert.assertNotNull(elements16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-    }
-
-    @Test
-    public void test1476() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1476");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        java.lang.String str4 = document2.title();
-        org.jsoup.nodes.Attributes attributes5 = document2.attributes();
-        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node9 = document8.parentNode;
-        org.jsoup.select.Elements elements11 = document8.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element12 = document2.prependChild((org.jsoup.nodes.Node) document8);
-        java.util.List<org.jsoup.nodes.Node> nodeList13 = document2.childNodes;
-        org.jsoup.select.Elements elements15 = document2.getElementsByTag("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str19 = document18.outerHtml();
-        org.jsoup.nodes.Document document22 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node23 = document22.parentNode;
-        java.lang.String str24 = document22.title();
-        org.jsoup.nodes.Element element26 = document22.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element27 = document18.appendChild((org.jsoup.nodes.Node) document22);
-        org.jsoup.nodes.Attributes attributes28 = document22.attributes();
-        java.lang.String str29 = document22.title();
-        int int30 = elements15.lastIndexOf((java.lang.Object) document22);
-        org.jsoup.nodes.Element element32 = document22.val("\n<!---->");
-        org.jsoup.select.Elements elements34 = element32.getElementsByIndexGreaterThan((int) (byte) 1);
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream35 = elements34.stream();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertNotNull(attributes5);
-        org.junit.Assert.assertNotNull(document8);
-        org.junit.Assert.assertNull(node9);
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(nodeList13);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertNotNull(document18);
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str19, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document22);
-        org.junit.Assert.assertNull(node23);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
-        org.junit.Assert.assertNotNull(element26);
-        org.junit.Assert.assertNotNull(element27);
-        org.junit.Assert.assertNotNull(attributes28);
-        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "" + "'", str29, "");
-        org.junit.Assert.assertTrue("'" + int30 + "' != '" + (-1) + "'", int30 == (-1));
-        org.junit.Assert.assertNotNull(element32);
-        org.junit.Assert.assertNotNull(elements34);
-        org.junit.Assert.assertNotNull(elementStream35);
-    }
-
-    @Test
-    public void test1477() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1477");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.select.Elements elements7 = elements5.val("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream8 = elements5.stream();
-        org.jsoup.select.Elements elements10 = elements5.prepend("hi");
-        org.jsoup.select.Elements elements12 = elements10.toggleClass("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
-        org.jsoup.select.Elements elements15 = elements10.attr("body", "<html>\n<head>\n</head>\n<body>\n</body>\n</html><<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>>\n</<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>><hi!>\n</hi!>");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elementStream8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertNotNull(elements15);
-    }
-
-    @Test
-    public void test1478() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1478");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        java.lang.String str6 = document2.text();
-        org.jsoup.select.Elements elements9 = document2.getElementsByAttributeValueNot("hi=\"\"", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Document document12 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.select.Elements elements13 = document12.getAllElements();
-        org.jsoup.select.Elements elements15 = document12.getElementsByIndexLessThan((int) (short) 10);
-        boolean boolean16 = elements9.equals((java.lang.Object) elements15);
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream17 = elements15.stream();
-        org.jsoup.nodes.Document document20 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node21 = document20.parentNode;
-        java.lang.String str22 = document20.title();
-        org.jsoup.nodes.Attributes attributes23 = document20.attributes();
-        org.jsoup.nodes.Document document26 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node27 = document26.parentNode;
-        org.jsoup.select.Elements elements29 = document26.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element30 = document20.prependChild((org.jsoup.nodes.Node) document26);
-        org.jsoup.select.Elements elements32 = document20.select("hi");
-        org.jsoup.select.Elements elements33 = document20.children();
-        org.jsoup.nodes.Element element34 = null;
-        org.jsoup.nodes.Element[] elementArray35 = new org.jsoup.nodes.Element[] { element34 };
-        org.jsoup.select.Elements elements36 = new org.jsoup.select.Elements(elementArray35);
-        boolean boolean37 = elements33.remove((java.lang.Object) elements36);
-        int int38 = elements15.lastIndexOf((java.lang.Object) elements36);
-        org.jsoup.nodes.Document document40 = org.jsoup.nodes.Document.createShell(" hi=\"\"");
-        boolean boolean41 = elements15.contains((java.lang.Object) " hi=\"\"");
-        elements15.clear();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "hi!" + "'", str6, "hi!");
-        org.junit.Assert.assertNotNull(elements9);
-        org.junit.Assert.assertNotNull(document12);
-        org.junit.Assert.assertNotNull(elements13);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(elementStream17);
-        org.junit.Assert.assertNotNull(document20);
-        org.junit.Assert.assertNull(node21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertNotNull(attributes23);
-        org.junit.Assert.assertNotNull(document26);
-        org.junit.Assert.assertNull(node27);
-        org.junit.Assert.assertNotNull(elements29);
-        org.junit.Assert.assertNotNull(element30);
-        org.junit.Assert.assertNotNull(elements32);
-        org.junit.Assert.assertNotNull(elements33);
-        org.junit.Assert.assertNotNull(elementArray35);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
-        org.junit.Assert.assertTrue("'" + int38 + "' != '" + (-1) + "'", int38 == (-1));
-        org.junit.Assert.assertNotNull(document40);
-        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
-    }
-
-    @Test
-    public void test1479() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1479");
-        org.jsoup.parser.Tag tag1 = org.jsoup.parser.Tag.valueOf("hi!");
-        boolean boolean2 = tag1.preserveWhitespace();
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str7 = document6.outerHtml();
-        org.jsoup.nodes.Document document10 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node11 = document10.parentNode;
-        java.lang.String str12 = document10.title();
-        org.jsoup.nodes.Element element14 = document10.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element15 = document6.appendChild((org.jsoup.nodes.Node) document10);
-        org.jsoup.nodes.Attributes attributes16 = document10.attributes();
-        boolean boolean18 = attributes16.hasKey("hi!");
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor19 = attributes16.iterator();
-        org.jsoup.nodes.Document document22 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node23 = document22.parentNode;
-        java.lang.String str24 = document22.title();
-        org.jsoup.nodes.Attributes attributes25 = document22.attributes();
-        java.lang.String str26 = attributes25.html();
-        attributes16.addAll(attributes25);
-        java.lang.String str28 = attributes16.toString();
-        org.jsoup.nodes.Element element29 = new org.jsoup.nodes.Element(tag1, "4", attributes16);
-        org.junit.Assert.assertNotNull(tag1);
-        org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str7, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document10);
-        org.junit.Assert.assertNull(node11);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
-        org.junit.Assert.assertNotNull(element14);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(attributes16);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNotNull(attributeItor19);
-        org.junit.Assert.assertNotNull(document22);
-        org.junit.Assert.assertNull(node23);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
-        org.junit.Assert.assertNotNull(attributes25);
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "" + "'", str26, "");
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "" + "'", str28, "");
-    }
-
-    @Test
-    public void test1480() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1480");
-        org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding2 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
-        org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str6 = document5.outerHtml();
-        document5.setBaseUri("hi");
-        boolean boolean9 = attributeWithValueEnding2.matches((org.jsoup.nodes.Element) document5);
-        org.jsoup.nodes.Element element11 = document5.prependText("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements12 = document5.children();
-        boolean boolean13 = document5.hasText();
-        org.junit.Assert.assertNotNull(document5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str6, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-    }
-
-    @Test
-    public void test1481() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1481");
-        org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag(" !");
-        org.jsoup.parser.Tag tag3 = org.jsoup.parser.Tag.valueOf("hi!");
-        org.jsoup.nodes.Element element5 = new org.jsoup.nodes.Element(tag3, "!");
-        boolean boolean6 = tag3.isData();
-        org.jsoup.nodes.Evaluator.Tag tag8 = new org.jsoup.nodes.Evaluator.Tag("hi!");
-        org.jsoup.nodes.Document document11 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str12 = document11.outerHtml();
-        org.jsoup.nodes.Document document15 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node16 = document15.parentNode;
-        java.lang.String str17 = document15.title();
-        org.jsoup.nodes.Element element19 = document15.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element20 = document11.appendChild((org.jsoup.nodes.Node) document15);
-        boolean boolean21 = tag8.matches((org.jsoup.nodes.Element) document11);
-        boolean boolean22 = tag3.equals((java.lang.Object) tag8);
-        org.jsoup.nodes.Element element24 = new org.jsoup.nodes.Element(tag3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
-        org.jsoup.nodes.Element element25 = element24.empty();
-        boolean boolean26 = tag1.matches(element25);
-        org.junit.Assert.assertNotNull(tag3);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNotNull(document11);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str12, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document15);
-        org.junit.Assert.assertNull(node16);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertNotNull(element19);
-        org.junit.Assert.assertNotNull(element20);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(element25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-    }
-
-    @Test
-    public void test1482() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1482");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream6 = elements5.stream();
-        org.jsoup.select.Elements elements8 = elements5.addClass("hi");
-        java.lang.String str9 = elements8.html();
-        java.lang.String str10 = elements8.val();
-        org.jsoup.select.Elements elements12 = elements8.val("hi");
-        org.jsoup.nodes.Document document15 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str16 = document15.outerHtml();
-        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node20 = document19.parentNode;
-        java.lang.String str21 = document19.title();
-        org.jsoup.nodes.Element element23 = document19.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element24 = document15.appendChild((org.jsoup.nodes.Node) document19);
-        org.jsoup.nodes.Document document27 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node28 = document27.parentNode;
-        java.lang.String str29 = document27.title();
-        org.jsoup.nodes.Attributes attributes30 = document27.attributes();
-        org.jsoup.nodes.Document document33 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node34 = document33.parentNode;
-        org.jsoup.select.Elements elements36 = document33.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element37 = document27.prependChild((org.jsoup.nodes.Node) document33);
-        org.jsoup.select.Elements elements39 = document27.select("hi");
-        org.jsoup.nodes.Element element40 = document19.appendChild((org.jsoup.nodes.Node) document27);
-        org.jsoup.nodes.Element element42 = document27.addClass("#declaration");
-        boolean boolean43 = elements8.add(element42);
-        boolean boolean45 = element42.hasClass("#document");
-        org.jsoup.nodes.Element element46 = element42.previousElementSibling();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elementStream6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!" + "'", str9, "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertNotNull(document15);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str16, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document19);
-        org.junit.Assert.assertNull(node20);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
-        org.junit.Assert.assertNotNull(element23);
-        org.junit.Assert.assertNotNull(element24);
-        org.junit.Assert.assertNotNull(document27);
-        org.junit.Assert.assertNull(node28);
-        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "" + "'", str29, "");
-        org.junit.Assert.assertNotNull(attributes30);
-        org.junit.Assert.assertNotNull(document33);
-        org.junit.Assert.assertNull(node34);
-        org.junit.Assert.assertNotNull(elements36);
-        org.junit.Assert.assertNotNull(element37);
-        org.junit.Assert.assertNotNull(elements39);
-        org.junit.Assert.assertNotNull(element40);
-        org.junit.Assert.assertNotNull(element42);
-        org.junit.Assert.assertTrue("'" + boolean43 + "' != '" + true + "'", boolean43 == true);
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
-        org.junit.Assert.assertNotNull(element46);
-    }
-
-    @Test
-    public void test1483() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1483");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements4 = document2.getAllElements();
-        org.jsoup.nodes.Element element6 = document2.createElement("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements7 = element6.getAllElements();
-        org.jsoup.nodes.Element element9 = element6.addClass("<html> \n<head> \n</head> \n<body> org.jsoup.select.Selector$SelectorParseException:  hi!  &lt;#root&gt; \n <html> \n  <head> \n  </head> \n  <body>\n    &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;   \n  </body>\n </html>\n</body>\n</html>");
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.select.Elements elements11 = element9.select("");
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated string is empty");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertNotNull(element6);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(element9);
-    }
-
-    @Test
-    public void test1484() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1484");
-        org.jsoup.nodes.Evaluator.AttributeWithValue attributeWithValue2 = new org.jsoup.nodes.Evaluator.AttributeWithValue("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
-        org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str6 = document5.outerHtml();
-        org.jsoup.nodes.Document document9 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node10 = document9.parentNode;
-        java.lang.String str11 = document9.title();
-        org.jsoup.nodes.Element element13 = document9.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element14 = document5.appendChild((org.jsoup.nodes.Node) document9);
-        org.jsoup.nodes.Element element15 = document9.head();
-        org.jsoup.nodes.Evaluator.Tag tag17 = new org.jsoup.nodes.Evaluator.Tag("#document");
-        org.jsoup.nodes.Document document20 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str21 = document20.outerHtml();
-        org.jsoup.nodes.Document document24 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node25 = document24.parentNode;
-        java.lang.String str26 = document24.title();
-        org.jsoup.nodes.Element element28 = document24.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element29 = document20.appendChild((org.jsoup.nodes.Node) document24);
-        org.jsoup.nodes.Element element30 = document24.head();
-        java.lang.String str31 = element30.id();
-        boolean boolean32 = tag17.matches(element30);
-        java.lang.String str33 = element30.baseUri();
-        element15.parentNode = element30;
-        boolean boolean35 = attributeWithValue2.matches(element30);
-        java.lang.String str36 = attributeWithValue2.value;
-        java.lang.String str37 = attributeWithValue2.value;
-        org.jsoup.nodes.Document document40 = org.jsoup.parser.Parser.parseBodyFragment("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!", " hi=\"\"");
-        boolean boolean41 = attributeWithValue2.matches((org.jsoup.nodes.Element) document40);
-        org.jsoup.nodes.Document document44 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str45 = document44.outerHtml();
-        org.jsoup.nodes.Document document48 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node49 = document48.parentNode;
-        java.lang.String str50 = document48.title();
-        org.jsoup.nodes.Element element52 = document48.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element53 = document44.appendChild((org.jsoup.nodes.Node) document48);
-        org.jsoup.nodes.Attributes attributes54 = document48.attributes();
-        org.jsoup.select.Elements elements56 = document48.getElementsByTag("hi!");
-        org.jsoup.nodes.Element element58 = document48.createElement("[!]");
-        org.jsoup.nodes.Element element59 = element58.parent();
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean60 = attributeWithValue2.matches(element59);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str6, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document9);
-        org.junit.Assert.assertNull(node10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(element14);
-        org.junit.Assert.assertNotNull(element15);
-        org.junit.Assert.assertNotNull(document20);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str21, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document24);
-        org.junit.Assert.assertNull(node25);
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "" + "'", str26, "");
-        org.junit.Assert.assertNotNull(element28);
-        org.junit.Assert.assertNotNull(element29);
-        org.junit.Assert.assertNotNull(element30);
-        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "" + "'", str31, "");
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "hi!" + "'", str33, "hi!");
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
-        org.junit.Assert.assertEquals("'" + str36 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!" + "'", str36, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
-        org.junit.Assert.assertEquals("'" + str37 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!" + "'", str37, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
-        org.junit.Assert.assertNotNull(document40);
-        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
-        org.junit.Assert.assertNotNull(document44);
-        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str45, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document48);
-        org.junit.Assert.assertNull(node49);
-        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "" + "'", str50, "");
-        org.junit.Assert.assertNotNull(element52);
-        org.junit.Assert.assertNotNull(element53);
-        org.junit.Assert.assertNotNull(attributes54);
-        org.junit.Assert.assertNotNull(elements56);
-        org.junit.Assert.assertNotNull(element58);
-        org.junit.Assert.assertNull(element59);
-    }
-
-    @Test
-    public void test1485() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1485");
-        org.jsoup.nodes.Document document1 = org.jsoup.Jsoup.parseBodyFragment("&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt;\n&lt;/body&gt;\n&lt;/html&gt;");
-        // The following exception was thrown during execution in test generation
-        try {
-            org.jsoup.nodes.Element element4 = document1.attr("", "<html> <head> </head> <body> hi! </body> </html> hi! hi!");
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The validated string is empty");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document1);
-    }
-
-    @Test
-    public void test1486() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1486");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream6 = elements5.stream();
-        org.jsoup.select.Elements elements8 = elements5.toggleClass("[ , !]");
-        java.lang.String str10 = elements8.attr("#comment");
-        org.jsoup.parser.TokenQueue tokenQueue12 = new org.jsoup.parser.TokenQueue("[4]");
-        tokenQueue12.addFirst(" head=\"[ , #, d, o, c, u, m, e, n, t]\"");
-        boolean boolean15 = elements8.contains((java.lang.Object) tokenQueue12);
-        boolean boolean16 = tokenQueue12.isEmpty();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elementStream6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-    }
-
-    @Test
-    public void test1487() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1487");
-        org.jsoup.nodes.Document document1 = org.jsoup.nodes.Document.createShell("");
-        java.lang.String str2 = document1.className();
-        org.junit.Assert.assertNotNull(document1);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "" + "'", str2, "");
-    }
-
-    @Test
-    public void test1488() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1488");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        java.lang.String str4 = document2.title();
-        org.jsoup.nodes.Attributes attributes5 = document2.attributes();
-        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node9 = document8.parentNode;
-        org.jsoup.select.Elements elements11 = document8.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element12 = document2.prependChild((org.jsoup.nodes.Node) document8);
-        org.jsoup.select.Elements elements14 = document8.getElementsByClass("!");
-        org.jsoup.nodes.XmlDeclaration xmlDeclaration18 = new org.jsoup.nodes.XmlDeclaration("hi!", "!", false);
-        org.jsoup.nodes.Document document21 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node22 = document21.parentNode;
-        boolean boolean23 = document21.isBlock();
-        xmlDeclaration18.addChild((org.jsoup.nodes.Node) document21);
-        org.jsoup.nodes.Element element25 = document8.appendChild((org.jsoup.nodes.Node) xmlDeclaration18);
-        org.jsoup.nodes.Element element27 = element25.toggleClass("&lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt; &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;");
-        org.jsoup.nodes.Document document30 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str31 = document30.outerHtml();
-        org.jsoup.select.Elements elements32 = document30.getAllElements();
-        java.lang.String str33 = document30.data();
-        org.jsoup.nodes.Element element35 = document30.text("");
-        org.jsoup.nodes.Node node36 = document30.parentNode;
-        org.jsoup.select.Elements elements38 = document30.getElementsByIndexGreaterThan((int) '4');
-        java.lang.String str39 = document30.baseUri();
-        org.jsoup.nodes.Element element41 = document30.appendText("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Document document42 = document30.normalise();
-        element25.parentNode = document30;
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertNotNull(attributes5);
-        org.junit.Assert.assertNotNull(document8);
-        org.junit.Assert.assertNull(node9);
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(elements14);
-        org.junit.Assert.assertNotNull(document21);
-        org.junit.Assert.assertNull(node22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(element25);
-        org.junit.Assert.assertNotNull(element27);
-        org.junit.Assert.assertNotNull(document30);
-        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str31, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements32);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "" + "'", str33, "");
-        org.junit.Assert.assertNotNull(element35);
-        org.junit.Assert.assertNull(node36);
-        org.junit.Assert.assertNotNull(elements38);
-        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "hi!" + "'", str39, "hi!");
-        org.junit.Assert.assertNotNull(element41);
-        org.junit.Assert.assertNotNull(document42);
-    }
-
-    @Test
-    public void test1489() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1489");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str3 = document2.outerHtml();
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node7 = document6.parentNode;
-        java.lang.String str8 = document6.title();
-        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
-        org.jsoup.nodes.Attributes attributes12 = document6.attributes();
-        boolean boolean14 = attributes12.hasKey("hi!");
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor15 = attributes12.iterator();
-        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node19 = document18.parentNode;
-        java.lang.String str20 = document18.title();
-        org.jsoup.nodes.Attributes attributes21 = document18.attributes();
-        java.lang.String str22 = attributes21.html();
-        attributes12.addAll(attributes21);
-        org.jsoup.parser.Tag tag25 = org.jsoup.parser.Tag.valueOf("#document");
-        boolean boolean26 = attributes12.equals((java.lang.Object) tag25);
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator27 = attributes12.spliterator();
-        attributes12.remove("<html> \n<head> \n</head> \n<body> org.jsoup.select.Selector$SelectorParseException:  hi!  &lt;#root&gt; \n <html> \n  <head> \n  </head> \n  <body>\n    &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;   \n  </body>\n </html>\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertNull(node7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(attributes12);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(attributeItor15);
-        org.junit.Assert.assertNotNull(document18);
-        org.junit.Assert.assertNull(node19);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
-        org.junit.Assert.assertNotNull(attributes21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertNotNull(tag25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNotNull(attributeSpliterator27);
-    }
-
-    @Test
-    public void test1490() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1490");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.select.Elements elements7 = elements5.val("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream8 = elements5.stream();
-        org.jsoup.select.Elements elements10 = elements5.prepend("hi");
-        org.jsoup.nodes.Document document13 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node14 = document13.parentNode;
-        java.lang.String str15 = document13.title();
-        org.jsoup.nodes.Attributes attributes16 = document13.attributes();
-        org.jsoup.nodes.Document document19 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node20 = document19.parentNode;
-        org.jsoup.select.Elements elements22 = document19.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element23 = document13.prependChild((org.jsoup.nodes.Node) document19);
-        java.lang.String str24 = document19.baseUri();
-        java.lang.String str25 = document19.className();
-        org.jsoup.nodes.Document document28 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str29 = document28.outerHtml();
-        org.jsoup.nodes.Document document32 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node33 = document32.parentNode;
-        java.lang.String str34 = document32.title();
-        org.jsoup.nodes.Element element36 = document32.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element37 = document28.appendChild((org.jsoup.nodes.Node) document32);
-        org.jsoup.nodes.Element element39 = document28.removeClass("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
-        java.lang.String str40 = document28.text();
-        org.jsoup.nodes.Element element42 = document28.addClass("#document");
-        org.jsoup.nodes.Element element44 = document28.createElement("hi!");
-        org.jsoup.select.Elements elements47 = document28.getElementsByAttributeValueContaining("#comment", "#comment");
-        java.lang.Integer int48 = org.jsoup.nodes.Node.indexInList((org.jsoup.nodes.Element) document19, (java.util.List<org.jsoup.nodes.Element>) elements47);
-        java.lang.String str49 = elements47.html();
-        boolean boolean50 = elements5.addAll((java.util.Collection<org.jsoup.nodes.Element>) elements47);
-        java.lang.Object[] objArray51 = elements5.toArray();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elementStream8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(document13);
-        org.junit.Assert.assertNull(node14);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertNotNull(attributes16);
-        org.junit.Assert.assertNotNull(document19);
-        org.junit.Assert.assertNull(node20);
-        org.junit.Assert.assertNotNull(elements22);
-        org.junit.Assert.assertNotNull(element23);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "hi!" + "'", str24, "hi!");
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "" + "'", str25, "");
-        org.junit.Assert.assertNotNull(document28);
-        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str29, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document32);
-        org.junit.Assert.assertNull(node33);
-        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "" + "'", str34, "");
-        org.junit.Assert.assertNotNull(element36);
-        org.junit.Assert.assertNotNull(element37);
-        org.junit.Assert.assertNotNull(element39);
-        org.junit.Assert.assertEquals("'" + str40 + "' != '" + "hi! <html> <head> </head> <body> hi! </body> </html>" + "'", str40, "hi! <html> <head> </head> <body> hi! </body> </html>");
-        org.junit.Assert.assertNotNull(element42);
-        org.junit.Assert.assertNotNull(element44);
-        org.junit.Assert.assertNotNull(elements47);
-        org.junit.Assert.assertNull(int48);
-        org.junit.Assert.assertEquals("'" + str49 + "' != '" + "" + "'", str49, "");
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
-        org.junit.Assert.assertNotNull(objArray51);
-        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray51), "[hi\n<html value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\nhi\n<head value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi\n</head>\n<body value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi hi!\n</body>\n</html>, \n<html value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\nhi\n<head value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi\n</head>\n<body value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi hi!\n</body>\n</html>, \n<head value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi\n</head>, \n<body value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi hi!\n</body>]");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray51), "[hi\n<html value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\nhi\n<head value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi\n</head>\n<body value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi hi!\n</body>\n</html>, \n<html value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\nhi\n<head value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi\n</head>\n<body value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi hi!\n</body>\n</html>, \n<head value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi\n</head>, \n<body value=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\">\n hi hi!\n</body>]");
-    }
-
-    @Test
-    public void test1491() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1491");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str3 = document2.outerHtml();
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node7 = document6.parentNode;
-        java.lang.String str8 = document6.title();
-        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
-        org.jsoup.nodes.Element element13 = document2.removeClass("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html><#root>\n<html>\n <head>\n </head>\n <body>\n  &lt;html&gt; &lt;head&gt; &lt;/head&gt; &lt;body&gt; hi! &lt;/body&gt; &lt;/html&gt;\n </body>\n</html>\n</#root>");
-        java.lang.String str14 = document2.text();
-        org.jsoup.nodes.Element element16 = document2.addClass("#document");
-        java.lang.String str17 = element16.baseUri;
-        org.jsoup.nodes.Element element20 = element16.attr("<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<html class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>\n</html>\n\n<head class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\">\n</head>\n\n<body class=\" hi\" head=\"&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;\" value=\"#text\"> hi!\n</body>", "hi! <html> <head> </head> <body> hi! </body> </html>");
-        java.lang.String str22 = element20.absUrl("<html>\n <head>\n </head>\n <body>\n </body>\n</html>");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertNull(node7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "hi! <html> <head> </head> <body> hi! </body> </html>" + "'", str14, "hi! <html> <head> </head> <body> hi! </body> </html>");
-        org.junit.Assert.assertNotNull(element16);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "hi!" + "'", str17, "hi!");
-        org.junit.Assert.assertNotNull(element20);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-    }
-
-    @Test
-    public void test1492() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1492");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        java.lang.String str4 = document2.title();
-        org.jsoup.nodes.Attributes attributes5 = document2.attributes();
-        org.jsoup.nodes.Document document8 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node9 = document8.parentNode;
-        org.jsoup.select.Elements elements11 = document8.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element12 = document2.prependChild((org.jsoup.nodes.Node) document8);
-        java.util.List<org.jsoup.nodes.Node> nodeList13 = document2.childNodes;
-        org.jsoup.select.Elements elements15 = document2.getElementsByTag("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements17 = elements15.removeAttr("hi");
-        org.jsoup.nodes.Document document20 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node21 = document20.parentNode;
-        java.lang.String str22 = document20.title();
-        org.jsoup.nodes.Attributes attributes23 = document20.attributes();
-        org.jsoup.nodes.Document document26 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node27 = document26.parentNode;
-        org.jsoup.select.Elements elements29 = document26.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element30 = document20.prependChild((org.jsoup.nodes.Node) document26);
-        java.util.List<org.jsoup.nodes.Node> nodeList31 = document20.childNodes;
-        org.jsoup.select.Elements elements33 = document20.getElementsByTag("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element35 = document20.addClass("<html>\n<head>\n</head>\n<body>\n hi\n</body>\n</html>");
-        boolean boolean36 = element35.preserveWhitespace();
-        org.jsoup.select.Elements elements38 = element35.getElementsByIndexLessThan(0);
-        boolean boolean39 = elements17.retainAll((java.util.Collection<org.jsoup.nodes.Element>) elements38);
-        org.jsoup.nodes.Element element40 = null;
-        org.jsoup.nodes.Element[] elementArray41 = new org.jsoup.nodes.Element[] { element40 };
-        org.jsoup.select.Elements elements42 = new org.jsoup.select.Elements(elementArray41);
-        org.jsoup.select.Elements elements43 = new org.jsoup.select.Elements(elementArray41);
-        boolean boolean44 = elements17.retainAll((java.util.Collection<org.jsoup.nodes.Element>) elements43);
-        org.jsoup.nodes.Element element45 = elements43.last();
-        org.jsoup.nodes.Element element46 = elements43.last();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertNotNull(attributes5);
-        org.junit.Assert.assertNotNull(document8);
-        org.junit.Assert.assertNull(node9);
-        org.junit.Assert.assertNotNull(elements11);
-        org.junit.Assert.assertNotNull(element12);
-        org.junit.Assert.assertNotNull(nodeList13);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertNotNull(elements17);
-        org.junit.Assert.assertNotNull(document20);
-        org.junit.Assert.assertNull(node21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertNotNull(attributes23);
-        org.junit.Assert.assertNotNull(document26);
-        org.junit.Assert.assertNull(node27);
-        org.junit.Assert.assertNotNull(elements29);
-        org.junit.Assert.assertNotNull(element30);
-        org.junit.Assert.assertNotNull(nodeList31);
-        org.junit.Assert.assertNotNull(elements33);
-        org.junit.Assert.assertNotNull(element35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertNotNull(elements38);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertNotNull(elementArray41);
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
-        org.junit.Assert.assertNull(element45);
-        org.junit.Assert.assertNull(element46);
-    }
-
-    @Test
-    public void test1493() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1493");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str3 = document2.outerHtml();
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node7 = document6.parentNode;
-        java.lang.String str8 = document6.title();
-        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
-        org.jsoup.nodes.Attributes attributes12 = document6.attributes();
-        boolean boolean14 = attributes12.hasKey("hi!");
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor15 = attributes12.iterator();
-        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node19 = document18.parentNode;
-        java.lang.String str20 = document18.title();
-        org.jsoup.nodes.Attributes attributes21 = document18.attributes();
-        java.lang.String str22 = attributes21.html();
-        attributes12.addAll(attributes21);
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor24 = attributes12.iterator();
-        org.jsoup.nodes.Document document27 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str28 = document27.outerHtml();
-        org.jsoup.nodes.Document document31 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node32 = document31.parentNode;
-        java.lang.String str33 = document31.title();
-        org.jsoup.nodes.Element element35 = document31.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element36 = document27.appendChild((org.jsoup.nodes.Node) document31);
-        org.jsoup.nodes.Attributes attributes37 = document31.attributes();
-        boolean boolean39 = attributes37.hasKey("hi!");
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor40 = attributes37.iterator();
-        org.jsoup.nodes.Document document43 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node44 = document43.parentNode;
-        java.lang.String str45 = document43.title();
-        org.jsoup.nodes.Attributes attributes46 = document43.attributes();
-        java.lang.String str47 = attributes46.html();
-        attributes37.addAll(attributes46);
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor49 = attributes46.iterator();
-        attributes12.addAll(attributes46);
-        org.jsoup.nodes.Attribute attribute53 = org.jsoup.nodes.Attribute.createFromEncoded("hi", "");
-        org.jsoup.nodes.Document document56 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node57 = document56.parentNode;
-        java.lang.String str58 = document56.title();
-        boolean boolean59 = attribute53.equals((java.lang.Object) str58);
-        attributes12.put(attribute53);
-        attributes12.put("<html>\n<head>\n</head>\n<body>\n &lt;#root&gt; \n <html> \n  <head> \n  </head> \n  <body>\n    hi!    \n   <html> \n    <head> \n    </head> \n    <body>\n      hi!  \n    </body>\n   </html>\n  </body>\n </html>\n</body>\n</html>", "<html>\n <head>\n </head>\n <body>\n </body>\n</html>");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertNull(node7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(attributes12);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(attributeItor15);
-        org.junit.Assert.assertNotNull(document18);
-        org.junit.Assert.assertNull(node19);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
-        org.junit.Assert.assertNotNull(attributes21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertNotNull(attributeItor24);
-        org.junit.Assert.assertNotNull(document27);
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str28, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document31);
-        org.junit.Assert.assertNull(node32);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "" + "'", str33, "");
-        org.junit.Assert.assertNotNull(element35);
-        org.junit.Assert.assertNotNull(element36);
-        org.junit.Assert.assertNotNull(attributes37);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertNotNull(attributeItor40);
-        org.junit.Assert.assertNotNull(document43);
-        org.junit.Assert.assertNull(node44);
-        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "" + "'", str45, "");
-        org.junit.Assert.assertNotNull(attributes46);
-        org.junit.Assert.assertEquals("'" + str47 + "' != '" + "" + "'", str47, "");
-        org.junit.Assert.assertNotNull(attributeItor49);
-        org.junit.Assert.assertNotNull(attribute53);
-        org.junit.Assert.assertNotNull(document56);
-        org.junit.Assert.assertNull(node57);
-        org.junit.Assert.assertEquals("'" + str58 + "' != '" + "" + "'", str58, "");
-        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + false + "'", boolean59 == false);
-    }
-
-    @Test
-    public void test1494() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1494");
-        org.jsoup.nodes.Evaluator.Tag tag1 = new org.jsoup.nodes.Evaluator.Tag("#document");
-        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan3 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node7 = document6.parentNode;
-        org.jsoup.select.Elements elements9 = document6.getElementsByIndexLessThan((int) 'a');
-        boolean boolean10 = indexLessThan3.matches((org.jsoup.nodes.Element) document6);
-        org.jsoup.nodes.Document document13 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node14 = document13.parentNode;
-        org.jsoup.select.Elements elements15 = document13.getAllElements();
-        org.jsoup.select.Elements elements16 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) indexLessThan3, (org.jsoup.nodes.Element) document13);
-        boolean boolean17 = tag1.matches((org.jsoup.nodes.Element) document13);
-        document13.baseUri = "hi=\"\"";
-        org.jsoup.nodes.Element element21 = document13.appendText("");
-        org.jsoup.nodes.Element element23 = element21.prependText(" !");
-        java.lang.String str24 = element21.data();
-        org.jsoup.select.Elements elements26 = element21.getElementsByAttribute("&lt;html&gt;\n&lt;head&gt;\n&lt;/head&gt;\n&lt;body&gt; hi!\n&lt;/body&gt;\n&lt;/html&gt;");
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream27 = elements26.parallelStream();
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertNull(node7);
-        org.junit.Assert.assertNotNull(elements9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(document13);
-        org.junit.Assert.assertNull(node14);
-        org.junit.Assert.assertNotNull(elements15);
-        org.junit.Assert.assertNotNull(elements16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNotNull(element23);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
-        org.junit.Assert.assertNotNull(elements26);
-        org.junit.Assert.assertNotNull(elementStream27);
-    }
-
-    @Test
-    public void test1495() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1495");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.select.Elements elements7 = elements5.val("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream8 = elements5.stream();
-        org.jsoup.select.Elements elements10 = elements5.toggleClass("#document");
-        org.jsoup.select.Elements elements12 = elements10.select("#declaration");
-        org.jsoup.nodes.Element element13 = elements10.first();
-        org.jsoup.nodes.Element element15 = element13.append(" hi=\"\"");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertNotNull(elementStream8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertNotNull(element13);
-        org.junit.Assert.assertNotNull(element15);
-    }
-
-    @Test
-    public void test1496() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1496");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str3 = document2.outerHtml();
-        org.jsoup.select.Elements elements4 = document2.getAllElements();
-        java.lang.String str5 = document2.data();
-        java.lang.String str6 = document2.baseUri();
-        org.jsoup.nodes.Element element8 = document2.text("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element10 = document2.prependText(" #document");
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements4);
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "hi!" + "'", str6, "hi!");
-        org.junit.Assert.assertNotNull(element8);
-        org.junit.Assert.assertNotNull(element10);
-    }
-
-    @Test
-    public void test1497() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1497");
-        org.jsoup.nodes.Evaluator.AttributeWithValueStarting attributeWithValueStarting2 = new org.jsoup.nodes.Evaluator.AttributeWithValueStarting("\n<body>\n <!----> hi!\n</body>", "\n<!--<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!-->");
-        org.jsoup.nodes.Document document5 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str6 = document5.outerHtml();
-        org.jsoup.select.Elements elements7 = document5.getAllElements();
-        java.lang.String str8 = document5.data();
-        org.jsoup.nodes.Element element10 = document5.getElementById("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean11 = attributeWithValueStarting2.matches(element10);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(document5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str6, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNull(element10);
-    }
-
-    @Test
-    public void test1498() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1498");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str3 = document2.outerHtml();
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node7 = document6.parentNode;
-        java.lang.String str8 = document6.title();
-        org.jsoup.nodes.Element element10 = document6.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element11 = document2.appendChild((org.jsoup.nodes.Node) document6);
-        org.jsoup.nodes.Attributes attributes12 = document6.attributes();
-        boolean boolean14 = attributes12.hasKey("hi!");
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor15 = attributes12.iterator();
-        org.jsoup.nodes.Document document18 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node19 = document18.parentNode;
-        java.lang.String str20 = document18.title();
-        org.jsoup.nodes.Attributes attributes21 = document18.attributes();
-        java.lang.String str22 = attributes21.html();
-        attributes12.addAll(attributes21);
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor24 = attributes12.iterator();
-        org.jsoup.nodes.Document document27 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str28 = document27.outerHtml();
-        org.jsoup.nodes.Document document31 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node32 = document31.parentNode;
-        java.lang.String str33 = document31.title();
-        org.jsoup.nodes.Element element35 = document31.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element36 = document27.appendChild((org.jsoup.nodes.Node) document31);
-        org.jsoup.nodes.Attributes attributes37 = document31.attributes();
-        boolean boolean39 = attributes37.hasKey("hi!");
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor40 = attributes37.iterator();
-        org.jsoup.nodes.Document document43 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node44 = document43.parentNode;
-        java.lang.String str45 = document43.title();
-        org.jsoup.nodes.Attributes attributes46 = document43.attributes();
-        java.lang.String str47 = attributes46.html();
-        attributes37.addAll(attributes46);
-        java.util.Iterator<org.jsoup.nodes.Attribute> attributeItor49 = attributes46.iterator();
-        attributes12.addAll(attributes46);
-        java.util.Spliterator<org.jsoup.nodes.Attribute> attributeSpliterator51 = attributes46.spliterator();
-        java.lang.String str52 = attributes46.html();
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str3, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertNull(node7);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertNotNull(element10);
-        org.junit.Assert.assertNotNull(element11);
-        org.junit.Assert.assertNotNull(attributes12);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(attributeItor15);
-        org.junit.Assert.assertNotNull(document18);
-        org.junit.Assert.assertNull(node19);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "" + "'", str20, "");
-        org.junit.Assert.assertNotNull(attributes21);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertNotNull(attributeItor24);
-        org.junit.Assert.assertNotNull(document27);
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str28, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document31);
-        org.junit.Assert.assertNull(node32);
-        org.junit.Assert.assertEquals("'" + str33 + "' != '" + "" + "'", str33, "");
-        org.junit.Assert.assertNotNull(element35);
-        org.junit.Assert.assertNotNull(element36);
-        org.junit.Assert.assertNotNull(attributes37);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertNotNull(attributeItor40);
-        org.junit.Assert.assertNotNull(document43);
-        org.junit.Assert.assertNull(node44);
-        org.junit.Assert.assertEquals("'" + str45 + "' != '" + "" + "'", str45, "");
-        org.junit.Assert.assertNotNull(attributes46);
-        org.junit.Assert.assertEquals("'" + str47 + "' != '" + "" + "'", str47, "");
-        org.junit.Assert.assertNotNull(attributeItor49);
-        org.junit.Assert.assertNotNull(attributeSpliterator51);
-        org.junit.Assert.assertEquals("'" + str52 + "' != '" + "" + "'", str52, "");
-    }
-
-    @Test
-    public void test1499() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1499");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream6 = elements5.stream();
-        org.jsoup.select.Elements elements8 = elements5.addClass("hi");
-        java.lang.Object[] objArray9 = elements8.toArray();
-        org.jsoup.nodes.Document document12 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str13 = document12.outerHtml();
-        org.jsoup.nodes.Document document16 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node17 = document16.parentNode;
-        java.lang.String str18 = document16.title();
-        org.jsoup.nodes.Element element20 = document16.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element21 = document12.appendChild((org.jsoup.nodes.Node) document16);
-        org.jsoup.nodes.Element element22 = document16.nextElementSibling();
-        org.jsoup.select.Elements elements23 = document16.siblingElements();
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream24 = elements23.stream();
-        org.jsoup.nodes.Document document27 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node28 = document27.parentNode;
-        org.jsoup.select.Elements elements30 = document27.getElementsByIndexLessThan((int) 'a');
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream31 = elements30.stream();
-        org.jsoup.select.Elements elements33 = elements30.addClass("hi");
-        java.lang.String str34 = elements33.html();
-        boolean boolean35 = elements23.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements33);
-        boolean boolean36 = elements8.removeAll((java.util.Collection<org.jsoup.nodes.Element>) elements33);
-        org.jsoup.nodes.Document document39 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node40 = document39.parentNode;
-        org.jsoup.select.Elements elements42 = document39.getElementsByIndexLessThan((int) 'a');
-        java.util.stream.Stream<org.jsoup.nodes.Element> elementStream43 = elements42.stream();
-        org.jsoup.select.Elements elements45 = elements42.addClass("hi");
-        org.jsoup.select.Elements elements46 = new org.jsoup.select.Elements((java.util.Collection<org.jsoup.nodes.Element>) elements45);
-        org.jsoup.select.Elements elements49 = elements45.attr("head", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements51 = elements49.val("#text");
-        org.jsoup.nodes.Document document54 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node55 = document54.parentNode;
-        java.lang.String str56 = document54.title();
-        org.jsoup.nodes.Attributes attributes57 = document54.attributes();
-        org.jsoup.nodes.Document document60 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node61 = document60.parentNode;
-        org.jsoup.select.Elements elements63 = document60.getElementsByIndexLessThan((int) 'a');
-        org.jsoup.nodes.Element element64 = document54.prependChild((org.jsoup.nodes.Node) document60);
-        org.jsoup.select.Elements elements66 = document60.getElementsByClass("!");
-        org.jsoup.nodes.Element element68 = document60.append("hi!");
-        int int69 = elements49.lastIndexOf((java.lang.Object) document60);
-        org.jsoup.select.Elements elements71 = elements49.prepend("\n&lt;!----&gt;");
-        boolean boolean72 = elements8.addAll((java.util.Collection<org.jsoup.nodes.Element>) elements71);
-        org.jsoup.nodes.Evaluator.AttributeWithValueEnding attributeWithValueEnding75 = new org.jsoup.nodes.Evaluator.AttributeWithValueEnding("\n<!---->", "hi!");
-        org.jsoup.nodes.Document document78 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str79 = document78.outerHtml();
-        document78.setBaseUri("hi");
-        boolean boolean82 = attributeWithValueEnding75.matches((org.jsoup.nodes.Element) document78);
-        org.jsoup.nodes.Element element84 = document78.prependText("<#root>\n<html>\n <head>\n </head>\n <body> hi!\n </body>\n</html>\n</#root>\n<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.select.Elements elements85 = document78.children();
-        boolean boolean87 = elements85.contains((java.lang.Object) "[ , !]");
-        boolean boolean88 = elements8.addAll((java.util.Collection<org.jsoup.nodes.Element>) elements85);
-        org.junit.Assert.assertNotNull(document2);
-        org.junit.Assert.assertNull(node3);
-        org.junit.Assert.assertNotNull(elements5);
-        org.junit.Assert.assertNotNull(elementStream6);
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(objArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray9), "[<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>, \n<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>, \n<head class=\" hi\">\n</head>, \n<body class=\" hi\"> hi!\n</body>]");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray9), "[<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>, \n<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>, \n<head class=\" hi\">\n</head>, \n<body class=\" hi\"> hi!\n</body>]");
-        org.junit.Assert.assertNotNull(document12);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str13, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document16);
-        org.junit.Assert.assertNull(node17);
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
-        org.junit.Assert.assertNotNull(element20);
-        org.junit.Assert.assertNotNull(element21);
-        org.junit.Assert.assertNull(element22);
-        org.junit.Assert.assertNotNull(elements23);
-        org.junit.Assert.assertNotNull(elementStream24);
-        org.junit.Assert.assertNotNull(document27);
-        org.junit.Assert.assertNull(node28);
-        org.junit.Assert.assertNotNull(elements30);
-        org.junit.Assert.assertNotNull(elementStream31);
-        org.junit.Assert.assertNotNull(elements33);
-        org.junit.Assert.assertEquals("'" + str34 + "' != '" + "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!" + "'", str34, "<html class=\" hi\">\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n</html>\n<head class=\" hi\">\n</head>\n<body class=\" hi\"> hi!\n</body>\n\nhi!");
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertNotNull(document39);
-        org.junit.Assert.assertNull(node40);
-        org.junit.Assert.assertNotNull(elements42);
-        org.junit.Assert.assertNotNull(elementStream43);
-        org.junit.Assert.assertNotNull(elements45);
-        org.junit.Assert.assertNotNull(elements49);
-        org.junit.Assert.assertNotNull(elements51);
-        org.junit.Assert.assertNotNull(document54);
-        org.junit.Assert.assertNull(node55);
-        org.junit.Assert.assertEquals("'" + str56 + "' != '" + "" + "'", str56, "");
-        org.junit.Assert.assertNotNull(attributes57);
-        org.junit.Assert.assertNotNull(document60);
-        org.junit.Assert.assertNull(node61);
-        org.junit.Assert.assertNotNull(elements63);
-        org.junit.Assert.assertNotNull(element64);
-        org.junit.Assert.assertNotNull(elements66);
-        org.junit.Assert.assertNotNull(element68);
-        org.junit.Assert.assertTrue("'" + int69 + "' != '" + (-1) + "'", int69 == (-1));
-        org.junit.Assert.assertNotNull(elements71);
-        org.junit.Assert.assertTrue("'" + boolean72 + "' != '" + true + "'", boolean72 == true);
-        org.junit.Assert.assertNotNull(document78);
-        org.junit.Assert.assertEquals("'" + str79 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str79, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertTrue("'" + boolean82 + "' != '" + false + "'", boolean82 == false);
-        org.junit.Assert.assertNotNull(element84);
-        org.junit.Assert.assertNotNull(elements85);
-        org.junit.Assert.assertTrue("'" + boolean87 + "' != '" + false + "'", boolean87 == false);
-        org.junit.Assert.assertTrue("'" + boolean88 + "' != '" + true + "'", boolean88 == true);
-    }
-
-    @Test
-    public void test1500() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1500");
-        org.jsoup.nodes.Element element0 = null;
-        org.jsoup.nodes.Element[] elementArray1 = new org.jsoup.nodes.Element[] { element0 };
-        org.jsoup.select.Elements elements2 = new org.jsoup.select.Elements(elementArray1);
-        org.jsoup.nodes.Document document6 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str7 = document6.outerHtml();
-        org.jsoup.select.Elements elements8 = document6.getAllElements();
-        org.jsoup.select.Elements elements10 = elements8.prepend("");
-        org.jsoup.select.Elements elements12 = elements10.prepend("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        int int14 = elements12.lastIndexOf((java.lang.Object) '#');
-        elements12.clear();
-        boolean boolean16 = elements2.addAll(0, (java.util.Collection<org.jsoup.nodes.Element>) elements12);
-        org.jsoup.parser.Tag tag18 = org.jsoup.parser.Tag.valueOf("hi!");
-        org.jsoup.nodes.Element element20 = new org.jsoup.nodes.Element(tag18, "!");
-        boolean boolean21 = tag18.isData();
-        org.jsoup.nodes.Evaluator.Tag tag23 = new org.jsoup.nodes.Evaluator.Tag("hi!");
-        org.jsoup.nodes.Document document26 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        java.lang.String str27 = document26.outerHtml();
-        org.jsoup.nodes.Document document30 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node31 = document30.parentNode;
-        java.lang.String str32 = document30.title();
-        org.jsoup.nodes.Element element34 = document30.text("<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.jsoup.nodes.Element element35 = document26.appendChild((org.jsoup.nodes.Node) document30);
-        boolean boolean36 = tag23.matches((org.jsoup.nodes.Element) document26);
-        boolean boolean37 = tag18.equals((java.lang.Object) tag23);
-        org.jsoup.nodes.Element element39 = new org.jsoup.nodes.Element(tag18, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>\n<head>\n</head>\n<body> hi!\n</body>\n\nhi!");
-        boolean boolean40 = elements12.add(element39);
-        org.jsoup.select.Elements elements42 = elements12.eq((int) '!');
-        java.lang.Class<?> wildcardClass43 = elements12.getClass();
-        org.junit.Assert.assertNotNull(elementArray1);
-        org.junit.Assert.assertNotNull(document6);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str7, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(elements8);
-        org.junit.Assert.assertNotNull(elements10);
-        org.junit.Assert.assertNotNull(elements12);
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + (-1) + "'", int14 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertNotNull(tag18);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertNotNull(document26);
-        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>" + "'", str27, "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        org.junit.Assert.assertNotNull(document30);
-        org.junit.Assert.assertNull(node31);
-        org.junit.Assert.assertEquals("'" + str32 + "' != '" + "" + "'", str32, "");
-        org.junit.Assert.assertNotNull(element34);
-        org.junit.Assert.assertNotNull(element35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertTrue("'" + boolean37 + "' != '" + false + "'", boolean37 == false);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + true + "'", boolean40 == true);
-        org.junit.Assert.assertNotNull(elements42);
-        org.junit.Assert.assertNotNull(wildcardClass43);
     }
 }
 

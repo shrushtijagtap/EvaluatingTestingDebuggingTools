@@ -13,6 +13,367 @@ public class RegressionTest1 {
     public void test0501() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest1.test0501");
+        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
+        org.apache.commons.jxpath.ri.QName qName1 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
+        org.apache.commons.jxpath.ri.QName qName4 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean5 = null;
+        java.util.Locale locale6 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer7 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName4, dynaBean5, locale6);
+        org.apache.commons.jxpath.ri.QName qName8 = dynaBeanPointer7.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer10 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer7, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer12 = jDOMNodePointer10.namespacePointer("hi!");
+        boolean boolean13 = jDOMNodePointer10.isCollection();
+        boolean boolean15 = jDOMNodePointer10.equals((java.lang.Object) "");
+        boolean boolean16 = jDOMNodePointer10.isLeaf();
+        java.lang.Object obj17 = jDOMNodePointer10.getValue();
+        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) nodeNameTest3, (org.apache.commons.jxpath.Pointer) jDOMNodePointer10);
+        java.lang.String str19 = jXPathContextReferenceImpl18.getDefaultNamespaceURI();
+        java.lang.String str21 = jXPathContextReferenceImpl18.getNamespaceURI("/namespace::hi!");
+        org.apache.commons.jxpath.Pointer pointer22 = jXPathContextReferenceImpl18.getContextPointer();
+        org.apache.commons.jxpath.ri.QName qName23 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean24 = null;
+        java.util.Locale locale25 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer26 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName23, dynaBean24, locale25);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer28 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer26, "");
+        boolean boolean29 = jDOMNamespacePointer28.isCollection();
+        java.lang.String str30 = jDOMNamespacePointer28.getNamespaceURI();
+        boolean boolean31 = jDOMNamespacePointer28.isCollection();
+        org.apache.commons.jxpath.ri.QName qName32 = jDOMNamespacePointer28.getName();
+        jXPathContextReferenceImpl18.setNamespaceContextPointer((org.apache.commons.jxpath.Pointer) jDOMNamespacePointer28);
+        org.apache.commons.jxpath.ri.QName qName34 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean35 = null;
+        java.util.Locale locale36 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer37 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName34, dynaBean35, locale36);
+        org.apache.commons.jxpath.ri.QName qName38 = dynaBeanPointer37.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer40 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer37, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.axes.RootContext rootContext41 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl18, (org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer40);
+        org.apache.commons.jxpath.ri.EvalContext evalContext42 = jXPathContextReferenceImpl18.getAbsoluteRootContext();
+        jXPathContextReferenceImpl18.registerNamespace("\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000", "*");
+        org.apache.commons.jxpath.ri.EvalContext evalContext46 = jXPathContextReferenceImpl18.getAbsoluteRootContext();
+        jXPathContextReferenceImpl18.registerDefaultNamespace("/namespace::$null");
+        // The following exception was thrown during execution in test generation
+        try {
+            jXPathContextReferenceImpl18.removePath("/namespace::$null");
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.jxpath.JXPathInvalidSyntaxException; message: Invalid XPath: '/namespace::$null'. Syntax error after: '/'");
+        } catch (org.apache.commons.jxpath.JXPathInvalidSyntaxException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(qName8);
+        org.junit.Assert.assertNotNull(nodePointer12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNull(obj17);
+        org.junit.Assert.assertNull(str19);
+        org.junit.Assert.assertNull(str21);
+        org.junit.Assert.assertNotNull(pointer22);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertNull(str30);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertNotNull(qName32);
+        org.junit.Assert.assertNull(qName38);
+        org.junit.Assert.assertNotNull(evalContext42);
+        org.junit.Assert.assertNotNull(evalContext46);
+    }
+
+    @Test
+    public void test0502() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0502");
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
+        org.jdom.Attribute attribute1 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
+        org.apache.commons.jxpath.ri.model.beans.NullElementPointer nullElementPointer4 = new org.apache.commons.jxpath.ri.model.beans.NullElementPointer(nodePointer0, (int) (short) 0);
+        java.lang.Object obj5 = nullElementPointer4.getImmediateNode();
+        java.lang.Object obj6 = nullElementPointer4.getImmediateNode();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory jDOMPointerFactory7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory();
+        org.apache.commons.jxpath.ri.QName qName8 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean9 = null;
+        java.util.Locale locale10 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer11 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName8, dynaBean9, locale10);
+        org.apache.commons.jxpath.ri.QName qName12 = dynaBeanPointer11.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer14 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer11, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer16 = jDOMNodePointer14.namespacePointer("hi!");
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer17 = nodePointer16.getImmediateValuePointer();
+        org.w3c.dom.Node node18 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer19 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(nodePointer17, node18);
+        org.apache.commons.jxpath.ri.QName qName20 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean21 = null;
+        java.util.Locale locale22 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer23 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName20, dynaBean21, locale22);
+        org.apache.commons.jxpath.ri.QName qName24 = dynaBeanPointer23.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer26 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer23, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer28 = jDOMNodePointer26.namespacePointer("hi!");
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer29 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer26);
+        java.lang.String[] strArray30 = nullPropertyPointer29.getPropertyNames();
+        boolean boolean31 = nullPropertyPointer29.isContainer();
+        int int32 = nullPropertyPointer29.getLength();
+        org.apache.commons.jxpath.ri.QName qName33 = nullPropertyPointer29.getName();
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory34 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
+        int int35 = dynaBeanPointerFactory34.getOrder();
+        int int36 = dynaBeanPointerFactory34.getOrder();
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer37 = jDOMPointerFactory7.createNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer19, qName33, (java.lang.Object) dynaBeanPointerFactory34);
+        org.apache.commons.jxpath.ri.QName qName38 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean39 = null;
+        java.util.Locale locale40 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer41 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName38, dynaBean39, locale40);
+        org.apache.commons.jxpath.ri.QName qName42 = dynaBeanPointer41.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer44 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer41, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer46 = jDOMNodePointer44.namespacePointer("hi!");
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer47 = nodePointer46.getImmediateValuePointer();
+        org.w3c.dom.Node node48 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer49 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(nodePointer47, node48);
+        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler50 = null;
+        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer51 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullElementPointer4, qName33, (java.lang.Object) dOMNodePointer49, dynamicPropertyHandler50);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer52 = null;
+        org.jdom.Attribute attribute53 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer54 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer52, attribute53);
+        boolean boolean55 = jDOMAttributePointer54.isLeaf();
+        org.apache.commons.jxpath.ri.QName qName56 = null;
+        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator57 = jDOMAttributePointer54.attributeIterator(qName56);
+        int int58 = jDOMAttributePointer54.getLength();
+        boolean boolean59 = jDOMAttributePointer54.isActual();
+        // The following exception was thrown during execution in test generation
+        try {
+            nullElementPointer4.setValue((java.lang.Object) jDOMAttributePointer54);
+            org.junit.Assert.fail("Expected exception of type java.lang.UnsupportedOperationException; message: Collection element does not exist: [1]");
+        } catch (java.lang.UnsupportedOperationException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(obj5);
+        org.junit.Assert.assertNull(obj6);
+        org.junit.Assert.assertNull(qName12);
+        org.junit.Assert.assertNotNull(nodePointer16);
+        org.junit.Assert.assertNotNull(nodePointer17);
+        org.junit.Assert.assertNull(qName24);
+        org.junit.Assert.assertNotNull(nodePointer28);
+        org.junit.Assert.assertNotNull(strArray30);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + true + "'", boolean31 == true);
+        org.junit.Assert.assertTrue("'" + int32 + "' != '" + 0 + "'", int32 == 0);
+        org.junit.Assert.assertNotNull(qName33);
+        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 700 + "'", int35 == 700);
+        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 700 + "'", int36 == 700);
+        org.junit.Assert.assertNull(nodePointer37);
+        org.junit.Assert.assertNull(qName42);
+        org.junit.Assert.assertNotNull(nodePointer46);
+        org.junit.Assert.assertNotNull(nodePointer47);
+        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + true + "'", boolean55 == true);
+        org.junit.Assert.assertNull(nodeIterator57);
+        org.junit.Assert.assertTrue("'" + int58 + "' != '" + 1 + "'", int58 == 1);
+        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + true + "'", boolean59 == true);
+    }
+
+    @Test
+    public void test0503() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0503");
+        org.apache.commons.jxpath.Container container0 = null;
+        org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
+        org.apache.commons.jxpath.ri.QName qName2 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean3 = null;
+        java.util.Locale locale4 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer5 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName2, dynaBean3, locale4);
+        org.apache.commons.jxpath.ri.QName qName6 = dynaBeanPointer5.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer8 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer5, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer10 = jDOMNodePointer8.namespacePointer("hi!");
+        boolean boolean11 = jDOMNodePointer8.isCollection();
+        org.apache.commons.jxpath.ri.QName qName13 = new org.apache.commons.jxpath.ri.QName("");
+        java.lang.Object obj14 = null;
+        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler15 = null;
+        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer16 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer8, qName13, obj14, dynamicPropertyHandler15);
+        java.lang.String str17 = qName13.toString();
+        org.apache.commons.jxpath.ri.QName qName18 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean19 = null;
+        java.util.Locale locale20 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer21 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName18, dynaBean19, locale20);
+        org.apache.commons.jxpath.ri.QName qName22 = dynaBeanPointer21.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer24 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer21, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext25 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext27 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext25, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer28 = dynaBeanPointer21.createPath(jXPathContext27);
+        java.util.List list30 = jXPathContext27.selectNodes("org.apache.commons.jxpath.JXPathContextFactory");
+        org.w3c.dom.Node node31 = null;
+        org.apache.commons.jxpath.ri.QName qName32 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean33 = null;
+        java.util.Locale locale34 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer35 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName32, dynaBean33, locale34);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer37 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer35, "");
+        boolean boolean38 = jDOMNamespacePointer37.isCollection();
+        java.lang.String str39 = jDOMNamespacePointer37.getNamespaceURI();
+        boolean boolean40 = jDOMNamespacePointer37.isCollection();
+        org.apache.commons.jxpath.ri.QName qName41 = jDOMNamespacePointer37.getName();
+        org.apache.commons.jxpath.ri.QName qName43 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean44 = null;
+        java.util.Locale locale45 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer46 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName43, dynaBean44, locale45);
+        org.apache.commons.jxpath.ri.QName qName47 = dynaBeanPointer46.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer49 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer46, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext50 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext52 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext50, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer53 = dynaBeanPointer46.createPath(jXPathContext52);
+        java.util.Locale locale54 = jXPathContext52.getLocale();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer55 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale54);
+        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer56 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName41, locale54);
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer57 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node31, locale54);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer58 = beanPointerFactory1.createNodePointer(qName13, (java.lang.Object) "org.apache.commons.jxpath.JXPathContextFactory", locale54);
+        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer59 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale54);
+        java.lang.Object obj60 = containerPointer59.getBaseValue();
+        java.lang.String str62 = containerPointer59.getNamespaceURI("@null");
+        org.apache.commons.jxpath.ri.QName qName63 = containerPointer59.getName();
+        org.junit.Assert.assertNull(qName6);
+        org.junit.Assert.assertNotNull(nodePointer10);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertNull(qName22);
+        org.junit.Assert.assertNotNull(jXPathContext27);
+        org.junit.Assert.assertNotNull(nodePointer28);
+        org.junit.Assert.assertNotNull(list30);
+        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
+        org.junit.Assert.assertNull(str39);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertNotNull(qName41);
+        org.junit.Assert.assertNull(qName47);
+        org.junit.Assert.assertNotNull(jXPathContext52);
+        org.junit.Assert.assertNotNull(nodePointer53);
+        org.junit.Assert.assertNotNull(locale54);
+        org.junit.Assert.assertEquals(locale54.toString(), "en_US");
+        org.junit.Assert.assertNotNull(nodePointer58);
+        org.junit.Assert.assertNull(obj60);
+        org.junit.Assert.assertNull(str62);
+        org.junit.Assert.assertNull(qName63);
+    }
+
+    @Test
+    public void test0504() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0504");
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
+        int int1 = dynaBeanPointerFactory0.getOrder();
+        org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest4 = null;
+        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext5 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext2, false, nodeTest4);
+        int int6 = descendantContext5.getDocumentOrder();
+        int int7 = descendantContext5.getPosition();
+        org.apache.commons.jxpath.ri.QName qName8 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean9 = null;
+        java.util.Locale locale10 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer11 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName8, dynaBean9, locale10);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer13 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer11, "");
+        boolean boolean14 = jDOMNamespacePointer13.isCollection();
+        java.lang.String str15 = jDOMNamespacePointer13.getNamespaceURI();
+        boolean boolean16 = jDOMNamespacePointer13.isCollection();
+        org.apache.commons.jxpath.ri.QName qName17 = jDOMNamespacePointer13.getName();
+        org.apache.commons.jxpath.ri.QName qName18 = jDOMNamespacePointer13.getName();
+        org.apache.commons.jxpath.ri.QName qName19 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean20 = null;
+        java.util.Locale locale21 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer22 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName19, dynaBean20, locale21);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer24 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer22, "");
+        boolean boolean25 = jDOMNamespacePointer24.isCollection();
+        java.lang.String str26 = jDOMNamespacePointer24.getNamespaceURI();
+        boolean boolean27 = jDOMNamespacePointer24.isCollection();
+        org.apache.commons.jxpath.ri.QName qName28 = jDOMNamespacePointer24.getName();
+        org.apache.commons.jxpath.ri.QName qName29 = jDOMNamespacePointer24.getName();
+        org.apache.commons.beanutils.DynaBean dynaBean30 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer31 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNamespacePointer13, qName29, dynaBean30);
+        org.apache.commons.jxpath.ri.EvalContext evalContext32 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest34 = null;
+        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext35 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext32, false, nodeTest34);
+        int int36 = descendantContext35.getDocumentOrder();
+        org.apache.commons.jxpath.ri.compiler.Step step38 = null;
+        org.apache.commons.jxpath.ri.compiler.Step[] stepArray39 = new org.apache.commons.jxpath.ri.compiler.Step[] { step38 };
+        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath40 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray39);
+        boolean boolean41 = locationPath40.isAbsolute();
+        org.apache.commons.jxpath.ri.axes.PredicateContext predicateContext42 = new org.apache.commons.jxpath.ri.axes.PredicateContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext35, (org.apache.commons.jxpath.ri.compiler.Expression) locationPath40);
+        org.apache.commons.jxpath.ri.QName qName43 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean44 = null;
+        java.util.Locale locale45 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer46 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName43, dynaBean44, locale45);
+        org.apache.commons.jxpath.ri.QName qName47 = dynaBeanPointer46.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer49 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer46, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer51 = jDOMNodePointer49.namespacePointer("hi!");
+        boolean boolean52 = jDOMNodePointer49.isCollection();
+        org.apache.commons.jxpath.ri.QName qName54 = new org.apache.commons.jxpath.ri.QName("");
+        java.lang.Object obj55 = null;
+        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler56 = null;
+        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer57 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer49, qName54, obj55, dynamicPropertyHandler56);
+        org.w3c.dom.Node node58 = null;
+        org.apache.commons.jxpath.ri.QName qName59 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean60 = null;
+        java.util.Locale locale61 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer62 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName59, dynaBean60, locale61);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer64 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer62, "");
+        boolean boolean65 = jDOMNamespacePointer64.isCollection();
+        java.lang.String str66 = jDOMNamespacePointer64.getNamespaceURI();
+        boolean boolean67 = jDOMNamespacePointer64.isCollection();
+        org.apache.commons.jxpath.ri.QName qName68 = jDOMNamespacePointer64.getName();
+        org.apache.commons.jxpath.ri.QName qName70 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean71 = null;
+        java.util.Locale locale72 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer73 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName70, dynaBean71, locale72);
+        org.apache.commons.jxpath.ri.QName qName74 = dynaBeanPointer73.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer76 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer73, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext77 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext79 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext77, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer80 = dynaBeanPointer73.createPath(jXPathContext79);
+        java.util.Locale locale81 = jXPathContext79.getLocale();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer82 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale81);
+        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer83 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName68, locale81);
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer84 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node58, locale81);
+        org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator pointerIterator85 = new org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator((java.util.Iterator) descendantContext35, qName54, locale81);
+        org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator pointerIterator86 = new org.apache.commons.jxpath.ri.compiler.Expression.PointerIterator((java.util.Iterator) descendantContext5, qName29, locale81);
+        org.apache.commons.jxpath.ri.parser.ParseException parseException88 = new org.apache.commons.jxpath.ri.parser.ParseException("DOM");
+        int[][] intArray89 = parseException88.expectedTokenSequences;
+        java.util.Locale locale90 = null;
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer91 = dynaBeanPointerFactory0.createNodePointer(qName29, (java.lang.Object) intArray89, locale90);
+        java.util.Locale locale92 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer93 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((java.lang.Object) qName29, locale92);
+        java.lang.String str94 = jDOMNodePointer93.getNamespaceURI();
+        // The following exception was thrown during execution in test generation
+        try {
+            jDOMNodePointer93.remove();
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.jxpath.JXPathException; message: Cannot remove root JDOM node");
+        } catch (org.apache.commons.jxpath.JXPathException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 700 + "'", int1 == 700);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNull(str15);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertNotNull(qName17);
+        org.junit.Assert.assertNotNull(qName18);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertNull(str26);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertNotNull(qName28);
+        org.junit.Assert.assertNotNull(qName29);
+        org.junit.Assert.assertTrue("'" + int36 + "' != '" + 0 + "'", int36 == 0);
+        org.junit.Assert.assertNotNull(stepArray39);
+        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
+        org.junit.Assert.assertNull(qName47);
+        org.junit.Assert.assertNotNull(nodePointer51);
+        org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
+        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
+        org.junit.Assert.assertNull(str66);
+        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + false + "'", boolean67 == false);
+        org.junit.Assert.assertNotNull(qName68);
+        org.junit.Assert.assertNull(qName74);
+        org.junit.Assert.assertNotNull(jXPathContext79);
+        org.junit.Assert.assertNotNull(nodePointer80);
+        org.junit.Assert.assertNotNull(locale81);
+        org.junit.Assert.assertEquals(locale81.toString(), "en_US");
+        org.junit.Assert.assertNull(intArray89);
+        org.junit.Assert.assertNull(nodePointer91);
+        org.junit.Assert.assertNull(str94);
+    }
+
+    @Test
+    public void test0505() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0505");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -35,9 +396,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0502() throws Throwable {
+    public void test0506() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0502");
+            System.out.format("%n%s%n", "RegressionTest1.test0506");
         org.apache.commons.jxpath.xml.DOMParser dOMParser0 = new org.apache.commons.jxpath.xml.DOMParser();
         boolean boolean1 = dOMParser0.isNamespaceAware();
         boolean boolean2 = dOMParser0.isNamespaceAware();
@@ -47,9 +408,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0503() throws Throwable {
+    public void test0507() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0503");
+            System.out.format("%n%s%n", "RegressionTest1.test0507");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -120,9 +481,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0504() throws Throwable {
+    public void test0508() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0504");
+            System.out.format("%n%s%n", "RegressionTest1.test0508");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -195,9 +556,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0505() throws Throwable {
+    public void test0509() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0505");
+            System.out.format("%n%s%n", "RegressionTest1.test0509");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -307,9 +668,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0506() throws Throwable {
+    public void test0510() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0506");
+            System.out.format("%n%s%n", "RegressionTest1.test0510");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -430,9 +791,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0507() throws Throwable {
+    public void test0511() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0507");
+            System.out.format("%n%s%n", "RegressionTest1.test0511");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -538,9 +899,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0508() throws Throwable {
+    public void test0512() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0508");
+            System.out.format("%n%s%n", "RegressionTest1.test0512");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.EvalContext evalContext1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest3 = null;
@@ -573,9 +934,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0509() throws Throwable {
+    public void test0513() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0509");
+            System.out.format("%n%s%n", "RegressionTest1.test0513");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo2 = null;
         java.util.Locale locale3 = null;
@@ -674,9 +1035,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0510() throws Throwable {
+    public void test0514() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0510");
+            System.out.format("%n%s%n", "RegressionTest1.test0514");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -779,9 +1140,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0511() throws Throwable {
+    public void test0515() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0511");
+            System.out.format("%n%s%n", "RegressionTest1.test0515");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -885,9 +1246,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0512() throws Throwable {
+    public void test0516() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0512");
+            System.out.format("%n%s%n", "RegressionTest1.test0516");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -955,9 +1316,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0513() throws Throwable {
+    public void test0517() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0513");
+            System.out.format("%n%s%n", "RegressionTest1.test0517");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -973,9 +1334,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0514() throws Throwable {
+    public void test0518() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0514");
+            System.out.format("%n%s%n", "RegressionTest1.test0518");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("@null");
         org.apache.commons.jxpath.ri.QName qName2 = null;
         org.apache.commons.beanutils.DynaBean dynaBean3 = null;
@@ -1005,9 +1366,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0515() throws Throwable {
+    public void test0519() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0515");
+            System.out.format("%n%s%n", "RegressionTest1.test0519");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -1031,9 +1392,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0516() throws Throwable {
+    public void test0520() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0516");
+            System.out.format("%n%s%n", "RegressionTest1.test0520");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -1122,9 +1483,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0517() throws Throwable {
+    public void test0521() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0517");
+            System.out.format("%n%s%n", "RegressionTest1.test0521");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -1245,9 +1606,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0518() throws Throwable {
+    public void test0522() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0518");
+            System.out.format("%n%s%n", "RegressionTest1.test0522");
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
         int int1 = dynaBeanPointerFactory0.getOrder();
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
@@ -1366,9 +1727,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0519() throws Throwable {
+    public void test0523() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0519");
+            System.out.format("%n%s%n", "RegressionTest1.test0523");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         java.text.DecimalFormatSymbols decimalFormatSymbols4 = jXPathContext2.getDecimalFormatSymbols("/");
@@ -1437,9 +1798,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0520() throws Throwable {
+    public void test0524() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0520");
+            System.out.format("%n%s%n", "RegressionTest1.test0524");
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
         int int1 = dynaBeanPointerFactory0.getOrder();
         int int2 = dynaBeanPointerFactory0.getOrder();
@@ -1448,9 +1809,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0521() throws Throwable {
+    public void test0525() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0521");
+            System.out.format("%n%s%n", "RegressionTest1.test0525");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -1504,9 +1865,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0522() throws Throwable {
+    public void test0526() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0522");
+            System.out.format("%n%s%n", "RegressionTest1.test0526");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         org.apache.commons.jxpath.AbstractFactory abstractFactory3 = jXPathContext2.getFactory();
@@ -1520,9 +1881,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0523() throws Throwable {
+    public void test0527() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0523");
+            System.out.format("%n%s%n", "RegressionTest1.test0527");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -1641,9 +2002,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0524() throws Throwable {
+    public void test0528() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0524");
+            System.out.format("%n%s%n", "RegressionTest1.test0528");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -1720,9 +2081,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0525() throws Throwable {
+    public void test0529() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0525");
+            System.out.format("%n%s%n", "RegressionTest1.test0529");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream1 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0);
         simpleCharStream1.bufpos = 'a';
@@ -1736,9 +2097,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0526() throws Throwable {
+    public void test0530() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0526");
+            System.out.format("%n%s%n", "RegressionTest1.test0530");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -1762,9 +2123,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0527() throws Throwable {
+    public void test0531() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0527");
+            System.out.format("%n%s%n", "RegressionTest1.test0531");
         org.apache.commons.jxpath.xml.JDOMParser jDOMParser0 = new org.apache.commons.jxpath.xml.JDOMParser();
         java.io.InputStream inputStream1 = null;
         // The following exception was thrown during execution in test generation
@@ -1777,9 +2138,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0528() throws Throwable {
+    public void test0532() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0528");
+            System.out.format("%n%s%n", "RegressionTest1.test0532");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -1850,9 +2211,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0529() throws Throwable {
+    public void test0533() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0529");
+            System.out.format("%n%s%n", "RegressionTest1.test0533");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -1906,9 +2267,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0530() throws Throwable {
+    public void test0534() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0530");
+            System.out.format("%n%s%n", "RegressionTest1.test0534");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -1944,9 +2305,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0531() throws Throwable {
+    public void test0535() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0531");
+            System.out.format("%n%s%n", "RegressionTest1.test0535");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -1961,9 +2322,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0532() throws Throwable {
+    public void test0536() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0532");
+            System.out.format("%n%s%n", "RegressionTest1.test0536");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -2032,9 +2393,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0533() throws Throwable {
+    public void test0537() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0533");
+            System.out.format("%n%s%n", "RegressionTest1.test0537");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.processingInstructionTest("/*");
         org.apache.commons.jxpath.ri.parser.ParseException parseException4 = new org.apache.commons.jxpath.ri.parser.ParseException("\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
@@ -2053,9 +2414,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0534() throws Throwable {
+    public void test0538() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0534");
+            System.out.format("%n%s%n", "RegressionTest1.test0538");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -2150,9 +2511,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0535() throws Throwable {
+    public void test0539() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0535");
+            System.out.format("%n%s%n", "RegressionTest1.test0539");
         org.apache.commons.jxpath.Variables variables0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -2178,9 +2539,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0536() throws Throwable {
+    public void test0540() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0536");
+            System.out.format("%n%s%n", "RegressionTest1.test0540");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -2200,9 +2561,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0537() throws Throwable {
+    public void test0541() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0537");
+            System.out.format("%n%s%n", "RegressionTest1.test0541");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -2218,9 +2579,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0538() throws Throwable {
+    public void test0542() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0538");
+            System.out.format("%n%s%n", "RegressionTest1.test0542");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, (int) '4', 24, 800);
         int int5 = simpleCharStream4.getBeginColumn();
@@ -2241,9 +2602,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0539() throws Throwable {
+    public void test0543() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0539");
+            System.out.format("%n%s%n", "RegressionTest1.test0543");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo2 = null;
         java.util.Locale locale3 = null;
@@ -2252,9 +2613,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0540() throws Throwable {
+    public void test0544() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0540");
+            System.out.format("%n%s%n", "RegressionTest1.test0544");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo2 = null;
         java.util.Locale locale3 = null;
@@ -2266,9 +2627,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0541() throws Throwable {
+    public void test0545() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0541");
+            System.out.format("%n%s%n", "RegressionTest1.test0545");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -2294,9 +2655,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0542() throws Throwable {
+    public void test0546() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0542");
+            System.out.format("%n%s%n", "RegressionTest1.test0546");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -2397,9 +2758,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0543() throws Throwable {
+    public void test0547() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0543");
+            System.out.format("%n%s%n", "RegressionTest1.test0547");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -2437,9 +2798,70 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0544() throws Throwable {
+    public void test0548() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0544");
+            System.out.format("%n%s%n", "RegressionTest1.test0548");
+        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
+        org.apache.commons.jxpath.ri.QName qName1 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
+        org.apache.commons.jxpath.ri.QName qName4 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean5 = null;
+        java.util.Locale locale6 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer7 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName4, dynaBean5, locale6);
+        org.apache.commons.jxpath.ri.QName qName8 = dynaBeanPointer7.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer10 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer7, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer12 = jDOMNodePointer10.namespacePointer("hi!");
+        boolean boolean13 = jDOMNodePointer10.isCollection();
+        boolean boolean15 = jDOMNodePointer10.equals((java.lang.Object) "");
+        boolean boolean16 = jDOMNodePointer10.isLeaf();
+        java.lang.Object obj17 = jDOMNodePointer10.getValue();
+        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) nodeNameTest3, (org.apache.commons.jxpath.Pointer) jDOMNodePointer10);
+        java.lang.String str19 = jXPathContextReferenceImpl18.getDefaultNamespaceURI();
+        java.lang.String str21 = jXPathContextReferenceImpl18.getNamespaceURI("/namespace::hi!");
+        org.apache.commons.jxpath.Pointer pointer22 = jXPathContextReferenceImpl18.getContextPointer();
+        org.apache.commons.jxpath.ri.QName qName23 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean24 = null;
+        java.util.Locale locale25 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer26 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName23, dynaBean24, locale25);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer28 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer26, "");
+        boolean boolean29 = jDOMNamespacePointer28.isCollection();
+        java.lang.String str30 = jDOMNamespacePointer28.getNamespaceURI();
+        boolean boolean31 = jDOMNamespacePointer28.isCollection();
+        org.apache.commons.jxpath.ri.QName qName32 = jDOMNamespacePointer28.getName();
+        jXPathContextReferenceImpl18.setNamespaceContextPointer((org.apache.commons.jxpath.Pointer) jDOMNamespacePointer28);
+        org.apache.commons.jxpath.ri.QName qName34 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean35 = null;
+        java.util.Locale locale36 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer37 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName34, dynaBean35, locale36);
+        org.apache.commons.jxpath.ri.QName qName38 = dynaBeanPointer37.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer40 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer37, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.axes.RootContext rootContext41 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl18, (org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer40);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer42 = rootContext41.getCurrentNodePointer();
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest43 = null;
+        org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext precedingOrFollowingContext45 = new org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext((org.apache.commons.jxpath.ri.EvalContext) rootContext41, nodeTest43, false);
+        org.apache.commons.jxpath.Pointer pointer46 = precedingOrFollowingContext45.getContextNodePointer();
+        org.junit.Assert.assertNull(qName8);
+        org.junit.Assert.assertNotNull(nodePointer12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNull(obj17);
+        org.junit.Assert.assertNull(str19);
+        org.junit.Assert.assertNull(str21);
+        org.junit.Assert.assertNotNull(pointer22);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertNull(str30);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertNotNull(qName32);
+        org.junit.Assert.assertNull(qName38);
+        org.junit.Assert.assertNotNull(nodePointer42);
+        org.junit.Assert.assertNull(pointer46);
+    }
+
+    @Test
+    public void test0549() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0549");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -2529,9 +2951,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0545() throws Throwable {
+    public void test0550() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0545");
+            System.out.format("%n%s%n", "RegressionTest1.test0550");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream1 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0);
         simpleCharStream1.bufpos = 'a';
@@ -2544,9 +2966,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0546() throws Throwable {
+    public void test0551() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0546");
+            System.out.format("%n%s%n", "RegressionTest1.test0551");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -2653,9 +3075,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0547() throws Throwable {
+    public void test0552() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0547");
+            System.out.format("%n%s%n", "RegressionTest1.test0552");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -2672,9 +3094,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0548() throws Throwable {
+    public void test0553() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0548");
+            System.out.format("%n%s%n", "RegressionTest1.test0553");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -2713,9 +3135,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0549() throws Throwable {
+    public void test0554() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0549");
+            System.out.format("%n%s%n", "RegressionTest1.test0554");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(41);
         org.apache.commons.jxpath.ri.QName qName3 = null;
@@ -2769,9 +3191,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0550() throws Throwable {
+    public void test0555() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0550");
+            System.out.format("%n%s%n", "RegressionTest1.test0555");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, (int) '4', 24, 800);
         java.io.Reader reader5 = null;
@@ -2787,9 +3209,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0551() throws Throwable {
+    public void test0556() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0551");
+            System.out.format("%n%s%n", "RegressionTest1.test0556");
         org.apache.commons.jxpath.ri.parser.ParseException parseException1 = new org.apache.commons.jxpath.ri.parser.ParseException("hi!");
         org.apache.commons.jxpath.JXPathException jXPathException3 = new org.apache.commons.jxpath.JXPathException("/");
         org.apache.commons.jxpath.ri.parser.ParseException parseException5 = new org.apache.commons.jxpath.ri.parser.ParseException("hi!");
@@ -2824,9 +3246,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0552() throws Throwable {
+    public void test0557() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0552");
+            System.out.format("%n%s%n", "RegressionTest1.test0557");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -2889,9 +3311,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0553() throws Throwable {
+    public void test0558() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0553");
+            System.out.format("%n%s%n", "RegressionTest1.test0558");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -2974,9 +3396,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0554() throws Throwable {
+    public void test0559() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0554");
+            System.out.format("%n%s%n", "RegressionTest1.test0559");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -2995,17 +3417,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0555() throws Throwable {
+    public void test0560() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0555");
+            System.out.format("%n%s%n", "RegressionTest1.test0560");
         int int0 = org.apache.commons.jxpath.ri.Compiler.FUNCTION_LAST;
         org.junit.Assert.assertTrue("'" + int0 + "' != '" + 1 + "'", int0 == 1);
     }
 
     @Test
-    public void test0556() throws Throwable {
+    public void test0561() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0556");
+            System.out.format("%n%s%n", "RegressionTest1.test0561");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -3020,9 +3442,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0557() throws Throwable {
+    public void test0562() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0557");
+            System.out.format("%n%s%n", "RegressionTest1.test0562");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -3047,9 +3469,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0558() throws Throwable {
+    public void test0563() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0558");
+            System.out.format("%n%s%n", "RegressionTest1.test0563");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -3146,9 +3568,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0559() throws Throwable {
+    public void test0564() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0559");
+            System.out.format("%n%s%n", "RegressionTest1.test0564");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -3277,9 +3699,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0560() throws Throwable {
+    public void test0565() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0560");
+            System.out.format("%n%s%n", "RegressionTest1.test0565");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -3294,9 +3716,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0561() throws Throwable {
+    public void test0566() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0561");
+            System.out.format("%n%s%n", "RegressionTest1.test0566");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -3334,9 +3756,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0562() throws Throwable {
+    public void test0567() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0562");
+            System.out.format("%n%s%n", "RegressionTest1.test0567");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -3425,9 +3847,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0563() throws Throwable {
+    public void test0568() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0563");
+            System.out.format("%n%s%n", "RegressionTest1.test0568");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -3496,9 +3918,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0564() throws Throwable {
+    public void test0569() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0564");
+            System.out.format("%n%s%n", "RegressionTest1.test0569");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -3552,9 +3974,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0565() throws Throwable {
+    public void test0570() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0565");
+            System.out.format("%n%s%n", "RegressionTest1.test0570");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -3665,9 +4087,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0566() throws Throwable {
+    public void test0571() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0566");
+            System.out.format("%n%s%n", "RegressionTest1.test0571");
         org.apache.commons.jxpath.ri.compiler.Step step1 = null;
         org.apache.commons.jxpath.ri.compiler.Step[] stepArray2 = new org.apache.commons.jxpath.ri.compiler.Step[] { step1 };
         org.apache.commons.jxpath.ri.compiler.LocationPath locationPath3 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray2);
@@ -3792,9 +4214,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0567() throws Throwable {
+    public void test0572() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0567");
+            System.out.format("%n%s%n", "RegressionTest1.test0572");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -3900,9 +4322,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0568() throws Throwable {
+    public void test0573() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0568");
+            System.out.format("%n%s%n", "RegressionTest1.test0573");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -3990,9 +4412,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0569() throws Throwable {
+    public void test0574() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0569");
+            System.out.format("%n%s%n", "RegressionTest1.test0574");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -4057,9 +4479,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0570() throws Throwable {
+    public void test0575() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0570");
+            System.out.format("%n%s%n", "RegressionTest1.test0575");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -4078,9 +4500,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0571() throws Throwable {
+    public void test0576() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0571");
+            System.out.format("%n%s%n", "RegressionTest1.test0576");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token2 = null;
         int[][] intArray3 = new int[][] {};
@@ -4136,9 +4558,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0572() throws Throwable {
+    public void test0577() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0572");
+            System.out.format("%n%s%n", "RegressionTest1.test0577");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -4172,9 +4594,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0573() throws Throwable {
+    public void test0578() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0573");
+            System.out.format("%n%s%n", "RegressionTest1.test0578");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -4229,17 +4651,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0574() throws Throwable {
+    public void test0579() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0574");
+            System.out.format("%n%s%n", "RegressionTest1.test0579");
         int int0 = org.apache.commons.jxpath.ri.parser.XPathParserConstants.AXIS_ATTRIBUTE;
         org.junit.Assert.assertTrue("'" + int0 + "' != '" + 39 + "'", int0 == 39);
     }
 
     @Test
-    public void test0575() throws Throwable {
+    public void test0580() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0575");
+            System.out.format("%n%s%n", "RegressionTest1.test0580");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -4268,9 +4690,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0576() throws Throwable {
+    public void test0581() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0576");
+            System.out.format("%n%s%n", "RegressionTest1.test0581");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -4306,9 +4728,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0577() throws Throwable {
+    public void test0582() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0577");
+            System.out.format("%n%s%n", "RegressionTest1.test0582");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -4426,9 +4848,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0578() throws Throwable {
+    public void test0583() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0578");
+            System.out.format("%n%s%n", "RegressionTest1.test0583");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream1 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0);
         simpleCharStream1.bufpos = 'a';
@@ -4448,9 +4870,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0579() throws Throwable {
+    public void test0584() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0579");
+            System.out.format("%n%s%n", "RegressionTest1.test0584");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -4520,9 +4942,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0580() throws Throwable {
+    public void test0585() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0580");
+            System.out.format("%n%s%n", "RegressionTest1.test0585");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -4618,9 +5040,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0581() throws Throwable {
+    public void test0586() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0581");
+            System.out.format("%n%s%n", "RegressionTest1.test0586");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -4681,9 +5103,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0582() throws Throwable {
+    public void test0587() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0582");
+            System.out.format("%n%s%n", "RegressionTest1.test0587");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         java.lang.Object obj3 = null;
@@ -4727,9 +5149,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0583() throws Throwable {
+    public void test0588() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0583");
+            System.out.format("%n%s%n", "RegressionTest1.test0588");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -4802,9 +5224,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0584() throws Throwable {
+    public void test0589() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0584");
+            System.out.format("%n%s%n", "RegressionTest1.test0589");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -4917,9 +5339,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0585() throws Throwable {
+    public void test0590() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0585");
+            System.out.format("%n%s%n", "RegressionTest1.test0590");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -4963,9 +5385,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0586() throws Throwable {
+    public void test0591() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0586");
+            System.out.format("%n%s%n", "RegressionTest1.test0591");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -5019,9 +5441,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0587() throws Throwable {
+    public void test0592() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0587");
+            System.out.format("%n%s%n", "RegressionTest1.test0592");
         org.apache.commons.jxpath.ri.compiler.Step step1 = null;
         org.apache.commons.jxpath.ri.compiler.Step[] stepArray2 = new org.apache.commons.jxpath.ri.compiler.Step[] { step1 };
         org.apache.commons.jxpath.ri.compiler.LocationPath locationPath3 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray2);
@@ -5035,9 +5457,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0588() throws Throwable {
+    public void test0593() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0588");
+            System.out.format("%n%s%n", "RegressionTest1.test0593");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -5143,9 +5565,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0589() throws Throwable {
+    public void test0594() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0589");
+            System.out.format("%n%s%n", "RegressionTest1.test0594");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -5175,9 +5597,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0590() throws Throwable {
+    public void test0595() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0590");
+            System.out.format("%n%s%n", "RegressionTest1.test0595");
         org.apache.commons.jxpath.ri.parser.TokenMgrError tokenMgrError2 = new org.apache.commons.jxpath.ri.parser.TokenMgrError("/*", (int) (short) 100);
         char char3 = tokenMgrError2.getCharacter();
         int int4 = tokenMgrError2.getPosition();
@@ -5186,9 +5608,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0591() throws Throwable {
+    public void test0596() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0591");
+            System.out.format("%n%s%n", "RegressionTest1.test0596");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -5307,9 +5729,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0592() throws Throwable {
+    public void test0597() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0592");
+            System.out.format("%n%s%n", "RegressionTest1.test0597");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -5329,9 +5751,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0593() throws Throwable {
+    public void test0598() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0593");
+            System.out.format("%n%s%n", "RegressionTest1.test0598");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -5425,9 +5847,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0594() throws Throwable {
+    public void test0599() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0594");
+            System.out.format("%n%s%n", "RegressionTest1.test0599");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -5543,9 +5965,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0595() throws Throwable {
+    public void test0600() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0595");
+            System.out.format("%n%s%n", "RegressionTest1.test0600");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -5610,9 +6032,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0596() throws Throwable {
+    public void test0601() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0596");
+            System.out.format("%n%s%n", "RegressionTest1.test0601");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -5639,9 +6061,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0597() throws Throwable {
+    public void test0602() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0597");
+            System.out.format("%n%s%n", "RegressionTest1.test0602");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -5660,9 +6082,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0598() throws Throwable {
+    public void test0603() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0598");
+            System.out.format("%n%s%n", "RegressionTest1.test0603");
         org.apache.commons.jxpath.ri.parser.ParseException parseException1 = new org.apache.commons.jxpath.ri.parser.ParseException("hi!");
         org.apache.commons.jxpath.JXPathException jXPathException2 = new org.apache.commons.jxpath.JXPathException((java.lang.Throwable) parseException1);
         java.lang.Object obj4 = org.apache.commons.jxpath.util.ValueUtils.getValue((java.lang.Object) parseException1, 43);
@@ -5673,9 +6095,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0599() throws Throwable {
+    public void test0604() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0599");
+            System.out.format("%n%s%n", "RegressionTest1.test0604");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -5691,9 +6113,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0600() throws Throwable {
+    public void test0605() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0600");
+            System.out.format("%n%s%n", "RegressionTest1.test0605");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -5786,9 +6208,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0601() throws Throwable {
+    public void test0606() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0601");
+            System.out.format("%n%s%n", "RegressionTest1.test0606");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -5875,9 +6297,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0602() throws Throwable {
+    public void test0607() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0602");
+            System.out.format("%n%s%n", "RegressionTest1.test0607");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -5924,9 +6346,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0603() throws Throwable {
+    public void test0608() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0603");
+            System.out.format("%n%s%n", "RegressionTest1.test0608");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -6041,9 +6463,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0604() throws Throwable {
+    public void test0609() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0604");
+            System.out.format("%n%s%n", "RegressionTest1.test0609");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -6083,9 +6505,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0605() throws Throwable {
+    public void test0610() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0605");
+            System.out.format("%n%s%n", "RegressionTest1.test0610");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -6108,9 +6530,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0606() throws Throwable {
+    public void test0611() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0606");
+            System.out.format("%n%s%n", "RegressionTest1.test0611");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -6129,9 +6551,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0607() throws Throwable {
+    public void test0612() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0607");
+            System.out.format("%n%s%n", "RegressionTest1.test0612");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -6146,9 +6568,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0608() throws Throwable {
+    public void test0613() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0608");
+            System.out.format("%n%s%n", "RegressionTest1.test0613");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -6269,9 +6691,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0609() throws Throwable {
+    public void test0614() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0609");
+            System.out.format("%n%s%n", "RegressionTest1.test0614");
         org.apache.commons.jxpath.Variables variables0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.model.VariablePointer variablePointer2 = new org.apache.commons.jxpath.ri.model.VariablePointer(variables0, qName1);
@@ -6394,9 +6816,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0610() throws Throwable {
+    public void test0615() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0610");
+            System.out.format("%n%s%n", "RegressionTest1.test0615");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -6419,9 +6841,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0611() throws Throwable {
+    public void test0616() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0611");
+            System.out.format("%n%s%n", "RegressionTest1.test0616");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -6498,17 +6920,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0612() throws Throwable {
+    public void test0617() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0612");
+            System.out.format("%n%s%n", "RegressionTest1.test0617");
         org.apache.commons.jxpath.ri.parser.Token token1 = org.apache.commons.jxpath.ri.parser.Token.newToken(52);
         org.junit.Assert.assertNotNull(token1);
     }
 
     @Test
-    public void test0613() throws Throwable {
+    public void test0618() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0613");
+            System.out.format("%n%s%n", "RegressionTest1.test0618");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -6541,9 +6963,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0614() throws Throwable {
+    public void test0619() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0614");
+            System.out.format("%n%s%n", "RegressionTest1.test0619");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -6580,9 +7002,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0615() throws Throwable {
+    public void test0620() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0615");
+            System.out.format("%n%s%n", "RegressionTest1.test0620");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -6648,9 +7070,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0616() throws Throwable {
+    public void test0621() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0616");
+            System.out.format("%n%s%n", "RegressionTest1.test0621");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -6701,9 +7123,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0617() throws Throwable {
+    public void test0622() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0617");
+            System.out.format("%n%s%n", "RegressionTest1.test0622");
         org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory dynamicPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointerFactory();
         int int1 = dynamicPointerFactory0.getOrder();
         int int2 = dynamicPointerFactory0.getOrder();
@@ -6712,9 +7134,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0618() throws Throwable {
+    public void test0623() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0618");
+            System.out.format("%n%s%n", "RegressionTest1.test0623");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -6820,9 +7242,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0619() throws Throwable {
+    public void test0624() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0619");
+            System.out.format("%n%s%n", "RegressionTest1.test0624");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("@null");
         org.apache.commons.jxpath.ri.QName qName2 = null;
         org.apache.commons.beanutils.DynaBean dynaBean3 = null;
@@ -6855,9 +7277,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0620() throws Throwable {
+    public void test0625() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0620");
+            System.out.format("%n%s%n", "RegressionTest1.test0625");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -6879,9 +7301,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0621() throws Throwable {
+    public void test0626() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0621");
+            System.out.format("%n%s%n", "RegressionTest1.test0626");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -6907,9 +7329,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0622() throws Throwable {
+    public void test0627() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0622");
+            System.out.format("%n%s%n", "RegressionTest1.test0627");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -6978,16 +7400,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0623() throws Throwable {
+    public void test0628() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0623");
+            System.out.format("%n%s%n", "RegressionTest1.test0628");
         org.apache.commons.jxpath.ri.parser.ParseException parseException1 = new org.apache.commons.jxpath.ri.parser.ParseException("/namespace::$null");
     }
 
     @Test
-    public void test0624() throws Throwable {
+    public void test0629() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0624");
+            System.out.format("%n%s%n", "RegressionTest1.test0629");
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory0 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -7053,9 +7475,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0625() throws Throwable {
+    public void test0630() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0625");
+            System.out.format("%n%s%n", "RegressionTest1.test0630");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler1 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token3 = null;
         int[][] intArray4 = new int[][] {};
@@ -7165,9 +7587,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0626() throws Throwable {
+    public void test0631() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0626");
+            System.out.format("%n%s%n", "RegressionTest1.test0631");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -7185,9 +7607,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0627() throws Throwable {
+    public void test0632() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0627");
+            System.out.format("%n%s%n", "RegressionTest1.test0632");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -7251,9 +7673,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0628() throws Throwable {
+    public void test0633() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0628");
+            System.out.format("%n%s%n", "RegressionTest1.test0633");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -7366,9 +7788,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0629() throws Throwable {
+    public void test0634() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0629");
+            System.out.format("%n%s%n", "RegressionTest1.test0634");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.EvalContext evalContext1 = null;
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
@@ -7409,9 +7831,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0630() throws Throwable {
+    public void test0635() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0630");
+            System.out.format("%n%s%n", "RegressionTest1.test0635");
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory0 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -7462,9 +7884,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0631() throws Throwable {
+    public void test0636() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0631");
+            System.out.format("%n%s%n", "RegressionTest1.test0636");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer2 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(nodePointer0, qName1);
@@ -7597,17 +8019,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0632() throws Throwable {
+    public void test0637() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0632");
+            System.out.format("%n%s%n", "RegressionTest1.test0637");
         java.lang.String str1 = org.apache.commons.jxpath.ri.compiler.Step.axisToString(5);
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "attribute" + "'", str1, "attribute");
     }
 
     @Test
-    public void test0633() throws Throwable {
+    public void test0638() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0633");
+            System.out.format("%n%s%n", "RegressionTest1.test0638");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -7623,9 +8045,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0634() throws Throwable {
+    public void test0639() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0634");
+            System.out.format("%n%s%n", "RegressionTest1.test0639");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -7659,9 +8081,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0635() throws Throwable {
+    public void test0640() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0635");
+            System.out.format("%n%s%n", "RegressionTest1.test0640");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -7763,9 +8185,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0636() throws Throwable {
+    public void test0641() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0636");
+            System.out.format("%n%s%n", "RegressionTest1.test0641");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -7843,9 +8265,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0637() throws Throwable {
+    public void test0642() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0637");
+            System.out.format("%n%s%n", "RegressionTest1.test0642");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -7940,9 +8362,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0638() throws Throwable {
+    public void test0643() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0638");
+            System.out.format("%n%s%n", "RegressionTest1.test0643");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -7960,9 +8382,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0639() throws Throwable {
+    public void test0644() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0639");
+            System.out.format("%n%s%n", "RegressionTest1.test0644");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -8081,9 +8503,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0640() throws Throwable {
+    public void test0645() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0640");
+            System.out.format("%n%s%n", "RegressionTest1.test0645");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -8124,9 +8546,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0641() throws Throwable {
+    public void test0646() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0641");
+            System.out.format("%n%s%n", "RegressionTest1.test0646");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo2 = null;
         java.util.Locale locale3 = null;
@@ -8148,16 +8570,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0642() throws Throwable {
+    public void test0647() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0642");
+            System.out.format("%n%s%n", "RegressionTest1.test0647");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError1 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("/");
     }
 
     @Test
-    public void test0643() throws Throwable {
+    public void test0648() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0643");
+            System.out.format("%n%s%n", "RegressionTest1.test0648");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -8245,9 +8667,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0644() throws Throwable {
+    public void test0649() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0644");
+            System.out.format("%n%s%n", "RegressionTest1.test0649");
         org.apache.commons.jxpath.ri.parser.TokenMgrError tokenMgrError2 = new org.apache.commons.jxpath.ri.parser.TokenMgrError("/*", (int) (short) 100);
         char char3 = tokenMgrError2.getCharacter();
         char char4 = tokenMgrError2.getCharacter();
@@ -8256,9 +8678,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0645() throws Throwable {
+    public void test0650() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0645");
+            System.out.format("%n%s%n", "RegressionTest1.test0650");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -8376,9 +8798,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0646() throws Throwable {
+    public void test0651() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0646");
+            System.out.format("%n%s%n", "RegressionTest1.test0651");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -8401,9 +8823,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0647() throws Throwable {
+    public void test0652() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0647");
+            System.out.format("%n%s%n", "RegressionTest1.test0652");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -8481,9 +8903,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0648() throws Throwable {
+    public void test0653() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0648");
+            System.out.format("%n%s%n", "RegressionTest1.test0653");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -8563,9 +8985,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0649() throws Throwable {
+    public void test0654() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0649");
+            System.out.format("%n%s%n", "RegressionTest1.test0654");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token2 = null;
         int[][] intArray3 = new int[][] {};
@@ -8598,9 +9020,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0650() throws Throwable {
+    public void test0655() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0650");
+            System.out.format("%n%s%n", "RegressionTest1.test0655");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -8617,9 +9039,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0651() throws Throwable {
+    public void test0656() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0651");
+            System.out.format("%n%s%n", "RegressionTest1.test0656");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -8732,9 +9154,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0652() throws Throwable {
+    public void test0657() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0652");
+            System.out.format("%n%s%n", "RegressionTest1.test0657");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -8788,9 +9210,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0653() throws Throwable {
+    public void test0658() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0653");
+            System.out.format("%n%s%n", "RegressionTest1.test0658");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -8827,9 +9249,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0654() throws Throwable {
+    public void test0659() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0654");
+            System.out.format("%n%s%n", "RegressionTest1.test0659");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -8907,9 +9329,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0655() throws Throwable {
+    public void test0660() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0655");
+            System.out.format("%n%s%n", "RegressionTest1.test0660");
         java.io.InputStream inputStream0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -8921,9 +9343,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0656() throws Throwable {
+    public void test0661() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0656");
+            System.out.format("%n%s%n", "RegressionTest1.test0661");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -8944,9 +9366,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0657() throws Throwable {
+    public void test0662() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0657");
+            System.out.format("%n%s%n", "RegressionTest1.test0662");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         java.text.DecimalFormatSymbols decimalFormatSymbols4 = jXPathContext2.getDecimalFormatSymbols("/");
@@ -9009,9 +9431,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0658() throws Throwable {
+    public void test0663() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0658");
+            System.out.format("%n%s%n", "RegressionTest1.test0663");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -9036,9 +9458,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0659() throws Throwable {
+    public void test0664() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0659");
+            System.out.format("%n%s%n", "RegressionTest1.test0664");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -9096,9 +9518,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0660() throws Throwable {
+    public void test0665() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0660");
+            System.out.format("%n%s%n", "RegressionTest1.test0665");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -9136,9 +9558,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0661() throws Throwable {
+    public void test0666() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0661");
+            System.out.format("%n%s%n", "RegressionTest1.test0666");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -9160,9 +9582,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0662() throws Throwable {
+    public void test0667() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0662");
+            System.out.format("%n%s%n", "RegressionTest1.test0667");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -9188,9 +9610,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0663() throws Throwable {
+    public void test0668() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0663");
+            System.out.format("%n%s%n", "RegressionTest1.test0668");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream3 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 23, 26);
         // The following exception was thrown during execution in test generation
@@ -9203,9 +9625,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0664() throws Throwable {
+    public void test0669() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0664");
+            System.out.format("%n%s%n", "RegressionTest1.test0669");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -9219,9 +9641,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0665() throws Throwable {
+    public void test0670() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0665");
+            System.out.format("%n%s%n", "RegressionTest1.test0670");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -9328,9 +9750,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0666() throws Throwable {
+    public void test0671() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0666");
+            System.out.format("%n%s%n", "RegressionTest1.test0671");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -9345,9 +9767,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0667() throws Throwable {
+    public void test0672() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0667");
+            System.out.format("%n%s%n", "RegressionTest1.test0672");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler1 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.QName qName2 = null;
         org.apache.commons.beanutils.DynaBean dynaBean3 = null;
@@ -9418,9 +9840,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0668() throws Throwable {
+    public void test0673() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0668");
+            System.out.format("%n%s%n", "RegressionTest1.test0673");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -9471,9 +9893,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0669() throws Throwable {
+    public void test0674() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0669");
+            System.out.format("%n%s%n", "RegressionTest1.test0674");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -9497,9 +9919,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0670() throws Throwable {
+    public void test0675() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0670");
+            System.out.format("%n%s%n", "RegressionTest1.test0675");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -9558,9 +9980,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0671() throws Throwable {
+    public void test0676() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0671");
+            System.out.format("%n%s%n", "RegressionTest1.test0676");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -9579,9 +10001,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0672() throws Throwable {
+    public void test0677() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0672");
+            System.out.format("%n%s%n", "RegressionTest1.test0677");
         org.apache.commons.jxpath.ri.parser.TokenMgrError tokenMgrError2 = new org.apache.commons.jxpath.ri.parser.TokenMgrError("", (int) '4');
         char char3 = tokenMgrError2.getCharacter();
         char char4 = tokenMgrError2.getCharacter();
@@ -9592,9 +10014,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0673() throws Throwable {
+    public void test0678() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0673");
+            System.out.format("%n%s%n", "RegressionTest1.test0678");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -9624,9 +10046,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0674() throws Throwable {
+    public void test0679() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0674");
+            System.out.format("%n%s%n", "RegressionTest1.test0679");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -9690,9 +10112,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0675() throws Throwable {
+    public void test0680() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0675");
+            System.out.format("%n%s%n", "RegressionTest1.test0680");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -9726,9 +10148,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0676() throws Throwable {
+    public void test0681() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0676");
+            System.out.format("%n%s%n", "RegressionTest1.test0681");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -9746,9 +10168,41 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0677() throws Throwable {
+    public void test0682() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0677");
+            System.out.format("%n%s%n", "RegressionTest1.test0682");
+        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
+        org.apache.commons.jxpath.ri.QName qName1 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
+        java.util.Locale locale3 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
+        org.apache.commons.jxpath.ri.QName qName5 = dynaBeanPointer4.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer9 = jDOMNodePointer7.namespacePointer("hi!");
+        boolean boolean10 = jDOMNodePointer7.isCollection();
+        boolean boolean12 = jDOMNodePointer7.equals((java.lang.Object) "");
+        boolean boolean13 = jDOMNodePointer7.isLeaf();
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer14 = null;
+        org.jdom.Attribute attribute15 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer16 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer14, attribute15);
+        java.lang.Object obj17 = jDOMAttributePointer16.getBaseValue();
+        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) boolean13, (org.apache.commons.jxpath.Pointer) jDOMAttributePointer16);
+        java.lang.String str20 = jXPathContextReferenceImpl18.getNamespaceURI("/");
+        org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver21 = jXPathContextReferenceImpl18.getNamespaceResolver();
+        org.junit.Assert.assertNull(qName5);
+        org.junit.Assert.assertNotNull(nodePointer9);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
+        org.junit.Assert.assertNull(obj17);
+        org.junit.Assert.assertNull(str20);
+        org.junit.Assert.assertNotNull(namespaceResolver21);
+    }
+
+    @Test
+    public void test0683() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0683");
         org.apache.commons.jxpath.ri.compiler.Step step1 = null;
         org.apache.commons.jxpath.ri.compiler.Step[] stepArray2 = new org.apache.commons.jxpath.ri.compiler.Step[] { step1 };
         org.apache.commons.jxpath.ri.compiler.LocationPath locationPath3 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray2);
@@ -9829,9 +10283,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0678() throws Throwable {
+    public void test0684() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0678");
+            System.out.format("%n%s%n", "RegressionTest1.test0684");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -9850,16 +10304,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0679() throws Throwable {
+    public void test0685() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0679");
+            System.out.format("%n%s%n", "RegressionTest1.test0685");
         org.apache.commons.jxpath.ri.parser.TokenMgrError tokenMgrError2 = new org.apache.commons.jxpath.ri.parser.TokenMgrError("org.apache.commons.jxpath.JXPathContextFactory", (int) (short) 10);
     }
 
     @Test
-    public void test0680() throws Throwable {
+    public void test0686() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0680");
+            System.out.format("%n%s%n", "RegressionTest1.test0686");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("*");
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = null;
         org.apache.commons.jxpath.ri.QName qName3 = null;
@@ -9952,9 +10406,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0681() throws Throwable {
+    public void test0687() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0681");
+            System.out.format("%n%s%n", "RegressionTest1.test0687");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -9991,9 +10445,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0682() throws Throwable {
+    public void test0688() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0682");
+            System.out.format("%n%s%n", "RegressionTest1.test0688");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -10106,9 +10560,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0683() throws Throwable {
+    public void test0689() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0683");
+            System.out.format("%n%s%n", "RegressionTest1.test0689");
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
         int int1 = dynaBeanPointerFactory0.getOrder();
         org.apache.commons.jxpath.Variables variables2 = null;
@@ -10167,9 +10621,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0684() throws Throwable {
+    public void test0690() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0684");
+            System.out.format("%n%s%n", "RegressionTest1.test0690");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -10269,9 +10723,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0685() throws Throwable {
+    public void test0691() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0685");
+            System.out.format("%n%s%n", "RegressionTest1.test0691");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -10320,9 +10774,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0686() throws Throwable {
+    public void test0692() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0686");
+            System.out.format("%n%s%n", "RegressionTest1.test0692");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.EvalContext evalContext1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest3 = null;
@@ -10362,9 +10816,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0687() throws Throwable {
+    public void test0693() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0687");
+            System.out.format("%n%s%n", "RegressionTest1.test0693");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         org.apache.commons.jxpath.Pointer pointer3 = jXPathContext2.getContextPointer();
@@ -10487,9 +10941,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0688() throws Throwable {
+    public void test0694() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0688");
+            System.out.format("%n%s%n", "RegressionTest1.test0694");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -10541,9 +10995,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0689() throws Throwable {
+    public void test0695() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0689");
+            System.out.format("%n%s%n", "RegressionTest1.test0695");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -10639,9 +11093,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0690() throws Throwable {
+    public void test0696() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0690");
+            System.out.format("%n%s%n", "RegressionTest1.test0696");
         org.apache.commons.jxpath.ri.compiler.Step step1 = null;
         org.apache.commons.jxpath.ri.compiler.Step[] stepArray2 = new org.apache.commons.jxpath.ri.compiler.Step[] { step1 };
         org.apache.commons.jxpath.ri.compiler.LocationPath locationPath3 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray2);
@@ -10662,9 +11116,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0691() throws Throwable {
+    public void test0697() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0691");
+            System.out.format("%n%s%n", "RegressionTest1.test0697");
         org.apache.commons.jxpath.ri.parser.Token token0 = new org.apache.commons.jxpath.ri.parser.Token();
         org.apache.commons.jxpath.ri.parser.Token token2 = org.apache.commons.jxpath.ri.parser.Token.newToken((int) '4');
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler3 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
@@ -10703,16 +11157,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0692() throws Throwable {
+    public void test0698() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0692");
+            System.out.format("%n%s%n", "RegressionTest1.test0698");
         org.apache.commons.jxpath.ri.parser.TokenMgrError tokenMgrError2 = new org.apache.commons.jxpath.ri.parser.TokenMgrError("/[@name='']", 37);
     }
 
     @Test
-    public void test0693() throws Throwable {
+    public void test0699() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0693");
+            System.out.format("%n%s%n", "RegressionTest1.test0699");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -10761,9 +11215,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0694() throws Throwable {
+    public void test0700() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0694");
+            System.out.format("%n%s%n", "RegressionTest1.test0700");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -10811,9 +11265,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0695() throws Throwable {
+    public void test0701() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0695");
+            System.out.format("%n%s%n", "RegressionTest1.test0701");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -10913,9 +11367,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0696() throws Throwable {
+    public void test0702() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0696");
+            System.out.format("%n%s%n", "RegressionTest1.test0702");
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -10996,9 +11450,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0697() throws Throwable {
+    public void test0703() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0697");
+            System.out.format("%n%s%n", "RegressionTest1.test0703");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -11110,9 +11564,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0698() throws Throwable {
+    public void test0704() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0698");
+            System.out.format("%n%s%n", "RegressionTest1.test0704");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -11172,9 +11626,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0699() throws Throwable {
+    public void test0705() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0699");
+            System.out.format("%n%s%n", "RegressionTest1.test0705");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -11194,9 +11648,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0700() throws Throwable {
+    public void test0706() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0700");
+            System.out.format("%n%s%n", "RegressionTest1.test0706");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -11256,9 +11710,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0701() throws Throwable {
+    public void test0707() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0701");
+            System.out.format("%n%s%n", "RegressionTest1.test0707");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -11328,9 +11782,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0702() throws Throwable {
+    public void test0708() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0702");
+            System.out.format("%n%s%n", "RegressionTest1.test0708");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -11391,9 +11845,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0703() throws Throwable {
+    public void test0709() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0703");
+            System.out.format("%n%s%n", "RegressionTest1.test0709");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -11480,9 +11934,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0704() throws Throwable {
+    public void test0710() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0704");
+            System.out.format("%n%s%n", "RegressionTest1.test0710");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -11510,9 +11964,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0705() throws Throwable {
+    public void test0711() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0705");
+            System.out.format("%n%s%n", "RegressionTest1.test0711");
         org.apache.commons.jxpath.xml.DOMParser dOMParser0 = new org.apache.commons.jxpath.xml.DOMParser();
         boolean boolean1 = dOMParser0.isNamespaceAware();
         boolean boolean2 = dOMParser0.isNamespaceAware();
@@ -11522,9 +11976,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0706() throws Throwable {
+    public void test0712() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0706");
+            System.out.format("%n%s%n", "RegressionTest1.test0712");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.ri.QName qName2 = null;
         org.apache.commons.beanutils.DynaBean dynaBean3 = null;
@@ -11548,9 +12002,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0707() throws Throwable {
+    public void test0713() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0707");
+            System.out.format("%n%s%n", "RegressionTest1.test0713");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -11609,9 +12063,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0708() throws Throwable {
+    public void test0714() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0708");
+            System.out.format("%n%s%n", "RegressionTest1.test0714");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -11728,9 +12182,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0709() throws Throwable {
+    public void test0715() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0709");
+            System.out.format("%n%s%n", "RegressionTest1.test0715");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -11766,9 +12220,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0710() throws Throwable {
+    public void test0716() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0710");
+            System.out.format("%n%s%n", "RegressionTest1.test0716");
         org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver0 = null;
         org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver1 = new org.apache.commons.jxpath.ri.NamespaceResolver(namespaceResolver0);
         org.apache.commons.jxpath.Pointer pointer2 = namespaceResolver1.getNamespaceContextPointer();
@@ -11793,9 +12247,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0711() throws Throwable {
+    public void test0717() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0711");
+            System.out.format("%n%s%n", "RegressionTest1.test0717");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -11882,9 +12336,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0712() throws Throwable {
+    public void test0718() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0712");
+            System.out.format("%n%s%n", "RegressionTest1.test0718");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, (int) '4', 24, 800);
         java.io.Reader reader5 = null;
@@ -11895,9 +12349,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0713() throws Throwable {
+    public void test0719() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0713");
+            System.out.format("%n%s%n", "RegressionTest1.test0719");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler1 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.QName qName2 = null;
         org.apache.commons.beanutils.DynaBean dynaBean3 = null;
@@ -11938,9 +12392,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0714() throws Throwable {
+    public void test0720() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0714");
+            System.out.format("%n%s%n", "RegressionTest1.test0720");
         org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory jDOMPointerFactory0 = new org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -11987,9 +12441,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0715() throws Throwable {
+    public void test0721() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0715");
+            System.out.format("%n%s%n", "RegressionTest1.test0721");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -12040,9 +12494,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0716() throws Throwable {
+    public void test0722() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0716");
+            System.out.format("%n%s%n", "RegressionTest1.test0722");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -12082,9 +12536,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0717() throws Throwable {
+    public void test0723() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0717");
+            System.out.format("%n%s%n", "RegressionTest1.test0723");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream1 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0);
         org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager3 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream1, 0);
@@ -12100,9 +12554,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0718() throws Throwable {
+    public void test0724() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0718");
+            System.out.format("%n%s%n", "RegressionTest1.test0724");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -12123,9 +12577,57 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0719() throws Throwable {
+    public void test0725() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0719");
+            System.out.format("%n%s%n", "RegressionTest1.test0725");
+        org.apache.commons.jxpath.ri.QName qName0 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
+        java.util.Locale locale2 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer5 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, "");
+        boolean boolean6 = jDOMNamespacePointer5.isCollection();
+        java.lang.String str7 = jDOMNamespacePointer5.getNamespaceURI();
+        boolean boolean8 = jDOMNamespacePointer5.isCollection();
+        org.apache.commons.jxpath.ri.QName qName9 = jDOMNamespacePointer5.getName();
+        org.apache.commons.jxpath.ri.QName qName11 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean12 = null;
+        java.util.Locale locale13 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer14 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName11, dynaBean12, locale13);
+        org.apache.commons.jxpath.ri.QName qName15 = dynaBeanPointer14.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer17 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer14, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext18 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext20 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext18, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer21 = dynaBeanPointer14.createPath(jXPathContext20);
+        java.util.Locale locale22 = jXPathContext20.getLocale();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer23 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale22);
+        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer24 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName9, locale22);
+        java.lang.String str25 = nullPointer24.asPath();
+        boolean boolean26 = nullPointer24.isLeaf();
+        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer27 = nullPointer24.getPropertyPointer();
+        java.lang.String str28 = nullPointer24.asPath();
+        boolean boolean29 = nullPointer24.isActual();
+        boolean boolean30 = nullPointer24.isActual();
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNull(str7);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(qName9);
+        org.junit.Assert.assertNull(qName15);
+        org.junit.Assert.assertNotNull(jXPathContext20);
+        org.junit.Assert.assertNotNull(nodePointer21);
+        org.junit.Assert.assertNotNull(locale22);
+        org.junit.Assert.assertEquals(locale22.toString(), "en_US");
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "null()" + "'", str25, "null()");
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
+        org.junit.Assert.assertNotNull(propertyPointer27);
+        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "null()" + "'", str28, "null()");
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
+    }
+
+    @Test
+    public void test0726() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0726");
         org.apache.commons.jxpath.ri.compiler.NodeTypeTest nodeTypeTest1 = new org.apache.commons.jxpath.ri.compiler.NodeTypeTest(50);
         int int2 = nodeTypeTest1.getNodeType();
         java.lang.String str3 = nodeTypeTest1.toString();
@@ -12136,9 +12638,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0720() throws Throwable {
+    public void test0727() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0720");
+            System.out.format("%n%s%n", "RegressionTest1.test0727");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -12245,9 +12747,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0721() throws Throwable {
+    public void test0728() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0721");
+            System.out.format("%n%s%n", "RegressionTest1.test0728");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -12305,9 +12807,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0722() throws Throwable {
+    public void test0729() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0722");
+            System.out.format("%n%s%n", "RegressionTest1.test0729");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -12373,9 +12875,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0723() throws Throwable {
+    public void test0730() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0723");
+            System.out.format("%n%s%n", "RegressionTest1.test0730");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -12415,9 +12917,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0724() throws Throwable {
+    public void test0731() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0724");
+            System.out.format("%n%s%n", "RegressionTest1.test0731");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -12495,9 +12997,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0725() throws Throwable {
+    public void test0732() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0725");
+            System.out.format("%n%s%n", "RegressionTest1.test0732");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -12548,9 +13050,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0726() throws Throwable {
+    public void test0733() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0726");
+            System.out.format("%n%s%n", "RegressionTest1.test0733");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         org.apache.commons.jxpath.AbstractFactory abstractFactory3 = jXPathContext2.getFactory();
@@ -12649,9 +13151,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0727() throws Throwable {
+    public void test0734() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0727");
+            System.out.format("%n%s%n", "RegressionTest1.test0734");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -12762,9 +13264,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0728() throws Throwable {
+    public void test0735() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0728");
+            System.out.format("%n%s%n", "RegressionTest1.test0735");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -12852,9 +13354,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0729() throws Throwable {
+    public void test0736() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0729");
+            System.out.format("%n%s%n", "RegressionTest1.test0736");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -12873,9 +13375,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0730() throws Throwable {
+    public void test0737() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0730");
+            System.out.format("%n%s%n", "RegressionTest1.test0737");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -12953,9 +13455,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0731() throws Throwable {
+    public void test0738() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0731");
+            System.out.format("%n%s%n", "RegressionTest1.test0738");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -13022,9 +13524,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0732() throws Throwable {
+    public void test0739() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0732");
+            System.out.format("%n%s%n", "RegressionTest1.test0739");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -13062,9 +13564,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0733() throws Throwable {
+    public void test0740() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0733");
+            System.out.format("%n%s%n", "RegressionTest1.test0740");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -13097,9 +13599,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0734() throws Throwable {
+    public void test0741() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0734");
+            System.out.format("%n%s%n", "RegressionTest1.test0741");
         org.apache.commons.jxpath.Variables variables0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.model.VariablePointer variablePointer2 = new org.apache.commons.jxpath.ri.model.VariablePointer(variables0, qName1);
@@ -13189,9 +13691,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0735() throws Throwable {
+    public void test0742() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0735");
+            System.out.format("%n%s%n", "RegressionTest1.test0742");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         java.lang.Object obj3 = null;
@@ -13295,9 +13797,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0736() throws Throwable {
+    public void test0743() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0736");
+            System.out.format("%n%s%n", "RegressionTest1.test0743");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -13411,9 +13913,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0737() throws Throwable {
+    public void test0744() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0737");
+            System.out.format("%n%s%n", "RegressionTest1.test0744");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -13515,9 +14017,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0738() throws Throwable {
+    public void test0745() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0738");
+            System.out.format("%n%s%n", "RegressionTest1.test0745");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -13594,9 +14096,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0739() throws Throwable {
+    public void test0746() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0739");
+            System.out.format("%n%s%n", "RegressionTest1.test0746");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -13648,9 +14150,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0740() throws Throwable {
+    public void test0747() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0740");
+            System.out.format("%n%s%n", "RegressionTest1.test0747");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -13769,9 +14271,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0741() throws Throwable {
+    public void test0748() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0741");
+            System.out.format("%n%s%n", "RegressionTest1.test0748");
         org.apache.commons.jxpath.JXPathContextFactory jXPathContextFactory0 = org.apache.commons.jxpath.JXPathContextFactory.newInstance();
         org.apache.commons.jxpath.JXPathContext jXPathContext1 = null;
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -13803,9 +14305,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0742() throws Throwable {
+    public void test0749() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0742");
+            System.out.format("%n%s%n", "RegressionTest1.test0749");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.EvalContext evalContext1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest3 = null;
@@ -13846,9 +14348,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0743() throws Throwable {
+    public void test0750() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0743");
+            System.out.format("%n%s%n", "RegressionTest1.test0750");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("*");
         org.apache.commons.jxpath.ri.QName qName2 = null;
         org.apache.commons.beanutils.DynaBean dynaBean3 = null;
@@ -13893,9 +14395,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0744() throws Throwable {
+    public void test0751() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0744");
+            System.out.format("%n%s%n", "RegressionTest1.test0751");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         java.text.DecimalFormatSymbols decimalFormatSymbols4 = jXPathContext2.getDecimalFormatSymbols("/");
@@ -13962,9 +14464,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0745() throws Throwable {
+    public void test0752() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0745");
+            System.out.format("%n%s%n", "RegressionTest1.test0752");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -14083,9 +14585,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0746() throws Throwable {
+    public void test0753() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0746");
+            System.out.format("%n%s%n", "RegressionTest1.test0753");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -14197,9 +14699,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0747() throws Throwable {
+    public void test0754() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0747");
+            System.out.format("%n%s%n", "RegressionTest1.test0754");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("@null");
         org.apache.commons.jxpath.ri.QName qName2 = null;
         org.apache.commons.beanutils.DynaBean dynaBean3 = null;
@@ -14283,9 +14785,73 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0748() throws Throwable {
+    public void test0755() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0748");
+            System.out.format("%n%s%n", "RegressionTest1.test0755");
+        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
+        org.apache.commons.jxpath.ri.QName qName1 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
+        org.apache.commons.jxpath.ri.QName qName4 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean5 = null;
+        java.util.Locale locale6 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer7 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName4, dynaBean5, locale6);
+        org.apache.commons.jxpath.ri.QName qName8 = dynaBeanPointer7.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer10 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer7, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer12 = jDOMNodePointer10.namespacePointer("hi!");
+        boolean boolean13 = jDOMNodePointer10.isCollection();
+        boolean boolean15 = jDOMNodePointer10.equals((java.lang.Object) "");
+        boolean boolean16 = jDOMNodePointer10.isLeaf();
+        java.lang.Object obj17 = jDOMNodePointer10.getValue();
+        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) nodeNameTest3, (org.apache.commons.jxpath.Pointer) jDOMNodePointer10);
+        java.lang.String str19 = jXPathContextReferenceImpl18.getDefaultNamespaceURI();
+        java.lang.String str21 = jXPathContextReferenceImpl18.getNamespaceURI("/namespace::hi!");
+        org.apache.commons.jxpath.Pointer pointer22 = jXPathContextReferenceImpl18.getContextPointer();
+        org.apache.commons.jxpath.Pointer pointer23 = jXPathContextReferenceImpl18.getContextPointer();
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer24 = null;
+        org.w3c.dom.Attr attr25 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer26 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer24, attr25);
+        java.lang.Object obj27 = dOMAttributePointer26.getBaseValue();
+        java.util.Locale locale29 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer30 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((java.lang.Object) 0.0f, locale29);
+        org.apache.commons.jxpath.ri.EvalContext evalContext31 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest33 = null;
+        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext34 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext31, false, nodeTest33);
+        org.apache.commons.jxpath.ri.QName qName35 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest37 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName35, "hi!");
+        org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext precedingOrFollowingContext39 = new org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext34, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest37, true);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer41 = null;
+        org.w3c.dom.Attr attr42 = null;
+        org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer43 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer41, attr42);
+        java.lang.Object obj44 = dOMAttributePointer43.getBaseValue();
+        java.lang.Object obj45 = dOMAttributePointer43.getImmediateNode();
+        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator46 = jDOMNodePointer30.childIterator((org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest37, false, (org.apache.commons.jxpath.ri.model.NodePointer) dOMAttributePointer43);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer47 = null;
+        int int48 = dOMAttributePointer26.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer30, nodePointer47);
+        jXPathContextReferenceImpl18.setNamespaceContextPointer((org.apache.commons.jxpath.Pointer) jDOMNodePointer30);
+        java.util.Locale locale50 = jXPathContextReferenceImpl18.getLocale();
+        org.junit.Assert.assertNull(qName8);
+        org.junit.Assert.assertNotNull(nodePointer12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNull(obj17);
+        org.junit.Assert.assertNull(str19);
+        org.junit.Assert.assertNull(str21);
+        org.junit.Assert.assertNotNull(pointer22);
+        org.junit.Assert.assertNotNull(pointer23);
+        org.junit.Assert.assertNull(obj27);
+        org.junit.Assert.assertNull(obj44);
+        org.junit.Assert.assertNull(obj45);
+        org.junit.Assert.assertNotNull(nodeIterator46);
+        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
+        org.junit.Assert.assertNotNull(locale50);
+        org.junit.Assert.assertEquals(locale50.toString(), "en_US");
+    }
+
+    @Test
+    public void test0756() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0756");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -14335,9 +14901,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0749() throws Throwable {
+    public void test0757() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0749");
+            System.out.format("%n%s%n", "RegressionTest1.test0757");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -14442,9 +15008,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0750() throws Throwable {
+    public void test0758() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0750");
+            System.out.format("%n%s%n", "RegressionTest1.test0758");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -14499,9 +15065,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0751() throws Throwable {
+    public void test0759() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0751");
+            System.out.format("%n%s%n", "RegressionTest1.test0759");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -14526,9 +15092,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0752() throws Throwable {
+    public void test0760() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0752");
+            System.out.format("%n%s%n", "RegressionTest1.test0760");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -14585,9 +15151,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0753() throws Throwable {
+    public void test0761() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0753");
+            System.out.format("%n%s%n", "RegressionTest1.test0761");
         org.apache.commons.jxpath.xml.DOMParser dOMParser0 = new org.apache.commons.jxpath.xml.DOMParser();
         boolean boolean1 = dOMParser0.isValidating();
         boolean boolean2 = dOMParser0.isValidating();
@@ -14596,9 +15162,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0754() throws Throwable {
+    public void test0762() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0754");
+            System.out.format("%n%s%n", "RegressionTest1.test0762");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -14621,9 +15187,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0755() throws Throwable {
+    public void test0763() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0755");
+            System.out.format("%n%s%n", "RegressionTest1.test0763");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError1 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("/namespace::$null");
         org.apache.commons.jxpath.JXPathTypeConversionException jXPathTypeConversionException3 = new org.apache.commons.jxpath.JXPathTypeConversionException("");
         jXPathContextFactoryConfigurationError1.addSuppressed((java.lang.Throwable) jXPathTypeConversionException3);
@@ -14632,9 +15198,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0756() throws Throwable {
+    public void test0764() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0756");
+            System.out.format("%n%s%n", "RegressionTest1.test0764");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -14697,9 +15263,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0757() throws Throwable {
+    public void test0765() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0757");
+            System.out.format("%n%s%n", "RegressionTest1.test0765");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -14762,9 +15328,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0758() throws Throwable {
+    public void test0766() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0758");
+            System.out.format("%n%s%n", "RegressionTest1.test0766");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -14860,9 +15426,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0759() throws Throwable {
+    public void test0767() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0759");
+            System.out.format("%n%s%n", "RegressionTest1.test0767");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -14914,9 +15480,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0760() throws Throwable {
+    public void test0768() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0760");
+            System.out.format("%n%s%n", "RegressionTest1.test0768");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -14940,9 +15506,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0761() throws Throwable {
+    public void test0769() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0761");
+            System.out.format("%n%s%n", "RegressionTest1.test0769");
         java.net.URL uRL0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -14954,9 +15520,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0762() throws Throwable {
+    public void test0770() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0762");
+            System.out.format("%n%s%n", "RegressionTest1.test0770");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -14979,9 +15545,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0763() throws Throwable {
+    public void test0771() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0763");
+            System.out.format("%n%s%n", "RegressionTest1.test0771");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -15033,9 +15599,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0764() throws Throwable {
+    public void test0772() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0764");
+            System.out.format("%n%s%n", "RegressionTest1.test0772");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream1 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0);
         simpleCharStream1.bufpos = 'a';
@@ -15046,9 +15612,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0765() throws Throwable {
+    public void test0773() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0765");
+            System.out.format("%n%s%n", "RegressionTest1.test0773");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         java.text.DecimalFormatSymbols decimalFormatSymbols4 = jXPathContext2.getDecimalFormatSymbols("/");
@@ -15063,9 +15629,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0766() throws Throwable {
+    public void test0774() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0766");
+            System.out.format("%n%s%n", "RegressionTest1.test0774");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -15169,9 +15735,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0767() throws Throwable {
+    public void test0775() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0767");
+            System.out.format("%n%s%n", "RegressionTest1.test0775");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -15184,9 +15750,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0768() throws Throwable {
+    public void test0776() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0768");
+            System.out.format("%n%s%n", "RegressionTest1.test0776");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -15231,9 +15797,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0769() throws Throwable {
+    public void test0777() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0769");
+            System.out.format("%n%s%n", "RegressionTest1.test0777");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -15262,9 +15828,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0770() throws Throwable {
+    public void test0778() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0770");
+            System.out.format("%n%s%n", "RegressionTest1.test0778");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -15383,16 +15949,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0771() throws Throwable {
+    public void test0779() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0771");
+            System.out.format("%n%s%n", "RegressionTest1.test0779");
         org.apache.commons.jxpath.ri.parser.ParseException parseException1 = new org.apache.commons.jxpath.ri.parser.ParseException("null()");
     }
 
     @Test
-    public void test0772() throws Throwable {
+    public void test0780() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0772");
+            System.out.format("%n%s%n", "RegressionTest1.test0780");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -15439,9 +16005,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0773() throws Throwable {
+    public void test0781() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0773");
+            System.out.format("%n%s%n", "RegressionTest1.test0781");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -15469,9 +16035,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0774() throws Throwable {
+    public void test0782() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0774");
+            System.out.format("%n%s%n", "RegressionTest1.test0782");
         org.apache.commons.jxpath.ri.parser.Token token1 = org.apache.commons.jxpath.ri.parser.Token.newToken((int) '4');
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler2 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token4 = null;
@@ -15523,9 +16089,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0775() throws Throwable {
+    public void test0783() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0775");
+            System.out.format("%n%s%n", "RegressionTest1.test0783");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -15546,9 +16112,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0776() throws Throwable {
+    public void test0784() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0776");
+            System.out.format("%n%s%n", "RegressionTest1.test0784");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -15641,9 +16207,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0777() throws Throwable {
+    public void test0785() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0777");
+            System.out.format("%n%s%n", "RegressionTest1.test0785");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -15761,9 +16327,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0778() throws Throwable {
+    public void test0786() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0778");
+            System.out.format("%n%s%n", "RegressionTest1.test0786");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -15800,9 +16366,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0779() throws Throwable {
+    public void test0787() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0779");
+            System.out.format("%n%s%n", "RegressionTest1.test0787");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -15880,9 +16446,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0780() throws Throwable {
+    public void test0788() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0780");
+            System.out.format("%n%s%n", "RegressionTest1.test0788");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -15933,9 +16499,66 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0781() throws Throwable {
+    public void test0789() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0781");
+            System.out.format("%n%s%n", "RegressionTest1.test0789");
+        org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler1 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
+        org.apache.commons.jxpath.ri.QName qName2 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean3 = null;
+        java.util.Locale locale4 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer5 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName2, dynaBean3, locale4);
+        org.apache.commons.jxpath.ri.QName qName6 = dynaBeanPointer5.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer8 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer5, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer10 = jDOMNodePointer8.namespacePointer("hi!");
+        boolean boolean11 = jDOMNodePointer8.isCollection();
+        org.apache.commons.jxpath.ri.QName qName13 = new org.apache.commons.jxpath.ri.QName("");
+        java.lang.Object obj14 = null;
+        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler15 = null;
+        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer16 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer8, qName13, obj14, dynamicPropertyHandler15);
+        java.lang.Object obj17 = treeCompiler1.nodeNameTest((java.lang.Object) qName13);
+        org.apache.commons.jxpath.ri.compiler.Step step19 = null;
+        org.apache.commons.jxpath.ri.compiler.Step[] stepArray20 = new org.apache.commons.jxpath.ri.compiler.Step[] { step19 };
+        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath21 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray20);
+        java.lang.Object obj22 = treeCompiler1.or((java.lang.Object[]) stepArray20);
+        java.lang.Object obj23 = org.apache.commons.jxpath.ri.Parser.parseExpression("null()", (org.apache.commons.jxpath.ri.Compiler) treeCompiler1);
+        org.apache.commons.jxpath.ri.parser.Token token24 = null;
+        int[][] intArray25 = new int[][] {};
+        java.lang.String[] strArray26 = org.apache.commons.jxpath.ri.parser.XPathParserConstants.tokenImage;
+        org.apache.commons.jxpath.ri.parser.ParseException parseException27 = new org.apache.commons.jxpath.ri.parser.ParseException(token24, intArray25, strArray26);
+        int[][] intArray28 = parseException27.expectedTokenSequences;
+        java.lang.Object obj29 = treeCompiler1.sum((java.lang.Object[]) intArray28);
+        org.apache.commons.jxpath.ri.compiler.Step step31 = null;
+        org.apache.commons.jxpath.ri.compiler.Step[] stepArray32 = new org.apache.commons.jxpath.ri.compiler.Step[] { step31 };
+        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath33 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray32);
+        java.lang.Object obj34 = treeCompiler1.sum((java.lang.Object[]) stepArray32);
+        org.junit.Assert.assertNull(qName6);
+        org.junit.Assert.assertNotNull(nodePointer10);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNotNull(obj17);
+        org.junit.Assert.assertEquals(obj17.toString(), "");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj17), "");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj17), "");
+        org.junit.Assert.assertNotNull(stepArray20);
+        org.junit.Assert.assertNotNull(obj22);
+        org.junit.Assert.assertNotNull(obj23);
+        org.junit.Assert.assertEquals(obj23.toString(), "unknownFunction28()()");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj23), "unknownFunction28()()");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj23), "unknownFunction28()()");
+        org.junit.Assert.assertNotNull(intArray25);
+        org.junit.Assert.assertNotNull(strArray26);
+        org.junit.Assert.assertNotNull(intArray28);
+        org.junit.Assert.assertNotNull(obj29);
+        org.junit.Assert.assertEquals(obj29.toString(), "");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj29), "");
+        org.junit.Assert.assertEquals(java.util.Objects.toString(obj29), "");
+        org.junit.Assert.assertNotNull(stepArray32);
+        org.junit.Assert.assertNotNull(obj34);
+    }
+
+    @Test
+    public void test0790() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0790");
         org.apache.commons.jxpath.xml.DOMParser dOMParser1 = new org.apache.commons.jxpath.xml.DOMParser();
         boolean boolean2 = dOMParser1.isNamespaceAware();
         org.apache.commons.jxpath.xml.DocumentContainer.registerXMLParser("DOM", (org.apache.commons.jxpath.xml.XMLParser) dOMParser1);
@@ -15944,9 +16567,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0782() throws Throwable {
+    public void test0791() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0782");
+            System.out.format("%n%s%n", "RegressionTest1.test0791");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -16002,9 +16625,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0783() throws Throwable {
+    public void test0792() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0783");
+            System.out.format("%n%s%n", "RegressionTest1.test0792");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo2 = null;
         java.util.Locale locale3 = null;
@@ -16014,9 +16637,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0784() throws Throwable {
+    public void test0793() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0784");
+            System.out.format("%n%s%n", "RegressionTest1.test0793");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -16047,9 +16670,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0785() throws Throwable {
+    public void test0794() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0785");
+            System.out.format("%n%s%n", "RegressionTest1.test0794");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -16148,9 +16771,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0786() throws Throwable {
+    public void test0795() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0786");
+            System.out.format("%n%s%n", "RegressionTest1.test0795");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -16171,9 +16794,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0787() throws Throwable {
+    public void test0796() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0787");
+            System.out.format("%n%s%n", "RegressionTest1.test0796");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -16267,16 +16890,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0788() throws Throwable {
+    public void test0797() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0788");
+            System.out.format("%n%s%n", "RegressionTest1.test0797");
         org.apache.commons.jxpath.ri.parser.TokenMgrError tokenMgrError2 = new org.apache.commons.jxpath.ri.parser.TokenMgrError("http://www.w3.org/XML/1998/namespace", 71);
     }
 
     @Test
-    public void test0789() throws Throwable {
+    public void test0798() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0789");
+            System.out.format("%n%s%n", "RegressionTest1.test0798");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -16362,9 +16985,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0790() throws Throwable {
+    public void test0799() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0790");
+            System.out.format("%n%s%n", "RegressionTest1.test0799");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -16475,9 +17098,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0791() throws Throwable {
+    public void test0800() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0791");
+            System.out.format("%n%s%n", "RegressionTest1.test0800");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -16587,9 +17210,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0792() throws Throwable {
+    public void test0801() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0792");
+            System.out.format("%n%s%n", "RegressionTest1.test0801");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -16605,9 +17228,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0793() throws Throwable {
+    public void test0802() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0793");
+            System.out.format("%n%s%n", "RegressionTest1.test0802");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -16625,9 +17248,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0794() throws Throwable {
+    public void test0803() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0794");
+            System.out.format("%n%s%n", "RegressionTest1.test0803");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -16743,9 +17366,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0795() throws Throwable {
+    public void test0804() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0795");
+            System.out.format("%n%s%n", "RegressionTest1.test0804");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -16836,9 +17459,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0796() throws Throwable {
+    public void test0805() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0796");
+            System.out.format("%n%s%n", "RegressionTest1.test0805");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -16874,9 +17497,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0797() throws Throwable {
+    public void test0806() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0797");
+            System.out.format("%n%s%n", "RegressionTest1.test0806");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -16897,9 +17520,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0798() throws Throwable {
+    public void test0807() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0798");
+            System.out.format("%n%s%n", "RegressionTest1.test0807");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -16971,9 +17594,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0799() throws Throwable {
+    public void test0808() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0799");
+            System.out.format("%n%s%n", "RegressionTest1.test0808");
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream0 = null;
         org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager1 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream0);
         java.io.Reader reader2 = null;
@@ -16995,9 +17618,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0800() throws Throwable {
+    public void test0809() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0800");
+            System.out.format("%n%s%n", "RegressionTest1.test0809");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -17084,9 +17707,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0801() throws Throwable {
+    public void test0810() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0801");
+            System.out.format("%n%s%n", "RegressionTest1.test0810");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -17192,9 +17815,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0802() throws Throwable {
+    public void test0811() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0802");
+            System.out.format("%n%s%n", "RegressionTest1.test0811");
         org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver0 = null;
         org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver1 = new org.apache.commons.jxpath.ri.NamespaceResolver(namespaceResolver0);
         org.apache.commons.jxpath.Pointer pointer2 = namespaceResolver1.getNamespaceContextPointer();
@@ -17216,9 +17839,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0803() throws Throwable {
+    public void test0812() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0803");
+            System.out.format("%n%s%n", "RegressionTest1.test0812");
         java.util.Locale locale1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((java.lang.Object) 0.0f, locale1);
         org.apache.commons.jxpath.ri.EvalContext evalContext3 = null;
@@ -17241,9 +17864,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0804() throws Throwable {
+    public void test0813() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0804");
+            System.out.format("%n%s%n", "RegressionTest1.test0813");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -17287,9 +17910,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0805() throws Throwable {
+    public void test0814() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0805");
+            System.out.format("%n%s%n", "RegressionTest1.test0814");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -17330,9 +17953,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0806() throws Throwable {
+    public void test0815() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0806");
+            System.out.format("%n%s%n", "RegressionTest1.test0815");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -17359,9 +17982,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0807() throws Throwable {
+    public void test0816() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0807");
+            System.out.format("%n%s%n", "RegressionTest1.test0816");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -17393,16 +18016,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0808() throws Throwable {
+    public void test0817() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0808");
+            System.out.format("%n%s%n", "RegressionTest1.test0817");
         org.apache.commons.jxpath.ri.compiler.NodeTypeTest nodeTypeTest1 = new org.apache.commons.jxpath.ri.compiler.NodeTypeTest(0);
     }
 
     @Test
-    public void test0809() throws Throwable {
+    public void test0818() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0809");
+            System.out.format("%n%s%n", "RegressionTest1.test0818");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.Container container1 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory2 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
@@ -17520,9 +18143,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0810() throws Throwable {
+    public void test0819() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0810");
+            System.out.format("%n%s%n", "RegressionTest1.test0819");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -17564,9 +18187,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0811() throws Throwable {
+    public void test0820() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0811");
+            System.out.format("%n%s%n", "RegressionTest1.test0820");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -17642,9 +18265,55 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0812() throws Throwable {
+    public void test0821() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0812");
+            System.out.format("%n%s%n", "RegressionTest1.test0821");
+        org.apache.commons.jxpath.ri.QName qName0 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
+        java.util.Locale locale2 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
+        org.apache.commons.jxpath.ri.QName qName4 = dynaBeanPointer3.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer8 = jDOMNodePointer6.namespacePointer("hi!");
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer9 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer6);
+        java.lang.String[] strArray10 = nullPropertyPointer9.getPropertyNames();
+        boolean boolean11 = nullPropertyPointer9.isContainer();
+        int int12 = nullPropertyPointer9.getLength();
+        org.apache.commons.jxpath.ri.QName qName13 = nullPropertyPointer9.getName();
+        org.apache.commons.jxpath.ri.QName qName14 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean15 = null;
+        java.util.Locale locale16 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer17 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName14, dynaBean15, locale16);
+        org.apache.commons.jxpath.ri.QName qName18 = dynaBeanPointer17.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer20 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer17, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer22 = jDOMNodePointer20.namespacePointer("hi!");
+        boolean boolean23 = jDOMNodePointer20.isCollection();
+        org.apache.commons.jxpath.ri.QName qName25 = new org.apache.commons.jxpath.ri.QName("");
+        java.lang.Object obj26 = null;
+        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler27 = null;
+        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer28 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer20, qName25, obj26, dynamicPropertyHandler27);
+        org.apache.commons.jxpath.ri.QName qName30 = new org.apache.commons.jxpath.ri.QName("");
+        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator31 = dynamicPointer28.attributeIterator(qName30);
+        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator32 = nullPropertyPointer9.attributeIterator(qName30);
+        java.lang.Object obj33 = nullPropertyPointer9.getImmediateNode();
+        org.junit.Assert.assertNull(qName4);
+        org.junit.Assert.assertNotNull(nodePointer8);
+        org.junit.Assert.assertNotNull(strArray10);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertNotNull(qName13);
+        org.junit.Assert.assertNull(qName18);
+        org.junit.Assert.assertNotNull(nodePointer22);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertNotNull(nodeIterator31);
+        org.junit.Assert.assertNotNull(nodeIterator32);
+        org.junit.Assert.assertNull(obj33);
+    }
+
+    @Test
+    public void test0822() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0822");
         org.apache.commons.jxpath.ri.parser.Token token0 = new org.apache.commons.jxpath.ri.parser.Token();
         int int1 = token0.kind;
         token0.beginLine = 22;
@@ -17652,9 +18321,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0813() throws Throwable {
+    public void test0823() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0813");
+            System.out.format("%n%s%n", "RegressionTest1.test0823");
         org.w3c.dom.Node node0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest1 = null;
         boolean boolean2 = org.apache.commons.jxpath.ri.model.dom.DOMNodePointer.testNode(node0, nodeTest1);
@@ -17662,9 +18331,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0814() throws Throwable {
+    public void test0824() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0814");
+            System.out.format("%n%s%n", "RegressionTest1.test0824");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -17761,9 +18430,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0815() throws Throwable {
+    public void test0825() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0815");
+            System.out.format("%n%s%n", "RegressionTest1.test0825");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -17873,9 +18542,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0816() throws Throwable {
+    public void test0826() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0816");
+            System.out.format("%n%s%n", "RegressionTest1.test0826");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -17903,9 +18572,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0817() throws Throwable {
+    public void test0827() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0817");
+            System.out.format("%n%s%n", "RegressionTest1.test0827");
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
         int int1 = dynaBeanPointerFactory0.getOrder();
         org.apache.commons.jxpath.Variables variables2 = null;
@@ -18023,9 +18692,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0818() throws Throwable {
+    public void test0828() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0818");
+            System.out.format("%n%s%n", "RegressionTest1.test0828");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -18046,9 +18715,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0819() throws Throwable {
+    public void test0829() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0819");
+            System.out.format("%n%s%n", "RegressionTest1.test0829");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -18071,9 +18740,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0820() throws Throwable {
+    public void test0830() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0820");
+            System.out.format("%n%s%n", "RegressionTest1.test0830");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -18098,9 +18767,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0821() throws Throwable {
+    public void test0831() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0821");
+            System.out.format("%n%s%n", "RegressionTest1.test0831");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo2 = null;
         java.util.Locale locale3 = null;
@@ -18122,9 +18791,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0822() throws Throwable {
+    public void test0832() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0822");
+            System.out.format("%n%s%n", "RegressionTest1.test0832");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -18141,9 +18810,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0823() throws Throwable {
+    public void test0833() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0823");
+            System.out.format("%n%s%n", "RegressionTest1.test0833");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -18219,17 +18888,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0824() throws Throwable {
+    public void test0834() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0824");
+            System.out.format("%n%s%n", "RegressionTest1.test0834");
         java.lang.Object obj2 = org.apache.commons.jxpath.ri.JXPathContextReferenceImpl.allocateConditionally("id('\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000')", "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
         org.junit.Assert.assertNull(obj2);
     }
 
     @Test
-    public void test0825() throws Throwable {
+    public void test0835() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0825");
+            System.out.format("%n%s%n", "RegressionTest1.test0835");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -18272,9 +18941,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0826() throws Throwable {
+    public void test0836() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0826");
+            System.out.format("%n%s%n", "RegressionTest1.test0836");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -18309,9 +18978,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0827() throws Throwable {
+    public void test0837() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0827");
+            System.out.format("%n%s%n", "RegressionTest1.test0837");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -18349,9 +19018,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0828() throws Throwable {
+    public void test0838() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0828");
+            System.out.format("%n%s%n", "RegressionTest1.test0838");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -18404,9 +19073,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0829() throws Throwable {
+    public void test0839() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0829");
+            System.out.format("%n%s%n", "RegressionTest1.test0839");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler1 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token3 = null;
         int[][] intArray4 = new int[][] {};
@@ -18459,9 +19128,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0830() throws Throwable {
+    public void test0840() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0830");
+            System.out.format("%n%s%n", "RegressionTest1.test0840");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -18532,9 +19201,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0831() throws Throwable {
+    public void test0841() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0831");
+            System.out.format("%n%s%n", "RegressionTest1.test0841");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -18648,9 +19317,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0832() throws Throwable {
+    public void test0842() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0832");
+            System.out.format("%n%s%n", "RegressionTest1.test0842");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -18671,9 +19340,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0833() throws Throwable {
+    public void test0843() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0833");
+            System.out.format("%n%s%n", "RegressionTest1.test0843");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token2 = null;
         int[][] intArray3 = new int[][] {};
@@ -18744,9 +19413,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0834() throws Throwable {
+    public void test0844() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0834");
+            System.out.format("%n%s%n", "RegressionTest1.test0844");
         org.apache.commons.jxpath.ri.parser.Token token1 = org.apache.commons.jxpath.ri.parser.Token.newToken((int) '4');
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler2 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token4 = null;
@@ -18858,9 +19527,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0835() throws Throwable {
+    public void test0845() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0835");
+            System.out.format("%n%s%n", "RegressionTest1.test0845");
         org.apache.commons.jxpath.ri.parser.ParseException parseException1 = new org.apache.commons.jxpath.ri.parser.ParseException("hi!");
         org.apache.commons.jxpath.JXPathException jXPathException3 = new org.apache.commons.jxpath.JXPathException("/");
         org.apache.commons.jxpath.ri.parser.ParseException parseException5 = new org.apache.commons.jxpath.ri.parser.ParseException("hi!");
@@ -18883,9 +19552,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0836() throws Throwable {
+    public void test0846() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0836");
+            System.out.format("%n%s%n", "RegressionTest1.test0846");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -18927,9 +19596,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0837() throws Throwable {
+    public void test0847() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0837");
+            System.out.format("%n%s%n", "RegressionTest1.test0847");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -19046,9 +19715,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0838() throws Throwable {
+    public void test0848() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0838");
+            System.out.format("%n%s%n", "RegressionTest1.test0848");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         org.apache.commons.jxpath.ri.EvalContext evalContext4 = null;
@@ -19167,18 +19836,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0839() throws Throwable {
+    public void test0849() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0839");
+            System.out.format("%n%s%n", "RegressionTest1.test0849");
         java.lang.Object obj0 = null;
         java.lang.String str1 = org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer.getLocalName(obj0);
         org.junit.Assert.assertNull(str1);
     }
 
     @Test
-    public void test0840() throws Throwable {
+    public void test0850() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0840");
+            System.out.format("%n%s%n", "RegressionTest1.test0850");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -19249,16 +19918,62 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0841() throws Throwable {
+    public void test0851() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0841");
+            System.out.format("%n%s%n", "RegressionTest1.test0851");
+        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.QName qName3 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean4 = null;
+        java.util.Locale locale5 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer6 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName3, dynaBean4, locale5);
+        org.apache.commons.jxpath.ri.QName qName7 = dynaBeanPointer6.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer9 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer6, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext10 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext12 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext10, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer13 = dynaBeanPointer6.createPath(jXPathContext12);
+        java.util.List list15 = jXPathContext12.selectNodes("org.apache.commons.jxpath.JXPathContextFactory");
+        jXPathContext12.removeAll("DOM");
+        org.apache.commons.jxpath.IdentityManager identityManager18 = jXPathContext12.getIdentityManager();
+        org.apache.commons.jxpath.Variables variables19 = jXPathContext12.getVariables();
+        variables19.undeclareVariable("$null");
+        org.apache.commons.jxpath.ri.QName qName22 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean23 = null;
+        java.util.Locale locale24 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer25 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName22, dynaBean23, locale24);
+        org.apache.commons.jxpath.ri.QName qName26 = dynaBeanPointer25.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer28 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer25, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer30 = dynaBeanPointer25.namespacePointer("");
+        org.apache.commons.jxpath.ri.QName qName32 = new org.apache.commons.jxpath.ri.QName("/");
+        org.apache.commons.beanutils.DynaBean dynaBean33 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer34 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(nodePointer30, qName32, dynaBean33);
+        java.lang.String str35 = qName32.toString();
+        org.apache.commons.jxpath.ri.model.VariablePointer variablePointer36 = new org.apache.commons.jxpath.ri.model.VariablePointer(variables19, qName32);
+        jXPathContext2.setVariables(variables19);
+        variables19.undeclareVariable("null");
+        org.junit.Assert.assertNotNull(jXPathContext2);
+        org.junit.Assert.assertNull(qName7);
+        org.junit.Assert.assertNotNull(jXPathContext12);
+        org.junit.Assert.assertNotNull(nodePointer13);
+        org.junit.Assert.assertNotNull(list15);
+        org.junit.Assert.assertNull(identityManager18);
+        org.junit.Assert.assertNotNull(variables19);
+        org.junit.Assert.assertNull(qName26);
+        org.junit.Assert.assertNull(nodePointer30);
+        org.junit.Assert.assertEquals("'" + str35 + "' != '" + "/" + "'", str35, "/");
+    }
+
+    @Test
+    public void test0852() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0852");
         org.apache.commons.jxpath.xml.DocumentContainer.registerXMLParser("", "*");
     }
 
     @Test
-    public void test0842() throws Throwable {
+    public void test0853() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0842");
+            System.out.format("%n%s%n", "RegressionTest1.test0853");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         java.text.DecimalFormatSymbols decimalFormatSymbols4 = jXPathContext2.getDecimalFormatSymbols("/");
@@ -19321,9 +20036,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0843() throws Throwable {
+    public void test0854() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0843");
+            System.out.format("%n%s%n", "RegressionTest1.test0854");
         org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver0 = null;
         org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver1 = new org.apache.commons.jxpath.ri.NamespaceResolver(namespaceResolver0);
         org.apache.commons.jxpath.Pointer pointer2 = namespaceResolver1.getNamespaceContextPointer();
@@ -19351,9 +20066,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0844() throws Throwable {
+    public void test0855() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0844");
+            System.out.format("%n%s%n", "RegressionTest1.test0855");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream1 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0);
         simpleCharStream1.bufpos = 'a';
@@ -19365,9 +20080,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0845() throws Throwable {
+    public void test0856() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0845");
+            System.out.format("%n%s%n", "RegressionTest1.test0856");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -19476,9 +20191,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0846() throws Throwable {
+    public void test0857() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0846");
+            System.out.format("%n%s%n", "RegressionTest1.test0857");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -19527,9 +20242,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0847() throws Throwable {
+    public void test0858() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0847");
+            System.out.format("%n%s%n", "RegressionTest1.test0858");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -19552,9 +20267,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0848() throws Throwable {
+    public void test0859() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0848");
+            System.out.format("%n%s%n", "RegressionTest1.test0859");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -19670,9 +20385,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0849() throws Throwable {
+    public void test0860() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0849");
+            System.out.format("%n%s%n", "RegressionTest1.test0860");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -19766,9 +20481,133 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0850() throws Throwable {
+    public void test0861() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0850");
+            System.out.format("%n%s%n", "RegressionTest1.test0861");
+        org.w3c.dom.Node node0 = null;
+        org.apache.commons.jxpath.ri.QName qName2 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean3 = null;
+        java.util.Locale locale4 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer5 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName2, dynaBean3, locale4);
+        org.apache.commons.jxpath.ri.QName qName6 = dynaBeanPointer5.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer8 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer5, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext9 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext11 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext9, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer12 = dynaBeanPointer5.createPath(jXPathContext11);
+        java.util.Locale locale13 = jXPathContext11.getLocale();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer14 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale13);
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer16 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale13, "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
+        java.lang.String str17 = dOMNodePointer16.asPath();
+        org.apache.commons.jxpath.ri.compiler.NodeTypeTest nodeTypeTest19 = new org.apache.commons.jxpath.ri.compiler.NodeTypeTest(50);
+        org.apache.commons.jxpath.ri.QName qName21 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean22 = null;
+        java.util.Locale locale23 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer24 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName21, dynaBean22, locale23);
+        org.apache.commons.jxpath.ri.QName qName25 = dynaBeanPointer24.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer27 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer24, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer29 = jDOMNodePointer27.namespacePointer("hi!");
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer30 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer27);
+        java.lang.String[] strArray31 = nullPropertyPointer30.getPropertyNames();
+        boolean boolean32 = nullPropertyPointer30.isContainer();
+        int int33 = nullPropertyPointer30.getLength();
+        org.apache.commons.jxpath.ri.QName qName34 = nullPropertyPointer30.getName();
+        org.apache.commons.jxpath.ri.QName qName35 = null;
+        org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo37 = null;
+        java.util.Locale locale38 = null;
+        org.apache.commons.jxpath.ri.model.beans.BeanPointer beanPointer39 = new org.apache.commons.jxpath.ri.model.beans.BeanPointer(qName35, (java.lang.Object) 800, jXPathBeanInfo37, locale38);
+        boolean boolean40 = nullPropertyPointer30.equals((java.lang.Object) jXPathBeanInfo37);
+        org.apache.commons.jxpath.ri.EvalContext evalContext41 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest43 = null;
+        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext44 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext41, false, nodeTest43);
+        int int45 = descendantContext44.getDocumentOrder();
+        org.apache.commons.jxpath.ri.compiler.Step step47 = null;
+        org.apache.commons.jxpath.ri.compiler.Step[] stepArray48 = new org.apache.commons.jxpath.ri.compiler.Step[] { step47 };
+        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath49 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray48);
+        boolean boolean50 = locationPath49.isAbsolute();
+        org.apache.commons.jxpath.ri.axes.PredicateContext predicateContext51 = new org.apache.commons.jxpath.ri.axes.PredicateContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext44, (org.apache.commons.jxpath.ri.compiler.Expression) locationPath49);
+        org.apache.commons.jxpath.ri.EvalContext evalContext52 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest54 = null;
+        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext55 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext52, false, nodeTest54);
+        org.apache.commons.jxpath.ri.QName qName56 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest58 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName56, "hi!");
+        org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext precedingOrFollowingContext60 = new org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext55, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest58, true);
+        org.apache.commons.jxpath.ri.axes.NamespaceContext namespaceContext61 = new org.apache.commons.jxpath.ri.axes.NamespaceContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext44, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest58);
+        boolean boolean62 = nullPropertyPointer30.equals((java.lang.Object) namespaceContext61);
+        nullPropertyPointer30.setNameAttributeValue("/namespace::hi!");
+        int int65 = nullPropertyPointer30.getLength();
+        org.apache.commons.jxpath.ri.model.dom.DOMNodeIterator dOMNodeIterator66 = new org.apache.commons.jxpath.ri.model.dom.DOMNodeIterator((org.apache.commons.jxpath.ri.model.NodePointer) dOMNodePointer16, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeTypeTest19, true, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer30);
+        org.junit.Assert.assertNull(qName6);
+        org.junit.Assert.assertNotNull(jXPathContext11);
+        org.junit.Assert.assertNotNull(nodePointer12);
+        org.junit.Assert.assertNotNull(locale13);
+        org.junit.Assert.assertEquals(locale13.toString(), "en_US");
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "id('\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000')" + "'", str17, "id('\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000')");
+        org.junit.Assert.assertNull(qName25);
+        org.junit.Assert.assertNotNull(nodePointer29);
+        org.junit.Assert.assertNotNull(strArray31);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + true + "'", boolean32 == true);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 0 + "'", int33 == 0);
+        org.junit.Assert.assertNotNull(qName34);
+        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
+        org.junit.Assert.assertTrue("'" + int45 + "' != '" + 0 + "'", int45 == 0);
+        org.junit.Assert.assertNotNull(stepArray48);
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
+        org.junit.Assert.assertTrue("'" + boolean62 + "' != '" + false + "'", boolean62 == false);
+        org.junit.Assert.assertTrue("'" + int65 + "' != '" + 0 + "'", int65 == 0);
+    }
+
+    @Test
+    public void test0862() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0862");
+        org.apache.commons.jxpath.ri.QName qName0 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
+        java.util.Locale locale2 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer5 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, "");
+        boolean boolean6 = jDOMNamespacePointer5.isCollection();
+        java.lang.String str7 = jDOMNamespacePointer5.getNamespaceURI();
+        boolean boolean8 = jDOMNamespacePointer5.isCollection();
+        org.apache.commons.jxpath.ri.QName qName9 = jDOMNamespacePointer5.getName();
+        org.apache.commons.jxpath.ri.QName qName11 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean12 = null;
+        java.util.Locale locale13 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer14 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName11, dynaBean12, locale13);
+        org.apache.commons.jxpath.ri.QName qName15 = dynaBeanPointer14.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer17 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer14, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext18 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext20 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext18, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer21 = dynaBeanPointer14.createPath(jXPathContext20);
+        java.util.Locale locale22 = jXPathContext20.getLocale();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer23 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale22);
+        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer24 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName9, locale22);
+        java.lang.String str25 = nullPointer24.asPath();
+        boolean boolean26 = nullPointer24.isLeaf();
+        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer27 = nullPointer24.getPropertyPointer();
+        java.lang.String str28 = nullPointer24.asPath();
+        boolean boolean29 = nullPointer24.isActual();
+        java.lang.Object obj30 = nullPointer24.getBaseValue();
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
+        org.junit.Assert.assertNull(str7);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNotNull(qName9);
+        org.junit.Assert.assertNull(qName15);
+        org.junit.Assert.assertNotNull(jXPathContext20);
+        org.junit.Assert.assertNotNull(nodePointer21);
+        org.junit.Assert.assertNotNull(locale22);
+        org.junit.Assert.assertEquals(locale22.toString(), "en_US");
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "null()" + "'", str25, "null()");
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
+        org.junit.Assert.assertNotNull(propertyPointer27);
+        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "null()" + "'", str28, "null()");
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertNull(obj30);
+    }
+
+    @Test
+    public void test0863() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0863");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -19791,9 +20630,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0851() throws Throwable {
+    public void test0864() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0851");
+            System.out.format("%n%s%n", "RegressionTest1.test0864");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -19853,9 +20692,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0852() throws Throwable {
+    public void test0865() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0852");
+            System.out.format("%n%s%n", "RegressionTest1.test0865");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -19885,9 +20724,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0853() throws Throwable {
+    public void test0866() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0853");
+            System.out.format("%n%s%n", "RegressionTest1.test0866");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -19918,9 +20757,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0854() throws Throwable {
+    public void test0867() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0854");
+            System.out.format("%n%s%n", "RegressionTest1.test0867");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -19998,9 +20837,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0855() throws Throwable {
+    public void test0868() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0855");
+            System.out.format("%n%s%n", "RegressionTest1.test0868");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -20082,9 +20921,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0856() throws Throwable {
+    public void test0869() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0856");
+            System.out.format("%n%s%n", "RegressionTest1.test0869");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -20165,9 +21004,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0857() throws Throwable {
+    public void test0870() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0857");
+            System.out.format("%n%s%n", "RegressionTest1.test0870");
         org.apache.commons.jxpath.JXPathContextFactoryConfigurationError jXPathContextFactoryConfigurationError1 = new org.apache.commons.jxpath.JXPathContextFactoryConfigurationError("/namespace::$null");
         org.apache.commons.jxpath.JXPathTypeConversionException jXPathTypeConversionException3 = new org.apache.commons.jxpath.JXPathTypeConversionException("");
         jXPathContextFactoryConfigurationError1.addSuppressed((java.lang.Throwable) jXPathTypeConversionException3);
@@ -20184,9 +21023,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0858() throws Throwable {
+    public void test0871() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0858");
+            System.out.format("%n%s%n", "RegressionTest1.test0871");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -20305,9 +21144,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0859() throws Throwable {
+    public void test0872() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0859");
+            System.out.format("%n%s%n", "RegressionTest1.test0872");
         org.apache.commons.jxpath.ri.compiler.Step step1 = null;
         org.apache.commons.jxpath.ri.compiler.Step[] stepArray2 = new org.apache.commons.jxpath.ri.compiler.Step[] { step1 };
         org.apache.commons.jxpath.ri.compiler.LocationPath locationPath3 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray2);
@@ -20321,9 +21160,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0860() throws Throwable {
+    public void test0873() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0860");
+            System.out.format("%n%s%n", "RegressionTest1.test0873");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -20354,9 +21193,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0861() throws Throwable {
+    public void test0874() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0861");
+            System.out.format("%n%s%n", "RegressionTest1.test0874");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -20417,9 +21256,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0862() throws Throwable {
+    public void test0875() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0862");
+            System.out.format("%n%s%n", "RegressionTest1.test0875");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -20499,9 +21338,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0863() throws Throwable {
+    public void test0876() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0863");
+            System.out.format("%n%s%n", "RegressionTest1.test0876");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -20605,9 +21444,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0864() throws Throwable {
+    public void test0877() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0864");
+            System.out.format("%n%s%n", "RegressionTest1.test0877");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -20713,9 +21552,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0865() throws Throwable {
+    public void test0878() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0865");
+            System.out.format("%n%s%n", "RegressionTest1.test0878");
         org.apache.commons.jxpath.BasicVariables basicVariables0 = new org.apache.commons.jxpath.BasicVariables();
         // The following exception was thrown during execution in test generation
         try {
@@ -20727,9 +21566,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0866() throws Throwable {
+    public void test0879() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0866");
+            System.out.format("%n%s%n", "RegressionTest1.test0879");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -20795,9 +21634,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0867() throws Throwable {
+    public void test0880() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0867");
+            System.out.format("%n%s%n", "RegressionTest1.test0880");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -20840,9 +21679,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0868() throws Throwable {
+    public void test0881() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0868");
+            System.out.format("%n%s%n", "RegressionTest1.test0881");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -20886,9 +21725,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0869() throws Throwable {
+    public void test0882() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0869");
+            System.out.format("%n%s%n", "RegressionTest1.test0882");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler1 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token3 = null;
         int[][] intArray4 = new int[][] {};
@@ -20972,9 +21811,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0870() throws Throwable {
+    public void test0883() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0870");
+            System.out.format("%n%s%n", "RegressionTest1.test0883");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         org.apache.commons.jxpath.ri.QName qName3 = null;
@@ -21004,9 +21843,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0871() throws Throwable {
+    public void test0884() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0871");
+            System.out.format("%n%s%n", "RegressionTest1.test0884");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -21074,16 +21913,16 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0872() throws Throwable {
+    public void test0885() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0872");
+            System.out.format("%n%s%n", "RegressionTest1.test0885");
         org.apache.commons.jxpath.ri.parser.TokenMgrError tokenMgrError7 = new org.apache.commons.jxpath.ri.parser.TokenMgrError(false, 200, (-2147483648), 75, "/[@name='']", 'a', 31);
     }
 
     @Test
-    public void test0873() throws Throwable {
+    public void test0886() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0873");
+            System.out.format("%n%s%n", "RegressionTest1.test0886");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -21146,9 +21985,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0874() throws Throwable {
+    public void test0887() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0874");
+            System.out.format("%n%s%n", "RegressionTest1.test0887");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -21165,9 +22004,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0875() throws Throwable {
+    public void test0888() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0875");
+            System.out.format("%n%s%n", "RegressionTest1.test0888");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -21191,9 +22030,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0876() throws Throwable {
+    public void test0889() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0876");
+            System.out.format("%n%s%n", "RegressionTest1.test0889");
         org.apache.commons.jxpath.ri.parser.Token token1 = org.apache.commons.jxpath.ri.parser.Token.newToken((int) '4');
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler2 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token4 = null;
@@ -21232,9 +22071,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0877() throws Throwable {
+    public void test0890() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0877");
+            System.out.format("%n%s%n", "RegressionTest1.test0890");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -21258,9 +22097,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0878() throws Throwable {
+    public void test0891() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0878");
+            System.out.format("%n%s%n", "RegressionTest1.test0891");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -21355,9 +22194,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0879() throws Throwable {
+    public void test0892() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0879");
+            System.out.format("%n%s%n", "RegressionTest1.test0892");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -21388,9 +22227,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0880() throws Throwable {
+    public void test0893() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0880");
+            System.out.format("%n%s%n", "RegressionTest1.test0893");
         org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl jXPathContextFactoryReferenceImpl0 = new org.apache.commons.jxpath.ri.JXPathContextFactoryReferenceImpl();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -21497,9 +22336,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0881() throws Throwable {
+    public void test0894() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0881");
+            System.out.format("%n%s%n", "RegressionTest1.test0894");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -21512,9 +22351,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0882() throws Throwable {
+    public void test0895() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0882");
+            System.out.format("%n%s%n", "RegressionTest1.test0895");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -21554,9 +22393,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0883() throws Throwable {
+    public void test0896() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0883");
+            System.out.format("%n%s%n", "RegressionTest1.test0896");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -21573,9 +22412,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0884() throws Throwable {
+    public void test0897() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0884");
+            System.out.format("%n%s%n", "RegressionTest1.test0897");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -21683,9 +22522,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0885() throws Throwable {
+    public void test0898() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0885");
+            System.out.format("%n%s%n", "RegressionTest1.test0898");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -21702,9 +22541,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0886() throws Throwable {
+    public void test0899() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0886");
+            System.out.format("%n%s%n", "RegressionTest1.test0899");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.jxpath.JXPathBeanInfo jXPathBeanInfo2 = null;
         java.util.Locale locale3 = null;
@@ -21718,9 +22557,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0887() throws Throwable {
+    public void test0900() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0887");
+            System.out.format("%n%s%n", "RegressionTest1.test0900");
         org.apache.commons.jxpath.ri.QName qName2 = new org.apache.commons.jxpath.ri.QName("/namespace::$null", "*");
         java.lang.String str3 = qName2.toString();
         java.lang.Object obj4 = null;
@@ -21780,9 +22619,35 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0888() throws Throwable {
+    public void test0901() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0888");
+            System.out.format("%n%s%n", "RegressionTest1.test0901");
+        org.w3c.dom.Node node0 = null;
+        org.apache.commons.jxpath.ri.QName qName1 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
+        java.util.Locale locale3 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
+        org.apache.commons.jxpath.ri.QName qName5 = dynaBeanPointer4.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext8 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext10 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext8, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer11 = dynaBeanPointer4.createPath(jXPathContext10);
+        java.util.List list13 = jXPathContext10.selectNodes("org.apache.commons.jxpath.JXPathContextFactory");
+        jXPathContext10.removeAll("DOM");
+        java.util.Locale locale16 = jXPathContext10.getLocale();
+        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer17 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale16);
+        org.junit.Assert.assertNull(qName5);
+        org.junit.Assert.assertNotNull(jXPathContext10);
+        org.junit.Assert.assertNotNull(nodePointer11);
+        org.junit.Assert.assertNotNull(list13);
+        org.junit.Assert.assertNotNull(locale16);
+        org.junit.Assert.assertEquals(locale16.toString(), "en_US");
+    }
+
+    @Test
+    public void test0902() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0902");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token2 = null;
         int[][] intArray3 = new int[][] {};
@@ -21874,9 +22739,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0889() throws Throwable {
+    public void test0903() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0889");
+            System.out.format("%n%s%n", "RegressionTest1.test0903");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token2 = null;
         int[][] intArray3 = new int[][] {};
@@ -21963,9 +22828,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0890() throws Throwable {
+    public void test0904() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0890");
+            System.out.format("%n%s%n", "RegressionTest1.test0904");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -22044,9 +22909,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0891() throws Throwable {
+    public void test0905() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0891");
+            System.out.format("%n%s%n", "RegressionTest1.test0905");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token2 = null;
         int[][] intArray3 = new int[][] {};
@@ -22085,9 +22950,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0892() throws Throwable {
+    public void test0906() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0892");
+            System.out.format("%n%s%n", "RegressionTest1.test0906");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -22155,9 +23020,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0893() throws Throwable {
+    public void test0907() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0893");
+            System.out.format("%n%s%n", "RegressionTest1.test0907");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -22193,9 +23058,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0894() throws Throwable {
+    public void test0908() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0894");
+            System.out.format("%n%s%n", "RegressionTest1.test0908");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -22250,9 +23115,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0895() throws Throwable {
+    public void test0909() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0895");
+            System.out.format("%n%s%n", "RegressionTest1.test0909");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -22366,9 +23231,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0896() throws Throwable {
+    public void test0910() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0896");
+            System.out.format("%n%s%n", "RegressionTest1.test0910");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -22479,9 +23344,52 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0897() throws Throwable {
+    public void test0911() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0897");
+            System.out.format("%n%s%n", "RegressionTest1.test0911");
+        org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
+        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
+        int int4 = descendantContext3.getDocumentOrder();
+        org.apache.commons.jxpath.ri.compiler.Step step6 = null;
+        org.apache.commons.jxpath.ri.compiler.Step[] stepArray7 = new org.apache.commons.jxpath.ri.compiler.Step[] { step6 };
+        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath8 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray7);
+        boolean boolean9 = locationPath8.isAbsolute();
+        org.apache.commons.jxpath.ri.axes.PredicateContext predicateContext10 = new org.apache.commons.jxpath.ri.axes.PredicateContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext3, (org.apache.commons.jxpath.ri.compiler.Expression) locationPath8);
+        predicateContext10.reset();
+        org.apache.commons.jxpath.ri.QName qName14 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean15 = null;
+        java.util.Locale locale16 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer17 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName14, dynaBean15, locale16);
+        org.apache.commons.jxpath.ri.QName qName18 = dynaBeanPointer17.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer20 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer17, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext21 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext23 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext21, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer24 = dynaBeanPointer17.createPath(jXPathContext23);
+        java.util.Locale locale25 = jXPathContext23.getLocale();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer26 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale25);
+        java.lang.String str27 = collectionPointer26.asPath();
+        org.apache.commons.jxpath.ri.QName qName28 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest30 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName28, "hi!");
+        boolean boolean31 = collectionPointer26.testNode((org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest30);
+        org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext32 = new org.apache.commons.jxpath.ri.axes.AncestorContext((org.apache.commons.jxpath.ri.EvalContext) predicateContext10, true, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest30);
+        ancestorContext32.reset();
+        org.junit.Assert.assertTrue("'" + int4 + "' != '" + 0 + "'", int4 == 0);
+        org.junit.Assert.assertNotNull(stepArray7);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertNull(qName18);
+        org.junit.Assert.assertNotNull(jXPathContext23);
+        org.junit.Assert.assertNotNull(nodePointer24);
+        org.junit.Assert.assertNotNull(locale25);
+        org.junit.Assert.assertEquals(locale25.toString(), "en_US");
+        org.junit.Assert.assertEquals("'" + str27 + "' != '" + "/" + "'", str27, "/");
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+    }
+
+    @Test
+    public void test0912() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0912");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -22521,9 +23429,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0898() throws Throwable {
+    public void test0913() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0898");
+            System.out.format("%n%s%n", "RegressionTest1.test0913");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token2 = null;
         int[][] intArray3 = new int[][] {};
@@ -22580,9 +23488,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0899() throws Throwable {
+    public void test0914() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0899");
+            System.out.format("%n%s%n", "RegressionTest1.test0914");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         org.apache.commons.jxpath.AbstractFactory abstractFactory3 = jXPathContext2.getFactory();
@@ -22624,9 +23532,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0900() throws Throwable {
+    public void test0915() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0900");
+            System.out.format("%n%s%n", "RegressionTest1.test0915");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -22679,9 +23587,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0901() throws Throwable {
+    public void test0916() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0901");
+            System.out.format("%n%s%n", "RegressionTest1.test0916");
         org.apache.commons.jxpath.xml.DOMParser dOMParser0 = new org.apache.commons.jxpath.xml.DOMParser();
         boolean boolean1 = dOMParser0.isNamespaceAware();
         dOMParser0.setIgnoringElementContentWhitespace(false);
@@ -22691,9 +23599,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0902() throws Throwable {
+    public void test0917() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0902");
+            System.out.format("%n%s%n", "RegressionTest1.test0917");
         org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory dynaBeanPointerFactory0 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointerFactory();
         int int1 = dynaBeanPointerFactory0.getOrder();
         org.apache.commons.jxpath.ri.EvalContext evalContext2 = null;
@@ -22810,9 +23718,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0903() throws Throwable {
+    public void test0918() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0903");
+            System.out.format("%n%s%n", "RegressionTest1.test0918");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -22925,9 +23833,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0904() throws Throwable {
+    public void test0919() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0904");
+            System.out.format("%n%s%n", "RegressionTest1.test0919");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -22977,9 +23885,51 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0905() throws Throwable {
+    public void test0920() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0905");
+            System.out.format("%n%s%n", "RegressionTest1.test0920");
+        org.apache.commons.jxpath.ri.QName qName0 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
+        java.util.Locale locale2 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
+        org.apache.commons.jxpath.ri.QName qName4 = dynaBeanPointer3.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer7 = null;
+        org.jdom.Attribute attribute8 = null;
+        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer9 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer7, attribute8);
+        boolean boolean10 = jDOMAttributePointer9.isLeaf();
+        boolean boolean11 = jDOMAttributePointer9.isActual();
+        org.apache.commons.jxpath.ri.QName qName12 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean13 = null;
+        java.util.Locale locale14 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer15 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName12, dynaBean13, locale14);
+        org.apache.commons.jxpath.ri.QName qName16 = dynaBeanPointer15.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer18 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer15, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer20 = jDOMNodePointer18.namespacePointer("hi!");
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer21 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer18);
+        java.lang.String[] strArray22 = nullPropertyPointer21.getPropertyNames();
+        boolean boolean23 = nullPropertyPointer21.isContainer();
+        int int24 = nullPropertyPointer21.getLength();
+        int int25 = jDOMNodePointer6.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) jDOMAttributePointer9, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer21);
+        java.lang.Class<?> wildcardClass26 = jDOMNodePointer6.getClass();
+        int int27 = org.apache.commons.jxpath.util.ValueUtils.getCollectionHint((java.lang.Class) wildcardClass26);
+        org.junit.Assert.assertNull(qName4);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertNull(qName16);
+        org.junit.Assert.assertNotNull(nodePointer20);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+        org.junit.Assert.assertTrue("'" + int24 + "' != '" + 0 + "'", int24 == 0);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 0 + "'", int25 == 0);
+        org.junit.Assert.assertNotNull(wildcardClass26);
+        org.junit.Assert.assertTrue("'" + int27 + "' != '" + 0 + "'", int27 == 0);
+    }
+
+    @Test
+    public void test0921() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0921");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -23087,9 +24037,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0906() throws Throwable {
+    public void test0922() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0906");
+            System.out.format("%n%s%n", "RegressionTest1.test0922");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream1 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0);
         simpleCharStream1.bufpos = 'a';
@@ -23106,9 +24056,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0907() throws Throwable {
+    public void test0923() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0907");
+            System.out.format("%n%s%n", "RegressionTest1.test0923");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -23135,9 +24085,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0908() throws Throwable {
+    public void test0924() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0908");
+            System.out.format("%n%s%n", "RegressionTest1.test0924");
         org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver0 = null;
         org.apache.commons.jxpath.ri.NamespaceResolver namespaceResolver1 = new org.apache.commons.jxpath.ri.NamespaceResolver(namespaceResolver0);
         org.apache.commons.jxpath.Pointer pointer2 = namespaceResolver1.getNamespaceContextPointer();
@@ -23149,9 +24099,81 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0909() throws Throwable {
+    public void test0925() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0909");
+            System.out.format("%n%s%n", "RegressionTest1.test0925");
+        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
+        org.apache.commons.jxpath.ri.QName qName1 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
+        org.apache.commons.jxpath.ri.QName qName4 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean5 = null;
+        java.util.Locale locale6 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer7 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName4, dynaBean5, locale6);
+        org.apache.commons.jxpath.ri.QName qName8 = dynaBeanPointer7.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer10 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer7, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer12 = jDOMNodePointer10.namespacePointer("hi!");
+        boolean boolean13 = jDOMNodePointer10.isCollection();
+        boolean boolean15 = jDOMNodePointer10.equals((java.lang.Object) "");
+        boolean boolean16 = jDOMNodePointer10.isLeaf();
+        java.lang.Object obj17 = jDOMNodePointer10.getValue();
+        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) nodeNameTest3, (org.apache.commons.jxpath.Pointer) jDOMNodePointer10);
+        java.lang.String str19 = jXPathContextReferenceImpl18.getDefaultNamespaceURI();
+        java.lang.String str21 = jXPathContextReferenceImpl18.getNamespaceURI("/namespace::hi!");
+        org.apache.commons.jxpath.Pointer pointer22 = jXPathContextReferenceImpl18.getContextPointer();
+        org.apache.commons.jxpath.ri.QName qName23 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean24 = null;
+        java.util.Locale locale25 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer26 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName23, dynaBean24, locale25);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer28 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer26, "");
+        boolean boolean29 = jDOMNamespacePointer28.isCollection();
+        java.lang.String str30 = jDOMNamespacePointer28.getNamespaceURI();
+        boolean boolean31 = jDOMNamespacePointer28.isCollection();
+        org.apache.commons.jxpath.ri.QName qName32 = jDOMNamespacePointer28.getName();
+        jXPathContextReferenceImpl18.setNamespaceContextPointer((org.apache.commons.jxpath.Pointer) jDOMNamespacePointer28);
+        org.apache.commons.jxpath.ri.QName qName34 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean35 = null;
+        java.util.Locale locale36 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer37 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName34, dynaBean35, locale36);
+        org.apache.commons.jxpath.ri.QName qName38 = dynaBeanPointer37.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer40 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer37, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.axes.RootContext rootContext41 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl18, (org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer40);
+        org.apache.commons.jxpath.JXPathContext jXPathContext42 = rootContext41.getJXPathContext();
+        org.apache.commons.jxpath.ri.EvalContext evalContext43 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest45 = null;
+        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext46 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext43, false, nodeTest45);
+        org.apache.commons.jxpath.ri.QName qName47 = null;
+        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest49 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName47, "hi!");
+        org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext precedingOrFollowingContext51 = new org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext46, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest49, true);
+        org.apache.commons.jxpath.ri.axes.ParentContext parentContext52 = new org.apache.commons.jxpath.ri.axes.ParentContext((org.apache.commons.jxpath.ri.EvalContext) rootContext41, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest49);
+        int int53 = parentContext52.getCurrentPosition();
+        int int54 = parentContext52.getDocumentOrder();
+        org.apache.commons.jxpath.ri.compiler.NodeTypeTest nodeTypeTest56 = new org.apache.commons.jxpath.ri.compiler.NodeTypeTest(50);
+        java.lang.String str57 = nodeTypeTest56.toString();
+        org.apache.commons.jxpath.ri.axes.AttributeContext attributeContext58 = new org.apache.commons.jxpath.ri.axes.AttributeContext((org.apache.commons.jxpath.ri.EvalContext) parentContext52, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeTypeTest56);
+        org.junit.Assert.assertNull(qName8);
+        org.junit.Assert.assertNotNull(nodePointer12);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertNull(obj17);
+        org.junit.Assert.assertNull(str19);
+        org.junit.Assert.assertNull(str21);
+        org.junit.Assert.assertNotNull(pointer22);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertNull(str30);
+        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
+        org.junit.Assert.assertNotNull(qName32);
+        org.junit.Assert.assertNull(qName38);
+        org.junit.Assert.assertNotNull(jXPathContext42);
+        org.junit.Assert.assertTrue("'" + int53 + "' != '" + 1 + "'", int53 == 1);
+        org.junit.Assert.assertTrue("'" + int54 + "' != '" + (-1) + "'", int54 == (-1));
+        org.junit.Assert.assertEquals("'" + str57 + "' != '" + "UNKNOWN()" + "'", str57, "UNKNOWN()");
+    }
+
+    @Test
+    public void test0926() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0926");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -23224,9 +24246,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0910() throws Throwable {
+    public void test0927() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0910");
+            System.out.format("%n%s%n", "RegressionTest1.test0927");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -23348,9 +24370,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0911() throws Throwable {
+    public void test0928() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0911");
+            System.out.format("%n%s%n", "RegressionTest1.test0928");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -23434,9 +24456,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0912() throws Throwable {
+    public void test0929() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0912");
+            System.out.format("%n%s%n", "RegressionTest1.test0929");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -23543,9 +24565,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0913() throws Throwable {
+    public void test0930() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0913");
+            System.out.format("%n%s%n", "RegressionTest1.test0930");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -23576,9 +24598,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0914() throws Throwable {
+    public void test0931() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0914");
+            System.out.format("%n%s%n", "RegressionTest1.test0931");
         org.apache.commons.jxpath.Variables variables0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.model.VariablePointer variablePointer2 = new org.apache.commons.jxpath.ri.model.VariablePointer(variables0, qName1);
@@ -23630,9 +24652,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0915() throws Throwable {
+    public void test0932() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0915");
+            System.out.format("%n%s%n", "RegressionTest1.test0932");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext0, (java.lang.Object) ' ');
         org.apache.commons.jxpath.ri.QName qName3 = null;
@@ -23676,9 +24698,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0916() throws Throwable {
+    public void test0933() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0916");
+            System.out.format("%n%s%n", "RegressionTest1.test0933");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -23763,9 +24785,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0917() throws Throwable {
+    public void test0934() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0917");
+            System.out.format("%n%s%n", "RegressionTest1.test0934");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -23779,9 +24801,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0918() throws Throwable {
+    public void test0935() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0918");
+            System.out.format("%n%s%n", "RegressionTest1.test0935");
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
         java.util.Locale locale3 = null;
@@ -23836,9 +24858,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0919() throws Throwable {
+    public void test0936() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0919");
+            System.out.format("%n%s%n", "RegressionTest1.test0936");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("*");
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = null;
         org.apache.commons.jxpath.ri.QName qName3 = null;
@@ -23926,9 +24948,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0920() throws Throwable {
+    public void test0937() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0920");
+            System.out.format("%n%s%n", "RegressionTest1.test0937");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -23986,9 +25008,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0921() throws Throwable {
+    public void test0938() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0921");
+            System.out.format("%n%s%n", "RegressionTest1.test0938");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         java.lang.Object obj1 = org.apache.commons.jxpath.ri.axes.RootContext.UNKNOWN_VALUE;
         org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler2 = null;
@@ -24067,9 +25089,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0922() throws Throwable {
+    public void test0939() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0922");
+            System.out.format("%n%s%n", "RegressionTest1.test0939");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -24145,9 +25167,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0923() throws Throwable {
+    public void test0940() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0923");
+            System.out.format("%n%s%n", "RegressionTest1.test0940");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -24258,9 +25280,95 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0924() throws Throwable {
+    public void test0941() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0924");
+            System.out.format("%n%s%n", "RegressionTest1.test0941");
+        org.apache.commons.jxpath.ri.QName qName0 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
+        java.util.Locale locale2 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
+        org.apache.commons.jxpath.ri.QName qName4 = dynaBeanPointer3.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer8 = jDOMNodePointer6.namespacePointer("hi!");
+        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer9 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer6);
+        java.lang.String[] strArray10 = nullPropertyPointer9.getPropertyNames();
+        boolean boolean11 = nullPropertyPointer9.isContainer();
+        int int12 = nullPropertyPointer9.getLength();
+        org.apache.commons.jxpath.ri.QName qName13 = nullPropertyPointer9.getName();
+        org.apache.commons.jxpath.ri.QName qName14 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean15 = null;
+        java.util.Locale locale16 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer17 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName14, dynaBean15, locale16);
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer19 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer17, "");
+        boolean boolean20 = jDOMNamespacePointer19.isCollection();
+        java.lang.String str21 = jDOMNamespacePointer19.getNamespaceURI();
+        boolean boolean22 = jDOMNamespacePointer19.isCollection();
+        org.apache.commons.jxpath.ri.QName qName23 = jDOMNamespacePointer19.getName();
+        org.apache.commons.jxpath.ri.QName qName25 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean26 = null;
+        java.util.Locale locale27 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer28 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName25, dynaBean26, locale27);
+        org.apache.commons.jxpath.ri.QName qName29 = dynaBeanPointer28.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer31 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer28, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext32 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext34 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext32, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer35 = dynaBeanPointer28.createPath(jXPathContext34);
+        java.util.Locale locale36 = jXPathContext34.getLocale();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer37 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale36);
+        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer38 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName23, locale36);
+        java.lang.String str39 = nullPointer38.asPath();
+        java.io.Reader reader40 = null;
+        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream41 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader40);
+        org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager43 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream41, 0);
+        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream44 = null;
+        org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager45 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream44);
+        java.io.PrintStream printStream46 = xPathParserTokenManager45.debugStream;
+        xPathParserTokenManager43.debugStream = printStream46;
+        boolean boolean48 = nullPointer38.equals((java.lang.Object) xPathParserTokenManager43);
+        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler49 = null;
+        org.apache.commons.jxpath.ri.QName qName51 = null;
+        org.apache.commons.beanutils.DynaBean dynaBean52 = null;
+        java.util.Locale locale53 = null;
+        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer54 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName51, dynaBean52, locale53);
+        org.apache.commons.jxpath.ri.QName qName55 = dynaBeanPointer54.getName();
+        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer57 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer54, (java.lang.Object) (byte) -1);
+        org.apache.commons.jxpath.JXPathContext jXPathContext58 = null;
+        org.apache.commons.jxpath.JXPathContext jXPathContext60 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext58, (java.lang.Object) ' ');
+        org.apache.commons.jxpath.ri.model.NodePointer nodePointer61 = dynaBeanPointer54.createPath(jXPathContext60);
+        java.util.Locale locale62 = jXPathContext60.getLocale();
+        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer63 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale62);
+        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer64 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer(qName13, (java.lang.Object) xPathParserTokenManager43, dynamicPropertyHandler49, locale62);
+        boolean boolean65 = dynamicPointer64.isNode();
+        org.junit.Assert.assertNull(qName4);
+        org.junit.Assert.assertNotNull(nodePointer8);
+        org.junit.Assert.assertNotNull(strArray10);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertNotNull(qName13);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+        org.junit.Assert.assertNull(str21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(qName23);
+        org.junit.Assert.assertNull(qName29);
+        org.junit.Assert.assertNotNull(jXPathContext34);
+        org.junit.Assert.assertNotNull(nodePointer35);
+        org.junit.Assert.assertNotNull(locale36);
+        org.junit.Assert.assertEquals(locale36.toString(), "en_US");
+        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "null()" + "'", str39, "null()");
+        org.junit.Assert.assertNotNull(printStream46);
+        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
+        org.junit.Assert.assertNull(qName55);
+        org.junit.Assert.assertNotNull(jXPathContext60);
+        org.junit.Assert.assertNotNull(nodePointer61);
+        org.junit.Assert.assertNotNull(locale62);
+        org.junit.Assert.assertEquals(locale62.toString(), "en_US");
+        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + true + "'", boolean65 == true);
+    }
+
+    @Test
+    public void test0942() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest1.test0942");
         org.apache.commons.jxpath.JXPathException jXPathException1 = new org.apache.commons.jxpath.JXPathException("/");
         org.apache.commons.jxpath.ri.parser.ParseException parseException3 = new org.apache.commons.jxpath.ri.parser.ParseException("hi!");
         org.apache.commons.jxpath.ri.parser.Token token4 = parseException3.currentToken;
@@ -24276,9 +25384,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0925() throws Throwable {
+    public void test0943() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0925");
+            System.out.format("%n%s%n", "RegressionTest1.test0943");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -24322,9 +25430,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0926() throws Throwable {
+    public void test0944() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0926");
+            System.out.format("%n%s%n", "RegressionTest1.test0944");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -24346,9 +25454,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0927() throws Throwable {
+    public void test0945() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0927");
+            System.out.format("%n%s%n", "RegressionTest1.test0945");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -24363,9 +25471,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0928() throws Throwable {
+    public void test0946() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0928");
+            System.out.format("%n%s%n", "RegressionTest1.test0946");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         java.lang.Object obj3 = null;
@@ -24414,9 +25522,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0929() throws Throwable {
+    public void test0947() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0929");
+            System.out.format("%n%s%n", "RegressionTest1.test0947");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream1 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0);
         org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager3 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream1, 0);
@@ -24426,9 +25534,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0930() throws Throwable {
+    public void test0948() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0930");
+            System.out.format("%n%s%n", "RegressionTest1.test0948");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         java.lang.Object obj3 = null;
@@ -24563,9 +25671,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0931() throws Throwable {
+    public void test0949() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0931");
+            System.out.format("%n%s%n", "RegressionTest1.test0949");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -24581,9 +25689,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0932() throws Throwable {
+    public void test0950() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0932");
+            System.out.format("%n%s%n", "RegressionTest1.test0950");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("*");
         org.apache.commons.jxpath.ri.QName qName2 = null;
         org.apache.commons.beanutils.DynaBean dynaBean3 = null;
@@ -24624,9 +25732,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0933() throws Throwable {
+    public void test0951() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0933");
+            System.out.format("%n%s%n", "RegressionTest1.test0951");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         java.lang.Object obj3 = null;
@@ -24709,9 +25817,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0934() throws Throwable {
+    public void test0952() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0934");
+            System.out.format("%n%s%n", "RegressionTest1.test0952");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -24742,18 +25850,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0935() throws Throwable {
+    public void test0953() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0935");
+            System.out.format("%n%s%n", "RegressionTest1.test0953");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream3 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, (int) ' ', 40);
         simpleCharStream3.bufpos = 19;
     }
 
     @Test
-    public void test0936() throws Throwable {
+    public void test0954() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0936");
+            System.out.format("%n%s%n", "RegressionTest1.test0954");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.processingInstructionTest("/*");
         org.apache.commons.jxpath.ri.QName qName3 = null;
@@ -24815,9 +25923,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0937() throws Throwable {
+    public void test0955() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0937");
+            System.out.format("%n%s%n", "RegressionTest1.test0955");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -24863,9 +25971,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0938() throws Throwable {
+    public void test0956() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0938");
+            System.out.format("%n%s%n", "RegressionTest1.test0956");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -24978,9 +26086,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0939() throws Throwable {
+    public void test0957() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0939");
+            System.out.format("%n%s%n", "RegressionTest1.test0957");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25001,18 +26109,18 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0940() throws Throwable {
+    public void test0958() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0940");
+            System.out.format("%n%s%n", "RegressionTest1.test0958");
         org.apache.commons.jxpath.ri.parser.TokenMgrError tokenMgrError2 = new org.apache.commons.jxpath.ri.parser.TokenMgrError("", (int) '4');
         int int3 = tokenMgrError2.getPosition();
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
     }
 
     @Test
-    public void test0941() throws Throwable {
+    public void test0959() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0941");
+            System.out.format("%n%s%n", "RegressionTest1.test0959");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25030,9 +26138,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0942() throws Throwable {
+    public void test0960() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0942");
+            System.out.format("%n%s%n", "RegressionTest1.test0960");
         org.apache.commons.jxpath.BasicVariables basicVariables0 = new org.apache.commons.jxpath.BasicVariables();
         boolean boolean2 = basicVariables0.isDeclaredVariable("null()");
         org.apache.commons.jxpath.ri.EvalContext evalContext4 = null;
@@ -25075,9 +26183,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0943() throws Throwable {
+    public void test0961() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0943");
+            System.out.format("%n%s%n", "RegressionTest1.test0961");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25100,9 +26208,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0944() throws Throwable {
+    public void test0962() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0944");
+            System.out.format("%n%s%n", "RegressionTest1.test0962");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25127,9 +26235,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0945() throws Throwable {
+    public void test0963() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0945");
+            System.out.format("%n%s%n", "RegressionTest1.test0963");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -25150,9 +26258,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0946() throws Throwable {
+    public void test0964() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0946");
+            System.out.format("%n%s%n", "RegressionTest1.test0964");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.w3c.dom.Attr attr1 = null;
         org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer0, attr1);
@@ -25204,9 +26312,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0947() throws Throwable {
+    public void test0965() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0947");
+            System.out.format("%n%s%n", "RegressionTest1.test0965");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25310,9 +26418,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0948() throws Throwable {
+    public void test0966() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0948");
+            System.out.format("%n%s%n", "RegressionTest1.test0966");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25356,9 +26464,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0949() throws Throwable {
+    public void test0967() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0949");
+            System.out.format("%n%s%n", "RegressionTest1.test0967");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         java.lang.Object obj3 = null;
@@ -25384,9 +26492,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0950() throws Throwable {
+    public void test0968() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0950");
+            System.out.format("%n%s%n", "RegressionTest1.test0968");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         java.lang.Object obj2 = treeCompiler0.nodeTypeTest(0);
         java.lang.Object obj3 = null;
@@ -25432,9 +26540,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0951() throws Throwable {
+    public void test0969() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0951");
+            System.out.format("%n%s%n", "RegressionTest1.test0969");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25457,17 +26565,17 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0952() throws Throwable {
+    public void test0970() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0952");
+            System.out.format("%n%s%n", "RegressionTest1.test0970");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream3 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 57, 30);
     }
 
     @Test
-    public void test0953() throws Throwable {
+    public void test0971() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0953");
+            System.out.format("%n%s%n", "RegressionTest1.test0971");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25529,9 +26637,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0954() throws Throwable {
+    public void test0972() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0954");
+            System.out.format("%n%s%n", "RegressionTest1.test0972");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -25639,9 +26747,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0955() throws Throwable {
+    public void test0973() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0955");
+            System.out.format("%n%s%n", "RegressionTest1.test0973");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25755,9 +26863,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0956() throws Throwable {
+    public void test0974() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0956");
+            System.out.format("%n%s%n", "RegressionTest1.test0974");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25783,9 +26891,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0957() throws Throwable {
+    public void test0975() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0957");
+            System.out.format("%n%s%n", "RegressionTest1.test0975");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25808,9 +26916,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0958() throws Throwable {
+    public void test0976() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0958");
+            System.out.format("%n%s%n", "RegressionTest1.test0976");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -25923,9 +27031,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0959() throws Throwable {
+    public void test0977() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0959");
+            System.out.format("%n%s%n", "RegressionTest1.test0977");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -25961,9 +27069,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0960() throws Throwable {
+    public void test0978() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0960");
+            System.out.format("%n%s%n", "RegressionTest1.test0978");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream3 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, 0, 700);
         int int4 = simpleCharStream3.getBeginColumn();
@@ -25971,9 +27079,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0961() throws Throwable {
+    public void test0979() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0961");
+            System.out.format("%n%s%n", "RegressionTest1.test0979");
         org.apache.commons.jxpath.CompiledExpression compiledExpression1 = org.apache.commons.jxpath.JXPathContext.compile("@null");
         org.apache.commons.jxpath.JXPathContext jXPathContext2 = null;
         org.apache.commons.jxpath.JXPathContext jXPathContext4 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext2, (java.lang.Object) ' ');
@@ -26063,9 +27171,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0962() throws Throwable {
+    public void test0980() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0962");
+            System.out.format("%n%s%n", "RegressionTest1.test0980");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -26154,9 +27262,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0963() throws Throwable {
+    public void test0981() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0963");
+            System.out.format("%n%s%n", "RegressionTest1.test0981");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -26227,9 +27335,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0964() throws Throwable {
+    public void test0982() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0964");
+            System.out.format("%n%s%n", "RegressionTest1.test0982");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -26250,9 +27358,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0965() throws Throwable {
+    public void test0983() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0965");
+            System.out.format("%n%s%n", "RegressionTest1.test0983");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -26277,9 +27385,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0966() throws Throwable {
+    public void test0984() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0966");
+            System.out.format("%n%s%n", "RegressionTest1.test0984");
         org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
@@ -26349,9 +27457,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0967() throws Throwable {
+    public void test0985() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0967");
+            System.out.format("%n%s%n", "RegressionTest1.test0985");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         org.w3c.dom.Node node2 = null;
@@ -26376,9 +27484,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0968() throws Throwable {
+    public void test0986() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0968");
+            System.out.format("%n%s%n", "RegressionTest1.test0986");
         org.apache.commons.jxpath.ri.compiler.Step step1 = null;
         org.apache.commons.jxpath.ri.compiler.Step[] stepArray2 = new org.apache.commons.jxpath.ri.compiler.Step[] { step1 };
         org.apache.commons.jxpath.ri.compiler.LocationPath locationPath3 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray2);
@@ -26437,9 +27545,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0969() throws Throwable {
+    public void test0987() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0969");
+            System.out.format("%n%s%n", "RegressionTest1.test0987");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -26464,9 +27572,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0970() throws Throwable {
+    public void test0988() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0970");
+            System.out.format("%n%s%n", "RegressionTest1.test0988");
         org.apache.commons.jxpath.Container container0 = null;
         org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
         org.apache.commons.jxpath.ri.QName qName2 = null;
@@ -26570,9 +27678,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0971() throws Throwable {
+    public void test0989() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0971");
+            System.out.format("%n%s%n", "RegressionTest1.test0989");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -26616,9 +27724,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0972() throws Throwable {
+    public void test0990() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0972");
+            System.out.format("%n%s%n", "RegressionTest1.test0990");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -26676,9 +27784,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0973() throws Throwable {
+    public void test0991() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0973");
+            System.out.format("%n%s%n", "RegressionTest1.test0991");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -26722,9 +27830,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0974() throws Throwable {
+    public void test0992() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0974");
+            System.out.format("%n%s%n", "RegressionTest1.test0992");
         org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
         org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
         org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
@@ -26739,9 +27847,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0975() throws Throwable {
+    public void test0993() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0975");
+            System.out.format("%n%s%n", "RegressionTest1.test0993");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.parser.Token token2 = null;
         int[][] intArray3 = new int[][] {};
@@ -26870,9 +27978,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0976() throws Throwable {
+    public void test0994() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0976");
+            System.out.format("%n%s%n", "RegressionTest1.test0994");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -26964,9 +28072,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0977() throws Throwable {
+    public void test0995() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0977");
+            System.out.format("%n%s%n", "RegressionTest1.test0995");
         java.io.Reader reader0 = null;
         org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, (int) '4', 24, 800);
         int int5 = simpleCharStream4.getBeginColumn();
@@ -26977,9 +28085,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0978() throws Throwable {
+    public void test0996() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0978");
+            System.out.format("%n%s%n", "RegressionTest1.test0996");
         org.apache.commons.jxpath.ri.model.NodePointer nodePointer0 = null;
         org.jdom.Attribute attribute1 = null;
         org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer2 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer0, attribute1);
@@ -27033,9 +28141,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0979() throws Throwable {
+    public void test0997() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0979");
+            System.out.format("%n%s%n", "RegressionTest1.test0997");
         org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory jDOMPointerFactory0 = new org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory();
         int int1 = jDOMPointerFactory0.getOrder();
         int int2 = jDOMPointerFactory0.getOrder();
@@ -27044,9 +28152,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0980() throws Throwable {
+    public void test0998() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0980");
+            System.out.format("%n%s%n", "RegressionTest1.test0998");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -27146,9 +28254,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0981() throws Throwable {
+    public void test0999() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0981");
+            System.out.format("%n%s%n", "RegressionTest1.test0999");
         org.apache.commons.jxpath.ri.QName qName0 = null;
         org.apache.commons.beanutils.DynaBean dynaBean1 = null;
         java.util.Locale locale2 = null;
@@ -27229,9 +28337,9 @@ public class RegressionTest1 {
     }
 
     @Test
-    public void test0982() throws Throwable {
+    public void test1000() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0982");
+            System.out.format("%n%s%n", "RegressionTest1.test1000");
         org.apache.commons.jxpath.ri.compiler.TreeCompiler treeCompiler0 = new org.apache.commons.jxpath.ri.compiler.TreeCompiler();
         org.apache.commons.jxpath.ri.QName qName1 = null;
         org.apache.commons.beanutils.DynaBean dynaBean2 = null;
@@ -27317,1065 +28425,6 @@ public class RegressionTest1 {
         org.junit.Assert.assertEquals(obj53.toString(), "'$null'");
         org.junit.Assert.assertEquals(java.lang.String.valueOf(obj53), "'$null'");
         org.junit.Assert.assertEquals(java.util.Objects.toString(obj53), "'$null'");
-    }
-
-    @Test
-    public void test0983() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0983");
-        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
-        java.util.Locale locale3 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
-        org.apache.commons.jxpath.ri.QName qName5 = dynaBeanPointer4.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer9 = jDOMNodePointer7.namespacePointer("hi!");
-        boolean boolean10 = jDOMNodePointer7.isCollection();
-        boolean boolean12 = jDOMNodePointer7.equals((java.lang.Object) "");
-        boolean boolean13 = jDOMNodePointer7.isLeaf();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer14 = null;
-        org.jdom.Attribute attribute15 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer16 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer14, attribute15);
-        java.lang.Object obj17 = jDOMAttributePointer16.getBaseValue();
-        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) boolean13, (org.apache.commons.jxpath.Pointer) jDOMAttributePointer16);
-        org.apache.commons.jxpath.JXPathContext jXPathContext19 = jXPathContextReferenceImpl18.getParentContext();
-        org.apache.commons.jxpath.ri.QName qName20 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean21 = null;
-        java.util.Locale locale22 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer23 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName20, dynaBean21, locale22);
-        org.apache.commons.jxpath.ri.QName qName24 = dynaBeanPointer23.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer26 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer23, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer28 = jDOMNodePointer26.namespacePointer("hi!");
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer29 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer26);
-        java.lang.Object obj30 = nullPropertyPointer29.clone();
-        org.apache.commons.jxpath.ri.axes.RootContext rootContext31 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl18, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer29);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer32 = null;
-        org.jdom.Attribute attribute33 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer34 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer32, attribute33);
-        java.lang.Object obj35 = jDOMAttributePointer34.getBaseValue();
-        org.apache.commons.jxpath.ri.QName qName36 = jDOMAttributePointer34.getName();
-        org.apache.commons.jxpath.ri.EvalContext evalContext37 = rootContext31.getVariableContext(qName36);
-        org.junit.Assert.assertNull(qName5);
-        org.junit.Assert.assertNotNull(nodePointer9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertNull(obj17);
-        org.junit.Assert.assertNull(jXPathContext19);
-        org.junit.Assert.assertNull(qName24);
-        org.junit.Assert.assertNotNull(nodePointer28);
-        org.junit.Assert.assertNotNull(obj30);
-        org.junit.Assert.assertEquals(obj30.toString(), "/*");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj30), "/*");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj30), "/*");
-        org.junit.Assert.assertNull(obj35);
-        org.junit.Assert.assertNotNull(qName36);
-        org.junit.Assert.assertNotNull(evalContext37);
-    }
-
-    @Test
-    public void test0984() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0984");
-        org.apache.commons.jxpath.Container container0 = null;
-        org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory1 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
-        org.apache.commons.jxpath.ri.QName qName2 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean3 = null;
-        java.util.Locale locale4 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer5 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName2, dynaBean3, locale4);
-        org.apache.commons.jxpath.ri.QName qName6 = dynaBeanPointer5.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer8 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer5, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer10 = jDOMNodePointer8.namespacePointer("hi!");
-        boolean boolean11 = jDOMNodePointer8.isCollection();
-        org.apache.commons.jxpath.ri.QName qName13 = new org.apache.commons.jxpath.ri.QName("");
-        java.lang.Object obj14 = null;
-        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler15 = null;
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer16 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer8, qName13, obj14, dynamicPropertyHandler15);
-        java.lang.String str17 = qName13.toString();
-        org.apache.commons.jxpath.ri.QName qName18 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean19 = null;
-        java.util.Locale locale20 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer21 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName18, dynaBean19, locale20);
-        org.apache.commons.jxpath.ri.QName qName22 = dynaBeanPointer21.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer24 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer21, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext25 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext27 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext25, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer28 = dynaBeanPointer21.createPath(jXPathContext27);
-        java.util.List list30 = jXPathContext27.selectNodes("org.apache.commons.jxpath.JXPathContextFactory");
-        org.w3c.dom.Node node31 = null;
-        org.apache.commons.jxpath.ri.QName qName32 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean33 = null;
-        java.util.Locale locale34 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer35 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName32, dynaBean33, locale34);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer37 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer35, "");
-        boolean boolean38 = jDOMNamespacePointer37.isCollection();
-        java.lang.String str39 = jDOMNamespacePointer37.getNamespaceURI();
-        boolean boolean40 = jDOMNamespacePointer37.isCollection();
-        org.apache.commons.jxpath.ri.QName qName41 = jDOMNamespacePointer37.getName();
-        org.apache.commons.jxpath.ri.QName qName43 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean44 = null;
-        java.util.Locale locale45 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer46 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName43, dynaBean44, locale45);
-        org.apache.commons.jxpath.ri.QName qName47 = dynaBeanPointer46.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer49 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer46, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext50 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext52 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext50, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer53 = dynaBeanPointer46.createPath(jXPathContext52);
-        java.util.Locale locale54 = jXPathContext52.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer55 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale54);
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer56 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName41, locale54);
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer57 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node31, locale54);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer58 = beanPointerFactory1.createNodePointer(qName13, (java.lang.Object) "org.apache.commons.jxpath.JXPathContextFactory", locale54);
-        org.apache.commons.jxpath.ri.model.container.ContainerPointer containerPointer59 = new org.apache.commons.jxpath.ri.model.container.ContainerPointer(container0, locale54);
-        java.lang.Object obj60 = containerPointer59.getBaseValue();
-        java.io.Reader reader61 = null;
-        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream62 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader61);
-        org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager64 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream62, 0);
-        boolean boolean65 = containerPointer59.equals((java.lang.Object) 0);
-        int int66 = containerPointer59.getLength();
-        org.junit.Assert.assertNull(qName6);
-        org.junit.Assert.assertNotNull(nodePointer10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertNull(qName22);
-        org.junit.Assert.assertNotNull(jXPathContext27);
-        org.junit.Assert.assertNotNull(nodePointer28);
-        org.junit.Assert.assertNotNull(list30);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertNull(str39);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertNotNull(qName41);
-        org.junit.Assert.assertNull(qName47);
-        org.junit.Assert.assertNotNull(jXPathContext52);
-        org.junit.Assert.assertNotNull(nodePointer53);
-        org.junit.Assert.assertNotNull(locale54);
-        org.junit.Assert.assertEquals(locale54.toString(), "en_US");
-        org.junit.Assert.assertNotNull(nodePointer58);
-        org.junit.Assert.assertNull(obj60);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-        org.junit.Assert.assertTrue("'" + int66 + "' != '" + 1 + "'", int66 == 1);
-    }
-
-    @Test
-    public void test0985() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0985");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
-        java.util.Locale locale2 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer5 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, "");
-        boolean boolean6 = jDOMNamespacePointer5.isCollection();
-        java.lang.String str7 = jDOMNamespacePointer5.getNamespaceURI();
-        boolean boolean8 = jDOMNamespacePointer5.isCollection();
-        org.apache.commons.jxpath.ri.QName qName9 = jDOMNamespacePointer5.getName();
-        org.apache.commons.jxpath.ri.QName qName11 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean12 = null;
-        java.util.Locale locale13 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer14 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName11, dynaBean12, locale13);
-        org.apache.commons.jxpath.ri.QName qName15 = dynaBeanPointer14.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer17 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer14, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext18 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext20 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext18, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer21 = dynaBeanPointer14.createPath(jXPathContext20);
-        java.util.Locale locale22 = jXPathContext20.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer23 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale22);
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer24 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName9, locale22);
-        java.lang.String str25 = nullPointer24.asPath();
-        boolean boolean26 = nullPointer24.isLeaf();
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer27 = nullPointer24.getPropertyPointer();
-        java.lang.String str28 = nullPointer24.asPath();
-        org.apache.commons.jxpath.CompiledExpression compiledExpression30 = org.apache.commons.jxpath.JXPathContext.compile("*");
-        org.apache.commons.jxpath.JXPathContext jXPathContext31 = null;
-        org.apache.commons.jxpath.ri.QName qName32 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest34 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName32, "hi!");
-        org.apache.commons.jxpath.ri.QName qName35 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean36 = null;
-        java.util.Locale locale37 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer38 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName35, dynaBean36, locale37);
-        org.apache.commons.jxpath.ri.QName qName39 = dynaBeanPointer38.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer41 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer38, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer43 = jDOMNodePointer41.namespacePointer("hi!");
-        boolean boolean44 = jDOMNodePointer41.isCollection();
-        boolean boolean46 = jDOMNodePointer41.equals((java.lang.Object) "");
-        boolean boolean47 = jDOMNodePointer41.isLeaf();
-        java.lang.Object obj48 = jDOMNodePointer41.getValue();
-        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl49 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext31, (java.lang.Object) nodeNameTest34, (org.apache.commons.jxpath.Pointer) jDOMNodePointer41);
-        jXPathContextReferenceImpl49.registerNamespace("hi!", "Empty expression context");
-        java.util.Iterator iterator53 = compiledExpression30.iteratePointers((org.apache.commons.jxpath.JXPathContext) jXPathContextReferenceImpl49);
-        java.lang.String str54 = jXPathContextReferenceImpl49.getDefaultNamespaceURI();
-        org.apache.commons.jxpath.ri.QName qName55 = null;
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer57 = null;
-        org.w3c.dom.Attr attr58 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer59 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer57, attr58);
-        org.apache.commons.jxpath.ri.QName qName60 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean61 = null;
-        java.util.Locale locale62 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer63 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName60, dynaBean61, locale62);
-        org.apache.commons.jxpath.ri.QName qName64 = dynaBeanPointer63.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer66 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer63, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer68 = jDOMNodePointer66.namespacePointer("hi!");
-        boolean boolean69 = jDOMNodePointer66.isCollection();
-        boolean boolean71 = jDOMNodePointer66.equals((java.lang.Object) "");
-        boolean boolean72 = jDOMNodePointer66.isLeaf();
-        org.apache.commons.jxpath.ri.QName qName73 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean74 = null;
-        java.util.Locale locale75 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer76 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName73, dynaBean74, locale75);
-        org.apache.commons.jxpath.ri.QName qName77 = dynaBeanPointer76.getName();
-        java.lang.String str79 = dynaBeanPointer76.getNamespaceURI("");
-        java.lang.Object obj80 = dynaBeanPointer76.getImmediateNode();
-        int int81 = dOMAttributePointer59.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer66, (org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer76);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.jxpath.ri.model.NodePointer nodePointer82 = nullPointer24.createChild((org.apache.commons.jxpath.JXPathContext) jXPathContextReferenceImpl49, qName55, 75, (java.lang.Object) jDOMNodePointer66);
-            org.junit.Assert.fail("Expected exception of type java.lang.UnsupportedOperationException; message: Cannot create the root object: null()");
-        } catch (java.lang.UnsupportedOperationException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-        org.junit.Assert.assertNull(str7);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(qName9);
-        org.junit.Assert.assertNull(qName15);
-        org.junit.Assert.assertNotNull(jXPathContext20);
-        org.junit.Assert.assertNotNull(nodePointer21);
-        org.junit.Assert.assertNotNull(locale22);
-        org.junit.Assert.assertEquals(locale22.toString(), "en_US");
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "null()" + "'", str25, "null()");
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
-        org.junit.Assert.assertNotNull(propertyPointer27);
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "null()" + "'", str28, "null()");
-        org.junit.Assert.assertNotNull(compiledExpression30);
-        org.junit.Assert.assertNull(qName39);
-        org.junit.Assert.assertNotNull(nodePointer43);
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + false + "'", boolean44 == false);
-        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + true + "'", boolean47 == true);
-        org.junit.Assert.assertNull(obj48);
-        org.junit.Assert.assertNotNull(iterator53);
-        org.junit.Assert.assertNull(str54);
-        org.junit.Assert.assertNull(qName64);
-        org.junit.Assert.assertNotNull(nodePointer68);
-        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
-        org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + false + "'", boolean71 == false);
-        org.junit.Assert.assertTrue("'" + boolean72 + "' != '" + true + "'", boolean72 == true);
-        org.junit.Assert.assertNull(qName77);
-        org.junit.Assert.assertNull(str79);
-        org.junit.Assert.assertNull(obj80);
-        org.junit.Assert.assertTrue("'" + int81 + "' != '" + 0 + "'", int81 == 0);
-    }
-
-    @Test
-    public void test0986() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0986");
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
-        java.util.Locale locale3 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
-        org.apache.commons.jxpath.ri.QName qName5 = dynaBeanPointer4.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext8 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext10 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext8, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer11 = dynaBeanPointer4.createPath(jXPathContext10);
-        java.util.Locale locale12 = jXPathContext10.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer13 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale12);
-        java.lang.Object obj14 = collectionPointer13.getImmediateNode();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer16 = collectionPointer13.namespacePointer("/namespace::$null");
-        boolean boolean17 = collectionPointer13.isLeaf();
-        org.apache.commons.jxpath.ri.QName qName18 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean19 = null;
-        java.util.Locale locale20 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer21 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName18, dynaBean19, locale20);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer23 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer21, "");
-        boolean boolean24 = jDOMNamespacePointer23.isCollection();
-        java.lang.String str25 = jDOMNamespacePointer23.getNamespaceURI();
-        boolean boolean26 = jDOMNamespacePointer23.isCollection();
-        org.apache.commons.jxpath.ri.QName qName27 = jDOMNamespacePointer23.getName();
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator28 = collectionPointer13.attributeIterator(qName27);
-        boolean boolean29 = collectionPointer13.isContainer();
-        org.junit.Assert.assertNull(qName5);
-        org.junit.Assert.assertNotNull(jXPathContext10);
-        org.junit.Assert.assertNotNull(nodePointer11);
-        org.junit.Assert.assertNotNull(locale12);
-        org.junit.Assert.assertEquals(locale12.toString(), "en_US");
-        org.junit.Assert.assertEquals("'" + obj14 + "' != '" + (byte) -1 + "'", obj14, (byte) -1);
-        org.junit.Assert.assertNull(nodePointer16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertNull(str25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNotNull(qName27);
-        org.junit.Assert.assertNotNull(nodeIterator28);
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-    }
-
-    @Test
-    public void test0987() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0987");
-        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
-        java.util.Locale locale3 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
-        org.apache.commons.jxpath.ri.QName qName5 = dynaBeanPointer4.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer9 = jDOMNodePointer7.namespacePointer("hi!");
-        boolean boolean10 = jDOMNodePointer7.isCollection();
-        boolean boolean12 = jDOMNodePointer7.equals((java.lang.Object) "");
-        boolean boolean13 = jDOMNodePointer7.isLeaf();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer14 = null;
-        org.jdom.Attribute attribute15 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer16 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer14, attribute15);
-        java.lang.Object obj17 = jDOMAttributePointer16.getBaseValue();
-        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) boolean13, (org.apache.commons.jxpath.Pointer) jDOMAttributePointer16);
-        org.apache.commons.jxpath.JXPathContext jXPathContext19 = jXPathContextReferenceImpl18.getParentContext();
-        org.apache.commons.jxpath.ri.QName qName20 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean21 = null;
-        java.util.Locale locale22 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer23 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName20, dynaBean21, locale22);
-        org.apache.commons.jxpath.ri.QName qName24 = dynaBeanPointer23.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer26 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer23, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer28 = jDOMNodePointer26.namespacePointer("hi!");
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer29 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer26);
-        java.lang.Object obj30 = nullPropertyPointer29.clone();
-        org.apache.commons.jxpath.ri.axes.RootContext rootContext31 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl18, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer29);
-        org.apache.commons.jxpath.ri.EvalContext evalContext33 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest35 = null;
-        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext36 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext33, false, nodeTest35);
-        int int37 = descendantContext36.getDocumentOrder();
-        org.apache.commons.jxpath.ri.compiler.Step step39 = null;
-        org.apache.commons.jxpath.ri.compiler.Step[] stepArray40 = new org.apache.commons.jxpath.ri.compiler.Step[] { step39 };
-        org.apache.commons.jxpath.ri.compiler.LocationPath locationPath41 = new org.apache.commons.jxpath.ri.compiler.LocationPath(false, stepArray40);
-        boolean boolean42 = locationPath41.isAbsolute();
-        org.apache.commons.jxpath.ri.axes.PredicateContext predicateContext43 = new org.apache.commons.jxpath.ri.axes.PredicateContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext36, (org.apache.commons.jxpath.ri.compiler.Expression) locationPath41);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.jxpath.Pointer pointer44 = jXPathContextReferenceImpl18.getPointer("", (org.apache.commons.jxpath.ri.compiler.Expression) locationPath41);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(qName5);
-        org.junit.Assert.assertNotNull(nodePointer9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertNull(obj17);
-        org.junit.Assert.assertNull(jXPathContext19);
-        org.junit.Assert.assertNull(qName24);
-        org.junit.Assert.assertNotNull(nodePointer28);
-        org.junit.Assert.assertNotNull(obj30);
-        org.junit.Assert.assertEquals(obj30.toString(), "/*");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(obj30), "/*");
-        org.junit.Assert.assertEquals(java.util.Objects.toString(obj30), "/*");
-        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 0 + "'", int37 == 0);
-        org.junit.Assert.assertNotNull(stepArray40);
-        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
-    }
-
-    @Test
-    public void test0988() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0988");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
-        java.util.Locale locale2 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
-        org.apache.commons.jxpath.ri.QName qName4 = dynaBeanPointer3.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer8 = dynaBeanPointer3.namespacePointer("");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer10 = dynaBeanPointer3.namespacePointer("$null");
-        org.apache.commons.jxpath.ri.QName qName11 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean12 = null;
-        java.util.Locale locale13 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer14 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName11, dynaBean12, locale13);
-        org.apache.commons.jxpath.ri.QName qName15 = dynaBeanPointer14.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer17 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer14, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext18 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext20 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext18, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer21 = dynaBeanPointer14.createPath(jXPathContext20);
-        java.util.List list23 = jXPathContext20.selectNodes("org.apache.commons.jxpath.JXPathContextFactory");
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer24 = dynaBeanPointer3.createPath(jXPathContext20);
-        java.lang.String str26 = dynaBeanPointer3.getNamespaceURI("*");
-        org.apache.commons.jxpath.ri.QName qName27 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean28 = null;
-        java.util.Locale locale29 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer30 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName27, dynaBean28, locale29);
-        org.apache.commons.jxpath.ri.QName qName31 = dynaBeanPointer30.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer33 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer30, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer35 = jDOMNodePointer33.namespacePointer("hi!");
-        boolean boolean36 = jDOMNodePointer33.isCollection();
-        org.apache.commons.jxpath.ri.QName qName38 = new org.apache.commons.jxpath.ri.QName("");
-        java.lang.Object obj39 = null;
-        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler40 = null;
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer41 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer33, qName38, obj39, dynamicPropertyHandler40);
-        org.apache.commons.jxpath.ri.QName qName43 = new org.apache.commons.jxpath.ri.QName("");
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator44 = dynamicPointer41.attributeIterator(qName43);
-        org.apache.commons.jxpath.ri.model.NodeIterator nodeIterator45 = dynaBeanPointer3.attributeIterator(qName43);
-        boolean boolean46 = dynaBeanPointer3.isCollection();
-        org.junit.Assert.assertNull(qName4);
-        org.junit.Assert.assertNull(nodePointer8);
-        org.junit.Assert.assertNull(nodePointer10);
-        org.junit.Assert.assertNull(qName15);
-        org.junit.Assert.assertNotNull(jXPathContext20);
-        org.junit.Assert.assertNotNull(nodePointer21);
-        org.junit.Assert.assertNotNull(list23);
-        org.junit.Assert.assertNotNull(nodePointer24);
-        org.junit.Assert.assertNull(str26);
-        org.junit.Assert.assertNull(qName31);
-        org.junit.Assert.assertNotNull(nodePointer35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertNotNull(nodeIterator44);
-        org.junit.Assert.assertNotNull(nodeIterator45);
-        org.junit.Assert.assertTrue("'" + boolean46 + "' != '" + false + "'", boolean46 == false);
-    }
-
-    @Test
-    public void test0989() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0989");
-        org.w3c.dom.Node node0 = null;
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
-        java.util.Locale locale3 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, "");
-        boolean boolean7 = jDOMNamespacePointer6.isCollection();
-        java.lang.String str8 = jDOMNamespacePointer6.getNamespaceURI();
-        boolean boolean9 = jDOMNamespacePointer6.isCollection();
-        org.apache.commons.jxpath.ri.QName qName10 = jDOMNamespacePointer6.getName();
-        org.apache.commons.jxpath.ri.QName qName12 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean13 = null;
-        java.util.Locale locale14 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer15 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName12, dynaBean13, locale14);
-        org.apache.commons.jxpath.ri.QName qName16 = dynaBeanPointer15.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer18 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer15, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext19 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext21 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext19, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer22 = dynaBeanPointer15.createPath(jXPathContext21);
-        java.util.Locale locale23 = jXPathContext21.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer24 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale23);
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer25 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName10, locale23);
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer26 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node0, locale23);
-        org.apache.commons.jxpath.ri.QName qName27 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean28 = null;
-        java.util.Locale locale29 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer30 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName27, dynaBean28, locale29);
-        org.apache.commons.jxpath.ri.QName qName31 = dynaBeanPointer30.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer33 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer30, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer35 = dynaBeanPointer30.namespacePointer("");
-        java.lang.Object obj36 = dynaBeanPointer30.getImmediateNode();
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer37 = dynaBeanPointer30.getPropertyPointer();
-        org.apache.commons.jxpath.ri.QName qName38 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean39 = null;
-        java.util.Locale locale40 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer41 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName38, dynaBean39, locale40);
-        org.apache.commons.jxpath.ri.QName qName42 = dynaBeanPointer41.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer44 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer41, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer46 = jDOMNodePointer44.namespacePointer("hi!");
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer47 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer44);
-        java.lang.String[] strArray48 = nullPropertyPointer47.getPropertyNames();
-        boolean boolean49 = nullPropertyPointer47.isContainer();
-        java.lang.String str50 = nullPropertyPointer47.asPath();
-        java.lang.Object obj51 = nullPropertyPointer47.getImmediateNode();
-        java.lang.String str52 = nullPropertyPointer47.getPropertyName();
-        // The following exception was thrown during execution in test generation
-        try {
-            int int53 = dOMNodePointer26.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) propertyPointer37, (org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer47);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertNull(str8);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertNotNull(qName10);
-        org.junit.Assert.assertNull(qName16);
-        org.junit.Assert.assertNotNull(jXPathContext21);
-        org.junit.Assert.assertNotNull(nodePointer22);
-        org.junit.Assert.assertNotNull(locale23);
-        org.junit.Assert.assertEquals(locale23.toString(), "en_US");
-        org.junit.Assert.assertNull(qName31);
-        org.junit.Assert.assertNull(nodePointer35);
-        org.junit.Assert.assertNull(obj36);
-        org.junit.Assert.assertNotNull(propertyPointer37);
-        org.junit.Assert.assertNull(qName42);
-        org.junit.Assert.assertNotNull(nodePointer46);
-        org.junit.Assert.assertNotNull(strArray48);
-        org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + true + "'", boolean49 == true);
-        org.junit.Assert.assertEquals("'" + str50 + "' != '" + "/*" + "'", str50, "/*");
-        org.junit.Assert.assertNull(obj51);
-        org.junit.Assert.assertEquals("'" + str52 + "' != '" + "*" + "'", str52, "*");
-    }
-
-    @Test
-    public void test0990() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0990");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
-        java.util.Locale locale2 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer5 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, "");
-        java.lang.Object obj6 = dynaBeanPointer3.getBaseValue();
-        org.apache.commons.jxpath.ri.model.beans.PropertyPointer propertyPointer7 = dynaBeanPointer3.getPropertyPointer();
-        org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory beanPointerFactory8 = new org.apache.commons.jxpath.ri.model.beans.BeanPointerFactory();
-        org.apache.commons.jxpath.ri.QName qName9 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean10 = null;
-        java.util.Locale locale11 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer12 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName9, dynaBean10, locale11);
-        org.apache.commons.jxpath.ri.QName qName13 = dynaBeanPointer12.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer15 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer12, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer17 = jDOMNodePointer15.namespacePointer("hi!");
-        boolean boolean18 = jDOMNodePointer15.isCollection();
-        org.apache.commons.jxpath.ri.QName qName20 = new org.apache.commons.jxpath.ri.QName("");
-        java.lang.Object obj21 = null;
-        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler22 = null;
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer23 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer15, qName20, obj21, dynamicPropertyHandler22);
-        java.lang.String str24 = qName20.toString();
-        org.apache.commons.jxpath.ri.QName qName25 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean26 = null;
-        java.util.Locale locale27 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer28 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName25, dynaBean26, locale27);
-        org.apache.commons.jxpath.ri.QName qName29 = dynaBeanPointer28.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer31 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer28, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext32 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext34 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext32, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer35 = dynaBeanPointer28.createPath(jXPathContext34);
-        java.util.List list37 = jXPathContext34.selectNodes("org.apache.commons.jxpath.JXPathContextFactory");
-        org.w3c.dom.Node node38 = null;
-        org.apache.commons.jxpath.ri.QName qName39 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean40 = null;
-        java.util.Locale locale41 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer42 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName39, dynaBean40, locale41);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer44 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer42, "");
-        boolean boolean45 = jDOMNamespacePointer44.isCollection();
-        java.lang.String str46 = jDOMNamespacePointer44.getNamespaceURI();
-        boolean boolean47 = jDOMNamespacePointer44.isCollection();
-        org.apache.commons.jxpath.ri.QName qName48 = jDOMNamespacePointer44.getName();
-        org.apache.commons.jxpath.ri.QName qName50 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean51 = null;
-        java.util.Locale locale52 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer53 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName50, dynaBean51, locale52);
-        org.apache.commons.jxpath.ri.QName qName54 = dynaBeanPointer53.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer56 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer53, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext57 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext59 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext57, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer60 = dynaBeanPointer53.createPath(jXPathContext59);
-        java.util.Locale locale61 = jXPathContext59.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer62 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale61);
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer63 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName48, locale61);
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer64 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer(node38, locale61);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer65 = beanPointerFactory8.createNodePointer(qName20, (java.lang.Object) "org.apache.commons.jxpath.JXPathContextFactory", locale61);
-        boolean boolean66 = propertyPointer7.equals((java.lang.Object) beanPointerFactory8);
-        org.apache.commons.jxpath.ri.QName qName67 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean68 = null;
-        java.util.Locale locale69 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer70 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName67, dynaBean68, locale69);
-        org.apache.commons.jxpath.ri.QName qName71 = dynaBeanPointer70.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer73 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer70, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer75 = jDOMNodePointer73.namespacePointer("hi!");
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer76 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer73);
-        java.lang.String[] strArray77 = nullPropertyPointer76.getPropertyNames();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer78 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer76);
-        org.apache.commons.jxpath.ri.QName qName79 = null;
-        org.apache.commons.jxpath.ri.QName qName80 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean81 = null;
-        java.util.Locale locale82 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer83 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName80, dynaBean81, locale82);
-        org.apache.commons.jxpath.ri.QName qName84 = dynaBeanPointer83.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer86 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer83, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext87 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext89 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext87, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer90 = dynaBeanPointer83.createPath(jXPathContext89);
-        java.util.List list92 = jXPathContext89.selectNodes("org.apache.commons.jxpath.JXPathContextFactory");
-        boolean boolean93 = jXPathContext89.isLenient();
-        org.apache.commons.jxpath.AbstractFactory abstractFactory94 = jXPathContext89.getFactory();
-        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler95 = null;
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer96 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer78, qName79, (java.lang.Object) jXPathContext89, dynamicPropertyHandler95);
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.jxpath.ri.model.NodePointer nodePointer97 = propertyPointer7.createPath(jXPathContext89);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(obj6);
-        org.junit.Assert.assertNotNull(propertyPointer7);
-        org.junit.Assert.assertNull(qName13);
-        org.junit.Assert.assertNotNull(nodePointer17);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
-        org.junit.Assert.assertNull(qName29);
-        org.junit.Assert.assertNotNull(jXPathContext34);
-        org.junit.Assert.assertNotNull(nodePointer35);
-        org.junit.Assert.assertNotNull(list37);
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
-        org.junit.Assert.assertNull(str46);
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
-        org.junit.Assert.assertNotNull(qName48);
-        org.junit.Assert.assertNull(qName54);
-        org.junit.Assert.assertNotNull(jXPathContext59);
-        org.junit.Assert.assertNotNull(nodePointer60);
-        org.junit.Assert.assertNotNull(locale61);
-        org.junit.Assert.assertEquals(locale61.toString(), "en_US");
-        org.junit.Assert.assertNotNull(nodePointer65);
-        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + false + "'", boolean66 == false);
-        org.junit.Assert.assertNull(qName71);
-        org.junit.Assert.assertNotNull(nodePointer75);
-        org.junit.Assert.assertNotNull(strArray77);
-        org.junit.Assert.assertNull(qName84);
-        org.junit.Assert.assertNotNull(jXPathContext89);
-        org.junit.Assert.assertNotNull(nodePointer90);
-        org.junit.Assert.assertNotNull(list92);
-        org.junit.Assert.assertTrue("'" + boolean93 + "' != '" + false + "'", boolean93 == false);
-        org.junit.Assert.assertNull(abstractFactory94);
-    }
-
-    @Test
-    public void test0991() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0991");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
-        java.util.Locale locale2 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
-        org.apache.commons.jxpath.ri.QName qName4 = dynaBeanPointer3.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer8 = jDOMNodePointer6.namespacePointer("hi!");
-        boolean boolean9 = jDOMNodePointer6.isCollection();
-        boolean boolean11 = jDOMNodePointer6.equals((java.lang.Object) "");
-        boolean boolean12 = jDOMNodePointer6.isLeaf();
-        java.lang.Object obj13 = jDOMNodePointer6.getValue();
-        org.apache.commons.jxpath.JXPathContext jXPathContext14 = null;
-        org.apache.commons.jxpath.ri.QName qName17 = new org.apache.commons.jxpath.ri.QName("/namespace::$null", "/namespace::$null");
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.jxpath.ri.model.NodePointer nodePointer19 = jDOMNodePointer6.createChild(jXPathContext14, qName17, 5);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(qName4);
-        org.junit.Assert.assertNotNull(nodePointer8);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertNull(obj13);
-    }
-
-    @Test
-    public void test0992() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0992");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
-        java.util.Locale locale2 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
-        org.apache.commons.jxpath.ri.QName qName4 = dynaBeanPointer3.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer8 = jDOMNodePointer6.namespacePointer("hi!");
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer9 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer6);
-        java.lang.String[] strArray10 = nullPropertyPointer9.getPropertyNames();
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer11 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer9);
-        org.w3c.dom.Node node12 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMNodePointer dOMNodePointer13 = new org.apache.commons.jxpath.ri.model.dom.DOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer11, node12);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer14 = dOMNodePointer13.getImmediateParentPointer();
-        org.junit.Assert.assertNull(qName4);
-        org.junit.Assert.assertNotNull(nodePointer8);
-        org.junit.Assert.assertNotNull(strArray10);
-        org.junit.Assert.assertNotNull(nodePointer14);
-    }
-
-    @Test
-    public void test0993() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0993");
-        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest3 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName1, "hi!");
-        org.apache.commons.jxpath.ri.QName qName4 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean5 = null;
-        java.util.Locale locale6 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer7 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName4, dynaBean5, locale6);
-        org.apache.commons.jxpath.ri.QName qName8 = dynaBeanPointer7.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer10 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer7, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer12 = jDOMNodePointer10.namespacePointer("hi!");
-        boolean boolean13 = jDOMNodePointer10.isCollection();
-        boolean boolean15 = jDOMNodePointer10.equals((java.lang.Object) "");
-        boolean boolean16 = jDOMNodePointer10.isLeaf();
-        java.lang.Object obj17 = jDOMNodePointer10.getValue();
-        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) nodeNameTest3, (org.apache.commons.jxpath.Pointer) jDOMNodePointer10);
-        java.lang.String str19 = jXPathContextReferenceImpl18.getDefaultNamespaceURI();
-        java.lang.String str21 = jXPathContextReferenceImpl18.getNamespaceURI("/namespace::hi!");
-        org.apache.commons.jxpath.Pointer pointer22 = jXPathContextReferenceImpl18.getContextPointer();
-        org.apache.commons.jxpath.ri.QName qName23 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean24 = null;
-        java.util.Locale locale25 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer26 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName23, dynaBean24, locale25);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer28 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer26, "");
-        boolean boolean29 = jDOMNamespacePointer28.isCollection();
-        java.lang.String str30 = jDOMNamespacePointer28.getNamespaceURI();
-        boolean boolean31 = jDOMNamespacePointer28.isCollection();
-        org.apache.commons.jxpath.ri.QName qName32 = jDOMNamespacePointer28.getName();
-        jXPathContextReferenceImpl18.setNamespaceContextPointer((org.apache.commons.jxpath.Pointer) jDOMNamespacePointer28);
-        org.apache.commons.jxpath.ri.QName qName34 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean35 = null;
-        java.util.Locale locale36 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer37 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName34, dynaBean35, locale36);
-        org.apache.commons.jxpath.ri.QName qName38 = dynaBeanPointer37.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer40 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer37, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.axes.RootContext rootContext41 = new org.apache.commons.jxpath.ri.axes.RootContext(jXPathContextReferenceImpl18, (org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer40);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer42 = rootContext41.getCurrentNodePointer();
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest43 = null;
-        org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext precedingOrFollowingContext45 = new org.apache.commons.jxpath.ri.axes.PrecedingOrFollowingContext((org.apache.commons.jxpath.ri.EvalContext) rootContext41, nodeTest43, false);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer46 = precedingOrFollowingContext45.getCurrentNodePointer();
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean48 = precedingOrFollowingContext45.setPosition(12);
-            org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer cannot be cast to org.apache.commons.jxpath.ri.model.beans.PropertyPointer");
-        } catch (java.lang.ClassCastException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(qName8);
-        org.junit.Assert.assertNotNull(nodePointer12);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertNull(obj17);
-        org.junit.Assert.assertNull(str19);
-        org.junit.Assert.assertNull(str21);
-        org.junit.Assert.assertNotNull(pointer22);
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-        org.junit.Assert.assertNull(str30);
-        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + false + "'", boolean31 == false);
-        org.junit.Assert.assertNotNull(qName32);
-        org.junit.Assert.assertNull(qName38);
-        org.junit.Assert.assertNotNull(nodePointer42);
-        org.junit.Assert.assertNull(nodePointer46);
-    }
-
-    @Test
-    public void test0994() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0994");
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
-        java.util.Locale locale3 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
-        org.apache.commons.jxpath.ri.QName qName5 = dynaBeanPointer4.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext8 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext10 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext8, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer11 = dynaBeanPointer4.createPath(jXPathContext10);
-        java.util.Locale locale12 = jXPathContext10.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer13 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale12);
-        java.lang.Object obj14 = collectionPointer13.getImmediateNode();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer16 = collectionPointer13.namespacePointer("/namespace::$null");
-        java.lang.Object obj17 = collectionPointer13.getImmediateNode();
-        org.apache.commons.jxpath.JXPathContext jXPathContext18 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext20 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext18, (java.lang.Object) ' ');
-        java.text.DecimalFormatSymbols decimalFormatSymbols22 = jXPathContext20.getDecimalFormatSymbols("/");
-        org.apache.commons.jxpath.Pointer pointer23 = jXPathContext20.getContextPointer();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer24 = null;
-        org.w3c.dom.Attr attr25 = null;
-        org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer dOMAttributePointer26 = new org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer(nodePointer24, attr25);
-        org.apache.commons.jxpath.ri.QName qName27 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean28 = null;
-        java.util.Locale locale29 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer30 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName27, dynaBean28, locale29);
-        org.apache.commons.jxpath.ri.QName qName31 = dynaBeanPointer30.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer33 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer30, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer35 = jDOMNodePointer33.namespacePointer("hi!");
-        boolean boolean36 = jDOMNodePointer33.isCollection();
-        boolean boolean38 = jDOMNodePointer33.equals((java.lang.Object) "");
-        boolean boolean39 = jDOMNodePointer33.isLeaf();
-        org.apache.commons.jxpath.ri.QName qName40 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean41 = null;
-        java.util.Locale locale42 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer43 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName40, dynaBean41, locale42);
-        org.apache.commons.jxpath.ri.QName qName44 = dynaBeanPointer43.getName();
-        java.lang.String str46 = dynaBeanPointer43.getNamespaceURI("");
-        java.lang.Object obj47 = dynaBeanPointer43.getImmediateNode();
-        int int48 = dOMAttributePointer26.compareChildNodePointers((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer33, (org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer43);
-        org.apache.commons.jxpath.ri.QName qName49 = jDOMNodePointer33.getName();
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.jxpath.ri.model.NodePointer nodePointer50 = collectionPointer13.createPath(jXPathContext20, (java.lang.Object) qName49);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(qName5);
-        org.junit.Assert.assertNotNull(jXPathContext10);
-        org.junit.Assert.assertNotNull(nodePointer11);
-        org.junit.Assert.assertNotNull(locale12);
-        org.junit.Assert.assertEquals(locale12.toString(), "en_US");
-        org.junit.Assert.assertEquals("'" + obj14 + "' != '" + (byte) -1 + "'", obj14, (byte) -1);
-        org.junit.Assert.assertNull(nodePointer16);
-        org.junit.Assert.assertEquals("'" + obj17 + "' != '" + (byte) -1 + "'", obj17, (byte) -1);
-        org.junit.Assert.assertNotNull(jXPathContext20);
-        org.junit.Assert.assertNull(decimalFormatSymbols22);
-        org.junit.Assert.assertNotNull(pointer23);
-        org.junit.Assert.assertNull(qName31);
-        org.junit.Assert.assertNotNull(nodePointer35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + true + "'", boolean39 == true);
-        org.junit.Assert.assertNull(qName44);
-        org.junit.Assert.assertNull(str46);
-        org.junit.Assert.assertNull(obj47);
-        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
-        org.junit.Assert.assertNotNull(qName49);
-    }
-
-    @Test
-    public void test0995() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0995");
-        org.apache.commons.jxpath.ri.EvalContext evalContext0 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeTest nodeTest2 = null;
-        org.apache.commons.jxpath.ri.axes.DescendantContext descendantContext3 = new org.apache.commons.jxpath.ri.axes.DescendantContext(evalContext0, false, nodeTest2);
-        int int4 = descendantContext3.getDocumentOrder();
-        int int5 = descendantContext3.getPosition();
-        org.apache.commons.jxpath.ri.QName qName7 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean8 = null;
-        java.util.Locale locale9 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer10 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName7, dynaBean8, locale9);
-        org.apache.commons.jxpath.ri.QName qName11 = dynaBeanPointer10.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer13 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer10, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext14 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext16 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext14, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer17 = dynaBeanPointer10.createPath(jXPathContext16);
-        java.util.Locale locale18 = jXPathContext16.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer19 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale18);
-        java.lang.String str20 = collectionPointer19.asPath();
-        org.apache.commons.jxpath.ri.QName qName21 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest23 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName21, "hi!");
-        boolean boolean24 = collectionPointer19.testNode((org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest23);
-        org.apache.commons.jxpath.ri.axes.AttributeContext attributeContext25 = new org.apache.commons.jxpath.ri.axes.AttributeContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext3, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest23);
-        org.apache.commons.jxpath.ri.EvalContext evalContext27 = null;
-        org.apache.commons.jxpath.ri.QName qName28 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest30 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName28, "hi!");
-        org.apache.commons.jxpath.ri.axes.ChildContext childContext33 = new org.apache.commons.jxpath.ri.axes.ChildContext(evalContext27, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest30, true, true);
-        org.apache.commons.jxpath.ri.axes.AncestorContext ancestorContext34 = new org.apache.commons.jxpath.ri.axes.AncestorContext((org.apache.commons.jxpath.ri.EvalContext) descendantContext3, false, (org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest30);
-        org.junit.Assert.assertTrue("'" + int4 + "' != '" + 0 + "'", int4 == 0);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertNull(qName11);
-        org.junit.Assert.assertNotNull(jXPathContext16);
-        org.junit.Assert.assertNotNull(nodePointer17);
-        org.junit.Assert.assertNotNull(locale18);
-        org.junit.Assert.assertEquals(locale18.toString(), "en_US");
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "/" + "'", str20, "/");
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-    }
-
-    @Test
-    public void test0996() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0996");
-        java.io.Reader reader0 = null;
-        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream4 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader0, (int) '4', 24, 800);
-        java.io.Reader reader5 = null;
-        simpleCharStream4.ReInit(reader5, (int) (short) -1, 11);
-        java.io.Reader reader9 = null;
-        simpleCharStream4.ReInit(reader9);
-        org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager11 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream4);
-        java.io.PrintStream printStream12 = xPathParserTokenManager11.debugStream;
-        // The following exception was thrown during execution in test generation
-        try {
-            xPathParserTokenManager11.SwitchTo(65);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.jxpath.ri.parser.TokenMgrError; message: Error: Ignoring invalid lexical state : 65. State unchanged.");
-        } catch (org.apache.commons.jxpath.ri.parser.TokenMgrError e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(printStream12);
-    }
-
-    @Test
-    public void test0997() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0997");
-        org.apache.commons.jxpath.JXPathContext jXPathContext0 = null;
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
-        java.util.Locale locale3 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
-        org.apache.commons.jxpath.ri.QName qName5 = dynaBeanPointer4.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer9 = jDOMNodePointer7.namespacePointer("hi!");
-        boolean boolean10 = jDOMNodePointer7.isCollection();
-        boolean boolean12 = jDOMNodePointer7.equals((java.lang.Object) "");
-        boolean boolean13 = jDOMNodePointer7.isLeaf();
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer14 = null;
-        org.jdom.Attribute attribute15 = null;
-        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer jDOMAttributePointer16 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer(nodePointer14, attribute15);
-        java.lang.Object obj17 = jDOMAttributePointer16.getBaseValue();
-        org.apache.commons.jxpath.ri.JXPathContextReferenceImpl jXPathContextReferenceImpl18 = new org.apache.commons.jxpath.ri.JXPathContextReferenceImpl(jXPathContext0, (java.lang.Object) boolean13, (org.apache.commons.jxpath.Pointer) jDOMAttributePointer16);
-        org.apache.commons.jxpath.JXPathContext jXPathContext19 = jXPathContextReferenceImpl18.getParentContext();
-        jXPathContextReferenceImpl18.registerNamespace("attribute", "<<unknown namespace>>");
-        // The following exception was thrown during execution in test generation
-        try {
-            org.apache.commons.jxpath.Pointer pointer24 = jXPathContextReferenceImpl18.createPath("http://www.w3.org/2000/xmlns/");
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.jxpath.JXPathInvalidSyntaxException; message: Invalid XPath: 'http://www.w3.org/2000/xmlns/'. Syntax error after: 'http:'");
-        } catch (org.apache.commons.jxpath.JXPathInvalidSyntaxException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(qName5);
-        org.junit.Assert.assertNotNull(nodePointer9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertNull(obj17);
-        org.junit.Assert.assertNull(jXPathContext19);
-    }
-
-    @Test
-    public void test0998() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0998");
-        org.apache.commons.jxpath.ri.QName qName1 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean2 = null;
-        java.util.Locale locale3 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer4 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName1, dynaBean2, locale3);
-        org.apache.commons.jxpath.ri.QName qName5 = dynaBeanPointer4.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer7 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer4, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext8 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext10 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext8, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer11 = dynaBeanPointer4.createPath(jXPathContext10);
-        java.util.Locale locale12 = jXPathContext10.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer13 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale12);
-        java.lang.String str14 = collectionPointer13.asPath();
-        org.apache.commons.jxpath.ri.QName qName15 = null;
-        org.apache.commons.jxpath.ri.compiler.NodeNameTest nodeNameTest17 = new org.apache.commons.jxpath.ri.compiler.NodeNameTest(qName15, "hi!");
-        boolean boolean18 = collectionPointer13.testNode((org.apache.commons.jxpath.ri.compiler.NodeTest) nodeNameTest17);
-        org.apache.commons.jxpath.ri.QName qName19 = collectionPointer13.getName();
-        org.junit.Assert.assertNull(qName5);
-        org.junit.Assert.assertNotNull(jXPathContext10);
-        org.junit.Assert.assertNotNull(nodePointer11);
-        org.junit.Assert.assertNotNull(locale12);
-        org.junit.Assert.assertEquals(locale12.toString(), "en_US");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "/" + "'", str14, "/");
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertNull(qName19);
-    }
-
-    @Test
-    public void test0999() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test0999");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
-        java.util.Locale locale2 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
-        org.apache.commons.jxpath.ri.QName qName4 = dynaBeanPointer3.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer8 = jDOMNodePointer6.namespacePointer("hi!");
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer9 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer6);
-        java.lang.String[] strArray10 = nullPropertyPointer9.getPropertyNames();
-        boolean boolean11 = nullPropertyPointer9.isContainer();
-        int int12 = nullPropertyPointer9.getLength();
-        org.apache.commons.jxpath.ri.QName qName13 = nullPropertyPointer9.getName();
-        org.apache.commons.jxpath.ri.QName qName14 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean15 = null;
-        java.util.Locale locale16 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer17 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName14, dynaBean15, locale16);
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer jDOMNamespacePointer19 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNamespacePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer17, "");
-        boolean boolean20 = jDOMNamespacePointer19.isCollection();
-        java.lang.String str21 = jDOMNamespacePointer19.getNamespaceURI();
-        boolean boolean22 = jDOMNamespacePointer19.isCollection();
-        org.apache.commons.jxpath.ri.QName qName23 = jDOMNamespacePointer19.getName();
-        org.apache.commons.jxpath.ri.QName qName25 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean26 = null;
-        java.util.Locale locale27 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer28 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName25, dynaBean26, locale27);
-        org.apache.commons.jxpath.ri.QName qName29 = dynaBeanPointer28.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer31 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer28, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext32 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext34 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext32, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer35 = dynaBeanPointer28.createPath(jXPathContext34);
-        java.util.Locale locale36 = jXPathContext34.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer37 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale36);
-        org.apache.commons.jxpath.ri.model.beans.NullPointer nullPointer38 = new org.apache.commons.jxpath.ri.model.beans.NullPointer(qName23, locale36);
-        java.lang.String str39 = nullPointer38.asPath();
-        java.io.Reader reader40 = null;
-        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream41 = new org.apache.commons.jxpath.ri.parser.SimpleCharStream(reader40);
-        org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager43 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream41, 0);
-        org.apache.commons.jxpath.ri.parser.SimpleCharStream simpleCharStream44 = null;
-        org.apache.commons.jxpath.ri.parser.XPathParserTokenManager xPathParserTokenManager45 = new org.apache.commons.jxpath.ri.parser.XPathParserTokenManager(simpleCharStream44);
-        java.io.PrintStream printStream46 = xPathParserTokenManager45.debugStream;
-        xPathParserTokenManager43.debugStream = printStream46;
-        boolean boolean48 = nullPointer38.equals((java.lang.Object) xPathParserTokenManager43);
-        org.apache.commons.jxpath.DynamicPropertyHandler dynamicPropertyHandler49 = null;
-        org.apache.commons.jxpath.ri.QName qName51 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean52 = null;
-        java.util.Locale locale53 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer54 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName51, dynaBean52, locale53);
-        org.apache.commons.jxpath.ri.QName qName55 = dynaBeanPointer54.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer57 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer54, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.JXPathContext jXPathContext58 = null;
-        org.apache.commons.jxpath.JXPathContext jXPathContext60 = org.apache.commons.jxpath.JXPathContext.newContext(jXPathContext58, (java.lang.Object) ' ');
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer61 = dynaBeanPointer54.createPath(jXPathContext60);
-        java.util.Locale locale62 = jXPathContext60.getLocale();
-        org.apache.commons.jxpath.ri.model.beans.CollectionPointer collectionPointer63 = new org.apache.commons.jxpath.ri.model.beans.CollectionPointer((java.lang.Object) (byte) -1, locale62);
-        org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer dynamicPointer64 = new org.apache.commons.jxpath.ri.model.dynamic.DynamicPointer(qName13, (java.lang.Object) xPathParserTokenManager43, dynamicPropertyHandler49, locale62);
-        boolean boolean65 = dynamicPointer64.isNode();
-        boolean boolean66 = dynamicPointer64.isCollection();
-        org.junit.Assert.assertNull(qName4);
-        org.junit.Assert.assertNotNull(nodePointer8);
-        org.junit.Assert.assertNotNull(strArray10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
-        org.junit.Assert.assertNotNull(qName13);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNull(str21);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(qName23);
-        org.junit.Assert.assertNull(qName29);
-        org.junit.Assert.assertNotNull(jXPathContext34);
-        org.junit.Assert.assertNotNull(nodePointer35);
-        org.junit.Assert.assertNotNull(locale36);
-        org.junit.Assert.assertEquals(locale36.toString(), "en_US");
-        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "null()" + "'", str39, "null()");
-        org.junit.Assert.assertNotNull(printStream46);
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
-        org.junit.Assert.assertNull(qName55);
-        org.junit.Assert.assertNotNull(jXPathContext60);
-        org.junit.Assert.assertNotNull(nodePointer61);
-        org.junit.Assert.assertNotNull(locale62);
-        org.junit.Assert.assertEquals(locale62.toString(), "en_US");
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + true + "'", boolean65 == true);
-        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + false + "'", boolean66 == false);
-    }
-
-    @Test
-    public void test1000() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest1.test1000");
-        org.apache.commons.jxpath.ri.QName qName0 = null;
-        org.apache.commons.beanutils.DynaBean dynaBean1 = null;
-        java.util.Locale locale2 = null;
-        org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer dynaBeanPointer3 = new org.apache.commons.jxpath.ri.model.dynabeans.DynaBeanPointer(qName0, dynaBean1, locale2);
-        org.apache.commons.jxpath.ri.QName qName4 = dynaBeanPointer3.getName();
-        org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer jDOMNodePointer6 = new org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer((org.apache.commons.jxpath.ri.model.NodePointer) dynaBeanPointer3, (java.lang.Object) (byte) -1);
-        org.apache.commons.jxpath.ri.model.NodePointer nodePointer8 = jDOMNodePointer6.namespacePointer("hi!");
-        org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer nullPropertyPointer9 = new org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer((org.apache.commons.jxpath.ri.model.NodePointer) jDOMNodePointer6);
-        java.lang.Object obj10 = nullPropertyPointer9.getImmediateNode();
-        nullPropertyPointer9.setNameAttributeValue("");
-        org.apache.commons.jxpath.ri.QName qName13 = nullPropertyPointer9.getName();
-        nullPropertyPointer9.setNameAttributeValue("JDOM");
-        org.apache.commons.jxpath.ri.QName qName17 = new org.apache.commons.jxpath.ri.QName("$null");
-        org.apache.commons.jxpath.ri.model.jdom.JDOMAttributeIterator jDOMAttributeIterator18 = new org.apache.commons.jxpath.ri.model.jdom.JDOMAttributeIterator((org.apache.commons.jxpath.ri.model.NodePointer) nullPropertyPointer9, qName17);
-        boolean boolean20 = jDOMAttributeIterator18.setPosition(28);
-        org.junit.Assert.assertNull(qName4);
-        org.junit.Assert.assertNotNull(nodePointer8);
-        org.junit.Assert.assertNull(obj10);
-        org.junit.Assert.assertNotNull(qName13);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
     }
 }
 

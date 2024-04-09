@@ -155,7 +155,7 @@ public class RegressionTest0 {
         com.google.javascript.rhino.jstype.FunctionType functionType80 = jSTypeRegistry52.createFunctionType((com.google.javascript.rhino.jstype.JSType) stringType63, (java.util.List<com.google.javascript.rhino.jstype.JSType>) jSTypeList78);
         com.google.javascript.rhino.jstype.UnionType unionType81 = new com.google.javascript.rhino.jstype.UnionType(jSTypeRegistry37, (java.util.Collection<com.google.javascript.rhino.jstype.JSType>) jSTypeList78);
         com.google.javascript.rhino.jstype.JSType jSType86 = jSTypeRegistry37.createNamedType("Unversioned directory", "RETURN", (int) '#', (-1));
-        jSTypeRegistry2.unregisterPropertyOnType("{({({1411457412},{1525077360},{-1795692850},function (this:{-1850962679}, {1272841832}, {1272841832}): {-1850962679})})}", jSType86);
+        jSTypeRegistry2.unregisterPropertyOnType("{({({804406666},{557170180},{-1795692850},function (this:{-1850962679}, {1405343690}, {1405343690}): {-1850962679})})}", jSType86);
         org.junit.Assert.assertTrue("'" + jSTypeNative3 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID + "'", jSTypeNative3.equals(com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID));
         org.junit.Assert.assertTrue("'" + jSTypeNative4 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID + "'", jSTypeNative4.equals(com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID));
         org.junit.Assert.assertTrue("'" + jSTypeNative5 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.TYPE_ERROR_TYPE + "'", jSTypeNative5.equals(com.google.javascript.rhino.jstype.JSTypeNative.TYPE_ERROR_TYPE));
@@ -242,51 +242,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(dependencyInfoLinkedDirectedGraph8);
         org.junit.Assert.assertNull(dependencyInfoDiGraphNode14);
         org.junit.Assert.assertNull(dependencyInfoDiGraphNode15);
-    }
-
-    @Test
-    public void test5() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test5");
-        com.google.javascript.rhino.ErrorReporter errorReporter0 = null;
-        com.google.javascript.rhino.jstype.JSTypeRegistry jSTypeRegistry2 = new com.google.javascript.rhino.jstype.JSTypeRegistry(errorReporter0, false);
-        com.google.javascript.rhino.jstype.JSTypeNative jSTypeNative3 = com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID;
-        com.google.javascript.rhino.jstype.JSTypeNative jSTypeNative4 = com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID;
-        com.google.javascript.rhino.jstype.JSTypeNative jSTypeNative5 = com.google.javascript.rhino.jstype.JSTypeNative.TYPE_ERROR_TYPE;
-        com.google.javascript.rhino.jstype.JSTypeNative jSTypeNative6 = com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID;
-        com.google.javascript.rhino.jstype.JSTypeNative jSTypeNative7 = com.google.javascript.rhino.jstype.JSTypeNative.REGEXP_FUNCTION_TYPE;
-        com.google.javascript.rhino.jstype.JSTypeNative jSTypeNative8 = com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID;
-        com.google.javascript.rhino.jstype.JSTypeNative[] jSTypeNativeArray9 = new com.google.javascript.rhino.jstype.JSTypeNative[] { jSTypeNative3, jSTypeNative4, jSTypeNative5, jSTypeNative6, jSTypeNative7, jSTypeNative8 };
-        com.google.javascript.rhino.jstype.JSType jSType10 = jSTypeRegistry2.createUnionType(jSTypeNativeArray9);
-        boolean boolean12 = jSTypeRegistry2.isForwardDeclaredType("hi!");
-        com.google.javascript.rhino.jstype.TemplateType templateType14 = new com.google.javascript.rhino.jstype.TemplateType(jSTypeRegistry2, "");
-        com.google.javascript.rhino.jstype.UnionTypeBuilder unionTypeBuilder15 = new com.google.javascript.rhino.jstype.UnionTypeBuilder(jSTypeRegistry2);
-        com.google.javascript.rhino.jstype.JSType jSType20 = jSTypeRegistry2.createNamedType("", "Function", 1, (int) '4');
-        org.junit.Assert.assertTrue("'" + jSTypeNative3 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID + "'", jSTypeNative3.equals(com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID));
-        org.junit.Assert.assertTrue("'" + jSTypeNative4 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID + "'", jSTypeNative4.equals(com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID));
-        org.junit.Assert.assertTrue("'" + jSTypeNative5 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.TYPE_ERROR_TYPE + "'", jSTypeNative5.equals(com.google.javascript.rhino.jstype.JSTypeNative.TYPE_ERROR_TYPE));
-        org.junit.Assert.assertTrue("'" + jSTypeNative6 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID + "'", jSTypeNative6.equals(com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID));
-        org.junit.Assert.assertTrue("'" + jSTypeNative7 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.REGEXP_FUNCTION_TYPE + "'", jSTypeNative7.equals(com.google.javascript.rhino.jstype.JSTypeNative.REGEXP_FUNCTION_TYPE));
-        org.junit.Assert.assertTrue("'" + jSTypeNative8 + "' != '" + com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID + "'", jSTypeNative8.equals(com.google.javascript.rhino.jstype.JSTypeNative.NULL_VOID));
-        org.junit.Assert.assertNotNull(jSTypeNativeArray9);
-        org.junit.Assert.assertNotNull(jSType10);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertNotNull(jSType20);
-    }
-
-    @Test
-    public void test6() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test6");
-        com.google.javascript.jscomp.CompilerOptions compilerOptions0 = new com.google.javascript.jscomp.CompilerOptions();
-        compilerOptions0.setCollapseObjectLiterals(true);
-        com.google.javascript.jscomp.CompilerOptions.TweakProcessing tweakProcessing3 = com.google.javascript.jscomp.CompilerOptions.TweakProcessing.CHECK;
-        compilerOptions0.setTweakProcessing(tweakProcessing3);
-        compilerOptions0.setNameReferenceReportPath("");
-        compilerOptions0.setAliasableGlobals("{proxy:{1869342669}}");
-        boolean boolean9 = compilerOptions0.generateExports;
-        org.junit.Assert.assertTrue("'" + tweakProcessing3 + "' != '" + com.google.javascript.jscomp.CompilerOptions.TweakProcessing.CHECK + "'", tweakProcessing3.equals(com.google.javascript.jscomp.CompilerOptions.TweakProcessing.CHECK));
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
     }
 }
 

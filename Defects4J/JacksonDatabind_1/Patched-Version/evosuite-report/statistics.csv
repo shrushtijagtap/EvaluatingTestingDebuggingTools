@@ -1,2 +1,2 @@
 TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
-com.fasterxml.jackson.databind.ser.BeanPropertyWriter,BRANCH,0.575,120,69
+com.fasterxml.jackson.databind.ser.BeanPropertyWriter,BRANCH,0.6916666666666667,120,82

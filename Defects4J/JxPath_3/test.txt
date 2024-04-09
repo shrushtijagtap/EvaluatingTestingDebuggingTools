@@ -1,1 +1,2 @@
-org.apache.commons.jxpath.ri.model.beans.BadlyImplementedFactoryTest.testBadFactoryImplementation
+org.apache.commons.jxpath.ri.model.beans.EvosuiteNullPropertyPointer_ESTest.test03
+org.apache.commons.jxpath.ri.model.beans.EvosuiteNullPropertyPointer_ESTest.test08

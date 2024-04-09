@@ -26,35 +26,35 @@ def run_test(version_path, zippath, bname):
         failed_bug.append(bname)
 
 
-def compress_and_rename(root_dir, pname):
-    # Constructing the source directory path
-    project_name, id = pname.split("_")
-    source_dir = os.path.join(root_dir, "evosuite-tests")
+# def compress_and_rename(root_dir, pname):
+#     # Constructing the source directory path
+#     project_name, id = pname.split("_")
+#     source_dir = os.path.join(root_dir, "evosuite-tests")
     
-    if "Buggy-Version" in str(root_dir):
-        project_id = id + "b"
-    else:
-        project_id = id + "f"
+#     if "Buggy-Version" in str(root_dir):
+#         project_id = id + "b"
+#     else:
+#         project_id = id + "f"
     
-    # Constructing the destination file name
-    dest_filename = f"{project_name}-{project_id}-evosuite.1.tar.bz2"
+#     # Constructing the destination file name
+#     dest_filename = f"{project_name}-{project_id}-evosuite.1.tar.bz2"
     
-    # Constructing the destination file path
-    dest_path = os.path.join(source_dir, dest_filename)
-    #print("dest_path: ", dest_path)
-    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+#     # Constructing the destination file path
+#     dest_path = os.path.join(source_dir, dest_filename)
+#     #print("dest_path: ", dest_path)
+#     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
 
-    # Creating a tar.bz2 file
-    with tarfile.open(dest_path, "w:bz2") as tar:
-        tar.add(source_dir, arcname=os.path.basename(source_dir))
+#     # Creating a tar.bz2 file
+#     with tarfile.open(dest_path, "w:bz2") as tar:
+#         tar.add(source_dir, arcname=os.path.basename(source_dir))
     
-    #print(f"Compression and renaming completed. File saved as: {dest_path}")
-    return dest_filename
+#     #print(f"Compression and renaming completed. File saved as: {dest_path}")
+#     return dest_filename
 
 
 if __name__ == '__main__':
         # Root path for the dataset
-        dataset_path = Path("/Users/shrushtijagtap/uiuc/Spring2024/CS527/Temp_test")
+        dataset_path = Path("/Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/Temp")
         version = ["Buggy-Version", "Patched-Version"]
         dpath = str(dataset_path)
 
@@ -68,8 +68,10 @@ if __name__ == '__main__':
             version_path_buggy = dpath + "/" + bug.name + "/" + version[0]
             version_path_fixed = dpath + "/" + bug.name + "/" + version[1]
 
-            evo_tarname_buggy = compress_and_rename(version_path_buggy, bug.name)
-            evo_tarname_fixed = compress_and_rename(version_path_fixed, bug.name)
+            name, id = bug.name.split("_")
+            evo_tarname_buggy = name+"-"+id+"b-evosuite.1.tar.bz2"
+            evo_tarname_fixed = name+"-"+id+"f-evosuite.1.tar.bz2"
+
             rp_tarname_buggy = evo_tarname_buggy.replace("evosuite", "randoop")
             rp_tarname_fixed = evo_tarname_fixed.replace("evosuite", "randoop")
             # print("evo tarname buggy: ", evo_tarname_buggy, "evo tarname fixed: ", evo_tarname_fixed)

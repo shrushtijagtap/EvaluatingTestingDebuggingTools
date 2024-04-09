@@ -1,6 +1,11 @@
-org.apache.commons.math3.fraction.BigFractionTest.testDigitLimitConstructor
-org.apache.commons.math3.fraction.FractionTest.testDigitLimitConstructor
+org.apache.commons.math3.fraction.EvosuiteBigFraction_ESTest.test13
+org.apache.commons.math3.fraction.EvosuiteBigFraction_ESTest.test52
+org.apache.commons.math3.fraction.EvosuiteFraction_ESTest.test21
 org.apache.commons.math3.fraction.RandoopRegressionTest0.test0035
-org.apache.commons.math3.fraction.RandoopRegressionTest1.test0609
-org.apache.commons.math3.fraction.RandoopRegressionTest1.test0675
-org.apache.commons.math3.fraction.RandoopRegressionTest2.test1098
+org.apache.commons.math3.fraction.RandoopRegressionTest1.test0603
+org.apache.commons.math3.fraction.RandoopRegressionTest1.test0669
+org.apache.commons.math3.fraction.RandoopRegressionTest2.test1081
+org.apache.commons.math3.fraction.RandoopRegressionTest0.test0035
+org.apache.commons.math3.fraction.RandoopRegressionTest1.test0603
+org.apache.commons.math3.fraction.RandoopRegressionTest1.test0669
+org.apache.commons.math3.fraction.RandoopRegressionTest2.test1081

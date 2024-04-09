@@ -1,2 +1,0 @@
-org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java
-org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java

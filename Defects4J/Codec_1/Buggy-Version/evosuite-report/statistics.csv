@@ -1,0 +1,4 @@
+TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
+org.apache.commons.codec.language.Caverphone,BRANCH,1.0,9,9
+org.apache.commons.codec.language.Metaphone,BRANCH,0.9715639810426541,211,204
+org.apache.commons.codec.language.SoundexUtils,BRANCH,1.0,20,20

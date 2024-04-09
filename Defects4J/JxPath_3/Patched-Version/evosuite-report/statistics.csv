@@ -1,2 +1,2 @@
 TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
-org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer,LINE;BRANCH;EXCEPTION;WEAKMUTATION;OUTPUT;METHOD;METHODNOEXCEPTION;CBRANCH,0.8403160047514731,558,464
+org.apache.commons.jxpath.ri.model.beans.NullPropertyPointer,BRANCH,0.9622641509433962,53,51

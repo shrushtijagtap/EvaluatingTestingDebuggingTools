@@ -1,2 +1,2 @@
 TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
-org.jfree.chart.renderer.category.AbstractCategoryItemRenderer,LINE;BRANCH;EXCEPTION;WEAKMUTATION;OUTPUT;METHOD;METHODNOEXCEPTION;CBRANCH,0.5952647489246764,2383,1165
+org.jfree.chart.renderer.category.AbstractCategoryItemRenderer,BRANCH,0.6788321167883211,274,186

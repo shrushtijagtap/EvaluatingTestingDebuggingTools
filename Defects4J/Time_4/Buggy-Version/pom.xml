@@ -542,6 +542,14 @@
       <version>3.8.2</version>
       <scope>test</scope>
     </dependency>
+    <!-- Evosuite -->
+    <dependency>
+      <groupId>org.evosuite</groupId>
+      <artifactId>evosuite-standalone-runtime</artifactId>
+      <version>1.2.0</version>
+      <scope>system</scope>
+      <systemPath>/Users/shrushtijagtap/uiuc/Spring2024/CS527/evosuite-standalone-runtime-1.2.0.jar</systemPath>
+    </dependency>
   </dependencies>
 
   <!-- ==================================================================== -->

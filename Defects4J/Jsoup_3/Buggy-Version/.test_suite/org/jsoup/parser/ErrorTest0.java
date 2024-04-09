@@ -2248,37 +2248,5 @@ public class ErrorTest0 {
         // during test generation this statement threw an exception of type java.lang.NullPointerException in error
         java.lang.Integer int3 = document2.siblingIndex();
     }
-
-    @Test
-    public void test119() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "ErrorTest0.test119");
-        org.jsoup.nodes.Document document1 = new org.jsoup.nodes.Document("hi!");
-        org.jsoup.nodes.Document document3 = new org.jsoup.nodes.Document("hi!");
-        org.jsoup.select.Elements elements5 = document3.getElementsByTag("hi!");
-        org.jsoup.select.Elements elements6 = elements5.parents();
-        org.jsoup.nodes.Document document8 = new org.jsoup.nodes.Document("hi!");
-        org.jsoup.select.Elements elements10 = document8.getElementsByTag("hi!");
-        boolean boolean11 = elements6.addAll((java.util.Collection<org.jsoup.nodes.Element>) elements10);
-        boolean boolean12 = document1.equals((java.lang.Object) elements6);
-        java.lang.String str13 = document1.toString();
-        org.jsoup.nodes.Element element15 = document1.addClass("");
-        org.jsoup.nodes.Element element17 = document1.createElement("hi!");
-        java.lang.String str18 = element17.baseUri();
-        org.jsoup.nodes.Element element20 = element17.addClass("");
-        org.jsoup.nodes.Element element21 = element20.parent();
-        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
-        org.jsoup.nodes.Node node22 = element20.nextSibling();
-    }
-
-    @Test
-    public void test120() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "ErrorTest0.test120");
-        org.jsoup.nodes.TextNode textNode2 = org.jsoup.nodes.TextNode.createFromEncoded("\n<!--#root-->", "");
-        org.jsoup.nodes.TextNode textNode4 = textNode2.text("<#root class=\"\">\n</#root>");
-        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
-        java.lang.Integer int5 = textNode4.siblingIndex();
-    }
 }
 

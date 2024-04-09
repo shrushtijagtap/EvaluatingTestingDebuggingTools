@@ -711,7 +711,7 @@ public class RandoopErrorTest0 {
         boolean boolean7 = hashCodeAndEqualsSafeSet2.contains((java.lang.Object) true);
         org.mockito.internal.creation.MockSettingsImpl<java.lang.reflect.GenericDeclaration> genericDeclarationMockSettingsImpl8 = new org.mockito.internal.creation.MockSettingsImpl<java.lang.reflect.GenericDeclaration>();
         boolean boolean9 = hashCodeAndEqualsSafeSet2.contains((java.lang.Object) genericDeclarationMockSettingsImpl8);
-        java.lang.String[] strArray14 = new java.lang.String[] { "[]", "[]", "[HashCodeAndEqualsMockWrapper{mockInstance=CallsRealMethods(614779293)}]", "[HashCodeAndEqualsMockWrapper{mockInstance=CallsRealMethods(614779293)}]" };
+        java.lang.String[] strArray14 = new java.lang.String[] { "[]", "[]", "[HashCodeAndEqualsMockWrapper{mockInstance=CallsRealMethods(216157735)}]", "[HashCodeAndEqualsMockWrapper{mockInstance=CallsRealMethods(216157735)}]" };
         java.lang.String[] strArray15 = hashCodeAndEqualsSafeSet2.toArray(strArray14);
         java.lang.Object obj16 = null;
         boolean boolean17 = hashCodeAndEqualsSafeSet2.remove(obj16);
@@ -1034,7 +1034,7 @@ public class RandoopErrorTest0 {
         org.mockito.internal.debugging.LocationImpl locationImpl19 = new org.mockito.internal.debugging.LocationImpl();
         org.mockito.invocation.MockHandler mockHandler20 = cglibMockMaker8.getHandler((java.lang.Object) locationImpl19);
         // during test generation this statement threw an exception of type org.mockito.exceptions.verification.junit.ArgumentsAreDifferent in error
-        reporter0.argumentsAreDifferent("[HashCodeAndEqualsMockWrapper{mockInstance=CallsRealMethods(1673836778)}]", "\n[]\n1.0\norg.mockito.exceptions.verification.WantedButNotInvoked: hi!\nclass org.mockito.exceptions.misusing.CannotStubVoidMethodWithReturnValue\norg.mockito.exceptions.misusing.NotAMockException: \n", (org.mockito.invocation.Location) locationImpl19);
+        reporter0.argumentsAreDifferent("[HashCodeAndEqualsMockWrapper{mockInstance=CallsRealMethods(975950141)}]", "\n[]\n1.0\norg.mockito.exceptions.verification.WantedButNotInvoked: hi!\nclass org.mockito.exceptions.misusing.CannotStubVoidMethodWithReturnValue\norg.mockito.exceptions.misusing.NotAMockException: \n", (org.mockito.invocation.Location) locationImpl19);
     }
 
     @Test
@@ -1089,6 +1089,52 @@ public class RandoopErrorTest0 {
         org.mockito.exceptions.Reporter reporter1 = org.mockito.Mockito.spy(reporter0);
         // during test generation this statement threw an exception of type org.mockito.exceptions.base.MockitoAssertionError in error
         reporter1.wantedAtMostX((int) '4', (int) (byte) 10);
+    }
+
+    @Test
+    public void test37() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopErrorTest0.test37");
+        org.mockito.internal.progress.ThreadSafeMockingProgress threadSafeMockingProgress0 = new org.mockito.internal.progress.ThreadSafeMockingProgress();
+        org.mockito.internal.listeners.MockingProgressListener mockingProgressListener1 = null;
+        threadSafeMockingProgress0.setListener(mockingProgressListener1);
+        org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet hashCodeAndEqualsSafeSet3 = new org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet();
+        java.util.Iterator<java.lang.Object> objItor4 = hashCodeAndEqualsSafeSet3.iterator();
+        org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet hashCodeAndEqualsSafeSet6 = org.mockito.internal.util.Checks.checkItemsNotNull(hashCodeAndEqualsSafeSet3, "");
+        boolean boolean8 = hashCodeAndEqualsSafeSet3.contains((java.lang.Object) true);
+        org.mockito.internal.creation.MockSettingsImpl<java.lang.reflect.GenericDeclaration> genericDeclarationMockSettingsImpl9 = new org.mockito.internal.creation.MockSettingsImpl<java.lang.reflect.GenericDeclaration>();
+        boolean boolean10 = hashCodeAndEqualsSafeSet3.contains((java.lang.Object) genericDeclarationMockSettingsImpl9);
+        org.mockito.MockSettings mockSettings12 = genericDeclarationMockSettingsImpl9.name("hi!");
+        java.lang.String str13 = genericDeclarationMockSettingsImpl9.getName();
+        org.mockito.internal.stubbing.InvocationContainerImpl invocationContainerImpl14 = new org.mockito.internal.stubbing.InvocationContainerImpl((org.mockito.internal.progress.MockingProgress) threadSafeMockingProgress0, (org.mockito.mock.MockCreationSettings) genericDeclarationMockSettingsImpl9);
+        java.util.List<org.mockito.invocation.Invocation> invocationList15 = invocationContainerImpl14.getInvocations();
+        java.util.List<org.mockito.internal.stubbing.StubbedInvocationMatcher> stubbedInvocationMatcherList16 = invocationContainerImpl14.getStubbedInvocations();
+        java.lang.String str17 = invocationContainerImpl14.toString();
+        java.util.List<org.mockito.internal.stubbing.StubbedInvocationMatcher> stubbedInvocationMatcherList18 = invocationContainerImpl14.getStubbedInvocations();
+        org.mockito.internal.progress.ThreadSafeMockingProgress threadSafeMockingProgress19 = new org.mockito.internal.progress.ThreadSafeMockingProgress();
+        org.mockito.internal.listeners.MockingProgressListener mockingProgressListener20 = null;
+        threadSafeMockingProgress19.setListener(mockingProgressListener20);
+        org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet hashCodeAndEqualsSafeSet22 = new org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet();
+        java.util.Iterator<java.lang.Object> objItor23 = hashCodeAndEqualsSafeSet22.iterator();
+        org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet hashCodeAndEqualsSafeSet25 = org.mockito.internal.util.Checks.checkItemsNotNull(hashCodeAndEqualsSafeSet22, "");
+        boolean boolean27 = hashCodeAndEqualsSafeSet22.contains((java.lang.Object) true);
+        org.mockito.internal.creation.MockSettingsImpl<java.lang.reflect.GenericDeclaration> genericDeclarationMockSettingsImpl28 = new org.mockito.internal.creation.MockSettingsImpl<java.lang.reflect.GenericDeclaration>();
+        boolean boolean29 = hashCodeAndEqualsSafeSet22.contains((java.lang.Object) genericDeclarationMockSettingsImpl28);
+        org.mockito.MockSettings mockSettings31 = genericDeclarationMockSettingsImpl28.name("hi!");
+        java.lang.String str32 = genericDeclarationMockSettingsImpl28.getName();
+        org.mockito.internal.stubbing.InvocationContainerImpl invocationContainerImpl33 = new org.mockito.internal.stubbing.InvocationContainerImpl((org.mockito.internal.progress.MockingProgress) threadSafeMockingProgress19, (org.mockito.mock.MockCreationSettings) genericDeclarationMockSettingsImpl28);
+        java.util.List<org.mockito.invocation.Invocation> invocationList34 = invocationContainerImpl33.getInvocations();
+        java.util.List<org.mockito.internal.stubbing.StubbedInvocationMatcher> stubbedInvocationMatcherList35 = invocationContainerImpl33.getStubbedInvocations();
+        org.mockito.internal.stubbing.OngoingStubbingImpl<org.mockito.internal.verification.VerificationModeFactory> verificationModeFactoryOngoingStubbingImpl36 = new org.mockito.internal.stubbing.OngoingStubbingImpl<org.mockito.internal.verification.VerificationModeFactory>(invocationContainerImpl33);
+        org.mockito.invocation.Invocation invocation37 = null;
+        org.mockito.mock.SerializableMode serializableMode38 = org.mockito.mock.SerializableMode.NONE;
+        org.mockito.mock.SerializableMode[] serializableModeArray39 = new org.mockito.mock.SerializableMode[] { serializableMode38 };
+        java.util.Set<org.mockito.mock.SerializableMode> serializableModeSet40 = org.mockito.internal.util.collections.Sets.newSet(serializableModeArray39);
+        java.util.List<org.hamcrest.Matcher> matcherList41 = org.mockito.internal.invocation.ArgumentsProcessor.argumentsToMatchers((java.lang.Object[]) serializableModeArray39);
+        org.mockito.internal.invocation.InvocationMatcher invocationMatcher42 = new org.mockito.internal.invocation.InvocationMatcher(invocation37, matcherList41);
+        invocationContainerImpl33.resetInvocationForPotentialStubbing(invocationMatcher42);
+        // during test generation this statement threw an exception of type java.lang.AssertionError in error
+        invocationContainerImpl14.setMethodForStubbing(invocationMatcher42);
     }
 }
 

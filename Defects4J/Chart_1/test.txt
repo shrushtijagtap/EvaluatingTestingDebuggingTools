@@ -1,1 +1,2 @@
-org.jfree.chart.renderer.category.junit.AbstractCategoryItemRendererTests.test2947660
+org.jfree.chart.renderer.category.junit.EvosuiteAbstractCategoryItemRenderer_ESTest.test76
+org.jfree.chart.renderer.category.junit.EvosuiteAbstractCategoryItemRenderer_ESTest.test04

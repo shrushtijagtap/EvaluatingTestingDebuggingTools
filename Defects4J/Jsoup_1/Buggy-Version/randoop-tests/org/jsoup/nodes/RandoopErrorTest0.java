@@ -1972,34 +1972,5 @@ public class RandoopErrorTest0 {
         // during test generation this statement threw an exception of type java.lang.NullPointerException in error
         org.jsoup.nodes.Element element17 = document4.nextElementSibling();
     }
-
-    @Test
-    public void test108() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopErrorTest0.test108");
-        org.jsoup.nodes.Document document2 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node3 = document2.parentNode;
-        org.jsoup.select.Elements elements5 = document2.getElementsByIndexLessThan((int) 'a');
-        java.lang.String str6 = document2.text();
-        org.jsoup.select.Elements elements9 = document2.getElementsByAttributeValueNot("hi=\"\"", "<html>\n<head>\n</head>\n<body> hi!\n</body>\n</html>");
-        int int11 = elements9.lastIndexOf((java.lang.Object) 'a');
-        org.jsoup.select.Elements elements13 = elements9.addClass("");
-        org.jsoup.nodes.Evaluator.Tag tag15 = new org.jsoup.nodes.Evaluator.Tag("#document");
-        org.jsoup.nodes.Evaluator.IndexLessThan indexLessThan17 = new org.jsoup.nodes.Evaluator.IndexLessThan((int) (byte) -1);
-        org.jsoup.nodes.Document document20 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node21 = document20.parentNode;
-        org.jsoup.select.Elements elements23 = document20.getElementsByIndexLessThan((int) 'a');
-        boolean boolean24 = indexLessThan17.matches((org.jsoup.nodes.Element) document20);
-        org.jsoup.nodes.Document document27 = org.jsoup.parser.Parser.parse("hi!", "hi!");
-        org.jsoup.nodes.Node node28 = document27.parentNode;
-        org.jsoup.select.Elements elements29 = document27.getAllElements();
-        org.jsoup.select.Elements elements30 = org.jsoup.select.Collector.collect((org.jsoup.nodes.Evaluator) indexLessThan17, (org.jsoup.nodes.Element) document27);
-        boolean boolean31 = tag15.matches((org.jsoup.nodes.Element) document27);
-        document27.baseUri = "hi=\"\"";
-        org.jsoup.nodes.Element element35 = document27.appendText("");
-        boolean boolean36 = elements13.add(element35);
-        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
-        org.jsoup.nodes.Node node37 = element35.previousSibling();
-    }
 }
 

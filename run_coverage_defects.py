@@ -28,16 +28,17 @@ def run_test(version_path, zippath, bname, output_dir, vname):
         failed_bug.append(bname)
 
 
+def create_coverage_dirs(output_dir):
+    coverage_types = ["Buggy-version-Randoop", "Buggy-version-Evosuite",
+                      "Patched-version-Randoop", "Patched-version-Evosuite", "Buggy-version-All", "Patched-version-All"]
+    for coverage_type in coverage_types:
+        os.makedirs(os.path.join(output_dir, coverage_type), exist_ok=True)
+
+
 def run_coverage_all(version_path, bname, output_dir, vname):
-    # command0 = ["defects4j", 'compile', '-w', version_path]
-    # command = ["defects4j", 'test', '-w', version_path, '-r']
     command1 = ["defects4j", 'coverage', '-w', version_path, '-r']
     print("\n")
     try:
-        # subprocess.run(command0, check=True, cwd=version_path, capture_output=True)
-        # print("ran command0: ", command0)
-        # subprocess.run(command, check=True, cwd=version_path, capture_output=True)
-        # print("ran command: ", command)
         result = subprocess.run(command1, check=True, cwd=version_path, capture_output=True)
         print("ran command1: ", command1)
         print(result.stdout)
@@ -64,7 +65,6 @@ def getname(root_dir, pname):
 
 
 def copy_files_to_coverage(source_paths, destination_folder):
-    os.makedirs(destination_folder, exist_ok=True)
     for source_path in source_paths:
         shutil.copy(source_path, destination_folder)
 
@@ -80,50 +80,53 @@ def move_or_copy_file(source, destination):
 
 
 if __name__ == '__main__':
-        # Root path for the dataset
-        dataset_path = Path("/Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J")
-        version = ["Buggy-Version", "Patched-Version"]
-        dpath = str(dataset_path)
+    # Root path for the dataset
+    dataset_path = Path("/Users/shrushtijagtap/uiuc/Spring2024/CS527/project_git/CS527-Project/Defects4J")
+    version = ["Buggy-Version", "Patched-Version"]
+    dpath = str(dataset_path)
 
-        for bug in dataset_path.iterdir():
-            print("*******************", bug.name,"***********************")
+    for bug in dataset_path.iterdir():
+        print("*******************", bug.name, "***********************")
 
-            if not bug.is_dir() or bug.name == "results":
-                print("skipping")
-                continue
+        if not bug.is_dir() or bug.name == "results" or bug.name == "Math_3":
+            print("skipping")
+            continue
 
-            version_path_buggy = dpath + "/" + bug.name + "/" + version[0]
-            version_path_fixed = dpath + "/" + bug.name + "/" + version[1]
+        version_path_buggy = dpath + "/" + bug.name + "/" + version[0]
+        version_path_fixed = dpath + "/" + bug.name + "/" + version[1]
 
-            evo_tar_buggy = getname(version_path_buggy, bug.name)
-            evo_tar_fixed = getname(version_path_fixed, bug.name)
-            rp_tar_buggy = evo_tar_buggy.replace("evosuite", "randoop")
-            rp_tar_fixed = evo_tar_fixed.replace("evosuite", "randoop")
-            
-            op_dir = dpath + "/" + bug.name + "/Coverage"
-            os.makedirs(op_dir, exist_ok=True)  # Create the 'Coverage' directory if it doesn't exist
+        op_dir = dpath + "/" + bug.name + "/Coverage"
+        create_coverage_dirs(op_dir)
 
-            generated_files = []
-            if os.path.exists(evo_tar_buggy):
-                run_test(version_path_buggy, evo_tar_buggy, bug.name, op_dir, "Buggy-version-Evosuite")
-                generated_files.append(evo_tar_buggy)
-            if os.path.exists(rp_tar_buggy):
-                run_test(version_path_buggy, rp_tar_buggy, bug.name, op_dir, "Buggy-version-Randoop")
-                generated_files.append(rp_tar_buggy)
-            if os.path.exists(evo_tar_fixed):
-                run_test(version_path_fixed, evo_tar_fixed, bug.name, op_dir, "Patched-version-Evosuite")
-                generated_files.append(evo_tar_fixed)
-            if os.path.exists(rp_tar_fixed):
-                run_test(version_path_fixed, rp_tar_fixed, bug.name, op_dir, "Patched-version-Randoop")
-                generated_files.append(rp_tar_fixed)
+        evo_tar_buggy = getname(version_path_buggy, bug.name)
+        evo_tar_fixed = getname(version_path_fixed, bug.name)
+        rp_tar_buggy = evo_tar_buggy.replace("evosuite", "randoop")
+        rp_tar_fixed = evo_tar_fixed.replace("evosuite", "randoop")
 
-            # run_coverage_all(version_path_buggy, bug.name, op_dir, "Buggy-version-All")
-            # run_coverage_all(version_path_fixed, bug.name, op_dir, "Patched-version-All")
+        generated_files = []
+        if os.path.exists(evo_tar_buggy):
+            run_test(version_path_buggy, evo_tar_buggy, bug.name, os.path.join(op_dir, "Buggy-version-Evosuite"),
+                     "Buggy-version-Evosuite")
+            generated_files.append(evo_tar_buggy)
+        if os.path.exists(rp_tar_buggy):
+            run_test(version_path_buggy, rp_tar_buggy, bug.name, os.path.join(op_dir, "Buggy-version-Randoop"),
+                     "Buggy-version-Randoop")
+            generated_files.append(rp_tar_buggy)
+        if os.path.exists(evo_tar_fixed):
+            run_test(version_path_fixed, evo_tar_fixed, bug.name, os.path.join(op_dir, "Patched-version-Evosuite"),
+                     "Patched-version-Evosuite")
+            generated_files.append(evo_tar_fixed)
+        if os.path.exists(rp_tar_fixed):
+            run_test(version_path_fixed, rp_tar_fixed, bug.name, os.path.join(op_dir, "Patched-version-Randoop"),
+                     "Patched-version-Randoop")
+            generated_files.append(rp_tar_fixed)
 
-            print("\n")
+        run_coverage_all(version_path_buggy, bug.name, os.path.join(op_dir, "Buggy-version-All"), "Buggy-version-All")
+        run_coverage_all(version_path_fixed, bug.name, os.path.join(op_dir, "Patched-version-All"), "Patched-version-All")
 
-            
-            copy_files_to_coverage(generated_files, "Coverage")
+        print("\n")
+
+        copy_files_to_coverage(generated_files, op_dir)
 
 
-        print("Failed bugs: ", failed_bug)
+    print("Failed bugs: ", failed_bug)

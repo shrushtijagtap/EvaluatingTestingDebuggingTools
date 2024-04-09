@@ -122,7 +122,7 @@ public class RandoopRegressionTest0 {
         // The following exception was thrown during execution in test generation
         try {
             com.fasterxml.jackson.databind.node.ContainerNode<com.fasterxml.jackson.databind.node.ArrayNode> arrayNodeContainerNode37 = objectMapper0.valueToTree((java.lang.Object) impl30);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: (was java.lang.NullPointerException) (through reference chain: com.fasterxml.jackson.databind.ser.Impl[\"typeFactory\"])");
+            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: (was java.lang.NullPointerException) (through reference chain: com.fasterxml.jackson.databind.ser.Impl[\"filterProvider\"])");
         } catch (java.lang.IllegalArgumentException e) {
         // Expected exception.
         }

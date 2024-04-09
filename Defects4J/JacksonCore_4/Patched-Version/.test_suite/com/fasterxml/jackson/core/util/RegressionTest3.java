@@ -17,6 +17,623 @@ public class RegressionTest3 {
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
         com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory4.setRootValueSeparator("true");
+        com.fasterxml.jackson.core.Version version7 = jsonFactory4.version();
+        com.fasterxml.jackson.core.Version version8 = jsonFactory4.version();
+        java.io.InputStream inputStream9 = null;
+        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory4.createJsonParser(inputStream9);
+        int int11 = jsonParser10.getCurrentTokenId();
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonFactory6);
+        org.junit.Assert.assertNotNull(version7);
+        org.junit.Assert.assertNotNull(version8);
+        org.junit.Assert.assertNotNull(jsonParser10);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+    }
+
+    @Test
+    public void test1502() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1502");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
+        textBuffer1.resetWithEmpty();
+        int int3 = textBuffer1.size();
+        java.lang.String str4 = textBuffer1.contentsAsString();
+        java.lang.String str5 = textBuffer1.contentsAsString();
+        char[] charArray6 = textBuffer1.contentsAsArray();
+        textBuffer1.resetWithString("false");
+        java.lang.String str9 = textBuffer1.toString();
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "" + "'", str5, "");
+        org.junit.Assert.assertNotNull(charArray6);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray6), "");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray6), "");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray6), "[]");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "false" + "'", str9, "false");
+    }
+
+    @Test
+    public void test1503() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1503");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
+        textBuffer1.resetWithEmpty();
+        textBuffer1.resetWithEmpty();
+        textBuffer1.setCurrentLength((int) (short) 1);
+        boolean boolean6 = textBuffer1.hasTextAsCharacters();
+        // The following exception was thrown during execution in test generation
+        try {
+            double double7 = textBuffer1.contentsAsDouble();
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
+    }
+
+    @Test
+    public void test1504() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1504");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        long long7 = jsonParser6.getValueAsLong();
+        java.lang.Object obj8 = jsonParser6.getTypeId();
+        jsonParser6.clearCurrentToken();
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
+        org.junit.Assert.assertNull(obj8);
+    }
+
+    @Test
+    public void test1505() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1505");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        jsonParser6.close();
+        java.lang.Object obj8 = jsonParser6.getTypeId();
+        long long10 = jsonParser6.nextLongValue((long) (byte) 0);
+        java.lang.String str11 = jsonParser6.nextTextValue();
+        boolean boolean12 = jsonParser6.isClosed();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec13 = jsonParser6.getCodec();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory14.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken17 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean18 = jsonToken17.isBoolean();
+        byte[] byteArray19 = jsonToken17.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser20 = jsonFactory16.createJsonParser(byteArray19);
+        int int21 = jsonParser20.getTextOffset();
+        boolean boolean22 = jsonParser20.getValueAsBoolean();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory23.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken26 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean27 = jsonToken26.isBoolean();
+        byte[] byteArray28 = jsonToken26.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser29 = jsonFactory25.createJsonParser(byteArray28);
+        jsonParser29.close();
+        java.lang.Object obj31 = jsonParser29.getEmbeddedObject();
+        boolean boolean32 = jsonParser29.hasTextCharacters();
+        com.fasterxml.jackson.core.JsonLocation jsonLocation33 = jsonParser29.getCurrentLocation();
+        double double35 = jsonParser29.getValueAsDouble((double) '4');
+        java.lang.String str36 = jsonParser29.nextTextValue();
+        com.fasterxml.jackson.core.JsonParser.Feature feature37 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES;
+        com.fasterxml.jackson.core.JsonParser jsonParser39 = jsonParser29.configure(feature37, false);
+        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonParser20.enable(feature37);
+        boolean boolean41 = jsonParser6.isEnabled(feature37);
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertNull(obj8);
+        org.junit.Assert.assertTrue("'" + long10 + "' != '" + 0L + "'", long10 == 0L);
+        org.junit.Assert.assertNull(str11);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertNull(objectCodec13);
+        org.junit.Assert.assertNotNull(jsonFactory16);
+        org.junit.Assert.assertTrue("'" + jsonToken17 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken17.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + true + "'", boolean18 == true);
+        org.junit.Assert.assertNotNull(byteArray19);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser20);
+        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 0 + "'", int21 == 0);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertNotNull(jsonFactory25);
+        org.junit.Assert.assertTrue("'" + jsonToken26 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken26.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
+        org.junit.Assert.assertNotNull(byteArray28);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray28), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser29);
+        org.junit.Assert.assertNull(obj31);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
+        org.junit.Assert.assertNotNull(jsonLocation33);
+        org.junit.Assert.assertTrue("'" + double35 + "' != '" + 52.0d + "'", double35 == 52.0d);
+        org.junit.Assert.assertNull(str36);
+        org.junit.Assert.assertTrue("'" + feature37 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES + "'", feature37.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES));
+        org.junit.Assert.assertNotNull(jsonParser39);
+        org.junit.Assert.assertNotNull(jsonParser40);
+        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
+    }
+
+    @Test
+    public void test1506() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1506");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        long long7 = jsonParser6.getValueAsLong();
+        java.lang.String str9 = jsonParser6.getValueAsString("JSON");
+        com.fasterxml.jackson.core.JsonToken jsonToken10 = jsonParser6.nextValue();
+        boolean boolean11 = jsonParser6.canReadTypeId();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator13 = jsonFactory12.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature14 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory12.configure(feature14, true);
+        com.fasterxml.jackson.core.JsonParser jsonParser18 = jsonFactory12.createParser("JSON");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory19.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken22 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean23 = jsonToken22.isBoolean();
+        byte[] byteArray24 = jsonToken22.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser25 = jsonFactory21.createJsonParser(byteArray24);
+        jsonParser25.close();
+        java.lang.Object obj27 = jsonParser25.getEmbeddedObject();
+        boolean boolean28 = jsonParser25.hasTextCharacters();
+        boolean boolean29 = jsonParser25.hasCurrentToken();
+        double double30 = jsonParser25.getValueAsDouble();
+        java.lang.String str31 = jsonParser25.getCurrentName();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory32 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator33 = jsonFactory32.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature34 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory36 = jsonFactory32.configure(feature34, true);
+        com.fasterxml.jackson.core.JsonParser.Feature feature37 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory38 = jsonFactory36.enable(feature37);
+        com.fasterxml.jackson.core.JsonParser.Feature feature39 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory40 = jsonFactory38.disable(feature39);
+        com.fasterxml.jackson.core.JsonParser jsonParser41 = jsonParser25.enable(feature39);
+        boolean boolean42 = jsonFactory12.isEnabled(feature39);
+        com.fasterxml.jackson.core.JsonParser jsonParser43 = jsonParser6.disable(feature39);
+        com.fasterxml.jackson.core.JsonLocation jsonLocation44 = jsonParser6.getTokenLocation();
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "JSON" + "'", str9, "JSON");
+        org.junit.Assert.assertTrue("'" + jsonToken10 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken10.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNull(outputDecorator13);
+        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature14.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory16);
+        org.junit.Assert.assertNotNull(jsonParser18);
+        org.junit.Assert.assertNotNull(jsonFactory21);
+        org.junit.Assert.assertTrue("'" + jsonToken22 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken22.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+        org.junit.Assert.assertNotNull(byteArray24);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser25);
+        org.junit.Assert.assertNull(obj27);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
+        org.junit.Assert.assertTrue("'" + double30 + "' != '" + 0.0d + "'", double30 == 0.0d);
+        org.junit.Assert.assertNull(str31);
+        org.junit.Assert.assertNull(outputDecorator33);
+        org.junit.Assert.assertTrue("'" + feature34 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature34.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory36);
+        org.junit.Assert.assertTrue("'" + feature37 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature37.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertNotNull(jsonFactory38);
+        org.junit.Assert.assertTrue("'" + feature39 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER + "'", feature39.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER));
+        org.junit.Assert.assertNotNull(jsonFactory40);
+        org.junit.Assert.assertNotNull(jsonParser41);
+        org.junit.Assert.assertTrue("'" + boolean42 + "' != '" + false + "'", boolean42 == false);
+        org.junit.Assert.assertNotNull(jsonParser43);
+        org.junit.Assert.assertNotNull(jsonLocation44);
+    }
+
+    @Test
+    public void test1507() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1507");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        long long7 = jsonParser6.getValueAsLong();
+        boolean boolean8 = jsonParser6.hasTextCharacters();
+        char[] charArray9 = jsonParser6.getTextCharacters();
+        int int11 = jsonParser6.getValueAsInt((int) (short) -1);
+        java.lang.Object obj12 = jsonParser6.getObjectId();
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertNull(charArray9);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + (-1) + "'", int11 == (-1));
+        org.junit.Assert.assertNull(obj12);
+    }
+
+    @Test
+    public void test1508() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1508");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("true");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler9 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
+        com.fasterxml.jackson.core.util.TextBuffer textBuffer10 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler9);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler14 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
+        byte[] byteArray20 = new byte[] { (byte) 0, (byte) 10, (byte) -1, (byte) -1 };
+        bufferRecycler14.releaseByteBuffer(1, byteArray20);
+        bufferRecycler9.releaseByteBuffer(7, byteArray20);
+        com.fasterxml.jackson.core.JsonParser jsonParser23 = jsonFactory4.createParser(byteArray20);
+        com.fasterxml.jackson.core.FormatSchema formatSchema24 = null;
+        boolean boolean25 = jsonParser23.canUseSchema(formatSchema24);
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertNotNull(byteArray20);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[0, 10, -1, -1]");
+        org.junit.Assert.assertNotNull(jsonParser23);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+    }
+
+    @Test
+    public void test1509() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1509");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        java.io.Reader reader5 = null;
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createJsonParser(reader5);
+        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
+        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonParser6.configure(feature7, true);
+        jsonParser9.clearCurrentToken();
+        com.fasterxml.jackson.core.Version version11 = jsonParser9.version();
+        com.fasterxml.jackson.core.JsonParser.Feature feature12 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        boolean boolean14 = feature12.enabledIn(1);
+        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonParser9.configure(feature12, true);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator18 = jsonFactory17.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature19 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory17.configure(feature19, true);
+        com.fasterxml.jackson.core.JsonParser.Feature feature22 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = jsonFactory21.enable(feature22);
+        com.fasterxml.jackson.core.JsonParser.Feature feature24 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = jsonFactory23.disable(feature24);
+        com.fasterxml.jackson.core.JsonParser jsonParser26 = jsonParser16.disable(feature24);
+        boolean boolean28 = feature24.enabledIn(1000);
+        int int29 = feature24.getMask();
+        int int30 = feature24.getMask();
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonParser9);
+        org.junit.Assert.assertNotNull(version11);
+        org.junit.Assert.assertTrue("'" + feature12 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature12.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(jsonParser16);
+        org.junit.Assert.assertNull(outputDecorator18);
+        org.junit.Assert.assertTrue("'" + feature19 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature19.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory21);
+        org.junit.Assert.assertTrue("'" + feature22 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature22.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertNotNull(jsonFactory23);
+        org.junit.Assert.assertTrue("'" + feature24 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER + "'", feature24.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER));
+        org.junit.Assert.assertNotNull(jsonFactory25);
+        org.junit.Assert.assertNotNull(jsonParser26);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + true + "'", boolean28 == true);
+        org.junit.Assert.assertTrue("'" + int29 + "' != '" + 64 + "'", int29 == 64);
+        org.junit.Assert.assertTrue("'" + int30 + "' != '" + 64 + "'", int30 == 64);
+    }
+
+    @Test
+    public void test1510() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1510");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        com.fasterxml.jackson.core.JsonFactory.Feature feature7 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory2.configure(feature7, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory2.copy();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator12 = jsonFactory11.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature13 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = jsonFactory11.configure(feature13, true);
+        com.fasterxml.jackson.core.JsonParser.Feature feature16 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory15.enable(feature16);
+        boolean boolean18 = jsonFactory17.requiresCustomCodec();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator20 = jsonFactory19.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature21 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory23 = jsonFactory19.configure(feature21, true);
+        boolean boolean24 = feature21.enabledByDefault();
+        boolean boolean25 = jsonFactory17.isEnabled(feature21);
+        int int26 = feature21.getMask();
+        boolean boolean27 = jsonFactory10.isEnabled(feature21);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory28 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory30 = jsonFactory28.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonParser jsonParser32 = jsonFactory30.createParser("true");
+        com.fasterxml.jackson.core.ObjectCodec objectCodec33 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory34 = jsonFactory30.setCodec(objectCodec33);
+        com.fasterxml.jackson.core.JsonParser.Feature feature35 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory36 = jsonFactory30.enable(feature35);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory37 = jsonFactory10.disable(feature35);
+        java.lang.String str38 = jsonFactory10.getRootValueSeparator();
+        java.io.InputStream inputStream39 = null;
+        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonFactory10.createJsonParser(inputStream39);
+        boolean boolean41 = jsonParser40.isClosed();
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature7.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory9);
+        org.junit.Assert.assertNotNull(jsonFactory10);
+        org.junit.Assert.assertNull(outputDecorator12);
+        org.junit.Assert.assertTrue("'" + feature13 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature13.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory15);
+        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature16.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertNotNull(jsonFactory17);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNull(outputDecorator20);
+        org.junit.Assert.assertTrue("'" + feature21 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature21.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory23);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + true + "'", boolean24 == true);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 4 + "'", int26 == 4);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertNotNull(jsonFactory30);
+        org.junit.Assert.assertNotNull(jsonParser32);
+        org.junit.Assert.assertNotNull(jsonFactory34);
+        org.junit.Assert.assertTrue("'" + feature35 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER + "'", feature35.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER));
+        org.junit.Assert.assertNotNull(jsonFactory36);
+        org.junit.Assert.assertNotNull(jsonFactory37);
+        org.junit.Assert.assertEquals("'" + str38 + "' != '" + "hi!" + "'", str38, "hi!");
+        org.junit.Assert.assertNotNull(jsonParser40);
+        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
+    }
+
+    @Test
+    public void test1511() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1511");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
+        jsonParser6.close();
+        java.lang.Boolean boolean8 = jsonParser6.nextBooleanValue();
+        com.fasterxml.jackson.core.JsonToken jsonToken9 = jsonParser6.nextToken();
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertNull(boolean8);
+        org.junit.Assert.assertNull(jsonToken9);
+    }
+
+    @Test
+    public void test1512() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1512");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
+        textBuffer1.resetWithEmpty();
+        int int3 = textBuffer1.size();
+        textBuffer1.ensureNotShared();
+        int int5 = textBuffer1.size();
+        java.lang.String str6 = textBuffer1.toString();
+        int int7 = textBuffer1.getTextOffset();
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "" + "'", str6, "");
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
+    }
+
+    @Test
+    public void test1513() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1513");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
+        java.lang.String str6 = jsonFactory4.getRootValueSeparator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES;
+        boolean boolean9 = feature7.enabledIn(1);
+        boolean boolean10 = jsonFactory4.isEnabled(feature7);
+        com.fasterxml.jackson.core.io.InputDecorator inputDecorator11 = jsonFactory4.getInputDecorator();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator13 = jsonFactory12.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature14 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory12.configure(feature14, true);
+        java.io.OutputStream outputStream17 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator18 = jsonFactory12.createGenerator(outputStream17);
+        java.io.Writer writer19 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator20 = jsonFactory12.createJsonGenerator(writer19);
+        java.io.Writer writer21 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator22 = jsonFactory12.createGenerator(writer21);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = null;
+        com.fasterxml.jackson.core.util.TextBuffer textBuffer24 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler23);
+        textBuffer24.resetWithEmpty();
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler28 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
+        byte[] byteArray31 = bufferRecycler28.allocByteBuffer(2, (int) (byte) 10);
+        char[] charArray34 = new char[] { ' ' };
+        bufferRecycler28.releaseCharBuffer(0, charArray34);
+        textBuffer24.resetWithShared(charArray34, 4000, 4);
+        com.fasterxml.jackson.core.JsonParser jsonParser41 = jsonFactory12.createParser(charArray34, 262144, (-1));
+        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec43 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory44 = jsonFactory42.setCodec(objectCodec43);
+        com.fasterxml.jackson.core.JsonParser.Feature feature45 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory47 = jsonFactory42.configure(feature45, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory49 = jsonFactory12.configure(feature45, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory51 = jsonFactory4.configure(feature45, false);
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNull(inputDecorator5);
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + " " + "'", str6, " ");
+        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES));
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNull(inputDecorator11);
+        org.junit.Assert.assertNull(outputDecorator13);
+        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature14.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory16);
+        org.junit.Assert.assertNotNull(jsonGenerator18);
+        org.junit.Assert.assertNotNull(jsonGenerator20);
+        org.junit.Assert.assertNotNull(jsonGenerator22);
+        org.junit.Assert.assertNotNull(byteArray31);
+        org.junit.Assert.assertNotNull(charArray34);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray34), " ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray34), " ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray34), "[ ]");
+        org.junit.Assert.assertNotNull(jsonParser41);
+        org.junit.Assert.assertNotNull(jsonFactory44);
+        org.junit.Assert.assertTrue("'" + feature45 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature45.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory47);
+        org.junit.Assert.assertNotNull(jsonFactory49);
+        org.junit.Assert.assertNotNull(jsonFactory51);
+    }
+
+    @Test
+    public void test1514() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1514");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        jsonParser6.close();
+        java.lang.Object obj8 = jsonParser6.getEmbeddedObject();
+        boolean boolean9 = jsonParser6.hasTextCharacters();
+        boolean boolean10 = jsonParser6.hasCurrentToken();
+        double double11 = jsonParser6.getValueAsDouble();
+        java.lang.String str12 = jsonParser6.getCurrentName();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory13 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator14 = jsonFactory13.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature15 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory13.configure(feature15, true);
+        com.fasterxml.jackson.core.JsonParser.Feature feature18 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory17.enable(feature18);
+        com.fasterxml.jackson.core.JsonParser.Feature feature20 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory19.disable(feature20);
+        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonParser6.enable(feature20);
+        com.fasterxml.jackson.core.JsonParser.Feature feature23 = null;
+        // The following exception was thrown during execution in test generation
+        try {
+            com.fasterxml.jackson.core.JsonParser jsonParser24 = jsonParser6.disable(feature23);
+            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
+        } catch (java.lang.NullPointerException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertNull(obj8);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + double11 + "' != '" + 0.0d + "'", double11 == 0.0d);
+        org.junit.Assert.assertNull(str12);
+        org.junit.Assert.assertNull(outputDecorator14);
+        org.junit.Assert.assertTrue("'" + feature15 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature15.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory17);
+        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature18.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertNotNull(jsonFactory19);
+        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER + "'", feature20.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER));
+        org.junit.Assert.assertNotNull(jsonFactory21);
+        org.junit.Assert.assertNotNull(jsonParser22);
+    }
+
+    @Test
+    public void test1515() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1515");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        long long7 = jsonParser6.getValueAsLong();
+        java.lang.String str8 = jsonParser6.getCurrentName();
+        boolean boolean10 = jsonParser6.getValueAsBoolean(true);
+        jsonParser6.clearCurrentToken();
+        int int12 = jsonParser6.getTextLength();
+        int int14 = jsonParser6.getValueAsInt((int) 'a');
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + long7 + "' != '" + 0L + "'", long7 == 0L);
+        org.junit.Assert.assertNull(str8);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + true + "'", boolean10 == true);
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 97 + "'", int14 == 97);
+    }
+
+    @Test
+    public void test1516() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1516");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
         com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
         java.lang.String str6 = jsonFactory4.getRootValueSeparator();
         com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
@@ -67,9 +684,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1502() throws Throwable {
+    public void test1517() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1502");
+            System.out.format("%n%s%n", "RegressionTest3.test1517");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -181,9 +798,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1503() throws Throwable {
+    public void test1518() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1503");
+            System.out.format("%n%s%n", "RegressionTest3.test1518");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -299,9 +916,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1504() throws Throwable {
+    public void test1519() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1504");
+            System.out.format("%n%s%n", "RegressionTest3.test1519");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -323,9 +940,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1505() throws Throwable {
+    public void test1520() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1505");
+            System.out.format("%n%s%n", "RegressionTest3.test1520");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -352,9 +969,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1506() throws Throwable {
+    public void test1521() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1506");
+            System.out.format("%n%s%n", "RegressionTest3.test1521");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -418,9 +1035,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1507() throws Throwable {
+    public void test1522() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1507");
+            System.out.format("%n%s%n", "RegressionTest3.test1522");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -497,9 +1114,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1508() throws Throwable {
+    public void test1523() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1508");
+            System.out.format("%n%s%n", "RegressionTest3.test1523");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -550,9 +1167,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1509() throws Throwable {
+    public void test1524() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1509");
+            System.out.format("%n%s%n", "RegressionTest3.test1524");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -652,9 +1269,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1510() throws Throwable {
+    public void test1525() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1510");
+            System.out.format("%n%s%n", "RegressionTest3.test1525");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -733,9 +1350,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1511() throws Throwable {
+    public void test1526() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1511");
+            System.out.format("%n%s%n", "RegressionTest3.test1526");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -825,9 +1442,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1512() throws Throwable {
+    public void test1527() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1512");
+            System.out.format("%n%s%n", "RegressionTest3.test1527");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -902,9 +1519,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1513() throws Throwable {
+    public void test1528() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1513");
+            System.out.format("%n%s%n", "RegressionTest3.test1528");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
@@ -938,9 +1555,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1514() throws Throwable {
+    public void test1529() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1514");
+            System.out.format("%n%s%n", "RegressionTest3.test1529");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         char[][] charArray3 = bufferRecycler2._charBuffers;
         byte[][] byteArray4 = bufferRecycler2._byteBuffers;
@@ -954,9 +1571,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1515() throws Throwable {
+    public void test1530() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1515");
+            System.out.format("%n%s%n", "RegressionTest3.test1530");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -989,9 +1606,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1516() throws Throwable {
+    public void test1531() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1516");
+            System.out.format("%n%s%n", "RegressionTest3.test1531");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1021,9 +1638,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1517() throws Throwable {
+    public void test1532() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1517");
+            System.out.format("%n%s%n", "RegressionTest3.test1532");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1094,9 +1711,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1518() throws Throwable {
+    public void test1533() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1518");
+            System.out.format("%n%s%n", "RegressionTest3.test1533");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -1111,9 +1728,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1519() throws Throwable {
+    public void test1534() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1519");
+            System.out.format("%n%s%n", "RegressionTest3.test1534");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1141,9 +1758,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1520() throws Throwable {
+    public void test1535() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1520");
+            System.out.format("%n%s%n", "RegressionTest3.test1535");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -1163,9 +1780,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1521() throws Throwable {
+    public void test1536() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1521");
+            System.out.format("%n%s%n", "RegressionTest3.test1536");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1190,9 +1807,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1522() throws Throwable {
+    public void test1537() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1522");
+            System.out.format("%n%s%n", "RegressionTest3.test1537");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1218,9 +1835,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1523() throws Throwable {
+    public void test1538() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1523");
+            System.out.format("%n%s%n", "RegressionTest3.test1538");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -1261,9 +1878,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1524() throws Throwable {
+    public void test1539() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1524");
+            System.out.format("%n%s%n", "RegressionTest3.test1539");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -1279,9 +1896,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1525() throws Throwable {
+    public void test1540() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1525");
+            System.out.format("%n%s%n", "RegressionTest3.test1540");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -1336,9 +1953,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1526() throws Throwable {
+    public void test1541() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1526");
+            System.out.format("%n%s%n", "RegressionTest3.test1541");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1364,9 +1981,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1527() throws Throwable {
+    public void test1542() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1527");
+            System.out.format("%n%s%n", "RegressionTest3.test1542");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1458,9 +2075,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1528() throws Throwable {
+    public void test1543() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1528");
+            System.out.format("%n%s%n", "RegressionTest3.test1543");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1492,9 +2109,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1529() throws Throwable {
+    public void test1544() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1529");
+            System.out.format("%n%s%n", "RegressionTest3.test1544");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -1542,9 +2159,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1530() throws Throwable {
+    public void test1545() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1530");
+            System.out.format("%n%s%n", "RegressionTest3.test1545");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -1557,9 +2174,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1531() throws Throwable {
+    public void test1546() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1531");
+            System.out.format("%n%s%n", "RegressionTest3.test1546");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1583,9 +2200,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1532() throws Throwable {
+    public void test1547() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1532");
+            System.out.format("%n%s%n", "RegressionTest3.test1547");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1621,9 +2238,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1533() throws Throwable {
+    public void test1548() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1533");
+            System.out.format("%n%s%n", "RegressionTest3.test1548");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -1648,9 +2265,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1534() throws Throwable {
+    public void test1549() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1534");
+            System.out.format("%n%s%n", "RegressionTest3.test1549");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1670,9 +2287,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1535() throws Throwable {
+    public void test1550() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1535");
+            System.out.format("%n%s%n", "RegressionTest3.test1550");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -1693,9 +2310,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1536() throws Throwable {
+    public void test1551() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1536");
+            System.out.format("%n%s%n", "RegressionTest3.test1551");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -1719,9 +2336,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1537() throws Throwable {
+    public void test1552() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1537");
+            System.out.format("%n%s%n", "RegressionTest3.test1552");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -1734,9 +2351,60 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1538() throws Throwable {
+    public void test1553() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1538");
+            System.out.format("%n%s%n", "RegressionTest3.test1553");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes5 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory4.setCharacterEscapes(characterEscapes5);
+        java.io.OutputStream outputStream7 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator8 = jsonFactory6.createJsonGenerator(outputStream7);
+        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory6.createJsonParser("null");
+        boolean boolean11 = jsonFactory6.requiresPropertyOrdering();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator13 = jsonFactory12.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature14 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory12.configure(feature14, true);
+        com.fasterxml.jackson.core.JsonParser.Feature feature17 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory16.enable(feature17);
+        boolean boolean19 = jsonFactory18.requiresCustomCodec();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator21 = jsonFactory20.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature22 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory20.configure(feature22, true);
+        boolean boolean25 = feature22.enabledByDefault();
+        boolean boolean26 = jsonFactory18.isEnabled(feature22);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory28 = jsonFactory6.configure(feature22, true);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory30 = jsonFactory28.setRootValueSeparator("");
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonFactory6);
+        org.junit.Assert.assertNotNull(jsonGenerator8);
+        org.junit.Assert.assertNotNull(jsonParser10);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNull(outputDecorator13);
+        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature14.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory16);
+        org.junit.Assert.assertTrue("'" + feature17 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature17.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertNotNull(jsonFactory18);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNull(outputDecorator21);
+        org.junit.Assert.assertTrue("'" + feature22 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature22.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory24);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
+        org.junit.Assert.assertNotNull(jsonFactory28);
+        org.junit.Assert.assertNotNull(jsonFactory30);
+    }
+
+    @Test
+    public void test1554() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1554");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -1821,9 +2489,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1539() throws Throwable {
+    public void test1555() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1539");
+            System.out.format("%n%s%n", "RegressionTest3.test1555");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.ensureNotShared();
@@ -1831,9 +2499,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1540() throws Throwable {
+    public void test1556() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1540");
+            System.out.format("%n%s%n", "RegressionTest3.test1556");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -1939,9 +2607,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1541() throws Throwable {
+    public void test1557() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1541");
+            System.out.format("%n%s%n", "RegressionTest3.test1557");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -1968,9 +2636,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1542() throws Throwable {
+    public void test1558() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1542");
+            System.out.format("%n%s%n", "RegressionTest3.test1558");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -2010,9 +2678,44 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1543() throws Throwable {
+    public void test1559() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1543");
+            System.out.format("%n%s%n", "RegressionTest3.test1559");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        jsonParser6.close();
+        java.lang.Object obj8 = jsonParser6.getTypeId();
+        long long10 = jsonParser6.nextLongValue((long) (byte) 0);
+        java.lang.String str11 = jsonParser6.nextTextValue();
+        boolean boolean12 = jsonParser6.isClosed();
+        long long14 = jsonParser6.getValueAsLong(100L);
+        int int15 = jsonParser6.getTextLength();
+        com.fasterxml.jackson.core.JsonLocation jsonLocation16 = jsonParser6.getCurrentLocation();
+        boolean boolean17 = jsonParser6.getValueAsBoolean();
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertNull(obj8);
+        org.junit.Assert.assertTrue("'" + long10 + "' != '" + 0L + "'", long10 == 0L);
+        org.junit.Assert.assertNull(str11);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
+        org.junit.Assert.assertTrue("'" + long14 + "' != '" + 100L + "'", long14 == 100L);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertNotNull(jsonLocation16);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+    }
+
+    @Test
+    public void test1560() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1560");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -2097,9 +2800,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1544() throws Throwable {
+    public void test1561() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1544");
+            System.out.format("%n%s%n", "RegressionTest3.test1561");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -2153,9 +2856,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1545() throws Throwable {
+    public void test1562() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1545");
+            System.out.format("%n%s%n", "RegressionTest3.test1562");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -2193,9 +2896,50 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1546() throws Throwable {
+    public void test1563() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1546");
+            System.out.format("%n%s%n", "RegressionTest3.test1563");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        java.io.Reader reader5 = null;
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createJsonParser(reader5);
+        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
+        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonParser6.configure(feature7, true);
+        jsonParser9.clearCurrentToken();
+        com.fasterxml.jackson.core.Version version11 = jsonParser9.version();
+        com.fasterxml.jackson.core.JsonParser.Feature feature12 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        boolean boolean14 = feature12.enabledIn(1);
+        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonParser9.configure(feature12, true);
+        com.fasterxml.jackson.core.ObjectCodec objectCodec17 = null;
+        jsonParser9.setCodec(objectCodec17);
+        com.fasterxml.jackson.core.JsonToken jsonToken19 = jsonParser9.nextValue();
+        com.fasterxml.jackson.core.JsonStreamContext jsonStreamContext20 = jsonParser9.getParsingContext();
+        boolean boolean21 = jsonParser9.getValueAsBoolean();
+        int int22 = jsonParser9.getValueAsInt();
+        long long24 = jsonParser9.nextLongValue((long) ' ');
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonParser9);
+        org.junit.Assert.assertNotNull(version11);
+        org.junit.Assert.assertTrue("'" + feature12 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature12.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(jsonParser16);
+        org.junit.Assert.assertNull(jsonToken19);
+        org.junit.Assert.assertNotNull(jsonStreamContext20);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
+        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
+        org.junit.Assert.assertTrue("'" + long24 + "' != '" + 32L + "'", long24 == 32L);
+    }
+
+    @Test
+    public void test1564() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1564");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = jsonFactory0.copy();
         java.io.Reader reader2 = null;
@@ -2213,9 +2957,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1547() throws Throwable {
+    public void test1565() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1547");
+            System.out.format("%n%s%n", "RegressionTest3.test1565");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory2.createParser("true");
@@ -2233,9 +2977,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1548() throws Throwable {
+    public void test1566() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1548");
+            System.out.format("%n%s%n", "RegressionTest3.test1566");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -2259,9 +3003,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1549() throws Throwable {
+    public void test1567() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1549");
+            System.out.format("%n%s%n", "RegressionTest3.test1567");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -2306,9 +3050,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1550() throws Throwable {
+    public void test1568() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1550");
+            System.out.format("%n%s%n", "RegressionTest3.test1568");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         boolean boolean3 = jsonFactory0.requiresPropertyOrdering();
@@ -2345,9 +3089,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1551() throws Throwable {
+    public void test1569() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1551");
+            System.out.format("%n%s%n", "RegressionTest3.test1569");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -2388,9 +3132,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1552() throws Throwable {
+    public void test1570() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1552");
+            System.out.format("%n%s%n", "RegressionTest3.test1570");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -2473,9 +3217,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1553() throws Throwable {
+    public void test1571() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1553");
+            System.out.format("%n%s%n", "RegressionTest3.test1571");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -2560,9 +3304,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1554() throws Throwable {
+    public void test1572() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1554");
+            System.out.format("%n%s%n", "RegressionTest3.test1572");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -2591,9 +3335,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1555() throws Throwable {
+    public void test1573() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1555");
+            System.out.format("%n%s%n", "RegressionTest3.test1573");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -2622,9 +3366,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1556() throws Throwable {
+    public void test1574() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1556");
+            System.out.format("%n%s%n", "RegressionTest3.test1574");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -2654,9 +3398,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1557() throws Throwable {
+    public void test1575() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1557");
+            System.out.format("%n%s%n", "RegressionTest3.test1575");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -2683,9 +3427,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1558() throws Throwable {
+    public void test1576() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1558");
+            System.out.format("%n%s%n", "RegressionTest3.test1576");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -2715,9 +3459,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1559() throws Throwable {
+    public void test1577() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1559");
+            System.out.format("%n%s%n", "RegressionTest3.test1577");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -2738,9 +3482,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1560() throws Throwable {
+    public void test1578() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1560");
+            System.out.format("%n%s%n", "RegressionTest3.test1578");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -2767,9 +3511,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1561() throws Throwable {
+    public void test1579() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1561");
+            System.out.format("%n%s%n", "RegressionTest3.test1579");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -2895,9 +3639,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1562() throws Throwable {
+    public void test1580() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1562");
+            System.out.format("%n%s%n", "RegressionTest3.test1580");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -2929,9 +3673,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1563() throws Throwable {
+    public void test1581() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1563");
+            System.out.format("%n%s%n", "RegressionTest3.test1581");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3031,9 +3775,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1564() throws Throwable {
+    public void test1582() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1564");
+            System.out.format("%n%s%n", "RegressionTest3.test1582");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3054,9 +3798,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1565() throws Throwable {
+    public void test1583() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1565");
+            System.out.format("%n%s%n", "RegressionTest3.test1583");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3129,9 +3873,27 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1566() throws Throwable {
+    public void test1584() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1566");
+            System.out.format("%n%s%n", "RegressionTest3.test1584");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
+        com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler4 = new com.fasterxml.jackson.core.util.BufferRecycler();
+        char[] charArray7 = bufferRecycler4.allocCharBuffer(0, (int) (short) -1);
+        textBuffer3.resetWithCopy(charArray7, (int) (short) 10, 2);
+        int int11 = textBuffer3.size();
+        char[] charArray12 = textBuffer3.finishCurrentSegment();
+        org.junit.Assert.assertNotNull(charArray7);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 2 + "'", int11 == 2);
+        org.junit.Assert.assertNotNull(charArray12);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray12), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray12), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
+    }
+
+    @Test
+    public void test1585() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1585");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -3149,9 +3911,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1567() throws Throwable {
+    public void test1586() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1567");
+            System.out.format("%n%s%n", "RegressionTest3.test1586");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3185,9 +3947,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1568() throws Throwable {
+    public void test1587() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1568");
+            System.out.format("%n%s%n", "RegressionTest3.test1587");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3212,9 +3974,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1569() throws Throwable {
+    public void test1588() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1569");
+            System.out.format("%n%s%n", "RegressionTest3.test1588");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3292,9 +4054,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1570() throws Throwable {
+    public void test1589() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1570");
+            System.out.format("%n%s%n", "RegressionTest3.test1589");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3346,9 +4108,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1571() throws Throwable {
+    public void test1590() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1571");
+            System.out.format("%n%s%n", "RegressionTest3.test1590");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -3388,9 +4150,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1572() throws Throwable {
+    public void test1591() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1572");
+            System.out.format("%n%s%n", "RegressionTest3.test1591");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -3457,9 +4219,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1573() throws Throwable {
+    public void test1592() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1573");
+            System.out.format("%n%s%n", "RegressionTest3.test1592");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3503,9 +4265,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1574() throws Throwable {
+    public void test1593() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1574");
+            System.out.format("%n%s%n", "RegressionTest3.test1593");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -3653,9 +4415,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1575() throws Throwable {
+    public void test1594() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1575");
+            System.out.format("%n%s%n", "RegressionTest3.test1594");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -3727,9 +4489,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1576() throws Throwable {
+    public void test1595() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1576");
+            System.out.format("%n%s%n", "RegressionTest3.test1595");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -3759,9 +4521,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1577() throws Throwable {
+    public void test1596() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1577");
+            System.out.format("%n%s%n", "RegressionTest3.test1596");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -3814,9 +4576,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1578() throws Throwable {
+    public void test1597() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1578");
+            System.out.format("%n%s%n", "RegressionTest3.test1597");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.getTextOffset();
@@ -3876,9 +4638,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1579() throws Throwable {
+    public void test1598() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1579");
+            System.out.format("%n%s%n", "RegressionTest3.test1598");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -3950,9 +4712,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1580() throws Throwable {
+    public void test1599() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1580");
+            System.out.format("%n%s%n", "RegressionTest3.test1599");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -3979,9 +4741,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1581() throws Throwable {
+    public void test1600() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1581");
+            System.out.format("%n%s%n", "RegressionTest3.test1600");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4035,9 +4797,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1582() throws Throwable {
+    public void test1601() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1582");
+            System.out.format("%n%s%n", "RegressionTest3.test1601");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4069,9 +4831,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1583() throws Throwable {
+    public void test1602() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1583");
+            System.out.format("%n%s%n", "RegressionTest3.test1602");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4111,9 +4873,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1584() throws Throwable {
+    public void test1603() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1584");
+            System.out.format("%n%s%n", "RegressionTest3.test1603");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -4139,9 +4901,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1585() throws Throwable {
+    public void test1604() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1585");
+            System.out.format("%n%s%n", "RegressionTest3.test1604");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4184,9 +4946,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1586() throws Throwable {
+    public void test1605() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1586");
+            System.out.format("%n%s%n", "RegressionTest3.test1605");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4213,9 +4975,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1587() throws Throwable {
+    public void test1606() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1587");
+            System.out.format("%n%s%n", "RegressionTest3.test1606");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[][] byteArray3 = bufferRecycler2._byteBuffers;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
@@ -4344,9 +5106,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1588() throws Throwable {
+    public void test1607() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1588");
+            System.out.format("%n%s%n", "RegressionTest3.test1607");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4375,9 +5137,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1589() throws Throwable {
+    public void test1608() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1589");
+            System.out.format("%n%s%n", "RegressionTest3.test1608");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -4444,9 +5206,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1590() throws Throwable {
+    public void test1609() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1590");
+            System.out.format("%n%s%n", "RegressionTest3.test1609");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -4511,9 +5273,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1591() throws Throwable {
+    public void test1610() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1591");
+            System.out.format("%n%s%n", "RegressionTest3.test1610");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -4544,9 +5306,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1592() throws Throwable {
+    public void test1611() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1592");
+            System.out.format("%n%s%n", "RegressionTest3.test1611");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -4566,9 +5328,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1593() throws Throwable {
+    public void test1612() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1593");
+            System.out.format("%n%s%n", "RegressionTest3.test1612");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4598,9 +5360,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1594() throws Throwable {
+    public void test1613() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1594");
+            System.out.format("%n%s%n", "RegressionTest3.test1613");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4638,9 +5400,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1595() throws Throwable {
+    public void test1614() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1595");
+            System.out.format("%n%s%n", "RegressionTest3.test1614");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -4683,9 +5445,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1596() throws Throwable {
+    public void test1615() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1596");
+            System.out.format("%n%s%n", "RegressionTest3.test1615");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -4714,9 +5476,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1597() throws Throwable {
+    public void test1616() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1597");
+            System.out.format("%n%s%n", "RegressionTest3.test1616");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4742,9 +5504,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1598() throws Throwable {
+    public void test1617() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1598");
+            System.out.format("%n%s%n", "RegressionTest3.test1617");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -4816,9 +5578,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1599() throws Throwable {
+    public void test1618() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1599");
+            System.out.format("%n%s%n", "RegressionTest3.test1618");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -4853,9 +5615,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1600() throws Throwable {
+    public void test1619() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1600");
+            System.out.format("%n%s%n", "RegressionTest3.test1619");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -4888,9 +5650,34 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1601() throws Throwable {
+    public void test1620() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1601");
+            System.out.format("%n%s%n", "RegressionTest3.test1620");
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
+        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
+        textBuffer1.resetWithEmpty();
+        int int3 = textBuffer1.size();
+        java.lang.String str4 = textBuffer1.contentsAsString();
+        char[] charArray5 = textBuffer1.contentsAsArray();
+        char[] charArray6 = textBuffer1.emptyAndGetCurrentSegment();
+        textBuffer1.resetWithString("\000\000\000\000\000\000\000\000\000\000\000\000");
+        int int9 = textBuffer1.getTextOffset();
+        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
+        org.junit.Assert.assertNotNull(charArray5);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[]");
+        org.junit.Assert.assertNotNull(charArray6);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray6), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray6), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
+    }
+
+    @Test
+    public void test1621() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1621");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -4903,9 +5690,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1602() throws Throwable {
+    public void test1622() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1602");
+            System.out.format("%n%s%n", "RegressionTest3.test1622");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -4931,9 +5718,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1603() throws Throwable {
+    public void test1623() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1603");
+            System.out.format("%n%s%n", "RegressionTest3.test1623");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = textBuffer1.getTextBuffer();
@@ -4945,9 +5732,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1604() throws Throwable {
+    public void test1624() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1604");
+            System.out.format("%n%s%n", "RegressionTest3.test1624");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -4965,9 +5752,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1605() throws Throwable {
+    public void test1625() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1605");
+            System.out.format("%n%s%n", "RegressionTest3.test1625");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -5004,9 +5791,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1606() throws Throwable {
+    public void test1626() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1606");
+            System.out.format("%n%s%n", "RegressionTest3.test1626");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -5067,9 +5854,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1607() throws Throwable {
+    public void test1627() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1607");
+            System.out.format("%n%s%n", "RegressionTest3.test1627");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -5085,9 +5872,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1608() throws Throwable {
+    public void test1628() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1608");
+            System.out.format("%n%s%n", "RegressionTest3.test1628");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[][] byteArray3 = bufferRecycler2._byteBuffers;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
@@ -5099,9 +5886,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1609() throws Throwable {
+    public void test1629() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1609");
+            System.out.format("%n%s%n", "RegressionTest3.test1629");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -5139,9 +5926,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1610() throws Throwable {
+    public void test1630() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1610");
+            System.out.format("%n%s%n", "RegressionTest3.test1630");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5174,9 +5961,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1611() throws Throwable {
+    public void test1631() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1611");
+            System.out.format("%n%s%n", "RegressionTest3.test1631");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[][] byteArray3 = bufferRecycler2._byteBuffers;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
@@ -5208,9 +5995,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1612() throws Throwable {
+    public void test1632() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1612");
+            System.out.format("%n%s%n", "RegressionTest3.test1632");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -5235,9 +6022,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1613() throws Throwable {
+    public void test1633() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1613");
+            System.out.format("%n%s%n", "RegressionTest3.test1633");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5269,9 +6056,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1614() throws Throwable {
+    public void test1634() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1614");
+            System.out.format("%n%s%n", "RegressionTest3.test1634");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory2.createParser("true");
@@ -5287,9 +6074,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1615() throws Throwable {
+    public void test1635() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1615");
+            System.out.format("%n%s%n", "RegressionTest3.test1635");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5360,9 +6147,37 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1616() throws Throwable {
+    public void test1636() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1616");
+            System.out.format("%n%s%n", "RegressionTest3.test1636");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        com.fasterxml.jackson.core.JsonParser.Feature feature5 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory4.enable(feature5);
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator7 = jsonFactory6.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonFactory6.createParser("");
+        java.io.OutputStream outputStream10 = null;
+        int int11 = jsonParser9.releaseBuffered(outputStream10);
+        boolean boolean12 = jsonParser9.hasTextCharacters();
+        int int13 = jsonParser9.getCurrentTokenId();
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertTrue("'" + feature5 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature5.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertNotNull(jsonFactory6);
+        org.junit.Assert.assertNull(outputDecorator7);
+        org.junit.Assert.assertNotNull(jsonParser9);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + (-1) + "'", int11 == (-1));
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
+    }
+
+    @Test
+    public void test1637() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1637");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler7 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
@@ -5436,9 +6251,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1617() throws Throwable {
+    public void test1638() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1617");
+            System.out.format("%n%s%n", "RegressionTest3.test1638");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5487,9 +6302,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1618() throws Throwable {
+    public void test1639() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1618");
+            System.out.format("%n%s%n", "RegressionTest3.test1639");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5556,9 +6371,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1619() throws Throwable {
+    public void test1640() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1619");
+            System.out.format("%n%s%n", "RegressionTest3.test1640");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5601,9 +6416,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1620() throws Throwable {
+    public void test1641() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1620");
+            System.out.format("%n%s%n", "RegressionTest3.test1641");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5632,9 +6447,75 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1621() throws Throwable {
+    public void test1642() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1621");
+            System.out.format("%n%s%n", "RegressionTest3.test1642");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
+        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
+        boolean boolean4 = jsonToken3.isBoolean();
+        byte[] byteArray5 = jsonToken3.asByteArray();
+        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
+        jsonParser6.close();
+        java.lang.Object obj8 = jsonParser6.getEmbeddedObject();
+        boolean boolean10 = jsonParser6.getValueAsBoolean(false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator12 = jsonFactory11.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature13 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = jsonFactory11.configure(feature13, true);
+        java.io.OutputStream outputStream16 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator17 = jsonFactory11.createGenerator(outputStream16);
+        java.io.Writer writer18 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator19 = jsonFactory11.createJsonGenerator(writer18);
+        java.io.Writer writer20 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator21 = jsonFactory11.createGenerator(writer20);
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler22 = null;
+        com.fasterxml.jackson.core.util.TextBuffer textBuffer23 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler22);
+        textBuffer23.resetWithEmpty();
+        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler27 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
+        byte[] byteArray30 = bufferRecycler27.allocByteBuffer(2, (int) (byte) 10);
+        char[] charArray33 = new char[] { ' ' };
+        bufferRecycler27.releaseCharBuffer(0, charArray33);
+        textBuffer23.resetWithShared(charArray33, 4000, 4);
+        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonFactory11.createParser(charArray33, 262144, (-1));
+        com.fasterxml.jackson.core.JsonFactory jsonFactory41 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.ObjectCodec objectCodec42 = null;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory43 = jsonFactory41.setCodec(objectCodec42);
+        com.fasterxml.jackson.core.JsonParser.Feature feature44 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory41.configure(feature44, false);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory48 = jsonFactory11.configure(feature44, false);
+        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonParser6.configure(feature44, true);
+        org.junit.Assert.assertNotNull(jsonFactory2);
+        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
+        org.junit.Assert.assertNotNull(byteArray5);
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
+        org.junit.Assert.assertNotNull(jsonParser6);
+        org.junit.Assert.assertNull(obj8);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNull(outputDecorator12);
+        org.junit.Assert.assertTrue("'" + feature13 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature13.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory15);
+        org.junit.Assert.assertNotNull(jsonGenerator17);
+        org.junit.Assert.assertNotNull(jsonGenerator19);
+        org.junit.Assert.assertNotNull(jsonGenerator21);
+        org.junit.Assert.assertNotNull(byteArray30);
+        org.junit.Assert.assertNotNull(charArray33);
+        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray33), " ");
+        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray33), " ");
+        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray33), "[ ]");
+        org.junit.Assert.assertNotNull(jsonParser40);
+        org.junit.Assert.assertNotNull(jsonFactory43);
+        org.junit.Assert.assertTrue("'" + feature44 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature44.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory46);
+        org.junit.Assert.assertNotNull(jsonFactory48);
+        org.junit.Assert.assertNotNull(jsonParser50);
+    }
+
+    @Test
+    public void test1643() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1643");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         boolean boolean3 = jsonFactory0.requiresPropertyOrdering();
@@ -5656,9 +6537,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1622() throws Throwable {
+    public void test1644() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1622");
+            System.out.format("%n%s%n", "RegressionTest3.test1644");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -5684,9 +6565,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1623() throws Throwable {
+    public void test1645() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1623");
+            System.out.format("%n%s%n", "RegressionTest3.test1645");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5715,9 +6596,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1624() throws Throwable {
+    public void test1646() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1624");
+            System.out.format("%n%s%n", "RegressionTest3.test1646");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5745,9 +6626,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1625() throws Throwable {
+    public void test1647() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1625");
+            System.out.format("%n%s%n", "RegressionTest3.test1647");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -5771,9 +6652,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1626() throws Throwable {
+    public void test1648() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1626");
+            System.out.format("%n%s%n", "RegressionTest3.test1648");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -5815,9 +6696,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1627() throws Throwable {
+    public void test1649() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1627");
+            System.out.format("%n%s%n", "RegressionTest3.test1649");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -5923,9 +6804,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1628() throws Throwable {
+    public void test1650() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1628");
+            System.out.format("%n%s%n", "RegressionTest3.test1650");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -5951,9 +6832,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1629() throws Throwable {
+    public void test1651() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1629");
+            System.out.format("%n%s%n", "RegressionTest3.test1651");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -5982,9 +6863,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1630() throws Throwable {
+    public void test1652() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1630");
+            System.out.format("%n%s%n", "RegressionTest3.test1652");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -6009,9 +6890,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1631() throws Throwable {
+    public void test1653() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1631");
+            System.out.format("%n%s%n", "RegressionTest3.test1653");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6101,9 +6982,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1632() throws Throwable {
+    public void test1654() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1632");
+            System.out.format("%n%s%n", "RegressionTest3.test1654");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -6152,9 +7033,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1633() throws Throwable {
+    public void test1655() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1633");
+            System.out.format("%n%s%n", "RegressionTest3.test1655");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6234,9 +7115,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1634() throws Throwable {
+    public void test1656() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1634");
+            System.out.format("%n%s%n", "RegressionTest3.test1656");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6309,9 +7190,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1635() throws Throwable {
+    public void test1657() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1635");
+            System.out.format("%n%s%n", "RegressionTest3.test1657");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6371,9 +7252,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1636() throws Throwable {
+    public void test1658() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1636");
+            System.out.format("%n%s%n", "RegressionTest3.test1658");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6400,9 +7281,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1637() throws Throwable {
+    public void test1659() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1637");
+            System.out.format("%n%s%n", "RegressionTest3.test1659");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append('4');
@@ -6413,9 +7294,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1638() throws Throwable {
+    public void test1660() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1638");
+            System.out.format("%n%s%n", "RegressionTest3.test1660");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6449,9 +7330,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1639() throws Throwable {
+    public void test1661() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1639");
+            System.out.format("%n%s%n", "RegressionTest3.test1661");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6487,9 +7368,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1640() throws Throwable {
+    public void test1662() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1640");
+            System.out.format("%n%s%n", "RegressionTest3.test1662");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6522,9 +7403,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1641() throws Throwable {
+    public void test1663() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1641");
+            System.out.format("%n%s%n", "RegressionTest3.test1663");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6579,9 +7460,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1642() throws Throwable {
+    public void test1664() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1642");
+            System.out.format("%n%s%n", "RegressionTest3.test1664");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6607,9 +7488,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1643() throws Throwable {
+    public void test1665() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1643");
+            System.out.format("%n%s%n", "RegressionTest3.test1665");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -6630,9 +7511,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1644() throws Throwable {
+    public void test1666() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1644");
+            System.out.format("%n%s%n", "RegressionTest3.test1666");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6670,9 +7551,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1645() throws Throwable {
+    public void test1667() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1645");
+            System.out.format("%n%s%n", "RegressionTest3.test1667");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -6817,9 +7698,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1646() throws Throwable {
+    public void test1668() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1646");
+            System.out.format("%n%s%n", "RegressionTest3.test1668");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -6854,9 +7735,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1647() throws Throwable {
+    public void test1669() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1647");
+            System.out.format("%n%s%n", "RegressionTest3.test1669");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken6 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -6951,9 +7832,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1648() throws Throwable {
+    public void test1670() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1648");
+            System.out.format("%n%s%n", "RegressionTest3.test1670");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -6975,9 +7856,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1649() throws Throwable {
+    public void test1671() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1649");
+            System.out.format("%n%s%n", "RegressionTest3.test1671");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[][] byteArray3 = bufferRecycler2._byteBuffers;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
@@ -7007,9 +7888,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1650() throws Throwable {
+    public void test1672() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1650");
+            System.out.format("%n%s%n", "RegressionTest3.test1672");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
@@ -7048,9 +7929,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1651() throws Throwable {
+    public void test1673() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1651");
+            System.out.format("%n%s%n", "RegressionTest3.test1673");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer2 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler1);
@@ -7122,9 +8003,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1652() throws Throwable {
+    public void test1674() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1652");
+            System.out.format("%n%s%n", "RegressionTest3.test1674");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7262,9 +8143,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1653() throws Throwable {
+    public void test1675() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1653");
+            System.out.format("%n%s%n", "RegressionTest3.test1675");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7362,9 +8243,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1654() throws Throwable {
+    public void test1676() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1654");
+            System.out.format("%n%s%n", "RegressionTest3.test1676");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7393,9 +8274,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1655() throws Throwable {
+    public void test1677() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1655");
+            System.out.format("%n%s%n", "RegressionTest3.test1677");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -7457,9 +8338,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1656() throws Throwable {
+    public void test1678() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1656");
+            System.out.format("%n%s%n", "RegressionTest3.test1678");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.ensureNotShared();
@@ -7475,9 +8356,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1657() throws Throwable {
+    public void test1679() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1657");
+            System.out.format("%n%s%n", "RegressionTest3.test1679");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7506,9 +8387,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1658() throws Throwable {
+    public void test1680() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1658");
+            System.out.format("%n%s%n", "RegressionTest3.test1680");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -7525,9 +8406,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1659() throws Throwable {
+    public void test1681() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1659");
+            System.out.format("%n%s%n", "RegressionTest3.test1681");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7554,9 +8435,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1660() throws Throwable {
+    public void test1682() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1660");
+            System.out.format("%n%s%n", "RegressionTest3.test1682");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7628,9 +8509,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1661() throws Throwable {
+    public void test1683() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1661");
+            System.out.format("%n%s%n", "RegressionTest3.test1683");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -7670,9 +8551,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1662() throws Throwable {
+    public void test1684() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1662");
+            System.out.format("%n%s%n", "RegressionTest3.test1684");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7696,9 +8577,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1663() throws Throwable {
+    public void test1685() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1663");
+            System.out.format("%n%s%n", "RegressionTest3.test1685");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -7714,9 +8595,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1664() throws Throwable {
+    public void test1686() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1664");
+            System.out.format("%n%s%n", "RegressionTest3.test1686");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7740,9 +8621,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1665() throws Throwable {
+    public void test1687() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1665");
+            System.out.format("%n%s%n", "RegressionTest3.test1687");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7796,9 +8677,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1666() throws Throwable {
+    public void test1688() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1666");
+            System.out.format("%n%s%n", "RegressionTest3.test1688");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -7816,9 +8697,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1667() throws Throwable {
+    public void test1689() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1667");
+            System.out.format("%n%s%n", "RegressionTest3.test1689");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -7959,9 +8840,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1668() throws Throwable {
+    public void test1690() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1668");
+            System.out.format("%n%s%n", "RegressionTest3.test1690");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -7993,9 +8874,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1669() throws Throwable {
+    public void test1691() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1669");
+            System.out.format("%n%s%n", "RegressionTest3.test1691");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8044,9 +8925,56 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1670() throws Throwable {
+    public void test1692() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1670");
+            System.out.format("%n%s%n", "RegressionTest3.test1692");
+        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
+        java.io.Writer writer5 = null;
+        com.fasterxml.jackson.core.JsonGenerator jsonGenerator6 = jsonFactory4.createGenerator(writer5);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory4.copy();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator9 = jsonFactory8.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonParser.Feature feature10 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory8.configure(feature10, true);
+        com.fasterxml.jackson.core.JsonParser.Feature feature13 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = jsonFactory12.enable(feature13);
+        boolean boolean15 = jsonFactory14.requiresCustomCodec();
+        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
+        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator17 = jsonFactory16.getOutputDecorator();
+        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
+        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory16.configure(feature18, true);
+        boolean boolean21 = feature18.enabledByDefault();
+        boolean boolean22 = jsonFactory14.isEnabled(feature18);
+        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory7.configure(feature18, false);
+        java.io.InputStream inputStream25 = null;
+        com.fasterxml.jackson.core.JsonParser jsonParser26 = jsonFactory24.createJsonParser(inputStream25);
+        org.junit.Assert.assertNull(outputDecorator1);
+        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory4);
+        org.junit.Assert.assertNotNull(jsonGenerator6);
+        org.junit.Assert.assertNotNull(jsonFactory7);
+        org.junit.Assert.assertNull(outputDecorator9);
+        org.junit.Assert.assertTrue("'" + feature10 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature10.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
+        org.junit.Assert.assertNotNull(jsonFactory12);
+        org.junit.Assert.assertTrue("'" + feature13 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature13.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
+        org.junit.Assert.assertNotNull(jsonFactory14);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNull(outputDecorator17);
+        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
+        org.junit.Assert.assertNotNull(jsonFactory20);
+        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertNotNull(jsonFactory24);
+        org.junit.Assert.assertNotNull(jsonParser26);
+    }
+
+    @Test
+    public void test1693() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest3.test1693");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -8160,9 +9088,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1671() throws Throwable {
+    public void test1694() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1671");
+            System.out.format("%n%s%n", "RegressionTest3.test1694");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         boolean boolean3 = jsonFactory0.requiresPropertyOrdering();
@@ -8189,9 +9117,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1672() throws Throwable {
+    public void test1695() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1672");
+            System.out.format("%n%s%n", "RegressionTest3.test1695");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8229,9 +9157,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1673() throws Throwable {
+    public void test1696() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1673");
+            System.out.format("%n%s%n", "RegressionTest3.test1696");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8264,9 +9192,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1674() throws Throwable {
+    public void test1697() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1674");
+            System.out.format("%n%s%n", "RegressionTest3.test1697");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -8282,9 +9210,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1675() throws Throwable {
+    public void test1698() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1675");
+            System.out.format("%n%s%n", "RegressionTest3.test1698");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8396,9 +9324,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1676() throws Throwable {
+    public void test1699() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1676");
+            System.out.format("%n%s%n", "RegressionTest3.test1699");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -8415,9 +9343,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1677() throws Throwable {
+    public void test1700() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1677");
+            System.out.format("%n%s%n", "RegressionTest3.test1700");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8452,9 +9380,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1678() throws Throwable {
+    public void test1701() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1678");
+            System.out.format("%n%s%n", "RegressionTest3.test1701");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -8484,9 +9412,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1679() throws Throwable {
+    public void test1702() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1679");
+            System.out.format("%n%s%n", "RegressionTest3.test1702");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -8630,9 +9558,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1680() throws Throwable {
+    public void test1703() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1680");
+            System.out.format("%n%s%n", "RegressionTest3.test1703");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
@@ -8783,9 +9711,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1681() throws Throwable {
+    public void test1704() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1681");
+            System.out.format("%n%s%n", "RegressionTest3.test1704");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory2.createParser("true");
@@ -8802,9 +9730,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1682() throws Throwable {
+    public void test1705() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1682");
+            System.out.format("%n%s%n", "RegressionTest3.test1705");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler7 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
@@ -8870,9 +9798,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1683() throws Throwable {
+    public void test1706() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1683");
+            System.out.format("%n%s%n", "RegressionTest3.test1706");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -8897,9 +9825,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1684() throws Throwable {
+    public void test1707() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1684");
+            System.out.format("%n%s%n", "RegressionTest3.test1707");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -8932,9 +9860,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1685() throws Throwable {
+    public void test1708() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1685");
+            System.out.format("%n%s%n", "RegressionTest3.test1708");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9031,9 +9959,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1686() throws Throwable {
+    public void test1709() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1686");
+            System.out.format("%n%s%n", "RegressionTest3.test1709");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
         int int4 = textBuffer3.getCurrentSegmentSize();
@@ -9044,9 +9972,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1687() throws Throwable {
+    public void test1710() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1687");
+            System.out.format("%n%s%n", "RegressionTest3.test1710");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -9069,9 +9997,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1688() throws Throwable {
+    public void test1711() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1688");
+            System.out.format("%n%s%n", "RegressionTest3.test1711");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -9127,9 +10055,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1689() throws Throwable {
+    public void test1712() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1689");
+            System.out.format("%n%s%n", "RegressionTest3.test1712");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9153,9 +10081,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1690() throws Throwable {
+    public void test1713() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1690");
+            System.out.format("%n%s%n", "RegressionTest3.test1713");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -9183,9 +10111,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1691() throws Throwable {
+    public void test1714() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1691");
+            System.out.format("%n%s%n", "RegressionTest3.test1714");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9290,9 +10218,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1692() throws Throwable {
+    public void test1715() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1692");
+            System.out.format("%n%s%n", "RegressionTest3.test1715");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9318,9 +10246,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1693() throws Throwable {
+    public void test1716() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1693");
+            System.out.format("%n%s%n", "RegressionTest3.test1716");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9348,7 +10276,7 @@ public class RegressionTest3 {
         // The following exception was thrown during execution in test generation
         try {
             java.lang.Boolean boolean30 = jsonParser28.nextBooleanValue();
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'y?': was expecting ('true', 'false' or 'null')? at [Source: [B@6bc4bf5c; line: 1, column: 3]");
+            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Unrecognized token 'y?': was expecting ('true', 'false' or 'null')? at [Source: [B@464c0cb9; line: 1, column: 3]");
         } catch (com.fasterxml.jackson.core.JsonParseException e) {
         // Expected exception.
         }
@@ -9377,9 +10305,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1694() throws Throwable {
+    public void test1717() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1694");
+            System.out.format("%n%s%n", "RegressionTest3.test1717");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -9532,9 +10460,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1695() throws Throwable {
+    public void test1718() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1695");
+            System.out.format("%n%s%n", "RegressionTest3.test1718");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -9586,9 +10514,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1696() throws Throwable {
+    public void test1719() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1696");
+            System.out.format("%n%s%n", "RegressionTest3.test1719");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -9655,9 +10583,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1697() throws Throwable {
+    public void test1720() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1697");
+            System.out.format("%n%s%n", "RegressionTest3.test1720");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9715,9 +10643,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1698() throws Throwable {
+    public void test1721() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1698");
+            System.out.format("%n%s%n", "RegressionTest3.test1721");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -9733,9 +10661,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1699() throws Throwable {
+    public void test1722() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1699");
+            System.out.format("%n%s%n", "RegressionTest3.test1722");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -9805,9 +10733,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1700() throws Throwable {
+    public void test1723() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1700");
+            System.out.format("%n%s%n", "RegressionTest3.test1723");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -9825,9 +10753,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1701() throws Throwable {
+    public void test1724() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1701");
+            System.out.format("%n%s%n", "RegressionTest3.test1724");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
         textBuffer3.releaseBuffers();
@@ -9836,9 +10764,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1702() throws Throwable {
+    public void test1725() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1702");
+            System.out.format("%n%s%n", "RegressionTest3.test1725");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -9895,9 +10823,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1703() throws Throwable {
+    public void test1726() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1703");
+            System.out.format("%n%s%n", "RegressionTest3.test1726");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken6 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -9992,9 +10920,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1704() throws Throwable {
+    public void test1727() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1704");
+            System.out.format("%n%s%n", "RegressionTest3.test1727");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10077,9 +11005,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1705() throws Throwable {
+    public void test1728() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1705");
+            System.out.format("%n%s%n", "RegressionTest3.test1728");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -10100,9 +11028,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1706() throws Throwable {
+    public void test1729() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1706");
+            System.out.format("%n%s%n", "RegressionTest3.test1729");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -10115,9 +11043,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1707() throws Throwable {
+    public void test1730() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1707");
+            System.out.format("%n%s%n", "RegressionTest3.test1730");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -10156,9 +11084,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1708() throws Throwable {
+    public void test1731() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1708");
+            System.out.format("%n%s%n", "RegressionTest3.test1731");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10182,9 +11110,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1709() throws Throwable {
+    public void test1732() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1709");
+            System.out.format("%n%s%n", "RegressionTest3.test1732");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10218,9 +11146,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1710() throws Throwable {
+    public void test1733() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1710");
+            System.out.format("%n%s%n", "RegressionTest3.test1733");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -10248,9 +11176,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1711() throws Throwable {
+    public void test1734() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1711");
+            System.out.format("%n%s%n", "RegressionTest3.test1734");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10276,9 +11204,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1712() throws Throwable {
+    public void test1735() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1712");
+            System.out.format("%n%s%n", "RegressionTest3.test1735");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append('4');
@@ -10297,9 +11225,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1713() throws Throwable {
+    public void test1736() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1713");
+            System.out.format("%n%s%n", "RegressionTest3.test1736");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -10419,9 +11347,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1714() throws Throwable {
+    public void test1737() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1714");
+            System.out.format("%n%s%n", "RegressionTest3.test1737");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10465,9 +11393,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1715() throws Throwable {
+    public void test1738() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1715");
+            System.out.format("%n%s%n", "RegressionTest3.test1738");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray8 = new byte[] { (byte) 0, (byte) 10, (byte) -1, (byte) -1 };
         bufferRecycler2.releaseByteBuffer(1, byteArray8);
@@ -10486,9 +11414,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1716() throws Throwable {
+    public void test1739() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1716");
+            System.out.format("%n%s%n", "RegressionTest3.test1739");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10539,9 +11467,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1717() throws Throwable {
+    public void test1740() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1717");
+            System.out.format("%n%s%n", "RegressionTest3.test1740");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10646,9 +11574,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1718() throws Throwable {
+    public void test1741() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1718");
+            System.out.format("%n%s%n", "RegressionTest3.test1741");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10681,9 +11609,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1719() throws Throwable {
+    public void test1742() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1719");
+            System.out.format("%n%s%n", "RegressionTest3.test1742");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -10714,9 +11642,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1720() throws Throwable {
+    public void test1743() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1720");
+            System.out.format("%n%s%n", "RegressionTest3.test1743");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -10753,9 +11681,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1721() throws Throwable {
+    public void test1744() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1721");
+            System.out.format("%n%s%n", "RegressionTest3.test1744");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10828,9 +11756,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1722() throws Throwable {
+    public void test1745() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1722");
+            System.out.format("%n%s%n", "RegressionTest3.test1745");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler5 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
@@ -10855,9 +11783,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1723() throws Throwable {
+    public void test1746() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1723");
+            System.out.format("%n%s%n", "RegressionTest3.test1746");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -10957,9 +11885,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1724() throws Throwable {
+    public void test1747() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1724");
+            System.out.format("%n%s%n", "RegressionTest3.test1747");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11032,9 +11960,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1725() throws Throwable {
+    public void test1748() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1725");
+            System.out.format("%n%s%n", "RegressionTest3.test1748");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11071,9 +11999,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1726() throws Throwable {
+    public void test1749() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1726");
+            System.out.format("%n%s%n", "RegressionTest3.test1749");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken6 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11192,9 +12120,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1727() throws Throwable {
+    public void test1750() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1727");
+            System.out.format("%n%s%n", "RegressionTest3.test1750");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -11209,9 +12137,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1728() throws Throwable {
+    public void test1751() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1728");
+            System.out.format("%n%s%n", "RegressionTest3.test1751");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -11247,9 +12175,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1729() throws Throwable {
+    public void test1752() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1729");
+            System.out.format("%n%s%n", "RegressionTest3.test1752");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11301,9 +12229,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1730() throws Throwable {
+    public void test1753() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1730");
+            System.out.format("%n%s%n", "RegressionTest3.test1753");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11403,9 +12331,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1731() throws Throwable {
+    public void test1754() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1731");
+            System.out.format("%n%s%n", "RegressionTest3.test1754");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11427,9 +12355,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1732() throws Throwable {
+    public void test1755() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1732");
+            System.out.format("%n%s%n", "RegressionTest3.test1755");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -11469,9 +12397,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1733() throws Throwable {
+    public void test1756() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1733");
+            System.out.format("%n%s%n", "RegressionTest3.test1756");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -11487,9 +12415,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1734() throws Throwable {
+    public void test1757() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1734");
+            System.out.format("%n%s%n", "RegressionTest3.test1757");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11581,9 +12509,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1735() throws Throwable {
+    public void test1758() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1735");
+            System.out.format("%n%s%n", "RegressionTest3.test1758");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11608,9 +12536,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1736() throws Throwable {
+    public void test1759() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1736");
+            System.out.format("%n%s%n", "RegressionTest3.test1759");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11634,9 +12562,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1737() throws Throwable {
+    public void test1760() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1737");
+            System.out.format("%n%s%n", "RegressionTest3.test1760");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11664,9 +12592,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1738() throws Throwable {
+    public void test1761() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1738");
+            System.out.format("%n%s%n", "RegressionTest3.test1761");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11697,9 +12625,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1739() throws Throwable {
+    public void test1762() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1739");
+            System.out.format("%n%s%n", "RegressionTest3.test1762");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11775,9 +12703,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1740() throws Throwable {
+    public void test1763() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1740");
+            System.out.format("%n%s%n", "RegressionTest3.test1763");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11883,9 +12811,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1741() throws Throwable {
+    public void test1764() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1741");
+            System.out.format("%n%s%n", "RegressionTest3.test1764");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -11896,9 +12824,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1742() throws Throwable {
+    public void test1765() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1742");
+            System.out.format("%n%s%n", "RegressionTest3.test1765");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -11947,9 +12875,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1743() throws Throwable {
+    public void test1766() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1743");
+            System.out.format("%n%s%n", "RegressionTest3.test1766");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -11969,9 +12897,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1744() throws Throwable {
+    public void test1767() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1744");
+            System.out.format("%n%s%n", "RegressionTest3.test1767");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -11985,9 +12913,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1745() throws Throwable {
+    public void test1768() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1745");
+            System.out.format("%n%s%n", "RegressionTest3.test1768");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12008,9 +12936,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1746() throws Throwable {
+    public void test1769() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1746");
+            System.out.format("%n%s%n", "RegressionTest3.test1769");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12034,9 +12962,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1747() throws Throwable {
+    public void test1770() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1747");
+            System.out.format("%n%s%n", "RegressionTest3.test1770");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[][] byteArray3 = bufferRecycler2._byteBuffers;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
@@ -12047,9 +12975,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1748() throws Throwable {
+    public void test1771() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1748");
+            System.out.format("%n%s%n", "RegressionTest3.test1771");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12077,9 +13005,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1749() throws Throwable {
+    public void test1772() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1749");
+            System.out.format("%n%s%n", "RegressionTest3.test1772");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12115,9 +13043,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1750() throws Throwable {
+    public void test1773() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1750");
+            System.out.format("%n%s%n", "RegressionTest3.test1773");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.ensureNotShared();
@@ -12133,9 +13061,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1751() throws Throwable {
+    public void test1774() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1751");
+            System.out.format("%n%s%n", "RegressionTest3.test1774");
         com.fasterxml.jackson.core.JsonLocation jsonLocation1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
@@ -12235,9 +13163,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1752() throws Throwable {
+    public void test1775() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1752");
+            System.out.format("%n%s%n", "RegressionTest3.test1775");
         com.fasterxml.jackson.core.JsonLocation jsonLocation1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
@@ -12340,9 +13268,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1753() throws Throwable {
+    public void test1776() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1753");
+            System.out.format("%n%s%n", "RegressionTest3.test1776");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12366,9 +13294,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1754() throws Throwable {
+    public void test1777() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1754");
+            System.out.format("%n%s%n", "RegressionTest3.test1777");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12399,9 +13327,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1755() throws Throwable {
+    public void test1778() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1755");
+            System.out.format("%n%s%n", "RegressionTest3.test1778");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -12424,9 +13352,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1756() throws Throwable {
+    public void test1779() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1756");
+            System.out.format("%n%s%n", "RegressionTest3.test1779");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -12461,9 +13389,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1757() throws Throwable {
+    public void test1780() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1757");
+            System.out.format("%n%s%n", "RegressionTest3.test1780");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12541,9 +13469,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1758() throws Throwable {
+    public void test1781() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1758");
+            System.out.format("%n%s%n", "RegressionTest3.test1781");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -12568,9 +13496,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1759() throws Throwable {
+    public void test1782() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1759");
+            System.out.format("%n%s%n", "RegressionTest3.test1782");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.contentsAsString();
@@ -12618,9 +13546,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1760() throws Throwable {
+    public void test1783() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1760");
+            System.out.format("%n%s%n", "RegressionTest3.test1783");
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -12759,9 +13687,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1761() throws Throwable {
+    public void test1784() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1761");
+            System.out.format("%n%s%n", "RegressionTest3.test1784");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -12796,9 +13724,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1762() throws Throwable {
+    public void test1785() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1762");
+            System.out.format("%n%s%n", "RegressionTest3.test1785");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.ensureNotShared();
@@ -12829,9 +13757,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1763() throws Throwable {
+    public void test1786() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1763");
+            System.out.format("%n%s%n", "RegressionTest3.test1786");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -12846,9 +13774,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1764() throws Throwable {
+    public void test1787() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1764");
+            System.out.format("%n%s%n", "RegressionTest3.test1787");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -12955,9 +13883,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1765() throws Throwable {
+    public void test1788() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1765");
+            System.out.format("%n%s%n", "RegressionTest3.test1788");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13098,9 +14026,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1766() throws Throwable {
+    public void test1789() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1766");
+            System.out.format("%n%s%n", "RegressionTest3.test1789");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -13141,9 +14069,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1767() throws Throwable {
+    public void test1790() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1767");
+            System.out.format("%n%s%n", "RegressionTest3.test1790");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13161,9 +14089,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1768() throws Throwable {
+    public void test1791() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1768");
+            System.out.format("%n%s%n", "RegressionTest3.test1791");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13205,9 +14133,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1769() throws Throwable {
+    public void test1792() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1769");
+            System.out.format("%n%s%n", "RegressionTest3.test1792");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13258,9 +14186,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1770() throws Throwable {
+    public void test1793() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1770");
+            System.out.format("%n%s%n", "RegressionTest3.test1793");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[][] byteArray3 = bufferRecycler2._byteBuffers;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
@@ -13272,9 +14200,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1771() throws Throwable {
+    public void test1794() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1771");
+            System.out.format("%n%s%n", "RegressionTest3.test1794");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13413,9 +14341,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1772() throws Throwable {
+    public void test1795() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1772");
+            System.out.format("%n%s%n", "RegressionTest3.test1795");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13447,9 +14375,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1773() throws Throwable {
+    public void test1796() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1773");
+            System.out.format("%n%s%n", "RegressionTest3.test1796");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -13529,9 +14457,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1774() throws Throwable {
+    public void test1797() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1774");
+            System.out.format("%n%s%n", "RegressionTest3.test1797");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
@@ -13612,9 +14540,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1775() throws Throwable {
+    public void test1798() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1775");
+            System.out.format("%n%s%n", "RegressionTest3.test1798");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -13644,9 +14572,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1776() throws Throwable {
+    public void test1799() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1776");
+            System.out.format("%n%s%n", "RegressionTest3.test1799");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13680,9 +14608,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1777() throws Throwable {
+    public void test1800() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1777");
+            System.out.format("%n%s%n", "RegressionTest3.test1800");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -13741,9 +14669,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1778() throws Throwable {
+    public void test1801() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1778");
+            System.out.format("%n%s%n", "RegressionTest3.test1801");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -13770,9 +14698,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1779() throws Throwable {
+    public void test1802() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1779");
+            System.out.format("%n%s%n", "RegressionTest3.test1802");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13798,9 +14726,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1780() throws Throwable {
+    public void test1803() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1780");
+            System.out.format("%n%s%n", "RegressionTest3.test1803");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13892,9 +14820,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1781() throws Throwable {
+    public void test1804() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1781");
+            System.out.format("%n%s%n", "RegressionTest3.test1804");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -13965,9 +14893,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1782() throws Throwable {
+    public void test1805() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1782");
+            System.out.format("%n%s%n", "RegressionTest3.test1805");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -13987,9 +14915,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1783() throws Throwable {
+    public void test1806() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1783");
+            System.out.format("%n%s%n", "RegressionTest3.test1806");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14018,9 +14946,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1784() throws Throwable {
+    public void test1807() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1784");
+            System.out.format("%n%s%n", "RegressionTest3.test1807");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -14064,9 +14992,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1785() throws Throwable {
+    public void test1808() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1785");
+            System.out.format("%n%s%n", "RegressionTest3.test1808");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14093,9 +15021,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1786() throws Throwable {
+    public void test1809() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1786");
+            System.out.format("%n%s%n", "RegressionTest3.test1809");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14125,9 +15053,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1787() throws Throwable {
+    public void test1810() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1787");
+            System.out.format("%n%s%n", "RegressionTest3.test1810");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14188,9 +15116,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1788() throws Throwable {
+    public void test1811() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1788");
+            System.out.format("%n%s%n", "RegressionTest3.test1811");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -14204,9 +15132,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1789() throws Throwable {
+    public void test1812() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1789");
+            System.out.format("%n%s%n", "RegressionTest3.test1812");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14244,9 +15172,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1790() throws Throwable {
+    public void test1813() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1790");
+            System.out.format("%n%s%n", "RegressionTest3.test1813");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14342,9 +15270,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1791() throws Throwable {
+    public void test1814() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1791");
+            System.out.format("%n%s%n", "RegressionTest3.test1814");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14369,9 +15297,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1792() throws Throwable {
+    public void test1815() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1792");
+            System.out.format("%n%s%n", "RegressionTest3.test1815");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
         byte[] byteArray5 = bufferRecycler2.allocByteBuffer(2, (int) (byte) 10);
         char[] charArray8 = new char[] { ' ' };
@@ -14407,9 +15335,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1793() throws Throwable {
+    public void test1816() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1793");
+            System.out.format("%n%s%n", "RegressionTest3.test1816");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14464,9 +15392,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1794() throws Throwable {
+    public void test1817() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1794");
+            System.out.format("%n%s%n", "RegressionTest3.test1817");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14537,9 +15465,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1795() throws Throwable {
+    public void test1818() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1795");
+            System.out.format("%n%s%n", "RegressionTest3.test1818");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -14572,9 +15500,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1796() throws Throwable {
+    public void test1819() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1796");
+            System.out.format("%n%s%n", "RegressionTest3.test1819");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -14715,9 +15643,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1797() throws Throwable {
+    public void test1820() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1797");
+            System.out.format("%n%s%n", "RegressionTest3.test1820");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14742,9 +15670,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1798() throws Throwable {
+    public void test1821() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1798");
+            System.out.format("%n%s%n", "RegressionTest3.test1821");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14770,9 +15698,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1799() throws Throwable {
+    public void test1822() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1799");
+            System.out.format("%n%s%n", "RegressionTest3.test1822");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14826,9 +15754,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1800() throws Throwable {
+    public void test1823() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1800");
+            System.out.format("%n%s%n", "RegressionTest3.test1823");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14863,9 +15791,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1801() throws Throwable {
+    public void test1824() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1801");
+            System.out.format("%n%s%n", "RegressionTest3.test1824");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -14894,9 +15822,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1802() throws Throwable {
+    public void test1825() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1802");
+            System.out.format("%n%s%n", "RegressionTest3.test1825");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -14922,9 +15850,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1803() throws Throwable {
+    public void test1826() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1803");
+            System.out.format("%n%s%n", "RegressionTest3.test1826");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -14966,9 +15894,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1804() throws Throwable {
+    public void test1827() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1804");
+            System.out.format("%n%s%n", "RegressionTest3.test1827");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -14994,9 +15922,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1805() throws Throwable {
+    public void test1828() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1805");
+            System.out.format("%n%s%n", "RegressionTest3.test1828");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
@@ -15084,9 +16012,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1806() throws Throwable {
+    public void test1829() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1806");
+            System.out.format("%n%s%n", "RegressionTest3.test1829");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15116,9 +16044,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1807() throws Throwable {
+    public void test1830() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1807");
+            System.out.format("%n%s%n", "RegressionTest3.test1830");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -15156,9 +16084,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1808() throws Throwable {
+    public void test1831() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1808");
+            System.out.format("%n%s%n", "RegressionTest3.test1831");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15209,9 +16137,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1809() throws Throwable {
+    public void test1832() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1809");
+            System.out.format("%n%s%n", "RegressionTest3.test1832");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15241,9 +16169,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1810() throws Throwable {
+    public void test1833() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1810");
+            System.out.format("%n%s%n", "RegressionTest3.test1833");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -15329,9 +16257,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1811() throws Throwable {
+    public void test1834() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1811");
+            System.out.format("%n%s%n", "RegressionTest3.test1834");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -15343,9 +16271,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1812() throws Throwable {
+    public void test1835() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1812");
+            System.out.format("%n%s%n", "RegressionTest3.test1835");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
@@ -15401,9 +16329,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1813() throws Throwable {
+    public void test1836() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1813");
+            System.out.format("%n%s%n", "RegressionTest3.test1836");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -15433,9 +16361,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1814() throws Throwable {
+    public void test1837() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1814");
+            System.out.format("%n%s%n", "RegressionTest3.test1837");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -15560,9 +16488,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1815() throws Throwable {
+    public void test1838() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1815");
+            System.out.format("%n%s%n", "RegressionTest3.test1838");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15586,9 +16514,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1816() throws Throwable {
+    public void test1839() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1816");
+            System.out.format("%n%s%n", "RegressionTest3.test1839");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -15636,9 +16564,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1817() throws Throwable {
+    public void test1840() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1817");
+            System.out.format("%n%s%n", "RegressionTest3.test1840");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -15668,9 +16596,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1818() throws Throwable {
+    public void test1841() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1818");
+            System.out.format("%n%s%n", "RegressionTest3.test1841");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -15702,9 +16630,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1819() throws Throwable {
+    public void test1842() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1819");
+            System.out.format("%n%s%n", "RegressionTest3.test1842");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15743,9 +16671,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1820() throws Throwable {
+    public void test1843() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1820");
+            System.out.format("%n%s%n", "RegressionTest3.test1843");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -15781,9 +16709,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1821() throws Throwable {
+    public void test1844() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1821");
+            System.out.format("%n%s%n", "RegressionTest3.test1844");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15812,9 +16740,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1822() throws Throwable {
+    public void test1845() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1822");
+            System.out.format("%n%s%n", "RegressionTest3.test1845");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15834,9 +16762,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1823() throws Throwable {
+    public void test1846() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1823");
+            System.out.format("%n%s%n", "RegressionTest3.test1846");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         java.io.Writer writer2 = null;
@@ -15896,9 +16824,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1824() throws Throwable {
+    public void test1847() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1824");
+            System.out.format("%n%s%n", "RegressionTest3.test1847");
         com.fasterxml.jackson.core.JsonLocation jsonLocation1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
@@ -15948,9 +16876,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1825() throws Throwable {
+    public void test1848() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1825");
+            System.out.format("%n%s%n", "RegressionTest3.test1848");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -15986,9 +16914,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1826() throws Throwable {
+    public void test1849() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1826");
+            System.out.format("%n%s%n", "RegressionTest3.test1849");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16038,9 +16966,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1827() throws Throwable {
+    public void test1850() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1827");
+            System.out.format("%n%s%n", "RegressionTest3.test1850");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16058,9 +16986,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1828() throws Throwable {
+    public void test1851() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1828");
+            System.out.format("%n%s%n", "RegressionTest3.test1851");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
@@ -16105,9 +17033,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1829() throws Throwable {
+    public void test1852() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1829");
+            System.out.format("%n%s%n", "RegressionTest3.test1852");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16213,9 +17141,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1830() throws Throwable {
+    public void test1853() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1830");
+            System.out.format("%n%s%n", "RegressionTest3.test1853");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16316,9 +17244,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1831() throws Throwable {
+    public void test1854() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1831");
+            System.out.format("%n%s%n", "RegressionTest3.test1854");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16397,9 +17325,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1832() throws Throwable {
+    public void test1855() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1832");
+            System.out.format("%n%s%n", "RegressionTest3.test1855");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         int int2 = textBuffer1.size();
@@ -16416,9 +17344,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1833() throws Throwable {
+    public void test1856() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1833");
+            System.out.format("%n%s%n", "RegressionTest3.test1856");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
@@ -16475,9 +17403,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1834() throws Throwable {
+    public void test1857() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1834");
+            System.out.format("%n%s%n", "RegressionTest3.test1857");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator3 = jsonFactory0.getOutputDecorator();
@@ -16502,9 +17430,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1835() throws Throwable {
+    public void test1858() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1835");
+            System.out.format("%n%s%n", "RegressionTest3.test1858");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
@@ -16604,9 +17532,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1836() throws Throwable {
+    public void test1859() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1836");
+            System.out.format("%n%s%n", "RegressionTest3.test1859");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
         java.io.Reader reader3 = null;
@@ -16631,9 +17559,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1837() throws Throwable {
+    public void test1860() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1837");
+            System.out.format("%n%s%n", "RegressionTest3.test1860");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.resetWithEmpty();
@@ -16659,9 +17587,9 @@ public class RegressionTest3 {
     }
 
     @Test
-    public void test1838() throws Throwable {
+    public void test1861() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1838");
+            System.out.format("%n%s%n", "RegressionTest3.test1861");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
@@ -16727,2508 +17655,6 @@ public class RegressionTest3 {
         org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + true + "'", boolean38 == true);
         org.junit.Assert.assertNotNull(jsonFactory39);
         org.junit.Assert.assertNotNull(jsonFactory40);
-    }
-
-    @Test
-    public void test1839() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1839");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
-        jsonParser6.close();
-        com.fasterxml.jackson.core.FormatSchema formatSchema8 = null;
-        boolean boolean9 = jsonParser6.canUseSchema(formatSchema8);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec10 = jsonParser6.getCodec();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertNull(objectCodec10);
-    }
-
-    @Test
-    public void test1840() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1840");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        java.io.Writer writer5 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator6 = jsonFactory4.createGenerator(writer5);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory4.copy();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator9 = jsonFactory8.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature10 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory8.configure(feature10, true);
-        com.fasterxml.jackson.core.JsonParser.Feature feature13 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = jsonFactory12.enable(feature13);
-        boolean boolean15 = jsonFactory14.requiresCustomCodec();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator17 = jsonFactory16.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory16.configure(feature18, true);
-        boolean boolean21 = feature18.enabledByDefault();
-        boolean boolean22 = jsonFactory14.isEnabled(feature18);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory7.configure(feature18, false);
-        java.io.InputStream inputStream25 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser26 = jsonFactory24.createJsonParser(inputStream25);
-        java.io.OutputStream outputStream27 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator28 = jsonFactory24.createGenerator(outputStream27);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonGenerator6);
-        org.junit.Assert.assertNotNull(jsonFactory7);
-        org.junit.Assert.assertNull(outputDecorator9);
-        org.junit.Assert.assertTrue("'" + feature10 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature10.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory12);
-        org.junit.Assert.assertTrue("'" + feature13 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature13.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertNotNull(jsonFactory14);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNull(outputDecorator17);
-        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertNotNull(jsonParser26);
-        org.junit.Assert.assertNotNull(jsonGenerator28);
-    }
-
-    @Test
-    public void test1841() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1841");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        java.io.Reader reader5 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createJsonParser(reader5);
-        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonParser6.configure(feature7, true);
-        jsonParser9.clearCurrentToken();
-        com.fasterxml.jackson.core.Version version11 = jsonParser9.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature12 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean14 = feature12.enabledIn(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonParser9.configure(feature12, true);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec17 = null;
-        jsonParser9.setCodec(objectCodec17);
-        com.fasterxml.jackson.core.JsonToken jsonToken19 = jsonParser9.nextValue();
-        com.fasterxml.jackson.core.JsonStreamContext jsonStreamContext20 = jsonParser9.getParsingContext();
-        boolean boolean21 = jsonParser9.getValueAsBoolean();
-        double double22 = jsonParser9.getValueAsDouble();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation23 = jsonParser9.getTokenLocation();
-        int int25 = jsonParser9.nextIntValue(512);
-        long long27 = jsonParser9.nextLongValue((long) 97);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser9);
-        org.junit.Assert.assertNotNull(version11);
-        org.junit.Assert.assertTrue("'" + feature12 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature12.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(jsonParser16);
-        org.junit.Assert.assertNull(jsonToken19);
-        org.junit.Assert.assertNotNull(jsonStreamContext20);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + double22 + "' != '" + 0.0d + "'", double22 == 0.0d);
-        org.junit.Assert.assertNotNull(jsonLocation23);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 512 + "'", int25 == 512);
-        org.junit.Assert.assertTrue("'" + long27 + "' != '" + 97L + "'", long27 == 97L);
-    }
-
-    @Test
-    public void test1842() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1842");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
-        boolean boolean7 = jsonParser6.getValueAsBoolean();
-        boolean boolean8 = jsonParser6.isClosed();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-    }
-
-    @Test
-    public void test1843() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1843");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
-        textBuffer1.resetWithEmpty();
-        int int3 = textBuffer1.size();
-        textBuffer1.ensureNotShared();
-        int int5 = textBuffer1.size();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler6 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer7 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler6);
-        textBuffer7.resetWithEmpty();
-        textBuffer7.setCurrentLength((int) ' ');
-        char[] charArray11 = textBuffer7.emptyAndGetCurrentSegment();
-        textBuffer1.resetWithCopy(charArray11, 0, 12);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler17 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        char[][] charArray18 = bufferRecycler17._charBuffers;
-        char[] charArray20 = bufferRecycler17.calloc((int) '#');
-        textBuffer1.resetWithShared(charArray20, 9, 4);
-        java.lang.String str24 = textBuffer1.contentsAsString();
-        textBuffer1.resetWithString("\000\000\000\000\000\000\000");
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertNotNull(charArray11);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray11), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray11), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertNotNull(charArray18);
-        org.junit.Assert.assertNotNull(charArray20);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray20), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray20), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray20), "[\000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000, \000]");
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "\000\000\000\000" + "'", str24, "\000\000\000\000");
-    }
-
-    @Test
-    public void test1844() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1844");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes5 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory4.setCharacterEscapes(characterEscapes5);
-        java.io.OutputStream outputStream7 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator8 = jsonFactory6.createJsonGenerator(outputStream7);
-        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory6.createJsonParser("null");
-        boolean boolean11 = jsonFactory6.requiresPropertyOrdering();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator13 = jsonFactory12.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature14 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory12.configure(feature14, true);
-        com.fasterxml.jackson.core.JsonParser.Feature feature17 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory16.enable(feature17);
-        boolean boolean19 = jsonFactory18.requiresCustomCodec();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator21 = jsonFactory20.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature22 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory20.configure(feature22, true);
-        boolean boolean25 = feature22.enabledByDefault();
-        boolean boolean26 = jsonFactory18.isEnabled(feature22);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory28 = jsonFactory6.configure(feature22, true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory30 = jsonFactory28.setRootValueSeparator("");
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator31 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory32 = jsonFactory28.setOutputDecorator(outputDecorator31);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonFactory6);
-        org.junit.Assert.assertNotNull(jsonGenerator8);
-        org.junit.Assert.assertNotNull(jsonParser10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNull(outputDecorator13);
-        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature14.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory16);
-        org.junit.Assert.assertTrue("'" + feature17 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature17.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertNull(outputDecorator21);
-        org.junit.Assert.assertTrue("'" + feature22 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature22.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + true + "'", boolean25 == true);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
-        org.junit.Assert.assertNotNull(jsonFactory28);
-        org.junit.Assert.assertNotNull(jsonFactory30);
-        org.junit.Assert.assertNotNull(jsonFactory32);
-    }
-
-    @Test
-    public void test1845() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1845");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        java.lang.String str6 = jsonFactory4.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory4.copy();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory8.setRootValueSeparator("hi!");
-        java.io.Reader reader11 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser12 = jsonFactory10.createJsonParser(reader11);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory13 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator14 = jsonFactory13.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature15 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory13.configure(feature15, true);
-        java.io.Reader reader18 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory17.createJsonParser(reader18);
-        com.fasterxml.jackson.core.JsonParser.Feature feature20 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonParser19.configure(feature20, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser23 = jsonParser12.disable(feature20);
-        com.fasterxml.jackson.core.FormatSchema formatSchema24 = null;
-        boolean boolean25 = jsonParser23.canUseSchema(formatSchema24);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory26 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator27 = jsonFactory26.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature28 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory30 = jsonFactory26.configure(feature28, true);
-        java.io.Reader reader31 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser32 = jsonFactory30.createJsonParser(reader31);
-        com.fasterxml.jackson.core.JsonParser.Feature feature33 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser35 = jsonParser32.configure(feature33, true);
-        jsonParser35.clearCurrentToken();
-        com.fasterxml.jackson.core.Version version37 = jsonParser35.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature38 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean40 = feature38.enabledIn(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser42 = jsonParser35.configure(feature38, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser43 = jsonParser23.disable(feature38);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory44 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator45 = jsonFactory44.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature46 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory48 = jsonFactory44.configure(feature46, true);
-        java.io.Reader reader49 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonFactory48.createJsonParser(reader49);
-        com.fasterxml.jackson.core.JsonParser.Feature feature51 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser53 = jsonParser50.configure(feature51, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser54 = jsonParser43.disable(feature51);
-        boolean boolean55 = jsonFactory7.isEnabled(feature51);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler58 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        byte[][] byteArray59 = bufferRecycler58._byteBuffers;
-        byte[][] byteArray60 = bufferRecycler58._byteBuffers;
-        char[] charArray62 = bufferRecycler58.allocCharBuffer((int) (short) 1);
-        byte[][] byteArray63 = bufferRecycler58._byteBuffers;
-        byte[] byteArray65 = bufferRecycler58.balloc((int) (short) 100);
-        com.fasterxml.jackson.core.JsonParser jsonParser68 = jsonFactory7.createParser(byteArray65, (int) '#', 0);
-        boolean boolean69 = jsonFactory7.canHandleBinaryNatively();
-        java.net.URL uRL70 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.JsonParser jsonParser71 = jsonFactory7.createJsonParser(uRL70);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + " " + "'", str6, " ");
-        org.junit.Assert.assertNotNull(jsonFactory7);
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertNotNull(jsonParser12);
-        org.junit.Assert.assertNull(outputDecorator14);
-        org.junit.Assert.assertTrue("'" + feature15 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature15.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonParser19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature20.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertNotNull(jsonParser23);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertNull(outputDecorator27);
-        org.junit.Assert.assertTrue("'" + feature28 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature28.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory30);
-        org.junit.Assert.assertNotNull(jsonParser32);
-        org.junit.Assert.assertTrue("'" + feature33 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature33.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser35);
-        org.junit.Assert.assertNotNull(version37);
-        org.junit.Assert.assertTrue("'" + feature38 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature38.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertNotNull(jsonParser42);
-        org.junit.Assert.assertNotNull(jsonParser43);
-        org.junit.Assert.assertNull(outputDecorator45);
-        org.junit.Assert.assertTrue("'" + feature46 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature46.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory48);
-        org.junit.Assert.assertNotNull(jsonParser50);
-        org.junit.Assert.assertTrue("'" + feature51 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature51.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser53);
-        org.junit.Assert.assertNotNull(jsonParser54);
-        org.junit.Assert.assertTrue("'" + boolean55 + "' != '" + false + "'", boolean55 == false);
-        org.junit.Assert.assertNotNull(byteArray59);
-        org.junit.Assert.assertNotNull(byteArray60);
-        org.junit.Assert.assertNotNull(charArray62);
-        org.junit.Assert.assertNotNull(byteArray63);
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]");
-        org.junit.Assert.assertNotNull(jsonParser68);
-        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
-    }
-
-    @Test
-    public void test1846() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1846");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        com.fasterxml.jackson.core.JsonToken jsonToken7 = jsonParser6.nextToken();
-        int int8 = jsonToken7.id();
-        byte[] byteArray9 = jsonToken7.asByteArray();
-        int int10 = jsonToken7.id();
-        boolean boolean11 = jsonToken7.isNumeric();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + jsonToken7 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken7.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 9 + "'", int8 == 9);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[116, 114, 117, 101]");
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 9 + "'", int10 == 9);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-    }
-
-    @Test
-    public void test1847() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1847");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = jsonFactory6.setRootValueSeparator("hi!");
-        java.io.Reader reader9 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory8.createJsonParser(reader9);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator12 = jsonFactory11.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature13 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = jsonFactory11.configure(feature13, true);
-        java.io.Reader reader16 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonFactory15.createJsonParser(reader16);
-        com.fasterxml.jackson.core.JsonParser.Feature feature18 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser20 = jsonParser17.configure(feature18, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser21 = jsonParser10.disable(feature18);
-        com.fasterxml.jackson.core.FormatSchema formatSchema22 = null;
-        boolean boolean23 = jsonParser21.canUseSchema(formatSchema22);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator25 = jsonFactory24.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature26 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory28 = jsonFactory24.configure(feature26, true);
-        java.io.Reader reader29 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser30 = jsonFactory28.createJsonParser(reader29);
-        com.fasterxml.jackson.core.JsonParser.Feature feature31 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser33 = jsonParser30.configure(feature31, true);
-        jsonParser33.clearCurrentToken();
-        com.fasterxml.jackson.core.Version version35 = jsonParser33.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature36 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean38 = feature36.enabledIn(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonParser33.configure(feature36, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser41 = jsonParser21.disable(feature36);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator43 = jsonFactory42.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature44 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory42.configure(feature44, true);
-        java.io.Reader reader47 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser48 = jsonFactory46.createJsonParser(reader47);
-        com.fasterxml.jackson.core.JsonParser.Feature feature49 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser51 = jsonParser48.configure(feature49, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser52 = jsonParser41.disable(feature49);
-        boolean boolean53 = jsonFactory4.isEnabled(feature49);
-        java.io.Writer writer54 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator55 = jsonFactory4.createJsonGenerator(writer54);
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator56 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory57 = jsonFactory4.setOutputDecorator(outputDecorator56);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory58 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator59 = jsonFactory58.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature60 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory62 = jsonFactory58.configure(feature60, true);
-        boolean boolean63 = feature60.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory64 = jsonFactory4.disable(feature60);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator65 = jsonFactory4.getInputDecorator();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertNotNull(jsonFactory8);
-        org.junit.Assert.assertNotNull(jsonParser10);
-        org.junit.Assert.assertNull(outputDecorator12);
-        org.junit.Assert.assertTrue("'" + feature13 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature13.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory15);
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature18.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser20);
-        org.junit.Assert.assertNotNull(jsonParser21);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNull(outputDecorator25);
-        org.junit.Assert.assertTrue("'" + feature26 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature26.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory28);
-        org.junit.Assert.assertNotNull(jsonParser30);
-        org.junit.Assert.assertTrue("'" + feature31 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature31.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser33);
-        org.junit.Assert.assertNotNull(version35);
-        org.junit.Assert.assertTrue("'" + feature36 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature36.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean38 + "' != '" + false + "'", boolean38 == false);
-        org.junit.Assert.assertNotNull(jsonParser40);
-        org.junit.Assert.assertNotNull(jsonParser41);
-        org.junit.Assert.assertNull(outputDecorator43);
-        org.junit.Assert.assertTrue("'" + feature44 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature44.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory46);
-        org.junit.Assert.assertNotNull(jsonParser48);
-        org.junit.Assert.assertTrue("'" + feature49 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature49.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser51);
-        org.junit.Assert.assertNotNull(jsonParser52);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
-        org.junit.Assert.assertNotNull(jsonGenerator55);
-        org.junit.Assert.assertNotNull(jsonFactory57);
-        org.junit.Assert.assertNull(outputDecorator59);
-        org.junit.Assert.assertTrue("'" + feature60 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature60.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory62);
-        org.junit.Assert.assertTrue("'" + boolean63 + "' != '" + true + "'", boolean63 == true);
-        org.junit.Assert.assertNotNull(jsonFactory64);
-        org.junit.Assert.assertNull(inputDecorator65);
-    }
-
-    @Test
-    public void test1848() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1848");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        int int8 = jsonParser6.getValueAsInt((int) (byte) 1);
-        boolean boolean9 = jsonParser6.isExpectedStartArrayToken();
-        boolean boolean10 = jsonParser6.canReadObjectId();
-        boolean boolean11 = jsonParser6.requiresCustomCodec();
-        boolean boolean12 = jsonParser6.requiresCustomCodec();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 1 + "'", int8 == 1);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-    }
-
-    @Test
-    public void test1849() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1849");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        jsonParser6.close();
-        java.lang.Object obj8 = jsonParser6.getTypeId();
-        long long10 = jsonParser6.nextLongValue((long) (byte) 0);
-        java.lang.String str11 = jsonParser6.nextTextValue();
-        boolean boolean12 = jsonParser6.isClosed();
-        long long14 = jsonParser6.getValueAsLong(100L);
-        int int15 = jsonParser6.getValueAsInt();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator17 = jsonFactory16.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature18 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory16.configure(feature18, true);
-        java.io.OutputStream outputStream21 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator22 = jsonFactory16.createGenerator(outputStream21);
-        java.io.Writer writer23 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator24 = jsonFactory16.createJsonGenerator(writer23);
-        java.io.Writer writer25 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator26 = jsonFactory16.createGenerator(writer25);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory29 = jsonFactory27.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken30 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean31 = jsonToken30.isBoolean();
-        byte[] byteArray32 = jsonToken30.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser33 = jsonFactory29.createJsonParser(byteArray32);
-        com.fasterxml.jackson.core.JsonParser.Feature feature34 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
-        com.fasterxml.jackson.core.JsonParser jsonParser36 = jsonParser33.configure(feature34, true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory37 = jsonFactory16.disable(feature34);
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonParser6.disable(feature34);
-        java.lang.Object obj39 = jsonParser38.getEmbeddedObject();
-        long long40 = jsonParser38.getValueAsLong();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertTrue("'" + long10 + "' != '" + 0L + "'", long10 == 0L);
-        org.junit.Assert.assertNull(str11);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertTrue("'" + long14 + "' != '" + 100L + "'", long14 == 100L);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertNull(outputDecorator17);
-        org.junit.Assert.assertTrue("'" + feature18 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature18.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertNotNull(jsonGenerator22);
-        org.junit.Assert.assertNotNull(jsonGenerator24);
-        org.junit.Assert.assertNotNull(jsonGenerator26);
-        org.junit.Assert.assertNotNull(jsonFactory29);
-        org.junit.Assert.assertTrue("'" + jsonToken30 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken30.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + true + "'", boolean31 == true);
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser33);
-        org.junit.Assert.assertTrue("'" + feature34 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER + "'", feature34.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER));
-        org.junit.Assert.assertNotNull(jsonParser36);
-        org.junit.Assert.assertNotNull(jsonFactory37);
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertNull(obj39);
-        org.junit.Assert.assertTrue("'" + long40 + "' != '" + 0L + "'", long40 == 0L);
-    }
-
-    @Test
-    public void test1850() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1850");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer3 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler4 = new com.fasterxml.jackson.core.util.BufferRecycler();
-        char[] charArray7 = bufferRecycler4.allocCharBuffer(0, (int) (short) -1);
-        textBuffer3.resetWithCopy(charArray7, (int) (short) 10, 2);
-        int int11 = textBuffer3.size();
-        char[] charArray12 = textBuffer3.finishCurrentSegment();
-        textBuffer3.releaseBuffers();
-        org.junit.Assert.assertNotNull(charArray7);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 2 + "'", int11 == 2);
-        org.junit.Assert.assertNotNull(charArray12);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray12), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray12), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-    }
-
-    @Test
-    public void test1851() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1851");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory4.setRootValueSeparator("true");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory7.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken10 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean11 = jsonToken10.isBoolean();
-        byte[] byteArray12 = jsonToken10.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory9.createJsonParser(byteArray12);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature14 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory9.configure(feature14, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory9.copy();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator19 = jsonFactory18.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory18.configure(feature20, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator23 = jsonFactory22.getInputDecorator();
-        java.lang.String str24 = jsonFactory22.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory25 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator26 = jsonFactory25.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature27 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory29 = jsonFactory25.configure(feature27, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser31 = jsonFactory29.createParser("");
-        com.fasterxml.jackson.core.JsonFactory.Feature feature32 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean33 = feature32.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory34 = jsonFactory29.enable(feature32);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory36 = jsonFactory22.configure(feature32, false);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature37 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory38 = jsonFactory22.disable(feature37);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory39 = jsonFactory9.enable(feature37);
-        boolean boolean40 = jsonFactory4.isEnabled(feature37);
-        boolean boolean41 = jsonFactory4.requiresPropertyOrdering();
-        com.fasterxml.jackson.core.JsonParser jsonParser43 = jsonFactory4.createParser("");
-        java.io.Reader reader44 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser45 = jsonFactory4.createParser(reader44);
-        java.net.URL uRL46 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.JsonParser jsonParser47 = jsonFactory4.createParser(uRL46);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonFactory6);
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertTrue("'" + jsonToken10 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken10.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + true + "'", boolean11 == true);
-        org.junit.Assert.assertNotNull(byteArray12);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray12), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature14.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory16);
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNull(outputDecorator19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNull(inputDecorator23);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + " " + "'", str24, " ");
-        org.junit.Assert.assertNull(outputDecorator26);
-        org.junit.Assert.assertTrue("'" + feature27 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature27.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory29);
-        org.junit.Assert.assertNotNull(jsonParser31);
-        org.junit.Assert.assertTrue("'" + feature32 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature32.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + true + "'", boolean33 == true);
-        org.junit.Assert.assertNotNull(jsonFactory34);
-        org.junit.Assert.assertNotNull(jsonFactory36);
-        org.junit.Assert.assertTrue("'" + feature37 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES + "'", feature37.equals(com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory38);
-        org.junit.Assert.assertNotNull(jsonFactory39);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + true + "'", boolean40 == true);
-        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
-        org.junit.Assert.assertNotNull(jsonParser43);
-        org.junit.Assert.assertNotNull(jsonParser45);
-    }
-
-    @Test
-    public void test1852() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1852");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        jsonParser6.close();
-        java.lang.Object obj8 = jsonParser6.getTypeId();
-        long long10 = jsonParser6.nextLongValue((long) (byte) 0);
-        java.lang.String str11 = jsonParser6.nextTextValue();
-        boolean boolean12 = jsonParser6.isClosed();
-        long long14 = jsonParser6.getValueAsLong(100L);
-        int int15 = jsonParser6.getTextLength();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation16 = jsonParser6.getCurrentLocation();
-        boolean boolean17 = jsonParser6.getValueAsBoolean();
-        com.fasterxml.jackson.core.Base64Variant base64Variant18 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            byte[] byteArray19 = jsonParser6.getBinaryValue(base64Variant18);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: [B@6872f9c8; line: 1, column: 13]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertTrue("'" + long10 + "' != '" + 0L + "'", long10 == 0L);
-        org.junit.Assert.assertNull(str11);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertTrue("'" + long14 + "' != '" + 100L + "'", long14 == 100L);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
-        org.junit.Assert.assertNotNull(jsonLocation16);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-    }
-
-    @Test
-    public void test1853() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1853");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
-        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean9 = feature7.enabledIn(1);
-        int int10 = feature7.getMask();
-        boolean boolean12 = feature7.enabledIn(2);
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonParser6.disable(feature7);
-        boolean boolean14 = jsonParser13.getValueAsBoolean();
-        java.lang.Object obj15 = jsonParser13.getTypeId();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 256 + "'", int10 == 256);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNull(obj15);
-    }
-
-    @Test
-    public void test1854() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1854");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
-        jsonParser6.close();
-        java.lang.Boolean boolean8 = jsonParser6.nextBooleanValue();
-        int int9 = jsonParser6.getFeatureMask();
-        java.io.OutputStream outputStream10 = null;
-        int int11 = jsonParser6.releaseBuffered(outputStream10);
-        boolean boolean12 = jsonParser6.isExpectedStartArrayToken();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory13 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator14 = jsonFactory13.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature15 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory13.configure(feature15, true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory17.setRootValueSeparator("true");
-        com.fasterxml.jackson.core.JsonParser jsonParser21 = jsonFactory19.createParser(" ");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler23 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer24 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler23);
-        textBuffer24.resetWithEmpty();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler28 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        byte[] byteArray31 = bufferRecycler28.allocByteBuffer(2, (int) (byte) 10);
-        char[] charArray34 = new char[] { ' ' };
-        bufferRecycler28.releaseCharBuffer(0, charArray34);
-        textBuffer24.resetWithShared(charArray34, 4000, 4);
-        com.fasterxml.jackson.core.JsonParser jsonParser39 = jsonFactory22.createParser(charArray34);
-        boolean boolean41 = jsonParser39.getValueAsBoolean(true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator43 = jsonFactory42.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature44 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory42.configure(feature44, true);
-        java.io.Reader reader47 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser48 = jsonFactory46.createJsonParser(reader47);
-        com.fasterxml.jackson.core.JsonParser.Feature feature49 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser51 = jsonParser48.configure(feature49, true);
-        int int52 = feature49.getMask();
-        boolean boolean53 = feature49.enabledByDefault();
-        boolean boolean54 = jsonParser39.isEnabled(feature49);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory55 = jsonFactory19.disable(feature49);
-        com.fasterxml.jackson.core.JsonParser jsonParser57 = jsonParser6.configure(feature49, true);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(boolean8);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 1 + "'", int9 == 1);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + (-1) + "'", int11 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertNull(outputDecorator14);
-        org.junit.Assert.assertTrue("'" + feature15 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature15.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNotNull(jsonParser21);
-        org.junit.Assert.assertNotNull(byteArray31);
-        org.junit.Assert.assertNotNull(charArray34);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray34), " ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray34), " ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray34), "[ ]");
-        org.junit.Assert.assertNotNull(jsonParser39);
-        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + true + "'", boolean41 == true);
-        org.junit.Assert.assertNull(outputDecorator43);
-        org.junit.Assert.assertTrue("'" + feature44 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature44.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory46);
-        org.junit.Assert.assertNotNull(jsonParser48);
-        org.junit.Assert.assertTrue("'" + feature49 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature49.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser51);
-        org.junit.Assert.assertTrue("'" + int52 + "' != '" + 4 + "'", int52 == 4);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
-        org.junit.Assert.assertNotNull(jsonFactory55);
-        org.junit.Assert.assertNotNull(jsonParser57);
-    }
-
-    @Test
-    public void test1855() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1855");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        java.io.Writer writer5 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator6 = jsonFactory4.createGenerator(writer5);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler7 = jsonFactory4._getBufferRecycler();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory8.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken11 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean12 = jsonToken11.isBoolean();
-        byte[] byteArray13 = jsonToken11.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory10.createJsonParser(byteArray13);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature15 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory10.configure(feature15, false);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler20 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        byte[][] byteArray21 = bufferRecycler20._byteBuffers;
-        byte[][] byteArray22 = bufferRecycler20._byteBuffers;
-        char[] charArray24 = bufferRecycler20.allocCharBuffer((int) (short) 1);
-        com.fasterxml.jackson.core.JsonParser jsonParser27 = jsonFactory10.createParser(charArray24, 262144, (int) (short) 10);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler28 = jsonFactory10._getBufferRecycler();
-        byte[] byteArray30 = bufferRecycler28.balloc(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser31 = jsonFactory4.createParser(byteArray30);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory32 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec33 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory34 = jsonFactory32.setCodec(objectCodec33);
-        com.fasterxml.jackson.core.JsonParser.Feature feature35 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory37 = jsonFactory32.configure(feature35, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken38 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean39 = jsonToken38.isStructEnd();
-        boolean boolean40 = jsonToken38.isScalarValue();
-        byte[] byteArray41 = jsonToken38.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser42 = jsonFactory32.createParser(byteArray41);
-        com.fasterxml.jackson.core.JsonParser jsonParser43 = jsonFactory4.createJsonParser(byteArray41);
-        boolean boolean44 = jsonFactory4.canUseCharArrays();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec45 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory4.setCodec(objectCodec45);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonGenerator6);
-        org.junit.Assert.assertNotNull(bufferRecycler7);
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertTrue("'" + jsonToken11 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken11.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertNotNull(byteArray13);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray13), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser14);
-        org.junit.Assert.assertTrue("'" + feature15 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature15.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertNotNull(byteArray22);
-        org.junit.Assert.assertNotNull(charArray24);
-        org.junit.Assert.assertNotNull(jsonParser27);
-        org.junit.Assert.assertNotNull(bufferRecycler28);
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray30), "[0]");
-        org.junit.Assert.assertNotNull(jsonParser31);
-        org.junit.Assert.assertNotNull(jsonFactory34);
-        org.junit.Assert.assertTrue("'" + feature35 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature35.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory37);
-        org.junit.Assert.assertTrue("'" + jsonToken38 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken38.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + true + "'", boolean40 == true);
-        org.junit.Assert.assertNotNull(byteArray41);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray41), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser42);
-        org.junit.Assert.assertNotNull(jsonParser43);
-        org.junit.Assert.assertTrue("'" + boolean44 + "' != '" + true + "'", boolean44 == true);
-        org.junit.Assert.assertNotNull(jsonFactory46);
-    }
-
-    @Test
-    public void test1856() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1856");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
-        textBuffer1.resetWithEmpty();
-        textBuffer1.setCurrentLength((int) ' ');
-        int int5 = textBuffer1.getCurrentSegmentSize();
-        // The following exception was thrown during execution in test generation
-        try {
-            textBuffer1.append('4');
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 32 + "'", int5 == 32);
-    }
-
-    @Test
-    public void test1857() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1857");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
-        textBuffer1.resetWithEmpty();
-        int int3 = textBuffer1.size();
-        textBuffer1.ensureNotShared();
-        int int5 = textBuffer1.size();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler6 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer7 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler6);
-        textBuffer7.resetWithEmpty();
-        textBuffer7.setCurrentLength((int) ' ');
-        char[] charArray11 = textBuffer7.emptyAndGetCurrentSegment();
-        textBuffer1.resetWithCopy(charArray11, 0, 12);
-        char[] charArray15 = textBuffer1.getTextBuffer();
-        java.lang.String str16 = textBuffer1.contentsAsString();
-        textBuffer1.append('4');
-        textBuffer1.resetWithEmpty();
-        char[] charArray20 = textBuffer1.getTextBuffer();
-        textBuffer1.resetWithEmpty();
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 0 + "'", int5 == 0);
-        org.junit.Assert.assertNotNull(charArray11);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray11), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray11), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertNotNull(charArray15);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray15), "\000\000\000\000\000\000\000\000\000\000\000\0004\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray15), "\000\000\000\000\000\000\000\000\000\000\000\0004\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "\000\000\000\000\000\000\000\000\000\000\000\000" + "'", str16, "\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertNotNull(charArray20);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray20), "\000\000\000\000\000\000\000\000\000\000\000\0004\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray20), "\000\000\000\000\000\000\000\000\000\000\000\0004\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-    }
-
-    @Test
-    public void test1858() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1858");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
-        int int2 = textBuffer1.size();
-        char[] charArray3 = textBuffer1.getCurrentSegment();
-        textBuffer1.ensureNotShared();
-        textBuffer1.setCurrentLength(256);
-        char[] charArray7 = textBuffer1.expandCurrentSegment();
-        char[] charArray8 = textBuffer1.getCurrentSegment();
-        char[] charArray9 = textBuffer1.finishCurrentSegment();
-        org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
-        org.junit.Assert.assertNotNull(charArray3);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray3), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray3), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertNotNull(charArray7);
-        org.junit.Assert.assertNotNull(charArray8);
-        org.junit.Assert.assertNotNull(charArray9);
-    }
-
-    @Test
-    public void test1859() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1859");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        java.lang.String str6 = jsonFactory4.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator8 = jsonFactory7.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory7.configure(feature9, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory11.createParser("");
-        com.fasterxml.jackson.core.JsonFactory.Feature feature14 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean15 = feature14.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory11.enable(feature14);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory4.configure(feature14, false);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature19 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory4.disable(feature19);
-        java.io.OutputStream outputStream21 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator22 = jsonFactory4.createGenerator(outputStream21);
-        java.io.InputStream inputStream23 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser24 = jsonFactory4.createParser(inputStream23);
-        java.lang.Class<?> wildcardClass25 = jsonFactory4.getClass();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + " " + "'", str6, " ");
-        org.junit.Assert.assertNull(outputDecorator8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature14.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
-        org.junit.Assert.assertNotNull(jsonFactory16);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertTrue("'" + feature19 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES + "'", feature19.equals(com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertNotNull(jsonGenerator22);
-        org.junit.Assert.assertNotNull(jsonParser24);
-        org.junit.Assert.assertNotNull(wildcardClass25);
-    }
-
-    @Test
-    public void test1860() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1860");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken6 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean7 = jsonToken6.isBoolean();
-        byte[] byteArray8 = jsonToken6.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonFactory5.createJsonParser(byteArray8);
-        jsonParser9.close();
-        java.lang.Object obj11 = jsonParser9.getEmbeddedObject();
-        boolean boolean12 = jsonParser9.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation13 = jsonParser9.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException14 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation13);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory16.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken19 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean20 = jsonToken19.isBoolean();
-        byte[] byteArray21 = jsonToken19.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser22 = jsonFactory18.createJsonParser(byteArray21);
-        jsonParser22.close();
-        java.lang.Object obj24 = jsonParser22.getEmbeddedObject();
-        boolean boolean25 = jsonParser22.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation26 = jsonParser22.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException27 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation26);
-        java.lang.String str28 = jsonParseException27.getOriginalMessage();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException29 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation13, (java.lang.Throwable) jsonParseException27);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation30 = jsonParseException29.getLocation();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory32 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory34 = jsonFactory32.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken35 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean36 = jsonToken35.isBoolean();
-        byte[] byteArray37 = jsonToken35.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser38 = jsonFactory34.createJsonParser(byteArray37);
-        jsonParser38.close();
-        java.lang.Object obj40 = jsonParser38.getEmbeddedObject();
-        boolean boolean41 = jsonParser38.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation42 = jsonParser38.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException43 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation42);
-        java.lang.String str44 = jsonParseException43.getOriginalMessage();
-        java.lang.Throwable[] throwableArray45 = jsonParseException43.getSuppressed();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory47 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory49 = jsonFactory47.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken50 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean51 = jsonToken50.isBoolean();
-        byte[] byteArray52 = jsonToken50.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser53 = jsonFactory49.createJsonParser(byteArray52);
-        jsonParser53.close();
-        java.lang.Object obj55 = jsonParser53.getEmbeddedObject();
-        boolean boolean56 = jsonParser53.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation57 = jsonParser53.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException58 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation57);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory60 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory62 = jsonFactory60.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken63 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean64 = jsonToken63.isBoolean();
-        byte[] byteArray65 = jsonToken63.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser66 = jsonFactory62.createJsonParser(byteArray65);
-        jsonParser66.close();
-        java.lang.Object obj68 = jsonParser66.getEmbeddedObject();
-        boolean boolean69 = jsonParser66.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation70 = jsonParser66.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException71 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation70);
-        java.lang.String str72 = jsonParseException71.getOriginalMessage();
-        jsonParseException58.addSuppressed((java.lang.Throwable) jsonParseException71);
-        java.lang.Throwable[] throwableArray74 = jsonParseException71.getSuppressed();
-        jsonParseException43.addSuppressed((java.lang.Throwable) jsonParseException71);
-        com.fasterxml.jackson.core.JsonParseException jsonParseException76 = new com.fasterxml.jackson.core.JsonParseException("", jsonLocation30, (java.lang.Throwable) jsonParseException43);
-        java.lang.String str77 = jsonParseException76.toString();
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertTrue("'" + jsonToken6 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken6.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser9);
-        org.junit.Assert.assertNull(obj11);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertNotNull(jsonLocation13);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertTrue("'" + jsonToken19 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken19.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + true + "'", boolean20 == true);
-        org.junit.Assert.assertNotNull(byteArray21);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray21), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser22);
-        org.junit.Assert.assertNull(obj24);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertNotNull(jsonLocation26);
-        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "hi!" + "'", str28, "hi!");
-        org.junit.Assert.assertNotNull(jsonLocation30);
-        org.junit.Assert.assertNotNull(jsonFactory34);
-        org.junit.Assert.assertTrue("'" + jsonToken35 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken35.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + true + "'", boolean36 == true);
-        org.junit.Assert.assertNotNull(byteArray37);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray37), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser38);
-        org.junit.Assert.assertNull(obj40);
-        org.junit.Assert.assertTrue("'" + boolean41 + "' != '" + false + "'", boolean41 == false);
-        org.junit.Assert.assertNotNull(jsonLocation42);
-        org.junit.Assert.assertEquals("'" + str44 + "' != '" + "hi!" + "'", str44, "hi!");
-        org.junit.Assert.assertNotNull(throwableArray45);
-        org.junit.Assert.assertNotNull(jsonFactory49);
-        org.junit.Assert.assertTrue("'" + jsonToken50 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken50.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + true + "'", boolean51 == true);
-        org.junit.Assert.assertNotNull(byteArray52);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray52), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser53);
-        org.junit.Assert.assertNull(obj55);
-        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
-        org.junit.Assert.assertNotNull(jsonLocation57);
-        org.junit.Assert.assertNotNull(jsonFactory62);
-        org.junit.Assert.assertTrue("'" + jsonToken63 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken63.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + true + "'", boolean64 == true);
-        org.junit.Assert.assertNotNull(byteArray65);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray65), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser66);
-        org.junit.Assert.assertNull(obj68);
-        org.junit.Assert.assertTrue("'" + boolean69 + "' != '" + false + "'", boolean69 == false);
-        org.junit.Assert.assertNotNull(jsonLocation70);
-        org.junit.Assert.assertEquals("'" + str72 + "' != '" + "hi!" + "'", str72, "hi!");
-        org.junit.Assert.assertNotNull(throwableArray74);
-    }
-
-    @Test
-    public void test1861() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1861");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
-        java.io.Reader reader3 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser4 = jsonFactory0.createParser(reader3);
-        java.lang.String str5 = jsonFactory0.getFormatName();
-        boolean boolean6 = jsonFactory0.requiresPropertyOrdering();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertNotNull(jsonParser4);
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "JSON" + "'", str5, "JSON");
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + false + "'", boolean6 == false);
-    }
-
-    @Test
-    public void test1862() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1862");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.JsonParser.Feature feature5 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory6 = jsonFactory4.enable(feature5);
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator7 = jsonFactory6.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonFactory6.createParser("");
-        java.io.OutputStream outputStream10 = null;
-        int int11 = jsonParser9.releaseBuffered(outputStream10);
-        boolean boolean12 = jsonParser9.hasTextCharacters();
-        int int13 = jsonParser9.getCurrentTokenId();
-        int int14 = jsonParser9.getValueAsInt();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertTrue("'" + feature5 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature5.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertNotNull(jsonFactory6);
-        org.junit.Assert.assertNull(outputDecorator7);
-        org.junit.Assert.assertNotNull(jsonParser9);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + (-1) + "'", int11 == (-1));
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
-    }
-
-    @Test
-    public void test1863() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1863");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        jsonParser6.close();
-        java.lang.Object obj8 = jsonParser6.getEmbeddedObject();
-        double double9 = jsonParser6.getValueAsDouble();
-        int int11 = jsonParser6.nextIntValue(0);
-        boolean boolean12 = jsonParser6.getBooleanValue();
-        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonParser6.setFeatureMask(9);
-        int int16 = jsonParser6.getValueAsInt(52);
-        int int17 = jsonParser6.getFeatureMask();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertTrue("'" + double9 + "' != '" + 0.0d + "'", double9 == 0.0d);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + true + "'", boolean12 == true);
-        org.junit.Assert.assertNotNull(jsonParser14);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 1 + "'", int16 == 1);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 9 + "'", int17 == 9);
-    }
-
-    @Test
-    public void test1864() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1864");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        java.io.OutputStream outputStream2 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator3 = jsonFactory0.createJsonGenerator(outputStream2);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.copy();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes7 = jsonFactory4.getCharacterEscapes();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler8 = jsonFactory4._getBufferRecycler();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler9 = jsonFactory4._getBufferRecycler();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertNotNull(jsonGenerator3);
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(characterEscapes7);
-        org.junit.Assert.assertNotNull(bufferRecycler8);
-        org.junit.Assert.assertNotNull(bufferRecycler9);
-    }
-
-    @Test
-    public void test1865() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1865");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        java.lang.String str6 = jsonFactory4.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator8 = jsonFactory7.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory7.configure(feature9, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory11.createParser("");
-        com.fasterxml.jackson.core.JsonFactory.Feature feature14 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean15 = feature14.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory11.enable(feature14);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory4.configure(feature14, false);
-        byte[] byteArray20 = new byte[] { (byte) -1 };
-        com.fasterxml.jackson.core.JsonParser jsonParser21 = jsonFactory4.createJsonParser(byteArray20);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator22 = jsonFactory4.getInputDecorator();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + " " + "'", str6, " ");
-        org.junit.Assert.assertNull(outputDecorator8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature14.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
-        org.junit.Assert.assertNotNull(jsonFactory16);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(byteArray20);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray20), "[-1]");
-        org.junit.Assert.assertNotNull(jsonParser21);
-        org.junit.Assert.assertNull(inputDecorator22);
-    }
-
-    @Test
-    public void test1866() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1866");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("true");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator8 = jsonFactory7.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory7.configure(feature9, true);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes12 = jsonFactory7.getCharacterEscapes();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler15 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        byte[][] byteArray16 = bufferRecycler15._byteBuffers;
-        byte[][] byteArray17 = bufferRecycler15._byteBuffers;
-        char[] charArray19 = bufferRecycler15.allocCharBuffer((int) (short) 1);
-        int int21 = bufferRecycler15.byteBufferLength(0);
-        char[] charArray23 = bufferRecycler15.calloc(0);
-        com.fasterxml.jackson.core.JsonParser jsonParser26 = jsonFactory7.createParser(charArray23, 12, 1000);
-        com.fasterxml.jackson.core.JsonParser jsonParser27 = jsonFactory4.createParser(charArray23);
-        java.io.OutputStream outputStream28 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            int int29 = jsonParser27.readBinaryValue(outputStream28);
-            org.junit.Assert.fail("Expected exception of type com.fasterxml.jackson.core.JsonParseException; message: Current token (null) not VALUE_STRING or VALUE_EMBEDDED_OBJECT, can not access as binary? at [Source: [C@5710ca55; line: 1, column: 1]");
-        } catch (com.fasterxml.jackson.core.JsonParseException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(outputDecorator8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertNull(characterEscapes12);
-        org.junit.Assert.assertNotNull(byteArray16);
-        org.junit.Assert.assertNotNull(byteArray17);
-        org.junit.Assert.assertNotNull(charArray19);
-        org.junit.Assert.assertTrue("'" + int21 + "' != '" + 8000 + "'", int21 == 8000);
-        org.junit.Assert.assertNotNull(charArray23);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray23), "");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray23), "");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray23), "[]");
-        org.junit.Assert.assertNotNull(jsonParser26);
-        org.junit.Assert.assertNotNull(jsonParser27);
-    }
-
-    @Test
-    public void test1867() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1867");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        jsonParser6.close();
-        java.lang.Object obj8 = jsonParser6.getEmbeddedObject();
-        boolean boolean10 = jsonParser6.getValueAsBoolean(false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator12 = jsonFactory11.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature13 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = jsonFactory11.configure(feature13, true);
-        java.io.OutputStream outputStream16 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator17 = jsonFactory11.createGenerator(outputStream16);
-        java.io.Writer writer18 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator19 = jsonFactory11.createJsonGenerator(writer18);
-        java.io.Writer writer20 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator21 = jsonFactory11.createGenerator(writer20);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler22 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer23 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler22);
-        textBuffer23.resetWithEmpty();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler27 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        byte[] byteArray30 = bufferRecycler27.allocByteBuffer(2, (int) (byte) 10);
-        char[] charArray33 = new char[] { ' ' };
-        bufferRecycler27.releaseCharBuffer(0, charArray33);
-        textBuffer23.resetWithShared(charArray33, 4000, 4);
-        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonFactory11.createParser(charArray33, 262144, (-1));
-        com.fasterxml.jackson.core.JsonFactory jsonFactory41 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec42 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory43 = jsonFactory41.setCodec(objectCodec42);
-        com.fasterxml.jackson.core.JsonParser.Feature feature44 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory41.configure(feature44, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory48 = jsonFactory11.configure(feature44, false);
-        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonParser6.configure(feature44, true);
-        boolean boolean51 = feature44.enabledByDefault();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNull(outputDecorator12);
-        org.junit.Assert.assertTrue("'" + feature13 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature13.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory15);
-        org.junit.Assert.assertNotNull(jsonGenerator17);
-        org.junit.Assert.assertNotNull(jsonGenerator19);
-        org.junit.Assert.assertNotNull(jsonGenerator21);
-        org.junit.Assert.assertNotNull(byteArray30);
-        org.junit.Assert.assertNotNull(charArray33);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray33), " ");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray33), " ");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray33), "[ ]");
-        org.junit.Assert.assertNotNull(jsonParser40);
-        org.junit.Assert.assertNotNull(jsonFactory43);
-        org.junit.Assert.assertTrue("'" + feature44 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature44.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory46);
-        org.junit.Assert.assertNotNull(jsonFactory48);
-        org.junit.Assert.assertNotNull(jsonParser50);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
-    }
-
-    @Test
-    public void test1868() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1868");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature2 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler5 = jsonFactory4._getBufferRecycler();
-        char[] charArray7 = bufferRecycler5.calloc(8);
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer8 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler5);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature2.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(bufferRecycler5);
-        org.junit.Assert.assertNotNull(charArray7);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray7), "\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray7), "\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray7), "[\000, \000, \000, \000, \000, \000, \000, \000]");
-    }
-
-    @Test
-    public void test1869() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1869");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setCodec(objectCodec1);
-        com.fasterxml.jackson.core.JsonParser.Feature feature3 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory0.configure(feature3, false);
-        com.fasterxml.jackson.core.JsonToken jsonToken6 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean7 = jsonToken6.isStructEnd();
-        boolean boolean8 = jsonToken6.isScalarValue();
-        byte[] byteArray9 = jsonToken6.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory0.createParser(byteArray9);
-        com.fasterxml.jackson.core.FormatSchema formatSchema11 = null;
-        boolean boolean12 = jsonParser10.canUseSchema(formatSchema11);
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + feature3 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature3.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertTrue("'" + jsonToken6 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken6.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertNotNull(byteArray9);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray9), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser10);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-    }
-
-    @Test
-    public void test1870() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1870");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler2 = new com.fasterxml.jackson.core.util.BufferRecycler((int) (byte) 10, (int) (short) 100);
-        byte[][] byteArray3 = bufferRecycler2._byteBuffers;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer4 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer5 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler2);
-        int int6 = textBuffer5.getTextOffset();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler7 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer8 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler7);
-        textBuffer8.resetWithEmpty();
-        int int10 = textBuffer8.size();
-        java.lang.String str11 = textBuffer8.contentsAsString();
-        char[] charArray12 = textBuffer8.emptyAndGetCurrentSegment();
-        char[] charArray13 = textBuffer8.expandCurrentSegment();
-        textBuffer8.append(' ');
-        textBuffer8.setCurrentLength(4000);
-        char[] charArray19 = textBuffer8.expandCurrentSegment(256);
-        textBuffer5.resetWithCopy(charArray19, 5, (int) ' ');
-        org.junit.Assert.assertNotNull(byteArray3);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 0 + "'", int10 == 0);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
-        org.junit.Assert.assertNotNull(charArray12);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray12), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray12), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertNotNull(charArray13);
-        org.junit.Assert.assertNotNull(charArray19);
-    }
-
-    @Test
-    public void test1871() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1871");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        java.io.Writer writer2 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator3 = jsonFactory0.createJsonGenerator(writer2);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator5 = jsonFactory4.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature6 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = jsonFactory4.configure(feature6, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonFactory8.createParser("");
-        byte[] byteArray11 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser14 = jsonFactory8.createParser(byteArray11, 262144, 0);
-        com.fasterxml.jackson.core.JsonToken jsonToken15 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean16 = jsonToken15.isStructEnd();
-        boolean boolean17 = jsonToken15.isScalarValue();
-        byte[] byteArray18 = jsonToken15.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory8.createJsonParser(byteArray18);
-        com.fasterxml.jackson.core.JsonParser jsonParser20 = jsonFactory0.createParser(byteArray18);
-        char[] charArray21 = jsonParser20.getTextCharacters();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec22 = null;
-        jsonParser20.setCodec(objectCodec22);
-        java.io.Writer writer24 = null;
-        int int25 = jsonParser20.releaseBuffered(writer24);
-        com.fasterxml.jackson.core.JsonToken jsonToken26 = jsonParser20.getCurrentToken();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertNotNull(jsonGenerator3);
-        org.junit.Assert.assertNull(outputDecorator5);
-        org.junit.Assert.assertTrue("'" + feature6 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature6.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory8);
-        org.junit.Assert.assertNotNull(jsonParser10);
-        org.junit.Assert.assertNotNull(jsonParser14);
-        org.junit.Assert.assertTrue("'" + jsonToken15 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken15.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
-        org.junit.Assert.assertNotNull(byteArray18);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray18), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser19);
-        org.junit.Assert.assertNotNull(jsonParser20);
-        org.junit.Assert.assertNull(charArray21);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + (-1) + "'", int25 == (-1));
-        org.junit.Assert.assertNull(jsonToken26);
-    }
-
-    @Test
-    public void test1872() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1872");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        java.lang.String str6 = jsonFactory4.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator8 = jsonFactory7.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature9 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory7.configure(feature9, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser13 = jsonFactory11.createParser("");
-        com.fasterxml.jackson.core.JsonFactory.Feature feature14 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean15 = feature14.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory11.enable(feature14);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory4.configure(feature14, false);
-        java.io.Reader reader19 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser20 = jsonFactory18.createParser(reader19);
-        com.fasterxml.jackson.core.Version version21 = jsonFactory18.version();
-        java.io.OutputStream outputStream22 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator23 = jsonFactory18.createGenerator(outputStream22);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + " " + "'", str6, " ");
-        org.junit.Assert.assertNull(outputDecorator8);
-        org.junit.Assert.assertTrue("'" + feature9 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature9.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertNotNull(jsonParser13);
-        org.junit.Assert.assertTrue("'" + feature14 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature14.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
-        org.junit.Assert.assertNotNull(jsonFactory16);
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(jsonParser20);
-        org.junit.Assert.assertNotNull(version21);
-        org.junit.Assert.assertNotNull(jsonGenerator23);
-    }
-
-    @Test
-    public void test1873() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1873");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        java.lang.String str6 = jsonFactory4.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES;
-        boolean boolean9 = feature7.enabledIn(1);
-        boolean boolean10 = jsonFactory4.isEnabled(feature7);
-        java.io.Writer writer11 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator12 = jsonFactory4.createJsonGenerator(writer11);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory13 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator14 = jsonFactory13.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature15 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory17 = jsonFactory13.configure(feature15, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser19 = jsonFactory17.createParser("");
-        com.fasterxml.jackson.core.JsonParser.Feature feature20 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean22 = feature20.enabledIn(1);
-        int int23 = feature20.getMask();
-        boolean boolean25 = feature20.enabledIn(2);
-        com.fasterxml.jackson.core.JsonParser jsonParser26 = jsonParser19.disable(feature20);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory28 = jsonFactory4.configure(feature20, false);
-        com.fasterxml.jackson.core.Version version29 = jsonFactory4.version();
-        java.lang.String str30 = jsonFactory4.getFormatName();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator32 = jsonFactory31.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature33 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = jsonFactory31.configure(feature33, true);
-        java.io.Reader reader36 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser37 = jsonFactory35.createJsonParser(reader36);
-        com.fasterxml.jackson.core.JsonParser.Feature feature38 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser40 = jsonParser37.configure(feature38, true);
-        jsonParser40.clearCurrentToken();
-        com.fasterxml.jackson.core.Version version42 = jsonParser40.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature43 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean45 = feature43.enabledIn(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser47 = jsonParser40.configure(feature43, true);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec48 = null;
-        jsonParser40.setCodec(objectCodec48);
-        boolean boolean50 = jsonParser40.isClosed();
-        boolean boolean51 = jsonParser40.requiresCustomCodec();
-        java.lang.Boolean boolean52 = jsonParser40.nextBooleanValue();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator54 = jsonFactory53.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature55 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory57 = jsonFactory53.configure(feature55, true);
-        java.io.Reader reader58 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser59 = jsonFactory57.createJsonParser(reader58);
-        com.fasterxml.jackson.core.JsonParser.Feature feature60 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser62 = jsonParser59.configure(feature60, true);
-        jsonParser62.clearCurrentToken();
-        com.fasterxml.jackson.core.Version version64 = jsonParser62.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature65 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean67 = feature65.enabledIn(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser69 = jsonParser62.configure(feature65, true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory70 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator71 = jsonFactory70.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature72 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory74 = jsonFactory70.configure(feature72, true);
-        com.fasterxml.jackson.core.JsonParser.Feature feature75 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory76 = jsonFactory74.enable(feature75);
-        com.fasterxml.jackson.core.JsonParser.Feature feature77 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory78 = jsonFactory76.disable(feature77);
-        com.fasterxml.jackson.core.JsonParser jsonParser79 = jsonParser69.disable(feature77);
-        boolean boolean80 = jsonParser40.isEnabled(feature77);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory81 = jsonFactory4.enable(feature77);
-        java.net.URL uRL82 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.JsonParser jsonParser83 = jsonFactory81.createParser(uRL82);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertEquals("'" + str6 + "' != '" + " " + "'", str6, " ");
-        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(jsonGenerator12);
-        org.junit.Assert.assertNull(outputDecorator14);
-        org.junit.Assert.assertTrue("'" + feature15 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature15.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory17);
-        org.junit.Assert.assertNotNull(jsonParser19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature20.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 256 + "'", int23 == 256);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertNotNull(jsonParser26);
-        org.junit.Assert.assertNotNull(jsonFactory28);
-        org.junit.Assert.assertNotNull(version29);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "JSON" + "'", str30, "JSON");
-        org.junit.Assert.assertNull(outputDecorator32);
-        org.junit.Assert.assertTrue("'" + feature33 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature33.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory35);
-        org.junit.Assert.assertNotNull(jsonParser37);
-        org.junit.Assert.assertTrue("'" + feature38 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature38.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser40);
-        org.junit.Assert.assertNotNull(version42);
-        org.junit.Assert.assertTrue("'" + feature43 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature43.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean45 + "' != '" + false + "'", boolean45 == false);
-        org.junit.Assert.assertNotNull(jsonParser47);
-        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
-        org.junit.Assert.assertNull(boolean52);
-        org.junit.Assert.assertNull(outputDecorator54);
-        org.junit.Assert.assertTrue("'" + feature55 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature55.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory57);
-        org.junit.Assert.assertNotNull(jsonParser59);
-        org.junit.Assert.assertTrue("'" + feature60 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature60.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser62);
-        org.junit.Assert.assertNotNull(version64);
-        org.junit.Assert.assertTrue("'" + feature65 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature65.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + false + "'", boolean67 == false);
-        org.junit.Assert.assertNotNull(jsonParser69);
-        org.junit.Assert.assertNull(outputDecorator71);
-        org.junit.Assert.assertTrue("'" + feature72 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature72.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory74);
-        org.junit.Assert.assertTrue("'" + feature75 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature75.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertNotNull(jsonFactory76);
-        org.junit.Assert.assertTrue("'" + feature77 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER + "'", feature77.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER));
-        org.junit.Assert.assertNotNull(jsonFactory78);
-        org.junit.Assert.assertNotNull(jsonParser79);
-        org.junit.Assert.assertTrue("'" + boolean80 + "' != '" + false + "'", boolean80 == false);
-        org.junit.Assert.assertNotNull(jsonFactory81);
-    }
-
-    @Test
-    public void test1874() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1874");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = jsonFactory1.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken4 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean5 = jsonToken4.isBoolean();
-        byte[] byteArray6 = jsonToken4.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory3.createJsonParser(byteArray6);
-        jsonParser7.close();
-        java.lang.Object obj9 = jsonParser7.getEmbeddedObject();
-        boolean boolean10 = jsonParser7.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation11 = jsonParser7.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory14 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory16 = jsonFactory14.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken17 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean18 = jsonToken17.isBoolean();
-        byte[] byteArray19 = jsonToken17.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser20 = jsonFactory16.createJsonParser(byteArray19);
-        jsonParser20.close();
-        java.lang.Object obj22 = jsonParser20.getEmbeddedObject();
-        boolean boolean23 = jsonParser20.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation24 = jsonParser20.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException25 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation24);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory29 = jsonFactory27.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken30 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean31 = jsonToken30.isBoolean();
-        byte[] byteArray32 = jsonToken30.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser33 = jsonFactory29.createJsonParser(byteArray32);
-        jsonParser33.close();
-        java.lang.Object obj35 = jsonParser33.getEmbeddedObject();
-        boolean boolean36 = jsonParser33.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation37 = jsonParser33.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException38 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation37);
-        java.lang.String str39 = jsonParseException38.getOriginalMessage();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException40 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation24, (java.lang.Throwable) jsonParseException38);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation41 = jsonParseException40.getLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException42 = new com.fasterxml.jackson.core.JsonParseException("true", jsonLocation11, (java.lang.Throwable) jsonParseException40);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory44 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory44.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken47 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean48 = jsonToken47.isBoolean();
-        byte[] byteArray49 = jsonToken47.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonFactory46.createJsonParser(byteArray49);
-        jsonParser50.close();
-        java.lang.Object obj52 = jsonParser50.getEmbeddedObject();
-        boolean boolean53 = jsonParser50.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation54 = jsonParser50.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory57 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory59 = jsonFactory57.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken60 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean61 = jsonToken60.isBoolean();
-        byte[] byteArray62 = jsonToken60.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser63 = jsonFactory59.createJsonParser(byteArray62);
-        jsonParser63.close();
-        java.lang.Object obj65 = jsonParser63.getEmbeddedObject();
-        boolean boolean66 = jsonParser63.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation67 = jsonParser63.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException68 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation67);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory70 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory72 = jsonFactory70.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken73 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean74 = jsonToken73.isBoolean();
-        byte[] byteArray75 = jsonToken73.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser76 = jsonFactory72.createJsonParser(byteArray75);
-        jsonParser76.close();
-        java.lang.Object obj78 = jsonParser76.getEmbeddedObject();
-        boolean boolean79 = jsonParser76.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation80 = jsonParser76.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException81 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation80);
-        java.lang.String str82 = jsonParseException81.getOriginalMessage();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException83 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation67, (java.lang.Throwable) jsonParseException81);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation84 = jsonParseException83.getLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException85 = new com.fasterxml.jackson.core.JsonParseException("true", jsonLocation54, (java.lang.Throwable) jsonParseException83);
-        java.lang.String str86 = jsonParseException85.getOriginalMessage();
-        jsonParseException42.addSuppressed((java.lang.Throwable) jsonParseException85);
-        java.lang.Throwable[] throwableArray88 = jsonParseException42.getSuppressed();
-        org.junit.Assert.assertNotNull(jsonFactory3);
-        org.junit.Assert.assertTrue("'" + jsonToken4 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken4.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
-        org.junit.Assert.assertNotNull(byteArray6);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray6), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertNull(obj9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(jsonLocation11);
-        org.junit.Assert.assertNotNull(jsonFactory16);
-        org.junit.Assert.assertTrue("'" + jsonToken17 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken17.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + true + "'", boolean18 == true);
-        org.junit.Assert.assertNotNull(byteArray19);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray19), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser20);
-        org.junit.Assert.assertNull(obj22);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(jsonLocation24);
-        org.junit.Assert.assertNotNull(jsonFactory29);
-        org.junit.Assert.assertTrue("'" + jsonToken30 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken30.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean31 + "' != '" + true + "'", boolean31 == true);
-        org.junit.Assert.assertNotNull(byteArray32);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray32), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser33);
-        org.junit.Assert.assertNull(obj35);
-        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
-        org.junit.Assert.assertNotNull(jsonLocation37);
-        org.junit.Assert.assertEquals("'" + str39 + "' != '" + "hi!" + "'", str39, "hi!");
-        org.junit.Assert.assertNotNull(jsonLocation41);
-        org.junit.Assert.assertNotNull(jsonFactory46);
-        org.junit.Assert.assertTrue("'" + jsonToken47 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken47.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + true + "'", boolean48 == true);
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser50);
-        org.junit.Assert.assertNull(obj52);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
-        org.junit.Assert.assertNotNull(jsonLocation54);
-        org.junit.Assert.assertNotNull(jsonFactory59);
-        org.junit.Assert.assertTrue("'" + jsonToken60 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken60.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + true + "'", boolean61 == true);
-        org.junit.Assert.assertNotNull(byteArray62);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray62), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser63);
-        org.junit.Assert.assertNull(obj65);
-        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + false + "'", boolean66 == false);
-        org.junit.Assert.assertNotNull(jsonLocation67);
-        org.junit.Assert.assertNotNull(jsonFactory72);
-        org.junit.Assert.assertTrue("'" + jsonToken73 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken73.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + true + "'", boolean74 == true);
-        org.junit.Assert.assertNotNull(byteArray75);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray75), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser76);
-        org.junit.Assert.assertNull(obj78);
-        org.junit.Assert.assertTrue("'" + boolean79 + "' != '" + false + "'", boolean79 == false);
-        org.junit.Assert.assertNotNull(jsonLocation80);
-        org.junit.Assert.assertEquals("'" + str82 + "' != '" + "hi!" + "'", str82, "hi!");
-        org.junit.Assert.assertNotNull(jsonLocation84);
-        org.junit.Assert.assertEquals("'" + str86 + "' != '" + "true" + "'", str86, "true");
-        org.junit.Assert.assertNotNull(throwableArray88);
-    }
-
-    @Test
-    public void test1875() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1875");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator6 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory4.setOutputDecorator(outputDecorator6);
-        boolean boolean8 = jsonFactory4.requiresPropertyOrdering();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = jsonFactory9.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken12 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean13 = jsonToken12.isBoolean();
-        byte[] byteArray14 = jsonToken12.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory11.createJsonParser(byteArray14);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature16 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = jsonFactory11.configure(feature16, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = jsonFactory11.copy();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator21 = jsonFactory20.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature22 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory24 = jsonFactory20.configure(feature22, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator25 = jsonFactory24.getInputDecorator();
-        java.lang.String str26 = jsonFactory24.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator28 = jsonFactory27.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature29 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = jsonFactory27.configure(feature29, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser33 = jsonFactory31.createParser("");
-        com.fasterxml.jackson.core.JsonFactory.Feature feature34 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean35 = feature34.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory36 = jsonFactory31.enable(feature34);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory38 = jsonFactory24.configure(feature34, false);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature39 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory40 = jsonFactory24.disable(feature39);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory41 = jsonFactory11.enable(feature39);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = jsonFactory4.disable(feature39);
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler43 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer44 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler43);
-        textBuffer44.resetWithEmpty();
-        int int46 = textBuffer44.size();
-        textBuffer44.ensureNotShared();
-        int int48 = textBuffer44.size();
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler49 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer50 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler49);
-        textBuffer50.resetWithEmpty();
-        textBuffer50.setCurrentLength((int) ' ');
-        char[] charArray54 = textBuffer50.emptyAndGetCurrentSegment();
-        textBuffer44.resetWithCopy(charArray54, 0, 12);
-        char[] charArray58 = textBuffer44.getTextBuffer();
-        char[] charArray59 = textBuffer44.finishCurrentSegment();
-        com.fasterxml.jackson.core.JsonParser jsonParser62 = jsonFactory4.createParser(charArray59, (int) (byte) 1, (int) (byte) 10);
-        boolean boolean63 = jsonParser62.canReadObjectId();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertNotNull(jsonFactory7);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertNotNull(jsonFactory11);
-        org.junit.Assert.assertTrue("'" + jsonToken12 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken12.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertNotNull(byteArray14);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray14), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser15);
-        org.junit.Assert.assertTrue("'" + feature16 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature16.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory18);
-        org.junit.Assert.assertNotNull(jsonFactory19);
-        org.junit.Assert.assertNull(outputDecorator21);
-        org.junit.Assert.assertTrue("'" + feature22 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature22.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory24);
-        org.junit.Assert.assertNull(inputDecorator25);
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + " " + "'", str26, " ");
-        org.junit.Assert.assertNull(outputDecorator28);
-        org.junit.Assert.assertTrue("'" + feature29 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature29.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory31);
-        org.junit.Assert.assertNotNull(jsonParser33);
-        org.junit.Assert.assertTrue("'" + feature34 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature34.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
-        org.junit.Assert.assertNotNull(jsonFactory36);
-        org.junit.Assert.assertNotNull(jsonFactory38);
-        org.junit.Assert.assertTrue("'" + feature39 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES + "'", feature39.equals(com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory40);
-        org.junit.Assert.assertNotNull(jsonFactory41);
-        org.junit.Assert.assertNotNull(jsonFactory42);
-        org.junit.Assert.assertTrue("'" + int46 + "' != '" + 0 + "'", int46 == 0);
-        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 0 + "'", int48 == 0);
-        org.junit.Assert.assertNotNull(charArray54);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray54), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray54), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertNotNull(charArray58);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray58), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray58), "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertNotNull(charArray59);
-        org.junit.Assert.assertNotNull(jsonParser62);
-        org.junit.Assert.assertTrue("'" + boolean63 + "' != '" + false + "'", boolean63 == false);
-    }
-
-    @Test
-    public void test1876() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1876");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createParser("");
-        jsonParser6.close();
-        java.lang.Boolean boolean8 = jsonParser6.nextBooleanValue();
-        int int9 = jsonParser6.getFeatureMask();
-        java.lang.String str10 = jsonParser6.getCurrentName();
-        long long11 = jsonParser6.getValueAsLong();
-        java.io.OutputStream outputStream12 = null;
-        int int13 = jsonParser6.releaseBuffered(outputStream12);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(boolean8);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 1 + "'", int9 == 1);
-        org.junit.Assert.assertNull(str10);
-        org.junit.Assert.assertTrue("'" + long11 + "' != '" + 0L + "'", long11 == 0L);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + (-1) + "'", int13 == (-1));
-    }
-
-    @Test
-    public void test1877() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1877");
-        com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
-        com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
-        textBuffer1.resetWithEmpty();
-        int int3 = textBuffer1.size();
-        java.lang.String str4 = textBuffer1.contentsAsString();
-        char[] charArray5 = textBuffer1.contentsAsArray();
-        char[] charArray6 = textBuffer1.emptyAndGetCurrentSegment();
-        textBuffer1.resetWithString("\000\000\000\000\000\000\000\000\000\000\000\000");
-        int int9 = textBuffer1.getTextOffset();
-        textBuffer1.append(' ');
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "" + "'", str4, "");
-        org.junit.Assert.assertNotNull(charArray5);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray5), "");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray5), "");
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(charArray5), "[]");
-        org.junit.Assert.assertNotNull(charArray6);
-        org.junit.Assert.assertEquals(java.lang.String.copyValueOf(charArray6), " \000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertEquals(java.lang.String.valueOf(charArray6), " \000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000");
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 0 + "'", int9 == 0);
-    }
-
-    @Test
-    public void test1878() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1878");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        java.io.Reader reader5 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createJsonParser(reader5);
-        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonParser6.configure(feature7, true);
-        boolean boolean10 = jsonParser9.hasCurrentToken();
-        double double11 = jsonParser9.getValueAsDouble();
-        com.fasterxml.jackson.core.ObjectCodec objectCodec12 = jsonParser9.getCodec();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser9);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + double11 + "' != '" + 0.0d + "'", double11 == 0.0d);
-        org.junit.Assert.assertNull(objectCodec12);
-    }
-
-    @Test
-    public void test1879() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1879");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator5 = jsonFactory4.getInputDecorator();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator6 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory7 = jsonFactory4.setOutputDecorator(outputDecorator6);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory8 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator9 = jsonFactory8.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature10 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory8.configure(feature10, true);
-        java.io.OutputStream outputStream13 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator14 = jsonFactory8.createGenerator(outputStream13);
-        java.io.Writer writer15 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator16 = jsonFactory8.createJsonGenerator(writer15);
-        java.io.Writer writer17 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator18 = jsonFactory8.createGenerator(writer17);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory19 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory21 = jsonFactory19.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken22 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean23 = jsonToken22.isBoolean();
-        byte[] byteArray24 = jsonToken22.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser25 = jsonFactory21.createJsonParser(byteArray24);
-        com.fasterxml.jackson.core.JsonParser.Feature feature26 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
-        com.fasterxml.jackson.core.JsonParser jsonParser28 = jsonParser25.configure(feature26, true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory29 = jsonFactory8.disable(feature26);
-        boolean boolean30 = jsonFactory7.isEnabled(feature26);
-        java.io.Reader reader31 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser32 = jsonFactory7.createJsonParser(reader31);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNull(inputDecorator5);
-        org.junit.Assert.assertNotNull(jsonFactory7);
-        org.junit.Assert.assertNull(outputDecorator9);
-        org.junit.Assert.assertTrue("'" + feature10 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature10.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory12);
-        org.junit.Assert.assertNotNull(jsonGenerator14);
-        org.junit.Assert.assertNotNull(jsonGenerator16);
-        org.junit.Assert.assertNotNull(jsonGenerator18);
-        org.junit.Assert.assertNotNull(jsonFactory21);
-        org.junit.Assert.assertTrue("'" + jsonToken22 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken22.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
-        org.junit.Assert.assertNotNull(byteArray24);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray24), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser25);
-        org.junit.Assert.assertTrue("'" + feature26 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER + "'", feature26.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER));
-        org.junit.Assert.assertNotNull(jsonParser28);
-        org.junit.Assert.assertNotNull(jsonFactory29);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-        org.junit.Assert.assertNotNull(jsonParser32);
-    }
-
-    @Test
-    public void test1880() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1880");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory3 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory3.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken6 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean7 = jsonToken6.isBoolean();
-        byte[] byteArray8 = jsonToken6.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonFactory5.createJsonParser(byteArray8);
-        jsonParser9.close();
-        java.lang.Object obj11 = jsonParser9.getEmbeddedObject();
-        boolean boolean12 = jsonParser9.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation13 = jsonParser9.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException14 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation13);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation15 = jsonParseException14.getLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException16 = new com.fasterxml.jackson.core.JsonParseException("false", jsonLocation15);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory20 = jsonFactory18.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken21 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean22 = jsonToken21.isBoolean();
-        byte[] byteArray23 = jsonToken21.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser24 = jsonFactory20.createJsonParser(byteArray23);
-        jsonParser24.close();
-        java.lang.Object obj26 = jsonParser24.getEmbeddedObject();
-        boolean boolean27 = jsonParser24.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation28 = jsonParser24.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory33 = jsonFactory31.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken34 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean35 = jsonToken34.isBoolean();
-        byte[] byteArray36 = jsonToken34.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser37 = jsonFactory33.createJsonParser(byteArray36);
-        jsonParser37.close();
-        java.lang.Object obj39 = jsonParser37.getEmbeddedObject();
-        boolean boolean40 = jsonParser37.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation41 = jsonParser37.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException42 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation41);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory44 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory46 = jsonFactory44.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken47 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean48 = jsonToken47.isBoolean();
-        byte[] byteArray49 = jsonToken47.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser50 = jsonFactory46.createJsonParser(byteArray49);
-        jsonParser50.close();
-        java.lang.Object obj52 = jsonParser50.getEmbeddedObject();
-        boolean boolean53 = jsonParser50.hasTextCharacters();
-        com.fasterxml.jackson.core.JsonLocation jsonLocation54 = jsonParser50.getCurrentLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException55 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation54);
-        java.lang.String str56 = jsonParseException55.getOriginalMessage();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException57 = new com.fasterxml.jackson.core.JsonParseException("hi!", jsonLocation41, (java.lang.Throwable) jsonParseException55);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation58 = jsonParseException57.getLocation();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException59 = new com.fasterxml.jackson.core.JsonParseException("true", jsonLocation28, (java.lang.Throwable) jsonParseException57);
-        java.lang.String str60 = jsonParseException59.toString();
-        com.fasterxml.jackson.core.JsonParseException jsonParseException61 = new com.fasterxml.jackson.core.JsonParseException("}", jsonLocation15, (java.lang.Throwable) jsonParseException59);
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertTrue("'" + jsonToken6 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken6.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
-        org.junit.Assert.assertNotNull(byteArray8);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray8), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser9);
-        org.junit.Assert.assertNull(obj11);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertNotNull(jsonLocation13);
-        org.junit.Assert.assertNotNull(jsonLocation15);
-        org.junit.Assert.assertNotNull(jsonFactory20);
-        org.junit.Assert.assertTrue("'" + jsonToken21 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken21.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
-        org.junit.Assert.assertNotNull(byteArray23);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray23), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser24);
-        org.junit.Assert.assertNull(obj26);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertNotNull(jsonLocation28);
-        org.junit.Assert.assertNotNull(jsonFactory33);
-        org.junit.Assert.assertTrue("'" + jsonToken34 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken34.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
-        org.junit.Assert.assertNotNull(byteArray36);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray36), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser37);
-        org.junit.Assert.assertNull(obj39);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertNotNull(jsonLocation41);
-        org.junit.Assert.assertNotNull(jsonFactory46);
-        org.junit.Assert.assertTrue("'" + jsonToken47 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken47.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + true + "'", boolean48 == true);
-        org.junit.Assert.assertNotNull(byteArray49);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray49), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser50);
-        org.junit.Assert.assertNull(obj52);
-        org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + false + "'", boolean53 == false);
-        org.junit.Assert.assertNotNull(jsonLocation54);
-        org.junit.Assert.assertEquals("'" + str56 + "' != '" + "hi!" + "'", str56, "hi!");
-        org.junit.Assert.assertNotNull(jsonLocation58);
-    }
-
-    @Test
-    public void test1881() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1881");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature7 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory2.configure(feature7, false);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory10 = jsonFactory2.copy();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory11 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator12 = jsonFactory11.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature13 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory15 = jsonFactory11.configure(feature13, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator16 = jsonFactory15.getInputDecorator();
-        java.lang.String str17 = jsonFactory15.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory18 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator19 = jsonFactory18.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature20 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory22 = jsonFactory18.configure(feature20, true);
-        com.fasterxml.jackson.core.JsonParser jsonParser24 = jsonFactory22.createParser("");
-        com.fasterxml.jackson.core.JsonFactory.Feature feature25 = com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES;
-        boolean boolean26 = feature25.enabledByDefault();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory27 = jsonFactory22.enable(feature25);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory29 = jsonFactory15.configure(feature25, false);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature30 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory31 = jsonFactory15.disable(feature30);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory32 = jsonFactory2.enable(feature30);
-        java.io.OutputStream outputStream33 = null;
-        com.fasterxml.jackson.core.JsonGenerator jsonGenerator34 = jsonFactory2.createGenerator(outputStream33);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory35 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory37 = jsonFactory35.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory38 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator39 = jsonFactory38.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature40 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory42 = jsonFactory38.configure(feature40, true);
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator43 = jsonFactory42.getInputDecorator();
-        java.lang.String str44 = jsonFactory42.getRootValueSeparator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature45 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES;
-        boolean boolean47 = feature45.enabledIn(1);
-        boolean boolean48 = jsonFactory42.isEnabled(feature45);
-        com.fasterxml.jackson.core.JsonParser.Feature feature49 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES;
-        boolean boolean51 = feature49.enabledIn(1);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory53 = jsonFactory42.configure(feature49, false);
-        boolean boolean54 = jsonFactory35.isEnabled(feature49);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory55 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory57 = jsonFactory55.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken58 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean59 = jsonToken58.isBoolean();
-        byte[] byteArray60 = jsonToken58.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser61 = jsonFactory57.createJsonParser(byteArray60);
-        jsonParser61.close();
-        java.lang.Object obj63 = jsonParser61.getEmbeddedObject();
-        boolean boolean64 = jsonParser61.hasTextCharacters();
-        boolean boolean65 = jsonParser61.hasCurrentToken();
-        double double66 = jsonParser61.getValueAsDouble();
-        java.lang.String str67 = jsonParser61.getCurrentName();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory68 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator69 = jsonFactory68.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonParser.Feature feature70 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory72 = jsonFactory68.configure(feature70, true);
-        com.fasterxml.jackson.core.JsonParser.Feature feature73 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory74 = jsonFactory72.enable(feature73);
-        com.fasterxml.jackson.core.JsonParser.Feature feature75 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory76 = jsonFactory74.disable(feature75);
-        com.fasterxml.jackson.core.JsonParser jsonParser77 = jsonParser61.enable(feature75);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory79 = jsonFactory35.configure(feature75, true);
-        com.fasterxml.jackson.core.JsonFactory jsonFactory80 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory82 = jsonFactory80.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken83 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean84 = jsonToken83.isBoolean();
-        byte[] byteArray85 = jsonToken83.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser86 = jsonFactory82.createJsonParser(byteArray85);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature87 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory89 = jsonFactory82.configure(feature87, false);
-        boolean boolean91 = feature87.enabledIn(262144);
-        boolean boolean92 = jsonFactory79.isEnabled(feature87);
-        boolean boolean93 = jsonFactory2.isEnabled(feature87);
-        boolean boolean95 = feature87.enabledIn(512);
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature7.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNotNull(jsonFactory10);
-        org.junit.Assert.assertNull(outputDecorator12);
-        org.junit.Assert.assertTrue("'" + feature13 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature13.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory15);
-        org.junit.Assert.assertNull(inputDecorator16);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + " " + "'", str17, " ");
-        org.junit.Assert.assertNull(outputDecorator19);
-        org.junit.Assert.assertTrue("'" + feature20 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature20.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory22);
-        org.junit.Assert.assertNotNull(jsonParser24);
-        org.junit.Assert.assertTrue("'" + feature25 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES + "'", feature25.equals(com.fasterxml.jackson.core.JsonFactory.Feature.CANONICALIZE_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
-        org.junit.Assert.assertNotNull(jsonFactory27);
-        org.junit.Assert.assertNotNull(jsonFactory29);
-        org.junit.Assert.assertTrue("'" + feature30 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES + "'", feature30.equals(com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES));
-        org.junit.Assert.assertNotNull(jsonFactory31);
-        org.junit.Assert.assertNotNull(jsonFactory32);
-        org.junit.Assert.assertNotNull(jsonGenerator34);
-        org.junit.Assert.assertNotNull(jsonFactory37);
-        org.junit.Assert.assertNull(outputDecorator39);
-        org.junit.Assert.assertTrue("'" + feature40 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature40.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory42);
-        org.junit.Assert.assertNull(inputDecorator43);
-        org.junit.Assert.assertEquals("'" + str44 + "' != '" + " " + "'", str44, " ");
-        org.junit.Assert.assertTrue("'" + feature45 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES + "'", feature45.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean47 + "' != '" + false + "'", boolean47 == false);
-        org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
-        org.junit.Assert.assertTrue("'" + feature49 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES + "'", feature49.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES));
-        org.junit.Assert.assertTrue("'" + boolean51 + "' != '" + false + "'", boolean51 == false);
-        org.junit.Assert.assertNotNull(jsonFactory53);
-        org.junit.Assert.assertTrue("'" + boolean54 + "' != '" + false + "'", boolean54 == false);
-        org.junit.Assert.assertNotNull(jsonFactory57);
-        org.junit.Assert.assertTrue("'" + jsonToken58 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken58.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean59 + "' != '" + true + "'", boolean59 == true);
-        org.junit.Assert.assertNotNull(byteArray60);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray60), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser61);
-        org.junit.Assert.assertNull(obj63);
-        org.junit.Assert.assertTrue("'" + boolean64 + "' != '" + false + "'", boolean64 == false);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-        org.junit.Assert.assertTrue("'" + double66 + "' != '" + 0.0d + "'", double66 == 0.0d);
-        org.junit.Assert.assertNull(str67);
-        org.junit.Assert.assertNull(outputDecorator69);
-        org.junit.Assert.assertTrue("'" + feature70 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS + "'", feature70.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonFactory72);
-        org.junit.Assert.assertTrue("'" + feature73 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature73.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertNotNull(jsonFactory74);
-        org.junit.Assert.assertTrue("'" + feature75 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER + "'", feature75.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER));
-        org.junit.Assert.assertNotNull(jsonFactory76);
-        org.junit.Assert.assertNotNull(jsonParser77);
-        org.junit.Assert.assertNotNull(jsonFactory79);
-        org.junit.Assert.assertNotNull(jsonFactory82);
-        org.junit.Assert.assertTrue("'" + jsonToken83 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken83.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean84 + "' != '" + true + "'", boolean84 == true);
-        org.junit.Assert.assertNotNull(byteArray85);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray85), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser86);
-        org.junit.Assert.assertTrue("'" + feature87 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature87.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory89);
-        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + false + "'", boolean91 == false);
-        org.junit.Assert.assertTrue("'" + boolean92 + "' != '" + true + "'", boolean92 == true);
-        org.junit.Assert.assertTrue("'" + boolean93 + "' != '" + false + "'", boolean93 == false);
-        org.junit.Assert.assertTrue("'" + boolean95 + "' != '" + false + "'", boolean95 == false);
-    }
-
-    @Test
-    public void test1882() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1882");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        java.lang.Object obj7 = jsonParser6.getEmbeddedObject();
-        java.lang.Object obj8 = jsonParser6.getEmbeddedObject();
-        boolean boolean9 = jsonParser6.isExpectedStartArrayToken();
-        boolean boolean10 = jsonParser6.isClosed();
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertNull(obj7);
-        org.junit.Assert.assertNull(obj8);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-    }
-
-    @Test
-    public void test1883() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1883");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.setRootValueSeparator("hi!");
-        com.fasterxml.jackson.core.JsonToken jsonToken3 = com.fasterxml.jackson.core.JsonToken.VALUE_TRUE;
-        boolean boolean4 = jsonToken3.isBoolean();
-        byte[] byteArray5 = jsonToken3.asByteArray();
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory2.createJsonParser(byteArray5);
-        com.fasterxml.jackson.core.JsonFactory.Feature feature7 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory9 = jsonFactory2.configure(feature7, false);
-        com.fasterxml.jackson.core.io.CharacterEscapes characterEscapes10 = jsonFactory2.getCharacterEscapes();
-        com.fasterxml.jackson.core.io.InputDecorator inputDecorator11 = null;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory12 = jsonFactory2.setInputDecorator(inputDecorator11);
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator13 = jsonFactory12.getOutputDecorator();
-        java.net.URL uRL14 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            com.fasterxml.jackson.core.JsonParser jsonParser15 = jsonFactory12.createParser(uRL14);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(jsonFactory2);
-        org.junit.Assert.assertTrue("'" + jsonToken3 + "' != '" + com.fasterxml.jackson.core.JsonToken.VALUE_TRUE + "'", jsonToken3.equals(com.fasterxml.jackson.core.JsonToken.VALUE_TRUE));
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(byteArray5);
-        org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray5), "[116, 114, 117, 101]");
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature7.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory9);
-        org.junit.Assert.assertNull(characterEscapes10);
-        org.junit.Assert.assertNotNull(jsonFactory12);
-        org.junit.Assert.assertNull(outputDecorator13);
-    }
-
-    @Test
-    public void test1884() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1884");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator2 = jsonFactory1.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature3 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory5 = jsonFactory1.configure(feature3, true);
-        java.io.Reader reader6 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser7 = jsonFactory5.createJsonParser(reader6);
-        com.fasterxml.jackson.core.JsonParser.Feature feature8 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser10 = jsonParser7.configure(feature8, true);
-        jsonParser10.clearCurrentToken();
-        com.fasterxml.jackson.core.Version version12 = jsonParser10.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature13 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean15 = feature13.enabledIn(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser17 = jsonParser10.configure(feature13, true);
-        com.fasterxml.jackson.core.JsonLocation jsonLocation18 = jsonParser10.getTokenLocation();
-        java.lang.Throwable throwable19 = null;
-        com.fasterxml.jackson.core.JsonParseException jsonParseException20 = new com.fasterxml.jackson.core.JsonParseException("true", jsonLocation18, throwable19);
-        org.junit.Assert.assertNull(outputDecorator2);
-        org.junit.Assert.assertTrue("'" + feature3 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature3.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory5);
-        org.junit.Assert.assertNotNull(jsonParser7);
-        org.junit.Assert.assertTrue("'" + feature8 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature8.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser10);
-        org.junit.Assert.assertNotNull(version12);
-        org.junit.Assert.assertTrue("'" + feature13 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature13.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(jsonParser17);
-        org.junit.Assert.assertNotNull(jsonLocation18);
-    }
-
-    @Test
-    public void test1885() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1885");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        java.io.Reader reader5 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createJsonParser(reader5);
-        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonParser6.configure(feature7, true);
-        jsonParser9.clearCurrentToken();
-        com.fasterxml.jackson.core.Version version11 = jsonParser9.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature12 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean14 = feature12.enabledIn(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonParser9.configure(feature12, true);
-        com.fasterxml.jackson.core.ObjectCodec objectCodec17 = null;
-        jsonParser9.setCodec(objectCodec17);
-        com.fasterxml.jackson.core.JsonToken jsonToken19 = jsonParser9.nextValue();
-        com.fasterxml.jackson.core.JsonStreamContext jsonStreamContext20 = jsonParser9.getParsingContext();
-        boolean boolean21 = jsonParser9.getValueAsBoolean();
-        int int22 = jsonParser9.getValueAsInt();
-        long long24 = jsonParser9.nextLongValue((long) ' ');
-        java.lang.Object obj25 = jsonParser9.getInputSource();
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser9);
-        org.junit.Assert.assertNotNull(version11);
-        org.junit.Assert.assertTrue("'" + feature12 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature12.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(jsonParser16);
-        org.junit.Assert.assertNull(jsonToken19);
-        org.junit.Assert.assertNotNull(jsonStreamContext20);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 0 + "'", int22 == 0);
-        org.junit.Assert.assertTrue("'" + long24 + "' != '" + 32L + "'", long24 == 32L);
-        org.junit.Assert.assertNull(obj25);
-    }
-
-    @Test
-    public void test1886() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest3.test1886");
-        com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
-        com.fasterxml.jackson.core.io.OutputDecorator outputDecorator1 = jsonFactory0.getOutputDecorator();
-        com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW;
-        com.fasterxml.jackson.core.JsonFactory jsonFactory4 = jsonFactory0.configure(feature2, true);
-        java.io.Reader reader5 = null;
-        com.fasterxml.jackson.core.JsonParser jsonParser6 = jsonFactory4.createJsonParser(reader5);
-        com.fasterxml.jackson.core.JsonParser.Feature feature7 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS;
-        com.fasterxml.jackson.core.JsonParser jsonParser9 = jsonParser6.configure(feature7, true);
-        jsonParser9.clearCurrentToken();
-        com.fasterxml.jackson.core.Version version11 = jsonParser9.version();
-        com.fasterxml.jackson.core.JsonParser.Feature feature12 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
-        boolean boolean14 = feature12.enabledIn(1);
-        com.fasterxml.jackson.core.JsonParser jsonParser16 = jsonParser9.configure(feature12, true);
-        boolean boolean18 = feature12.enabledIn(0);
-        org.junit.Assert.assertNull(outputDecorator1);
-        org.junit.Assert.assertTrue("'" + feature2 + "' != '" + com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW + "'", feature2.equals(com.fasterxml.jackson.core.JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW));
-        org.junit.Assert.assertNotNull(jsonFactory4);
-        org.junit.Assert.assertNotNull(jsonParser6);
-        org.junit.Assert.assertTrue("'" + feature7 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS + "'", feature7.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_YAML_COMMENTS));
-        org.junit.Assert.assertNotNull(jsonParser9);
-        org.junit.Assert.assertNotNull(version11);
-        org.junit.Assert.assertTrue("'" + feature12 + "' != '" + com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS + "'", feature12.equals(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS));
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNotNull(jsonParser16);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
     }
 }
 

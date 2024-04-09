@@ -1,1 +1,5 @@
-com.fasterxml.jackson.databind.deser.TestCollectionDeserialization.testArrayIndexForExceptions
+com.fasterxml.jackson.databind.deser.std.EvosuiteStringArrayDeserializer_ESTest.test4
+com.fasterxml.jackson.databind.deser.std.EvosuiteStringArrayDeserializer_ESTest.test5
+com.fasterxml.jackson.databind.deser.std.EvosuiteStringArrayDeserializer_ESTest.test2
+com.fasterxml.jackson.databind.deser.std.EvosuiteStringArrayDeserializer_ESTest.test3
+com.fasterxml.jackson.databind.deser.std.EvosuiteStringArrayDeserializer_ESTest.test6

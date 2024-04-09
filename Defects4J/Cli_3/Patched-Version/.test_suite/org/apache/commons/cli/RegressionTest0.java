@@ -719,13 +719,5 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(class7);
         org.junit.Assert.assertEquals("'" + obj8 + "' != '" + "" + "'", obj8, "");
     }
-
-    @Test
-    public void test62() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test62");
-        java.net.URL uRL1 = org.apache.commons.cli.TypeHandler.createURL("[ Options: [ short {=[ option:   ::  ]} ] [ long {} ]");
-        org.junit.Assert.assertNull(uRL1);
-    }
 }
 

@@ -14,6 +14,1190 @@ public class RandoopRegressionTest2 {
         if (debug)
             System.out.format("%n%s%n", "RandoopRegressionTest2.test1001");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        boolean boolean9 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendAlternate("");
+        doubleMetaphoneResult7.appendAlternate("");
+        doubleMetaphoneResult7.append(' ');
+        java.lang.String str16 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.append("", "RKPK");
+        doubleMetaphoneResult7.appendPrimary('a');
+        java.lang.String str22 = doubleMetaphoneResult7.getPrimary();
+        doubleMetaphoneResult7.append('E', '#');
+        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: ");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + " " + "'", str16, " ");
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + " a" + "'", str22, " a");
+    }
+
+    @Test
+    public void test1002() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1002");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
+        char char6 = doubleMetaphone0.charAt("", 1);
+        java.lang.String str8 = doubleMetaphone0.encode("ARKPXKMNSKTKNKTRKSPXN");
+        char char11 = doubleMetaphone0.charAt("ARKPKSKM", (int) 'r');
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) -1);
+        java.lang.String str14 = doubleMetaphoneResult13.getPrimary();
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "" + "'", str3, "");
+        org.junit.Assert.assertTrue("'" + char6 + "' != '" + '\000' + "'", char6 == '\000');
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "ARKP" + "'", str8, "ARKP");
+        org.junit.Assert.assertTrue("'" + char11 + "' != '" + '\000' + "'", char11 == '\000');
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
+    }
+
+    @Test
+    public void test1003() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1003");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
+        java.lang.String str8 = doubleMetaphone0.encode("");
+        char char11 = doubleMetaphone0.charAt("", 0);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
+        doubleMetaphoneResult13.appendPrimary("ARKP");
+        doubleMetaphoneResult13.append("ARKPK", "\000AARKPKSKM");
+        doubleMetaphoneResult13.append('a', '.');
+        doubleMetaphoneResult13.append(' ', 'o');
+        doubleMetaphoneResult13.appendPrimary('a');
+        doubleMetaphoneResult13.append('A');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertNull(str8);
+        org.junit.Assert.assertTrue("'" + char11 + "' != '" + '\000' + "'", char11 == '\000');
+    }
+
+    @Test
+    public void test1004() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1004");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.getMaxCodeLen();
+        int int6 = doubleMetaphone0.getMaxCodeLen();
+        int int7 = doubleMetaphone0.getMaxCodeLen();
+        char char10 = doubleMetaphone0.charAt("ARKP", (int) (byte) -1);
+        java.lang.String str12 = doubleMetaphone0.doubleMetaphone("org.apache");
+        int int13 = doubleMetaphone0.getMaxCodeLen();
+        int int14 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str17 = doubleMetaphone0.doubleMetaphone("#hi!ARKPXK", true);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult19 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) -1);
+        // The following exception was thrown during execution in test generation
+        try {
+            doubleMetaphoneResult19.append("  ");
+            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1");
+        } catch (java.lang.StringIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 10 + "'", int7 == 10);
+        org.junit.Assert.assertTrue("'" + char10 + "' != '" + '\000' + "'", char10 == '\000');
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "ARKPX" + "'", str12, "ARKPX");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 10 + "'", int13 == 10);
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 10 + "'", int14 == 10);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "RKPKSK" + "'", str17, "RKPKSK");
+    }
+
+    @Test
+    public void test1005() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1005");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
+        java.lang.String str8 = doubleMetaphone0.encode("");
+        doubleMetaphone0.setMaxCodeLen(0);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult12 = doubleMetaphone0.new DoubleMetaphoneResult(0);
+        doubleMetaphoneResult12.append(" ", "org.apache.commons.codec.EncoderException: ");
+        java.lang.String str16 = doubleMetaphoneResult12.getAlternate();
+        java.lang.String str17 = doubleMetaphoneResult12.getPrimary();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertNull(str8);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+    }
+
+    @Test
+    public void test1006() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1006");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        java.lang.String str4 = doubleMetaphone0.encode("ARKPXKMNSK");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult6 = doubleMetaphone0.new DoubleMetaphoneResult(0);
+        java.lang.String str7 = doubleMetaphoneResult6.getAlternate();
+        doubleMetaphoneResult6.appendAlternate('a');
+        doubleMetaphoneResult6.append(" Horg.apac", "A");
+        doubleMetaphoneResult6.append('a');
+        doubleMetaphoneResult6.appendPrimary("org.apache.commons.codec.EncoderException: ARKPX");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "ARKP" + "'", str4, "ARKP");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
+    }
+
+    @Test
+    public void test1007() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1007");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone0.maxCodeLen = (byte) 10;
+        boolean boolean10 = doubleMetaphone0.isDoubleMetaphoneEqual("H", "ARKP", true);
+        int int11 = doubleMetaphone0.getMaxCodeLen();
+        java.lang.String str13 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ARKP");
+        java.lang.String str15 = doubleMetaphone0.encode("ARKPKSKMNSK");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 10 + "'", int11 == 10);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "ARKPXKMNSK" + "'", str13, "ARKPXKMNSK");
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "ARKPKSKMNS" + "'", str15, "ARKPKSKMNS");
+    }
+
+    @Test
+    public void test1008() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1008");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
+        java.lang.String str8 = doubleMetaphone0.encode("");
+        char char11 = doubleMetaphone0.charAt("", 0);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
+        doubleMetaphoneResult13.appendPrimary("ARKP");
+        doubleMetaphoneResult13.appendAlternate(' ');
+        doubleMetaphoneResult13.append("org.apache.commons.codec.EncoderException: ARKPX", "RKPK");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertNull(str8);
+        org.junit.Assert.assertTrue("'" + char11 + "' != '" + '\000' + "'", char11 == '\000');
+    }
+
+    @Test
+    public void test1009() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1009");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("", true);
+        int int8 = doubleMetaphone0.getMaxCodeLen();
+        char char11 = doubleMetaphone0.charAt("", 4);
+        char char14 = doubleMetaphone0.charAt("H", (int) '#');
+        java.lang.String str16 = doubleMetaphone0.doubleMetaphone("ARKP");
+        java.lang.String str19 = doubleMetaphone0.doubleMetaphone(" org.apach", true);
+        doubleMetaphone0.setMaxCodeLen((int) (short) -1);
+        doubleMetaphone0.maxCodeLen = 'T';
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone24 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str26 = doubleMetaphone24.doubleMetaphone("");
+        doubleMetaphone24.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone24.setMaxCodeLen(0);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult32 = doubleMetaphone24.new DoubleMetaphoneResult((int) (short) 1);
+        doubleMetaphoneResult32.append('a', '4');
+        doubleMetaphoneResult32.append('e');
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj38 = doubleMetaphone0.encode((java.lang.Object) doubleMetaphoneResult32);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertNull(str7);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 10 + "'", int8 == 10);
+        org.junit.Assert.assertTrue("'" + char11 + "' != '" + '\000' + "'", char11 == '\000');
+        org.junit.Assert.assertTrue("'" + char14 + "' != '" + '\000' + "'", char14 == '\000');
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "ARKP" + "'", str16, "ARKP");
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "ARKPK" + "'", str19, "ARKPK");
+        org.junit.Assert.assertNull(str26);
+    }
+
+    @Test
+    public void test1010() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1010");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.getMaxCodeLen();
+        int int6 = doubleMetaphone0.getMaxCodeLen();
+        int int7 = doubleMetaphone0.getMaxCodeLen();
+        char char10 = doubleMetaphone0.charAt("ARKP", (int) (byte) -1);
+        java.lang.String str12 = doubleMetaphone0.doubleMetaphone("org.apache");
+        int int13 = doubleMetaphone0.getMaxCodeLen();
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult15 = doubleMetaphone0.new DoubleMetaphoneResult(0);
+        java.lang.String str17 = doubleMetaphone0.encode("");
+        java.lang.String str19 = doubleMetaphone0.doubleMetaphone("hi!.");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 10 + "'", int7 == 10);
+        org.junit.Assert.assertTrue("'" + char10 + "' != '" + '\000' + "'", char10 == '\000');
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "ARKPX" + "'", str12, "ARKPX");
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 10 + "'", int13 == 10);
+        org.junit.Assert.assertNull(str17);
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "H" + "'", str19, "H");
+    }
+
+    @Test
+    public void test1011() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1011");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.getMaxCodeLen();
+        int int6 = doubleMetaphone0.getMaxCodeLen();
+        int int7 = doubleMetaphone0.getMaxCodeLen();
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult9 = doubleMetaphone0.new DoubleMetaphoneResult(35);
+        boolean boolean10 = doubleMetaphoneResult9.isComplete();
+        doubleMetaphoneResult9.appendPrimary("org.apache.commons.codec.EncoderException: A");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 10 + "'", int7 == 10);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+    }
+
+    @Test
+    public void test1012() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1012");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
+        doubleMetaphoneResult7.append("hi!", "org.apache.commons.codec.EncoderException: H");
+        doubleMetaphoneResult7.appendPrimary("");
+        doubleMetaphoneResult7.appendPrimary("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!");
+        java.lang.String str15 = doubleMetaphoneResult7.getPrimary();
+        doubleMetaphoneResult7.appendAlternate('a');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "ARKP" + "'", str5, "ARKP");
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "hi!org.apa" + "'", str15, "hi!org.apa");
+    }
+
+    @Test
+    public void test1013() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1013");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        char char8 = doubleMetaphone0.charAt("ARKP", (int) (short) 0);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult10 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone11 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str13 = doubleMetaphone11.doubleMetaphone("");
+        doubleMetaphone11.setMaxCodeLen((int) (byte) 10);
+        int int16 = doubleMetaphone11.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult18 = doubleMetaphone11.new DoubleMetaphoneResult(10);
+        boolean boolean19 = doubleMetaphoneResult18.isComplete();
+        doubleMetaphoneResult18.appendPrimary(' ');
+        doubleMetaphoneResult18.appendPrimary("H");
+        doubleMetaphoneResult18.append("", "");
+        doubleMetaphoneResult18.append("org.apache.commons.codec.EncoderException: ");
+        doubleMetaphoneResult18.appendPrimary('a');
+        doubleMetaphoneResult18.append(' ');
+        doubleMetaphoneResult18.appendAlternate('E');
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj35 = doubleMetaphone0.encode((java.lang.Object) 'E');
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + char8 + "' != '" + 'A' + "'", char8 == 'A');
+        org.junit.Assert.assertNull(str13);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+    }
+
+    @Test
+    public void test1014() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1014");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        boolean boolean9 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendAlternate('\000');
+        doubleMetaphoneResult7.append('\000', 'A');
+        doubleMetaphoneResult7.append("ARKPKSKMNS");
+        doubleMetaphoneResult7.append("ARKPXKMNSK");
+        doubleMetaphoneResult7.append('a');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+    }
+
+    @Test
+    public void test1015() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1015");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary(' ');
+        doubleMetaphoneResult7.appendPrimary("H");
+        doubleMetaphoneResult7.append("", "");
+        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: ");
+        doubleMetaphoneResult7.appendPrimary('a');
+        doubleMetaphoneResult7.append(' ');
+        java.lang.String str22 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: a");
+        doubleMetaphoneResult7.append("RKP");
+        doubleMetaphoneResult7.append('R', 'a');
+        doubleMetaphoneResult7.append('r', '4');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "org.apache" + "'", str22, "org.apache");
+    }
+
+    @Test
+    public void test1016() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1016");
+        java.lang.String[] strArray22 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
+        boolean boolean23 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray22);
+        boolean boolean24 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray22);
+        boolean boolean25 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache", (int) '\000', (int) (short) 100, strArray22);
+        boolean boolean26 = org.apache.commons.codec.language.DoubleMetaphone.contains("#org.apach", (int) 'a', 0, strArray22);
+        boolean boolean27 = org.apache.commons.codec.language.DoubleMetaphone.contains("", (int) 'A', 0, strArray22);
+        boolean boolean28 = org.apache.commons.codec.language.DoubleMetaphone.contains("#org.apach", (int) 'o', 1, strArray22);
+        org.junit.Assert.assertNotNull(strArray22);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+    }
+
+    @Test
+    public void test1017() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1017");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.getMaxCodeLen();
+        boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
+        char char7 = doubleMetaphone0.charAt(" ", 65);
+        int int8 = doubleMetaphone0.maxCodeLen;
+        int int9 = doubleMetaphone0.maxCodeLen;
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertTrue("'" + char7 + "' != '" + '\000' + "'", char7 == '\000');
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 4 + "'", int9 == 4);
+    }
+
+    @Test
+    public void test1018() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1018");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.encode("hi!");
+        char char5 = doubleMetaphone0.charAt("", 100);
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
+        int int8 = doubleMetaphone0.getMaxCodeLen();
+        int int9 = doubleMetaphone0.maxCodeLen;
+        int int10 = doubleMetaphone0.maxCodeLen;
+        int int11 = doubleMetaphone0.maxCodeLen;
+        boolean boolean15 = doubleMetaphone0.isDoubleMetaphoneEqual("aorg.apach", "org.apache.commons.codec.EncoderException: ARKPX", true);
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone16 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str18 = doubleMetaphone16.encode("hi!");
+        char char21 = doubleMetaphone16.charAt("", 100);
+        java.lang.String str23 = doubleMetaphone16.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
+        int int24 = doubleMetaphone16.getMaxCodeLen();
+        int int25 = doubleMetaphone16.maxCodeLen;
+        int int26 = doubleMetaphone16.getMaxCodeLen();
+        java.lang.String str28 = doubleMetaphone16.encode("ARKPKSKMNSKTKNKTRKSPKSN");
+        java.lang.String str30 = doubleMetaphone16.doubleMetaphone("org.apache.commons.codec.EncoderException: A");
+        java.lang.Object obj31 = doubleMetaphone0.encode((java.lang.Object) "org.apache.commons.codec.EncoderException: A");
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
+        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 4 + "'", int9 == 4);
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 4 + "'", int10 == 4);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 4 + "'", int11 == 4);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + true + "'", boolean15 == true);
+        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "H" + "'", str18, "H");
+        org.junit.Assert.assertTrue("'" + char21 + "' != '" + '\000' + "'", char21 == '\000');
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "ARKP" + "'", str23, "ARKP");
+        org.junit.Assert.assertTrue("'" + int24 + "' != '" + 4 + "'", int24 == 4);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 4 + "'", int25 == 4);
+        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 4 + "'", int26 == 4);
+        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "ARKP" + "'", str28, "ARKP");
+        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "ARKP" + "'", str30, "ARKP");
+        org.junit.Assert.assertEquals("'" + obj31 + "' != '" + "ARKP" + "'", obj31, "ARKP");
+    }
+
+    @Test
+    public void test1019() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1019");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean11 = doubleMetaphone0.isDoubleMetaphoneEqual("hi!", "", false);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        java.lang.String str15 = doubleMetaphone0.encode(" ");
+        int int16 = doubleMetaphone0.getMaxCodeLen();
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult18 = doubleMetaphone0.new DoubleMetaphoneResult(0);
+        java.lang.String str20 = doubleMetaphone0.encode("A");
+        boolean boolean24 = doubleMetaphone0.isDoubleMetaphoneEqual(" Horg.apac", "", true);
+        int int25 = doubleMetaphone0.getMaxCodeLen();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
+        org.junit.Assert.assertNull(str15);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "A" + "'", str20, "A");
+        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
+        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 10 + "'", int25 == 10);
+    }
+
+    @Test
+    public void test1020() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1020");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.encode("hi!");
+        char char5 = doubleMetaphone0.charAt("", 100);
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
+        doubleMetaphone0.maxCodeLen = (short) 100;
+        java.lang.String str11 = doubleMetaphone0.encode("ARKPK");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone12 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str14 = doubleMetaphone12.doubleMetaphone("");
+        doubleMetaphone12.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone12.setMaxCodeLen((int) (short) 0);
+        java.lang.String str20 = doubleMetaphone12.encode("");
+        doubleMetaphone12.setMaxCodeLen(0);
+        int int23 = doubleMetaphone12.getMaxCodeLen();
+        boolean boolean27 = doubleMetaphone12.isDoubleMetaphoneEqual("ARKPXKMNSKTKNKTRKSPXN", "hi!", true);
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone28 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str30 = doubleMetaphone28.doubleMetaphone("");
+        doubleMetaphone28.setMaxCodeLen((int) (byte) 10);
+        int int33 = doubleMetaphone28.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult35 = doubleMetaphone28.new DoubleMetaphoneResult(10);
+        boolean boolean36 = doubleMetaphoneResult35.isComplete();
+        doubleMetaphoneResult35.appendPrimary("org.apache.commons.codec.EncoderException: hi!");
+        java.lang.Object obj39 = doubleMetaphone12.encode((java.lang.Object) "org.apache.commons.codec.EncoderException: hi!");
+        java.lang.String str41 = doubleMetaphone12.doubleMetaphone("ARKPXKMNSKTKNKTRKSPXN");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult43 = doubleMetaphone12.new DoubleMetaphoneResult((int) 'o');
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj44 = doubleMetaphone0.encode((java.lang.Object) doubleMetaphone12);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
+        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "ARKPK" + "'", str11, "ARKPK");
+        org.junit.Assert.assertNull(str14);
+        org.junit.Assert.assertNull(str20);
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
+        org.junit.Assert.assertNull(str30);
+        org.junit.Assert.assertTrue("'" + int33 + "' != '" + 10 + "'", int33 == 10);
+        org.junit.Assert.assertTrue("'" + boolean36 + "' != '" + false + "'", boolean36 == false);
+        org.junit.Assert.assertEquals("'" + obj39 + "' != '" + "" + "'", obj39, "");
+        org.junit.Assert.assertEquals("'" + str41 + "' != '" + "" + "'", str41, "");
+    }
+
+    @Test
+    public void test1021() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1021");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str4 = doubleMetaphone0.doubleMetaphone("", false);
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ARKP", true);
+        java.lang.String str9 = doubleMetaphone0.encode(" ");
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str4);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
+        org.junit.Assert.assertNull(str9);
+    }
+
+    @Test
+    public void test1022() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1022");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.getMaxCodeLen();
+        doubleMetaphone0.setMaxCodeLen(100);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult5 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) -1);
+        doubleMetaphoneResult5.append('a', ' ');
+        boolean boolean9 = doubleMetaphoneResult5.isComplete();
+        doubleMetaphoneResult5.appendPrimary('T');
+        // The following exception was thrown during execution in test generation
+        try {
+            doubleMetaphoneResult5.append("org.apache.commons.codec.EncoderException: #org.apach", "org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!");
+            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1");
+        } catch (java.lang.StringIndexOutOfBoundsException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + true + "'", boolean9 == true);
+    }
+
+    @Test
+    public void test1023() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1023");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary(' ');
+        doubleMetaphoneResult7.appendPrimary("H");
+        doubleMetaphoneResult7.append('\000', ' ');
+        doubleMetaphoneResult7.appendAlternate(" ");
+        doubleMetaphoneResult7.appendPrimary('a');
+        doubleMetaphoneResult7.append('4');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+    }
+
+    @Test
+    public void test1024() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1024");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.encode("");
+        doubleMetaphone0.maxCodeLen = (byte) 0;
+        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("H", false);
+        java.lang.String str10 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSK");
+        int int11 = doubleMetaphone0.getMaxCodeLen();
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(0);
+        java.lang.String str15 = doubleMetaphone0.encode("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 0);
+        java.lang.String str19 = doubleMetaphone0.encode("");
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertNull(str15);
+        org.junit.Assert.assertNull(str19);
+    }
+
+    @Test
+    public void test1025() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1025");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary(' ');
+        doubleMetaphoneResult7.appendPrimary("H");
+        doubleMetaphoneResult7.append("", "");
+        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: ");
+        doubleMetaphoneResult7.appendAlternate("HARKP");
+        java.lang.String str20 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.appendAlternate('o');
+        boolean boolean23 = doubleMetaphoneResult7.isComplete();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "org.apache" + "'", str20, "org.apache");
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+    }
+
+    @Test
+    public void test1026() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1026");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.getMaxCodeLen();
+        java.lang.Object obj7 = doubleMetaphone0.encode((java.lang.Object) "hi!");
+        java.lang.String str9 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: ");
+        int int10 = doubleMetaphone0.getMaxCodeLen();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertEquals("'" + obj7 + "' != '" + "H" + "'", obj7, "H");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "ARKPXKMNSK" + "'", str9, "ARKPXKMNSK");
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 10 + "'", int10 == 10);
+    }
+
+    @Test
+    public void test1027() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1027");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.encode("");
+        doubleMetaphone0.maxCodeLen = (byte) 0;
+        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("H", false);
+        java.lang.String str10 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSK");
+        doubleMetaphone0.maxCodeLen = 0;
+        doubleMetaphone0.setMaxCodeLen(0);
+        int int15 = doubleMetaphone0.maxCodeLen;
+        boolean boolean18 = doubleMetaphone0.isDoubleMetaphoneEqual("#hi!ARKPXK", "aorg.apach");
+        char char21 = doubleMetaphone0.charAt("RKPKSK", 100);
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + true + "'", boolean18 == true);
+        org.junit.Assert.assertTrue("'" + char21 + "' != '" + '\000' + "'", char21 == '\000');
+    }
+
+    @Test
+    public void test1028() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1028");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary(' ');
+        doubleMetaphoneResult7.appendPrimary("H");
+        doubleMetaphoneResult7.append("", "");
+        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: ");
+        doubleMetaphoneResult7.appendPrimary('a');
+        doubleMetaphoneResult7.appendAlternate('#');
+        boolean boolean22 = doubleMetaphoneResult7.isComplete();
+        boolean boolean23 = doubleMetaphoneResult7.isComplete();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + true + "'", boolean23 == true);
+    }
+
+    @Test
+    public void test1029() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1029");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
+        java.lang.String str8 = doubleMetaphone0.encode("");
+        char char11 = doubleMetaphone0.charAt("", 0);
+        int int12 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult14 = doubleMetaphone0.new DoubleMetaphoneResult(97);
+        java.lang.Class<?> wildcardClass15 = doubleMetaphone0.getClass();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertNull(str8);
+        org.junit.Assert.assertTrue("'" + char11 + "' != '" + '\000' + "'", char11 == '\000');
+        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
+        org.junit.Assert.assertNotNull(wildcardClass15);
+    }
+
+    @Test
+    public void test1030() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1030");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.encode("hi!");
+        char char5 = doubleMetaphone0.charAt("", 100);
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
+        int int8 = doubleMetaphone0.getMaxCodeLen();
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult10 = doubleMetaphone0.new DoubleMetaphoneResult((int) '\000');
+        doubleMetaphone0.maxCodeLen = (short) 1;
+        java.lang.String str14 = doubleMetaphone0.doubleMetaphone("");
+        int int15 = doubleMetaphone0.getMaxCodeLen();
+        boolean boolean19 = doubleMetaphone0.isDoubleMetaphoneEqual("RKPK", "ARKPXKMNSKTKNKTRKSPXNRKPXKMNSKTKNKTRKSPXN", false);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult21 = doubleMetaphone0.new DoubleMetaphoneResult(32);
+        doubleMetaphoneResult21.appendAlternate("RKP");
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
+        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
+        org.junit.Assert.assertNull(str14);
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 1 + "'", int15 == 1);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+    }
+
+    @Test
+    public void test1031() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1031");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.encode("");
+        doubleMetaphone0.maxCodeLen = (byte) 0;
+        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("H", false);
+        java.lang.String str10 = doubleMetaphone0.encode("ARKPKSKMNS");
+        java.lang.String str13 = doubleMetaphone0.doubleMetaphone("a", true);
+        int int14 = doubleMetaphone0.getMaxCodeLen();
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
+        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 0 + "'", int14 == 0);
+    }
+
+    @Test
+    public void test1032() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1032");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("");
+        doubleMetaphoneResult7.append('#');
+        java.lang.String str13 = doubleMetaphoneResult7.getPrimary();
+        java.lang.String str14 = doubleMetaphoneResult7.getPrimary();
+        doubleMetaphoneResult7.append('A');
+        doubleMetaphoneResult7.append("");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "#" + "'", str13, "#");
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "#" + "'", str14, "#");
+    }
+
+    @Test
+    public void test1033() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1033");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.getMaxCodeLen();
+        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", false);
+        doubleMetaphone0.maxCodeLen = (byte) 100;
+        java.lang.String str12 = doubleMetaphone0.encode("ARKPXKMNSKTKNKTRKSPXN");
+        java.lang.String str14 = doubleMetaphone0.encode("RKPK");
+        doubleMetaphone0.setMaxCodeLen((int) 'r');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "ARKPXKMNSK" + "'", str8, "ARKPXKMNSK");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "ARKPKSKMNSKTKNKTRKSPKSN" + "'", str12, "ARKPKSKMNSKTKNKTRKSPKSN");
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "RKPK" + "'", str14, "RKPK");
+    }
+
+    @Test
+    public void test1034() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1034");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult4 = doubleMetaphone0.new DoubleMetaphoneResult(0);
+        int int5 = doubleMetaphone0.getMaxCodeLen();
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj7 = doubleMetaphone0.encode((java.lang.Object) 101);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 4 + "'", int5 == 4);
+    }
+
+    @Test
+    public void test1035() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1035");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.encode("");
+        java.lang.String str5 = doubleMetaphone0.encode("org.apache.commons.codec.EncoderException: hi!");
+        java.lang.String str7 = doubleMetaphone0.encode("ARKPXKMNSK");
+        java.lang.String str9 = doubleMetaphone0.doubleMetaphone("hi!org.apa");
+        int int10 = doubleMetaphone0.getMaxCodeLen();
+        boolean boolean13 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: ", "HARKPA");
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "ARKP" + "'", str5, "ARKP");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "HRKP" + "'", str9, "HRKP");
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 4 + "'", int10 == 4);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+    }
+
+    @Test
+    public void test1036() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1036");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone0.maxCodeLen = (byte) 10;
+        boolean boolean10 = doubleMetaphone0.isDoubleMetaphoneEqual("H", "ARKP", true);
+        int int11 = doubleMetaphone0.getMaxCodeLen();
+        java.lang.String str13 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ARKP");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult15 = doubleMetaphone0.new DoubleMetaphoneResult((int) 'R');
+        doubleMetaphoneResult15.append('o');
+        doubleMetaphoneResult15.append("\000\000ARKPKSKM", "org.apache.commons.codec.EncoderException: H");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 10 + "'", int11 == 10);
+        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "ARKPXKMNSK" + "'", str13, "ARKPXKMNSK");
+    }
+
+    @Test
+    public void test1037() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1037");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary('4');
+        doubleMetaphoneResult7.appendPrimary('#');
+        doubleMetaphoneResult7.appendAlternate('e');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+    }
+
+    @Test
+    public void test1038() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1038");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.getMaxCodeLen();
+        char char8 = doubleMetaphone0.charAt("", (int) (byte) -1);
+        boolean boolean12 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: H", "H", false);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult14 = doubleMetaphone0.new DoubleMetaphoneResult((int) (short) 1);
+        java.lang.String str16 = doubleMetaphone0.encode("  #");
+        java.lang.String str19 = doubleMetaphone0.doubleMetaphone("A", true);
+        java.lang.String str21 = doubleMetaphone0.doubleMetaphone(" H\000 ");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + char8 + "' != '" + '\000' + "'", char8 == '\000');
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "A" + "'", str19, "A");
+        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
+    }
+
+    @Test
+    public void test1039() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1039");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("");
+        java.lang.String str11 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.appendAlternate("org.apache.commons.codec.EncoderException: a");
+        doubleMetaphoneResult7.append("");
+        java.lang.String str16 = doubleMetaphoneResult7.getPrimary();
+        doubleMetaphoneResult7.append(' ');
+        doubleMetaphoneResult7.appendAlternate('#');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
+    }
+
+    @Test
+    public void test1040() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1040");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary(' ');
+        doubleMetaphoneResult7.appendPrimary("H");
+        doubleMetaphoneResult7.append("H");
+        doubleMetaphoneResult7.append("");
+        doubleMetaphoneResult7.append("  #\000", " ");
+        boolean boolean20 = doubleMetaphoneResult7.isComplete();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
+    }
+
+    @Test
+    public void test1041() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1041");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.encode("");
+        doubleMetaphone0.maxCodeLen = (byte) 0;
+        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("H", false);
+        doubleMetaphone0.maxCodeLen = 'E';
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone11 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str13 = doubleMetaphone11.doubleMetaphone("");
+        doubleMetaphone11.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone11.setMaxCodeLen(0);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult19 = doubleMetaphone11.new DoubleMetaphoneResult((int) (short) 1);
+        boolean boolean23 = doubleMetaphone11.isDoubleMetaphoneEqual("org.apache", "", false);
+        // The following exception was thrown during execution in test generation
+        try {
+            java.lang.Object obj24 = doubleMetaphone0.encode((java.lang.Object) boolean23);
+            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
+        } catch (org.apache.commons.codec.EncoderException e) {
+        // Expected exception.
+        }
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertNull(str13);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+    }
+
+    @Test
+    public void test1042() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1042");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("");
+        doubleMetaphoneResult7.append('a', '#');
+        doubleMetaphoneResult7.appendAlternate("org.apache.commons.codec.EncoderException: ");
+        boolean boolean16 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("A");
+        doubleMetaphoneResult7.appendAlternate('R');
+        doubleMetaphoneResult7.append(" H\000");
+        boolean boolean23 = doubleMetaphoneResult7.isComplete();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
+    }
+
+    @Test
+    public void test1043() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1043");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSK");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult9 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
+        java.lang.String str11 = doubleMetaphone0.doubleMetaphone("ARKP");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult((int) (short) 10);
+        doubleMetaphoneResult13.appendPrimary("ARKP");
+        java.lang.String str16 = doubleMetaphoneResult13.getPrimary();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKPKSKMNS" + "'", str7, "ARKPKSKMNS");
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "ARKP" + "'", str11, "ARKP");
+        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "ARKP" + "'", str16, "ARKP");
+    }
+
+    @Test
+    public void test1044() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1044");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        boolean boolean9 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendAlternate('A');
+        boolean boolean12 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append('o', 'H');
+        doubleMetaphoneResult7.append('T', '#');
+        doubleMetaphoneResult7.append(' ', 'R');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+    }
+
+    @Test
+    public void test1045() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1045");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSK");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult9 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
+        java.lang.String str11 = doubleMetaphone0.encode("org.apache.commons.codec.EncoderException: ");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean14 = doubleMetaphoneResult13.isComplete();
+        doubleMetaphoneResult13.appendAlternate("");
+        java.lang.String str17 = doubleMetaphoneResult13.getAlternate();
+        doubleMetaphoneResult13.appendPrimary('a');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKPKSKMNS" + "'", str7, "ARKPKSKMNS");
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "ARKPXKMNSK" + "'", str11, "ARKPXKMNSK");
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+    }
+
+    @Test
+    public void test1046() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1046");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        boolean boolean9 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("ARKPX");
+        doubleMetaphoneResult7.append('\000');
+        java.lang.String str14 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.append('#');
+        boolean boolean17 = doubleMetaphoneResult7.isComplete();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "ARKPX\000" + "'", str14, "ARKPX\000");
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+    }
+
+    @Test
+    public void test1047() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1047");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary(' ');
+        doubleMetaphoneResult7.appendPrimary("H");
+        doubleMetaphoneResult7.append("H");
+        doubleMetaphoneResult7.append("");
+        boolean boolean17 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append('\000');
+        doubleMetaphoneResult7.append("", "#");
+        doubleMetaphoneResult7.append('H');
+        doubleMetaphoneResult7.appendPrimary('K');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
+    }
+
+    @Test
+    public void test1048() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1048");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary(' ');
+        doubleMetaphoneResult7.appendPrimary("H");
+        doubleMetaphoneResult7.append("", "");
+        doubleMetaphoneResult7.appendAlternate(' ');
+        doubleMetaphoneResult7.appendPrimary('#');
+        doubleMetaphoneResult7.append(' ');
+        java.lang.String str22 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.append("RKP");
+        doubleMetaphoneResult7.append("A", "aAARKPa");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "  " + "'", str22, "  ");
+    }
+
+    @Test
+    public void test1049() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1049");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        boolean boolean9 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendAlternate("");
+        doubleMetaphoneResult7.append('\000', 'a');
+        java.lang.String str15 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.append('a', 'A');
+        doubleMetaphoneResult7.appendPrimary("");
+        doubleMetaphoneResult7.appendPrimary('a');
+        doubleMetaphoneResult7.appendAlternate("ARKPKSKMNSKTKNKTRKSPKSN");
+        java.lang.String str25 = doubleMetaphoneResult7.getPrimary();
+        doubleMetaphoneResult7.appendAlternate("org.apache.commons.codec.EncoderException: ARKPKSKMNS");
+        java.lang.String str28 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.append('o');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "a" + "'", str15, "a");
+        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "\000aa" + "'", str25, "\000aa");
+        org.junit.Assert.assertEquals("'" + str28 + "' != '" + "aAARKPKSKM" + "'", str28, "aAARKPKSKM");
+    }
+
+    @Test
+    public void test1050() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1050");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
         boolean boolean7 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache", "", true);
@@ -34,9 +1218,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1002() throws Throwable {
+    public void test1051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1002");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1051");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -55,9 +1239,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1003() throws Throwable {
+    public void test1052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1003");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1052");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -82,9 +1266,22 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1004() throws Throwable {
+    public void test1053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1004");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1053");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.getMaxCodeLen();
+        char char4 = doubleMetaphone0.charAt("ARKPXKMNSK", (int) (byte) 0);
+        java.lang.String str6 = doubleMetaphone0.encode("ARKPKSKMNSK");
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertTrue("'" + char4 + "' != '" + 'A' + "'", char4 == 'A');
+        org.junit.Assert.assertEquals("'" + str6 + "' != '" + "ARKP" + "'", str6, "ARKP");
+    }
+
+    @Test
+    public void test1054() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1054");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -100,9 +1297,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1005() throws Throwable {
+    public void test1055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1005");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1055");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -123,9 +1320,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1006() throws Throwable {
+    public void test1056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1006");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1056");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -155,9 +1352,36 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1007() throws Throwable {
+    public void test1057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1007");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1057");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        boolean boolean9 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendAlternate('A');
+        boolean boolean12 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("ARKPXKMNSKTKNKTRKSPXN", "org.apache.commons.codec.EncoderException: H");
+        boolean boolean16 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append('\000', 'H');
+        doubleMetaphoneResult7.append(' ');
+        java.lang.String str22 = doubleMetaphoneResult7.getAlternate();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "Aorg.apach" + "'", str22, "Aorg.apach");
+    }
+
+    @Test
+    public void test1058() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1058");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -188,9 +1412,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1008() throws Throwable {
+    public void test1059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1008");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1059");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.setMaxCodeLen(100);
@@ -204,9 +1428,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1009() throws Throwable {
+    public void test1060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1009");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1060");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -228,9 +1452,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1010() throws Throwable {
+    public void test1061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1010");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1061");
         java.lang.String[] strArray25 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean26 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray25);
         boolean boolean27 = org.apache.commons.codec.language.DoubleMetaphone.contains("H", (int) 'A', 4, strArray25);
@@ -250,9 +1474,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1011() throws Throwable {
+    public void test1062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1011");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1062");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.setMaxCodeLen(100);
@@ -269,9 +1493,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1012() throws Throwable {
+    public void test1063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1012");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1063");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -305,9 +1529,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1013() throws Throwable {
+    public void test1064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1013");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1064");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -327,9 +1551,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1014() throws Throwable {
+    public void test1065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1014");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1065");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -346,9 +1570,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1015() throws Throwable {
+    public void test1066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1015");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1066");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.setMaxCodeLen(100);
@@ -361,9 +1585,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1016() throws Throwable {
+    public void test1067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1016");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1067");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -382,18 +1606,18 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1017() throws Throwable {
+    public void test1068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1017");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1068");
         java.lang.String[] strArray3 = null;
         boolean boolean4 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException:  ", 72, 114, strArray3);
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
     }
 
     @Test
-    public void test1018() throws Throwable {
+    public void test1069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1018");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1069");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -420,9 +1644,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1019() throws Throwable {
+    public void test1070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1019");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1070");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -442,9 +1666,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1020() throws Throwable {
+    public void test1071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1020");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1071");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -472,9 +1696,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1021() throws Throwable {
+    public void test1072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1021");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1072");
         java.lang.String[] strArray25 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean26 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray25);
         boolean boolean27 = org.apache.commons.codec.language.DoubleMetaphone.contains("H", (int) 'A', 4, strArray25);
@@ -494,9 +1718,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1022() throws Throwable {
+    public void test1073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1022");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1073");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -514,9 +1738,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1023() throws Throwable {
+    public void test1074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1023");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1074");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -532,9 +1756,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1024() throws Throwable {
+    public void test1075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1024");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1075");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -548,9 +1772,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1025() throws Throwable {
+    public void test1076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1025");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1076");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -564,9 +1788,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1026() throws Throwable {
+    public void test1077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1026");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1077");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -587,9 +1811,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1027() throws Throwable {
+    public void test1078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1027");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1078");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -607,9 +1831,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1028() throws Throwable {
+    public void test1079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1028");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1079");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -625,9 +1849,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1029() throws Throwable {
+    public void test1080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1029");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1080");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -650,9 +1874,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1030() throws Throwable {
+    public void test1081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1030");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1081");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -674,9 +1898,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1031() throws Throwable {
+    public void test1082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1031");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1082");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -703,9 +1927,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1032() throws Throwable {
+    public void test1083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1032");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1083");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -719,9 +1943,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1033() throws Throwable {
+    public void test1084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1033");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1084");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -747,9 +1971,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1034() throws Throwable {
+    public void test1085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1034");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1085");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -769,9 +1993,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1035() throws Throwable {
+    public void test1086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1035");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1086");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -791,9 +2015,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1036() throws Throwable {
+    public void test1087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1036");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1087");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -810,9 +2034,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1037() throws Throwable {
+    public void test1088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1037");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1088");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -828,9 +2052,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1038() throws Throwable {
+    public void test1089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1038");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1089");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -863,9 +2087,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1039() throws Throwable {
+    public void test1090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1039");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1090");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -883,9 +2107,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1040() throws Throwable {
+    public void test1091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1040");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1091");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -908,9 +2132,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1041() throws Throwable {
+    public void test1092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1041");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1092");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -930,9 +2154,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1042() throws Throwable {
+    public void test1093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1042");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1093");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -953,9 +2177,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1043() throws Throwable {
+    public void test1094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1043");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1094");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -972,9 +2196,44 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1044() throws Throwable {
+    public void test1095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1044");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1095");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        char char8 = doubleMetaphone0.charAt("ARKP", (int) (short) 0);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult10 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone11 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str13 = doubleMetaphone11.doubleMetaphone("");
+        doubleMetaphone11.setMaxCodeLen((int) (byte) 10);
+        int int16 = doubleMetaphone11.getMaxCodeLen();
+        int int17 = doubleMetaphone11.getMaxCodeLen();
+        int int18 = doubleMetaphone11.getMaxCodeLen();
+        char char21 = doubleMetaphone11.charAt("ARKP", (int) (byte) -1);
+        java.lang.String str23 = doubleMetaphone11.doubleMetaphone("org.apache");
+        java.lang.Object obj24 = doubleMetaphone0.encode((java.lang.Object) str23);
+        char char27 = doubleMetaphone0.charAt("HRKP", (int) (byte) 0);
+        char char30 = doubleMetaphone0.charAt("ARKPXKMNSK", 97);
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + char8 + "' != '" + 'A' + "'", char8 == 'A');
+        org.junit.Assert.assertNull(str13);
+        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
+        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 10 + "'", int17 == 10);
+        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 10 + "'", int18 == 10);
+        org.junit.Assert.assertTrue("'" + char21 + "' != '" + '\000' + "'", char21 == '\000');
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "ARKPX" + "'", str23, "ARKPX");
+        org.junit.Assert.assertEquals("'" + obj24 + "' != '" + "ARKPKS" + "'", obj24, "ARKPKS");
+        org.junit.Assert.assertTrue("'" + char27 + "' != '" + 'H' + "'", char27 == 'H');
+        org.junit.Assert.assertTrue("'" + char30 + "' != '" + '\000' + "'", char30 == '\000');
+    }
+
+    @Test
+    public void test1096() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1096");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -991,9 +2250,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1045() throws Throwable {
+    public void test1097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1045");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1097");
         java.lang.String[] strArray19 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean20 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray19);
         boolean boolean21 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray19);
@@ -1011,9 +2270,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1046() throws Throwable {
+    public void test1098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1046");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1098");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1034,9 +2293,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1047() throws Throwable {
+    public void test1099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1047");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1099");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str4 = doubleMetaphone0.encode("ARKPXKMNSK");
@@ -1050,9 +2309,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1048() throws Throwable {
+    public void test1100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1048");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1100");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "H", false);
         char char7 = doubleMetaphone0.charAt("#org.apach", 65);
@@ -1063,9 +2322,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1049() throws Throwable {
+    public void test1101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1049");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1101");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1089,9 +2348,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1050() throws Throwable {
+    public void test1102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1050");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1102");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -1108,9 +2367,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1051() throws Throwable {
+    public void test1103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1051");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1103");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1143,9 +2402,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1052() throws Throwable {
+    public void test1104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1052");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1104");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1165,9 +2424,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1053() throws Throwable {
+    public void test1105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1053");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1105");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -1211,9 +2470,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1054() throws Throwable {
+    public void test1106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1054");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1106");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1234,9 +2493,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1055() throws Throwable {
+    public void test1107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1055");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1107");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -1252,9 +2511,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1056() throws Throwable {
+    public void test1108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1056");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1108");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1275,9 +2534,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1057() throws Throwable {
+    public void test1109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1057");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1109");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1297,9 +2556,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1058() throws Throwable {
+    public void test1110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1058");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1110");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1320,9 +2579,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1059() throws Throwable {
+    public void test1111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1059");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1111");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1340,9 +2599,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1060() throws Throwable {
+    public void test1112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1060");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1112");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "H", false);
         char char7 = doubleMetaphone0.charAt("#org.apach", 65);
@@ -1359,9 +2618,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1061() throws Throwable {
+    public void test1113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1061");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1113");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1381,9 +2640,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1062() throws Throwable {
+    public void test1114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1062");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1114");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1401,9 +2660,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1063() throws Throwable {
+    public void test1115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1063");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1115");
         java.lang.String[] strArray17 = new java.lang.String[] { "org.apache", "RKPK" };
         boolean boolean18 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: H", (int) (short) 10, (int) (short) 0, strArray17);
         boolean boolean19 = org.apache.commons.codec.language.DoubleMetaphone.contains(" H#", (int) (byte) 100, (int) 'H', strArray17);
@@ -1419,9 +2678,37 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1064() throws Throwable {
+    public void test1116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1064");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1116");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.encode("");
+        doubleMetaphone0.maxCodeLen = (byte) 0;
+        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("H", false);
+        java.lang.String str10 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSK");
+        java.lang.String str12 = doubleMetaphone0.encode("org.apache");
+        java.lang.String str14 = doubleMetaphone0.encode("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: H");
+        int int15 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str17 = doubleMetaphone0.encode("");
+        int int18 = doubleMetaphone0.getMaxCodeLen();
+        boolean boolean22 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: a", "4", true);
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
+        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 0 + "'", int15 == 0);
+        org.junit.Assert.assertNull(str17);
+        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 0 + "'", int18 == 0);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
+    }
+
+    @Test
+    public void test1117() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1117");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -1446,9 +2733,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1065() throws Throwable {
+    public void test1118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1065");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1118");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1466,9 +2753,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1066() throws Throwable {
+    public void test1119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1066");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1119");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1504,9 +2791,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1067() throws Throwable {
+    public void test1120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1067");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1120");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -1526,9 +2813,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1068() throws Throwable {
+    public void test1121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1068");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1121");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1546,9 +2833,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1069() throws Throwable {
+    public void test1122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1069");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1122");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -1606,9 +2893,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1070() throws Throwable {
+    public void test1123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1070");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1123");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1626,9 +2913,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1071() throws Throwable {
+    public void test1124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1071");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1124");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -1656,9 +2943,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1072() throws Throwable {
+    public void test1125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1072");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1125");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1696,9 +2983,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1073() throws Throwable {
+    public void test1126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1073");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1126");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -1715,9 +3002,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1074() throws Throwable {
+    public void test1127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1074");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1127");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1739,9 +3026,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1075() throws Throwable {
+    public void test1128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1075");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1128");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1768,9 +3055,33 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1076() throws Throwable {
+    public void test1129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1076");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1129");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.encode("");
+        doubleMetaphone0.maxCodeLen = (byte) 0;
+        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("H", false);
+        java.lang.String str10 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSK");
+        int int11 = doubleMetaphone0.getMaxCodeLen();
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(0);
+        doubleMetaphoneResult13.appendAlternate("ARKPKSKMNS");
+        boolean boolean16 = doubleMetaphoneResult13.isComplete();
+        doubleMetaphoneResult13.appendAlternate("ARKPARKPK");
+        doubleMetaphoneResult13.appendAlternate('A');
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
+    }
+
+    @Test
+    public void test1130() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1130");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -1784,9 +3095,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1077() throws Throwable {
+    public void test1131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1077");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1131");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1807,9 +3118,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1078() throws Throwable {
+    public void test1132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1078");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1132");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.maxCodeLen = 65;
@@ -1819,9 +3130,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1079() throws Throwable {
+    public void test1133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1079");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1133");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -1857,9 +3168,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1080() throws Throwable {
+    public void test1134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1080");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1134");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -1874,9 +3185,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1081() throws Throwable {
+    public void test1135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1081");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1135");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPKSKMNS", "ARKPX");
@@ -1887,9 +3198,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1082() throws Throwable {
+    public void test1136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1082");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1136");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -1925,9 +3236,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1083() throws Throwable {
+    public void test1137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1083");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1137");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1947,9 +3258,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1084() throws Throwable {
+    public void test1138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1084");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1138");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1968,9 +3279,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1085() throws Throwable {
+    public void test1139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1085");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1139");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -1986,9 +3297,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1086() throws Throwable {
+    public void test1140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1086");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1140");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2015,9 +3326,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1087() throws Throwable {
+    public void test1141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1087");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1141");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2039,9 +3350,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1088() throws Throwable {
+    public void test1142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1088");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1142");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "H", false);
         char char7 = doubleMetaphone0.charAt("#org.apach", 65);
@@ -2062,9 +3373,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1089() throws Throwable {
+    public void test1143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1089");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1143");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2086,9 +3397,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1090() throws Throwable {
+    public void test1144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1090");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1144");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2108,9 +3419,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1091() throws Throwable {
+    public void test1145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1091");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1145");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2146,9 +3457,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1092() throws Throwable {
+    public void test1146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1092");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1146");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2168,9 +3479,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1093() throws Throwable {
+    public void test1147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1093");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1147");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2188,9 +3499,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1094() throws Throwable {
+    public void test1148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1094");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1148");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2208,9 +3519,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1095() throws Throwable {
+    public void test1149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1095");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1149");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str4 = doubleMetaphone0.encode("ARKPXKMNSK");
@@ -2276,9 +3587,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1096() throws Throwable {
+    public void test1150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1096");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1150");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -2353,9 +3664,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1097() throws Throwable {
+    public void test1151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1097");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1151");
         java.lang.String[] strArray22 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean23 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray22);
         boolean boolean24 = org.apache.commons.codec.language.DoubleMetaphone.contains("H", (int) 'A', 4, strArray22);
@@ -2373,9 +3684,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1098() throws Throwable {
+    public void test1152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1098");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1152");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -2396,9 +3707,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1099() throws Throwable {
+    public void test1153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1099");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1153");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2419,9 +3730,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1100() throws Throwable {
+    public void test1154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1100");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1154");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2444,9 +3755,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1101() throws Throwable {
+    public void test1155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1101");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1155");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2464,9 +3775,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1102() throws Throwable {
+    public void test1156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1102");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1156");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2487,9 +3798,32 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1103() throws Throwable {
+    public void test1157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1103");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1157");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        boolean boolean9 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendAlternate('\000');
+        doubleMetaphoneResult7.appendPrimary("a");
+        boolean boolean14 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("");
+        doubleMetaphoneResult7.append(' ', 'R');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+    }
+
+    @Test
+    public void test1158() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1158");
         java.lang.String[] strArray16 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean17 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray16);
         boolean boolean18 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray16);
@@ -2503,9 +3837,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1104() throws Throwable {
+    public void test1159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1104");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1159");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -2537,9 +3871,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1105() throws Throwable {
+    public void test1160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1105");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1160");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -2568,9 +3902,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1106() throws Throwable {
+    public void test1161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1106");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1161");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2590,9 +3924,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1107() throws Throwable {
+    public void test1162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1107");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1162");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2615,9 +3949,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1108() throws Throwable {
+    public void test1163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1108");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1163");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2637,9 +3971,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1109() throws Throwable {
+    public void test1164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1109");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1164");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2661,9 +3995,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1110() throws Throwable {
+    public void test1165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1110");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1165");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -2681,9 +4015,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1111() throws Throwable {
+    public void test1166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1111");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1166");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2712,9 +4046,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1112() throws Throwable {
+    public void test1167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1112");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1167");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2739,9 +4073,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1113() throws Throwable {
+    public void test1168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1113");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1168");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -2766,9 +4100,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1114() throws Throwable {
+    public void test1169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1114");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1169");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -2787,9 +4121,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1115() throws Throwable {
+    public void test1170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1115");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1170");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -2806,9 +4140,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1116() throws Throwable {
+    public void test1171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1116");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1171");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2828,9 +4162,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1117() throws Throwable {
+    public void test1172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1117");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1172");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2848,9 +4182,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1118() throws Throwable {
+    public void test1173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1118");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1173");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2871,9 +4205,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1119() throws Throwable {
+    public void test1174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1119");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1174");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -2891,9 +4225,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1120() throws Throwable {
+    public void test1175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1120");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1175");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2912,9 +4246,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1121() throws Throwable {
+    public void test1176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1121");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1176");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -2931,9 +4265,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1122() throws Throwable {
+    public void test1177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1122");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1177");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -2979,9 +4313,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1123() throws Throwable {
+    public void test1178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1123");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1178");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.setMaxCodeLen(100);
@@ -2993,9 +4327,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1124() throws Throwable {
+    public void test1179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1124");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1179");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -3017,9 +4351,33 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1125() throws Throwable {
+    public void test1180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1125");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1180");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("");
+        doubleMetaphoneResult7.append('a', '#');
+        doubleMetaphoneResult7.appendAlternate("org.apache.commons.codec.EncoderException: ");
+        boolean boolean16 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("A");
+        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: hi!");
+        doubleMetaphoneResult7.append('a');
+        doubleMetaphoneResult7.append('a');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
+    }
+
+    @Test
+    public void test1181() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1181");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3032,9 +4390,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1126() throws Throwable {
+    public void test1182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1126");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1182");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -3071,9 +4429,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1127() throws Throwable {
+    public void test1183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1127");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1183");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3094,9 +4452,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1128() throws Throwable {
+    public void test1184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1128");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1184");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -3131,9 +4489,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1129() throws Throwable {
+    public void test1185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1129");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1185");
         java.lang.String[] strArray19 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean20 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray19);
         boolean boolean21 = org.apache.commons.codec.language.DoubleMetaphone.contains("H", (int) 'A', 4, strArray19);
@@ -3149,9 +4507,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1130() throws Throwable {
+    public void test1186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1130");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1186");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         org.apache.commons.codec.EncoderException encoderException10 = new org.apache.commons.codec.EncoderException("");
@@ -3204,9 +4562,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1131() throws Throwable {
+    public void test1187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1131");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1187");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3225,9 +4583,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1132() throws Throwable {
+    public void test1188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1132");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1188");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "H", false);
         char char7 = doubleMetaphone0.charAt("#org.apach", 65);
@@ -3264,9 +4622,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1133() throws Throwable {
+    public void test1189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1133");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1189");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3289,9 +4647,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1134() throws Throwable {
+    public void test1190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1134");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1190");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -3314,9 +4672,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1135() throws Throwable {
+    public void test1191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1135");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1191");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3336,9 +4694,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1136() throws Throwable {
+    public void test1192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1136");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1192");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3362,9 +4720,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1137() throws Throwable {
+    public void test1193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1137");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1193");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -3389,9 +4747,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1138() throws Throwable {
+    public void test1194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1138");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1194");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -3428,9 +4786,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1139() throws Throwable {
+    public void test1195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1139");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1195");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3453,9 +4811,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1140() throws Throwable {
+    public void test1196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1140");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1196");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3474,9 +4832,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1141() throws Throwable {
+    public void test1197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1141");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1197");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3498,9 +4856,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1142() throws Throwable {
+    public void test1198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1142");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1198");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3522,9 +4880,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1143() throws Throwable {
+    public void test1199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1143");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1199");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -3541,9 +4899,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1144() throws Throwable {
+    public void test1200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1144");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1200");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3554,9 +4912,27 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1145() throws Throwable {
+    public void test1201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1145");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1201");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int1 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str3 = doubleMetaphone0.encode("");
+        java.lang.String str5 = doubleMetaphone0.encode("org.apache.commons.codec.EncoderException: hi!");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        java.lang.String str10 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!", true);
+        int int11 = doubleMetaphone0.getMaxCodeLen();
+        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "ARKP" + "'", str5, "ARKP");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "ARKP" + "'", str10, "ARKP");
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 4 + "'", int11 == 4);
+    }
+
+    @Test
+    public void test1202() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1202");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3591,9 +4967,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1146() throws Throwable {
+    public void test1203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1146");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1203");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3617,9 +4993,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1147() throws Throwable {
+    public void test1204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1147");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1204");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3641,9 +5017,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1148() throws Throwable {
+    public void test1205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1148");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1205");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3663,9 +5039,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1149() throws Throwable {
+    public void test1206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1149");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1206");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
@@ -3681,9 +5057,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1150() throws Throwable {
+    public void test1207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1150");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1207");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -3705,9 +5081,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1151() throws Throwable {
+    public void test1208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1151");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1208");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3731,9 +5107,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1152() throws Throwable {
+    public void test1209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1152");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1209");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3750,9 +5126,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1153() throws Throwable {
+    public void test1210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1153");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1210");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3776,9 +5152,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1154() throws Throwable {
+    public void test1211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1154");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1211");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3813,9 +5189,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1155() throws Throwable {
+    public void test1212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1155");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1212");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3855,9 +5231,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1156() throws Throwable {
+    public void test1213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1156");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1213");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3879,9 +5255,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1157() throws Throwable {
+    public void test1214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1157");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1214");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -3895,9 +5271,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1158() throws Throwable {
+    public void test1215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1158");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1215");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -3921,9 +5297,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1159() throws Throwable {
+    public void test1216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1159");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1216");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3940,9 +5316,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1160() throws Throwable {
+    public void test1217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1160");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1217");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3965,9 +5341,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1161() throws Throwable {
+    public void test1218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1161");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1218");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -3990,9 +5366,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1162() throws Throwable {
+    public void test1219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1162");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1219");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4018,9 +5394,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1163() throws Throwable {
+    public void test1220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1163");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1220");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4055,9 +5431,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1164() throws Throwable {
+    public void test1221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1164");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1221");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -4075,9 +5451,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1165() throws Throwable {
+    public void test1222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1165");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1222");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4094,9 +5470,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1166() throws Throwable {
+    public void test1223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1166");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1223");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4112,9 +5488,23 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1167() throws Throwable {
+    public void test1224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1167");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1224");
+        java.lang.String[] strArray11 = new java.lang.String[] { "org.apache", "RKPK" };
+        boolean boolean12 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: H", (int) (short) 10, (int) (short) 0, strArray11);
+        boolean boolean13 = org.apache.commons.codec.language.DoubleMetaphone.contains(" H#", (int) (byte) 100, (int) 'H', strArray11);
+        boolean boolean14 = org.apache.commons.codec.language.DoubleMetaphone.contains("H\000#H", 82, (int) 'K', strArray11);
+        org.junit.Assert.assertNotNull(strArray11);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + false + "'", boolean13 == false);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+    }
+
+    @Test
+    public void test1225() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1225");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4146,9 +5536,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1168() throws Throwable {
+    public void test1226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1168");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1226");
         java.lang.String[] strArray28 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean29 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray28);
         boolean boolean30 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray28);
@@ -4170,9 +5560,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1169() throws Throwable {
+    public void test1227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1169");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1227");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4197,9 +5587,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1170() throws Throwable {
+    public void test1228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1170");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1228");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean5 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSKTKNKTRKSPXN", "org.apache", false);
@@ -4215,9 +5605,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1171() throws Throwable {
+    public void test1229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1171");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1229");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4238,9 +5628,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1172() throws Throwable {
+    public void test1230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1172");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1230");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -4269,9 +5659,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1173() throws Throwable {
+    public void test1231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1173");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1231");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -4290,9 +5680,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1174() throws Throwable {
+    public void test1232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1174");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1232");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4325,9 +5715,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1175() throws Throwable {
+    public void test1233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1175");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1233");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4349,9 +5739,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1176() throws Throwable {
+    public void test1234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1176");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1234");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str4 = doubleMetaphone0.encode("ARKPXKMNSK");
@@ -4367,9 +5757,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1177() throws Throwable {
+    public void test1235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1177");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1235");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4392,9 +5782,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1178() throws Throwable {
+    public void test1236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1178");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1236");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4413,9 +5803,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1179() throws Throwable {
+    public void test1237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1179");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1237");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4437,9 +5827,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1180() throws Throwable {
+    public void test1238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1180");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1238");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -4460,9 +5850,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1181() throws Throwable {
+    public void test1239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1181");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1239");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4486,9 +5876,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1182() throws Throwable {
+    public void test1240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1182");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1240");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4510,9 +5900,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1183() throws Throwable {
+    public void test1241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1183");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1241");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4533,9 +5923,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1184() throws Throwable {
+    public void test1242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1184");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1242");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         java.lang.String str3 = doubleMetaphone0.encode("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!");
@@ -4548,9 +5938,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1185() throws Throwable {
+    public void test1243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1185");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1243");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4573,9 +5963,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1186() throws Throwable {
+    public void test1244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1186");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1244");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -4596,9 +5986,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1187() throws Throwable {
+    public void test1245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1187");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1245");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.maxCodeLen = 65;
@@ -4639,9 +6029,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1188() throws Throwable {
+    public void test1246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1188");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1246");
         java.lang.String[] strArray16 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean17 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray16);
         boolean boolean18 = org.apache.commons.codec.language.DoubleMetaphone.contains("H", (int) 'A', 4, strArray16);
@@ -4655,9 +6045,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1189() throws Throwable {
+    public void test1247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1189");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1247");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4678,9 +6068,35 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1190() throws Throwable {
+    public void test1248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1190");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1248");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.encode("hi!");
+        char char5 = doubleMetaphone0.charAt("", 100);
+        java.lang.String str7 = doubleMetaphone0.encode("ARKPXKMNSKTKNKTRKSPXN");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone8 = new org.apache.commons.codec.language.DoubleMetaphone();
+        int int9 = doubleMetaphone8.getMaxCodeLen();
+        boolean boolean12 = doubleMetaphone8.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
+        java.lang.String str15 = doubleMetaphone8.doubleMetaphone("org.apache", true);
+        java.lang.String str17 = doubleMetaphone8.encode("H");
+        java.lang.Object obj18 = doubleMetaphone0.encode((java.lang.Object) str17);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult20 = doubleMetaphone0.new DoubleMetaphoneResult((int) ' ');
+        doubleMetaphoneResult20.append("org.apache.commons.codec.EncoderException: ARKPXKMNSKTKNKTRKSPXNRKPXKMNSKTKNKTRKSPXN", "HRKPK");
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
+        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 4 + "'", int9 == 4);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "ARKP" + "'", str15, "ARKP");
+        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
+        org.junit.Assert.assertNull(obj18);
+    }
+
+    @Test
+    public void test1249() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1249");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -4699,9 +6115,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1191() throws Throwable {
+    public void test1250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1191");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1250");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4723,9 +6139,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1192() throws Throwable {
+    public void test1251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1192");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1251");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -4739,9 +6155,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1193() throws Throwable {
+    public void test1252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1193");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1252");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4759,9 +6175,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1194() throws Throwable {
+    public void test1253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1194");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1253");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -4780,9 +6196,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1195() throws Throwable {
+    public void test1254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1195");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1254");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4817,9 +6233,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1196() throws Throwable {
+    public void test1255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1196");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1255");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4842,9 +6258,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1197() throws Throwable {
+    public void test1256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1197");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1256");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -4861,9 +6277,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1198() throws Throwable {
+    public void test1257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1198");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1257");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -4883,9 +6299,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1199() throws Throwable {
+    public void test1258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1199");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1258");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -4944,9 +6360,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1200() throws Throwable {
+    public void test1259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1200");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1259");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -4965,9 +6381,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1201() throws Throwable {
+    public void test1260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1201");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1260");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -4986,9 +6402,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1202() throws Throwable {
+    public void test1261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1202");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1261");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5002,9 +6418,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1203() throws Throwable {
+    public void test1262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1203");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1262");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5020,9 +6436,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1204() throws Throwable {
+    public void test1263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1204");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1263");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5061,9 +6477,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1205() throws Throwable {
+    public void test1264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1205");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1264");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5090,9 +6506,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1206() throws Throwable {
+    public void test1265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1206");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1265");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5114,9 +6530,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1207() throws Throwable {
+    public void test1266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1207");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1266");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -5138,9 +6554,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1208() throws Throwable {
+    public void test1267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1208");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1267");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -5162,9 +6578,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1209() throws Throwable {
+    public void test1268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1209");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1268");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5179,9 +6595,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1210() throws Throwable {
+    public void test1269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1210");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1269");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5201,9 +6617,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1211() throws Throwable {
+    public void test1270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1211");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1270");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5218,9 +6634,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1212() throws Throwable {
+    public void test1271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1212");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1271");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5262,9 +6678,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1213() throws Throwable {
+    public void test1272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1213");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1272");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5284,9 +6700,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1214() throws Throwable {
+    public void test1273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1214");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1273");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5308,9 +6724,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1215() throws Throwable {
+    public void test1274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1215");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1274");
         java.lang.String[] strArray20 = new java.lang.String[] { "org.apache", "RKPK" };
         boolean boolean21 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: H", (int) (short) 10, (int) (short) 0, strArray20);
         boolean boolean22 = org.apache.commons.codec.language.DoubleMetaphone.contains(" H#", (int) (byte) 100, (int) 'H', strArray20);
@@ -5328,9 +6744,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1216() throws Throwable {
+    public void test1275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1216");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1275");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
@@ -5351,9 +6767,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1217() throws Throwable {
+    public void test1276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1217");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1276");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5372,9 +6788,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1218() throws Throwable {
+    public void test1277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1218");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1277");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5403,9 +6819,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1219() throws Throwable {
+    public void test1278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1219");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1278");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -5420,9 +6836,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1220() throws Throwable {
+    public void test1279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1220");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1279");
         java.lang.String[] strArray16 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean17 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray16);
         boolean boolean18 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray16);
@@ -5438,9 +6854,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1221() throws Throwable {
+    public void test1280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1221");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1280");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -5458,9 +6874,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1222() throws Throwable {
+    public void test1281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1222");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1281");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5482,9 +6898,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1223() throws Throwable {
+    public void test1282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1223");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1282");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5503,9 +6919,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1224() throws Throwable {
+    public void test1283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1224");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1283");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.setMaxCodeLen(100);
@@ -5527,9 +6943,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1225() throws Throwable {
+    public void test1284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1225");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1284");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5544,9 +6960,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1226() throws Throwable {
+    public void test1285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1226");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1285");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -5558,18 +6974,35 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1227() throws Throwable {
+    public void test1286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1227");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1286");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
+        doubleMetaphoneResult7.append("hi!", "org.apache.commons.codec.EncoderException: H");
+        java.lang.String str11 = doubleMetaphoneResult7.getPrimary();
+        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: hi!", "org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!");
+        doubleMetaphoneResult7.appendPrimary('.');
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "ARKP" + "'", str5, "ARKP");
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "hi!" + "'", str11, "hi!");
+    }
+
+    @Test
+    public void test1287() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1287");
         java.lang.String[] strArray3 = null;
         boolean boolean4 = org.apache.commons.codec.language.DoubleMetaphone.contains("", (int) (short) 100, 4, strArray3);
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
     }
 
     @Test
-    public void test1228() throws Throwable {
+    public void test1288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1228");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1288");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5586,9 +7019,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1229() throws Throwable {
+    public void test1289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1229");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1289");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -5610,9 +7043,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1230() throws Throwable {
+    public void test1290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1230");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1290");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5636,9 +7069,20 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1231() throws Throwable {
+    public void test1291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1231");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1291");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.encode("hi!");
+        char char5 = doubleMetaphone0.charAt(" HHAa\000", (int) 'r');
+        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
+        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
+    }
+
+    @Test
+    public void test1292() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1292");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5653,9 +7097,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1232() throws Throwable {
+    public void test1293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1232");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1293");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -5672,9 +7116,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1233() throws Throwable {
+    public void test1294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1233");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1294");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -5715,9 +7159,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1234() throws Throwable {
+    public void test1295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1234");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1295");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -5771,9 +7215,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1235() throws Throwable {
+    public void test1296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1235");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1296");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -5784,9 +7228,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1236() throws Throwable {
+    public void test1297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1236");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1297");
         java.lang.String[] strArray3 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -5798,9 +7242,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1237() throws Throwable {
+    public void test1298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1237");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1298");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -5822,9 +7266,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1238() throws Throwable {
+    public void test1299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1238");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1299");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5841,9 +7285,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1239() throws Throwable {
+    public void test1300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1239");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1300");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5861,9 +7305,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1240() throws Throwable {
+    public void test1301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1240");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1301");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5884,9 +7328,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1241() throws Throwable {
+    public void test1302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1241");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1302");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5911,9 +7355,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1242() throws Throwable {
+    public void test1303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1242");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1303");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -5935,9 +7379,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1243() throws Throwable {
+    public void test1304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1243");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1304");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -5960,9 +7404,33 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1244() throws Throwable {
+    public void test1305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1244");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1305");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        boolean boolean9 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendAlternate('\000');
+        doubleMetaphoneResult7.append('\000', 'A');
+        doubleMetaphoneResult7.append("ARKPKSKMNS");
+        doubleMetaphoneResult7.append("");
+        doubleMetaphoneResult7.append("H", "");
+        doubleMetaphoneResult7.append(" ");
+        doubleMetaphoneResult7.appendAlternate("hi!");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+    }
+
+    @Test
+    public void test1306() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1306");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -5981,9 +7449,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1245() throws Throwable {
+    public void test1307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1245");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1307");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6008,9 +7476,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1246() throws Throwable {
+    public void test1308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1246");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1308");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6028,9 +7496,27 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1247() throws Throwable {
+    public void test1309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1247");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1309");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("", true);
+        java.lang.String str9 = doubleMetaphone0.encode(" ");
+        int int10 = doubleMetaphone0.maxCodeLen;
+        int int11 = doubleMetaphone0.getMaxCodeLen();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertNull(str7);
+        org.junit.Assert.assertNull(str9);
+        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 10 + "'", int10 == 10);
+        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 10 + "'", int11 == 10);
+    }
+
+    @Test
+    public void test1310() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1310");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -6047,9 +7533,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1248() throws Throwable {
+    public void test1311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1248");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1311");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6071,9 +7557,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1249() throws Throwable {
+    public void test1312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1249");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1312");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -6095,9 +7581,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1250() throws Throwable {
+    public void test1313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1250");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1313");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -6111,9 +7597,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1251() throws Throwable {
+    public void test1314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1251");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1314");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -6132,9 +7618,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1252() throws Throwable {
+    public void test1315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1252");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1315");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -6166,9 +7652,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1253() throws Throwable {
+    public void test1316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1253");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1316");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -6186,9 +7672,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1254() throws Throwable {
+    public void test1317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1254");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1317");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6212,9 +7698,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1255() throws Throwable {
+    public void test1318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1255");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1318");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6230,9 +7716,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1256() throws Throwable {
+    public void test1319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1256");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1319");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6267,9 +7753,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1257() throws Throwable {
+    public void test1320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1257");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1320");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
@@ -6282,9 +7768,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1258() throws Throwable {
+    public void test1321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1258");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1321");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -6313,9 +7799,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1259() throws Throwable {
+    public void test1322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1259");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1322");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
@@ -6330,18 +7816,18 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1260() throws Throwable {
+    public void test1323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1260");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1323");
         java.lang.String[] strArray3 = null;
         boolean boolean4 = org.apache.commons.codec.language.DoubleMetaphone.contains("# hi!a", 84, 35, strArray3);
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
     }
 
     @Test
-    public void test1261() throws Throwable {
+    public void test1324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1261");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1324");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
@@ -6359,9 +7845,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1262() throws Throwable {
+    public void test1325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1262");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1325");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -6386,9 +7872,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1263() throws Throwable {
+    public void test1326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1263");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1326");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6406,9 +7892,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1264() throws Throwable {
+    public void test1327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1264");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1327");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -6430,9 +7916,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1265() throws Throwable {
+    public void test1328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1265");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1328");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6451,9 +7937,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1266() throws Throwable {
+    public void test1329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1266");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1329");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -6467,9 +7953,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1267() throws Throwable {
+    public void test1330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1267");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1330");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6484,9 +7970,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1268() throws Throwable {
+    public void test1331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1268");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1331");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6504,9 +7990,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1269() throws Throwable {
+    public void test1332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1269");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1332");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6523,9 +8009,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1270() throws Throwable {
+    public void test1333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1270");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1333");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6544,9 +8030,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1271() throws Throwable {
+    public void test1334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1271");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1334");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6558,9 +8044,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1272() throws Throwable {
+    public void test1335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1272");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1335");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6605,9 +8091,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1273() throws Throwable {
+    public void test1336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1273");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1336");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6631,9 +8117,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1274() throws Throwable {
+    public void test1337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1274");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1337");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -6653,9 +8139,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1275() throws Throwable {
+    public void test1338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1275");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1338");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
@@ -6672,9 +8158,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1276() throws Throwable {
+    public void test1339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1276");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1339");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6714,9 +8200,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1277() throws Throwable {
+    public void test1340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1277");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1340");
         java.lang.String[] strArray13 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean14 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray13);
         boolean boolean15 = org.apache.commons.codec.language.DoubleMetaphone.contains("RKPK", 10, 1, strArray13);
@@ -6728,9 +8214,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1278() throws Throwable {
+    public void test1341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1278");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1341");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6753,9 +8239,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1279() throws Throwable {
+    public void test1342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1279");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1342");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -6778,9 +8264,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1280() throws Throwable {
+    public void test1343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1280");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1343");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -6800,9 +8286,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1281() throws Throwable {
+    public void test1344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1281");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1344");
         java.lang.String[] strArray13 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean14 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray13);
         boolean boolean15 = org.apache.commons.codec.language.DoubleMetaphone.contains("aorg.apach", 82, 0, strArray13);
@@ -6814,9 +8300,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1282() throws Throwable {
+    public void test1345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1282");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1345");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
@@ -6834,9 +8320,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1283() throws Throwable {
+    public void test1346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1283");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1346");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -6866,9 +8352,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1284() throws Throwable {
+    public void test1347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1284");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1347");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("a");
@@ -6884,9 +8370,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1285() throws Throwable {
+    public void test1348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1285");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1348");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6907,9 +8393,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1286() throws Throwable {
+    public void test1349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1286");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1349");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -6925,9 +8411,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1287() throws Throwable {
+    public void test1350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1287");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1350");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -6947,9 +8433,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1288() throws Throwable {
+    public void test1351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1288");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1351");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -6970,9 +8456,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1289() throws Throwable {
+    public void test1352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1289");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1352");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -7008,9 +8494,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1290() throws Throwable {
+    public void test1353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1290");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1353");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7035,9 +8521,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1291() throws Throwable {
+    public void test1354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1291");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1354");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7056,9 +8542,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1292() throws Throwable {
+    public void test1355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1292");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1355");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7085,9 +8571,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1293() throws Throwable {
+    public void test1356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1293");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1356");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -7106,9 +8592,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1294() throws Throwable {
+    public void test1357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1294");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1357");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7143,9 +8629,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1295() throws Throwable {
+    public void test1358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1295");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1358");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7162,9 +8648,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1296() throws Throwable {
+    public void test1359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1296");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1359");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7181,9 +8667,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1297() throws Throwable {
+    public void test1360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1297");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1360");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -7199,9 +8685,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1298() throws Throwable {
+    public void test1361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1298");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1361");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7220,9 +8706,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1299() throws Throwable {
+    public void test1362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1299");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1362");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -7247,9 +8733,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1300() throws Throwable {
+    public void test1363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1300");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1363");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7266,9 +8752,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1301() throws Throwable {
+    public void test1364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1301");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1364");
         java.lang.String[] strArray19 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean20 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray19);
         boolean boolean21 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray19);
@@ -7284,9 +8770,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1302() throws Throwable {
+    public void test1365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1302");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1365");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7310,9 +8796,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1303() throws Throwable {
+    public void test1366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1303");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1366");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7331,9 +8817,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1304() throws Throwable {
+    public void test1367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1304");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1367");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7348,9 +8834,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1305() throws Throwable {
+    public void test1368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1305");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1368");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7368,9 +8854,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1306() throws Throwable {
+    public void test1369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1306");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1369");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7392,9 +8878,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1307() throws Throwable {
+    public void test1370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1307");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1370");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -7412,9 +8898,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1308() throws Throwable {
+    public void test1371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1308");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1371");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -7433,9 +8919,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1309() throws Throwable {
+    public void test1372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1309");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1372");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7457,9 +8943,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1310() throws Throwable {
+    public void test1373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1310");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1373");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -7498,9 +8984,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1311() throws Throwable {
+    public void test1374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1311");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1374");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7522,9 +9008,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1312() throws Throwable {
+    public void test1375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1312");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1375");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7551,9 +9037,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1313() throws Throwable {
+    public void test1376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1313");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1376");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7580,9 +9066,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1314() throws Throwable {
+    public void test1377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1314");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1377");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         char char5 = doubleMetaphone0.charAt("Aorg.apach", 35);
@@ -7591,9 +9077,31 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1315() throws Throwable {
+    public void test1378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1315");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1378");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.getMaxCodeLen();
+        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", false);
+        int int9 = doubleMetaphone0.getMaxCodeLen();
+        char char12 = doubleMetaphone0.charAt("", 1);
+        int int13 = doubleMetaphone0.maxCodeLen;
+        java.lang.String str15 = doubleMetaphone0.doubleMetaphone(" Ho");
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "ARKPXKMNSK" + "'", str8, "ARKPXKMNSK");
+        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 10 + "'", int9 == 10);
+        org.junit.Assert.assertTrue("'" + char12 + "' != '" + '\000' + "'", char12 == '\000');
+        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 10 + "'", int13 == 10);
+        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "H" + "'", str15, "H");
+    }
+
+    @Test
+    public void test1379() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1379");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -7615,9 +9123,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1316() throws Throwable {
+    public void test1380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1316");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1380");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
@@ -7631,9 +9139,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1317() throws Throwable {
+    public void test1381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1317");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1381");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7664,9 +9172,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1318() throws Throwable {
+    public void test1382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1318");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1382");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7698,9 +9206,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1319() throws Throwable {
+    public void test1383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1319");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1383");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7724,9 +9232,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1320() throws Throwable {
+    public void test1384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1320");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1384");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7750,9 +9258,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1321() throws Throwable {
+    public void test1385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1321");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1385");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7776,9 +9284,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1322() throws Throwable {
+    public void test1386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1322");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1386");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult4 = doubleMetaphone0.new DoubleMetaphoneResult(0);
@@ -7788,9 +9296,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1323() throws Throwable {
+    public void test1387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1323");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1387");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7815,9 +9323,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1324() throws Throwable {
+    public void test1388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1324");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1388");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7837,9 +9345,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1325() throws Throwable {
+    public void test1389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1325");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1389");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7861,9 +9369,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1326() throws Throwable {
+    public void test1390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1326");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1390");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -7879,9 +9387,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1327() throws Throwable {
+    public void test1391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1327");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1391");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7906,9 +9414,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1328() throws Throwable {
+    public void test1392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1328");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1392");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -7925,9 +9433,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1329() throws Throwable {
+    public void test1393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1329");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1393");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -7946,9 +9454,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1330() throws Throwable {
+    public void test1394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1330");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1394");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -7967,9 +9475,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1331() throws Throwable {
+    public void test1395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1331");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1395");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -7987,9 +9495,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1332() throws Throwable {
+    public void test1396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1332");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1396");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8005,9 +9513,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1333() throws Throwable {
+    public void test1397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1333");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1397");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -8027,9 +9535,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1334() throws Throwable {
+    public void test1398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1334");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1398");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -8052,9 +9560,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1335() throws Throwable {
+    public void test1399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1335");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1399");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8078,9 +9586,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1336() throws Throwable {
+    public void test1400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1336");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1400");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8095,9 +9603,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1337() throws Throwable {
+    public void test1401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1337");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1401");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -8119,9 +9627,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1338() throws Throwable {
+    public void test1402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1338");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1402");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8140,9 +9648,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1339() throws Throwable {
+    public void test1403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1339");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1403");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "H", false);
         char char7 = doubleMetaphone0.charAt("#org.apach", 65);
@@ -8156,9 +9664,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1340() throws Throwable {
+    public void test1404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1340");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1404");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8175,9 +9683,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1341() throws Throwable {
+    public void test1405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1341");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1405");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -8197,9 +9705,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1342() throws Throwable {
+    public void test1406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1342");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1406");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str4 = doubleMetaphone0.doubleMetaphone("", false);
@@ -8224,9 +9732,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1343() throws Throwable {
+    public void test1407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1343");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1407");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -8252,9 +9760,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1344() throws Throwable {
+    public void test1408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1344");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1408");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -8296,9 +9804,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1345() throws Throwable {
+    public void test1409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1345");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1409");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -8329,9 +9837,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1346() throws Throwable {
+    public void test1410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1346");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1410");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8351,9 +9859,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1347() throws Throwable {
+    public void test1411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1347");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1411");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -8391,9 +9899,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1348() throws Throwable {
+    public void test1412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1348");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1412");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8412,9 +9920,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1349() throws Throwable {
+    public void test1413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1349");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1413");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str4 = doubleMetaphone0.doubleMetaphone("", false);
@@ -8429,9 +9937,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1350() throws Throwable {
+    public void test1414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1350");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1414");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -8457,9 +9965,24 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1351() throws Throwable {
+    public void test1415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1351");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1415");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        java.lang.String str4 = doubleMetaphone0.encode("ARKPXKMNSK");
+        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("AR", true);
+        int int8 = doubleMetaphone0.getMaxCodeLen();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "ARKP" + "'", str4, "ARKP");
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "AR" + "'", str7, "AR");
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
+    }
+
+    @Test
+    public void test1416() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1416");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8480,9 +10003,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1352() throws Throwable {
+    public void test1417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1352");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1417");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8503,18 +10026,18 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1353() throws Throwable {
+    public void test1418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1353");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1418");
         java.lang.String[] strArray3 = null;
         boolean boolean4 = org.apache.commons.codec.language.DoubleMetaphone.contains("HA", (int) '4', 65, strArray3);
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
     }
 
     @Test
-    public void test1354() throws Throwable {
+    public void test1419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1354");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1419");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8536,9 +10059,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1355() throws Throwable {
+    public void test1420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1355");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1420");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8558,9 +10081,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1356() throws Throwable {
+    public void test1421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1356");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1421");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -8596,9 +10119,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1357() throws Throwable {
+    public void test1422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1357");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1422");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "H", false);
         char char7 = doubleMetaphone0.charAt("#org.apach", 65);
@@ -8613,9 +10136,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1358() throws Throwable {
+    public void test1423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1358");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1423");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8635,9 +10158,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1359() throws Throwable {
+    public void test1424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1359");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1424");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8663,9 +10186,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1360() throws Throwable {
+    public void test1425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1360");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1425");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8684,9 +10207,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1361() throws Throwable {
+    public void test1426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1361");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1426");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8720,9 +10243,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1362() throws Throwable {
+    public void test1427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1362");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1427");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8747,9 +10270,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1363() throws Throwable {
+    public void test1428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1363");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1428");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8770,9 +10293,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1364() throws Throwable {
+    public void test1429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1364");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1429");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8789,9 +10312,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1365() throws Throwable {
+    public void test1430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1365");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1430");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "H", false);
         char char7 = doubleMetaphone0.charAt("#org.apach", 65);
@@ -8802,9 +10325,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1366() throws Throwable {
+    public void test1431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1366");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1431");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8826,9 +10349,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1367() throws Throwable {
+    public void test1432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1367");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1432");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -8847,9 +10370,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1368() throws Throwable {
+    public void test1433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1368");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1433");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8874,9 +10397,26 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1369() throws Throwable {
+    public void test1434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1369");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1434");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
+        java.lang.String str8 = doubleMetaphone0.encode("");
+        doubleMetaphone0.setMaxCodeLen(0);
+        java.lang.Object obj12 = doubleMetaphone0.encode((java.lang.Object) " H#");
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult14 = doubleMetaphone0.new DoubleMetaphoneResult(82);
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertNull(str8);
+        org.junit.Assert.assertEquals("'" + obj12 + "' != '" + "" + "'", obj12, "");
+    }
+
+    @Test
+    public void test1435() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1435");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8898,9 +10438,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1370() throws Throwable {
+    public void test1436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1370");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1436");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8924,9 +10464,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1371() throws Throwable {
+    public void test1437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1371");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1437");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -8943,9 +10483,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1372() throws Throwable {
+    public void test1438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1372");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1438");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -8968,9 +10508,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1373() throws Throwable {
+    public void test1439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1373");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1439");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -9026,9 +10566,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1374() throws Throwable {
+    public void test1440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1374");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1440");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9044,9 +10584,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1375() throws Throwable {
+    public void test1441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1375");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1441");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9068,9 +10608,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1376() throws Throwable {
+    public void test1442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1376");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1442");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9100,9 +10640,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1377() throws Throwable {
+    public void test1443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1377");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1443");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9125,9 +10665,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1378() throws Throwable {
+    public void test1444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1378");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1444");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -9157,9 +10697,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1379() throws Throwable {
+    public void test1445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1379");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1445");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9180,9 +10720,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1380() throws Throwable {
+    public void test1446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1380");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1446");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -9205,9 +10745,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1381() throws Throwable {
+    public void test1447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1381");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1447");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9228,9 +10768,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1382() throws Throwable {
+    public void test1448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1382");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1448");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -9244,9 +10784,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1383() throws Throwable {
+    public void test1449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1383");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1449");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9265,9 +10805,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1384() throws Throwable {
+    public void test1450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1384");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1450");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9287,9 +10827,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1385() throws Throwable {
+    public void test1451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1385");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1451");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -9316,9 +10856,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1386() throws Throwable {
+    public void test1452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1386");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1452");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("H", "", false);
         char char7 = doubleMetaphone0.charAt(" ", 0);
@@ -9331,9 +10871,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1387() throws Throwable {
+    public void test1453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1387");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1453");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -9367,9 +10907,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1388() throws Throwable {
+    public void test1454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1388");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1454");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.encode("");
@@ -9386,9 +10926,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1389() throws Throwable {
+    public void test1455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1389");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1455");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9424,9 +10964,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1390() throws Throwable {
+    public void test1456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1390");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1456");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9448,9 +10988,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1391() throws Throwable {
+    public void test1457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1391");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1457");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -9467,9 +11007,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1392() throws Throwable {
+    public void test1458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1392");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1458");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -9490,9 +11030,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1393() throws Throwable {
+    public void test1459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1393");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1459");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -9526,9 +11066,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1394() throws Throwable {
+    public void test1460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1394");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1460");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9545,9 +11085,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1395() throws Throwable {
+    public void test1461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1395");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1461");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9565,9 +11105,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1396() throws Throwable {
+    public void test1462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1396");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1462");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.setMaxCodeLen(100);
@@ -9584,9 +11124,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1397() throws Throwable {
+    public void test1463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1397");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1463");
         java.lang.String[] strArray22 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean23 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray22);
         boolean boolean24 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray22);
@@ -9604,9 +11144,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1398() throws Throwable {
+    public void test1464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1398");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1464");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9633,9 +11173,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1399() throws Throwable {
+    public void test1465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1399");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1465");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.maxCodeLen;
         java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
@@ -9654,9 +11194,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1400() throws Throwable {
+    public void test1466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1400");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1466");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         int int3 = doubleMetaphone0.maxCodeLen;
@@ -9673,9 +11213,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1401() throws Throwable {
+    public void test1467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1401");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1467");
         java.lang.String[] strArray25 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
         boolean boolean26 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray25);
         boolean boolean27 = org.apache.commons.codec.language.DoubleMetaphone.contains("H", (int) 'A', 4, strArray25);
@@ -9695,9 +11235,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1402() throws Throwable {
+    public void test1468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1402");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1468");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         doubleMetaphone0.setMaxCodeLen(100);
@@ -9711,9 +11251,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1403() throws Throwable {
+    public void test1469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1403");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1469");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -9733,9 +11273,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1404() throws Throwable {
+    public void test1470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1404");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1470");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9767,9 +11307,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1405() throws Throwable {
+    public void test1471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1405");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1471");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9792,9 +11332,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1406() throws Throwable {
+    public void test1472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1406");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1472");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9820,9 +11360,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1407() throws Throwable {
+    public void test1473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1407");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1473");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9850,9 +11390,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1408() throws Throwable {
+    public void test1474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1408");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1474");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9911,9 +11451,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1409() throws Throwable {
+    public void test1475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1409");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1475");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         java.lang.String str4 = doubleMetaphone0.encode("");
@@ -9933,9 +11473,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1410() throws Throwable {
+    public void test1476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1410");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1476");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -9965,9 +11505,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1411() throws Throwable {
+    public void test1477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1411");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1477");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -10001,9 +11541,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1412() throws Throwable {
+    public void test1478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1412");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1478");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10031,9 +11571,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1413() throws Throwable {
+    public void test1479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1413");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1479");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10056,9 +11596,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1414() throws Throwable {
+    public void test1480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1414");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1480");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10075,9 +11615,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1415() throws Throwable {
+    public void test1481() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1415");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1481");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10100,9 +11640,30 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1416() throws Throwable {
+    public void test1482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1416");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1482");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.append("");
+        java.lang.String str11 = doubleMetaphoneResult7.getAlternate();
+        doubleMetaphoneResult7.appendPrimary("HRKP");
+        java.lang.String str14 = doubleMetaphoneResult7.getPrimary();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "" + "'", str11, "");
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "HRKP" + "'", str14, "HRKP");
+    }
+
+    @Test
+    public void test1483() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1483");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10120,9 +11681,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1417() throws Throwable {
+    public void test1484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1417");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1484");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -10142,9 +11703,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1418() throws Throwable {
+    public void test1485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1418");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1485");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10169,9 +11730,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1419() throws Throwable {
+    public void test1486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1419");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1486");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10193,9 +11754,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1420() throws Throwable {
+    public void test1487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1420");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1487");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10229,9 +11790,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1421() throws Throwable {
+    public void test1488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1421");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1488");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10261,9 +11822,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1422() throws Throwable {
+    public void test1489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1422");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1489");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10284,9 +11845,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1423() throws Throwable {
+    public void test1490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1423");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1490");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10306,9 +11867,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1424() throws Throwable {
+    public void test1491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1424");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1491");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         java.lang.String str4 = doubleMetaphone0.encode("ARKPXKMNSK");
@@ -10320,9 +11881,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1425() throws Throwable {
+    public void test1492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1425");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1492");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -10341,9 +11902,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1426() throws Throwable {
+    public void test1493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1426");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1493");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         int int1 = doubleMetaphone0.getMaxCodeLen();
         boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
@@ -10363,9 +11924,33 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1427() throws Throwable {
+    public void test1494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1427");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1494");
+        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
+        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
+        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
+        int int5 = doubleMetaphone0.maxCodeLen;
+        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
+        boolean boolean8 = doubleMetaphoneResult7.isComplete();
+        doubleMetaphoneResult7.appendPrimary("org.apache.commons.codec.EncoderException: hi!");
+        doubleMetaphoneResult7.append("H");
+        doubleMetaphoneResult7.append("ARKPKSKMNS", "H");
+        doubleMetaphoneResult7.append("H", "org.apache");
+        doubleMetaphoneResult7.append('\000', 'a');
+        java.lang.String str22 = doubleMetaphoneResult7.getAlternate();
+        java.lang.String str23 = doubleMetaphoneResult7.getPrimary();
+        org.junit.Assert.assertNull(str2);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
+        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "HHorg.apac" + "'", str22, "HHorg.apac");
+        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "org.apache" + "'", str23, "org.apache");
+    }
+
+    @Test
+    public void test1495() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1495");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -10389,9 +11974,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1428() throws Throwable {
+    public void test1496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1428");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1496");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10412,9 +11997,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1429() throws Throwable {
+    public void test1497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1429");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1497");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10440,9 +12025,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1430() throws Throwable {
+    public void test1498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1430");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1498");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -10470,9 +12055,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1431() throws Throwable {
+    public void test1499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1431");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1499");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
         doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
@@ -10493,9 +12078,9 @@ public class RandoopRegressionTest2 {
     }
 
     @Test
-    public void test1432() throws Throwable {
+    public void test1500() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1432");
+            System.out.format("%n%s%n", "RandoopRegressionTest2.test1500");
         org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
         java.lang.String str2 = doubleMetaphone0.encode("hi!");
         char char5 = doubleMetaphone0.charAt("", 100);
@@ -10538,1649 +12123,6 @@ public class RandoopRegressionTest2 {
         org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
         org.junit.Assert.assertEquals("'" + obj31 + "' != '" + "" + "'", obj31, "");
         org.junit.Assert.assertNotNull(throwableArray40);
-    }
-
-    @Test
-    public void test1433() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1433");
-        java.lang.String[] strArray23 = new java.lang.String[] { "org.apache", "RKPK" };
-        boolean boolean24 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: H", (int) (short) 10, (int) (short) 0, strArray23);
-        boolean boolean25 = org.apache.commons.codec.language.DoubleMetaphone.contains(" H#", (int) (byte) 100, (int) 'H', strArray23);
-        boolean boolean26 = org.apache.commons.codec.language.DoubleMetaphone.contains("R", (int) 'R', 4, strArray23);
-        boolean boolean27 = org.apache.commons.codec.language.DoubleMetaphone.contains(" H#", 0, (int) (short) 1, strArray23);
-        boolean boolean28 = org.apache.commons.codec.language.DoubleMetaphone.contains(" H#", (int) 'r', 114, strArray23);
-        boolean boolean29 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache", (int) '#', (int) 'm', strArray23);
-        boolean boolean30 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKPKSKM", (int) 'o', (int) 'm', strArray23);
-        org.junit.Assert.assertNotNull(strArray23);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + false + "'", boolean27 == false);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-        org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
-        org.junit.Assert.assertTrue("'" + boolean30 + "' != '" + false + "'", boolean30 == false);
-    }
-
-    @Test
-    public void test1434() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1434");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendPrimary(' ');
-        doubleMetaphoneResult7.append(' ', 'a');
-        boolean boolean14 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate('A');
-        doubleMetaphoneResult7.append("ARKP");
-        doubleMetaphoneResult7.appendAlternate('a');
-        doubleMetaphoneResult7.append("", "hi!");
-        boolean boolean24 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException", "org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException:  ");
-        doubleMetaphoneResult7.appendPrimary('E');
-        java.lang.String str30 = doubleMetaphoneResult7.getAlternate();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-        org.junit.Assert.assertEquals("'" + str30 + "' != '" + "aAARKPahi!" + "'", str30, "aAARKPahi!");
-    }
-
-    @Test
-    public void test1435() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1435");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        boolean boolean9 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.append(' ');
-        java.lang.String str16 = doubleMetaphoneResult7.getAlternate();
-        doubleMetaphoneResult7.append("", "RKPK");
-        doubleMetaphoneResult7.appendAlternate(" ");
-        doubleMetaphoneResult7.appendAlternate('4');
-        doubleMetaphoneResult7.appendAlternate("hi!org.apa");
-        doubleMetaphoneResult7.appendPrimary("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + " " + "'", str16, " ");
-    }
-
-    @Test
-    public void test1436() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1436");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        char char8 = doubleMetaphone0.charAt("", (int) (byte) -1);
-        boolean boolean12 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: H", "H", false);
-        java.lang.String str14 = doubleMetaphone0.encode("A");
-        boolean boolean18 = doubleMetaphone0.isDoubleMetaphoneEqual("hi!", "org.apache.commons.codec.EncoderException: hi!", false);
-        java.lang.String str21 = doubleMetaphone0.doubleMetaphone("HRKPK", true);
-        char char24 = doubleMetaphone0.charAt("ahi!H", 111);
-        int int25 = doubleMetaphone0.maxCodeLen;
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + char8 + "' != '" + '\000' + "'", char8 == '\000');
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "A" + "'", str14, "A");
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "RKPK" + "'", str21, "RKPK");
-        org.junit.Assert.assertTrue("'" + char24 + "' != '" + '\000' + "'", char24 == '\000');
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 10 + "'", int25 == 10);
-    }
-
-    @Test
-    public void test1437() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1437");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        int int6 = doubleMetaphone0.getMaxCodeLen();
-        char char9 = doubleMetaphone0.charAt(" ", (int) 'A');
-        doubleMetaphone0.maxCodeLen = ' ';
-        doubleMetaphone0.maxCodeLen = 'r';
-        int int14 = doubleMetaphone0.getMaxCodeLen();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
-        org.junit.Assert.assertTrue("'" + char9 + "' != '" + '\000' + "'", char9 == '\000');
-        org.junit.Assert.assertTrue("'" + int14 + "' != '" + 114 + "'", int14 == 114);
-    }
-
-    @Test
-    public void test1438() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1438");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", false);
-        doubleMetaphone0.maxCodeLen = (short) 10;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult12 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        java.lang.String str14 = doubleMetaphone0.encode("aAorg.apac");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "ARKPXKMNSK" + "'", str8, "ARKPXKMNSK");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "ARKPK" + "'", str14, "ARKPK");
-    }
-
-    @Test
-    public void test1439() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1439");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        int int6 = doubleMetaphone0.getMaxCodeLen();
-        int int7 = doubleMetaphone0.getMaxCodeLen();
-        java.lang.String str9 = doubleMetaphone0.encode("ARKPKSKMNS");
-        doubleMetaphone0.setMaxCodeLen(100);
-        doubleMetaphone0.setMaxCodeLen((int) '#');
-        boolean boolean16 = doubleMetaphone0.isDoubleMetaphoneEqual("\000AARKPKSKM", "org.apache.commons.codec.EncoderException: hi!org.apa");
-        java.lang.String str19 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSKTKNKTRKSPXNRKPXKMNSKTKNKT", false);
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 10 + "'", int7 == 10);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "ARKPKSKMNS" + "'", str9, "ARKPKSKMNS");
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "ARKPKSKMNSKTKNKTRKSPKSNRKPKSKMNSKTK" + "'", str19, "ARKPKSKMNSKTKNKTRKSPKSNRKPKSKMNSKTK");
-    }
-
-    @Test
-    public void test1440() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1440");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        int int6 = doubleMetaphone0.getMaxCodeLen();
-        int int7 = doubleMetaphone0.getMaxCodeLen();
-        java.lang.String str9 = doubleMetaphone0.encode("ARKPKSKMNS");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone10 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str12 = doubleMetaphone10.doubleMetaphone("");
-        doubleMetaphone10.setMaxCodeLen((int) (byte) 10);
-        int int15 = doubleMetaphone10.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult17 = doubleMetaphone10.new DoubleMetaphoneResult(10);
-        boolean boolean18 = doubleMetaphoneResult17.isComplete();
-        boolean boolean19 = doubleMetaphoneResult17.isComplete();
-        doubleMetaphoneResult17.appendAlternate('A');
-        java.lang.String str22 = doubleMetaphoneResult17.getPrimary();
-        java.lang.Object obj23 = doubleMetaphone0.encode((java.lang.Object) str22);
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 10 + "'", int7 == 10);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "ARKPKSKMNS" + "'", str9, "ARKPKSKMNS");
-        org.junit.Assert.assertNull(str12);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 10 + "'", int15 == 10);
-        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "" + "'", str22, "");
-        org.junit.Assert.assertNull(obj23);
-    }
-
-    @Test
-    public void test1441() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1441");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        boolean boolean9 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate('A');
-        boolean boolean12 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append("ARKPXKMNSKTKNKTRKSPXN", "org.apache.commons.codec.EncoderException: H");
-        boolean boolean16 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append('\000', 'H');
-        java.lang.String str20 = doubleMetaphoneResult7.getPrimary();
-        doubleMetaphoneResult7.append(" H\000");
-        doubleMetaphoneResult7.append('#');
-        doubleMetaphoneResult7.append('e');
-        doubleMetaphoneResult7.appendAlternate('r');
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "ARKPXKMNSK" + "'", str20, "ARKPXKMNSK");
-    }
-
-    @Test
-    public void test1442() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1442");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        boolean boolean9 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.append(' ');
-        java.lang.String str16 = doubleMetaphoneResult7.getPrimary();
-        doubleMetaphoneResult7.appendAlternate("ARKP");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + " " + "'", str16, " ");
-    }
-
-    @Test
-    public void test1443() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1443");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        int int3 = doubleMetaphone0.maxCodeLen;
-        char char6 = doubleMetaphone0.charAt("org.apache.commons.codec.EncoderException: hi!", (int) '#');
-        int int7 = doubleMetaphone0.maxCodeLen;
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        java.lang.String str10 = doubleMetaphone0.doubleMetaphone("ARKPKSKMNSK");
-        boolean boolean14 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: ARKPX", "org.apache.commons.codec.EncoderException: ARKPKSKMNS", true);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 4 + "'", int3 == 4);
-        org.junit.Assert.assertTrue("'" + char6 + "' != '" + 'e' + "'", char6 == 'e');
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 4 + "'", int7 == 4);
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "ARKP" + "'", str10, "ARKP");
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + true + "'", boolean14 == true);
-    }
-
-    @Test
-    public void test1444() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1444");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        java.lang.String str4 = doubleMetaphone0.encode("");
-        char char7 = doubleMetaphone0.charAt("hi!", 4);
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        int int9 = doubleMetaphone0.maxCodeLen;
-        boolean boolean13 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPX", "ARKPKSKMNS", true);
-        org.apache.commons.codec.EncoderException encoderException17 = new org.apache.commons.codec.EncoderException("hi!");
-        java.lang.Throwable[] throwableArray18 = encoderException17.getSuppressed();
-        org.apache.commons.codec.EncoderException encoderException19 = new org.apache.commons.codec.EncoderException((java.lang.Throwable) encoderException17);
-        org.apache.commons.codec.EncoderException encoderException20 = new org.apache.commons.codec.EncoderException("H", (java.lang.Throwable) encoderException17);
-        org.apache.commons.codec.EncoderException encoderException24 = new org.apache.commons.codec.EncoderException("");
-        org.apache.commons.codec.EncoderException encoderException26 = new org.apache.commons.codec.EncoderException("");
-        encoderException24.addSuppressed((java.lang.Throwable) encoderException26);
-        org.apache.commons.codec.EncoderException encoderException28 = new org.apache.commons.codec.EncoderException("hi!", (java.lang.Throwable) encoderException26);
-        org.apache.commons.codec.EncoderException encoderException29 = new org.apache.commons.codec.EncoderException("", (java.lang.Throwable) encoderException26);
-        encoderException20.addSuppressed((java.lang.Throwable) encoderException26);
-        org.apache.commons.codec.EncoderException encoderException31 = new org.apache.commons.codec.EncoderException((java.lang.Throwable) encoderException26);
-        org.apache.commons.codec.EncoderException encoderException32 = new org.apache.commons.codec.EncoderException("", (java.lang.Throwable) encoderException26);
-        java.lang.Throwable[] throwableArray33 = encoderException26.getSuppressed();
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Object obj34 = doubleMetaphone0.encode((java.lang.Object) encoderException26);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
-        } catch (org.apache.commons.codec.EncoderException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertNull(str4);
-        org.junit.Assert.assertTrue("'" + char7 + "' != '" + '\000' + "'", char7 == '\000');
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 4 + "'", int9 == 4);
-        org.junit.Assert.assertTrue("'" + boolean13 + "' != '" + true + "'", boolean13 == true);
-        org.junit.Assert.assertNotNull(throwableArray18);
-        org.junit.Assert.assertNotNull(throwableArray33);
-    }
-
-    @Test
-    public void test1445() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1445");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        int int6 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.maxCodeLen = (short) 10;
-        int int9 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult11 = doubleMetaphone0.new DoubleMetaphoneResult((int) 'A');
-        doubleMetaphoneResult11.append(' ', 'r');
-        boolean boolean15 = doubleMetaphoneResult11.isComplete();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 10 + "'", int9 == 10);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-    }
-
-    @Test
-    public void test1446() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1446");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean11 = doubleMetaphone0.isDoubleMetaphoneEqual("hi!", "", false);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        doubleMetaphoneResult13.append('\000', 'A');
-        doubleMetaphoneResult13.append(' ', 'a');
-        doubleMetaphoneResult13.appendPrimary('a');
-        boolean boolean22 = doubleMetaphoneResult13.isComplete();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-    }
-
-    @Test
-    public void test1447() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1447");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendPrimary(' ');
-        doubleMetaphoneResult7.append(' ', 'a');
-        boolean boolean14 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append('E', 'R');
-        doubleMetaphoneResult7.appendPrimary('A');
-        doubleMetaphoneResult7.append(" HHAa");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-    }
-
-    @Test
-    public void test1448() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1448");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean11 = doubleMetaphone0.isDoubleMetaphoneEqual("hi!", "", false);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        java.lang.String str15 = doubleMetaphone0.encode(" ");
-        int int16 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult18 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        char char21 = doubleMetaphone0.charAt("org.apache.commons.codec.EncoderException: a", 4);
-        int int22 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str24 = doubleMetaphone0.encode("org.apache.commons.codec.EncoderException: a");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNull(str15);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
-        org.junit.Assert.assertTrue("'" + char21 + "' != '" + 'a' + "'", char21 == 'a');
-        org.junit.Assert.assertTrue("'" + int22 + "' != '" + 10 + "'", int22 == 10);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "ARKPXKMNSK" + "'", str24, "ARKPXKMNSK");
-    }
-
-    @Test
-    public void test1449() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1449");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        int int1 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str3 = doubleMetaphone0.encode("");
-        doubleMetaphone0.maxCodeLen = (byte) 0;
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("");
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult9 = doubleMetaphone0.new DoubleMetaphoneResult((int) 'o');
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
-        org.junit.Assert.assertNull(str3);
-        org.junit.Assert.assertNull(str7);
-    }
-
-    @Test
-    public void test1450() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1450");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        int int6 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.maxCodeLen = (short) 10;
-        java.lang.String str11 = doubleMetaphone0.doubleMetaphone("ARKPX", false);
-        boolean boolean14 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "ARKPKKMNSKTKNKTRKSPXNRKPKKMNSKTKNKT");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "ARKPKS" + "'", str11, "ARKPKS");
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-    }
-
-    @Test
-    public void test1451() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1451");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        boolean boolean9 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate('A');
-        boolean boolean12 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append("ARKPXKMNSKTKNKTRKSPXN", "org.apache.commons.codec.EncoderException: H");
-        boolean boolean16 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append('\000', 'H');
-        java.lang.String str20 = doubleMetaphoneResult7.getPrimary();
-        doubleMetaphoneResult7.append('r');
-        java.lang.String str23 = doubleMetaphoneResult7.getPrimary();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "ARKPXKMNSK" + "'", str20, "ARKPXKMNSK");
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "ARKPXKMNSK" + "'", str23, "ARKPXKMNSK");
-    }
-
-    @Test
-    public void test1452() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1452");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        char char7 = doubleMetaphone0.charAt("#H", (int) 'H');
-        java.lang.String str10 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: a", true);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult12 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 0);
-        char char15 = doubleMetaphone0.charAt("", 114);
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + char7 + "' != '" + '\000' + "'", char7 == '\000');
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "ARKPKKMNSK" + "'", str10, "ARKPKKMNSK");
-        org.junit.Assert.assertTrue("'" + char15 + "' != '" + '\000' + "'", char15 == '\000');
-    }
-
-    @Test
-    public void test1453() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1453");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        boolean boolean9 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.append(' ');
-        java.lang.String str16 = doubleMetaphoneResult7.getAlternate();
-        doubleMetaphoneResult7.append("", "RKPK");
-        doubleMetaphoneResult7.appendPrimary('a');
-        java.lang.String str22 = doubleMetaphoneResult7.getPrimary();
-        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: hi!org.apa");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + " " + "'", str16, " ");
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + " a" + "'", str22, " a");
-    }
-
-    @Test
-    public void test1454() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1454");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        int int1 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str3 = doubleMetaphone0.doubleMetaphone("H");
-        char char6 = doubleMetaphone0.charAt("", 1);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult8 = doubleMetaphone0.new DoubleMetaphoneResult((int) 'a');
-        char char11 = doubleMetaphone0.charAt("org.apache.commons.codec.EncoderException: hi!", (int) (byte) 0);
-        java.lang.String str14 = doubleMetaphone0.doubleMetaphone("ARKPKS", false);
-        org.apache.commons.codec.EncoderException encoderException16 = new org.apache.commons.codec.EncoderException("org.apache.commons.codec.EncoderException: hi!");
-        java.lang.Object obj17 = doubleMetaphone0.encode((java.lang.Object) "org.apache.commons.codec.EncoderException: hi!");
-        org.apache.commons.codec.EncoderException encoderException20 = new org.apache.commons.codec.EncoderException("");
-        org.apache.commons.codec.EncoderException encoderException22 = new org.apache.commons.codec.EncoderException("");
-        encoderException20.addSuppressed((java.lang.Throwable) encoderException22);
-        org.apache.commons.codec.EncoderException encoderException24 = new org.apache.commons.codec.EncoderException("hi!", (java.lang.Throwable) encoderException22);
-        org.apache.commons.codec.EncoderException encoderException25 = new org.apache.commons.codec.EncoderException((java.lang.Throwable) encoderException22);
-        org.apache.commons.codec.EncoderException encoderException26 = new org.apache.commons.codec.EncoderException((java.lang.Throwable) encoderException25);
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Object obj27 = doubleMetaphone0.encode((java.lang.Object) encoderException25);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
-        } catch (org.apache.commons.codec.EncoderException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
-        org.junit.Assert.assertEquals("'" + str3 + "' != '" + "" + "'", str3, "");
-        org.junit.Assert.assertTrue("'" + char6 + "' != '" + '\000' + "'", char6 == '\000');
-        org.junit.Assert.assertTrue("'" + char11 + "' != '" + 'o' + "'", char11 == 'o');
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "ARKP" + "'", str14, "ARKP");
-        org.junit.Assert.assertEquals("'" + obj17 + "' != '" + "ARKP" + "'", obj17, "ARKP");
-    }
-
-    @Test
-    public void test1455() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1455");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        char char8 = doubleMetaphone0.charAt("ARKP", (int) (short) 0);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult10 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        doubleMetaphone0.setMaxCodeLen((int) '#');
-        java.lang.String str15 = doubleMetaphone0.doubleMetaphone("  #\000", false);
-        boolean boolean19 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", "", false);
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + char8 + "' != '" + 'A' + "'", char8 == 'A');
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-    }
-
-    @Test
-    public void test1456() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1456");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean11 = doubleMetaphone0.isDoubleMetaphoneEqual("hi!", "", false);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        java.lang.String str15 = doubleMetaphone0.encode(" ");
-        int int16 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.maxCodeLen = (short) 1;
-        doubleMetaphone0.maxCodeLen = (short) -1;
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean23 = doubleMetaphone0.isDoubleMetaphoneEqual("#org.apach", "AHH");
-            org.junit.Assert.fail("Expected exception of type java.lang.NegativeArraySizeException; message: null");
-        } catch (java.lang.NegativeArraySizeException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNull(str15);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
-    }
-
-    @Test
-    public void test1457() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1457");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        int int6 = doubleMetaphone0.getMaxCodeLen();
-        int int7 = doubleMetaphone0.getMaxCodeLen();
-        java.lang.String str9 = doubleMetaphone0.encode("ARKPKSKMNS");
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult11 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        java.lang.String str15 = doubleMetaphone0.encode("");
-        java.lang.String str17 = doubleMetaphone0.encode("ARKP");
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult19 = doubleMetaphone0.new DoubleMetaphoneResult((int) (short) 100);
-        char char22 = doubleMetaphone0.charAt("hi!org.apa", 100);
-        java.lang.String str24 = doubleMetaphone0.doubleMetaphone(" HHA ");
-        java.lang.String str26 = doubleMetaphone0.doubleMetaphone("H\000AARKPKSK");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 10 + "'", int7 == 10);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "ARKPKSKMNS" + "'", str9, "ARKPKSKMNS");
-        org.junit.Assert.assertNull(str15);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "ARKP" + "'", str17, "ARKP");
-        org.junit.Assert.assertTrue("'" + char22 + "' != '" + '\000' + "'", char22 == '\000');
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "" + "'", str24, "");
-        org.junit.Assert.assertEquals("'" + str26 + "' != '" + "RKPKSK" + "'", str26, "RKPKSK");
-    }
-
-    @Test
-    public void test1458() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1458");
-        java.lang.String[] strArray19 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
-        boolean boolean20 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray19);
-        boolean boolean21 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray19);
-        boolean boolean22 = org.apache.commons.codec.language.DoubleMetaphone.contains(" H#", (int) 'a', 4, strArray19);
-        boolean boolean23 = org.apache.commons.codec.language.DoubleMetaphone.contains("H", 1, (int) (short) 1, strArray19);
-        boolean boolean24 = org.apache.commons.codec.language.DoubleMetaphone.contains("\000AARKPKSKM", 0, (int) '4', strArray19);
-        org.junit.Assert.assertNotNull(strArray19);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + false + "'", boolean24 == false);
-    }
-
-    @Test
-    public void test1459() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1459");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendPrimary(' ');
-        doubleMetaphoneResult7.appendPrimary("H");
-        doubleMetaphoneResult7.append("", "");
-        doubleMetaphoneResult7.appendAlternate("ARKPKMN");
-        doubleMetaphoneResult7.append("", " hi!\000a");
-        java.lang.String str21 = doubleMetaphoneResult7.getAlternate();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "ARKPKMN hi" + "'", str21, "ARKPKMN hi");
-    }
-
-    @Test
-    public void test1460() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1460");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        char char5 = doubleMetaphone0.charAt("", 100);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.maxCodeLen = '\000';
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone11 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str13 = doubleMetaphone11.doubleMetaphone("");
-        doubleMetaphone11.setMaxCodeLen((int) (byte) 10);
-        int int16 = doubleMetaphone11.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult18 = doubleMetaphone11.new DoubleMetaphoneResult(10);
-        boolean boolean19 = doubleMetaphoneResult18.isComplete();
-        doubleMetaphoneResult18.append("");
-        doubleMetaphoneResult18.append('a', '#');
-        doubleMetaphoneResult18.appendAlternate("org.apache.commons.codec.EncoderException: ");
-        doubleMetaphoneResult18.appendAlternate("");
-        doubleMetaphoneResult18.appendPrimary("a");
-        java.lang.Object obj31 = doubleMetaphone0.encode((java.lang.Object) "a");
-        doubleMetaphone0.maxCodeLen = (byte) 10;
-        java.lang.String str35 = doubleMetaphone0.encode("a ");
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertNull(str13);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertEquals("'" + obj31 + "' != '" + "" + "'", obj31, "");
-        org.junit.Assert.assertEquals("'" + str35 + "' != '" + "A" + "'", str35, "A");
-    }
-
-    @Test
-    public void test1461() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1461");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        boolean boolean9 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.append(' ');
-        java.lang.String str16 = doubleMetaphoneResult7.getAlternate();
-        doubleMetaphoneResult7.append("", "RKPK");
-        doubleMetaphoneResult7.appendAlternate(" ");
-        doubleMetaphoneResult7.appendPrimary(" Ha#");
-        java.lang.String str24 = doubleMetaphoneResult7.getAlternate();
-        boolean boolean25 = doubleMetaphoneResult7.isComplete();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + " " + "'", str16, " ");
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + " RKPK " + "'", str24, " RKPK ");
-        org.junit.Assert.assertTrue("'" + boolean25 + "' != '" + false + "'", boolean25 == false);
-    }
-
-    @Test
-    public void test1462() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1462");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        int int1 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.setMaxCodeLen(100);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult5 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) -1);
-        doubleMetaphoneResult5.append('a', ' ');
-        doubleMetaphoneResult5.appendPrimary('o');
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
-    }
-
-    @Test
-    public void test1463() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1463");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        boolean boolean9 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate("");
-        doubleMetaphoneResult7.append('\000', 'a');
-        java.lang.String str15 = doubleMetaphoneResult7.getAlternate();
-        doubleMetaphoneResult7.append('a', 'A');
-        doubleMetaphoneResult7.appendPrimary("");
-        doubleMetaphoneResult7.appendPrimary('a');
-        doubleMetaphoneResult7.appendAlternate("ARKPKSKMNSKTKNKTRKSPKSN");
-        java.lang.String str25 = doubleMetaphoneResult7.getPrimary();
-        doubleMetaphoneResult7.append("ARKPKMNSK", "ARKPKSKMNS");
-        doubleMetaphoneResult7.appendPrimary('o');
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "a" + "'", str15, "a");
-        org.junit.Assert.assertEquals("'" + str25 + "' != '" + "\000aa" + "'", str25, "\000aa");
-    }
-
-    @Test
-    public void test1464() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1464");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str7 = doubleMetaphone0.encode("");
-        char char10 = doubleMetaphone0.charAt("org.apache.commons.codec.EncoderException: #org.apach", (int) 'E');
-        doubleMetaphone0.maxCodeLen = 'e';
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertNull(str7);
-        org.junit.Assert.assertTrue("'" + char10 + "' != '" + '\000' + "'", char10 == '\000');
-    }
-
-    @Test
-    public void test1465() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1465");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        int int6 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.maxCodeLen = (short) 10;
-        java.lang.String str11 = doubleMetaphone0.doubleMetaphone("ARKPX", false);
-        boolean boolean14 = doubleMetaphone0.isDoubleMetaphoneEqual("RKPKSKM", "org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: ");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone15 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str17 = doubleMetaphone15.encode("hi!");
-        char char20 = doubleMetaphone15.charAt("", 100);
-        java.lang.String str22 = doubleMetaphone15.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
-        int int23 = doubleMetaphone15.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult25 = doubleMetaphone15.new DoubleMetaphoneResult((int) '\000');
-        doubleMetaphone15.maxCodeLen = (short) 1;
-        java.lang.String str29 = doubleMetaphone15.encode("aAARKPa");
-        java.lang.String str31 = doubleMetaphone15.encode("a\000AARKPKSK");
-        java.lang.Object obj32 = doubleMetaphone0.encode((java.lang.Object) "a\000AARKPKSK");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
-        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "ARKPKS" + "'", str11, "ARKPKS");
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "H" + "'", str17, "H");
-        org.junit.Assert.assertTrue("'" + char20 + "' != '" + '\000' + "'", char20 == '\000');
-        org.junit.Assert.assertEquals("'" + str22 + "' != '" + "ARKP" + "'", str22, "ARKP");
-        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 4 + "'", int23 == 4);
-        org.junit.Assert.assertEquals("'" + str29 + "' != '" + "A" + "'", str29, "A");
-        org.junit.Assert.assertEquals("'" + str31 + "' != '" + "A" + "'", str31, "A");
-        org.junit.Assert.assertEquals("'" + obj32 + "' != '" + "ARKPKSK" + "'", obj32, "ARKPKSK");
-    }
-
-    @Test
-    public void test1466() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1466");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        boolean boolean11 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ARKPX", "");
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult((int) ' ');
-        java.lang.String str14 = doubleMetaphoneResult13.getAlternate();
-        doubleMetaphoneResult13.appendAlternate(' ');
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "ARKP" + "'", str5, "ARKP");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-    }
-
-    @Test
-    public void test1467() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1467");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        java.lang.String str4 = doubleMetaphone0.encode("ARKPXKMNSK");
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult6 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        java.lang.String str7 = doubleMetaphoneResult6.getAlternate();
-        doubleMetaphoneResult6.appendAlternate('a');
-        doubleMetaphoneResult6.append(" Horg.apac", "A");
-        doubleMetaphoneResult6.append('a');
-        doubleMetaphoneResult6.append("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", " H\000hi!\000ARK");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertEquals("'" + str4 + "' != '" + "ARKP" + "'", str4, "ARKP");
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "" + "'", str7, "");
-    }
-
-    @Test
-    public void test1468() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1468");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        doubleMetaphoneResult7.appendPrimary("org.apache.commons.codec.EncoderException: hi!");
-        doubleMetaphoneResult7.appendAlternate("  #");
-        doubleMetaphoneResult7.appendAlternate('E');
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-    }
-
-    @Test
-    public void test1469() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1469");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
-        java.lang.String str8 = doubleMetaphone0.encode("");
-        doubleMetaphone0.setMaxCodeLen(0);
-        java.lang.String str12 = doubleMetaphone0.encode("a");
-        java.lang.String str14 = doubleMetaphone0.encode("a");
-        java.lang.String str17 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: #org.apach", true);
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertNull(str8);
-        org.junit.Assert.assertEquals("'" + str12 + "' != '" + "" + "'", str12, "");
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "" + "'", str14, "");
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-    }
-
-    @Test
-    public void test1470() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1470");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        doubleMetaphoneResult7.append("Aar", "aAorg.apac");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-    }
-
-    @Test
-    public void test1471() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1471");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        char char8 = doubleMetaphone0.charAt("ARKP", (int) (short) 0);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult10 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        doubleMetaphone0.setMaxCodeLen((int) '#');
-        java.lang.String str15 = doubleMetaphone0.doubleMetaphone("  #\000", false);
-        java.lang.String str17 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSKTKNKTRKSPXNRKPK");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + char8 + "' != '" + 'A' + "'", char8 == 'A');
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "" + "'", str15, "");
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "ARKPKSKMNSKTKNKTRKSPKSNRKPK" + "'", str17, "ARKPKSKMNSKTKNKTRKSPKSNRKPK");
-    }
-
-    @Test
-    public void test1472() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1472");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean11 = doubleMetaphone0.isDoubleMetaphoneEqual("hi!", "", false);
-        boolean boolean15 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: hi!org.apa", "  ", false);
-        java.lang.String str17 = doubleMetaphone0.encode(" H# ");
-        int int18 = doubleMetaphone0.maxCodeLen;
-        int int19 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str21 = doubleMetaphone0.encode("ARKPKKMNSK");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "" + "'", str17, "");
-        org.junit.Assert.assertTrue("'" + int18 + "' != '" + 10 + "'", int18 == 10);
-        org.junit.Assert.assertTrue("'" + int19 + "' != '" + 10 + "'", int19 == 10);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "ARKPKMNSK" + "'", str21, "ARKPKMNSK");
-    }
-
-    @Test
-    public void test1473() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1473");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        doubleMetaphone0.maxCodeLen = (byte) 10;
-        boolean boolean10 = doubleMetaphone0.isDoubleMetaphoneEqual("H", "ARKP", true);
-        int int11 = doubleMetaphone0.getMaxCodeLen();
-        java.lang.String str13 = doubleMetaphone0.doubleMetaphone(" H#");
-        char char16 = doubleMetaphone0.charAt("org.apache.commons.codec.EncoderException: H", (int) (byte) 1);
-        boolean boolean19 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", " HHA");
-        java.lang.String str21 = doubleMetaphone0.encode("  #");
-        java.lang.String str24 = doubleMetaphone0.doubleMetaphone("ARKPK", true);
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 10 + "'", int11 == 10);
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-        org.junit.Assert.assertTrue("'" + char16 + "' != '" + 'r' + "'", char16 == 'r');
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertEquals("'" + str21 + "' != '" + "" + "'", str21, "");
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "ARKPK" + "'", str24, "ARKPK");
-    }
-
-    @Test
-    public void test1474() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1474");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("ARKPXKMNSK", "H", false);
-        doubleMetaphone0.setMaxCodeLen(35);
-        java.lang.Object obj7 = null;
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Object obj8 = doubleMetaphone0.encode(obj7);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
-        } catch (org.apache.commons.codec.EncoderException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-    }
-
-    @Test
-    public void test1475() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1475");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        char char5 = doubleMetaphone0.charAt("", 100);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult10 = doubleMetaphone0.new DoubleMetaphoneResult((int) '\000');
-        doubleMetaphone0.maxCodeLen = (short) 1;
-        java.lang.String str14 = doubleMetaphone0.doubleMetaphone("");
-        int int15 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult17 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        doubleMetaphoneResult17.appendAlternate("");
-        doubleMetaphoneResult17.appendAlternate("ARKPXKMNSKTKNKTRKSPXN");
-        doubleMetaphoneResult17.appendAlternate("");
-        doubleMetaphoneResult17.appendPrimary("aAARKPKSKM");
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 1 + "'", int15 == 1);
-    }
-
-    @Test
-    public void test1476() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1476");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
-        java.lang.String str8 = doubleMetaphone0.encode("");
-        doubleMetaphone0.setMaxCodeLen(0);
-        java.lang.Object obj12 = doubleMetaphone0.encode((java.lang.Object) " H#");
-        doubleMetaphone0.maxCodeLen = (short) 100;
-        int int15 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str17 = doubleMetaphone0.encode(" ");
-        java.lang.String str19 = doubleMetaphone0.encode("ARKPKS");
-        boolean boolean23 = doubleMetaphone0.isDoubleMetaphoneEqual("#H", "", false);
-        int int24 = doubleMetaphone0.getMaxCodeLen();
-        int int25 = doubleMetaphone0.maxCodeLen;
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertNull(str8);
-        org.junit.Assert.assertEquals("'" + obj12 + "' != '" + "" + "'", obj12, "");
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 100 + "'", int15 == 100);
-        org.junit.Assert.assertNull(str17);
-        org.junit.Assert.assertEquals("'" + str19 + "' != '" + "ARKPKS" + "'", str19, "ARKPKS");
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertTrue("'" + int24 + "' != '" + 100 + "'", int24 == 100);
-        org.junit.Assert.assertTrue("'" + int25 + "' != '" + 100 + "'", int25 == 100);
-    }
-
-    @Test
-    public void test1477() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1477");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        char char5 = doubleMetaphone0.charAt("", 100);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.maxCodeLen = '\000';
-        int int11 = doubleMetaphone0.maxCodeLen;
-        int int12 = doubleMetaphone0.maxCodeLen;
-        int int13 = doubleMetaphone0.maxCodeLen;
-        char char16 = doubleMetaphone0.charAt("ARKPARKPK", (int) (short) -1);
-        char char19 = doubleMetaphone0.charAt("\000org.apach", 0);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
-        org.junit.Assert.assertTrue("'" + int13 + "' != '" + 0 + "'", int13 == 0);
-        org.junit.Assert.assertTrue("'" + char16 + "' != '" + '\000' + "'", char16 == '\000');
-        org.junit.Assert.assertTrue("'" + char19 + "' != '" + '\000' + "'", char19 == '\000');
-    }
-
-    @Test
-    public void test1478() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1478");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        char char5 = doubleMetaphone0.charAt("", 100);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult10 = doubleMetaphone0.new DoubleMetaphoneResult((int) '\000');
-        doubleMetaphone0.maxCodeLen = (short) 1;
-        java.lang.String str14 = doubleMetaphone0.encode("aAARKPa");
-        java.lang.String str16 = doubleMetaphone0.doubleMetaphone("ARKPKSKMN");
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult18 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        java.lang.String str20 = doubleMetaphone0.encode("ARKPKSKMNS");
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "A" + "'", str14, "A");
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "A" + "'", str16, "A");
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "A" + "'", str20, "A");
-    }
-
-    @Test
-    public void test1479() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1479");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean11 = doubleMetaphone0.isDoubleMetaphoneEqual("hi!", "", false);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        java.lang.String str15 = doubleMetaphone0.encode(" ");
-        int int16 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.maxCodeLen = (short) 1;
-        doubleMetaphone0.maxCodeLen = (short) -1;
-        doubleMetaphone0.maxCodeLen = 'a';
-        java.lang.String str25 = doubleMetaphone0.doubleMetaphone("  ", true);
-        boolean boolean28 = doubleMetaphone0.isDoubleMetaphoneEqual("H r", "org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: ARKPX");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNull(str15);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
-        org.junit.Assert.assertNull(str25);
-        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
-    }
-
-    @Test
-    public void test1480() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1480");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.getMaxCodeLen();
-        int int6 = doubleMetaphone0.getMaxCodeLen();
-        int int7 = doubleMetaphone0.getMaxCodeLen();
-        java.lang.String str9 = doubleMetaphone0.encode("ARKPKSKMNS");
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult11 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        doubleMetaphone0.setMaxCodeLen(100);
-        doubleMetaphone0.setMaxCodeLen(0);
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 10 + "'", int6 == 10);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 10 + "'", int7 == 10);
-        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "ARKPKSKMNS" + "'", str9, "ARKPKSKMNS");
-    }
-
-    @Test
-    public void test1481() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1481");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
-        java.lang.String str8 = doubleMetaphone0.encode("");
-        doubleMetaphone0.setMaxCodeLen(0);
-        int int11 = doubleMetaphone0.getMaxCodeLen();
-        int int12 = doubleMetaphone0.maxCodeLen;
-        boolean boolean16 = doubleMetaphone0.isDoubleMetaphoneEqual("#hi!ARKPXK", "ARKPKSKMNSKTKNKTRKSPKSN", true);
-        int int17 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str19 = doubleMetaphone0.doubleMetaphone("");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertNull(str8);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 0 + "'", int12 == 0);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + true + "'", boolean16 == true);
-        org.junit.Assert.assertTrue("'" + int17 + "' != '" + 0 + "'", int17 == 0);
-        org.junit.Assert.assertNull(str19);
-    }
-
-    @Test
-    public void test1482() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1482");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        int int1 = doubleMetaphone0.getMaxCodeLen();
-        boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ", "");
-        boolean boolean8 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache", "ARKP", false);
-        int int9 = doubleMetaphone0.maxCodeLen;
-        int int10 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.EncoderException encoderException13 = new org.apache.commons.codec.EncoderException("  #\000");
-        org.apache.commons.codec.EncoderException encoderException14 = new org.apache.commons.codec.EncoderException("hi!", (java.lang.Throwable) encoderException13);
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Object obj15 = doubleMetaphone0.encode((java.lang.Object) encoderException13);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
-        } catch (org.apache.commons.codec.EncoderException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
-        org.junit.Assert.assertTrue("'" + int9 + "' != '" + 4 + "'", int9 == 4);
-        org.junit.Assert.assertTrue("'" + int10 + "' != '" + 4 + "'", int10 == 4);
-    }
-
-    @Test
-    public void test1483() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1483");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendPrimary(' ');
-        doubleMetaphoneResult7.appendPrimary("H");
-        doubleMetaphoneResult7.append("", "");
-        java.lang.String str16 = doubleMetaphoneResult7.getAlternate();
-        doubleMetaphoneResult7.appendAlternate('r');
-        doubleMetaphoneResult7.append('T');
-        boolean boolean21 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append("");
-        doubleMetaphoneResult7.append('a');
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-    }
-
-    @Test
-    public void test1484() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1484");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        char char5 = doubleMetaphone0.charAt("", 100);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        doubleMetaphone0.maxCodeLen = '\000';
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone11 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str13 = doubleMetaphone11.doubleMetaphone("");
-        doubleMetaphone11.setMaxCodeLen((int) (byte) 10);
-        int int16 = doubleMetaphone11.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult18 = doubleMetaphone11.new DoubleMetaphoneResult(10);
-        boolean boolean19 = doubleMetaphoneResult18.isComplete();
-        doubleMetaphoneResult18.append("");
-        doubleMetaphoneResult18.append('a', '#');
-        doubleMetaphoneResult18.appendAlternate("org.apache.commons.codec.EncoderException: ");
-        doubleMetaphoneResult18.appendAlternate("");
-        doubleMetaphoneResult18.appendPrimary("a");
-        java.lang.Object obj31 = doubleMetaphone0.encode((java.lang.Object) "a");
-        doubleMetaphone0.maxCodeLen = (byte) 10;
-        char char36 = doubleMetaphone0.charAt("org.apache.commons.codec.EncoderException: #org.apach", 0);
-        boolean boolean39 = doubleMetaphone0.isDoubleMetaphoneEqual("#org.apach", " H#");
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertNull(str13);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertEquals("'" + obj31 + "' != '" + "" + "'", obj31, "");
-        org.junit.Assert.assertTrue("'" + char36 + "' != '" + 'o' + "'", char36 == 'o');
-        org.junit.Assert.assertTrue("'" + boolean39 + "' != '" + false + "'", boolean39 == false);
-    }
-
-    @Test
-    public void test1485() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1485");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSK");
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult9 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
-        doubleMetaphoneResult9.append("", "#org.apach");
-        java.lang.String str13 = doubleMetaphoneResult9.getPrimary();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKPKSKMNS" + "'", str7, "ARKPKSKMNS");
-        org.junit.Assert.assertEquals("'" + str13 + "' != '" + "" + "'", str13, "");
-    }
-
-    @Test
-    public void test1486() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1486");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendPrimary(' ');
-        doubleMetaphoneResult7.appendPrimary("H");
-        doubleMetaphoneResult7.append("", "");
-        doubleMetaphoneResult7.appendAlternate('a');
-        doubleMetaphoneResult7.appendAlternate(' ');
-        doubleMetaphoneResult7.append("#org.apach");
-        doubleMetaphoneResult7.append("ARKPKKMNSK");
-        boolean boolean24 = doubleMetaphoneResult7.isComplete();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean24 + "' != '" + true + "'", boolean24 == true);
-    }
-
-    @Test
-    public void test1487() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1487");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendPrimary(' ');
-        doubleMetaphoneResult7.appendPrimary("H");
-        doubleMetaphoneResult7.append("", "");
-        doubleMetaphoneResult7.append("org.apache.commons.codec.EncoderException: ");
-        doubleMetaphoneResult7.appendPrimary("#org.apach");
-        doubleMetaphoneResult7.appendPrimary(" ");
-        doubleMetaphoneResult7.append('\000');
-        doubleMetaphoneResult7.append('r');
-        doubleMetaphoneResult7.appendAlternate('A');
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-    }
-
-    @Test
-    public void test1488() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1488");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("", true);
-        java.lang.String str10 = doubleMetaphone0.doubleMetaphone(" Horg.apac", true);
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone11 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str13 = doubleMetaphone11.doubleMetaphone("");
-        doubleMetaphone11.setMaxCodeLen((int) (byte) 10);
-        int int16 = doubleMetaphone11.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult18 = doubleMetaphone11.new DoubleMetaphoneResult(10);
-        boolean boolean19 = doubleMetaphoneResult18.isComplete();
-        boolean boolean20 = doubleMetaphoneResult18.isComplete();
-        doubleMetaphoneResult18.appendAlternate('\000');
-        doubleMetaphoneResult18.append('\000', 'A');
-        doubleMetaphoneResult18.append("ARKPKSKMNS");
-        doubleMetaphoneResult18.append("");
-        doubleMetaphoneResult18.append("H", "");
-        java.lang.Object obj33 = doubleMetaphone0.encode((java.lang.Object) "");
-        char char36 = doubleMetaphone0.charAt("AHH", 0);
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertNull(str7);
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "HRKPK" + "'", str10, "HRKPK");
-        org.junit.Assert.assertNull(str13);
-        org.junit.Assert.assertTrue("'" + int16 + "' != '" + 10 + "'", int16 == 10);
-        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNull(obj33);
-        org.junit.Assert.assertTrue("'" + char36 + "' != '" + 'A' + "'", char36 == 'A');
-    }
-
-    @Test
-    public void test1489() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1489");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        java.lang.String str5 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: ", true);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult((int) (byte) 10);
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        boolean boolean11 = doubleMetaphone0.isDoubleMetaphoneEqual("org.apache.commons.codec.EncoderException: ARKPX", "");
-        java.lang.String str13 = doubleMetaphone0.doubleMetaphone("");
-        org.apache.commons.codec.EncoderException encoderException17 = new org.apache.commons.codec.EncoderException("");
-        org.apache.commons.codec.EncoderException encoderException19 = new org.apache.commons.codec.EncoderException("");
-        encoderException17.addSuppressed((java.lang.Throwable) encoderException19);
-        org.apache.commons.codec.EncoderException encoderException21 = new org.apache.commons.codec.EncoderException("hi!", (java.lang.Throwable) encoderException19);
-        org.apache.commons.codec.EncoderException encoderException22 = new org.apache.commons.codec.EncoderException((java.lang.Throwable) encoderException19);
-        org.apache.commons.codec.EncoderException encoderException23 = new org.apache.commons.codec.EncoderException((java.lang.Throwable) encoderException22);
-        org.apache.commons.codec.EncoderException encoderException24 = new org.apache.commons.codec.EncoderException("", (java.lang.Throwable) encoderException23);
-        org.apache.commons.codec.EncoderException encoderException25 = new org.apache.commons.codec.EncoderException((java.lang.Throwable) encoderException24);
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.Object obj26 = doubleMetaphone0.encode((java.lang.Object) encoderException24);
-            org.junit.Assert.fail("Expected exception of type org.apache.commons.codec.EncoderException; message: DoubleMetaphone encode parameter is not of type String");
-        } catch (org.apache.commons.codec.EncoderException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertEquals("'" + str5 + "' != '" + "ARKP" + "'", str5, "ARKP");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertTrue("'" + boolean11 + "' != '" + false + "'", boolean11 == false);
-        org.junit.Assert.assertNull(str13);
-    }
-
-    @Test
-    public void test1490() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1490");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendPrimary(' ');
-        doubleMetaphoneResult7.append(' ', 'a');
-        boolean boolean14 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate('A');
-        doubleMetaphoneResult7.append("ARKP");
-        doubleMetaphoneResult7.appendPrimary("ARKPKSKMNSKTKNKTRKSPKSNRKPK");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-    }
-
-    @Test
-    public void test1491() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1491");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        boolean boolean9 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendAlternate('\000');
-        doubleMetaphoneResult7.appendPrimary('4');
-        java.lang.String str14 = doubleMetaphoneResult7.getPrimary();
-        doubleMetaphoneResult7.appendPrimary("");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "4" + "'", str14, "4");
-    }
-
-    @Test
-    public void test1492() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1492");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append("");
-        doubleMetaphoneResult7.append('a', '#');
-        doubleMetaphoneResult7.appendAlternate("org.apache.commons.codec.EncoderException: ");
-        boolean boolean16 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.append("A");
-        doubleMetaphoneResult7.appendAlternate('R');
-        doubleMetaphoneResult7.append(" H\000");
-        doubleMetaphoneResult7.append('\000', 'a');
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean16 + "' != '" + false + "'", boolean16 == false);
-    }
-
-    @Test
-    public void test1493() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1493");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        char char5 = doubleMetaphone0.charAt("", 100);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
-        doubleMetaphone0.maxCodeLen = (short) 100;
-        doubleMetaphone0.maxCodeLen = 'A';
-        int int12 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str14 = doubleMetaphone0.encode("#org.apach");
-        java.lang.String str17 = doubleMetaphone0.doubleMetaphone("\000AARKPKSKM", false);
-        char char20 = doubleMetaphone0.charAt("  #\000", 0);
-        java.lang.String str23 = doubleMetaphone0.doubleMetaphone("Aar", true);
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + 65 + "'", int12 == 65);
-        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "RKPK" + "'", str14, "RKPK");
-        org.junit.Assert.assertEquals("'" + str17 + "' != '" + "ARKPKSKM" + "'", str17, "ARKPKSKM");
-        org.junit.Assert.assertTrue("'" + char20 + "' != '" + ' ' + "'", char20 == ' ');
-        org.junit.Assert.assertEquals("'" + str23 + "' != '" + "AR" + "'", str23, "AR");
-    }
-
-    @Test
-    public void test1494() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1494");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        boolean boolean4 = doubleMetaphone0.isDoubleMetaphoneEqual("H", "", false);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("hi!", true);
-        char char10 = doubleMetaphone0.charAt("ARKPX", (int) 'r');
-        int int11 = doubleMetaphone0.getMaxCodeLen();
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "H" + "'", str7, "H");
-        org.junit.Assert.assertTrue("'" + char10 + "' != '" + '\000' + "'", char10 == '\000');
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 4 + "'", int11 == 4);
-    }
-
-    @Test
-    public void test1495() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1495");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.encode("hi!");
-        char char5 = doubleMetaphone0.charAt("", 100);
-        java.lang.String str7 = doubleMetaphone0.doubleMetaphone("org.apache.commons.codec.EncoderException: hi!");
-        int int8 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult10 = doubleMetaphone0.new DoubleMetaphoneResult((int) '\000');
-        doubleMetaphone0.maxCodeLen = (short) 1;
-        java.lang.String str14 = doubleMetaphone0.doubleMetaphone("");
-        int int15 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult17 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        doubleMetaphoneResult17.appendAlternate("");
-        doubleMetaphoneResult17.appendAlternate(" HHAa");
-        doubleMetaphoneResult17.append("ARKPKSKMNS", "org.apache.commons.codec.EncoderException:  ");
-        doubleMetaphoneResult17.appendAlternate("\000 .");
-        org.junit.Assert.assertEquals("'" + str2 + "' != '" + "H" + "'", str2, "H");
-        org.junit.Assert.assertTrue("'" + char5 + "' != '" + '\000' + "'", char5 == '\000');
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "ARKP" + "'", str7, "ARKP");
-        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 4 + "'", int8 == 4);
-        org.junit.Assert.assertNull(str14);
-        org.junit.Assert.assertTrue("'" + int15 + "' != '" + 1 + "'", int15 == 1);
-    }
-
-    @Test
-    public void test1496() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1496");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        int int5 = doubleMetaphone0.maxCodeLen;
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult7 = doubleMetaphone0.new DoubleMetaphoneResult(10);
-        boolean boolean8 = doubleMetaphoneResult7.isComplete();
-        doubleMetaphoneResult7.appendPrimary(' ');
-        doubleMetaphoneResult7.appendPrimary("H");
-        doubleMetaphoneResult7.append("", "");
-        java.lang.String str16 = doubleMetaphoneResult7.getAlternate();
-        doubleMetaphoneResult7.append('o', 'T');
-        doubleMetaphoneResult7.append('r', 'a');
-        boolean boolean23 = doubleMetaphoneResult7.isComplete();
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 10 + "'", int5 == 10);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertEquals("'" + str16 + "' != '" + "" + "'", str16, "");
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-    }
-
-    @Test
-    public void test1497() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1497");
-        java.lang.String[] strArray19 = new java.lang.String[] { "ARKPXKMNSK", "", "ARKP", "H" };
-        boolean boolean20 = org.apache.commons.codec.language.DoubleMetaphone.contains("ARKP", 100, (int) (short) 1, strArray19);
-        boolean boolean21 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: hi!", (int) (short) 10, (int) (short) 100, strArray19);
-        boolean boolean22 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache", (int) '\000', (int) (short) 100, strArray19);
-        boolean boolean23 = org.apache.commons.codec.language.DoubleMetaphone.contains("#org.apach", (int) 'a', 0, strArray19);
-        // The following exception was thrown during execution in test generation
-        try {
-            boolean boolean24 = org.apache.commons.codec.language.DoubleMetaphone.contains("org.apache.commons.codec.EncoderException: org.apache.commons.codec.EncoderException: ARKPXKMNSK", (int) 'R', (-1), strArray19);
-            org.junit.Assert.fail("Expected exception of type java.lang.StringIndexOutOfBoundsException; message: String index out of range: -1");
-        } catch (java.lang.StringIndexOutOfBoundsException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strArray19);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + false + "'", boolean21 == false);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-    }
-
-    @Test
-    public void test1498() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1498");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        doubleMetaphone0.maxCodeLen = (byte) 10;
-        boolean boolean10 = doubleMetaphone0.isDoubleMetaphoneEqual("H", "ARKP", true);
-        char char13 = doubleMetaphone0.charAt("#org.apach", (int) (short) -1);
-        doubleMetaphone0.maxCodeLen = 'e';
-        char char18 = doubleMetaphone0.charAt("org.apache.commons.codec.EncoderException: A", 1);
-        java.lang.String str20 = doubleMetaphone0.doubleMetaphone(" org.apach");
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertTrue("'" + char13 + "' != '" + '\000' + "'", char13 == '\000');
-        org.junit.Assert.assertTrue("'" + char18 + "' != '" + 'r' + "'", char18 == 'r');
-        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "ARKPK" + "'", str20, "ARKPK");
-    }
-
-    @Test
-    public void test1499() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1499");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        int int1 = doubleMetaphone0.maxCodeLen;
-        java.lang.String str3 = doubleMetaphone0.encode("");
-        doubleMetaphone0.maxCodeLen = (byte) 0;
-        java.lang.String str8 = doubleMetaphone0.doubleMetaphone("H", false);
-        java.lang.String str10 = doubleMetaphone0.doubleMetaphone("ARKPXKMNSK");
-        int int11 = doubleMetaphone0.getMaxCodeLen();
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult13 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        java.lang.String str15 = doubleMetaphone0.encode("");
-        java.lang.String str17 = doubleMetaphone0.doubleMetaphone("");
-        org.junit.Assert.assertTrue("'" + int1 + "' != '" + 4 + "'", int1 == 4);
-        org.junit.Assert.assertNull(str3);
-        org.junit.Assert.assertEquals("'" + str8 + "' != '" + "" + "'", str8, "");
-        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "" + "'", str10, "");
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 0 + "'", int11 == 0);
-        org.junit.Assert.assertNull(str15);
-        org.junit.Assert.assertNull(str17);
-    }
-
-    @Test
-    public void test1500() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RandoopRegressionTest2.test1500");
-        org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone0 = new org.apache.commons.codec.language.DoubleMetaphone();
-        java.lang.String str2 = doubleMetaphone0.doubleMetaphone("");
-        doubleMetaphone0.setMaxCodeLen((int) (byte) 10);
-        doubleMetaphone0.setMaxCodeLen((int) (short) 0);
-        java.lang.String str8 = doubleMetaphone0.encode("");
-        doubleMetaphone0.setMaxCodeLen(0);
-        org.apache.commons.codec.language.DoubleMetaphone.DoubleMetaphoneResult doubleMetaphoneResult12 = doubleMetaphone0.new DoubleMetaphoneResult(0);
-        doubleMetaphoneResult12.append(" ", "org.apache.commons.codec.EncoderException: ");
-        doubleMetaphoneResult12.appendPrimary('A');
-        org.junit.Assert.assertNull(str2);
-        org.junit.Assert.assertNull(str8);
     }
 }
 

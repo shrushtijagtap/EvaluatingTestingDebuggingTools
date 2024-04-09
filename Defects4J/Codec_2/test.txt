@@ -1,2 +1,0 @@
-org.apache.commons.codec.binary.Base64InputStreamTest.testBase64EmptyInputStream
-org.apache.commons.codec.binary.Base64OutputStreamTest.testBase64EmptyOutputStream

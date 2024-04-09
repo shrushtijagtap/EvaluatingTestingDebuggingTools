@@ -4040,6 +4040,69 @@ public class RegressionTest0 {
     public void test122() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test122");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        java.util.Set set4 = serializableMap1.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry6 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap0, set4, (int) ' ');
+        java.lang.String str7 = strMapTrieEntry6.toString();
+        boolean boolean8 = strMapTrieEntry6.isEmpty();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap9 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap9.mapIterator();
+        java.lang.String str12 = serializableMap9.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap13 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap14 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor15 = serializableMap14.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor16 = serializableMap14.mapIterator();
+        java.util.Set set17 = serializableMap14.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry19 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap13, set17, (int) ' ');
+        java.lang.String str20 = strMapTrieEntry19.toString();
+        strMapTrieEntry19.bitIndex = 0;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap23 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor24 = serializableMap23.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor25 = serializableMap23.mapIterator();
+        java.util.Set set26 = serializableMap23.keySet();
+        boolean boolean28 = serializableMap23.containsKey((java.lang.Object) "hi!");
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor29 = serializableMap23.mapIterator();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap30 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor31 = serializableMap30.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection32 = serializableMap30.values();
+        java.util.Set<java.lang.String> strSet33 = serializableMap30.keySet();
+        java.util.Set set34 = strMapTrieEntry19.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap23, (java.util.Set) strSet33);
+        boolean boolean35 = serializableMap9.containsValue((java.lang.Object) strSet33);
+        strMapTrieEntry6.value = strSet33;
+        int int37 = strMapTrieEntry6.bitIndex;
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap38 = strMapTrieEntry6.key;
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNotNull(set4);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str7, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(strItor10);
+        org.junit.Assert.assertNull(str12);
+        org.junit.Assert.assertNotNull(strItor15);
+        org.junit.Assert.assertNotNull(strItor16);
+        org.junit.Assert.assertNotNull(set17);
+        org.junit.Assert.assertEquals("'" + str20 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str20, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertNotNull(strItor24);
+        org.junit.Assert.assertNotNull(strItor25);
+        org.junit.Assert.assertNotNull(set26);
+        org.junit.Assert.assertTrue("'" + boolean28 + "' != '" + false + "'", boolean28 == false);
+        org.junit.Assert.assertNotNull(strItor29);
+        org.junit.Assert.assertNotNull(strItor31);
+        org.junit.Assert.assertNotNull(serializableCollection32);
+        org.junit.Assert.assertNotNull(strSet33);
+        org.junit.Assert.assertNotNull(set34);
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + false + "'", boolean35 == false);
+        org.junit.Assert.assertTrue("'" + int37 + "' != '" + 32 + "'", int37 == 32);
+        org.junit.Assert.assertNull(strMap38);
+    }
+
+    @Test
+    public void test123() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test123");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -4065,9 +4128,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test123() throws Throwable {
+    public void test124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test123");
+            System.out.format("%n%s%n", "RegressionTest0.test124");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -4211,9 +4274,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test124() throws Throwable {
+    public void test125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test124");
+            System.out.format("%n%s%n", "RegressionTest0.test125");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -4267,9 +4330,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test125() throws Throwable {
+    public void test126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test125");
+            System.out.format("%n%s%n", "RegressionTest0.test126");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -4309,9 +4372,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test126() throws Throwable {
+    public void test127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test126");
+            System.out.format("%n%s%n", "RegressionTest0.test127");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4334,9 +4397,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test127() throws Throwable {
+    public void test128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test127");
+            System.out.format("%n%s%n", "RegressionTest0.test128");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4370,9 +4433,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test128() throws Throwable {
+    public void test129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test128");
+            System.out.format("%n%s%n", "RegressionTest0.test129");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4437,9 +4500,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test129() throws Throwable {
+    public void test130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test129");
+            System.out.format("%n%s%n", "RegressionTest0.test130");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -4471,9 +4534,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test130() throws Throwable {
+    public void test131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test130");
+            System.out.format("%n%s%n", "RegressionTest0.test131");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -4501,9 +4564,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test131() throws Throwable {
+    public void test132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test131");
+            System.out.format("%n%s%n", "RegressionTest0.test132");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4522,9 +4585,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test132() throws Throwable {
+    public void test133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test132");
+            System.out.format("%n%s%n", "RegressionTest0.test133");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4668,9 +4731,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test133() throws Throwable {
+    public void test134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test133");
+            System.out.format("%n%s%n", "RegressionTest0.test134");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4691,9 +4754,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test134() throws Throwable {
+    public void test135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test134");
+            System.out.format("%n%s%n", "RegressionTest0.test135");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4733,9 +4796,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test135() throws Throwable {
+    public void test136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test135");
+            System.out.format("%n%s%n", "RegressionTest0.test136");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -4754,9 +4817,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test136() throws Throwable {
+    public void test137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test136");
+            System.out.format("%n%s%n", "RegressionTest0.test137");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4826,9 +4889,62 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test137() throws Throwable {
+    public void test138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test137");
+            System.out.format("%n%s%n", "RegressionTest0.test138");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        java.util.Set set4 = serializableMap1.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry6 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap0, set4, (int) ' ');
+        java.lang.String str7 = strMapTrieEntry6.toString();
+        strMapTrieEntry6.bitIndex = 0;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap10 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap10.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor12 = serializableMap10.mapIterator();
+        java.util.Set set13 = serializableMap10.keySet();
+        boolean boolean15 = serializableMap10.containsKey((java.lang.Object) "hi!");
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor16 = serializableMap10.mapIterator();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap17 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor18 = serializableMap17.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection19 = serializableMap17.values();
+        java.util.Set<java.lang.String> strSet20 = serializableMap17.keySet();
+        java.util.Set set21 = strMapTrieEntry6.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap10, (java.util.Set) strSet20);
+        java.io.Serializable serializable24 = serializableMap10.put("hi!", (java.io.Serializable) "");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap25 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap26 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor27 = serializableMap26.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor28 = serializableMap26.mapIterator();
+        java.util.Set set29 = serializableMap26.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry31 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap25, set29, (int) ' ');
+        boolean boolean32 = strMapTrieEntry31.isEmpty();
+        boolean boolean33 = serializableMap10.equals((java.lang.Object) strMapTrieEntry31);
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNotNull(set4);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str7, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertNotNull(strItor11);
+        org.junit.Assert.assertNotNull(strItor12);
+        org.junit.Assert.assertNotNull(set13);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNotNull(strItor16);
+        org.junit.Assert.assertNotNull(strItor18);
+        org.junit.Assert.assertNotNull(serializableCollection19);
+        org.junit.Assert.assertNotNull(strSet20);
+        org.junit.Assert.assertNotNull(set21);
+        org.junit.Assert.assertNull(serializable24);
+        org.junit.Assert.assertNotNull(strItor27);
+        org.junit.Assert.assertNotNull(strItor28);
+        org.junit.Assert.assertNotNull(set29);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + true + "'", boolean32 == true);
+        org.junit.Assert.assertTrue("'" + boolean33 + "' != '" + false + "'", boolean33 == false);
+    }
+
+    @Test
+    public void test139() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test139");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4905,9 +5021,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test138() throws Throwable {
+    public void test140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test138");
+            System.out.format("%n%s%n", "RegressionTest0.test140");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -4935,9 +5051,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test139() throws Throwable {
+    public void test141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test139");
+            System.out.format("%n%s%n", "RegressionTest0.test141");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -4958,9 +5074,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test140() throws Throwable {
+    public void test142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test140");
+            System.out.format("%n%s%n", "RegressionTest0.test142");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -4980,9 +5096,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test141() throws Throwable {
+    public void test143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test141");
+            System.out.format("%n%s%n", "RegressionTest0.test143");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         // The following exception was thrown during execution in test generation
@@ -4997,9 +5113,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test142() throws Throwable {
+    public void test144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test142");
+            System.out.format("%n%s%n", "RegressionTest0.test144");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -5104,9 +5220,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test143() throws Throwable {
+    public void test145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test143");
+            System.out.format("%n%s%n", "RegressionTest0.test145");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -5124,9 +5240,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test144() throws Throwable {
+    public void test146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test144");
+            System.out.format("%n%s%n", "RegressionTest0.test146");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5241,9 +5357,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test145() throws Throwable {
+    public void test147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test145");
+            System.out.format("%n%s%n", "RegressionTest0.test147");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5301,9 +5417,32 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test146() throws Throwable {
+    public void test148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test146");
+            System.out.format("%n%s%n", "RegressionTest0.test148");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        java.util.Set set4 = serializableMap1.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry6 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap0, set4, (int) ' ');
+        java.lang.String str7 = strMapTrieEntry6.toString();
+        boolean boolean8 = strMapTrieEntry6.isEmpty();
+        java.lang.String str9 = strMapTrieEntry6.toString();
+        java.lang.String str10 = strMapTrieEntry6.toString();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNotNull(set4);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str7, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertEquals("'" + str9 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str9, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertEquals("'" + str10 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str10, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+    }
+
+    @Test
+    public void test149() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test149");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5321,9 +5460,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test147() throws Throwable {
+    public void test150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test147");
+            System.out.format("%n%s%n", "RegressionTest0.test150");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5395,9 +5534,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test148() throws Throwable {
+    public void test151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test148");
+            System.out.format("%n%s%n", "RegressionTest0.test151");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5420,9 +5559,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test149() throws Throwable {
+    public void test152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test149");
+            System.out.format("%n%s%n", "RegressionTest0.test152");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5518,9 +5657,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test150() throws Throwable {
+    public void test153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test150");
+            System.out.format("%n%s%n", "RegressionTest0.test153");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         serializableMap0.clear();
         java.util.Set<java.lang.String> strSet2 = serializableMap0.keySet();
@@ -5532,9 +5671,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test151() throws Throwable {
+    public void test154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test151");
+            System.out.format("%n%s%n", "RegressionTest0.test154");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5582,9 +5721,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test152() throws Throwable {
+    public void test155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test152");
+            System.out.format("%n%s%n", "RegressionTest0.test155");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5667,9 +5806,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test153() throws Throwable {
+    public void test156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test153");
+            System.out.format("%n%s%n", "RegressionTest0.test156");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5715,9 +5854,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test154() throws Throwable {
+    public void test157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test154");
+            System.out.format("%n%s%n", "RegressionTest0.test157");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -5851,9 +5990,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test155() throws Throwable {
+    public void test158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test155");
+            System.out.format("%n%s%n", "RegressionTest0.test158");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -5881,9 +6020,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test156() throws Throwable {
+    public void test159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test156");
+            System.out.format("%n%s%n", "RegressionTest0.test159");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -5918,9 +6057,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test157() throws Throwable {
+    public void test160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test157");
+            System.out.format("%n%s%n", "RegressionTest0.test160");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5940,9 +6079,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test158() throws Throwable {
+    public void test161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test158");
+            System.out.format("%n%s%n", "RegressionTest0.test161");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -5988,9 +6127,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test159() throws Throwable {
+    public void test162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test159");
+            System.out.format("%n%s%n", "RegressionTest0.test162");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -6018,9 +6157,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test160() throws Throwable {
+    public void test163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test160");
+            System.out.format("%n%s%n", "RegressionTest0.test163");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6054,9 +6193,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test161() throws Throwable {
+    public void test164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test161");
+            System.out.format("%n%s%n", "RegressionTest0.test164");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6106,9 +6245,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test162() throws Throwable {
+    public void test165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test162");
+            System.out.format("%n%s%n", "RegressionTest0.test165");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -6132,9 +6271,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test163() throws Throwable {
+    public void test166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test163");
+            System.out.format("%n%s%n", "RegressionTest0.test166");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6192,9 +6331,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test164() throws Throwable {
+    public void test167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test164");
+            System.out.format("%n%s%n", "RegressionTest0.test167");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6230,9 +6369,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test165() throws Throwable {
+    public void test168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test165");
+            System.out.format("%n%s%n", "RegressionTest0.test168");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6293,9 +6432,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test166() throws Throwable {
+    public void test169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test166");
+            System.out.format("%n%s%n", "RegressionTest0.test169");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -6306,9 +6445,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test167() throws Throwable {
+    public void test170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test167");
+            System.out.format("%n%s%n", "RegressionTest0.test170");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6383,9 +6522,74 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test168() throws Throwable {
+    public void test171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test168");
+            System.out.format("%n%s%n", "RegressionTest0.test171");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry6 = serializableMap1.floorEntry("");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap7 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap8 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor9 = serializableMap8.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap8.mapIterator();
+        serializableMap7.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap8);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry14 = serializableMap7.getNearestEntryForKey("", (int) ' ');
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry15 = serializableMap1.nextEntry(strTrieEntry14);
+        java.util.Set<java.lang.String> strSet16 = serializableMap1.keySet();
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap17 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap18 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor19 = serializableMap18.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor20 = serializableMap18.mapIterator();
+        java.util.Set set21 = serializableMap18.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry23 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap17, set21, (int) ' ');
+        java.lang.String str24 = strMapTrieEntry23.toString();
+        strMapTrieEntry23.bitIndex = 0;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap27 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor28 = serializableMap27.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor29 = serializableMap27.mapIterator();
+        java.util.Set set30 = serializableMap27.keySet();
+        boolean boolean32 = serializableMap27.containsKey((java.lang.Object) "hi!");
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor33 = serializableMap27.mapIterator();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap34 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor35 = serializableMap34.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection36 = serializableMap34.values();
+        java.util.Set<java.lang.String> strSet37 = serializableMap34.keySet();
+        java.util.Set set38 = strMapTrieEntry23.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap27, (java.util.Set) strSet37);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.Map<java.lang.String, java.io.Serializable>, java.util.Map<java.lang.String, java.io.Serializable>> strMapTrieEntry40 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.Map<java.lang.String, java.io.Serializable>, java.util.Map<java.lang.String, java.io.Serializable>>((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1, (java.util.Map<java.lang.String, java.io.Serializable>) serializableMap27, (int) '4');
+        java.util.Set set41 = serializableMap27.keySet();
+        int int43 = serializableMap27.lengthInBits("");
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNull(strTrieEntry6);
+        org.junit.Assert.assertNotNull(strItor9);
+        org.junit.Assert.assertNotNull(strItor10);
+        org.junit.Assert.assertNotNull(strTrieEntry14);
+        org.junit.Assert.assertNull(strTrieEntry15);
+        org.junit.Assert.assertNotNull(strSet16);
+        org.junit.Assert.assertNotNull(strItor19);
+        org.junit.Assert.assertNotNull(strItor20);
+        org.junit.Assert.assertNotNull(set21);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str24, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertNotNull(strItor28);
+        org.junit.Assert.assertNotNull(strItor29);
+        org.junit.Assert.assertNotNull(set30);
+        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
+        org.junit.Assert.assertNotNull(strItor33);
+        org.junit.Assert.assertNotNull(strItor35);
+        org.junit.Assert.assertNotNull(serializableCollection36);
+        org.junit.Assert.assertNotNull(strSet37);
+        org.junit.Assert.assertNotNull(set38);
+        org.junit.Assert.assertNotNull(set41);
+        org.junit.Assert.assertTrue("'" + int43 + "' != '" + 0 + "'", int43 == 0);
+    }
+
+    @Test
+    public void test172() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test172");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6416,9 +6620,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test169() throws Throwable {
+    public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test169");
+            System.out.format("%n%s%n", "RegressionTest0.test173");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6474,9 +6678,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test170() throws Throwable {
+    public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test170");
+            System.out.format("%n%s%n", "RegressionTest0.test174");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -6586,9 +6790,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test171() throws Throwable {
+    public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test171");
+            System.out.format("%n%s%n", "RegressionTest0.test175");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -6612,9 +6816,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test172() throws Throwable {
+    public void test176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test172");
+            System.out.format("%n%s%n", "RegressionTest0.test176");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -6635,9 +6839,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test173() throws Throwable {
+    public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test173");
+            System.out.format("%n%s%n", "RegressionTest0.test177");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6717,9 +6921,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test174() throws Throwable {
+    public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test174");
+            System.out.format("%n%s%n", "RegressionTest0.test178");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6766,9 +6970,126 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test175() throws Throwable {
+    public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test175");
+            System.out.format("%n%s%n", "RegressionTest0.test179");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
+        java.io.Serializable serializable4 = serializableMap0.selectValue("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap5 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap5.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor7 = serializableMap5.mapIterator();
+        java.util.Set set8 = serializableMap5.keySet();
+        boolean boolean10 = serializableMap5.containsKey((java.lang.Object) "hi!");
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap5.mapIterator();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap12 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap13 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor14 = serializableMap13.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor15 = serializableMap13.mapIterator();
+        serializableMap12.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap13);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry18 = serializableMap13.floorEntry("");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap19 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap20 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor21 = serializableMap20.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor22 = serializableMap20.mapIterator();
+        serializableMap19.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap20);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry26 = serializableMap19.getNearestEntryForKey("", (int) ' ');
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry27 = serializableMap13.nextEntry(strTrieEntry26);
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap28 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap29 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor30 = serializableMap29.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor31 = serializableMap29.mapIterator();
+        serializableMap28.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap29);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry34 = serializableMap29.floorEntry("");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap35 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap36 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor37 = serializableMap36.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor38 = serializableMap36.mapIterator();
+        serializableMap35.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap36);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry42 = serializableMap35.getNearestEntryForKey("", (int) ' ');
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry43 = serializableMap29.nextEntry(strTrieEntry42);
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap44 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap45 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor46 = serializableMap45.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor47 = serializableMap45.mapIterator();
+        serializableMap44.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap45);
+        java.lang.String str50 = serializableMap44.previousKey("hi!");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap51 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor52 = serializableMap51.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor53 = serializableMap51.mapIterator();
+        java.util.Set set54 = serializableMap51.keySet();
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap56 = serializableMap51.tailMap("hi!");
+        java.io.Serializable serializable58 = serializableMap51.selectValue("");
+        boolean boolean61 = serializableMap51.compareKeys("hi!", "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
+        java.io.Serializable serializable62 = serializableMap44.get((java.lang.Object) "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap63 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap64 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor65 = serializableMap64.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor66 = serializableMap64.mapIterator();
+        serializableMap63.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap64);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry70 = serializableMap63.getNearestEntryForKey("", (int) ' ');
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry71 = serializableMap44.nextEntry(strTrieEntry70);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry72 = serializableMap5.nextEntryImpl(strTrieEntry26, strTrieEntry43, strTrieEntry70);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry73 = serializableMap0.followRight(strTrieEntry70);
+        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet74 = serializableMap0.entrySet();
+        java.util.Collection<java.io.Serializable> serializableCollection75 = serializableMap0.values();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap76 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap77 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor78 = serializableMap77.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor79 = serializableMap77.mapIterator();
+        serializableMap76.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap77);
+        int int81 = serializableMap76.bitsPerElement();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap76);
+        org.junit.Assert.assertNotNull(strItor1);
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNull(serializable4);
+        org.junit.Assert.assertNotNull(strItor6);
+        org.junit.Assert.assertNotNull(strItor7);
+        org.junit.Assert.assertNotNull(set8);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+        org.junit.Assert.assertNotNull(strItor11);
+        org.junit.Assert.assertNotNull(strItor14);
+        org.junit.Assert.assertNotNull(strItor15);
+        org.junit.Assert.assertNull(strTrieEntry18);
+        org.junit.Assert.assertNotNull(strItor21);
+        org.junit.Assert.assertNotNull(strItor22);
+        org.junit.Assert.assertNotNull(strTrieEntry26);
+        org.junit.Assert.assertNull(strTrieEntry27);
+        org.junit.Assert.assertNotNull(strItor30);
+        org.junit.Assert.assertNotNull(strItor31);
+        org.junit.Assert.assertNull(strTrieEntry34);
+        org.junit.Assert.assertNotNull(strItor37);
+        org.junit.Assert.assertNotNull(strItor38);
+        org.junit.Assert.assertNotNull(strTrieEntry42);
+        org.junit.Assert.assertNull(strTrieEntry43);
+        org.junit.Assert.assertNotNull(strItor46);
+        org.junit.Assert.assertNotNull(strItor47);
+        org.junit.Assert.assertNull(str50);
+        org.junit.Assert.assertNotNull(strItor52);
+        org.junit.Assert.assertNotNull(strItor53);
+        org.junit.Assert.assertNotNull(set54);
+        org.junit.Assert.assertNotNull(strMap56);
+        org.junit.Assert.assertNull(serializable58);
+        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
+        org.junit.Assert.assertNull(serializable62);
+        org.junit.Assert.assertNotNull(strItor65);
+        org.junit.Assert.assertNotNull(strItor66);
+        org.junit.Assert.assertNotNull(strTrieEntry70);
+        org.junit.Assert.assertNull(strTrieEntry71);
+        org.junit.Assert.assertNull(strTrieEntry72);
+        org.junit.Assert.assertNull(strTrieEntry73);
+        org.junit.Assert.assertNotNull(strEntrySet74);
+        org.junit.Assert.assertNotNull(serializableCollection75);
+        org.junit.Assert.assertNotNull(strItor78);
+        org.junit.Assert.assertNotNull(strItor79);
+        org.junit.Assert.assertTrue("'" + int81 + "' != '" + 16 + "'", int81 == 16);
+    }
+
+    @Test
+    public void test180() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test180");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6824,9 +7145,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test176() throws Throwable {
+    public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test176");
+            System.out.format("%n%s%n", "RegressionTest0.test181");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6891,9 +7212,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test177() throws Throwable {
+    public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test177");
+            System.out.format("%n%s%n", "RegressionTest0.test182");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6913,9 +7234,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test178() throws Throwable {
+    public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test178");
+            System.out.format("%n%s%n", "RegressionTest0.test183");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -6954,9 +7275,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test179() throws Throwable {
+    public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test179");
+            System.out.format("%n%s%n", "RegressionTest0.test184");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -6973,9 +7294,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test180() throws Throwable {
+    public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test180");
+            System.out.format("%n%s%n", "RegressionTest0.test185");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -7035,9 +7356,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test181() throws Throwable {
+    public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test181");
+            System.out.format("%n%s%n", "RegressionTest0.test186");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -7061,9 +7382,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test182() throws Throwable {
+    public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test182");
+            System.out.format("%n%s%n", "RegressionTest0.test187");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7080,9 +7401,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test183() throws Throwable {
+    public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test183");
+            System.out.format("%n%s%n", "RegressionTest0.test188");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -7211,9 +7532,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test184() throws Throwable {
+    public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test184");
+            System.out.format("%n%s%n", "RegressionTest0.test189");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -7325,9 +7646,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test185() throws Throwable {
+    public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test185");
+            System.out.format("%n%s%n", "RegressionTest0.test190");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7403,9 +7724,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test186() throws Throwable {
+    public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test186");
+            System.out.format("%n%s%n", "RegressionTest0.test191");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7424,9 +7745,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test187() throws Throwable {
+    public void test192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test187");
+            System.out.format("%n%s%n", "RegressionTest0.test192");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -7442,9 +7763,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test188() throws Throwable {
+    public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test188");
+            System.out.format("%n%s%n", "RegressionTest0.test193");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7525,9 +7846,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test189() throws Throwable {
+    public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test189");
+            System.out.format("%n%s%n", "RegressionTest0.test194");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7540,9 +7861,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test190() throws Throwable {
+    public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test190");
+            System.out.format("%n%s%n", "RegressionTest0.test195");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7616,9 +7937,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test191() throws Throwable {
+    public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test191");
+            System.out.format("%n%s%n", "RegressionTest0.test196");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7708,9 +8029,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test192() throws Throwable {
+    public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test192");
+            System.out.format("%n%s%n", "RegressionTest0.test197");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7731,9 +8052,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test193() throws Throwable {
+    public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test193");
+            System.out.format("%n%s%n", "RegressionTest0.test198");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -7754,9 +8075,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test194() throws Throwable {
+    public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test194");
+            System.out.format("%n%s%n", "RegressionTest0.test199");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -7809,9 +8130,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test195() throws Throwable {
+    public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test195");
+            System.out.format("%n%s%n", "RegressionTest0.test200");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7853,9 +8174,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test196() throws Throwable {
+    public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test196");
+            System.out.format("%n%s%n", "RegressionTest0.test201");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -7883,9 +8204,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test197() throws Throwable {
+    public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test197");
+            System.out.format("%n%s%n", "RegressionTest0.test202");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
         int int6 = stringKeyAnalyzer0.lengthInBits("");
@@ -7897,9 +8218,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test198() throws Throwable {
+    public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test198");
+            System.out.format("%n%s%n", "RegressionTest0.test203");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -7921,9 +8242,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test199() throws Throwable {
+    public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test199");
+            System.out.format("%n%s%n", "RegressionTest0.test204");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7940,9 +8261,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test200() throws Throwable {
+    public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test200");
+            System.out.format("%n%s%n", "RegressionTest0.test205");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -7964,9 +8285,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test201() throws Throwable {
+    public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test201");
+            System.out.format("%n%s%n", "RegressionTest0.test206");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8011,9 +8332,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test202() throws Throwable {
+    public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test202");
+            System.out.format("%n%s%n", "RegressionTest0.test207");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
         int int6 = stringKeyAnalyzer0.lengthInBits("");
@@ -8032,9 +8353,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test203() throws Throwable {
+    public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test203");
+            System.out.format("%n%s%n", "RegressionTest0.test208");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8097,9 +8418,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test204() throws Throwable {
+    public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test204");
+            System.out.format("%n%s%n", "RegressionTest0.test209");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8125,9 +8446,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test205() throws Throwable {
+    public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test205");
+            System.out.format("%n%s%n", "RegressionTest0.test210");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         int int1 = serializableMap0.size();
         java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
@@ -8138,9 +8459,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test206() throws Throwable {
+    public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test206");
+            System.out.format("%n%s%n", "RegressionTest0.test211");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -8155,9 +8476,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test207() throws Throwable {
+    public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test207");
+            System.out.format("%n%s%n", "RegressionTest0.test212");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8201,9 +8522,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test208() throws Throwable {
+    public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test208");
+            System.out.format("%n%s%n", "RegressionTest0.test213");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8218,9 +8539,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test209() throws Throwable {
+    public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test209");
+            System.out.format("%n%s%n", "RegressionTest0.test214");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8272,9 +8593,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test210() throws Throwable {
+    public void test215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test210");
+            System.out.format("%n%s%n", "RegressionTest0.test215");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -8289,9 +8610,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test211() throws Throwable {
+    public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test211");
+            System.out.format("%n%s%n", "RegressionTest0.test216");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -8307,9 +8628,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test212() throws Throwable {
+    public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test212");
+            System.out.format("%n%s%n", "RegressionTest0.test217");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8327,9 +8648,37 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test213() throws Throwable {
+    public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test213");
+            System.out.format("%n%s%n", "RegressionTest0.test218");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
+        java.util.Set set3 = serializableMap0.keySet();
+        boolean boolean5 = serializableMap0.containsKey((java.lang.Object) "hi!");
+        int int6 = serializableMap0.size();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap8 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor9 = serializableMap8.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection10 = serializableMap8.values();
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap12 = serializableMap8.prefixMap("hi!");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap14 = serializableMap8.headMap("hi!");
+        java.io.Serializable serializable15 = serializableMap0.put("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])", (java.io.Serializable) "hi!");
+        org.junit.Assert.assertNotNull(strItor1);
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(set3);
+        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
+        org.junit.Assert.assertTrue("'" + int6 + "' != '" + 0 + "'", int6 == 0);
+        org.junit.Assert.assertNotNull(strItor9);
+        org.junit.Assert.assertNotNull(serializableCollection10);
+        org.junit.Assert.assertNotNull(strMap12);
+        org.junit.Assert.assertNotNull(strMap14);
+        org.junit.Assert.assertNull(serializable15);
+    }
+
+    @Test
+    public void test219() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test219");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
@@ -8350,9 +8699,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test214() throws Throwable {
+    public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test214");
+            System.out.format("%n%s%n", "RegressionTest0.test220");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8378,9 +8727,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test215() throws Throwable {
+    public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test215");
+            System.out.format("%n%s%n", "RegressionTest0.test221");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8449,9 +8798,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test216() throws Throwable {
+    public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test216");
+            System.out.format("%n%s%n", "RegressionTest0.test222");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8464,9 +8813,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test217() throws Throwable {
+    public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test217");
+            System.out.format("%n%s%n", "RegressionTest0.test223");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -8486,9 +8835,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test218() throws Throwable {
+    public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test218");
+            System.out.format("%n%s%n", "RegressionTest0.test224");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8525,9 +8874,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test219() throws Throwable {
+    public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test219");
+            System.out.format("%n%s%n", "RegressionTest0.test225");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8551,9 +8900,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test220() throws Throwable {
+    public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test220");
+            System.out.format("%n%s%n", "RegressionTest0.test226");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -8569,17 +8918,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test221() throws Throwable {
+    public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test221");
+            System.out.format("%n%s%n", "RegressionTest0.test227");
         boolean boolean2 = org.apache.commons.collections4.trie.AbstractBitwiseTrie.compare((java.lang.Object) (-35), (java.lang.Object) (-3));
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
     }
 
     @Test
-    public void test222() throws Throwable {
+    public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test222");
+            System.out.format("%n%s%n", "RegressionTest0.test228");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8675,9 +9024,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test223() throws Throwable {
+    public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test223");
+            System.out.format("%n%s%n", "RegressionTest0.test229");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -8705,9 +9054,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test224() throws Throwable {
+    public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test224");
+            System.out.format("%n%s%n", "RegressionTest0.test230");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -8726,9 +9075,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test225() throws Throwable {
+    public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test225");
+            System.out.format("%n%s%n", "RegressionTest0.test231");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8780,9 +9129,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test226() throws Throwable {
+    public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test226");
+            System.out.format("%n%s%n", "RegressionTest0.test232");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -8801,9 +9150,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test227() throws Throwable {
+    public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test227");
+            System.out.format("%n%s%n", "RegressionTest0.test233");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -8831,9 +9180,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test228() throws Throwable {
+    public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test228");
+            System.out.format("%n%s%n", "RegressionTest0.test234");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -8933,9 +9282,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test229() throws Throwable {
+    public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test229");
+            System.out.format("%n%s%n", "RegressionTest0.test235");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -8952,9 +9301,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test230() throws Throwable {
+    public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test230");
+            System.out.format("%n%s%n", "RegressionTest0.test236");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -8968,9 +9317,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test231() throws Throwable {
+    public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test231");
+            System.out.format("%n%s%n", "RegressionTest0.test237");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -8990,9 +9339,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test232() throws Throwable {
+    public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test232");
+            System.out.format("%n%s%n", "RegressionTest0.test238");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -9009,17 +9358,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test233() throws Throwable {
+    public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test233");
+            System.out.format("%n%s%n", "RegressionTest0.test239");
         boolean boolean1 = org.apache.commons.collections4.trie.KeyAnalyzer.isNullBitKey(15);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test234() throws Throwable {
+    public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test234");
+            System.out.format("%n%s%n", "RegressionTest0.test240");
         java.util.Map<java.lang.String, java.io.Serializable> strMap0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -9031,9 +9380,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test235() throws Throwable {
+    public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test235");
+            System.out.format("%n%s%n", "RegressionTest0.test241");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -9082,9 +9431,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test236() throws Throwable {
+    public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test236");
+            System.out.format("%n%s%n", "RegressionTest0.test242");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -9101,9 +9450,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test237() throws Throwable {
+    public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test237");
+            System.out.format("%n%s%n", "RegressionTest0.test243");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -9121,9 +9470,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test238() throws Throwable {
+    public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test238");
+            System.out.format("%n%s%n", "RegressionTest0.test244");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9168,9 +9517,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test239() throws Throwable {
+    public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test239");
+            System.out.format("%n%s%n", "RegressionTest0.test245");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -9184,9 +9533,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test240() throws Throwable {
+    public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test240");
+            System.out.format("%n%s%n", "RegressionTest0.test246");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -9218,9 +9567,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test241() throws Throwable {
+    public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test241");
+            System.out.format("%n%s%n", "RegressionTest0.test247");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -9263,9 +9612,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test242() throws Throwable {
+    public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test242");
+            System.out.format("%n%s%n", "RegressionTest0.test248");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -9286,9 +9635,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test243() throws Throwable {
+    public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test243");
+            System.out.format("%n%s%n", "RegressionTest0.test249");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -9305,9 +9654,29 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test244() throws Throwable {
+    public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test244");
+            System.out.format("%n%s%n", "RegressionTest0.test250");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
+        int int5 = serializableMap0.bitsPerElement();
+        serializableMap0.clear();
+        boolean boolean7 = serializableMap0.isEmpty();
+        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet8 = serializableMap0.entrySet();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertTrue("'" + int5 + "' != '" + 16 + "'", int5 == 16);
+        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + true + "'", boolean7 == true);
+        org.junit.Assert.assertNotNull(strEntrySet8);
+    }
+
+    @Test
+    public void test251() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test251");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -9335,9 +9704,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test245() throws Throwable {
+    public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test245");
+            System.out.format("%n%s%n", "RegressionTest0.test252");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -9354,9 +9723,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test246() throws Throwable {
+    public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test246");
+            System.out.format("%n%s%n", "RegressionTest0.test253");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -9372,9 +9741,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test247() throws Throwable {
+    public void test254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test247");
+            System.out.format("%n%s%n", "RegressionTest0.test254");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9393,9 +9762,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test248() throws Throwable {
+    public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test248");
+            System.out.format("%n%s%n", "RegressionTest0.test255");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -9410,9 +9779,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test249() throws Throwable {
+    public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test249");
+            System.out.format("%n%s%n", "RegressionTest0.test256");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9444,9 +9813,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test250() throws Throwable {
+    public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test250");
+            System.out.format("%n%s%n", "RegressionTest0.test257");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9478,9 +9847,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test251() throws Throwable {
+    public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test251");
+            System.out.format("%n%s%n", "RegressionTest0.test258");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
         int int6 = stringKeyAnalyzer0.lengthInBits("");
@@ -9497,9 +9866,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test252() throws Throwable {
+    public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test252");
+            System.out.format("%n%s%n", "RegressionTest0.test259");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9527,9 +9896,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test253() throws Throwable {
+    public void test260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test253");
+            System.out.format("%n%s%n", "RegressionTest0.test260");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
@@ -9547,9 +9916,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test254() throws Throwable {
+    public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test254");
+            System.out.format("%n%s%n", "RegressionTest0.test261");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9612,9 +9981,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test255() throws Throwable {
+    public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test255");
+            System.out.format("%n%s%n", "RegressionTest0.test262");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9647,17 +10016,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test256() throws Throwable {
+    public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test256");
+            System.out.format("%n%s%n", "RegressionTest0.test263");
         boolean boolean1 = org.apache.commons.collections4.trie.KeyAnalyzer.isOutOfBoundsIndex(32);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test257() throws Throwable {
+    public void test264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test257");
+            System.out.format("%n%s%n", "RegressionTest0.test264");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         serializableMap0.clear();
         org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry3 = serializableMap0.ceilingEntry("Entry(key={} [0], value=null, parent=null, left={} [0], right=null, predecessor={} [0])");
@@ -9665,9 +10034,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test258() throws Throwable {
+    public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test258");
+            System.out.format("%n%s%n", "RegressionTest0.test265");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9764,9 +10133,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test259() throws Throwable {
+    public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test259");
+            System.out.format("%n%s%n", "RegressionTest0.test266");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9786,9 +10155,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test260() throws Throwable {
+    public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test260");
+            System.out.format("%n%s%n", "RegressionTest0.test267");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
         int int7 = stringKeyAnalyzer0.compare("", "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
@@ -9807,9 +10176,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test261() throws Throwable {
+    public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test261");
+            System.out.format("%n%s%n", "RegressionTest0.test268");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -9852,9 +10221,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test262() throws Throwable {
+    public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test262");
+            System.out.format("%n%s%n", "RegressionTest0.test269");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -9873,9 +10242,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test263() throws Throwable {
+    public void test270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test263");
+            System.out.format("%n%s%n", "RegressionTest0.test270");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
@@ -9886,9 +10255,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test264() throws Throwable {
+    public void test271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test264");
+            System.out.format("%n%s%n", "RegressionTest0.test271");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         // The following exception was thrown during execution in test generation
         try {
@@ -9901,9 +10270,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test265() throws Throwable {
+    public void test272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test265");
+            System.out.format("%n%s%n", "RegressionTest0.test272");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -10032,9 +10401,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test266() throws Throwable {
+    public void test273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test266");
+            System.out.format("%n%s%n", "RegressionTest0.test273");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -10060,9 +10429,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test267() throws Throwable {
+    public void test274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test267");
+            System.out.format("%n%s%n", "RegressionTest0.test274");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10104,9 +10473,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test268() throws Throwable {
+    public void test275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test268");
+            System.out.format("%n%s%n", "RegressionTest0.test275");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10234,9 +10603,23 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test269() throws Throwable {
+    public void test276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test269");
+            System.out.format("%n%s%n", "RegressionTest0.test276");
+        org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
+        boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
+        java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
+        int int7 = stringKeyAnalyzer0.lengthInBits("hi!");
+        org.junit.Assert.assertNotNull(stringKeyAnalyzer0);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertNotNull(strComparator5);
+        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 48 + "'", int7 == 48);
+    }
+
+    @Test
+    public void test277() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test277");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -10270,9 +10653,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test270() throws Throwable {
+    public void test278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test270");
+            System.out.format("%n%s%n", "RegressionTest0.test278");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10327,9 +10710,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test271() throws Throwable {
+    public void test279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test271");
+            System.out.format("%n%s%n", "RegressionTest0.test279");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10391,9 +10774,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test272() throws Throwable {
+    public void test280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test272");
+            System.out.format("%n%s%n", "RegressionTest0.test280");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -10434,9 +10817,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test273() throws Throwable {
+    public void test281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test273");
+            System.out.format("%n%s%n", "RegressionTest0.test281");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         serializableMap0.clear();
@@ -10444,9 +10827,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test274() throws Throwable {
+    public void test282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test274");
+            System.out.format("%n%s%n", "RegressionTest0.test282");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10465,9 +10848,109 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test275() throws Throwable {
+    public void test283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test275");
+            System.out.format("%n%s%n", "RegressionTest0.test283");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
+        java.util.Set set3 = serializableMap0.keySet();
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap5 = serializableMap0.tailMap("hi!");
+        java.io.Serializable serializable7 = serializableMap0.selectValue("");
+        boolean boolean8 = serializableMap0.isEmpty();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap10 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap11 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor12 = serializableMap11.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor13 = serializableMap11.mapIterator();
+        serializableMap10.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap11);
+        java.io.Serializable serializable15 = serializableMap0.put("", (java.io.Serializable) serializableMap10);
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap17 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap18 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor19 = serializableMap18.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor20 = serializableMap18.mapIterator();
+        serializableMap17.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap18);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry23 = serializableMap18.floorEntry("");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap24 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap25 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor26 = serializableMap25.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor27 = serializableMap25.mapIterator();
+        serializableMap24.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap25);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry31 = serializableMap24.getNearestEntryForKey("", (int) ' ');
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry32 = serializableMap18.nextEntry(strTrieEntry31);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry34 = serializableMap18.lowerEntry("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        java.util.Map.Entry<java.lang.String, java.io.Serializable> strEntry36 = serializableMap18.select("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
+        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet37 = serializableMap18.entrySet();
+        java.io.Serializable serializable38 = serializableMap0.getOrDefault((java.lang.Object) "Entry(key={} [1], value=null, parent=null, left={} [1], right=null, predecessor={} [1])", (java.io.Serializable) serializableMap18);
+        java.lang.Object obj39 = null;
+        java.io.Serializable serializable40 = serializableMap0.get(obj39);
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap41 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap42 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor43 = serializableMap42.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor44 = serializableMap42.mapIterator();
+        serializableMap41.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap42);
+        java.lang.String str47 = serializableMap41.previousKey("hi!");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap48 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor49 = serializableMap48.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor50 = serializableMap48.mapIterator();
+        java.util.Set set51 = serializableMap48.keySet();
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap53 = serializableMap48.tailMap("hi!");
+        java.io.Serializable serializable55 = serializableMap48.selectValue("");
+        boolean boolean58 = serializableMap48.compareKeys("hi!", "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
+        java.io.Serializable serializable59 = serializableMap41.get((java.lang.Object) "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap60 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap61 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor62 = serializableMap61.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor63 = serializableMap61.mapIterator();
+        serializableMap60.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap61);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry67 = serializableMap60.getNearestEntryForKey("", (int) ' ');
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry68 = serializableMap41.nextEntry(strTrieEntry67);
+        java.util.Collection collection69 = serializableMap41.values();
+        boolean boolean70 = serializableMap0.equals((java.lang.Object) serializableMap41);
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap73 = serializableMap41.subMap("", "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertNotNull(strItor1);
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(set3);
+        org.junit.Assert.assertNotNull(strMap5);
+        org.junit.Assert.assertNull(serializable7);
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(strItor12);
+        org.junit.Assert.assertNotNull(strItor13);
+        org.junit.Assert.assertNull(serializable15);
+        org.junit.Assert.assertNotNull(strItor19);
+        org.junit.Assert.assertNotNull(strItor20);
+        org.junit.Assert.assertNull(strTrieEntry23);
+        org.junit.Assert.assertNotNull(strItor26);
+        org.junit.Assert.assertNotNull(strItor27);
+        org.junit.Assert.assertNotNull(strTrieEntry31);
+        org.junit.Assert.assertNull(strTrieEntry32);
+        org.junit.Assert.assertNull(strTrieEntry34);
+        org.junit.Assert.assertNull(strEntry36);
+        org.junit.Assert.assertNotNull(strEntrySet37);
+        org.junit.Assert.assertNotNull(serializable38);
+        org.junit.Assert.assertNull(serializable40);
+        org.junit.Assert.assertNotNull(strItor43);
+        org.junit.Assert.assertNotNull(strItor44);
+        org.junit.Assert.assertNull(str47);
+        org.junit.Assert.assertNotNull(strItor49);
+        org.junit.Assert.assertNotNull(strItor50);
+        org.junit.Assert.assertNotNull(set51);
+        org.junit.Assert.assertNotNull(strMap53);
+        org.junit.Assert.assertNull(serializable55);
+        org.junit.Assert.assertTrue("'" + boolean58 + "' != '" + false + "'", boolean58 == false);
+        org.junit.Assert.assertNull(serializable59);
+        org.junit.Assert.assertNotNull(strItor62);
+        org.junit.Assert.assertNotNull(strItor63);
+        org.junit.Assert.assertNotNull(strTrieEntry67);
+        org.junit.Assert.assertNull(strTrieEntry68);
+        org.junit.Assert.assertNotNull(collection69);
+        org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + false + "'", boolean70 == false);
+        org.junit.Assert.assertNotNull(strMap73);
+    }
+
+    @Test
+    public void test284() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test284");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
@@ -10580,9 +11063,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test276() throws Throwable {
+    public void test285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test276");
+            System.out.format("%n%s%n", "RegressionTest0.test285");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -10597,9 +11080,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test277() throws Throwable {
+    public void test286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test277");
+            System.out.format("%n%s%n", "RegressionTest0.test286");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10689,9 +11172,31 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test278() throws Throwable {
+    public void test287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test278");
+            System.out.format("%n%s%n", "RegressionTest0.test287");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
+        java.lang.String str6 = serializableMap0.previousKey("hi!");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap8 = serializableMap0.prefixMap("hi!");
+        java.util.Set set9 = null;
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry11 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap8, set9, (int) (short) 100);
+        strMapTrieEntry11.bitIndex = 0;
+        java.lang.String str14 = strMapTrieEntry11.toString();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNull(str6);
+        org.junit.Assert.assertNotNull(strMap8);
+        org.junit.Assert.assertEquals("'" + str14 + "' != '" + "Entry(key={} [0], value=null, parent=null, left={} [0], right=null, predecessor={} [0])" + "'", str14, "Entry(key={} [0], value=null, parent=null, left={} [0], right=null, predecessor={} [0])");
+    }
+
+    @Test
+    public void test288() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test288");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10708,9 +11213,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test279() throws Throwable {
+    public void test289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test279");
+            System.out.format("%n%s%n", "RegressionTest0.test289");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10725,9 +11230,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test280() throws Throwable {
+    public void test290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test280");
+            System.out.format("%n%s%n", "RegressionTest0.test290");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.size();
@@ -10738,9 +11243,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test281() throws Throwable {
+    public void test291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test281");
+            System.out.format("%n%s%n", "RegressionTest0.test291");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10774,9 +11279,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test282() throws Throwable {
+    public void test292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test282");
+            System.out.format("%n%s%n", "RegressionTest0.test292");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
         int int7 = stringKeyAnalyzer0.compare("", "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
@@ -10788,9 +11293,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test283() throws Throwable {
+    public void test293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test283");
+            System.out.format("%n%s%n", "RegressionTest0.test293");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -10880,9 +11385,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test284() throws Throwable {
+    public void test294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test284");
+            System.out.format("%n%s%n", "RegressionTest0.test294");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -10904,9 +11409,48 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test285() throws Throwable {
+    public void test295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test285");
+            System.out.format("%n%s%n", "RegressionTest0.test295");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
+        java.util.Set<java.lang.String> strSet3 = serializableMap0.keySet();
+        int int4 = serializableMap0.size();
+        org.junit.Assert.assertNotNull(strItor1);
+        org.junit.Assert.assertNotNull(serializableCollection2);
+        org.junit.Assert.assertNotNull(strSet3);
+        org.junit.Assert.assertTrue("'" + int4 + "' != '" + 0 + "'", int4 == 0);
+    }
+
+    @Test
+    public void test296() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test296");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        java.util.Set set4 = serializableMap1.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry6 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap0, set4, (int) ' ');
+        java.lang.String str7 = strMapTrieEntry6.toString();
+        boolean boolean8 = strMapTrieEntry6.isEmpty();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry9 = strMapTrieEntry6.predecessor;
+        strMapTrieEntry9.bitIndex = (byte) 0;
+        boolean boolean12 = strMapTrieEntry9.isInternalNode();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNotNull(set4);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str7, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(strMapTrieEntry9);
+        org.junit.Assert.assertTrue("'" + boolean12 + "' != '" + false + "'", boolean12 == false);
+    }
+
+    @Test
+    public void test297() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test297");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -10934,9 +11478,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test286() throws Throwable {
+    public void test298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test286");
+            System.out.format("%n%s%n", "RegressionTest0.test298");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11046,9 +11590,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test287() throws Throwable {
+    public void test299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test287");
+            System.out.format("%n%s%n", "RegressionTest0.test299");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11124,9 +11668,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test288() throws Throwable {
+    public void test300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test288");
+            System.out.format("%n%s%n", "RegressionTest0.test300");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -11174,9 +11718,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test289() throws Throwable {
+    public void test301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test289");
+            System.out.format("%n%s%n", "RegressionTest0.test301");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -11207,9 +11751,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test290() throws Throwable {
+    public void test302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test290");
+            System.out.format("%n%s%n", "RegressionTest0.test302");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11307,9 +11851,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test291() throws Throwable {
+    public void test303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test291");
+            System.out.format("%n%s%n", "RegressionTest0.test303");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11392,9 +11936,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test292() throws Throwable {
+    public void test304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test292");
+            System.out.format("%n%s%n", "RegressionTest0.test304");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11406,9 +11950,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test293() throws Throwable {
+    public void test305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test293");
+            System.out.format("%n%s%n", "RegressionTest0.test305");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11480,9 +12024,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test294() throws Throwable {
+    public void test306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test294");
+            System.out.format("%n%s%n", "RegressionTest0.test306");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11575,9 +12119,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test295() throws Throwable {
+    public void test307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test295");
+            System.out.format("%n%s%n", "RegressionTest0.test307");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -11686,9 +12230,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test296() throws Throwable {
+    public void test308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test296");
+            System.out.format("%n%s%n", "RegressionTest0.test308");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -11720,9 +12264,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test297() throws Throwable {
+    public void test309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test297");
+            System.out.format("%n%s%n", "RegressionTest0.test309");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         int int7 = stringKeyAnalyzer0.compare("Trie[0]={\n}\n", "hi!");
@@ -11732,9 +12276,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test298() throws Throwable {
+    public void test310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test298");
+            System.out.format("%n%s%n", "RegressionTest0.test310");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
@@ -11825,9 +12369,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test299() throws Throwable {
+    public void test311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test299");
+            System.out.format("%n%s%n", "RegressionTest0.test311");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11841,9 +12385,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test300() throws Throwable {
+    public void test312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test300");
+            System.out.format("%n%s%n", "RegressionTest0.test312");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -11867,9 +12411,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test301() throws Throwable {
+    public void test313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test301");
+            System.out.format("%n%s%n", "RegressionTest0.test313");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -11929,9 +12473,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test302() throws Throwable {
+    public void test314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test302");
+            System.out.format("%n%s%n", "RegressionTest0.test314");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -11961,17 +12505,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test303() throws Throwable {
+    public void test315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test303");
+            System.out.format("%n%s%n", "RegressionTest0.test315");
         boolean boolean1 = org.apache.commons.collections4.trie.KeyAnalyzer.isOutOfBoundsIndex(3);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test304() throws Throwable {
+    public void test316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test304");
+            System.out.format("%n%s%n", "RegressionTest0.test316");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12033,9 +12577,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test305() throws Throwable {
+    public void test317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test305");
+            System.out.format("%n%s%n", "RegressionTest0.test317");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12082,9 +12626,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test306() throws Throwable {
+    public void test318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test306");
+            System.out.format("%n%s%n", "RegressionTest0.test318");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -12105,9 +12649,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test307() throws Throwable {
+    public void test319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test307");
+            System.out.format("%n%s%n", "RegressionTest0.test319");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12186,9 +12730,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test308() throws Throwable {
+    public void test320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test308");
+            System.out.format("%n%s%n", "RegressionTest0.test320");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12228,9 +12772,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test309() throws Throwable {
+    public void test321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test309");
+            System.out.format("%n%s%n", "RegressionTest0.test321");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.size();
@@ -12241,9 +12785,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test310() throws Throwable {
+    public void test322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test310");
+            System.out.format("%n%s%n", "RegressionTest0.test322");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12285,9 +12829,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test311() throws Throwable {
+    public void test323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test311");
+            System.out.format("%n%s%n", "RegressionTest0.test323");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -12346,9 +12890,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test312() throws Throwable {
+    public void test324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test312");
+            System.out.format("%n%s%n", "RegressionTest0.test324");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12365,9 +12909,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test313() throws Throwable {
+    public void test325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test313");
+            System.out.format("%n%s%n", "RegressionTest0.test325");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12416,9 +12960,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test314() throws Throwable {
+    public void test326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test314");
+            System.out.format("%n%s%n", "RegressionTest0.test326");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -12548,9 +13092,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test315() throws Throwable {
+    public void test327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test315");
+            System.out.format("%n%s%n", "RegressionTest0.test327");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -12580,9 +13124,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test316() throws Throwable {
+    public void test328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test316");
+            System.out.format("%n%s%n", "RegressionTest0.test328");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
@@ -12603,9 +13147,37 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test317() throws Throwable {
+    public void test329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test317");
+            System.out.format("%n%s%n", "RegressionTest0.test329");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
+        int int2 = serializableMap0.modCount;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap3 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor4 = serializableMap3.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor5 = serializableMap3.mapIterator();
+        java.util.Set set6 = serializableMap3.keySet();
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap8 = serializableMap3.tailMap("hi!");
+        boolean boolean9 = serializableMap0.containsValue((java.lang.Object) strMap8);
+        org.apache.commons.collections4.OrderedMapIterator orderedMapIterator10 = serializableMap0.mapIterator();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry12 = serializableMap0.ceilingEntry("Entry(key=null [0], value=[], parent=null, left=null [0], right=null [32], predecessor=null [0])");
+        java.util.Collection<java.io.Serializable> serializableCollection13 = serializableMap0.values();
+        org.junit.Assert.assertNotNull(strItor1);
+        org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
+        org.junit.Assert.assertNotNull(strItor4);
+        org.junit.Assert.assertNotNull(strItor5);
+        org.junit.Assert.assertNotNull(set6);
+        org.junit.Assert.assertNotNull(strMap8);
+        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
+        org.junit.Assert.assertNotNull(orderedMapIterator10);
+        org.junit.Assert.assertNull(strTrieEntry12);
+        org.junit.Assert.assertNotNull(serializableCollection13);
+    }
+
+    @Test
+    public void test330() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test330");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12662,9 +13234,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test318() throws Throwable {
+    public void test331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test318");
+            System.out.format("%n%s%n", "RegressionTest0.test331");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -12685,9 +13257,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test319() throws Throwable {
+    public void test332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test319");
+            System.out.format("%n%s%n", "RegressionTest0.test332");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12721,9 +13293,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test320() throws Throwable {
+    public void test333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test320");
+            System.out.format("%n%s%n", "RegressionTest0.test333");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap1 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap2 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap2.mapIterator();
@@ -12816,9 +13388,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test321() throws Throwable {
+    public void test334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test321");
+            System.out.format("%n%s%n", "RegressionTest0.test334");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12882,9 +13454,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test322() throws Throwable {
+    public void test335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test322");
+            System.out.format("%n%s%n", "RegressionTest0.test335");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         int int1 = serializableMap0.size();
         java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
@@ -12937,9 +13509,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test323() throws Throwable {
+    public void test336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test323");
+            System.out.format("%n%s%n", "RegressionTest0.test336");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -12998,9 +13570,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test324() throws Throwable {
+    public void test337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test324");
+            System.out.format("%n%s%n", "RegressionTest0.test337");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13035,17 +13607,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test325() throws Throwable {
+    public void test338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test325");
+            System.out.format("%n%s%n", "RegressionTest0.test338");
         boolean boolean1 = org.apache.commons.collections4.trie.KeyAnalyzer.isEqualBitKey((int) (byte) 0);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
     @Test
-    public void test326() throws Throwable {
+    public void test339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test326");
+            System.out.format("%n%s%n", "RegressionTest0.test339");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -13068,9 +13640,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test327() throws Throwable {
+    public void test340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test327");
+            System.out.format("%n%s%n", "RegressionTest0.test340");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         serializableMap0.decrementSize();
@@ -13078,9 +13650,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test328() throws Throwable {
+    public void test341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test328");
+            System.out.format("%n%s%n", "RegressionTest0.test341");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13094,9 +13666,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test329() throws Throwable {
+    public void test342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test329");
+            System.out.format("%n%s%n", "RegressionTest0.test342");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13159,9 +13731,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test330() throws Throwable {
+    public void test343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test330");
+            System.out.format("%n%s%n", "RegressionTest0.test343");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         int int3 = stringKeyAnalyzer0.compare("Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])", "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
         java.util.Comparator<java.lang.String> strComparator4 = stringKeyAnalyzer0.reversed();
@@ -13173,9 +13745,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test331() throws Throwable {
+    public void test344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test331");
+            System.out.format("%n%s%n", "RegressionTest0.test344");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -13198,9 +13770,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test332() throws Throwable {
+    public void test345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test332");
+            System.out.format("%n%s%n", "RegressionTest0.test345");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -13266,9 +13838,43 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test333() throws Throwable {
+    public void test346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test333");
+            System.out.format("%n%s%n", "RegressionTest0.test346");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
+        java.lang.String str6 = serializableMap0.previousKey("hi!");
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry8 = serializableMap0.higherEntry("Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])");
+        java.util.Set set9 = serializableMap0.keySet();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap10 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap10.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection12 = serializableMap10.values();
+        java.util.Set<java.lang.String> strSet13 = serializableMap10.keySet();
+        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet14 = serializableMap10.entrySet();
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap17 = serializableMap10.subMap("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])", "hi!");
+        boolean boolean18 = serializableMap0.containsValue((java.lang.Object) "hi!");
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor19 = serializableMap0.mapIterator();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNull(str6);
+        org.junit.Assert.assertNull(strTrieEntry8);
+        org.junit.Assert.assertNotNull(set9);
+        org.junit.Assert.assertNotNull(strItor11);
+        org.junit.Assert.assertNotNull(serializableCollection12);
+        org.junit.Assert.assertNotNull(strSet13);
+        org.junit.Assert.assertNotNull(strEntrySet14);
+        org.junit.Assert.assertNotNull(strMap17);
+        org.junit.Assert.assertTrue("'" + boolean18 + "' != '" + false + "'", boolean18 == false);
+        org.junit.Assert.assertNotNull(strItor19);
+    }
+
+    @Test
+    public void test347() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test347");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13349,9 +13955,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test334() throws Throwable {
+    public void test348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test334");
+            System.out.format("%n%s%n", "RegressionTest0.test348");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
         boolean boolean8 = stringKeyAnalyzer0.isBitSet("", (-1), (-3));
@@ -13368,9 +13974,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test335() throws Throwable {
+    public void test349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test335");
+            System.out.format("%n%s%n", "RegressionTest0.test349");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13396,9 +14002,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test336() throws Throwable {
+    public void test350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test336");
+            System.out.format("%n%s%n", "RegressionTest0.test350");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -13441,9 +14047,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test337() throws Throwable {
+    public void test351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test337");
+            System.out.format("%n%s%n", "RegressionTest0.test351");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
         int int6 = stringKeyAnalyzer0.lengthInBits("");
@@ -13462,9 +14068,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test338() throws Throwable {
+    public void test352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test338");
+            System.out.format("%n%s%n", "RegressionTest0.test352");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13548,9 +14154,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test339() throws Throwable {
+    public void test353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test339");
+            System.out.format("%n%s%n", "RegressionTest0.test353");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13584,9 +14190,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test340() throws Throwable {
+    public void test354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test340");
+            System.out.format("%n%s%n", "RegressionTest0.test354");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -13605,9 +14211,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test341() throws Throwable {
+    public void test355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test341");
+            System.out.format("%n%s%n", "RegressionTest0.test355");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -13706,9 +14312,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test342() throws Throwable {
+    public void test356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test342");
+            System.out.format("%n%s%n", "RegressionTest0.test356");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13759,9 +14365,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test343() throws Throwable {
+    public void test357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test343");
+            System.out.format("%n%s%n", "RegressionTest0.test357");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
         int int6 = stringKeyAnalyzer0.lengthInBits("");
@@ -13780,9 +14386,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test344() throws Throwable {
+    public void test358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test344");
+            System.out.format("%n%s%n", "RegressionTest0.test358");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -13810,9 +14416,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test345() throws Throwable {
+    public void test359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test345");
+            System.out.format("%n%s%n", "RegressionTest0.test359");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -13950,9 +14556,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test346() throws Throwable {
+    public void test360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test346");
+            System.out.format("%n%s%n", "RegressionTest0.test360");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14057,9 +14663,29 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test347() throws Throwable {
+    public void test361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test347");
+            System.out.format("%n%s%n", "RegressionTest0.test361");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry6 = serializableMap0.ceilingEntry("hi!");
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry9 = serializableMap0.getNearestEntryForKey("hi!", (int) (short) 10);
+        java.lang.String str11 = serializableMap0.nextKey("Entry(key={} [1], value=null, parent=null, left={} [1], right=null, predecessor={} [1])");
+        serializableMap0.clear();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNull(strTrieEntry6);
+        org.junit.Assert.assertNotNull(strTrieEntry9);
+        org.junit.Assert.assertNull(str11);
+    }
+
+    @Test
+    public void test362() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test362");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14117,9 +14743,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test348() throws Throwable {
+    public void test363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test348");
+            System.out.format("%n%s%n", "RegressionTest0.test363");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14152,9 +14778,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test349() throws Throwable {
+    public void test364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test349");
+            System.out.format("%n%s%n", "RegressionTest0.test364");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -14188,9 +14814,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test350() throws Throwable {
+    public void test365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test350");
+            System.out.format("%n%s%n", "RegressionTest0.test365");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -14214,9 +14840,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test351() throws Throwable {
+    public void test366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test351");
+            System.out.format("%n%s%n", "RegressionTest0.test366");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14265,9 +14891,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test352() throws Throwable {
+    public void test367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test352");
+            System.out.format("%n%s%n", "RegressionTest0.test367");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -14284,9 +14910,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test353() throws Throwable {
+    public void test368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test353");
+            System.out.format("%n%s%n", "RegressionTest0.test368");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -14314,9 +14940,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test354() throws Throwable {
+    public void test369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test354");
+            System.out.format("%n%s%n", "RegressionTest0.test369");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
@@ -14334,9 +14960,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test355() throws Throwable {
+    public void test370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test355");
+            System.out.format("%n%s%n", "RegressionTest0.test370");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         boolean boolean2 = strItor1.hasNext();
@@ -14345,9 +14971,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test356() throws Throwable {
+    public void test371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test356");
+            System.out.format("%n%s%n", "RegressionTest0.test371");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14368,9 +14994,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test357() throws Throwable {
+    public void test372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test357");
+            System.out.format("%n%s%n", "RegressionTest0.test372");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14419,9 +15045,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test358() throws Throwable {
+    public void test373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test358");
+            System.out.format("%n%s%n", "RegressionTest0.test373");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14452,9 +15078,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test359() throws Throwable {
+    public void test374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test359");
+            System.out.format("%n%s%n", "RegressionTest0.test374");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -14480,9 +15106,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test360() throws Throwable {
+    public void test375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test360");
+            System.out.format("%n%s%n", "RegressionTest0.test375");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -14550,9 +15176,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test361() throws Throwable {
+    public void test376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test361");
+            System.out.format("%n%s%n", "RegressionTest0.test376");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14651,16 +15277,16 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test362() throws Throwable {
+    public void test377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test362");
+            System.out.format("%n%s%n", "RegressionTest0.test377");
         org.apache.commons.collections4.trie.PatriciaTrie<java.lang.Comparable<java.lang.String>> strComparableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.lang.Comparable<java.lang.String>>();
     }
 
     @Test
-    public void test363() throws Throwable {
+    public void test378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test363");
+            System.out.format("%n%s%n", "RegressionTest0.test378");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -14687,9 +15313,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test364() throws Throwable {
+    public void test379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test364");
+            System.out.format("%n%s%n", "RegressionTest0.test379");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14729,9 +15355,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test365() throws Throwable {
+    public void test380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test365");
+            System.out.format("%n%s%n", "RegressionTest0.test380");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14750,9 +15376,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test366() throws Throwable {
+    public void test381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test366");
+            System.out.format("%n%s%n", "RegressionTest0.test381");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -14838,9 +15464,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test367() throws Throwable {
+    public void test382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test367");
+            System.out.format("%n%s%n", "RegressionTest0.test382");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14898,9 +15524,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test368() throws Throwable {
+    public void test383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test368");
+            System.out.format("%n%s%n", "RegressionTest0.test383");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14932,9 +15558,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test369() throws Throwable {
+    public void test384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test369");
+            System.out.format("%n%s%n", "RegressionTest0.test384");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -14992,9 +15618,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test370() throws Throwable {
+    public void test385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test370");
+            System.out.format("%n%s%n", "RegressionTest0.test385");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -15026,9 +15652,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test371() throws Throwable {
+    public void test386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test371");
+            System.out.format("%n%s%n", "RegressionTest0.test386");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
@@ -15063,9 +15689,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test372() throws Throwable {
+    public void test387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test372");
+            System.out.format("%n%s%n", "RegressionTest0.test387");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -15103,9 +15729,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test373() throws Throwable {
+    public void test388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test373");
+            System.out.format("%n%s%n", "RegressionTest0.test388");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -15141,9 +15767,29 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test374() throws Throwable {
+    public void test389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test374");
+            System.out.format("%n%s%n", "RegressionTest0.test389");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry6 = serializableMap1.floorEntry("");
+        java.lang.String str8 = serializableMap1.selectKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        java.lang.Object obj9 = null;
+        boolean boolean10 = serializableMap1.containsValue(obj9);
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNull(strTrieEntry6);
+        org.junit.Assert.assertNull(str8);
+        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
+    }
+
+    @Test
+    public void test390() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test390");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -15221,9 +15867,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test375() throws Throwable {
+    public void test391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test375");
+            System.out.format("%n%s%n", "RegressionTest0.test391");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -15240,9 +15886,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test376() throws Throwable {
+    public void test392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test376");
+            System.out.format("%n%s%n", "RegressionTest0.test392");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
@@ -15258,9 +15904,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test377() throws Throwable {
+    public void test393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test377");
+            System.out.format("%n%s%n", "RegressionTest0.test393");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -15288,9 +15934,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test378() throws Throwable {
+    public void test394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test378");
+            System.out.format("%n%s%n", "RegressionTest0.test394");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -15396,9 +16042,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test379() throws Throwable {
+    public void test395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test379");
+            System.out.format("%n%s%n", "RegressionTest0.test395");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -15472,9 +16118,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test380() throws Throwable {
+    public void test396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test380");
+            System.out.format("%n%s%n", "RegressionTest0.test396");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -15508,9 +16154,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test381() throws Throwable {
+    public void test397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test381");
+            System.out.format("%n%s%n", "RegressionTest0.test397");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -15524,9 +16170,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test382() throws Throwable {
+    public void test398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test382");
+            System.out.format("%n%s%n", "RegressionTest0.test398");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -15550,9 +16196,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test383() throws Throwable {
+    public void test399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test383");
+            System.out.format("%n%s%n", "RegressionTest0.test399");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -15574,17 +16220,17 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test384() throws Throwable {
+    public void test400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test384");
+            System.out.format("%n%s%n", "RegressionTest0.test400");
         boolean boolean1 = org.apache.commons.collections4.trie.KeyAnalyzer.isValidBitIndex(192);
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + true + "'", boolean1 == true);
     }
 
     @Test
-    public void test385() throws Throwable {
+    public void test401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test385");
+            System.out.format("%n%s%n", "RegressionTest0.test401");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -15683,9 +16329,81 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test386() throws Throwable {
+    public void test402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test386");
+            System.out.format("%n%s%n", "RegressionTest0.test402");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
+        java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap4 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap5 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap5.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor7 = serializableMap5.mapIterator();
+        java.util.Set set8 = serializableMap5.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry10 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap4, set8, (int) ' ');
+        java.lang.String str11 = strMapTrieEntry10.toString();
+        strMapTrieEntry10.bitIndex = 0;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap14 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor15 = serializableMap14.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor16 = serializableMap14.mapIterator();
+        java.util.Set set17 = serializableMap14.keySet();
+        boolean boolean19 = serializableMap14.containsKey((java.lang.Object) "hi!");
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor20 = serializableMap14.mapIterator();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap21 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor22 = serializableMap21.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection23 = serializableMap21.values();
+        java.util.Set<java.lang.String> strSet24 = serializableMap21.keySet();
+        java.util.Set set25 = strMapTrieEntry10.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap14, (java.util.Set) strSet24);
+        boolean boolean26 = serializableMap0.containsValue((java.lang.Object) strSet24);
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap27 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor28 = serializableMap27.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor29 = serializableMap27.mapIterator();
+        java.util.Set set30 = serializableMap27.keySet();
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap32 = serializableMap27.tailMap("hi!");
+        java.io.Serializable serializable34 = serializableMap27.selectValue("");
+        boolean boolean35 = serializableMap27.isEmpty();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap27);
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap38 = serializableMap0.headMap("Entry(key=Trie[0]={\n}\n [0], value=null, parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap40 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor41 = serializableMap40.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor42 = serializableMap40.mapIterator();
+        java.io.Serializable serializable44 = serializableMap40.selectValue("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
+        int int46 = serializableMap40.lengthInBits("");
+        java.io.Serializable serializable47 = serializableMap0.replace("Entry(key=Trie[0]={\n}\n [0], value=null, parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])", (java.io.Serializable) serializableMap40);
+        org.junit.Assert.assertNotNull(strItor1);
+        org.junit.Assert.assertNull(str3);
+        org.junit.Assert.assertNotNull(strItor6);
+        org.junit.Assert.assertNotNull(strItor7);
+        org.junit.Assert.assertNotNull(set8);
+        org.junit.Assert.assertEquals("'" + str11 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str11, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertNotNull(strItor15);
+        org.junit.Assert.assertNotNull(strItor16);
+        org.junit.Assert.assertNotNull(set17);
+        org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + false + "'", boolean19 == false);
+        org.junit.Assert.assertNotNull(strItor20);
+        org.junit.Assert.assertNotNull(strItor22);
+        org.junit.Assert.assertNotNull(serializableCollection23);
+        org.junit.Assert.assertNotNull(strSet24);
+        org.junit.Assert.assertNotNull(set25);
+        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
+        org.junit.Assert.assertNotNull(strItor28);
+        org.junit.Assert.assertNotNull(strItor29);
+        org.junit.Assert.assertNotNull(set30);
+        org.junit.Assert.assertNotNull(strMap32);
+        org.junit.Assert.assertNull(serializable34);
+        org.junit.Assert.assertTrue("'" + boolean35 + "' != '" + true + "'", boolean35 == true);
+        org.junit.Assert.assertNotNull(strMap38);
+        org.junit.Assert.assertNotNull(strItor41);
+        org.junit.Assert.assertNotNull(strItor42);
+        org.junit.Assert.assertNull(serializable44);
+        org.junit.Assert.assertTrue("'" + int46 + "' != '" + 0 + "'", int46 == 0);
+        org.junit.Assert.assertNull(serializable47);
+    }
+
+    @Test
+    public void test403() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test403");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -15796,9 +16514,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test387() throws Throwable {
+    public void test404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test387");
+            System.out.format("%n%s%n", "RegressionTest0.test404");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -15812,9 +16530,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test388() throws Throwable {
+    public void test405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test388");
+            System.out.format("%n%s%n", "RegressionTest0.test405");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -15857,9 +16575,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test389() throws Throwable {
+    public void test406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test389");
+            System.out.format("%n%s%n", "RegressionTest0.test406");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -15894,9 +16612,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test390() throws Throwable {
+    public void test407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test390");
+            System.out.format("%n%s%n", "RegressionTest0.test407");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -16008,9 +16726,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test391() throws Throwable {
+    public void test408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test391");
+            System.out.format("%n%s%n", "RegressionTest0.test408");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -16040,9 +16758,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test392() throws Throwable {
+    public void test409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test392");
+            System.out.format("%n%s%n", "RegressionTest0.test409");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -16137,9 +16855,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test393() throws Throwable {
+    public void test410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test393");
+            System.out.format("%n%s%n", "RegressionTest0.test410");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -16221,9 +16939,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test394() throws Throwable {
+    public void test411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test394");
+            System.out.format("%n%s%n", "RegressionTest0.test411");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
@@ -16246,9 +16964,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test395() throws Throwable {
+    public void test412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test395");
+            System.out.format("%n%s%n", "RegressionTest0.test412");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -16268,9 +16986,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test396() throws Throwable {
+    public void test413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test396");
+            System.out.format("%n%s%n", "RegressionTest0.test413");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -16296,9 +17014,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test397() throws Throwable {
+    public void test414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test397");
+            System.out.format("%n%s%n", "RegressionTest0.test414");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -16324,9 +17042,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test398() throws Throwable {
+    public void test415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test398");
+            System.out.format("%n%s%n", "RegressionTest0.test415");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -16350,9 +17068,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test399() throws Throwable {
+    public void test416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test399");
+            System.out.format("%n%s%n", "RegressionTest0.test416");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry2 = serializableMap0.firstEntry();
@@ -16365,9 +17083,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test400() throws Throwable {
+    public void test417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test400");
+            System.out.format("%n%s%n", "RegressionTest0.test417");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -16409,9 +17127,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test401() throws Throwable {
+    public void test418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test401");
+            System.out.format("%n%s%n", "RegressionTest0.test418");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         int int3 = stringKeyAnalyzer0.compare("Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])", "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
         // The following exception was thrown during execution in test generation
@@ -16426,9 +17144,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test402() throws Throwable {
+    public void test419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test402");
+            System.out.format("%n%s%n", "RegressionTest0.test419");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -16457,9 +17175,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test403() throws Throwable {
+    public void test420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test403");
+            System.out.format("%n%s%n", "RegressionTest0.test420");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -16478,9 +17196,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test404() throws Throwable {
+    public void test421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test404");
+            System.out.format("%n%s%n", "RegressionTest0.test421");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -16515,9 +17233,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test405() throws Throwable {
+    public void test422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test405");
+            System.out.format("%n%s%n", "RegressionTest0.test422");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -16604,9 +17322,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test406() throws Throwable {
+    public void test423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test406");
+            System.out.format("%n%s%n", "RegressionTest0.test423");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -16647,9 +17365,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test407() throws Throwable {
+    public void test424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test407");
+            System.out.format("%n%s%n", "RegressionTest0.test424");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -16693,9 +17411,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test408() throws Throwable {
+    public void test425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test408");
+            System.out.format("%n%s%n", "RegressionTest0.test425");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         // The following exception was thrown during execution in test generation
@@ -16709,9 +17427,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test409() throws Throwable {
+    public void test426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test409");
+            System.out.format("%n%s%n", "RegressionTest0.test426");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -16735,9 +17453,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test410() throws Throwable {
+    public void test427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test410");
+            System.out.format("%n%s%n", "RegressionTest0.test427");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -16782,9 +17500,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test411() throws Throwable {
+    public void test428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test411");
+            System.out.format("%n%s%n", "RegressionTest0.test428");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -16885,9 +17603,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test412() throws Throwable {
+    public void test429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test412");
+            System.out.format("%n%s%n", "RegressionTest0.test429");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry2 = serializableMap0.floorEntry("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
         org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry4 = serializableMap0.higherEntry("Entry(key=Trie[0]={\n}\n [0], value=null, parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])");
@@ -16898,9 +17616,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test413() throws Throwable {
+    public void test430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test413");
+            System.out.format("%n%s%n", "RegressionTest0.test430");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -16975,9 +17693,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test414() throws Throwable {
+    public void test431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test414");
+            System.out.format("%n%s%n", "RegressionTest0.test431");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -17031,9 +17749,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test415() throws Throwable {
+    public void test432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test415");
+            System.out.format("%n%s%n", "RegressionTest0.test432");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17061,9 +17779,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test416() throws Throwable {
+    public void test433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test416");
+            System.out.format("%n%s%n", "RegressionTest0.test433");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -17085,9 +17803,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test417() throws Throwable {
+    public void test434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test417");
+            System.out.format("%n%s%n", "RegressionTest0.test434");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17139,9 +17857,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test418() throws Throwable {
+    public void test435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test418");
+            System.out.format("%n%s%n", "RegressionTest0.test435");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -17163,9 +17881,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test419() throws Throwable {
+    public void test436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test419");
+            System.out.format("%n%s%n", "RegressionTest0.test436");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -17304,9 +18022,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test420() throws Throwable {
+    public void test437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test420");
+            System.out.format("%n%s%n", "RegressionTest0.test437");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
@@ -17332,9 +18050,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test421() throws Throwable {
+    public void test438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test421");
+            System.out.format("%n%s%n", "RegressionTest0.test438");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17381,9 +18099,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test422() throws Throwable {
+    public void test439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test422");
+            System.out.format("%n%s%n", "RegressionTest0.test439");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
@@ -17430,9 +18148,104 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test423() throws Throwable {
+    public void test440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test423");
+            System.out.format("%n%s%n", "RegressionTest0.test440");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        java.util.Set set4 = serializableMap1.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry6 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap0, set4, (int) ' ');
+        java.lang.String str7 = strMapTrieEntry6.toString();
+        strMapTrieEntry6.bitIndex = 0;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap10 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap10.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor12 = serializableMap10.mapIterator();
+        java.util.Set set13 = serializableMap10.keySet();
+        boolean boolean15 = serializableMap10.containsKey((java.lang.Object) "hi!");
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor16 = serializableMap10.mapIterator();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap17 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor18 = serializableMap17.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection19 = serializableMap17.values();
+        java.util.Set<java.lang.String> strSet20 = serializableMap17.keySet();
+        java.util.Set set21 = strMapTrieEntry6.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap10, (java.util.Set) strSet20);
+        boolean boolean22 = strMapTrieEntry6.isInternalNode();
+        int int23 = strMapTrieEntry6.bitIndex;
+        java.lang.String str24 = strMapTrieEntry6.toString();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap25 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap26 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor27 = serializableMap26.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor28 = serializableMap26.mapIterator();
+        serializableMap25.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap26);
+        java.lang.String str31 = serializableMap25.previousKey("hi!");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap33 = serializableMap25.prefixMap("hi!");
+        java.util.Set set34 = null;
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry36 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap33, set34, (int) (short) 100);
+        java.util.Set set37 = strMapTrieEntry36.value;
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry38 = strMapTrieEntry36.predecessor;
+        strMapTrieEntry36.bitIndex = (-1);
+        strMapTrieEntry6.predecessor = strMapTrieEntry36;
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap42 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap43 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor44 = serializableMap43.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor45 = serializableMap43.mapIterator();
+        java.util.Set set46 = serializableMap43.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry48 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap42, set46, (int) ' ');
+        java.lang.String str49 = strMapTrieEntry48.toString();
+        boolean boolean50 = strMapTrieEntry48.isEmpty();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap51 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor52 = serializableMap51.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor53 = serializableMap51.mapIterator();
+        java.util.Set set54 = serializableMap51.keySet();
+        boolean boolean56 = serializableMap51.containsKey((java.lang.Object) "hi!");
+        java.util.Set set57 = serializableMap51.keySet();
+        java.util.Set set58 = strMapTrieEntry48.setValue(set57);
+        int int59 = strMapTrieEntry48.bitIndex;
+        strMapTrieEntry48.bitIndex = 0;
+        strMapTrieEntry6.predecessor = strMapTrieEntry48;
+        java.util.Set set63 = strMapTrieEntry48.getValue();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNotNull(set4);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str7, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertNotNull(strItor11);
+        org.junit.Assert.assertNotNull(strItor12);
+        org.junit.Assert.assertNotNull(set13);
+        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
+        org.junit.Assert.assertNotNull(strItor16);
+        org.junit.Assert.assertNotNull(strItor18);
+        org.junit.Assert.assertNotNull(serializableCollection19);
+        org.junit.Assert.assertNotNull(strSet20);
+        org.junit.Assert.assertNotNull(set21);
+        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
+        org.junit.Assert.assertTrue("'" + int23 + "' != '" + 0 + "'", int23 == 0);
+        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])" + "'", str24, "Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])");
+        org.junit.Assert.assertNotNull(strItor27);
+        org.junit.Assert.assertNotNull(strItor28);
+        org.junit.Assert.assertNull(str31);
+        org.junit.Assert.assertNotNull(strMap33);
+        org.junit.Assert.assertNull(set37);
+        org.junit.Assert.assertNotNull(strMapTrieEntry38);
+        org.junit.Assert.assertNotNull(strItor44);
+        org.junit.Assert.assertNotNull(strItor45);
+        org.junit.Assert.assertNotNull(set46);
+        org.junit.Assert.assertEquals("'" + str49 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str49, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + true + "'", boolean50 == true);
+        org.junit.Assert.assertNotNull(strItor52);
+        org.junit.Assert.assertNotNull(strItor53);
+        org.junit.Assert.assertNotNull(set54);
+        org.junit.Assert.assertTrue("'" + boolean56 + "' != '" + false + "'", boolean56 == false);
+        org.junit.Assert.assertNotNull(set57);
+        org.junit.Assert.assertNotNull(set58);
+        org.junit.Assert.assertTrue("'" + int59 + "' != '" + 32 + "'", int59 == 32);
+        org.junit.Assert.assertNotNull(set63);
+    }
+
+    @Test
+    public void test441() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test441");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17449,9 +18262,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test424() throws Throwable {
+    public void test442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test424");
+            System.out.format("%n%s%n", "RegressionTest0.test442");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17493,9 +18306,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test425() throws Throwable {
+    public void test443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test425");
+            System.out.format("%n%s%n", "RegressionTest0.test443");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -17514,9 +18327,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test426() throws Throwable {
+    public void test444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test426");
+            System.out.format("%n%s%n", "RegressionTest0.test444");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17542,9 +18355,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test427() throws Throwable {
+    public void test445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test427");
+            System.out.format("%n%s%n", "RegressionTest0.test445");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17621,9 +18434,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test428() throws Throwable {
+    public void test446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test428");
+            System.out.format("%n%s%n", "RegressionTest0.test446");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17660,9 +18473,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test429() throws Throwable {
+    public void test447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test429");
+            System.out.format("%n%s%n", "RegressionTest0.test447");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17683,9 +18496,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test430() throws Throwable {
+    public void test448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test430");
+            System.out.format("%n%s%n", "RegressionTest0.test448");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17752,9 +18565,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test431() throws Throwable {
+    public void test449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test431");
+            System.out.format("%n%s%n", "RegressionTest0.test449");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17784,18 +18597,18 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test432() throws Throwable {
+    public void test450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test432");
+            System.out.format("%n%s%n", "RegressionTest0.test450");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = new org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer();
         int int3 = stringKeyAnalyzer0.compare("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])", "");
         org.junit.Assert.assertTrue("'" + int3 + "' != '" + 91 + "'", int3 == 91);
     }
 
     @Test
-    public void test433() throws Throwable {
+    public void test451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test433");
+            System.out.format("%n%s%n", "RegressionTest0.test451");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17810,9 +18623,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test434() throws Throwable {
+    public void test452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test434");
+            System.out.format("%n%s%n", "RegressionTest0.test452");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -17844,9 +18657,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test435() throws Throwable {
+    public void test453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test435");
+            System.out.format("%n%s%n", "RegressionTest0.test453");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -17880,9 +18693,30 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test436() throws Throwable {
+    public void test454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test436");
+            System.out.format("%n%s%n", "RegressionTest0.test454");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap6 = serializableMap1.headMap("hi!");
+        org.apache.commons.collections4.OrderedMapIterator orderedMapIterator7 = serializableMap1.mapIterator();
+        java.lang.Object obj8 = null;
+        java.lang.Object obj9 = serializableMap1.remove(obj8);
+        serializableMap1.clear();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNotNull(strMap6);
+        org.junit.Assert.assertNotNull(orderedMapIterator7);
+        org.junit.Assert.assertNull(obj9);
+    }
+
+    @Test
+    public void test455() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test455");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -17904,9 +18738,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test437() throws Throwable {
+    public void test456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test437");
+            System.out.format("%n%s%n", "RegressionTest0.test456");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -17948,9 +18782,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test438() throws Throwable {
+    public void test457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test438");
+            System.out.format("%n%s%n", "RegressionTest0.test457");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         serializableMap0.clear();
         java.util.Comparator<? super java.lang.String> wildcardComparator2 = serializableMap0.comparator();
@@ -17958,9 +18792,24 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test439() throws Throwable {
+    public void test458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test439");
+            System.out.format("%n%s%n", "RegressionTest0.test458");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
+        int int2 = serializableMap0.modCount;
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap4 = serializableMap0.prefixMap("");
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry6 = serializableMap0.higherEntry("");
+        org.junit.Assert.assertNotNull(strItor1);
+        org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
+        org.junit.Assert.assertNotNull(strMap4);
+        org.junit.Assert.assertNull(strTrieEntry6);
+    }
+
+    @Test
+    public void test459() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test459");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18027,9 +18876,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test440() throws Throwable {
+    public void test460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test440");
+            System.out.format("%n%s%n", "RegressionTest0.test460");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18088,9 +18937,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test441() throws Throwable {
+    public void test461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test441");
+            System.out.format("%n%s%n", "RegressionTest0.test461");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -18107,9 +18956,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test442() throws Throwable {
+    public void test462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test442");
+            System.out.format("%n%s%n", "RegressionTest0.test462");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18149,9 +18998,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test443() throws Throwable {
+    public void test463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test443");
+            System.out.format("%n%s%n", "RegressionTest0.test463");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -18173,9 +19022,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test444() throws Throwable {
+    public void test464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test444");
+            System.out.format("%n%s%n", "RegressionTest0.test464");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -18209,9 +19058,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test445() throws Throwable {
+    public void test465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test445");
+            System.out.format("%n%s%n", "RegressionTest0.test465");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18242,9 +19091,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test446() throws Throwable {
+    public void test466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test446");
+            System.out.format("%n%s%n", "RegressionTest0.test466");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -18261,9 +19110,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test447() throws Throwable {
+    public void test467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test447");
+            System.out.format("%n%s%n", "RegressionTest0.test467");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18286,9 +19135,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test448() throws Throwable {
+    public void test468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test448");
+            System.out.format("%n%s%n", "RegressionTest0.test468");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -18408,9 +19257,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test449() throws Throwable {
+    public void test469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test449");
+            System.out.format("%n%s%n", "RegressionTest0.test469");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18477,9 +19326,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test450() throws Throwable {
+    public void test470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test450");
+            System.out.format("%n%s%n", "RegressionTest0.test470");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         int int2 = serializableMap0.modCount;
@@ -18582,9 +19431,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test451() throws Throwable {
+    public void test471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test451");
+            System.out.format("%n%s%n", "RegressionTest0.test471");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.lang.String str3 = serializableMap0.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
@@ -18643,9 +19492,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test452() throws Throwable {
+    public void test472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test452");
+            System.out.format("%n%s%n", "RegressionTest0.test472");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18715,9 +19564,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test453() throws Throwable {
+    public void test473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test453");
+            System.out.format("%n%s%n", "RegressionTest0.test473");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -18828,9 +19677,73 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test454() throws Throwable {
+    public void test474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test454");
+            System.out.format("%n%s%n", "RegressionTest0.test474");
+        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
+        java.util.Set set4 = serializableMap1.keySet();
+        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry6 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap0, set4, (int) ' ');
+        java.lang.String str7 = strMapTrieEntry6.toString();
+        boolean boolean8 = strMapTrieEntry6.isEmpty();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap9 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap9.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap9.mapIterator();
+        java.util.Set set12 = serializableMap9.keySet();
+        boolean boolean14 = serializableMap9.containsKey((java.lang.Object) "hi!");
+        java.util.Set set15 = serializableMap9.keySet();
+        java.util.Set set16 = strMapTrieEntry6.setValue(set15);
+        boolean boolean17 = strMapTrieEntry6.isExternalNode();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap18 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap19 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor20 = serializableMap19.mapIterator();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor21 = serializableMap19.mapIterator();
+        serializableMap18.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap19);
+        java.lang.String str24 = serializableMap18.previousKey("hi!");
+        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap25 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
+        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor26 = serializableMap25.mapIterator();
+        java.util.Collection<java.io.Serializable> serializableCollection27 = serializableMap25.values();
+        java.util.Set<java.lang.String> strSet28 = serializableMap25.keySet();
+        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet29 = serializableMap25.entrySet();
+        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet30 = serializableMap25.entrySet();
+        java.util.Set set31 = strMapTrieEntry6.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap18, (java.util.Set) strEntrySet30);
+        boolean boolean34 = serializableMap18.compareKeys("hi!", "");
+        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor35 = serializableMap18.mapIterator();
+        java.lang.String str37 = serializableMap18.nextKey("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
+        java.util.Set<java.lang.String> strSet38 = serializableMap18.keySet();
+        org.junit.Assert.assertNotNull(strItor2);
+        org.junit.Assert.assertNotNull(strItor3);
+        org.junit.Assert.assertNotNull(set4);
+        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str7, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
+        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
+        org.junit.Assert.assertNotNull(strItor10);
+        org.junit.Assert.assertNotNull(strItor11);
+        org.junit.Assert.assertNotNull(set12);
+        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
+        org.junit.Assert.assertNotNull(set15);
+        org.junit.Assert.assertNotNull(set16);
+        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
+        org.junit.Assert.assertNotNull(strItor20);
+        org.junit.Assert.assertNotNull(strItor21);
+        org.junit.Assert.assertNull(str24);
+        org.junit.Assert.assertNotNull(strItor26);
+        org.junit.Assert.assertNotNull(serializableCollection27);
+        org.junit.Assert.assertNotNull(strSet28);
+        org.junit.Assert.assertNotNull(strEntrySet29);
+        org.junit.Assert.assertNotNull(strEntrySet30);
+        org.junit.Assert.assertNotNull(set31);
+        org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + false + "'", boolean34 == false);
+        org.junit.Assert.assertNotNull(strItor35);
+        org.junit.Assert.assertNull(str37);
+        org.junit.Assert.assertNotNull(strSet38);
+    }
+
+    @Test
+    public void test475() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test475");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18860,9 +19773,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test455() throws Throwable {
+    public void test476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test455");
+            System.out.format("%n%s%n", "RegressionTest0.test476");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -18881,9 +19794,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test456() throws Throwable {
+    public void test477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test456");
+            System.out.format("%n%s%n", "RegressionTest0.test477");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -18918,9 +19831,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test457() throws Throwable {
+    public void test478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test457");
+            System.out.format("%n%s%n", "RegressionTest0.test478");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -18939,9 +19852,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test458() throws Throwable {
+    public void test479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test458");
+            System.out.format("%n%s%n", "RegressionTest0.test479");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -18967,9 +19880,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test459() throws Throwable {
+    public void test480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test459");
+            System.out.format("%n%s%n", "RegressionTest0.test480");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -19003,9 +19916,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test460() throws Throwable {
+    public void test481() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test460");
+            System.out.format("%n%s%n", "RegressionTest0.test481");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -19022,9 +19935,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test461() throws Throwable {
+    public void test482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test461");
+            System.out.format("%n%s%n", "RegressionTest0.test482");
         java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -19082,9 +19995,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test462() throws Throwable {
+    public void test483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test462");
+            System.out.format("%n%s%n", "RegressionTest0.test483");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -19102,9 +20015,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test463() throws Throwable {
+    public void test484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test463");
+            System.out.format("%n%s%n", "RegressionTest0.test484");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -19125,9 +20038,23 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test464() throws Throwable {
+    public void test485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test464");
+            System.out.format("%n%s%n", "RegressionTest0.test485");
+        org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
+        boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
+        java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
+        int int8 = stringKeyAnalyzer0.compare("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=Trie[0]={\n}\n [0])", "");
+        org.junit.Assert.assertNotNull(stringKeyAnalyzer0);
+        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
+        org.junit.Assert.assertNotNull(strComparator5);
+        org.junit.Assert.assertTrue("'" + int8 + "' != '" + 101 + "'", int8 == 101);
+    }
+
+    @Test
+    public void test486() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test486");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -19142,9 +20069,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test465() throws Throwable {
+    public void test487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test465");
+            System.out.format("%n%s%n", "RegressionTest0.test487");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         serializableMap0.clear();
         serializableMap0.modCount = (short) 0;
@@ -19162,9 +20089,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test466() throws Throwable {
+    public void test488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test466");
+            System.out.format("%n%s%n", "RegressionTest0.test488");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         // The following exception was thrown during execution in test generation
@@ -19179,9 +20106,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test467() throws Throwable {
+    public void test489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test467");
+            System.out.format("%n%s%n", "RegressionTest0.test489");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -19233,9 +20160,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test468() throws Throwable {
+    public void test490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test468");
+            System.out.format("%n%s%n", "RegressionTest0.test490");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -19341,9 +20268,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test469() throws Throwable {
+    public void test491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test469");
+            System.out.format("%n%s%n", "RegressionTest0.test491");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -19364,9 +20291,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test470() throws Throwable {
+    public void test492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test470");
+            System.out.format("%n%s%n", "RegressionTest0.test492");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -19476,9 +20403,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test471() throws Throwable {
+    public void test493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test471");
+            System.out.format("%n%s%n", "RegressionTest0.test493");
         org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
         boolean boolean4 = stringKeyAnalyzer0.isBitSet("", (int) (short) 1, (-1));
         java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
@@ -19498,9 +20425,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test472() throws Throwable {
+    public void test494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test472");
+            System.out.format("%n%s%n", "RegressionTest0.test494");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -19530,9 +20457,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test473() throws Throwable {
+    public void test495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test473");
+            System.out.format("%n%s%n", "RegressionTest0.test495");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -19549,9 +20476,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test474() throws Throwable {
+    public void test496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test474");
+            System.out.format("%n%s%n", "RegressionTest0.test496");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
@@ -19584,9 +20511,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test475() throws Throwable {
+    public void test497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test475");
+            System.out.format("%n%s%n", "RegressionTest0.test497");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
@@ -19647,9 +20574,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test476() throws Throwable {
+    public void test498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test476");
+            System.out.format("%n%s%n", "RegressionTest0.test498");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -19666,9 +20593,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test477() throws Throwable {
+    public void test499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test477");
+            System.out.format("%n%s%n", "RegressionTest0.test499");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -19742,9 +20669,9 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test478() throws Throwable {
+    public void test500() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test478");
+            System.out.format("%n%s%n", "RegressionTest0.test500");
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
         org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
@@ -19774,1010 +20701,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNull(serializable18);
         org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
         org.junit.Assert.assertTrue("'" + int21 + "' != '" + 16 + "'", int21 == 16);
-    }
-
-    @Test
-    public void test479() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test479");
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
-        java.util.Set set4 = serializableMap1.keySet();
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry6 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap0, set4, (int) ' ');
-        java.lang.String str7 = strMapTrieEntry6.toString();
-        strMapTrieEntry6.bitIndex = 0;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap10 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap10.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor12 = serializableMap10.mapIterator();
-        java.util.Set set13 = serializableMap10.keySet();
-        boolean boolean15 = serializableMap10.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor16 = serializableMap10.mapIterator();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap17 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor18 = serializableMap17.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection19 = serializableMap17.values();
-        java.util.Set<java.lang.String> strSet20 = serializableMap17.keySet();
-        java.util.Set set21 = strMapTrieEntry6.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap10, (java.util.Set) strSet20);
-        boolean boolean22 = strMapTrieEntry6.isInternalNode();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap23 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor24 = serializableMap23.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection25 = serializableMap23.values();
-        int int26 = serializableMap23.modCount;
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry30 = serializableMap23.subtree("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])", (int) (byte) 1, (int) (byte) -1);
-        strMapTrieEntry6.key = serializableMap23;
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry32 = strMapTrieEntry6.predecessor;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap33 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor34 = serializableMap33.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor35 = serializableMap33.mapIterator();
-        java.util.Set set36 = serializableMap33.keySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap38 = serializableMap33.prefixMap("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        int int40 = serializableMap33.lengthInBits("hi!");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap41 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap42 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor43 = serializableMap42.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor44 = serializableMap42.mapIterator();
-        serializableMap41.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap42);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry47 = serializableMap42.floorEntry("");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap48 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap49 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor50 = serializableMap49.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor51 = serializableMap49.mapIterator();
-        serializableMap48.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap49);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry55 = serializableMap48.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry56 = serializableMap42.nextEntry(strTrieEntry55);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry58 = serializableMap42.lowerEntry("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        int int60 = serializableMap42.lengthInBits("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        java.util.Set<java.lang.String> strSet61 = serializableMap42.keySet();
-        java.util.Set set62 = strMapTrieEntry32.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap33, (java.util.Set) strSet61);
-        java.lang.String str64 = serializableMap33.selectKey("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(strItor3);
-        org.junit.Assert.assertNotNull(set4);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str7, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertNotNull(strItor12);
-        org.junit.Assert.assertNotNull(set13);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(strItor16);
-        org.junit.Assert.assertNotNull(strItor18);
-        org.junit.Assert.assertNotNull(serializableCollection19);
-        org.junit.Assert.assertNotNull(strSet20);
-        org.junit.Assert.assertNotNull(set21);
-        org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + false + "'", boolean22 == false);
-        org.junit.Assert.assertNotNull(strItor24);
-        org.junit.Assert.assertNotNull(serializableCollection25);
-        org.junit.Assert.assertTrue("'" + int26 + "' != '" + 0 + "'", int26 == 0);
-        org.junit.Assert.assertNull(strTrieEntry30);
-        org.junit.Assert.assertNotNull(strMapTrieEntry32);
-        org.junit.Assert.assertNotNull(strItor34);
-        org.junit.Assert.assertNotNull(strItor35);
-        org.junit.Assert.assertNotNull(set36);
-        org.junit.Assert.assertNotNull(strMap38);
-        org.junit.Assert.assertTrue("'" + int40 + "' != '" + 48 + "'", int40 == 48);
-        org.junit.Assert.assertNotNull(strItor43);
-        org.junit.Assert.assertNotNull(strItor44);
-        org.junit.Assert.assertNull(strTrieEntry47);
-        org.junit.Assert.assertNotNull(strItor50);
-        org.junit.Assert.assertNotNull(strItor51);
-        org.junit.Assert.assertNotNull(strTrieEntry55);
-        org.junit.Assert.assertNull(strTrieEntry56);
-        org.junit.Assert.assertNull(strTrieEntry58);
-        org.junit.Assert.assertTrue("'" + int60 + "' != '" + 1456 + "'", int60 == 1456);
-        org.junit.Assert.assertNotNull(strSet61);
-        org.junit.Assert.assertNotNull(set62);
-        org.junit.Assert.assertNull(str64);
-    }
-
-    @Test
-    public void test480() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test480");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
-        java.util.Set<java.lang.String> strSet3 = serializableMap0.keySet();
-        java.util.Set<java.lang.String> strSet4 = serializableMap0.keySet();
-        // The following exception was thrown during execution in test generation
-        try {
-            java.util.SortedMap<java.lang.String, java.io.Serializable> strMap7 = serializableMap0.subMap("Entry(key={} [0], value=null, parent=null, left={} [0], right=null, predecessor={} [0])", "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=Trie[0]={\n}\n [0])");
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: fromKey > toKey");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(serializableCollection2);
-        org.junit.Assert.assertNotNull(strSet3);
-        org.junit.Assert.assertNotNull(strSet4);
-    }
-
-    @Test
-    public void test481() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test481");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
-        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry6 = serializableMap1.floorEntry("");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap7 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap8 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor9 = serializableMap8.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap8.mapIterator();
-        serializableMap7.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap8);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry14 = serializableMap7.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry15 = serializableMap1.nextEntry(strTrieEntry14);
-        java.util.Set<java.lang.String> strSet16 = serializableMap1.keySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap17 = null;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap18 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor19 = serializableMap18.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor20 = serializableMap18.mapIterator();
-        java.util.Set set21 = serializableMap18.keySet();
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry23 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap17, set21, (int) ' ');
-        java.lang.String str24 = strMapTrieEntry23.toString();
-        strMapTrieEntry23.bitIndex = 0;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap27 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor28 = serializableMap27.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor29 = serializableMap27.mapIterator();
-        java.util.Set set30 = serializableMap27.keySet();
-        boolean boolean32 = serializableMap27.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor33 = serializableMap27.mapIterator();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap34 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor35 = serializableMap34.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection36 = serializableMap34.values();
-        java.util.Set<java.lang.String> strSet37 = serializableMap34.keySet();
-        java.util.Set set38 = strMapTrieEntry23.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap27, (java.util.Set) strSet37);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.Map<java.lang.String, java.io.Serializable>, java.util.Map<java.lang.String, java.io.Serializable>> strMapTrieEntry40 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.Map<java.lang.String, java.io.Serializable>, java.util.Map<java.lang.String, java.io.Serializable>>((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1, (java.util.Map<java.lang.String, java.io.Serializable>) serializableMap27, (int) '4');
-        java.lang.String str42 = serializableMap1.nextKey("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap43 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap44 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor45 = serializableMap44.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor46 = serializableMap44.mapIterator();
-        serializableMap43.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap44);
-        int int48 = serializableMap43.bitsPerElement();
-        java.io.Serializable serializable51 = serializableMap43.replace("hi!", (java.io.Serializable) (-1.0d));
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap52 = null;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap53 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor54 = serializableMap53.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor55 = serializableMap53.mapIterator();
-        java.util.Set set56 = serializableMap53.keySet();
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry58 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap52, set56, (int) ' ');
-        java.lang.String str59 = strMapTrieEntry58.toString();
-        strMapTrieEntry58.bitIndex = 0;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap62 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor63 = serializableMap62.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor64 = serializableMap62.mapIterator();
-        java.util.Set set65 = serializableMap62.keySet();
-        boolean boolean67 = serializableMap62.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor68 = serializableMap62.mapIterator();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap69 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor70 = serializableMap69.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection71 = serializableMap69.values();
-        java.util.Set<java.lang.String> strSet72 = serializableMap69.keySet();
-        java.util.Set set73 = strMapTrieEntry58.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap62, (java.util.Set) strSet72);
-        boolean boolean74 = strMapTrieEntry58.isInternalNode();
-        int int75 = strMapTrieEntry58.bitIndex;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap76 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor77 = serializableMap76.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection78 = serializableMap76.values();
-        java.util.Set<java.lang.String> strSet79 = serializableMap76.keySet();
-        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet80 = serializableMap76.entrySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap83 = serializableMap76.subMap("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])", "hi!");
-        java.util.Map.Entry<java.lang.String, java.io.Serializable> strEntry85 = serializableMap76.select("");
-        java.util.Set set86 = null;
-        java.util.Set set87 = strMapTrieEntry58.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap76, set86);
-        boolean boolean88 = serializableMap1.remove((java.lang.Object) serializable51, (java.lang.Object) strMapTrieEntry58);
-        boolean boolean91 = serializableMap1.compareKeys("Entry(key={} [1], value=null, parent=null, left={} [1], right=null, predecessor={} [1])", "Trie[0]={\n}\n");
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(strItor3);
-        org.junit.Assert.assertNull(strTrieEntry6);
-        org.junit.Assert.assertNotNull(strItor9);
-        org.junit.Assert.assertNotNull(strItor10);
-        org.junit.Assert.assertNotNull(strTrieEntry14);
-        org.junit.Assert.assertNull(strTrieEntry15);
-        org.junit.Assert.assertNotNull(strSet16);
-        org.junit.Assert.assertNotNull(strItor19);
-        org.junit.Assert.assertNotNull(strItor20);
-        org.junit.Assert.assertNotNull(set21);
-        org.junit.Assert.assertEquals("'" + str24 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str24, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        org.junit.Assert.assertNotNull(strItor28);
-        org.junit.Assert.assertNotNull(strItor29);
-        org.junit.Assert.assertNotNull(set30);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-        org.junit.Assert.assertNotNull(strItor33);
-        org.junit.Assert.assertNotNull(strItor35);
-        org.junit.Assert.assertNotNull(serializableCollection36);
-        org.junit.Assert.assertNotNull(strSet37);
-        org.junit.Assert.assertNotNull(set38);
-        org.junit.Assert.assertNull(str42);
-        org.junit.Assert.assertNotNull(strItor45);
-        org.junit.Assert.assertNotNull(strItor46);
-        org.junit.Assert.assertTrue("'" + int48 + "' != '" + 16 + "'", int48 == 16);
-        org.junit.Assert.assertNull(serializable51);
-        org.junit.Assert.assertNotNull(strItor54);
-        org.junit.Assert.assertNotNull(strItor55);
-        org.junit.Assert.assertNotNull(set56);
-        org.junit.Assert.assertEquals("'" + str59 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str59, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        org.junit.Assert.assertNotNull(strItor63);
-        org.junit.Assert.assertNotNull(strItor64);
-        org.junit.Assert.assertNotNull(set65);
-        org.junit.Assert.assertTrue("'" + boolean67 + "' != '" + false + "'", boolean67 == false);
-        org.junit.Assert.assertNotNull(strItor68);
-        org.junit.Assert.assertNotNull(strItor70);
-        org.junit.Assert.assertNotNull(serializableCollection71);
-        org.junit.Assert.assertNotNull(strSet72);
-        org.junit.Assert.assertNotNull(set73);
-        org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + false + "'", boolean74 == false);
-        org.junit.Assert.assertTrue("'" + int75 + "' != '" + 0 + "'", int75 == 0);
-        org.junit.Assert.assertNotNull(strItor77);
-        org.junit.Assert.assertNotNull(serializableCollection78);
-        org.junit.Assert.assertNotNull(strSet79);
-        org.junit.Assert.assertNotNull(strEntrySet80);
-        org.junit.Assert.assertNotNull(strMap83);
-        org.junit.Assert.assertNull(strEntry85);
-        org.junit.Assert.assertNotNull(set87);
-        org.junit.Assert.assertTrue("'" + boolean88 + "' != '" + false + "'", boolean88 == false);
-        org.junit.Assert.assertTrue("'" + boolean91 + "' != '" + false + "'", boolean91 == false);
-    }
-
-    @Test
-    public void test482() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test482");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
-        java.util.Set set3 = serializableMap0.keySet();
-        boolean boolean5 = serializableMap0.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap0.mapIterator();
-        boolean boolean7 = strItor6.hasNext();
-        boolean boolean8 = strItor6.hasNext();
-        boolean boolean9 = strItor6.hasPrevious();
-        boolean boolean10 = strItor6.hasNext();
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(set3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(strItor6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-    }
-
-    @Test
-    public void test483() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test483");
-        org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
-        boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
-        java.util.Comparator<java.lang.String> strComparator5 = stringKeyAnalyzer0.reversed();
-        boolean boolean9 = stringKeyAnalyzer0.isBitSet("Entry(key={} [1], value=null, parent=null, left={} [1], right=null, predecessor={} [1])", 0, 12);
-        int int12 = stringKeyAnalyzer0.compare("Entry(key=null [0], value=[], parent=null, left=null [0], right=null [32], predecessor=null [0])", "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=Trie[0]={\n}\n [0])");
-        org.junit.Assert.assertNotNull(stringKeyAnalyzer0);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertNotNull(strComparator5);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-        org.junit.Assert.assertTrue("'" + int12 + "' != '" + (-3) + "'", int12 == (-3));
-    }
-
-    @Test
-    public void test484() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test484");
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap0 = null;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
-        java.util.Set set4 = serializableMap1.keySet();
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry6 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap0, set4, (int) ' ');
-        java.lang.String str7 = strMapTrieEntry6.toString();
-        strMapTrieEntry6.bitIndex = 0;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap10 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap10.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor12 = serializableMap10.mapIterator();
-        java.util.Set set13 = serializableMap10.keySet();
-        boolean boolean15 = serializableMap10.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor16 = serializableMap10.mapIterator();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap17 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor18 = serializableMap17.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection19 = serializableMap17.values();
-        java.util.Set<java.lang.String> strSet20 = serializableMap17.keySet();
-        java.util.Set set21 = strMapTrieEntry6.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap10, (java.util.Set) strSet20);
-        java.util.Comparator<? super java.lang.String> wildcardComparator22 = serializableMap10.comparator();
-        java.lang.Object obj23 = null;
-        java.lang.Object obj24 = serializableMap10.remove(obj23);
-        java.util.Set set25 = serializableMap10.entrySet();
-        java.util.Comparator<? super java.lang.String> wildcardComparator26 = serializableMap10.comparator();
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(strItor3);
-        org.junit.Assert.assertNotNull(set4);
-        org.junit.Assert.assertEquals("'" + str7 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str7, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertNotNull(strItor12);
-        org.junit.Assert.assertNotNull(set13);
-        org.junit.Assert.assertTrue("'" + boolean15 + "' != '" + false + "'", boolean15 == false);
-        org.junit.Assert.assertNotNull(strItor16);
-        org.junit.Assert.assertNotNull(strItor18);
-        org.junit.Assert.assertNotNull(serializableCollection19);
-        org.junit.Assert.assertNotNull(strSet20);
-        org.junit.Assert.assertNotNull(set21);
-        org.junit.Assert.assertNotNull(wildcardComparator22);
-        org.junit.Assert.assertNull(obj24);
-        org.junit.Assert.assertNotNull(set25);
-        org.junit.Assert.assertNotNull(wildcardComparator26);
-    }
-
-    @Test
-    public void test485() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test485");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
-        int int3 = serializableMap0.modCount;
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry5 = serializableMap0.ceilingEntry("");
-        java.util.Set set6 = serializableMap0.entrySet();
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor7 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap8 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap9 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap9.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap9.mapIterator();
-        serializableMap8.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap9);
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap14 = serializableMap9.headMap("hi!");
-        org.apache.commons.collections4.OrderedMapIterator orderedMapIterator15 = serializableMap9.mapIterator();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap17 = serializableMap9.tailMap("");
-        java.lang.String str18 = serializableMap0.castKey((java.lang.Object) "");
-        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet19 = serializableMap0.entrySet();
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(serializableCollection2);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertNull(strTrieEntry5);
-        org.junit.Assert.assertNotNull(set6);
-        org.junit.Assert.assertNotNull(strItor7);
-        org.junit.Assert.assertNotNull(strItor10);
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertNotNull(strMap14);
-        org.junit.Assert.assertNotNull(orderedMapIterator15);
-        org.junit.Assert.assertNotNull(strMap17);
-        org.junit.Assert.assertEquals("'" + str18 + "' != '" + "" + "'", str18, "");
-        org.junit.Assert.assertNotNull(strEntrySet19);
-    }
-
-    @Test
-    public void test486() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test486");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
-        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
-        java.lang.String str6 = serializableMap0.previousKey("hi!");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap7 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor8 = serializableMap7.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor9 = serializableMap7.mapIterator();
-        java.util.Set set10 = serializableMap7.keySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap12 = serializableMap7.tailMap("hi!");
-        java.io.Serializable serializable14 = serializableMap7.selectValue("");
-        boolean boolean17 = serializableMap7.compareKeys("hi!", "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        java.io.Serializable serializable18 = serializableMap0.get((java.lang.Object) "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap19 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap20 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor21 = serializableMap20.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor22 = serializableMap20.mapIterator();
-        serializableMap19.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap20);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry26 = serializableMap19.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry27 = serializableMap0.nextEntry(strTrieEntry26);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry29 = serializableMap0.ceilingEntry("Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])");
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(strItor3);
-        org.junit.Assert.assertNull(str6);
-        org.junit.Assert.assertNotNull(strItor8);
-        org.junit.Assert.assertNotNull(strItor9);
-        org.junit.Assert.assertNotNull(set10);
-        org.junit.Assert.assertNotNull(strMap12);
-        org.junit.Assert.assertNull(serializable14);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNull(serializable18);
-        org.junit.Assert.assertNotNull(strItor21);
-        org.junit.Assert.assertNotNull(strItor22);
-        org.junit.Assert.assertNotNull(strTrieEntry26);
-        org.junit.Assert.assertNull(strTrieEntry27);
-        org.junit.Assert.assertNull(strTrieEntry29);
-    }
-
-    @Test
-    public void test487() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test487");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        int int2 = serializableMap0.modCount;
-        java.util.Set set3 = serializableMap0.entrySet();
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry5 = serializableMap0.floorEntry("hi!");
-        boolean boolean6 = serializableMap0.isEmpty();
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
-        org.junit.Assert.assertNotNull(set3);
-        org.junit.Assert.assertNull(strTrieEntry5);
-        org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
-    }
-
-    @Test
-    public void test488() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test488");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
-        java.util.Set set3 = serializableMap0.keySet();
-        boolean boolean5 = serializableMap0.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap0.mapIterator();
-        boolean boolean7 = strItor6.hasNext();
-        boolean boolean8 = strItor6.hasPrevious();
-        boolean boolean9 = strItor6.hasPrevious();
-        // The following exception was thrown during execution in test generation
-        try {
-            strItor6.remove();
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: null");
-        } catch (java.lang.IllegalStateException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(set3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(strItor6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + boolean9 + "' != '" + false + "'", boolean9 == false);
-    }
-
-    @Test
-    public void test489() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test489");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
-        java.util.Set set3 = serializableMap0.keySet();
-        boolean boolean5 = serializableMap0.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap0.mapIterator();
-        java.util.Set<java.lang.String> strSet7 = serializableMap0.keySet();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap8 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap9 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap9.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap9.mapIterator();
-        serializableMap8.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap9);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry14 = serializableMap9.floorEntry("");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap15 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap16 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor17 = serializableMap16.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor18 = serializableMap16.mapIterator();
-        serializableMap15.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap16);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry22 = serializableMap15.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry23 = serializableMap9.nextEntry(strTrieEntry22);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry24 = serializableMap0.previousEntry(strTrieEntry22);
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor25 = serializableMap0.mapIterator();
-        java.util.Set set26 = serializableMap0.entrySet();
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(set3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(strItor6);
-        org.junit.Assert.assertNotNull(strSet7);
-        org.junit.Assert.assertNotNull(strItor10);
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertNull(strTrieEntry14);
-        org.junit.Assert.assertNotNull(strItor17);
-        org.junit.Assert.assertNotNull(strItor18);
-        org.junit.Assert.assertNotNull(strTrieEntry22);
-        org.junit.Assert.assertNull(strTrieEntry23);
-        org.junit.Assert.assertNull(strTrieEntry24);
-        org.junit.Assert.assertNotNull(strItor25);
-        org.junit.Assert.assertNotNull(set26);
-    }
-
-    @Test
-    public void test490() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test490");
-        org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
-        boolean boolean4 = stringKeyAnalyzer0.isBitSet("hi!", (int) (short) 1, 10);
-        boolean boolean8 = stringKeyAnalyzer0.isBitSet("", (-1), (-3));
-        int int11 = stringKeyAnalyzer0.compare("Entry(key={} [0], value=null, parent=null, left={} [0], right=null, predecessor={} [0])", "Entry(key=Trie[0]={\n}\n [0], value=null, parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])");
-        org.junit.Assert.assertNotNull(stringKeyAnalyzer0);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + false + "'", boolean4 == false);
-        org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + false + "'", boolean8 == false);
-        org.junit.Assert.assertTrue("'" + int11 + "' != '" + 39 + "'", int11 == 39);
-    }
-
-    @Test
-    public void test491() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test491");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
-        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry6 = serializableMap1.floorEntry("");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap7 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap8 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor9 = serializableMap8.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap8.mapIterator();
-        serializableMap7.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap8);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry14 = serializableMap7.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry15 = serializableMap1.nextEntry(strTrieEntry14);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry17 = serializableMap1.lowerEntry("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        boolean boolean20 = serializableMap1.compareKeys("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])", "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap21 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor22 = serializableMap21.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor23 = serializableMap21.mapIterator();
-        java.util.Set set24 = serializableMap21.keySet();
-        boolean boolean26 = serializableMap21.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry30 = serializableMap21.subtree("hi!", 16, 0);
-        java.io.Serializable serializable31 = serializableMap1.remove((java.lang.Object) strTrieEntry30);
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap32 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor33 = serializableMap32.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor34 = serializableMap32.mapIterator();
-        int int35 = serializableMap32.modCount;
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry37 = serializableMap32.higherEntry("Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])");
-        java.lang.Object obj38 = serializableMap1.remove((java.lang.Object) strTrieEntry37);
-        int int39 = serializableMap1.modCount;
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(strItor3);
-        org.junit.Assert.assertNull(strTrieEntry6);
-        org.junit.Assert.assertNotNull(strItor9);
-        org.junit.Assert.assertNotNull(strItor10);
-        org.junit.Assert.assertNotNull(strTrieEntry14);
-        org.junit.Assert.assertNull(strTrieEntry15);
-        org.junit.Assert.assertNull(strTrieEntry17);
-        org.junit.Assert.assertTrue("'" + boolean20 + "' != '" + false + "'", boolean20 == false);
-        org.junit.Assert.assertNotNull(strItor22);
-        org.junit.Assert.assertNotNull(strItor23);
-        org.junit.Assert.assertNotNull(set24);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + false + "'", boolean26 == false);
-        org.junit.Assert.assertNull(strTrieEntry30);
-        org.junit.Assert.assertNull(serializable31);
-        org.junit.Assert.assertNotNull(strItor33);
-        org.junit.Assert.assertNotNull(strItor34);
-        org.junit.Assert.assertTrue("'" + int35 + "' != '" + 0 + "'", int35 == 0);
-        org.junit.Assert.assertNull(strTrieEntry37);
-        org.junit.Assert.assertNull(obj38);
-        org.junit.Assert.assertTrue("'" + int39 + "' != '" + 0 + "'", int39 == 0);
-    }
-
-    @Test
-    public void test492() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test492");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
-        java.util.Set set3 = serializableMap0.keySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap5 = serializableMap0.prefixMap("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.String str6 = serializableMap0.firstKey();
-            org.junit.Assert.fail("Expected exception of type java.util.NoSuchElementException; message: null");
-        } catch (java.util.NoSuchElementException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(set3);
-        org.junit.Assert.assertNotNull(strMap5);
-    }
-
-    @Test
-    public void test493() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test493");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap1 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap1.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor3 = serializableMap1.mapIterator();
-        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap1);
-        java.lang.String str6 = serializableMap0.previousKey("hi!");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap7 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor8 = serializableMap7.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor9 = serializableMap7.mapIterator();
-        java.util.Set set10 = serializableMap7.keySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap12 = serializableMap7.tailMap("hi!");
-        java.io.Serializable serializable14 = serializableMap7.selectValue("");
-        boolean boolean17 = serializableMap7.compareKeys("hi!", "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        java.io.Serializable serializable18 = serializableMap0.get((java.lang.Object) "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap19 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap20 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor21 = serializableMap20.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor22 = serializableMap20.mapIterator();
-        serializableMap19.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap20);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry26 = serializableMap19.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry27 = serializableMap0.nextEntry(strTrieEntry26);
-        java.io.Serializable serializable30 = serializableMap0.put("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])", (java.io.Serializable) 10.0f);
-        java.lang.Object obj31 = null;
-        boolean boolean32 = serializableMap0.containsKey(obj31);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(strItor3);
-        org.junit.Assert.assertNull(str6);
-        org.junit.Assert.assertNotNull(strItor8);
-        org.junit.Assert.assertNotNull(strItor9);
-        org.junit.Assert.assertNotNull(set10);
-        org.junit.Assert.assertNotNull(strMap12);
-        org.junit.Assert.assertNull(serializable14);
-        org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + false + "'", boolean17 == false);
-        org.junit.Assert.assertNull(serializable18);
-        org.junit.Assert.assertNotNull(strItor21);
-        org.junit.Assert.assertNotNull(strItor22);
-        org.junit.Assert.assertNotNull(strTrieEntry26);
-        org.junit.Assert.assertNull(strTrieEntry27);
-        org.junit.Assert.assertNull(serializable30);
-        org.junit.Assert.assertTrue("'" + boolean32 + "' != '" + false + "'", boolean32 == false);
-    }
-
-    @Test
-    public void test494() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test494");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        int int2 = serializableMap0.modCount;
-        serializableMap0.clear();
-        int int4 = serializableMap0.size();
-        java.lang.String str6 = serializableMap0.nextKey("Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor={} [0])");
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
-        org.junit.Assert.assertTrue("'" + int4 + "' != '" + 0 + "'", int4 == 0);
-        org.junit.Assert.assertNull(str6);
-    }
-
-    @Test
-    public void test495() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test495");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
-        java.io.Serializable serializable4 = serializableMap0.selectValue("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap5 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap5.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor7 = serializableMap5.mapIterator();
-        java.util.Set set8 = serializableMap5.keySet();
-        boolean boolean10 = serializableMap5.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap5.mapIterator();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap12 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap13 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor14 = serializableMap13.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor15 = serializableMap13.mapIterator();
-        serializableMap12.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap13);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry18 = serializableMap13.floorEntry("");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap19 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap20 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor21 = serializableMap20.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor22 = serializableMap20.mapIterator();
-        serializableMap19.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap20);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry26 = serializableMap19.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry27 = serializableMap13.nextEntry(strTrieEntry26);
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap28 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap29 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor30 = serializableMap29.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor31 = serializableMap29.mapIterator();
-        serializableMap28.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap29);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry34 = serializableMap29.floorEntry("");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap35 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap36 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor37 = serializableMap36.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor38 = serializableMap36.mapIterator();
-        serializableMap35.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap36);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry42 = serializableMap35.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry43 = serializableMap29.nextEntry(strTrieEntry42);
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap44 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap45 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor46 = serializableMap45.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor47 = serializableMap45.mapIterator();
-        serializableMap44.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap45);
-        java.lang.String str50 = serializableMap44.previousKey("hi!");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap51 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor52 = serializableMap51.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor53 = serializableMap51.mapIterator();
-        java.util.Set set54 = serializableMap51.keySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap56 = serializableMap51.tailMap("hi!");
-        java.io.Serializable serializable58 = serializableMap51.selectValue("");
-        boolean boolean61 = serializableMap51.compareKeys("hi!", "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        java.io.Serializable serializable62 = serializableMap44.get((java.lang.Object) "Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap63 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap64 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor65 = serializableMap64.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor66 = serializableMap64.mapIterator();
-        serializableMap63.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap64);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry70 = serializableMap63.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry71 = serializableMap44.nextEntry(strTrieEntry70);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry72 = serializableMap5.nextEntryImpl(strTrieEntry26, strTrieEntry43, strTrieEntry70);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry73 = serializableMap0.followRight(strTrieEntry70);
-        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet74 = serializableMap0.entrySet();
-        java.util.Collection<java.io.Serializable> serializableCollection75 = serializableMap0.values();
-        java.util.Set set76 = serializableMap0.keySet();
-        java.util.Set set77 = serializableMap0.entrySet();
-        java.util.Comparator<? super java.lang.String> wildcardComparator78 = serializableMap0.comparator();
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNull(serializable4);
-        org.junit.Assert.assertNotNull(strItor6);
-        org.junit.Assert.assertNotNull(strItor7);
-        org.junit.Assert.assertNotNull(set8);
-        org.junit.Assert.assertTrue("'" + boolean10 + "' != '" + false + "'", boolean10 == false);
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertNotNull(strItor14);
-        org.junit.Assert.assertNotNull(strItor15);
-        org.junit.Assert.assertNull(strTrieEntry18);
-        org.junit.Assert.assertNotNull(strItor21);
-        org.junit.Assert.assertNotNull(strItor22);
-        org.junit.Assert.assertNotNull(strTrieEntry26);
-        org.junit.Assert.assertNull(strTrieEntry27);
-        org.junit.Assert.assertNotNull(strItor30);
-        org.junit.Assert.assertNotNull(strItor31);
-        org.junit.Assert.assertNull(strTrieEntry34);
-        org.junit.Assert.assertNotNull(strItor37);
-        org.junit.Assert.assertNotNull(strItor38);
-        org.junit.Assert.assertNotNull(strTrieEntry42);
-        org.junit.Assert.assertNull(strTrieEntry43);
-        org.junit.Assert.assertNotNull(strItor46);
-        org.junit.Assert.assertNotNull(strItor47);
-        org.junit.Assert.assertNull(str50);
-        org.junit.Assert.assertNotNull(strItor52);
-        org.junit.Assert.assertNotNull(strItor53);
-        org.junit.Assert.assertNotNull(set54);
-        org.junit.Assert.assertNotNull(strMap56);
-        org.junit.Assert.assertNull(serializable58);
-        org.junit.Assert.assertTrue("'" + boolean61 + "' != '" + false + "'", boolean61 == false);
-        org.junit.Assert.assertNull(serializable62);
-        org.junit.Assert.assertNotNull(strItor65);
-        org.junit.Assert.assertNotNull(strItor66);
-        org.junit.Assert.assertNotNull(strTrieEntry70);
-        org.junit.Assert.assertNull(strTrieEntry71);
-        org.junit.Assert.assertNull(strTrieEntry72);
-        org.junit.Assert.assertNull(strTrieEntry73);
-        org.junit.Assert.assertNotNull(strEntrySet74);
-        org.junit.Assert.assertNotNull(serializableCollection75);
-        org.junit.Assert.assertNotNull(set76);
-        org.junit.Assert.assertNotNull(set77);
-        org.junit.Assert.assertNotNull(wildcardComparator78);
-    }
-
-    @Test
-    public void test496() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test496");
-        org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer stringKeyAnalyzer0 = org.apache.commons.collections4.trie.analyzer.StringKeyAnalyzer.INSTANCE;
-        // The following exception was thrown during execution in test generation
-        try {
-            int int7 = stringKeyAnalyzer0.bitIndex("Entry(key=Trie[0]={\n}\n [0], value=[], parent=null, left=Trie[0]={\n}\n [0], right=null, predecessor=Trie[0]={\n}\n [0])", 15, 2, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])", (-94), 192);
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: The offsets and lengths must be at Character boundaries");
-        } catch (java.lang.IllegalArgumentException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(stringKeyAnalyzer0);
-    }
-
-    @Test
-    public void test497() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test497");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
-        java.util.Set set3 = serializableMap0.keySet();
-        boolean boolean5 = serializableMap0.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap0.mapIterator();
-        boolean boolean7 = strItor6.hasNext();
-        // The following exception was thrown during execution in test generation
-        try {
-            strItor6.remove();
-            org.junit.Assert.fail("Expected exception of type java.lang.IllegalStateException; message: null");
-        } catch (java.lang.IllegalStateException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(set3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(strItor6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-    }
-
-    @Test
-    public void test498() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test498");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection2 = serializableMap0.values();
-        int int3 = serializableMap0.modCount;
-        boolean boolean4 = serializableMap0.isEmpty();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor5 = serializableMap0.mapIterator();
-        java.util.Comparator comparator6 = serializableMap0.comparator();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap8 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor9 = serializableMap8.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap8.mapIterator();
-        java.io.Serializable serializable11 = serializableMap0.put("Entry(key=null [0], value=[], parent=null, left=null [0], right=null [32], predecessor=null [0])", (java.io.Serializable) serializableMap8);
-        boolean boolean14 = serializableMap0.compareKeys("Entry(key=null [0], value=[], parent=null, left=null [0], right=null [32], predecessor=null [0])", "Trie[0]={\n}\n");
-        java.lang.String str16 = serializableMap0.previousKey("hi!");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap18 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor19 = serializableMap18.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor20 = serializableMap18.mapIterator();
-        java.util.Set set21 = serializableMap18.keySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap23 = serializableMap18.tailMap("hi!");
-        java.io.Serializable serializable25 = serializableMap18.selectValue("");
-        boolean boolean26 = serializableMap18.isEmpty();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap28 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap29 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor30 = serializableMap29.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor31 = serializableMap29.mapIterator();
-        serializableMap28.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap29);
-        java.io.Serializable serializable33 = serializableMap18.put("", (java.io.Serializable) serializableMap28);
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap35 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap36 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor37 = serializableMap36.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor38 = serializableMap36.mapIterator();
-        serializableMap35.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap36);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry41 = serializableMap36.floorEntry("");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap42 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap43 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor44 = serializableMap43.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor45 = serializableMap43.mapIterator();
-        serializableMap42.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap43);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry49 = serializableMap42.getNearestEntryForKey("", (int) ' ');
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry50 = serializableMap36.nextEntry(strTrieEntry49);
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.lang.String, java.io.Serializable> strTrieEntry52 = serializableMap36.lowerEntry("Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        java.util.Map.Entry<java.lang.String, java.io.Serializable> strEntry54 = serializableMap36.select("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        java.util.Set<java.util.Map.Entry<java.lang.String, java.io.Serializable>> strEntrySet55 = serializableMap36.entrySet();
-        java.io.Serializable serializable56 = serializableMap18.getOrDefault((java.lang.Object) "Entry(key={} [1], value=null, parent=null, left={} [1], right=null, predecessor={} [1])", (java.io.Serializable) serializableMap36);
-        java.io.Serializable serializable57 = serializableMap0.putIfAbsent("Entry(key={} [100], value=null, parent=null, left={} [100], right=null, predecessor={} [100])", (java.io.Serializable) "Entry(key={} [1], value=null, parent=null, left={} [1], right=null, predecessor={} [1])");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap58 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor59 = serializableMap58.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor60 = serializableMap58.mapIterator();
-        java.util.Set set61 = serializableMap58.keySet();
-        boolean boolean63 = serializableMap58.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor64 = serializableMap58.mapIterator();
-        boolean boolean65 = strItor64.hasNext();
-        boolean boolean66 = serializableMap0.containsValue((java.lang.Object) boolean65);
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(serializableCollection2);
-        org.junit.Assert.assertTrue("'" + int3 + "' != '" + 0 + "'", int3 == 0);
-        org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
-        org.junit.Assert.assertNotNull(strItor5);
-        org.junit.Assert.assertNotNull(comparator6);
-        org.junit.Assert.assertNotNull(strItor9);
-        org.junit.Assert.assertNotNull(strItor10);
-        org.junit.Assert.assertNull(serializable11);
-        org.junit.Assert.assertTrue("'" + boolean14 + "' != '" + false + "'", boolean14 == false);
-        org.junit.Assert.assertNull(str16);
-        org.junit.Assert.assertNotNull(strItor19);
-        org.junit.Assert.assertNotNull(strItor20);
-        org.junit.Assert.assertNotNull(set21);
-        org.junit.Assert.assertNotNull(strMap23);
-        org.junit.Assert.assertNull(serializable25);
-        org.junit.Assert.assertTrue("'" + boolean26 + "' != '" + true + "'", boolean26 == true);
-        org.junit.Assert.assertNotNull(strItor30);
-        org.junit.Assert.assertNotNull(strItor31);
-        org.junit.Assert.assertNull(serializable33);
-        org.junit.Assert.assertNotNull(strItor37);
-        org.junit.Assert.assertNotNull(strItor38);
-        org.junit.Assert.assertNull(strTrieEntry41);
-        org.junit.Assert.assertNotNull(strItor44);
-        org.junit.Assert.assertNotNull(strItor45);
-        org.junit.Assert.assertNotNull(strTrieEntry49);
-        org.junit.Assert.assertNull(strTrieEntry50);
-        org.junit.Assert.assertNull(strTrieEntry52);
-        org.junit.Assert.assertNull(strEntry54);
-        org.junit.Assert.assertNotNull(strEntrySet55);
-        org.junit.Assert.assertNotNull(serializable56);
-        org.junit.Assert.assertNull(serializable57);
-        org.junit.Assert.assertNotNull(strItor59);
-        org.junit.Assert.assertNotNull(strItor60);
-        org.junit.Assert.assertNotNull(set61);
-        org.junit.Assert.assertTrue("'" + boolean63 + "' != '" + false + "'", boolean63 == false);
-        org.junit.Assert.assertNotNull(strItor64);
-        org.junit.Assert.assertTrue("'" + boolean65 + "' != '" + false + "'", boolean65 == false);
-        org.junit.Assert.assertTrue("'" + boolean66 + "' != '" + false + "'", boolean66 == false);
-    }
-
-    @Test
-    public void test499() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test499");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
-        java.util.Set set3 = serializableMap0.keySet();
-        boolean boolean5 = serializableMap0.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap0.mapIterator();
-        boolean boolean7 = strItor6.hasPrevious();
-        // The following exception was thrown during execution in test generation
-        try {
-            java.lang.String str8 = strItor6.next();
-            org.junit.Assert.fail("Expected exception of type java.util.NoSuchElementException; message: null");
-        } catch (java.util.NoSuchElementException e) {
-        // Expected exception.
-        }
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(set3);
-        org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + false + "'", boolean5 == false);
-        org.junit.Assert.assertNotNull(strItor6);
-        org.junit.Assert.assertTrue("'" + boolean7 + "' != '" + false + "'", boolean7 == false);
-    }
-
-    @Test
-    public void test500() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test500");
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap0 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor1 = serializableMap0.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor2 = serializableMap0.mapIterator();
-        java.util.Set set3 = serializableMap0.keySet();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap5 = serializableMap0.tailMap("hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor6 = serializableMap0.mapIterator();
-        int int7 = serializableMap0.size();
-        java.util.SortedMap<java.lang.String, java.io.Serializable> strMap8 = null;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap9 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor10 = serializableMap9.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor11 = serializableMap9.mapIterator();
-        java.util.Set set12 = serializableMap9.keySet();
-        org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set> strMapTrieEntry14 = new org.apache.commons.collections4.trie.AbstractPatriciaTrie.TrieEntry<java.util.SortedMap<java.lang.String, java.io.Serializable>, java.util.Set>(strMap8, set12, (int) ' ');
-        java.lang.String str15 = strMapTrieEntry14.toString();
-        strMapTrieEntry14.bitIndex = 0;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap18 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor19 = serializableMap18.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor20 = serializableMap18.mapIterator();
-        java.util.Set set21 = serializableMap18.keySet();
-        boolean boolean23 = serializableMap18.containsKey((java.lang.Object) "hi!");
-        org.apache.commons.collections4.OrderedMapIterator<java.lang.String, java.io.Serializable> strItor24 = serializableMap18.mapIterator();
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap25 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor26 = serializableMap25.mapIterator();
-        java.util.Collection<java.io.Serializable> serializableCollection27 = serializableMap25.values();
-        java.util.Set<java.lang.String> strSet28 = serializableMap25.keySet();
-        java.util.Set set29 = strMapTrieEntry14.setKeyValue((java.util.SortedMap<java.lang.String, java.io.Serializable>) serializableMap18, (java.util.Set) strSet28);
-        java.lang.Object obj30 = null;
-        org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable> serializableMap31 = new org.apache.commons.collections4.trie.PatriciaTrie<java.io.Serializable>();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor32 = serializableMap31.mapIterator();
-        org.apache.commons.collections4.MapIterator<java.lang.String, java.io.Serializable> strItor33 = serializableMap31.mapIterator();
-        java.util.Set set34 = serializableMap31.keySet();
-        serializableMap31.clear();
-        java.lang.String str37 = serializableMap31.selectKey("");
-        java.io.Serializable serializable39 = serializableMap31.selectValue("Entry(key=null [0], value=[], parent=null, left=null [0], right=null, predecessor=null [0])");
-        boolean boolean40 = serializableMap18.remove(obj30, (java.lang.Object) serializableMap31);
-        serializableMap0.putAll((java.util.Map<java.lang.String, java.io.Serializable>) serializableMap18);
-        java.util.Set set42 = serializableMap0.keySet();
-        org.junit.Assert.assertNotNull(strItor1);
-        org.junit.Assert.assertNotNull(strItor2);
-        org.junit.Assert.assertNotNull(set3);
-        org.junit.Assert.assertNotNull(strMap5);
-        org.junit.Assert.assertNotNull(strItor6);
-        org.junit.Assert.assertTrue("'" + int7 + "' != '" + 0 + "'", int7 == 0);
-        org.junit.Assert.assertNotNull(strItor10);
-        org.junit.Assert.assertNotNull(strItor11);
-        org.junit.Assert.assertNotNull(set12);
-        org.junit.Assert.assertEquals("'" + str15 + "' != '" + "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])" + "'", str15, "Entry(key=null [32], value=[], parent=null, left=null [32], right=null, predecessor=null [32])");
-        org.junit.Assert.assertNotNull(strItor19);
-        org.junit.Assert.assertNotNull(strItor20);
-        org.junit.Assert.assertNotNull(set21);
-        org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
-        org.junit.Assert.assertNotNull(strItor24);
-        org.junit.Assert.assertNotNull(strItor26);
-        org.junit.Assert.assertNotNull(serializableCollection27);
-        org.junit.Assert.assertNotNull(strSet28);
-        org.junit.Assert.assertNotNull(set29);
-        org.junit.Assert.assertNotNull(strItor32);
-        org.junit.Assert.assertNotNull(strItor33);
-        org.junit.Assert.assertNotNull(set34);
-        org.junit.Assert.assertNull(str37);
-        org.junit.Assert.assertNull(serializable39);
-        org.junit.Assert.assertTrue("'" + boolean40 + "' != '" + false + "'", boolean40 == false);
-        org.junit.Assert.assertNotNull(set42);
     }
 }
 

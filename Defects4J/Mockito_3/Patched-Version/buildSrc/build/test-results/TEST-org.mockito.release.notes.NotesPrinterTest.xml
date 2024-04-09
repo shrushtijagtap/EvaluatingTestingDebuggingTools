@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.notes.NotesPrinterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-02T18:38:27" hostname="Shrushtis-MacBook-Air.local" time="0.039">
+<testsuite name="org.mockito.release.notes.NotesPrinterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-07T21:44:24" hostname="Shrushtis-MacBook-Air.local" time="0.041">
   <properties/>
-  <testcase name="prints notes" classname="org.mockito.release.notes.NotesPrinterTest" time="0.039"/>
+  <testcase name="prints notes" classname="org.mockito.release.notes.NotesPrinterTest" time="0.041"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

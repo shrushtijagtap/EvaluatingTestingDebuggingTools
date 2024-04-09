@@ -1,0 +1,2 @@
+TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
+org.apache.commons.compress.archivers.cpio.CpioArchiveOutputStream,BRANCH,0.8762886597938144,97,85
