@@ -2,7 +2,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ RegressionTest0.class, RegressionTest1.class, RegressionTest2.class, RegressionTest3.class, RegressionTest4.class, RegressionTest5.class, RegressionTest6.class, RegressionTest7.class, RegressionTest8.class, RegressionTest9.class, RegressionTest10.class, RegressionTest11.class, RegressionTest12.class, RegressionTest13.class, RegressionTest14.class })
-public class RegressionTest {
+@Suite.SuiteClasses({ RandoopRegressionTest0.class, RandoopRegressionTest1.class, RandoopRegressionTest2.class, RandoopRegressionTest3.class, RandoopRegressionTest4.class, RandoopRegressionTest5.class, RandoopRegressionTest6.class, RandoopRegressionTest7.class, RandoopRegressionTest8.class, RandoopRegressionTest9.class, RandoopRegressionTest10.class, RandoopRegressionTest11.class, RandoopRegressionTest12.class, RandoopRegressionTest13.class, RandoopRegressionTest14.class })
+public class RandoopRegressionTest {
 }
 

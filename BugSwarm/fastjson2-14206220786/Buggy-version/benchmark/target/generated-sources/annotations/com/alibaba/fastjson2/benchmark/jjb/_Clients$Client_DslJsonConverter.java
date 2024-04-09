@@ -125,8 +125,8 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 			if (instance.getName() == null) writer.writeNull();
 			else com.dslplatform.json.StringConverter.serialize(instance.getName(), writer);
 			writer.writeAscii(quoted_partners);
-			if (instance.getPartners() == null) throw new com.dslplatform.json.ConfigurationException("Property 'partners' is not allowed to be null");
-			writer.serialize(instance.getPartners(), writer_partners);
+			if (instance.getPartners() == null) writer.writeNull();
+			else writer.serialize(instance.getPartners(), writer_partners);
 			writer.writeAscii(quoted_eyeColor);
 			if (instance.getEyeColor() == null) writer.writeNull();
 			else { writer.writeByte((byte)'"'); writer.writeAscii(instance.getEyeColor().name()); writer.writeByte((byte)'"'); }
@@ -137,8 +137,8 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 			if (instance.getEmails() == null) writer.writeNull();
 			else writer.serialize(instance.getEmails(), writer_emails);
 			writer.writeAscii(quoted_tags);
-			if (instance.getTags() == null) throw new com.dslplatform.json.ConfigurationException("Property 'tags' is not allowed to be null");
-			writer.serialize(instance.getTags(), writer_tags);
+			if (instance.getTags() == null) writer.writeNull();
+			else writer.serialize(instance.getTags(), writer_tags);
 			writer.writeAscii(quoted_picture);
 			if (instance.getPicture() == null) writer.writeNull();
 			else com.dslplatform.json.StringConverter.serialize(instance.getPicture(), writer);
@@ -196,11 +196,11 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 				com.dslplatform.json.StringConverter.serialize(instance.getName(), writer);
 				writer.writeByte((byte)','); hasWritten = true;
 			}
-			if (instance.getPartners() != null && !instance.getPartners().isEmpty()) {
+			if (instance.getPartners() != null) {
 				writer.writeByte((byte)'"'); writer.writeAscii(name_partners); writer.writeByte((byte)'"'); writer.writeByte((byte)':');
 				writer.serialize(instance.getPartners(), writer_partners);
 				writer.writeByte((byte)','); hasWritten = true;
-			} else if (instance.getPartners() == null) throw new com.dslplatform.json.ConfigurationException("Property 'partners' is not allowed to be null");
+			}
 			if (instance.getEyeColor() != null) {
 				writer.writeByte((byte)'"'); writer.writeAscii(name_eyeColor); writer.writeByte((byte)'"'); writer.writeByte((byte)':');
 				{ writer.writeByte((byte)'"'); writer.writeAscii(instance.getEyeColor().name()); writer.writeByte((byte)'"'); }
@@ -216,11 +216,11 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 				writer.serialize(instance.getEmails(), writer_emails);
 				writer.writeByte((byte)','); hasWritten = true;
 			}
-			if (instance.getTags() != null && !instance.getTags().isEmpty()) {
+			if (instance.getTags() != null) {
 				writer.writeByte((byte)'"'); writer.writeAscii(name_tags); writer.writeByte((byte)'"'); writer.writeByte((byte)':');
 				writer.serialize(instance.getTags(), writer_tags);
 				writer.writeByte((byte)','); hasWritten = true;
-			} else if (instance.getTags() == null) throw new com.dslplatform.json.ConfigurationException("Property 'tags' is not allowed to be null");
+			}
 			if (instance.getPicture() != null) {
 				writer.writeByte((byte)'"'); writer.writeAscii(name_picture); writer.writeByte((byte)'"'); writer.writeByte((byte)':');
 				com.dslplatform.json.StringConverter.serialize(instance.getPicture(), writer);
@@ -280,101 +280,59 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 			return instance;
 		}
 		public void bindContent(final com.dslplatform.json.JsonReader reader, final com.alibaba.fastjson2.benchmark.jjb.Clients.Client instance) throws java.io.IOException {
-			if (reader.last() == '}') {
-				if (instance.getPartners() == null) instance.setPartners(java.util.Collections.emptyList());
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.last() == '}') return;
 			if (reader.fillNameWeakHash() != 971 || !reader.wasLastName(name_longitude)) { bindSlow(reader, instance, 0); return; }
 			reader.getNextToken();
 			instance.setLongitude(com.dslplatform.json.NumberConverter.deserializeDouble(reader));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getPartners() == null) instance.setPartners(java.util.Collections.emptyList());
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 301 || !reader.wasLastName(name_age)) { bindSlow(reader, instance, 1); return; }
 			reader.getNextToken();
 			instance.setAge(com.dslplatform.json.NumberConverter.deserializeInt(reader));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getPartners() == null) instance.setPartners(java.util.Collections.emptyList());
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 205 || !reader.wasLastName(name_id)) { bindSlow(reader, instance, 2); return; }
 			reader.getNextToken();
 			instance.setId(com.dslplatform.json.NumberConverter.deserializeLong(reader));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getPartners() == null) instance.setPartners(java.util.Collections.emptyList());
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 759 || !reader.wasLastName(name_company)) { bindSlow(reader, instance, 3); return; }
 			reader.getNextToken();
 			instance.setCompany(com.dslplatform.json.StringConverter.READER.read(reader));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getPartners() == null) instance.setPartners(java.util.Collections.emptyList());
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 425 || !reader.wasLastName(name_guid)) { bindSlow(reader, instance, 4); return; }
 			reader.getNextToken();
 			instance.setGuid(com.dslplatform.json.UUIDConverter.READER.read(reader));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getPartners() == null) instance.setPartners(java.util.Collections.emptyList());
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 417 || !reader.wasLastName(name_name)) { bindSlow(reader, instance, 5); return; }
 			reader.getNextToken();
 			instance.setName(com.dslplatform.json.StringConverter.READER.read(reader));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getPartners() == null) instance.setPartners(java.util.Collections.emptyList());
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 879 || !reader.wasLastName(name_partners)) { bindSlow(reader, instance, 6); return; }
 			reader.getNextToken();
-			if (reader.wasNull()) throw reader.newParseErrorAt("Property 'partners' is not allowed to be null", 0);
 			instance.setPartners(reader.readCollection(reader_partners));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 834 || !reader.wasLastName(name_eyeColor)) { bindSlow(reader, instance, 7); return; }
 			reader.getNextToken();
 			instance.setEyeColor(reader.wasNull() ? null : com.alibaba.fastjson2.benchmark.jjb._Clients$EyeColor_DslJsonConverter.EnumConverter.readStatic(reader));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 710 || !reader.wasLastName(name_balance)) { bindSlow(reader, instance, 8); return; }
 			reader.getNextToken();
 			instance.setBalance(reader_balance().read(reader));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 635 || !reader.wasLastName(name_emails)) { bindSlow(reader, instance, 9); return; }
 			reader.getNextToken();
 			instance.setEmails((java.lang.String[])reader.readArray(reader_emails, emptyArray_emails));
-			if (reader.getNextToken() == '}')  {
-				if (instance.getTags() == null) instance.setTags(java.util.Collections.emptyList());
-				return;
-			}
+			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
 			if (reader.fillNameWeakHash() != 431 || !reader.wasLastName(name_tags)) { bindSlow(reader, instance, 10); return; }
 			reader.getNextToken();
-			if (reader.wasNull()) throw reader.newParseErrorAt("Property 'tags' is not allowed to be null", 0);
 			instance.setTags(reader.readCollection(reader_tags));
 			if (reader.getNextToken() == '}')  return;
 			if (reader.last() != ',') throw reader.newParseError("Expecting ',' for other mandatory properties"); else reader.getNextToken();
@@ -432,8 +390,6 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 			}
 		}
 		private void bindSlow(final com.dslplatform.json.JsonReader reader, final com.alibaba.fastjson2.benchmark.jjb.Clients.Client instance, int index) throws java.io.IOException {
-			boolean __detected_partners__ = index > 6;
-			boolean __detected_tags__ = index > 10;
 			switch(reader.getLastHash()) {
 				case 745154899:
 					reader.getNextToken();
@@ -482,9 +438,7 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 					reader.getNextToken();
 					break;
 				case -199824480:
-					__detected_tags__ = true;
 					reader.getNextToken();
-					if (reader.wasNull()) throw reader.newParseErrorAt("Property 'tags' is not allowed to be null", 0);
 					instance.setTags(reader.readCollection(reader_tags));
 					reader.getNextToken();
 					break;
@@ -504,9 +458,7 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 					reader.getNextToken();
 					break;
 				case -333821954:
-					__detected_partners__ = true;
 					reader.getNextToken();
-					if (reader.wasNull()) throw reader.newParseErrorAt("Property 'partners' is not allowed to be null", 0);
 					instance.setPartners(reader.readCollection(reader_partners));
 					reader.getNextToken();
 					break;
@@ -594,9 +546,7 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 						reader.getNextToken();
 						break;
 					case -199824480:
-						__detected_tags__ = true;
 						reader.getNextToken();
-						if (reader.wasNull()) throw reader.newParseErrorAt("Property 'tags' is not allowed to be null", 0);
 						instance.setTags(reader.readCollection(reader_tags));
 						reader.getNextToken();
 						break;
@@ -616,9 +566,7 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 						reader.getNextToken();
 						break;
 					case -333821954:
-						__detected_partners__ = true;
 						reader.getNextToken();
-						if (reader.wasNull()) throw reader.newParseErrorAt("Property 'partners' is not allowed to be null", 0);
 						instance.setPartners(reader.readCollection(reader_partners));
 						reader.getNextToken();
 						break;
@@ -658,12 +606,6 @@ public class _Clients$Client_DslJsonConverter implements com.dslplatform.json.Co
 				}
 			}
 			if (reader.last() != '}') throw reader.newParseError("Expecting '}' for object end");
-			if (!__detected_partners__ && instance.getPartners() == null) {
-				instance.setPartners(java.util.Collections.emptyList());
-			}
-			if (!__detected_tags__ && instance.getTags() == null) {
-				instance.setTags(java.util.Collections.emptyList());
-			}
 		}
 	}
 }

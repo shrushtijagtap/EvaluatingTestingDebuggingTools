@@ -1,3 +1,4 @@
+package org.apache.shiro.web.mgt;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

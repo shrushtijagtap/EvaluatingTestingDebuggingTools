@@ -3,7 +3,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RegressionTest12 {
+public class RandoopRegressionTest12 {
 
     public static boolean debug = false;
 

@@ -1,3 +1,4 @@
+package org.apache.shiro.web.mgt;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
