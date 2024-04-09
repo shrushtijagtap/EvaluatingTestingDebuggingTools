@@ -1,14 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.JSONTest
 -------------------------------------------------------------------------------
-Tests run: 12, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! -- in com.alibaba.json.bvt.JSONTest
-com.alibaba.json.bvt.JSONTest.test_number -- Time elapsed: 0.009 s <<< FAILURE!
+Tests run: 12, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.364 s <<< FAILURE! -- in com.alibaba.json.bvt.JSONTest
+com.alibaba.json.bvt.JSONTest.test_number -- Time elapsed: 0.204 s <<< FAILURE!
 java.lang.AssertionError: expected:<9.223372036854776E-18> but was:<9.223372036854775E-18>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
 	at org.junit.Assert.assertEquals(Assert.java:118)
 	at org.junit.Assert.assertEquals(Assert.java:144)
-	at com.alibaba.json.bvt.JSONTest.test_number(JSONTest.java:40)
+	at com.alibaba.json.bvt.JSONTest.__CLR4_5_2nvgwdfy5m(JSONTest.java:40)
+	at com.alibaba.json.bvt.JSONTest.test_number(JSONTest.java:33)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

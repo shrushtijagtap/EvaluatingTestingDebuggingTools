@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.deser.BooleanDeserializerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.deser.BooleanDeserializerTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.deser.BooleanDeserializerTest
 com.alibaba.json.bvt.parser.deser.BooleanDeserializerTest.test_boolean -- Time elapsed: 0 s <<< ERROR!
 com.alibaba.fastjson.JSONException: Feature.AllowSingleQuotes is false
 	at com.alibaba.fastjson.parser.JSONLexerBase.nextToken(JSONLexerBase.java:131)
@@ -10,7 +10,8 @@ com.alibaba.fastjson.JSONException: Feature.AllowSingleQuotes is false
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:367)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:287)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:560)
-	at com.alibaba.json.bvt.parser.deser.BooleanDeserializerTest.test_boolean(BooleanDeserializerTest.java:19)
+	at com.alibaba.json.bvt.parser.deser.BooleanDeserializerTest.__CLR4_5_2tee2ci1lgd(BooleanDeserializerTest.java:19)
+	at com.alibaba.json.bvt.parser.deser.BooleanDeserializerTest.test_boolean(BooleanDeserializerTest.java:15)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

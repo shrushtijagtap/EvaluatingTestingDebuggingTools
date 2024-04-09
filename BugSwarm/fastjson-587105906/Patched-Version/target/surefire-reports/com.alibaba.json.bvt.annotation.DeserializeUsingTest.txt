@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.annotation.DeserializeUsingTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.013 s <<< FAILURE! -- in com.alibaba.json.bvt.annotation.DeserializeUsingTest
-com.alibaba.json.bvt.annotation.DeserializeUsingTest.test_deserializeUsing -- Time elapsed: 0.009 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.005 s <<< FAILURE! -- in com.alibaba.json.bvt.annotation.DeserializeUsingTest
+com.alibaba.json.bvt.annotation.DeserializeUsingTest.test_deserializeUsing -- Time elapsed: 0.003 s <<< ERROR!
 com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.parser.JSONLexerBase.scanSymbol(JSONLexerBase.java:604)
 	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.deserialze(JavaBeanDeserializer.java:692)
@@ -11,7 +11,8 @@ com.alibaba.fastjson.JSONException: syntax error
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:383)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:287)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:560)
-	at com.alibaba.json.bvt.annotation.DeserializeUsingTest.test_deserializeUsing(DeserializeUsingTest.java:20)
+	at com.alibaba.json.bvt.annotation.DeserializeUsingTest.__CLR4_5_2fnkl091161(DeserializeUsingTest.java:20)
+	at com.alibaba.json.bvt.annotation.DeserializeUsingTest.test_deserializeUsing(DeserializeUsingTest.java:18)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

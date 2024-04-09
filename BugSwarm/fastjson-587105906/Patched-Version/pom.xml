@@ -193,7 +193,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+               <groupId>org.openclover</groupId>
+               <artifactId>clover-maven-plugin</artifactId>
+               <version>4.5.2</version>
+               
+            </plugin>
         </plugins>
+        
     </build>
 
     <dependencies>
@@ -419,11 +426,7 @@
             <version>2.2.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.openclover</groupId>
-            <artifactId>clover-maven-plugin</artifactId>
-            <version>4.5.2</version>
-        </dependency>
+       
 
         <dependency>
             <groupId>org.clojure</groupId>
@@ -655,6 +658,7 @@
 						</executions>
 					</plugin>
 				</plugins>
+                
 			</build>
 		</profile>
 

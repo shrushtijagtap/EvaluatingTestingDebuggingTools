@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.bug.Bug_for_lixianfeng
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.bug.Bug_for_lixianfeng
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.bug.Bug_for_lixianfeng
 com.alibaba.json.bvt.parser.bug.Bug_for_lixianfeng.test_long_list -- Time elapsed: 0 s <<< ERROR!
 com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt.parser.bug.Bug_for_lixianfeng$Te, property canPurchase
 	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseField(JavaBeanDeserializer.java:1132)
@@ -13,7 +13,8 @@ com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:383)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:287)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:560)
-	at com.alibaba.json.bvt.parser.bug.Bug_for_lixianfeng.test_long_list(Bug_for_lixianfeng.java:20)
+	at com.alibaba.json.bvt.parser.bug.Bug_for_lixianfeng.__CLR4_5_2sosfdn1kka(Bug_for_lixianfeng.java:20)
+	at com.alibaba.json.bvt.parser.bug.Bug_for_lixianfeng.test_long_list(Bug_for_lixianfeng.java:17)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

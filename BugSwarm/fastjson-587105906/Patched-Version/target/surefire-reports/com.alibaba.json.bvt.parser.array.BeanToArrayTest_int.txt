@@ -1,14 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.array.BeanToArrayTest_int
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.array.BeanToArrayTest_int
+Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.005 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.array.BeanToArrayTest_int
 com.alibaba.json.bvt.parser.array.BeanToArrayTest_int.test_int_error -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_int.test_int_error(BeanToArrayTest_int.java:32)
+	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_int.__CLR4_5_2qoirim1kbc(BeanToArrayTest_int.java:32)
+	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_int.test_int_error(BeanToArrayTest_int.java:25)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -37,7 +38,8 @@ java.lang.AssertionError
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_int.test_int_error_1(BeanToArrayTest_int.java:42)
+	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_int.__CLR4_5_25rjjl01kbi(BeanToArrayTest_int.java:42)
+	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_int.test_int_error_1(BeanToArrayTest_int.java:35)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

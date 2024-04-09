@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":82,"id":44230,"methods":[{"el":27,"sc":5,"sl":20},{"el":36,"sc":5,"sl":29},{"el":45,"sc":5,"sl":38},{"el":54,"sc":5,"sl":47},{"el":59,"sc":5,"sl":56},{"el":68,"sc":5,"sl":61},{"el":77,"sc":5,"sl":70},{"el":81,"sc":5,"sl":79}],"name":"JSONTest2","sl":18}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_129":{"methods":[{"sl":61}],"name":"test_5","pass":true,"statements":[{"sl":62},{"sl":63},{"sl":64},{"sl":65},{"sl":66},{"sl":67}]},"test_179":{"methods":[{"sl":20}],"name":"test_0","pass":true,"statements":[{"sl":21},{"sl":22},{"sl":23},{"sl":24},{"sl":25},{"sl":26}]},"test_3493":{"methods":[{"sl":70}],"name":"test_6","pass":true,"statements":[{"sl":71},{"sl":72},{"sl":73},{"sl":74},{"sl":75},{"sl":76}]},"test_375":{"methods":[{"sl":38}],"name":"test_2","pass":true,"statements":[{"sl":39},{"sl":40},{"sl":41},{"sl":42},{"sl":43},{"sl":44}]},"test_3875":{"methods":[{"sl":56}],"name":"test_4","pass":true,"statements":[{"sl":57},{"sl":58}]},"test_4069":{"methods":[{"sl":29}],"name":"test_1","pass":true,"statements":[{"sl":30},{"sl":31},{"sl":32},{"sl":33},{"sl":34},{"sl":35}]},"test_4306":{"methods":[{"sl":79}],"name":"test_7","pass":true,"statements":[{"sl":80}]},"test_699":{"methods":[{"sl":47}],"name":"test_3","pass":true,"statements":[{"sl":48},{"sl":49},{"sl":50},{"sl":51},{"sl":52},{"sl":53}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [179], [179], [179], [179], [179], [179], [179], [], [], [4069], [4069], [4069], [4069], [4069], [4069], [4069], [], [], [375], [375], [375], [375], [375], [375], [375], [], [], [699], [699], [699], [699], [699], [699], [699], [], [], [3875], [3875], [3875], [], [], [129], [129], [129], [129], [129], [129], [129], [], [], [3493], [3493], [3493], [3493], [3493], [3493], [3493], [], [], [4306], [4306], [], []]

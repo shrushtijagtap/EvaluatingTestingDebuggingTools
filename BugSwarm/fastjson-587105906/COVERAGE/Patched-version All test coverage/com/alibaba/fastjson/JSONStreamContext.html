@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../style.css');
+        @import url('../../../tree.css');
+        
+    </style>
+
+    <script src="../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../clover.js" type="text/javascript"></script>
+    <script src="../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../cloud.js" type="text/javascript"></script>
+
+            <title>fastjson 1.2.60_preview_04</title>
+    </head>
+
+<body  onload="onLoad('fastjson 1.2.60_preview_04: com.alibaba.fastjson.JSONStreamContext.java')">
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="https://github.com/alibaba/fastjson" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="https://github.com/alibaba/fastjson" target="_top">
+                                        fastjson 1.2.60_preview_04
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../" data-package-name="com.alibaba.fastjson">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../dashboard.html">Project Clover database Tue Apr 9 2024 16:11:52 CDT</a></li> 
+        <li><a href="pkg-summary.html">        Package com.alibaba.fastjson</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            File JSONStreamContext.java
+    </h1>
+
+
+
+
+
+
+
+
+    
+<div class="aui-tabs horizontal-tabs" id="tabs-file">
+            <div class="tabs-pane aui-tabs-pane-100-pcnt active-pane" id="tabs-file-source">
+        <div>&#160;</div>
+
+        
+                <div style="display: table; width: 100%">
+                            <div class="clover-histogram-table-cell">
+                                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Coverage histogram</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div class="aui-item clover-aui-item-histogram">
+                    <img src="../../../img/srcFileCovDistChart10.png" alt="../../../img/srcFileCovDistChart10.png"
+                         usemap="#srcFileCovDistChart10.png" class="clover-histogram-img"/>
+                    <map id="srcFileCovDistChart10.png" name="srcFileCovDistChart10.png">
+<area shape="rect" coords="100,41,107,66" title="104 files have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="91,58,98,66" title="35 files have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="82,60,89,66" title="27 files have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="73,63,80,65" title="12 files have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="64,65,71,66" title="5 files have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="56,65,63,66" title="6 files have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="47,65,54,66" title="4 files have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,65,45,66" title="6 files have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="29,65,36,66" title="6 files have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="20,66,27,67" title="2 files have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="11,8,18,65" title="238 files have 0% coverage" alt="" nohref="nohref"/>
+</map><br />
+                    <span class="subtle"><strong>0% </strong>of files have more coverage</span>
+                </div>
+            </div>
+        </div>
+                    </div>
+                        <div style="display: table-cell; width: 67%;">
+                    <div class="dashboard-widget">
+        <header class="dashboard-widget-header">
+            <h3>Code metrics</h3>
+        </header>
+        <div class="dashboard-widget-content">
+                        
+
+<div id="td-header-stats" class="aui-item" style="display: ">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">0</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">19</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">14</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.5</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+</div>
+
+</div>
+                        
+
+<div id="td-filtered-header-stats" class="aui-item" style="display: none">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this file">Branches:</label></div>
+        <div class="stats-box-value">0</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this file">Statements:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this file">Methods:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this file">Classes:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+            <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this file">LOC:</label></div>
+        <div class="stats-box-value">19</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this file">NCLOC:</label></div>
+        <div class="stats-box-value">14</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this file">Total complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this file">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.5</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">2</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this file">Average method complexity:</label></div>
+        <div class="stats-box-value">1</div>
+    </div>
+</div>
+
+</div>        </div>
+    </div>
+            </div>
+        </div>
+
+        
+        
+
+
+    <h2>Classes</h2>
+
+        <table class="aui aui-table-sortable">
+        <thead>
+                        <tr>     <th>Class</th>
+    <th>Line #</th>
+
+            
+        <th class="">
+            <label  title="The total number of statements.">Total Statements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The percentage of elements that have been filtered from this report.">% Filtered</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label>
+        </th>
+        
+            
+        <th class="">
+            <label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label>
+        </th>
+        
+    
+            <th>Actions</th>
+    </tr>         </thead>
+        <tbody>
+                              <tr> <td id="JSONStreamContext">
+        <span><a href="#3" title="JSONStreamContext" onclick="closeDialogAndScrollTo('dialog-JSONStreamContext', '3');">JSONStreamContext</a></span>
+</td>
+<td>3<a name="sl-3"></a></td>
+    <td class="">2</td>
+    <td class="">0%</td>
+    <td class="">1</td>
+    <td class="">0</td>
+    <td class=""><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+    <td><button data-dialog-id="dialog-JSONStreamContext" class="aui-button aui-button-link dialog-show-button">Show methods</button></td>
+</tr>                      </tbody>
+    </table>
+
+    
+     
+        <section role="dialog" id="dialog-JSONStreamContext" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+            
+            <header class="aui-dialog2-header">
+                <h1 class="aui-dialog2-header-main">Class JSONStreamContext</h1>
+                <div class="aui-dialog2-header-secondary">
+                    <input id="dialog-JSONStreamContext-method-filter" class="test-filter text" type="text" name="method-filter"
+                           placeholder="Type to filter methods..." autocomplete="off"
+                           onkeyup="filterMethods('dialog-JSONStreamContext-methods-body', 'dialog-JSONStreamContext-method-filter');"/>
+                </div>
+            </header>
+
+            
+            <div class="aui-dialog2-content">
+
+                
+
+                <table class="aui aui-table-sortable">
+                                                                                                            
+                    <thead>
+                                                 <tr> <th id="JSONStreamContext">
+    Class<br/>    <span><a href="#3" title="JSONStreamContext" onclick="closeDialogAndScrollTo('dialog-JSONStreamContext', '3');">JSONStreamContext</a></span>
+</th>
+<th>Line #<br/>3<a name="sl-3"></a></th>
+    <th class=""><label  title="The total number of statements.">Total Statements</label><br/>2</th>
+    <th class=""><label  title="The percentage of elements that have been filtered from this report.">% Filtered</label><br/>0%</th>
+    <th class=""><label  title="Cyclomatic complexity is a measure of the number of paths in your code.">Complexity</label><br/>1</th>
+    <th class=""><label  title="The number of statements and branches that were not covered during testing.">Uncovered Elements</label><br/>0</th>
+    <th class=""><label  title="The amount of code that was hit at least once during testing.">TOTAL Coverage</label><br/><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></th>
+</tr>                     </thead>
+                    <tbody id="dialog-JSONStreamContext-methods-body">
+                                                                                                            <tr id="JSONStreamContext-1">
+<td id="summary-15-5">
+ <span class="sortValue">JSONStreamContext(JSONStreamContext,int)</span>
+&#160;&#160;<a href="?line=29#15" title="JSONStreamContext(JSONStreamContext,int)" name="sl-15" onclick="closeDialogAndScrollTo('dialog-JSONStreamContext', '15');">JSONStreamContext(JSONStreamContext,int)</a>
+</td>
+<td align="right"><span class="sortValue">15</span>15</td>
+<td class="" align="right"><span class="sortValue">2.0</span>2</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0%</td>
+<td class="" align="right"><span class="sortValue">1.0</span>1</td>
+<td class="" align="right"><span class="sortValue">0.0</span>0</td>
+<td class="" align="right"><span class="sortValue">1.0</span><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+ </tr>                                                                         </tbody>
+                </table>
+
+                <div>&#160;</div>
+                
+
+            </div>
+
+            
+            <footer class="aui-dialog2-footer">
+                <div class="aui-dialog2-footer-actions">
+                    <button class="aui-button aui-button-primary dialog-close-button"
+                            data-dialog-id="dialog-JSONStreamContext">Close</button>
+                </div>
+                <div class="aui-dialog2-footer-hint">Click on a class or a method name to jump to source.</div>
+            </footer>
+        </section>
+
+     
+ 
+        
+        <div>&#160;</div>
+
+<h2>Contributing tests</h2>
+
+    <div>
+                This file is covered by 57 tests.
+        <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-link dialog-show-button">
+            Select tests to highlight the test coverage
+        </button>.
+    </div>
+
+<section role="dialog" id="contr-tests-dialog" class="aui-layer aui-dialog2 aui-dialog2-xlarge" aria-hidden="true">
+    
+    <header class="aui-dialog2-header">
+        <h1 class="aui-dialog2-header-main">Contributing tests</h1>
+        <div class="aui-dialog2-header-secondary">
+            <input id="test-filter" class="test-filter text" type="text" name="test-filter"
+                   placeholder="Type to filter tests..." autocomplete="off"
+                   onkeyup="filterTests('tests-body', 'test-filter', 3);"/>
+        </div>
+    </header>
+
+    
+    <div class="aui-dialog2-content">
+    
+
+        <p class="aui-buttons">
+            <button title="Selects all tests for this file, highlighting their coverage."
+                    class="aui-button" id="selectalltests">Select all</button>
+        </p>
+
+        <table class="aui aui-table-sortable">
+            <thead id="tests-head">
+            <tr id="testHeaderRow">
+                <th class="aui-table-column-unsortable"></th>
+                <th>
+                    <label title="The percentage of coverage contributed by each single test.">Test contribution</label>
+                </th>
+                <th>
+                    <label title="The test (or test iteration) which was executed.">Test</label>
+                </th>
+                <th>
+                    <label>Result</label>
+                </th>
+                <th class="aui-table-column-unsortable">
+                    <label>Actions</label>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tests-body">
+
+<tr id="test-3185">
+<td><a name="testA-3185"></a><input type="checkbox" id="cb-3185" value="3185" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_1_test_writer_2gh.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3185">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest_1.test_writer</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_1_test_writer_2gh.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest_1.test_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_1.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_1_test_writer_2gh.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-311">
+<td><a name="testA-311"></a><input type="checkbox" id="cb-311" value="311" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_error_test_read_8n.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-311">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReaderTest_error.test_read</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_error_test_read_8n.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReaderTest_error.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_error.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_error_test_read_8n.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-535">
+<td><a name="testA-535"></a><input type="checkbox" id="cb-535" value="535" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_2_test_read_1_ev.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-535">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_object_2.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_2_test_read_1_ev.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_object_2.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_2.html?line=33#src-33" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_2_test_read_1_ev.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1724">
+<td><a name="testA-1724"></a><input type="checkbox" id="cb-1724" value="1724" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_test_read_1bw.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1724">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_array.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_test_read_1bw.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_array.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array.html?line=17#src-17" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_test_read_1bw.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4464">
+<td><a name="testA-4464"></a><input type="checkbox" id="cb-4464" value="4464" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_2_test_writer_3g0.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4464">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest_2.test_writer</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_2_test_writer_3g0.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest_2.test_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_2.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_2_test_writer_3g0.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4320">
+<td><a name="testA-4320"></a><input type="checkbox" id="cb-4320" value="4320" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_test_read_1_3c0.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4320">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_int.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_test_read_1_3c0.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_int.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int.html?line=32#src-32" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_test_read_1_3c0.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1263">
+<td><a name="testA-1263"></a><input type="checkbox" id="cb-1263" value="1263" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_1_test_read_z3.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1263">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReaderTest_1.test_read</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_1_test_read_z3.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReaderTest_1.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_1.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_1_test_read_z3.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3681">
+<td><a name="testA-3681"></a><input type="checkbox" id="cb-3681" value="3681" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_2_test_read_2u9.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3681">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_object_2.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_2_test_read_2u9.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_object_2.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_2.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_2_test_read_2u9.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1537">
+<td><a name="testA-1537"></a><input type="checkbox" id="cb-1537" value="1537" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_1_16p.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1537">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_object.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_1_16p.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_object.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object.html?line=36#src-36" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_1_16p.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-806">
+<td><a name="testA-806"></a><input type="checkbox" id="cb-806" value="806" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_string_test_read_1_me.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-806">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_string.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_string_test_read_1_me.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_string.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_string.html?line=35#src-35" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_string_test_read_1_me.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1025">
+<td><a name="testA-1025"></a><input type="checkbox" id="cb-1025" value="1025" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_string_test_read_sh.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1025">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_string.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_string_test_read_sh.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_string.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_string.html?line=17#src-17" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_string_test_read_sh.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2960">
+<td><a name="testA-2960"></a><input type="checkbox" id="cb-2960" value="2960" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_2a8.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2960">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_string.test_array</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_2a8.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_string.test_array</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_2a8.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1274">
+<td><a name="testA-1274"></a><input type="checkbox" id="cb-1274" value="1274" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_2_test_read_ze.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1274">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_array_2.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_2_test_read_ze.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_array_2.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_2.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_2_test_read_ze.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2558">
+<td><a name="testA-2558"></a><input type="checkbox" id="cb-2558" value="2558" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_error2_test_read_1z2.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2558">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReaderTest_error2.test_read</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_error2_test_read_1z2.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReaderTest_error2.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_error2.html?line=17#src-17" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_error2_test_read_1z2.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2649">
+<td><a name="testA-2649"></a><input type="checkbox" id="cb-2649" value="2649" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_map_test_array_21l.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2649">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_map.test_array</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_map_test_array_21l.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_map.test_array</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_map.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_map_test_array_21l.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-273">
+<td><a name="testA-273"></a><input type="checkbox" id="cb-273" value="273" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_error_test_writer_7l.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-273">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest_error.test_writer</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_error_test_writer_7l.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest_error.test_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_error.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_error_test_writer_7l.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3076">
+<td><a name="testA-3076"></a><input type="checkbox" id="cb-3076" value="3076" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_0_2dg.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3076">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest.test_0</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_0_2dg.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_0_2dg.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1140">
+<td><a name="testA-1140"></a><input type="checkbox" id="cb-1140" value="1140" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_2_vo.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1140">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest.test_2</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_2_vo.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest.test_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest.html?line=37#src-37" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_2_vo.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4404">
+<td><a name="testA-4404"></a><input type="checkbox" id="cb-4404" value="4404" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/bug/Issue72_test_for_issue_3ec.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4404">  <span class="sortValue">com.alibaba.json.bvt.bug.Issue72.test_for_issue</span><a href="../../../com/alibaba/json/bvt/bug/Issue72_test_for_issue_3ec.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Issue72.test_for_issue</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/bug/Issue72.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/bug/Issue72_test_for_issue_3ec.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1028">
+<td><a name="testA-1028"></a><input type="checkbox" id="cb-1028" value="1028" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReader_error_test_1_sk.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1028">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReader_error.test_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReader_error_test_1_sk.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReader_error.test_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReader_error.html?line=26#src-26" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReader_error_test_1_sk.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2066">
+<td><a name="testA-2066"></a><input type="checkbox" id="cb-2066" value="2066" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_test_read_1le.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2066">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReaderTest.test_read</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_test_read_1le.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReaderTest.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReaderTest_test_read_1le.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4223">
+<td><a name="testA-4223"></a><input type="checkbox" id="cb-4223" value="4223" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_unquote_test_read_1_39b.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4223">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_int_unquote.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_unquote_test_read_1_39b.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_int_unquote.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_unquote.html?line=35#src-35" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_unquote_test_read_1_39b.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1752">
+<td><a name="testA-1752"></a><input type="checkbox" id="cb-1752" value="1752" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_3_1co.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1752">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_object.test_read_3</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_3_1co.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_object.test_read_3</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object.html?line=47#src-47" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_3_1co.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4523">
+<td><a name="testA-4523"></a><input type="checkbox" id="cb-4523" value="4523" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_3_test_writer_3hn.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4523">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest_3.test_writer</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_3_test_writer_3hn.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest_3.test_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_3.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_3_test_writer_3hn.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4225">
+<td><a name="testA-4225"></a><input type="checkbox" id="cb-4225" value="4225" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/bug/Issue169_test_for_issue_39d.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4225">  <span class="sortValue">com.alibaba.json.bvt.bug.Issue169.test_for_issue</span><a href="../../../com/alibaba/json/bvt/bug/Issue169_test_for_issue_39d.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Issue169.test_for_issue</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/bug/Issue169.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/bug/Issue169_test_for_issue_39d.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3980">
+<td><a name="testA-3980"></a><input type="checkbox" id="cb-3980" value="3980" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/UnquoteNameTest_test_obj_1_32k.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3980">  <span class="sortValue">com.alibaba.json.bvt.parser.UnquoteNameTest.test_obj_1</span><a href="../../../com/alibaba/json/bvt/parser/UnquoteNameTest_test_obj_1_32k.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.UnquoteNameTest.test_obj_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/UnquoteNameTest.html?line=64#src-64" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/UnquoteNameTest_test_obj_1_32k.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4379">
+<td><a name="testA-4379"></a><input type="checkbox" id="cb-4379" value="4379" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_3dn.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4379">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_obj_3.test_obj</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_3dn.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_obj_3.test_obj</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_3dn.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1702">
+<td><a name="testA-1702"></a><input type="checkbox" id="cb-1702" value="1702" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_2_1ba.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1702">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_obj_3.test_obj_2</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_2_1ba.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_obj_3.test_obj_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3.html?line=24#src-24" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_2_1ba.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1654">
+<td><a name="testA-1654"></a><input type="checkbox" id="cb-1654" value="1654" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_2_test_array_19y.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1654">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_obj_2.test_array</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_2_test_array_19y.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_obj_2.test_array</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_2.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_2_test_array_19y.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-431">
+<td><a name="testA-431"></a><input type="checkbox" id="cb-431" value="431" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_bz.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-431">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_object.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_bz.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_object.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object.html?line=17#src-17" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_bz.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2998">
+<td><a name="testA-2998"></a><input type="checkbox" id="cb-2998" value="2998" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_test_read_2ba.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2998">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_int.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_test_read_2ba.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_int.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int.html?line=14#src-14" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_test_read_2ba.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2335">
+<td><a name="testA-2335"></a><input type="checkbox" id="cb-2335" value="2335" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_typeRef_test_array_2_1sv.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2335">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_typeRef.test_array_2</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_typeRef_test_array_2_1sv.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_typeRef.test_array_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_typeRef.html?line=37#src-37" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_typeRef_test_array_2_1sv.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3800">
+<td><a name="testA-3800"></a><input type="checkbox" id="cb-3800" value="3800" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_2_2xk.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3800">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_string.test_array_2</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_2_2xk.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_string.test_array_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string.html?line=25#src-25" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_2_2xk.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1588">
+<td><a name="testA-1588"></a><input type="checkbox" id="cb-1588" value="1588" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_unquote_test_read_184.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1588">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_int_unquote.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_unquote_test_read_184.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_int_unquote.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_unquote.html?line=18#src-18" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_int_unquote_test_read_184.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4359">
+<td><a name="testA-4359"></a><input type="checkbox" id="cb-4359" value="4359" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_long_test_read_3d3.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4359">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_long.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_long_test_read_3d3.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_long.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_long.html?line=17#src-17" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_long_test_read_3d3.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3202">
+<td><a name="testA-3202"></a><input type="checkbox" id="cb-3202" value="3202" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_3_2gy.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3202">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_obj_3.test_obj_3</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_3_2gy.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_obj_3.test_obj_3</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3.html?line=41#src-41" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_3_test_obj_3_2gy.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3372">
+<td><a name="testA-3372"></a><input type="checkbox" id="cb-3372" value="3372" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_array_test_array_2lo.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3372">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_array.test_array</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_array_test_array_2lo.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_array.test_array</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_array.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_array_test_array_2lo.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-861">
+<td><a name="testA-861"></a><input type="checkbox" id="cb-861" value="861" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_nx.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-861">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_object.test_read</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_nx.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_object.test_read</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_nx.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3083">
+<td><a name="testA-3083"></a><input type="checkbox" id="cb-3083" value="3083" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_3_2dn.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3083">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_string.test_array_3</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_3_2dn.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_string.test_array_3</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string.html?line=39#src-39" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_string_test_array_3_2dn.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2611">
+<td><a name="testA-2611"></a><input type="checkbox" id="cb-2611" value="2611" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_6_test_writer_20j.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2611">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest_6.test_writer</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_6_test_writer_20j.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest_6.test_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_6.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_6_test_writer_20j.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1815">
+<td><a name="testA-1815"></a><input type="checkbox" id="cb-1815" value="1815" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/bug/Bug_for_issue_448_test_for_issue_1ef.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1815">  <span class="sortValue">com.alibaba.json.bvt.bug.Bug_for_issue_448.test_for_issue</span><a href="../../../com/alibaba/json/bvt/bug/Bug_for_issue_448_test_for_issue_1ef.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Bug_for_issue_448.test_for_issue</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/bug/Bug_for_issue_448.html?line=21#src-21" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/bug/Bug_for_issue_448_test_for_issue_1ef.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2200">
+<td><a name="testA-2200"></a><input type="checkbox" id="cb-2200" value="2200" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/UnquoteNameTest_test_obj_1p4.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2200">  <span class="sortValue">com.alibaba.json.bvt.parser.UnquoteNameTest.test_obj</span><a href="../../../com/alibaba/json/bvt/parser/UnquoteNameTest_test_obj_1p4.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.UnquoteNameTest.test_obj</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/UnquoteNameTest.html?line=53#src-53" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/UnquoteNameTest_test_obj_1p4.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1458">
+<td><a name="testA-1458"></a><input type="checkbox" id="cb-1458" value="1458" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_typeRef_test_array_1_14i.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1458">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_typeRef.test_array_1</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_typeRef_test_array_1_14i.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_typeRef.test_array_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_typeRef.html?line=24#src-24" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_typeRef_test_array_1_14i.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3852">
+<td><a name="testA-3852"></a><input type="checkbox" id="cb-3852" value="3852" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_2_test_read_1_2z0.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3852">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_array_2.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_2_test_read_1_2z0.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_array_2.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_2.html?line=33#src-33" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_2_test_read_1_2z0.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3287">
+<td><a name="testA-3287"></a><input type="checkbox" id="cb-3287" value="3287" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_test_array_2jb.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3287">  <span class="sortValue">com.alibaba.json.bvt.parser.stream.JSONReader_obj.test_array</span><a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_test_array_2jb.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.stream.JSONReader_obj.test_array</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/stream/JSONReader_obj_test_array_2jb.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4518">
+<td><a name="testA-4518"></a><input type="checkbox" id="cb-4518" value="4518" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/annotation/CustomDeserializerTest_test_0_3hi.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4518">  <span class="sortValue">com.alibaba.json.bvt.annotation.CustomDeserializerTest.test_0</span><a href="../../../com/alibaba/json/bvt/annotation/CustomDeserializerTest_test_0_3hi.html" title="View Test Summary Page">com.alibaba.json.bvt.annotation.CustomDeserializerTest.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/annotation/CustomDeserializerTest.html?line=16#src-16" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/annotation/CustomDeserializerTest_test_0_3hi.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4623">
+<td><a name="testA-4623"></a><input type="checkbox" id="cb-4623" value="4623" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/bug/Issue143_test_for_issue_3kf.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4623">  <span class="sortValue">com.alibaba.json.bvt.bug.Issue143.test_for_issue</span><a href="../../../com/alibaba/json/bvt/bug/Issue143_test_for_issue_3kf.html" title="View Test Summary Page">com.alibaba.json.bvt.bug.Issue143.test_for_issue</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/bug/Issue143.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/bug/Issue143_test_for_issue_3kf.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-165">
+<td><a name="testA-165"></a><input type="checkbox" id="cb-165" value="165" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/LargeTest_test_0_4l.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-165">  <span class="sortValue">com.alibaba.json.bvt.stream.LargeTest.test_0</span><a href="../../../com/alibaba/json/bvt/stream/LargeTest_test_0_4l.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.LargeTest.test_0</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/LargeTest.html?line=18#src-18" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/LargeTest_test_0_4l.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-276">
+<td><a name="testA-276"></a><input type="checkbox" id="cb-276" value="276" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_0_test_writer_7o.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-276">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest_0.test_writer</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_0_test_writer_7o.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest_0.test_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_0.html?line=13#src-13" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_0_test_writer_7o.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1034">
+<td><a name="testA-1034"></a><input type="checkbox" id="cb-1034" value="1034" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_2_sq.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1034">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_object.test_read_2</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_2_sq.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_object.test_read_2</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object.html?line=56#src-56" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_object_test_read_2_sq.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4561">
+<td><a name="testA-4561"></a><input type="checkbox" id="cb-4561" value="4561" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_1_3ip.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4561">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_object.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_1_3ip.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_object.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object.html?line=32#src-32" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_object_test_read_1_3ip.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2182">
+<td><a name="testA-2182"></a><input type="checkbox" id="cb-2182" value="2182" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_4_1om.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2182">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest.test_4</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_4_1om.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest.test_4</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest.html?line=84#src-84" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_4_1om.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-3352">
+<td><a name="testA-3352"></a><input type="checkbox" id="cb-3352" value="3352" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_test_read_1_2l4.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-3352">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_array_array.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_test_read_1_2l4.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_array_array.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array.html?line=34#src-34" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_array_array_test_read_1_2l4.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-4838">
+<td><a name="testA-4838"></a><input type="checkbox" id="cb-4838" value="4838" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_3_3qe.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-4838">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest.test_3</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_3_3qe.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest.test_3</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest.html?line=55#src-55" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_3_3qe.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-794">
+<td><a name="testA-794"></a><input type="checkbox" id="cb-794" value="794" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_5_test_writer_m2.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-794">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest_5.test_writer</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_5_test_writer_m2.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest_5.test_writer</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_5.html?line=15#src-15" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_5_test_writer_m2.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-1366">
+<td><a name="testA-1366"></a><input type="checkbox" id="cb-1366" value="1366" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_1_11y.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-1366">  <span class="sortValue">com.alibaba.json.bvt.stream.JSONWriterTest.test_1</span><a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_1_11y.html" title="View Test Summary Page">com.alibaba.json.bvt.stream.JSONWriterTest.test_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest.html?line=24#src-24" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/stream/JSONWriterTest_test_1_11y.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+<tr id="test-2814">
+<td><a name="testA-2814"></a><input type="checkbox" id="cb-2814" value="2814" name="testMethod" autocomplete="off" title="Check to highlight coverage of this test in the source code"/></td>
+<td style="vertical-align: middle"  class="link" onclick="window.location.href='../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_long_test_read_1_266.html';">
+<span class="sortValue">1.0</span>
+<div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative contribBarNegative"><div class="barPositive contribBarPositive contribBarPositive" style="width:100%"></div></div></div></td>
+<td id="tc-2814">  <span class="sortValue">com.alibaba.json.bvt.parser.JSONReaderTest_object_long.test_read_1</span><a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_long_test_read_1_266.html" title="View Test Summary Page">com.alibaba.json.bvt.parser.JSONReaderTest_object_long.test_read_1</a>
+</td>
+<td>      <span class="sortValue">1</span><span class="aui-lozenge aui-lozenge-success">PASS</span>
+  </td>
+<td> <a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_long.html?line=35#src-35" title="View Test Source">
+ <span class="aui-icon aui-icon-small aui-iconfont-file-txt aui-icon-medium-gray"></span>
+</a>
+<a href="../../../com/alibaba/json/bvt/parser/JSONReaderTest_object_long_test_read_1_266.html" title="View Test Summary Page"><span class="aui-icon aui-icon-small aui-iconfont-file-ppt aui-icon-medium-gray"></span></a>
+</td>
+</tr>
+
+            </tbody>
+        </table>
+
+        
+        <div>&#160;</div>
+
+    
+    </div>
+
+    
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button data-dialog-id="contr-tests-dialog" class="aui-button aui-button-primary dialog-close-button">Apply</button>
+        </div>
+        <div class="aui-dialog2-footer-hint">Select tests to highlight code covered by them in the source view.</div>
+    </footer>
+</section>
+
+ 
+        
+        
+
+
+
+
+
+<h2>Source view</h2>
+
+
+<div style="display: table; width: 100%;">
+    <div style="display: table-cell">
+        <button class="aui-button aui-button-link"
+                title="Toggles all methods in the source to be either expanded or collapsed."
+                onclick="toggleAllInlineMethods(this); return false;" id="method-expander">
+            Collapse all methods
+        </button>
+    </div>
+    <div style="display: table-cell">
+        <div style="text-align: right; margin-bottom: 10px">
+            <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;Show legend
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function(content, trigger, showPopup) {
+                content.css({"padding":"20px"}).html(SRC_FILE_LEGEND_TEXT);
+                showPopup();
+                return false;
+            },
+            {
+                width: 700, hideDelay: 60000
+            }
+    );
+</script>        </div>
+    </div>
+</div>
+
+<table cellspacing="0" cellpadding="0" class="srcView" width="100%">
+
+    
+<tbody> <tr id="l1">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=1#src-1">1</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-1" class="srcLine"><span class="keyword">package</span> com.alibaba.<a href="../fastjson/pkg-summary.html">fastjson</a>;</span></td>
+</tr>
+ <tr id="l2">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=2#src-2">2</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-2" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="3" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-3' onclick="toggleInlineStats(this, 'inlinestats-3');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-3" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-3'), 'inlinestats-3');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (3)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 0.5</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l3">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=3#src-3">3</a></td>
+<td align="right" class="coverageCount NoHilight "   onclick="return showTestsForLine(this, 3, 'Tests that hit JSONStreamContext');" >&#160;&#160;</td>
+<td class=" srcCell" id="id-3"><span class="spacer"></span><span id="src-3" class="srcLine"><span class="keyword">class</span> <a href="../../../com/alibaba/fastjson/JSONStreamContext.html#JSONStreamContext">JSONStreamContext</a> {</span></td>
+</tr>
+ <tr id="l4">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=4#src-4">4</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-4" class="srcLine"></span></td>
+</tr>
+ <tr id="l5">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=5#src-5">5</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-5" class="srcLine">    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span>                  StartObject   = 1001;</span></td>
+</tr>
+ <tr id="l6">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=6#src-6">6</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-6" class="srcLine">    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span>                  PropertyKey   = 1002;</span></td>
+</tr>
+ <tr id="l7">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=7#src-7">7</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-7" class="srcLine">    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span>                  PropertyValue = 1003;</span></td>
+</tr>
+ <tr id="l8">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=8#src-8">8</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-8" class="srcLine">    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span>                  StartArray    = 1004;</span></td>
+</tr>
+ <tr id="l9">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=9#src-9">9</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-9" class="srcLine">    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span>                  ArrayValue    = 1005;</span></td>
+</tr>
+ <tr id="l10">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=10#src-10">10</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-10" class="srcLine"></span></td>
+</tr>
+ <tr id="l11">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=11#src-11">11</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-11" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">final</span> <a href="../../../com/alibaba/fastjson/JSONStreamContext.html#JSONStreamContext">JSONStreamContext</a> parent;</span></td>
+</tr>
+ <tr id="l12">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=12#src-12">12</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-12" class="srcLine"></span></td>
+</tr>
+ <tr id="l13">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=13#src-13">13</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-13" class="srcLine">    <span class="keyword">protected</span> <span class="keyword">int</span>                     state;</span></td>
+</tr>
+ <tr id="l14">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=14#src-14">14</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-14" class="srcLine"></span></td>
+</tr>
+<tr class="inlineStatsRow" align="right" valign="middle">
+<td class="coverageCount"><a name="15" class="nolink">&#160;</a></td>
+    <td class="coverageCount aui-icon aui-icon-small aui-iconfont-arrows-right" id='inlineStatsToggle-15' onclick="toggleInlineStats(this, 'inlinestats-15');"/>
+    <td align="center" valign="middle">
+        <table id="inlinestats-15" style="display:none;" class="inlineStats" width="100%" cellspacing="1px" cellpadding="1px">
+            <tr onclick="toggleInlineStats(document.getElementById('inlineStatsToggle-15'), 'inlinestats-15');return true;">
+                <td><div>
+<div title="100% Covered" style="min-width:40px;" class="barNegative contribBarNegative barNegative"><div class="barPositive contribBarPositive barPositive" style="width:100%"></div></div></div></td><td>100%</td>
+                <td class="inlineStat">Uncovered Elements: 0 (2)</td>
+                <td class="inlineStat">Complexity: 1</td>
+                <td class="inlineStat">Complexity Density: 0.5</td>
+                            </tr>
+        </table>
+    </td>
+</tr>
+<tr id="l15">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=15#src-15">15</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 15, 'Tests that hit JSONStreamContext(JSONStreamContext,int)');" ><span title="Line 15, Col 5: method entered 131 times." class="nolink">&#160;131</span></td>
+<td class=" methodStart  srcCell" id="id-15"><img title="Method Statistics" onclick="toggleSrcRowVis(this, 15,18);" id="img-15" src="../../../img/collapse.gif"  alt="toggle" class="icon"/><span id="src-15" class="srcLine"><span class="nolink" title="Line 15, Col 5: method entered 131 times.">    <span class="keyword">public</span> <a href="../../../com/alibaba/fastjson/JSONStreamContext.html#JSONStreamContext">JSONStreamContext</a>(<a href="../../../com/alibaba/fastjson/JSONStreamContext.html#JSONStreamContext">JSONStreamContext</a> parent, <span class="keyword">int</span> state){</span><span class="foldControl" onclick="toggleSrcRowVis(document.getElementById('img-15'), 15,18);" id="e15" style="display:none;border:none;">...</span></span></td>
+</tr>
+ <tr id="l16">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=16#src-16">16</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 16, 'Tests that hit line # 16');" ><span title="Line 16, Col 9: statement executed 131 times." class="nolink">&#160;131</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-16" class="srcLine"><span class="nolink" title="Line 16, Col 9: statement executed 131 times.">        <span class="keyword">this</span>.parent = parent;</span></span></td>
+</tr>
+ <tr id="l17">
+<td align="right" class="lineCount Good"><a class="lineNumHref" href="?line=17#src-17">17</a></td>
+<td align="right" class="coverageCount Good hitByTest"   onclick="return showTestsForLine(this, 17, 'Tests that hit line # 17');" ><span title="Line 17, Col 9: statement executed 131 times." class="nolink">&#160;131</span></td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-17" class="srcLine"><span class="nolink" title="Line 17, Col 9: statement executed 131 times.">        <span class="keyword">this</span>.state = state;</span></span></td>
+</tr>
+ <tr id="l18">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=18#src-18">18</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-18" class="srcLine">    }</span></td>
+</tr>
+ <tr id="l19">
+<td align="right" class="lineCount NoHilight"><a class="lineNumHref" href="?line=19#src-19">19</a></td>
+<td align="right" class="coverageCount NoHilight "   >&#160;&#160;</td>
+<td class=" srcCell" ><span class="spacer"></span><span id="src-19" class="srcLine">}</span></td>
+</tr>
+ 
+    </tbody></table>    </div>
+</div><!-- .aui-tabs -->
+
+<script type="text/javascript"> 
+    var ol_bgclass = "overBG";
+    var ol_fgclass = "overFG";
+    var ol_cgclass = "overCaption";
+    var ol_captionfontclass= "overCaption";
+    var ol_closefontclass = "closeFont";
+    var ol_closeclick = 1;
+    var ol_close = 'X';
+    var ol_wrap = 1;
+    var rootRelPath = '../../../';
+    var testsPerFile = -1;
+</script>
+<script src="JSONStreamContext.js" type="text/javascript"></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Tue Apr 9 2024 16:45:45 CDT using coverage data from Tue Apr 9 2024 16:43:32 CDT.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>
