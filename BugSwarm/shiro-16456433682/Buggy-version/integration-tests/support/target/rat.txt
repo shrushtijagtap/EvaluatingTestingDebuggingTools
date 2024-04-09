@@ -1,0 +1,31 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:40-05:00
+
+Notes: 0
+Binaries: 2
+Archives: 0
+Standards: 3
+
+Apache Licensed: 3
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/integration-tests/support/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/integration-tests/support/src/main/resources/createKeyStore.sh
+  B     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/integration-tests/support/src/main/resources/test-keystore.pem
+  B     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/integration-tests/support/src/main/resources/test-keystore.jks
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/integration-tests/support/src/main/java/org/apache/shiro/testing/web/AbstractContainerIT.java
+ 
+*****************************************************

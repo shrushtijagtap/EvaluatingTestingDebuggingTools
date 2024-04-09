@@ -1,0 +1,38 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] fastjson2-parent                                                   [pom]
+[INFO] fastjson2                                                          [jar]
+[INFO] fastjson2-benchmark                                                [jar]
+[INFO] fastjson2-extension                                                [jar]
+[INFO] fastjson1-compatible                                               [jar]
+[INFO] fastjson2-kotlin                                                   [jar]
+[INFO] spring-test                                                        [jar]
+[INFO] 
+[INFO] ---------------< com.alibaba.fastjson2:fastjson2-parent >---------------
+[INFO] Building fastjson2-parent 2.0.19-SNAPSHOT                          [1/7]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson2-parent ---
+[INFO] 
+[INFO] --- checkstyle:3.2.0:check (checkstyle) @ fastjson2-parent ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ fastjson2-parent ---
+[INFO] 
+[INFO] --- kotlin:1.7.20:compile (compile) @ fastjson2-parent ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (java-compile) @ fastjson2-parent ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] ------------------< com.alibaba.fastjson2:fastjson2 >-------------------
+[INFO] Building fastjson2 2.0.19-SNAPSHOT                                 [2/7]
+[INFO]   from core/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson2 ---
+[INFO] 
+[INFO] --- checkstyle:3.2.0:check (checkstyle) @ fastjson2 ---

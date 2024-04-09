@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [Surefire suite]">
+  <test name="Surefire test">
+    <classes>
+      <class name="io.swagger.oas.annotations.test.security.SecurityTests"/>
+      <class name="io.swagger.oas.annotations.test.callbacks.CallbackTest"/>
+      <class name="io.swagger.oas.annotations.test.AbstractAnnotationTest"/>
+      <class name="io.swagger.oas.annotations.test.operations.AnnotatedOperationMethodTests"/>
+      <class name="io.swagger.oas.annotations.test.operations.MergedOperationTests"/>
+      <class name="io.swagger.oas.annotations.test.schemas.PojoTests"/>
+      <class name="io.swagger.oas.annotations.test.info.InfoTest"/>
+    </classes>
+  </test> <!-- Surefire test -->
+</suite> <!-- Failed suite [Surefire suite] -->

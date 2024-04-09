@@ -1,0 +1,33 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:36-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 6
+
+Apache Licensed: 6
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/core/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/core/src/test/groovy/org/apache/shiro/config/IniTest.groovy
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/core/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/core/src/main/java/org/apache/shiro/config/ResourceConfigurable.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/core/src/main/java/org/apache/shiro/config/ConfigurationException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/core/src/main/java/org/apache/shiro/config/Ini.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/core/src/main/java/org/apache/shiro/config/package-info.java
+ 
+*****************************************************

@@ -1,0 +1,40 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:36-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 13
+
+Apache Licensed: 13
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/test/groovy/org/apache/shiro/crypto/AesCipherServiceTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/test/groovy/org/apache/shiro/crypto/JcaCipherServiceTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/test/groovy/org/apache/shiro/crypto/BlowfishCipherServiceTest.groovy
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/AesCipherService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/CipherService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/PaddingScheme.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/BlowfishCipherService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/OperationMode.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/AbstractSymmetricCipherService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/JcaCipherService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/DefaultBlockCipherService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/crypto/cipher/src/main/java/org/apache/shiro/crypto/package-info.java
+ 
+*****************************************************

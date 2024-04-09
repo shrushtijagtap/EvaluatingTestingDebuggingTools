@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.alibaba.fastjson2.JSONReaderTest1
+-------------------------------------------------------------------------------
+Tests run: 86, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.744 s - in com.alibaba.fastjson2.JSONReaderTest1

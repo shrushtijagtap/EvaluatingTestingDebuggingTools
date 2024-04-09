@@ -1,0 +1,39 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:41-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 12
+
+Apache Licensed: 12
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/pom.xml
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/resources/templates/account-info.html
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/resources/templates/fragments/head.html
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/resources/templates/login.html
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/resources/templates/hello.html
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/resources/templates/error.html
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/resources/application.properties
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/java/org/apache/shiro/samples/HelloController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/java/org/apache/shiro/samples/WebApp.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/java/org/apache/shiro/samples/AccountInfoController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/java/org/apache/shiro/samples/RestrictedErrorController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-boot-web/src/main/java/org/apache/shiro/samples/LoginController.java
+ 
+*****************************************************

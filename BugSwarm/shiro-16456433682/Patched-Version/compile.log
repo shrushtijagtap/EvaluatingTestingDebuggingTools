@@ -1,0 +1,150 @@
+[INFO] Scanning for projects...
+[INFO] Inspecting build with total of 51 modules...
+[INFO] Installing Nexus Staging features:
+[INFO]   ... total of 51 executions of maven-deploy-plugin replaced with nexus-staging-maven-plugin
+[WARNING] The project org.apache.shiro:shiro-root:pom:1.12.1-SNAPSHOT uses prerequisites which is only intended for maven-plugin projects but not for non maven-plugin projects. For such purposes you should use the maven-enforcer-plugin. See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Apache Shiro                                                       [pom]
+[INFO] Apache Shiro :: Lang                                            [bundle]
+[INFO] Apache Shiro :: Cryptography                                       [pom]
+[INFO] Apache Shiro :: Cryptography :: Core                            [bundle]
+[INFO] Apache Shiro :: Cryptography :: Hashing                         [bundle]
+[INFO] Apache Shiro :: Cryptography :: Ciphers                         [bundle]
+[INFO] Apache Shiro :: Event                                           [bundle]
+[INFO] Apache Shiro :: Cache                                           [bundle]
+[INFO] Apache Shiro :: Configuration                                      [pom]
+[INFO] Apache Shiro :: Configuration :: Core                           [bundle]
+[INFO] Apache Shiro :: Configuration :: OGDL                           [bundle]
+[INFO] Apache Shiro :: Core                                            [bundle]
+[INFO] Apache Shiro :: Web                                             [bundle]
+[INFO] Apache Shiro :: Support                                            [pom]
+[INFO] Apache Shiro :: Support :: AspectJ                              [bundle]
+[INFO] Apache Shiro :: Support :: JCache                               [bundle]
+[INFO] Apache Shiro :: Support :: EHCache                              [bundle]
+[INFO] Apache Shiro :: Support :: Hazelcast                            [bundle]
+[INFO] Apache Shiro :: Support :: Quartz                               [bundle]
+[INFO] Apache Shiro :: Support :: Spring                               [bundle]
+[INFO] Apache Shiro :: Support :: Guice                                [bundle]
+[INFO] Apache Shiro :: Support :: CAS                                  [bundle]
+[INFO] Apache Shiro :: Support :: Spring Boot Parent                      [pom]
+[INFO] Apache Shiro :: Support :: Spring Boot                             [jar]
+[INFO] Apache Shiro :: Support :: Spring Boot Web                         [jar]
+[INFO] Apache Shiro :: Support :: Servlet Plugin                          [jar]
+[INFO] Apache Shiro :: Support :: JAX-RS                               [bundle]
+[INFO] Apache Shiro :: Support :: Karaf Features                          [pom]
+[INFO] Apache Shiro :: Tools                                              [pom]
+[INFO] Apache Shiro :: Tools :: Hasher                                 [bundle]
+[INFO] Apache Shiro :: All (aggregate jar)                                [pom]
+[INFO] Apache Shiro :: Integration Tests                                  [pom]
+[INFO] Apache Shiro :: ITs :: Support                                     [jar]
+[INFO] Apache Shiro :: ITs :: Guice 3                                     [war]
+[INFO] Apache Shiro :: ITs :: Guice 4                                     [war]
+[INFO] Apache Shiro :: Samples                                            [pom]
+[INFO] Apache Shiro :: Samples :: AspectJ                                 [jar]
+[INFO] Apache Shiro :: Samples :: Quick Start                             [jar]
+[INFO] Apache Shiro :: Samples :: Web                                     [war]
+[INFO] Apache Shiro :: Samples :: Spring Quickstart                       [jar]
+[INFO] Apache Shiro :: Samples :: Spring MVC                              [war]
+[INFO] Apache Shiro :: Samples :: Spring-Hibernate                        [war]
+[INFO] Apache Shiro :: Samples :: Spring Boot                             [jar]
+[INFO] Apache Shiro :: Samples :: Spring Boot Web                         [jar]
+[INFO] Apache Shiro :: Samples :: Guice Web                               [war]
+[INFO] Apache Shiro :: Samples :: Quick Start Guice                       [jar]
+[INFO] Apache Shiro :: Samples :: Servlet Plugin                          [war]
+[INFO] Apache Shiro :: Samples :: JAX-RS                                  [war]
+[INFO] Apache Shiro :: Samples :: Web Jakarta                             [war]
+[INFO] Apache Shiro :: Test Coverage                                      [pom]
+[INFO] Apache Shiro :: BOM                                                [pom]
+[INFO] 
+[INFO] --------------------< org.apache.shiro:shiro-root >---------------------
+[INFO] Building Apache Shiro 1.12.1-SNAPSHOT                             [1/51]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ shiro-root ---
+[INFO] 
+[INFO] --- apache-rat:0.15:check (rat-chec) @ shiro-root ---
+[INFO] Enabled default license matchers.
+[INFO] Will parse SCM ignores for exclusions...
+[INFO] Finished adding exclusions from SCM ignore files.
+[INFO] 76 implicit excludes.
+[INFO] 11 explicit excludes.
+[INFO] 16 resources included
+[INFO] Rat check: Summary over all files. Unapproved: 1, unknown: 1, generated: 0, approved: 9 licenses.
+[INFO] Enabled default license matchers.
+[INFO] Will parse SCM ignores for exclusions...
+[INFO] Finished adding exclusions from SCM ignore files.
+[INFO] 76 implicit excludes.
+[INFO] 11 explicit excludes.
+[INFO] 16 resources included
+[WARNING] Files with unapproved licenses:
+  compile.log
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Apache Shiro 1.12.1-SNAPSHOT:
+[INFO] 
+[INFO] Apache Shiro ....................................... FAILURE [ 10.350 s]
+[INFO] Apache Shiro :: Lang ............................... SKIPPED
+[INFO] Apache Shiro :: Cryptography ....................... SKIPPED
+[INFO] Apache Shiro :: Cryptography :: Core ............... SKIPPED
+[INFO] Apache Shiro :: Cryptography :: Hashing ............ SKIPPED
+[INFO] Apache Shiro :: Cryptography :: Ciphers ............ SKIPPED
+[INFO] Apache Shiro :: Event .............................. SKIPPED
+[INFO] Apache Shiro :: Cache .............................. SKIPPED
+[INFO] Apache Shiro :: Configuration ...................... SKIPPED
+[INFO] Apache Shiro :: Configuration :: Core .............. SKIPPED
+[INFO] Apache Shiro :: Configuration :: OGDL .............. SKIPPED
+[INFO] Apache Shiro :: Core ............................... SKIPPED
+[INFO] Apache Shiro :: Web ................................ SKIPPED
+[INFO] Apache Shiro :: Support ............................ SKIPPED
+[INFO] Apache Shiro :: Support :: AspectJ ................. SKIPPED
+[INFO] Apache Shiro :: Support :: JCache .................. SKIPPED
+[INFO] Apache Shiro :: Support :: EHCache ................. SKIPPED
+[INFO] Apache Shiro :: Support :: Hazelcast ............... SKIPPED
+[INFO] Apache Shiro :: Support :: Quartz .................. SKIPPED
+[INFO] Apache Shiro :: Support :: Spring .................. SKIPPED
+[INFO] Apache Shiro :: Support :: Guice ................... SKIPPED
+[INFO] Apache Shiro :: Support :: CAS ..................... SKIPPED
+[INFO] Apache Shiro :: Support :: Spring Boot Parent ...... SKIPPED
+[INFO] Apache Shiro :: Support :: Spring Boot ............. SKIPPED
+[INFO] Apache Shiro :: Support :: Spring Boot Web ......... SKIPPED
+[INFO] Apache Shiro :: Support :: Servlet Plugin .......... SKIPPED
+[INFO] Apache Shiro :: Support :: JAX-RS .................. SKIPPED
+[INFO] Apache Shiro :: Support :: Karaf Features .......... SKIPPED
+[INFO] Apache Shiro :: Tools .............................. SKIPPED
+[INFO] Apache Shiro :: Tools :: Hasher .................... SKIPPED
+[INFO] Apache Shiro :: All (aggregate jar) ................ SKIPPED
+[INFO] Apache Shiro :: Integration Tests .................. SKIPPED
+[INFO] Apache Shiro :: ITs :: Support ..................... SKIPPED
+[INFO] Apache Shiro :: ITs :: Guice 3 ..................... SKIPPED
+[INFO] Apache Shiro :: ITs :: Guice 4 ..................... SKIPPED
+[INFO] Apache Shiro :: Samples ............................ SKIPPED
+[INFO] Apache Shiro :: Samples :: AspectJ ................. SKIPPED
+[INFO] Apache Shiro :: Samples :: Quick Start ............. SKIPPED
+[INFO] Apache Shiro :: Samples :: Web ..................... SKIPPED
+[INFO] Apache Shiro :: Samples :: Spring Quickstart ....... SKIPPED
+[INFO] Apache Shiro :: Samples :: Spring MVC .............. SKIPPED
+[INFO] Apache Shiro :: Samples :: Spring-Hibernate ........ SKIPPED
+[INFO] Apache Shiro :: Samples :: Spring Boot ............. SKIPPED
+[INFO] Apache Shiro :: Samples :: Spring Boot Web ......... SKIPPED
+[INFO] Apache Shiro :: Samples :: Guice Web ............... SKIPPED
+[INFO] Apache Shiro :: Samples :: Quick Start Guice ....... SKIPPED
+[INFO] Apache Shiro :: Samples :: Servlet Plugin .......... SKIPPED
+[INFO] Apache Shiro :: Samples :: JAX-RS .................. SKIPPED
+[INFO] Apache Shiro :: Samples :: Web Jakarta ............. SKIPPED
+[INFO] Apache Shiro :: Test Coverage ...................... SKIPPED
+[INFO] Apache Shiro :: BOM ................................ SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  31.453 s
+[INFO] Finished at: 2024-04-05T20:09:50-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.rat:apache-rat-plugin:0.15:check (rat-chec) on project shiro-root: Too many files with unapproved license: 1 See RAT report in: /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Patched-Version/target/rat.txt -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

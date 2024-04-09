@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.alibaba.fastjson2.util.TypeUtilsTest
+-------------------------------------------------------------------------------
+Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.348 s - in com.alibaba.fastjson2.util.TypeUtilsTest

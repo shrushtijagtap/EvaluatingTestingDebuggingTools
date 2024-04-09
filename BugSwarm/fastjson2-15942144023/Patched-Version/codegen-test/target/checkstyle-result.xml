@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.2">
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/maps/JSONObjectTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/maps/Map1Test.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/maps/MapTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/eishay/Image.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/eishay/MediaContentTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/eishay/Media.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/eishay/MediaContent.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/annotation/JSONFieldTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/IntTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/PrimitiveTypeTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/PrimitiveObjectTypeTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/UtilTypeTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/NumberTypeTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/PrimitiveArrayTypeTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/DateTypeTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/collections/CollectionTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/collections/JSONArrayTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-15942144023/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/collections/ListTest1.java">
+</file>
+</checkstyle>

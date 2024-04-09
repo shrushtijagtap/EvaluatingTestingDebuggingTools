@@ -1,0 +1,49 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:41-05:00
+
+Notes: 1
+Binaries: 1
+Archives: 0
+Standards: 21
+
+Apache Licensed: 21
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/resources/log4j2.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/resources/ehcache.xml
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/resources/application.properties
+  B     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/webapp/logo.png
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/webapp/WEB-INF/resources/login.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/webapp/WEB-INF/resources/include.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/webapp/WEB-INF/resources/sampleIndex.jsp
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/webapp/shiro.css
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/BootstrapDataPopulator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/SampleManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/config/ApplicationConfig.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/config/RemotingServletConfig.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/config/JspViewsConfig.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/config/ServletApplicationInitializer.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/web/JnlpController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/web/IndexController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/web/RootRedirectController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/web/LogoutController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/web/LoginController.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/DefaultSampleManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/spring-mvc/src/main/java/org/apache/shiro/samples/spring/realm/SaltAwareJdbcRealm.java
+ 
+*****************************************************

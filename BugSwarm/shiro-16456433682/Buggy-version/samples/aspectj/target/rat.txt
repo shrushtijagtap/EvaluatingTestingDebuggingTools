@@ -1,0 +1,41 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:40-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 14
+
+Apache Licensed: 14
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/test/resources/META-INF/aop.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/test/resources/log4j2-test.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/test/resources/shiroBankServiceTest.ini
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/test/java/org/apache/shiro/samples/aspectj/bank/SecureBankServiceTest.java
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/BankServerRunner.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/NotEnoughFundsException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/InactiveAccountException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/Account.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/SecureBankService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/AccountNotFoundException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/BankService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/AccountTransaction.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/samples/aspectj/src/main/java/org/apache/shiro/samples/aspectj/bank/BankServiceException.java
+ 
+*****************************************************

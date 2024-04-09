@@ -1,0 +1,57 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:36-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 30
+
+Apache Licensed: 30
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/test/java/org/apache/shiro/lang/util/ClassUtilsTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/test/java/org/apache/shiro/lang/util/StringUtilsTest.java
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/StringUtils.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/SoftHashMap.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/ClassUtils.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/SimpleByteSource.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/Factory.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/Assert.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/UnknownClassException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/Nameable.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/InstantiationException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/Initializable.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/Destroyable.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/ByteSource.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/util/LifecycleUtils.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/codec/CodecException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/codec/Base64.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/codec/Hex.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/codec/H64.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/codec/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/codec/CodecSupport.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/io/XmlSerializer.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/io/SerializationException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/io/ClassResolvingObjectInputStream.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/io/ResourceUtils.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/io/Serializer.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/io/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/io/DefaultSerializer.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/lang/src/main/java/org/apache/shiro/ShiroException.java
+ 
+*****************************************************

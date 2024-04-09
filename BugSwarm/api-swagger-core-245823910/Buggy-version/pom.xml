@@ -290,6 +290,11 @@
                             <artifactId>jersey-servlet</artifactId>
                             <version>${jersey-version}</version>
                         </dependency>
+                        <dependency>
+                            <groupId>org.openclover</groupId>
+                            <artifactId>clover-maven-plugin</artifactId>
+                            <version>4.5.2</version>
+                        </dependency>
                     </dependencies>
                 </plugin>
                 <plugin>
@@ -485,6 +490,14 @@
                 <artifactId>guava</artifactId>
                 <version>${guava-version}</version>
             </dependency>
+             <dependency>
+            <groupId>org.evosuite</groupId>
+            <artifactId>evosuite-standalone-runtime</artifactId>
+            <version>1.2.0</version> <!-- Or the version you prefer -->
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../../../evosuite-standalone-runtime-1.2.0.jar</systemPath>
+        </dependency>
+            
         </dependencies>
     </dependencyManagement>
     <properties>

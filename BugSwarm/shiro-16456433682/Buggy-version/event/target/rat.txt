@@ -1,0 +1,58 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:37-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 31
+
+Apache Licensed: 31
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/EventTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/ErroneouslyAnnotatedSubscriber.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/EventListenerComparatorTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/SimpleEvent.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/SubclassTestSubscriber.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/BazEvent.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/ExceptionThrowingSubscriber.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/TestSubscriber.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/DefaultEventBusTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/FooEvent.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/ErrorCausingEvent.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/AnnotationEventListenerResolverTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/SimpleSubscriber.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/InvalidMethodModiferSubscriber.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/SingleArgumentMethodEventListenerTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/NotAnnotatedSubscriber.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/BarEvent.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/test/groovy/org/apache/shiro/event/support/EventClassComparatorTest.groovy
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/EventBus.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/EventBusAware.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/Subscribe.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/Event.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/support/EventListenerComparator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/support/EventClassComparator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/support/SingleArgumentMethodEventListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/support/TypedEventListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/support/DefaultEventBus.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/support/AnnotationEventListenerResolver.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/support/EventListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/event/src/main/java/org/apache/shiro/event/support/EventListenerResolver.java
+ 
+*****************************************************

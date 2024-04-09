@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.2">
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/SpringTestApplication.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/ChatMessageHandler.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/WebSocketConfig.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/WebMvcConfigurer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/entity/User.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/controller/WebSocket.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/controller/TestController.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220786/Buggy-version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/controller/JsonViewResolver.java">
+</file>
+</checkstyle>

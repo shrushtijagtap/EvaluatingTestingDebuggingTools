@@ -204,6 +204,7 @@
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
+        
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
@@ -218,6 +219,13 @@
             <version>3.1.2</version>
             <scope>provided</scope>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.evosuite</groupId>
+            <artifactId>evosuite-standalone-runtime</artifactId>
+            <version>1.2.0</version> <!-- Or the version you prefer -->
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../../evosuite-standalone-runtime-1.2.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -398,6 +406,7 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -409,6 +418,11 @@
             <artifactId>json-smart</artifactId>
             <version>2.2.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openclover</groupId>
+            <artifactId>clover-maven-plugin</artifactId>
+            <version>4.5.2</version>
         </dependency>
 
         <dependency>

@@ -1,0 +1,49 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:37-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 22
+
+Apache Licensed: 22
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/SimpleEnum.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/DefaultInterpolatorTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/ReflectionBuilderTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/SimpleBeanFactory.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/CommonsInterpolatorTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/CompositeBean.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/InitializableBean.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/RecordingBeanListener.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/event/BeanEventTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/test/groovy/org/apache/shiro/config/SimpleBean.groovy
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/DefaultInterpolator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/UnresolveableReferenceException.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/CommonsInterpolator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/Interpolator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/ReflectionBuilder.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/event/InstantiatedBeanEvent.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/event/InitializedBeanEvent.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/event/LoggingBeanEventListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/event/ConfiguredBeanEvent.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/event/BeanEvent.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/config/ogdl/src/main/java/org/apache/shiro/config/event/DestroyedBeanEvent.java
+ 
+*****************************************************

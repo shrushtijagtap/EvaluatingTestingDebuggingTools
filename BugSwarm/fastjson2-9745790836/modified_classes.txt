@@ -1,1 +1,1 @@
-src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java
+core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java

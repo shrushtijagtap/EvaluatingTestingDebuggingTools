@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [Surefire suite]">
+  <test name="Surefire test">
+    <classes>
+      <class name="io.swagger.test.SimpleBuilderTest"/>
+    </classes>
+  </test> <!-- Surefire test -->
+</suite> <!-- Failed suite [Surefire suite] -->

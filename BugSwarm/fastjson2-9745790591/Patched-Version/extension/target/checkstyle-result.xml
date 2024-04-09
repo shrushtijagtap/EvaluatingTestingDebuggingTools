@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.2">
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONExtractInt64.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONExtract.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONExtractInt32.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONWritable.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONExtractScalar.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONExtract2.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/AwtWriterModule.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/config/FastJsonConfig.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/Polygon.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/MultiPoint.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/Point.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/GeometryCollection.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/MultiLineString.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/MultiPolygon.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/FeatureCollection.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/LineString.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/Feature.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/geo/Geometry.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/retrofit/Retrofit2ConverterFactory.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/airlift/JSONFunctions.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/airlift/SliceValueConsumer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVParserUTF8.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVParser.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVParserUTF16.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVWriter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVWriterUTF8.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVWriterUTF16.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/AwtRederModule.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/websocket/sockjs/FastjsonSockJsMessageCodec.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/webservlet/view/FastJsonJsonView.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/http/converter/FastJsonHttpMessageConverter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/GenericFastJsonRedisSerializer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/GenericFastJsonJSONBRedisSerializer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/FastJsonJSONBRedisSerializer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/data/redis/FastJsonRedisSerializer.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonWriterModule.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonPointReader.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonReaderModule.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/data/mongodb/GeoJsonPolygonReader.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/messaging/converter/MappingFastJsonMessageConverter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/spring/messaging/converter/MappingFastJsonJSONBMessageConverter.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2_perf/odps/JSONExtractScalarTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2_perf/odps/JSONExtractTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorDynamicCompile.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/eishay/vo/Image.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/eishay/vo/Media.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/eishay/vo/MediaContent.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/odps/JSONExtract2Test.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/config/FastJsonConfigTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/trino/SliceValueConsumerTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/FeatureCollectionTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/MultiLineStringTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/LineStringTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/PolygonTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/MultiPolygonTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/FeatureTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/PointTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/GeometryCollectionTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/geo/MultiPointTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/springdoc/OpenApiJsonWriterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/codegen/ObjectReaderGen.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/codegen/ReaderCodeGenTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/retrofit/Retrofit2ConverterFactoryTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/v1issues/issue_4100/Issue4138.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/odps/JSONExtractScalarTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/odps/JSONExtractTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/JSONFunctionsTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVTest2.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVTest3.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVParserTest1.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVParserTest2.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVParserTest3.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVParserTest4.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVTest0.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVTest1.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVParserTest5.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/support/csv/CSVParserTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/awt/FontTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/awt/ColorTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/awt/PointTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/issues/Issue798.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/issues/IssueLiXiaoFei.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/issues/Issue363.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/issues/Issue483.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/springfox/SwaggerJsonWriterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/MappingFastJsonMessageConverterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/FastjsonSockJsMessageCodecTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/FastJsonHttpMessageConverterUnitTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/mock/FastJsonHttpMessageConverterMockTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/mock/FastJsonJsonViewMockTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/FastJsonJSONBRedisSerializerTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/FastJsonJsonViewUnitTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/MappingFastJsonJSONBMessageConverterTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonRedisSerializerTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonJSONBRedisSerializerTest.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/issues/issue283/Issue283.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/issues/issue342/Issue342.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/issues/issue237/Issue237.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/issues/issue471/Issue471.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/issues/issue337/Issue337.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/issues/issue256/Issue256.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/GenericFastJsonRedisSerializerTest2.java">
+</file>
+<file name="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-9745790591/Patched-Version/extension/src/test/java/com/alibaba/fastjson2/spring/FastJsonRedisSerializerTest.java">
+</file>
+</checkstyle>

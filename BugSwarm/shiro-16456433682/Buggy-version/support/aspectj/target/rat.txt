@@ -1,0 +1,38 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:37-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 11
+
+Apache Licensed: 11
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/test/resources/META-INF/aop.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/test/resources/shiroDummyServiceTest.ini
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/test/java/org/apache/shiro/aspectj/DummyService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/test/java/org/apache/shiro/aspectj/SecuredDummyService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/test/java/org/apache/shiro/aspectj/DummyServiceTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/test/java/org/apache/shiro/aspectj/RestrictedDummyService.java
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/main/java/org/apache/shiro/aspectj/BeforeAdviceMethodInvocationAdapter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/main/java/org/apache/shiro/aspectj/AspectjAnnotationsAuthorizingMethodInterceptor.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/main/java/org/apache/shiro/aspectj/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/aspectj/src/main/aspect/org/apache/shiro/aspectj/ShiroAnnotationAuthorizingAspect.java
+ 
+*****************************************************

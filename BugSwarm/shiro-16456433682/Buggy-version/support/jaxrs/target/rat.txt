@@ -1,0 +1,37 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:39-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 10
+
+Apache Licensed: 10
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/test/groovy/org/apache/shiro/web/jaxrs/SubjectPrincipalRequestFilterTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/test/groovy/org/apache/shiro/web/jaxrs/ShiroSecurityContextTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/test/groovy/org/apache/shiro/web/jaxrs/ExceptionMapperTest.groovy
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs/ShiroFeature.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs/ShiroAnnotationFilterFeature.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs/SubjectPrincipalRequestFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs/AnnotationAuthorizationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs/ExceptionMapper.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs/ShiroSecurityContext.java
+ 
+*****************************************************

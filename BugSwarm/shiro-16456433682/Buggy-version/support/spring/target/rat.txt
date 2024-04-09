@@ -1,0 +1,84 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2024-04-09T01:33:39-05:00
+
+Notes: 1
+Binaries: 0
+Archives: 0
+Standards: 57
+
+Apache Licensed: 57
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+0 Unknown Licenses
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/resources/org/apache/shiro/spring/security/interceptor/AbstractAuthorizationAnnotationTest-context.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/resources/org/apache/shiro/spring/security/interceptor/DapcAuthorizationAnnotationTest-context.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/resources/org/apache/shiro/spring/security/interceptor/SchemaAuthorizationAnnotationTest-context.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/resources/org/apache/shiro/spring/web/config/ShiroWebConfigurationTestSameSiteStrict.properties
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/resources/org/apache/shiro/spring/web/ShiroFilterFactoryBeanTest.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/resources/log4j2-test.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/remoting/SecureRemoteInvocationFactoryTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/security/interceptor/AbstractAuthorizationAnnotationTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/security/interceptor/DefaultTestService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/security/interceptor/SchemaAuthorizationAnnotationTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/security/interceptor/DapcAuthorizationAnnotationTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/security/interceptor/TestService.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/security/interceptor/AuthorizationAttributeSourceAdvisorTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/web/DummyFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/web/config/ShiroWebConfigurationTestSameSiteStrict.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/web/ShiroFilterFactoryBeanTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/web/testconfig/CacheManagerConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/testconfig/EventBusConsumersTestConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/testconfig/RealmTestConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/testconfig/EventBusTestConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/java/org/apache/shiro/spring/testconfig/OptionalComponentsTestConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/config/ShiroConfigurationTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/config/ShiroWebFilterConfigurationTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/config/ShiroConfigurationWithOptionalComponentsTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/config/ShiroEventBusAwareBeanPostProcessorTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/config/ShiroBeanConfigurationTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/web/config/DefaultShiroFilterChainDefinitionTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/web/config/ShiroWebConfigurationTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/web/config/ShiroWebConfigurationWithCacheTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/test/groovy/org/apache/shiro/spring/web/ShiroUrlPathHelperTest.groovy
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/remoting/SecureRemoteInvocationExecutor.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/remoting/SecureRemoteInvocationFactory.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/remoting/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/config/ShiroAnnotationProcessorConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/config/AbstractShiroBeanConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/config/AbstractShiroConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/config/ShiroBeanConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/config/AbstractShiroAnnotationProcessorConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/config/ShiroConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/security/interceptor/AopAllianceAnnotationsAuthorizingMethodInterceptor.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/security/interceptor/AuthorizationAttributeSourceAdvisor.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/security/interceptor/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/ShiroUrlPathHelper.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/ShiroFilterFactoryBean.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/config/ShiroWebConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/config/AbstractShiroWebFilterConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/config/ShiroRequestMappingConfig.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/config/ShiroWebFilterConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/config/DefaultShiroFilterChainDefinition.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/config/AbstractShiroWebConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/config/ShiroFilterChainDefinition.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/web/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/LifecycleBeanPostProcessor.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/aop/SpringAnnotationResolver.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/ShiroEventBusBeanPostProcessor.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/support/spring/src/main/java/org/apache/shiro/spring/package-info.java
+ 
+*****************************************************

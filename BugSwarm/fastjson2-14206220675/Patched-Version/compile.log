@@ -1,0 +1,386 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] fastjson2-parent                                                   [pom]
+[INFO] fastjson2                                                          [jar]
+[INFO] fastjson2-extension                                                [jar]
+[INFO] fastjson2-benchmark                                                [jar]
+[INFO] fastjson2-extension-spring5                                        [jar]
+[INFO] example-spring-test                                                [jar]
+[INFO] fastjson1-compatible                                               [jar]
+[INFO] fastjson2-kotlin                                                   [jar]
+[INFO] safemode-test                                                      [jar]
+[INFO] 
+[INFO] ---------------< com.alibaba.fastjson2:fastjson2-parent >---------------
+[INFO] Building fastjson2-parent 2.0.34-SNAPSHOT                          [1/9]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson2-parent ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ fastjson2-parent ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ fastjson2-parent ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ fastjson2-parent ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ fastjson2-parent ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] ------------------< com.alibaba.fastjson2:fastjson2 >-------------------
+[INFO] Building fastjson2 2.0.34-SNAPSHOT                                 [2/9]
+[INFO]   from core/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson2 ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ fastjson2 ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ fastjson2 ---
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fastjson2 ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ fastjson2 ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ fastjson2 ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 524 source files with javac [debug target 1.8] to target/classes
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/UnsafeUtils.java:[3,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java:[5,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16JDK9UF.java:[3,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderASCII.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/UnsafeUtils.java:[8,25] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/UnsafeUtils.java:[10,9] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/UnsafeUtils.java:[12,36] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/UnsafeUtils.java:[14,23] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java:[289,51] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java:[514,50] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16JDK9UF.java:[46,48] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderASCII.java:[505,28] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderASCII.java:[519,28] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/schema/JSONSchema.java: Some input files use or override a deprecated API.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/schema/JSONSchema.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] -------------< com.alibaba.fastjson2:fastjson2-extension >--------------
+[INFO] Building fastjson2-extension 2.0.34-SNAPSHOT                       [3/9]
+[INFO]   from extension/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson2-extension ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ fastjson2-extension ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ fastjson2-extension ---
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fastjson2-extension ---
+[INFO] skip non existing resourceDirectory /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/extension/src/main/resources
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ fastjson2-extension ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ fastjson2-extension ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 25 source files with javac [debug target 1.8] to target/classes
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONExtract.java: /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONExtract.java uses or overrides a deprecated API.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/odps/JSONExtract.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVUtils.java: /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVUtils.java uses unchecked or unsafe operations.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/extension/src/main/java/com/alibaba/fastjson2/support/csv/CSVUtils.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] -------------< com.alibaba.fastjson2:fastjson2-benchmark >--------------
+[INFO] Building fastjson2-benchmark 2.0.34-SNAPSHOT                       [4/9]
+[INFO]   from benchmark/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson2-benchmark ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ fastjson2-benchmark ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ fastjson2-benchmark ---
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fastjson2-benchmark ---
+[INFO] Copying 29 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ fastjson2-benchmark ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ fastjson2-benchmark ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 152 source files with javac [debug target 1.8] to target/classes
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/benchmark/src/main/java/com/alibaba/fastjson2/benchmark/protobuf/MediaContentHolder.java: Some input files use or override a deprecated API.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/benchmark/src/main/java/com/alibaba/fastjson2/benchmark/protobuf/MediaContentHolder.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/benchmark/src/main/java/com/alibaba/fastjson2/benchmark/wast/LongTextParseCase.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/benchmark/src/main/java/com/alibaba/fastjson2/benchmark/wast/LongTextParseCase.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (compile) @ fastjson2-benchmark ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 152 source files with javac [debug target 1.8] to target/classes
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.StringField20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteStringNoneCache already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.DateParseMultiFormat already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.DateParse19 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteStringTree1x already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.DateWrite already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayFuryParse already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CartTree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.AsciiToChars already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.WriteCase already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.BigInteger20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.BigDecimal20Tree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.HomepageTree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.Double20Tree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.String20Tree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CSVBank already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.LargeFile2MTest already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.DoubleValue20L already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CSVReaderCOVID19 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.SimpleBeanCase already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.String20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.Instant20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.DateFormat19 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.DateWriteCase already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteStringTree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.Float20Tree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.Date20TreeWrite already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.LongTextParseCase already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.Date20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.BigDecimalNew already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseTreeUTF8BytesPretty already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseBinary already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.SpaceCheckBenchmark already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.jsonschema.JSONSchemaBenchmark2 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.Issue210 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CSVCOVID19 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.IntValue20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseTreeStringPretty already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayFuryCompatibleWrite already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.jsonpath.JSONPathMultiBenchmark2 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.LargeFile26MTest already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.DoubleArray20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteBinaryArrayMapping already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.SimpleBeanWriteCase already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteUTF8Bytes already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.NumberValueBeanCase already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseBinaryArrayMapping already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.jsonpath.JSONPathMultiBenchmark already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.BytesAsciiCheck already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.Int20Tree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.BigDecimalWrite already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.DateParse already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.Date20Write already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.Int32ValueBeanCase already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.DoubleToString already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.OffsetDateTime20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.Issue609 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseUTF8BytesPretty already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.jjb.ClientsParseUTF8Bytes already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.LocalDateTime20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.StringCreateBenchmark already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseUTF8Bytes already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.jjb.ClientsWriteUTF8Bytes already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.DoubleValue20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CSVCDCList already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteBinary already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteUTF8BytesTree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.issues.Issue206ParseTreeStringPretty already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayFuryParseNoneCache already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseTreeString already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.SpaceCheckWorestBenchmark already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CartItemDO2Benchmark already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseStringNoneCache already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.TaobaoH5ApiTree already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.Invoke already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.ASCIICheck already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.StringFormatBenchmark already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteBinaryAutoType already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseTreeUTF8Bytes already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.DoubleToBigDecimal already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.BigDecimal20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayFuryWrite already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CSVCOVID19List already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.DecodeASCIIBenchmarkJDK8 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayFuryCompatibleParse already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CSVBankList already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.ZonedDateTime20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseString already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.InvokeFirst already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.FloatToBigDecimal already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.SuperLongText already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.jjb.UsersParseUTF8Bytes already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CSVPerson already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.LongTextParse2 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.wast.EishayWriterCase already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.CSVBig38M already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.FloatValue20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseBinaryAutoType already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.EncodeUTF8Benchmark already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.schema.JSONSchemaBenchmark1 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.fastcode.DateFormat10 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.primitves.LocalDate20 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayFuryWriteNoneCache already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.DecodeUTF8BenchmarkJDK17 already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.LargeFile3MTest already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayWriteString already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.StringGetValueBenchmark already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.jjb.UsersWriteUTF8Bytes already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.eishay.EishayParseStringPretty already exist, overwriting
+[INFO] Benchmark entries for com.alibaba.fastjson2.benchmark.jsonpath.BookStore already exist, overwriting
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/benchmark/src/main/java/com/alibaba/fastjson2/benchmark/protobuf/MediaContentHolder.java: Some input files use or override a deprecated API.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/benchmark/src/main/java/com/alibaba/fastjson2/benchmark/protobuf/MediaContentHolder.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/benchmark/src/main/java/com/alibaba/fastjson2/benchmark/wast/LongTextParseCase.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/benchmark/src/main/java/com/alibaba/fastjson2/benchmark/wast/LongTextParseCase.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] ---------< com.alibaba.fastjson2:fastjson2-extension-spring5 >----------
+[INFO] Building fastjson2-extension-spring5 2.0.34-SNAPSHOT               [5/9]
+[INFO]   from extension-spring5/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson2-extension-spring5 ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ fastjson2-extension-spring5 ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ fastjson2-extension-spring5 ---
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fastjson2-extension-spring5 ---
+[INFO] skip non existing resourceDirectory /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/extension-spring5/src/main/resources
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ fastjson2-extension-spring5 ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ fastjson2-extension-spring5 ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 15 source files with javac [debug target 1.8] to target/classes
+[INFO] 
+[INFO] -----------< com.com.alibaba.fastjson2:example-spring-test >------------
+[INFO] Building example-spring-test 2.0.34-SNAPSHOT                       [6/9]
+[INFO]   from example-spring-test/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ example-spring-test ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ example-spring-test ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ example-spring-test ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ example-spring-test ---
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ example-spring-test ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ example-spring-test ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 8 source files with javac [debug target 1.8] to target/classes
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/WebMvcConfigurer.java: /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/WebMvcConfigurer.java uses or overrides a deprecated API.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/WebMvcConfigurer.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/ChatMessageHandler.java: /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/ChatMessageHandler.java uses unchecked or unsafe operations.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/example-spring-test/src/main/java/com/alibaba/fastjson2/example/springtest/config/ChatMessageHandler.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] ------------------------< com.alibaba:fastjson >------------------------
+[INFO] Building fastjson1-compatible 2.0.34-SNAPSHOT                      [7/9]
+[INFO]   from fastjson1-compatible/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ fastjson ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ fastjson ---
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fastjson ---
+[INFO] skip non existing resourceDirectory /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/fastjson1-compatible/src/main/resources
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ fastjson ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ fastjson ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 92 source files with javac [debug target 1.8] to target/classes
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/fastjson1-compatible/src/main/java/com/alibaba/fastjson/support/spring/FastJsonHttpMessageConverter.java: Some input files use or override a deprecated API.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/fastjson1-compatible/src/main/java/com/alibaba/fastjson/support/spring/FastJsonHttpMessageConverter.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/fastjson1-compatible/src/main/java/com/alibaba/fastjson/serializer/SerializeConfig.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/fastjson1-compatible/src/main/java/com/alibaba/fastjson/serializer/SerializeConfig.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] ---------------< com.alibaba.fastjson2:fastjson2-kotlin >---------------
+[INFO] Building fastjson2-kotlin 2.0.34-SNAPSHOT                          [8/9]
+[INFO]   from kotlin/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ fastjson2-kotlin ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ fastjson2-kotlin ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ fastjson2-kotlin ---
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fastjson2-kotlin ---
+[INFO] skip non existing resourceDirectory /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/kotlin/src/main/resources
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ fastjson2-kotlin ---
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ fastjson2-kotlin ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] 
+[INFO] ----------------< com.alibaba.fastjson2:safemode-test >-----------------
+[INFO] Building safemode-test 2.0.34-SNAPSHOT                             [9/9]
+[INFO]   from safemode-test/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ safemode-test ---
+[INFO] 
+[INFO] --- checkstyle:3.2.2:check (checkstyle) @ safemode-test ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.3.0:enforce (enforce-maven) @ safemode-test ---
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ safemode-test ---
+[INFO] skip non existing resourceDirectory /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/fastjson2-14206220675/Patched-Version/safemode-test/src/main/resources
+[INFO] 
+[INFO] --- kotlin:1.8.21:compile (compile) @ safemode-test ---
+[WARNING] No sources found skipping Kotlin compile
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (java-compile) @ safemode-test ---
+[INFO] No sources to compile
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for fastjson2-parent 2.0.34-SNAPSHOT:
+[INFO] 
+[INFO] fastjson2-parent ................................... SUCCESS [  3.966 s]
+[INFO] fastjson2 .......................................... SUCCESS [ 34.862 s]
+[INFO] fastjson2-extension ................................ SUCCESS [  1.542 s]
+[INFO] fastjson2-benchmark ................................ SUCCESS [ 27.109 s]
+[INFO] fastjson2-extension-spring5 ........................ SUCCESS [  1.771 s]
+[INFO] example-spring-test ................................ SUCCESS [  3.203 s]
+[INFO] fastjson1-compatible ............................... SUCCESS [  5.479 s]
+[INFO] fastjson2-kotlin ................................... SUCCESS [ 10.748 s]
+[INFO] safemode-test ...................................... SUCCESS [  0.281 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:29 min
+[INFO] Finished at: 2024-04-05T20:25:04-05:00
+[INFO] ------------------------------------------------------------------------

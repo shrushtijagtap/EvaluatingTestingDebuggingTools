@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="138" started-at="2024-04-09T05:58:24Z" finished-at="2024-04-09T05:58:25Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="138" started-at="2024-04-09T05:58:24Z" finished-at="2024-04-09T05:58:25Z">
+      <class name="io.swagger.oas.annotations.test.security.SecurityTests">
+        <test-method status="PASS" signature="testSecurityRequirement()[pri:0, instance:io.swagger.oas.annotations.test.security.SecurityTests@4de8b406]" name="testSecurityRequirement" duration-ms="52" started-at="2024-04-09T00:58:25Z" finished-at="2024-04-09T00:58:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSecurityRequirement -->
+      </class> <!-- io.swagger.oas.annotations.test.security.SecurityTests -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
