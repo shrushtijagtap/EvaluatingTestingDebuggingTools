@@ -490,6 +490,13 @@
                 <artifactId>guava</artifactId>
                 <version>${guava-version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.evosuite</groupId>
+                <artifactId>evosuite-standalone-runtime</artifactId>
+                <version>1.2.0</version> <!-- Or the version you prefer -->
+                <scope>system</scope>
+                <systemPath>${project.basedir}/../../../../evosuite-standalone-runtime-1.2.0.jar</systemPath>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>

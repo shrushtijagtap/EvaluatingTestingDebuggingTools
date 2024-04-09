@@ -2,12 +2,12 @@
 *****************************************************
 Summary
 -------
-Generated at: 2024-04-08T05:39:01-05:00
+Generated at: 2024-04-09T01:33:38-05:00
 
 Notes: 1
 Binaries: 0
 Archives: 0
-Standards: 153
+Standards: 155
 
 Apache Licensed: 153
 Generated Documents: 0
@@ -15,166 +15,246 @@ Generated Documents: 0
 JavaDocs are generated, thus a license header is optional.
 Generated files do not require license headers.
 
-0 Unknown Licenses
+2 Unknown Licenses
+
+*****************************************************
+
+Files with unapproved licenses:
+
+  /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/RandoopRegressionTest0.java
+  /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/RandoopRegressionTest.java
+
+*****************************************************
 
 *****************************************************
   Files with Apache License headers will be marked AL
   Binary files (which do not require any license headers) will be marked B
   Compressed archives will be marked A
   Notices, licenses etc. will be marked N
-  AL    pom.xml
-  AL    src/test/resources/IniShiroFilterTest.ini
-  AL    src/test/resources/org/apache/shiro/web/env/EnvironmentLoaderServiceTest.ini
-  AL    src/test/resources/log4j2-test.xml
-  AL    src/test/java/org/apache/shiro/web/servlet/SimpleCookieTest.java
-  AL    src/test/java/org/apache/shiro/web/servlet/ShiroHttpServletRequestTest.java
-  AL    src/test/java/org/apache/shiro/web/servlet/OncePerRequestFilterTest.java
-  AL    src/test/java/org/apache/shiro/web/config/WebIniSecurityManagerFactoryTest.java
-  AL    src/test/java/org/apache/shiro/web/RestoreSystemProperties.java
-  AL    src/test/java/org/apache/shiro/web/env/EnvironmentLoaderServiceTest.java
-  AL    src/test/java/org/apache/shiro/web/env/WebEnvironmentStub.java
-  AL    src/test/java/org/apache/shiro/web/env/FilterStub.java
-  AL    src/test/java/org/apache/shiro/web/mgt/CookieRememberMeManagerTest.java
-  AL    src/test/java/org/apache/shiro/web/mgt/NonIniWebSecurityManagerTest.java
-  AL    src/test/java/org/apache/shiro/web/mgt/AbstractWebSecurityManagerTest.java
-  AL    src/test/java/org/apache/shiro/web/mgt/DefaultWebSecurityManagerTest.java
-  AL    src/test/java/org/apache/shiro/web/WebTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/authc/BasicHttpFilterAuthenticationTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/authc/AnonymousFilterTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/mgt/PathMatchingFilterChainResolverTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/mgt/SimpleNamedFilterListTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/PathMatchingFilterTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/authz/HostFilterTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/authz/PortFilterTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/authz/SslFilterTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/authz/HttpMethodPermissionFilterTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/authz/AuthorizationFilterTest.java
-  AL    src/test/java/org/apache/shiro/web/filter/PathMatchingFilterParameterizedTest.java
-  AL    src/test/java/org/apache/shiro/web/session/HttpServletSessionTest.java
-  AL    src/test/groovy/org/apache/shiro/web/servlet/AbstractShiroFilterTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/servlet/ShiroHttpServletResponseTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/servlet/ShiroFilterTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/servlet/IniShiroFilterTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/util/WebUtilsTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/config/IniFilterChainResolverFactoryTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/env/EnvironmentLoaderTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/env/MockWebEnvironment.groovy
-  AL    src/test/groovy/org/apache/shiro/web/env/IniWebEnvironmentTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/mgt/DefaultWebSessionStorageEvaluatorTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/filter/authc/LogoutFilterTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/filter/authc/BearerHttpFilterAuthenticationTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/filter/mgt/DefaultFilterChainManagerTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/filter/InvalidRequestFilterTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/filter/session/NoSessionCreationFilterTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/session/mgt/DefaultWebSessionManagerTest.groovy
-  AL    src/test/groovy/org/apache/shiro/web/session/mgt/ServletContainerSessionManagerTest.groovy
-  AL    src/it/mrm/settings.xml
-  AL    src/it/projects/MultipleServiceLoader/pom.xml
-  AL    src/it/projects/MultipleServiceLoader/invoker.properties
-  AL    src/it/projects/MultipleServiceLoader/src/test/java/org/apache/shiro/web/it/loader/SecondaryWebEnvironmentTest.java
-  AL    src/it/projects/MultipleServiceLoader/src/main/resources/META-INF/services/org.apache.shiro.web.env.WebEnvironment
-  AL    src/it/projects/MultipleServiceLoader/src/main/java/org/apache/shiro/web/it/loader/SecondaryWebEnvironment.java
-  N     src/main/resources/META-INF/NOTICE
-  AL    src/main/resources/META-INF/shiro.tld
-  AL    src/main/java/org/apache/shiro/web/servlet/HttpSessionContext.java
-  AL    src/main/java/org/apache/shiro/web/servlet/ServletContextSupport.java
-  AL    src/main/java/org/apache/shiro/web/servlet/ShiroHttpServletResponse.java
-  AL    src/main/java/org/apache/shiro/web/servlet/SimpleCookie.java
-  AL    src/main/java/org/apache/shiro/web/servlet/AbstractShiroFilter.java
-  AL    src/main/java/org/apache/shiro/web/servlet/AdviceFilter.java
-  AL    src/main/java/org/apache/shiro/web/servlet/ShiroHttpServletRequest.java
-  AL    src/main/java/org/apache/shiro/web/servlet/IniShiroFilter.java
-  AL    src/main/java/org/apache/shiro/web/servlet/AbstractFilter.java
-  AL    src/main/java/org/apache/shiro/web/servlet/ProxiedFilterChain.java
-  AL    src/main/java/org/apache/shiro/web/servlet/OncePerRequestFilter.java
-  AL    src/main/java/org/apache/shiro/web/servlet/NameableFilter.java
-  AL    src/main/java/org/apache/shiro/web/servlet/Cookie.java
-  AL    src/main/java/org/apache/shiro/web/servlet/ShiroHttpSession.java
-  AL    src/main/java/org/apache/shiro/web/servlet/package-info.java
-  AL    src/main/java/org/apache/shiro/web/servlet/ShiroFilter.java
-  AL    src/main/java/org/apache/shiro/web/util/RequestPairSource.java
-  AL    src/main/java/org/apache/shiro/web/util/SavedRequest.java
-  AL    src/main/java/org/apache/shiro/web/util/RedirectView.java
-  AL    src/main/java/org/apache/shiro/web/util/WebUtils.java
-  AL    src/main/java/org/apache/shiro/web/config/IniFilterChainResolverFactory.java
-  AL    src/main/java/org/apache/shiro/web/config/ShiroFilterConfiguration.java
-  AL    src/main/java/org/apache/shiro/web/config/WebIniSecurityManagerFactory.java
-  AL    src/main/java/org/apache/shiro/web/config/package-info.java
-  AL    src/main/java/org/apache/shiro/web/subject/WebSubjectContext.java
-  AL    src/main/java/org/apache/shiro/web/subject/WebSubject.java
-  AL    src/main/java/org/apache/shiro/web/subject/support/DefaultWebSubjectContext.java
-  AL    src/main/java/org/apache/shiro/web/subject/support/WebDelegatingSubject.java
-  AL    src/main/java/org/apache/shiro/web/subject/support/package-info.java
-  AL    src/main/java/org/apache/shiro/web/subject/package-info.java
-  AL    src/main/java/org/apache/shiro/web/tags/LacksPermissionTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/AuthenticatedTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/PermissionTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/GuestTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/NotAuthenticatedTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/SecureTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/HasAnyRolesTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/LacksRoleTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/UserTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/RoleTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/HasRoleTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/PrincipalTag.java
-  AL    src/main/java/org/apache/shiro/web/tags/package-info.java
-  AL    src/main/java/org/apache/shiro/web/tags/HasPermissionTag.java
-  AL    src/main/java/org/apache/shiro/web/env/WebEnvironment.java
-  AL    src/main/java/org/apache/shiro/web/env/MutableWebEnvironment.java
-  AL    src/main/java/org/apache/shiro/web/env/IniWebEnvironment.java
-  AL    src/main/java/org/apache/shiro/web/env/EnvironmentLoaderListener.java
-  AL    src/main/java/org/apache/shiro/web/env/DefaultWebEnvironment.java
-  AL    src/main/java/org/apache/shiro/web/env/ResourceBasedWebEnvironment.java
-  AL    src/main/java/org/apache/shiro/web/env/EnvironmentLoader.java
-  AL    src/main/java/org/apache/shiro/web/env/package-info.java
-  AL    src/main/java/org/apache/shiro/web/mgt/DefaultWebSecurityManager.java
-  AL    src/main/java/org/apache/shiro/web/mgt/CookieRememberMeManager.java
-  AL    src/main/java/org/apache/shiro/web/mgt/WebSecurityManager.java
-  AL    src/main/java/org/apache/shiro/web/mgt/DefaultWebSessionStorageEvaluator.java
-  AL    src/main/java/org/apache/shiro/web/mgt/DefaultWebSubjectFactory.java
-  AL    src/main/java/org/apache/shiro/web/mgt/package-info.java
-  AL    src/main/java/org/apache/shiro/web/filter/PathConfigProcessor.java
-  AL    src/main/java/org/apache/shiro/web/filter/PathMatchingFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/AnonymousFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/FormAuthenticationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/UserFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/PassThruAuthenticationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/BasicHttpAuthenticationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/HttpAuthenticationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/LogoutFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/AuthenticatingFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/package-info.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/BearerHttpAuthenticationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authc/AuthenticationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/InvalidRequestFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/mgt/NamedFilterList.java
-  AL    src/main/java/org/apache/shiro/web/filter/mgt/FilterChainResolver.java
-  AL    src/main/java/org/apache/shiro/web/filter/mgt/SimpleNamedFilterList.java
-  AL    src/main/java/org/apache/shiro/web/filter/mgt/DefaultFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/mgt/PathMatchingFilterChainResolver.java
-  AL    src/main/java/org/apache/shiro/web/filter/mgt/FilterChainManager.java
-  AL    src/main/java/org/apache/shiro/web/filter/mgt/DefaultFilterChainManager.java
-  AL    src/main/java/org/apache/shiro/web/filter/mgt/package-info.java
-  AL    src/main/java/org/apache/shiro/web/filter/AccessControlFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authz/PortFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authz/RolesAuthorizationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authz/AuthorizationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authz/SslFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authz/PermissionsAuthorizationFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authz/HostFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/authz/package-info.java
-  AL    src/main/java/org/apache/shiro/web/filter/authz/HttpMethodPermissionFilter.java
-  AL    src/main/java/org/apache/shiro/web/filter/package-info.java
-  AL    src/main/java/org/apache/shiro/web/filter/session/NoSessionCreationFilter.java
-  AL    src/main/java/org/apache/shiro/web/package-info.java
-  AL    src/main/java/org/apache/shiro/web/session/HttpServletSession.java
-  AL    src/main/java/org/apache/shiro/web/session/mgt/DefaultWebSessionContext.java
-  AL    src/main/java/org/apache/shiro/web/session/mgt/WebSessionKey.java
-  AL    src/main/java/org/apache/shiro/web/session/mgt/DefaultWebSessionManager.java
-  AL    src/main/java/org/apache/shiro/web/session/mgt/ServletContainerSessionManager.java
-  AL    src/main/java/org/apache/shiro/web/session/mgt/WebSessionManager.java
-  AL    src/main/java/org/apache/shiro/web/session/mgt/WebSessionContext.java
-  AL    src/main/java/org/apache/shiro/web/session/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/resources/IniShiroFilterTest.ini
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/resources/org/apache/shiro/web/env/EnvironmentLoaderServiceTest.ini
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/resources/log4j2-test.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/servlet/SimpleCookieTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/servlet/ShiroHttpServletRequestTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/servlet/OncePerRequestFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/config/WebIniSecurityManagerFactoryTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/RestoreSystemProperties.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/env/EnvironmentLoaderServiceTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/env/WebEnvironmentStub.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/env/FilterStub.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/CookieRememberMeManagerTest.java
+ !????? /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/RandoopRegressionTest0.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/NonIniWebSecurityManagerTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/AbstractWebSecurityManagerTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/DefaultWebSecurityManagerTest.java
+ !????? /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/RandoopRegressionTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/WebTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/authc/BasicHttpFilterAuthenticationTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/authc/AnonymousFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/mgt/PathMatchingFilterChainResolverTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/mgt/SimpleNamedFilterListTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/PathMatchingFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/authz/HostFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/authz/PortFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/authz/SslFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/authz/HttpMethodPermissionFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/authz/AuthorizationFilterTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/filter/PathMatchingFilterParameterizedTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/session/HttpServletSessionTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/servlet/AbstractShiroFilterTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/servlet/ShiroHttpServletResponseTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/servlet/ShiroFilterTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/servlet/IniShiroFilterTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/util/WebUtilsTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/config/IniFilterChainResolverFactoryTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/env/EnvironmentLoaderTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/env/MockWebEnvironment.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/env/IniWebEnvironmentTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/mgt/DefaultWebSessionStorageEvaluatorTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/filter/authc/LogoutFilterTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/filter/authc/BearerHttpFilterAuthenticationTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/filter/mgt/DefaultFilterChainManagerTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/filter/InvalidRequestFilterTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/filter/session/NoSessionCreationFilterTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/session/mgt/DefaultWebSessionManagerTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/groovy/org/apache/shiro/web/session/mgt/ServletContainerSessionManagerTest.groovy
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/it/mrm/settings.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/it/projects/MultipleServiceLoader/pom.xml
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/it/projects/MultipleServiceLoader/invoker.properties
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/it/projects/MultipleServiceLoader/src/test/java/org/apache/shiro/web/it/loader/SecondaryWebEnvironmentTest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/it/projects/MultipleServiceLoader/src/main/resources/META-INF/services/org.apache.shiro.web.env.WebEnvironment
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/it/projects/MultipleServiceLoader/src/main/java/org/apache/shiro/web/it/loader/SecondaryWebEnvironment.java
+  N     /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/resources/META-INF/NOTICE
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/resources/META-INF/shiro.tld
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/HttpSessionContext.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/ServletContextSupport.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/ShiroHttpServletResponse.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/SimpleCookie.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/AbstractShiroFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/AdviceFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/ShiroHttpServletRequest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/IniShiroFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/AbstractFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/ProxiedFilterChain.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/OncePerRequestFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/NameableFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/Cookie.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/ShiroHttpSession.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/servlet/ShiroFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/util/RequestPairSource.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/util/SavedRequest.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/util/RedirectView.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/util/WebUtils.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/config/IniFilterChainResolverFactory.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/config/ShiroFilterConfiguration.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/config/WebIniSecurityManagerFactory.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/config/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/subject/WebSubjectContext.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/subject/WebSubject.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/subject/support/DefaultWebSubjectContext.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/subject/support/WebDelegatingSubject.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/subject/support/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/subject/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/LacksPermissionTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/AuthenticatedTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/PermissionTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/GuestTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/NotAuthenticatedTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/SecureTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/HasAnyRolesTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/LacksRoleTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/UserTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/RoleTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/HasRoleTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/PrincipalTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/tags/HasPermissionTag.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/env/WebEnvironment.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/env/MutableWebEnvironment.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/env/IniWebEnvironment.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/env/EnvironmentLoaderListener.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/env/DefaultWebEnvironment.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/env/ResourceBasedWebEnvironment.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/env/EnvironmentLoader.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/env/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/mgt/DefaultWebSecurityManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/mgt/CookieRememberMeManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/mgt/WebSecurityManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/mgt/DefaultWebSessionStorageEvaluator.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/mgt/DefaultWebSubjectFactory.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/mgt/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/PathConfigProcessor.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/PathMatchingFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/AnonymousFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/FormAuthenticationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/UserFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/PassThruAuthenticationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/BasicHttpAuthenticationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/HttpAuthenticationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/LogoutFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/AuthenticatingFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/BearerHttpAuthenticationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authc/AuthenticationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/InvalidRequestFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/mgt/NamedFilterList.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/mgt/FilterChainResolver.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/mgt/SimpleNamedFilterList.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/mgt/DefaultFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/mgt/PathMatchingFilterChainResolver.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/mgt/FilterChainManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/mgt/DefaultFilterChainManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/mgt/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/AccessControlFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authz/PortFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authz/RolesAuthorizationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authz/AuthorizationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authz/SslFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authz/PermissionsAuthorizationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authz/HostFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authz/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/authz/HttpMethodPermissionFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/filter/session/NoSessionCreationFilter.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/package-info.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/session/HttpServletSession.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/session/mgt/DefaultWebSessionContext.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/session/mgt/WebSessionKey.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/session/mgt/DefaultWebSessionManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/session/mgt/ServletContainerSessionManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/session/mgt/WebSessionManager.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/session/mgt/WebSessionContext.java
+  AL    /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/session/package-info.java
  
 *****************************************************
+
+ Printing headers for text files without a valid license header...
+ 
+=====================================================
+== File: /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/RandoopRegressionTest0.java
+=====================================================
+package org.apache.shiro.web.mgt;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class RandoopRegressionTest0 {
+
+    public static boolean debug = false;
+
+    @Test
+    public void test01() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test01");
+        java.lang.String str0 = org.apache.shiro.web.mgt.CookieRememberMeManager.DEFAULT_REMEMBER_ME_COOKIE_NAME;
+        org.junit.Assert.assertEquals("'" + str0 + "' != '" + "rememberMe" + "'", str0, "rememberMe");
+    }
+
+    @Test
+    public void test02() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test02");
+        java.lang.Object obj0 = new java.lang.Object();
+        java.lang.Class<?> wildcardClass1 = obj0.getClass();
+        org.junit.Assert.assertNotNull(wildcardClass1);
+    }
+
+    @Test
+    public void test03() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test03");
+        org.apache.shiro.web.mgt.CookieRememberMeManager cookieRememberMeManager0 = new org.apache.shiro.web.mgt.CookieRememberMeManager();
+        byte[] byteArray1 = cookieRememberMeManager0.getDecryptionCipherKey();
+        org.apache.shiro.web.servlet.Cookie cookie2 = null;
+        cookieRememberMeManager0.setCookie(cookie2);
+        org.apache.shiro.web.servlet.Cookie cookie4 = cookieRememberMeManager0.getCookie();
+        org.junit.Assert.assertNotNull(byteArray1);
+// flaky:         org.junit.Assert.assertEquals(java.util.Arrays.toString(byteArray1), "[114, -91, -80, 100, -65, 59, 115, 63, -84, -101, 38, -104, -62, 48, 94, 27]");
+        org.junit.Assert.assertNull(cookie4);
+    }
+
+    @Test
+    public void test04() throws Throwable {
+        if (debug)
+            System.out.format("%n%s%n", "RegressionTest0.test04");
+        org.apache.shiro.web.mgt.CookieRememberMeManager cookieRememberMeManager0 = new org.apache.shiro.web.mgt.CookieRememberMeManager();
+        org.apache.shiro.web.servlet.Cookie cookie1 = null;
+        cookieRememberMeManager0.setCookie(cookie1);
+        org.apache.shiro.web.mgt.CookieRememberMeManager cookieRememberMeManager3 = new org.apache.shiro.web.mgt.CookieRememberMeManager();
+        byte[] byteArray4 = cookieRememberMeManager3.getDecryptionCipherKey();
+
+=====================================================
+== File: /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/shiro-16456433682/Buggy-version/web/src/test/java/org/apache/shiro/web/mgt/RandoopRegressionTest.java
+=====================================================
+package org.apache.shiro.web.mgt;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses({ RandoopRegressionTest0.class })
+public class RandoopRegressionTest {
+}
+

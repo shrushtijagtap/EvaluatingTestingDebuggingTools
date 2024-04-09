@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestSuite" time="1.145" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="gopherProxySet" value="false"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations/target/test-classes:/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations/target/classes:/Users/shreyachaudhary/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.jar:/Users/shreyachaudhary/.m2/repository/org/testng/testng/6.9.10/testng-6.9.10.jar:/Users/shreyachaudhary/.m2/repository/com/beust/jcommander/1.48/jcommander-1.48.jar:/Users/shreyachaudhary/.m2/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar:"/>
+    <property name="java.vm.vendor" value="Temurin"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="America/Chicago"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib"/>
+    <property name="sun.java.command" value="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations/target/surefire/surefirebooter-20240409005822947_3.jar /Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations/target/surefire 2024-04-09T00-58-22_024-jvmRun1 surefire-20240409005822947_1tmp surefire_0-20240409005822947_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="surefire.test.class.path" value="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations/target/test-classes:/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations/target/classes:/Users/shreyachaudhary/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.jar:/Users/shreyachaudhary/.m2/repository/org/testng/testng/6.9.10/testng-6.9.10.jar:/Users/shreyachaudhary/.m2/repository/com/beust/jcommander/1.48/jcommander-1.48.jar:/Users/shreyachaudhary/.m2/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/shreyachaudhary"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre"/>
+    <property name="basedir" value="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations"/>
+    <property name="file.separator" value="/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations/target/surefire/surefirebooter-20240409005822947_3.jar"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/classes"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="1.8.0_402-b06"/>
+    <property name="user.name" value="shreyachaudhary"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="14.4.1"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/Users/shreyachaudhary/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/70/9z8mmtr153x2znr25_zb57mr0000gn/T/"/>
+    <property name="java.version" value="1.8.0_402"/>
+    <property name="user.dir" value="/Users/shreyachaudhary/Desktop/cs527/CS527-Project/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-annotations"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/Users/shreyachaudhary/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Temurin"/>
+    <property name="java.vm.version" value="25.402-b06"/>
+    <property name="java.specification.maintenance.version" value="5"/>
+    <property name="java.ext.dirs" value="/Users/shreyachaudhary/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+  </properties>
+  <testcase name="testSecurityRequirement" classname="io.swagger.oas.annotations.test.security.SecurityTests" time="0.056"/>
+</testsuite>
