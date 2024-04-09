@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.bug.Bug_for_issue_265
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.003 s <<< FAILURE! -- in com.alibaba.json.bvt.bug.Bug_for_issue_265
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.bug.Bug_for_issue_265
 com.alibaba.json.bvt.bug.Bug_for_issue_265.test_for_issue_decode -- Time elapsed: 0 s <<< ERROR!
 com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt.bug.Bug_for_issue_265$User, property id
 	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseField(JavaBeanDeserializer.java:1132)
@@ -11,8 +11,7 @@ com.alibaba.fastjson.JSONException: setter not found, class com.alibaba.json.bvt
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:383)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:287)
 	at com.alibaba.fastjson.JSON.parseObject(JSON.java:560)
-	at com.alibaba.json.bvt.bug.Bug_for_issue_265.__CLR4_5_2w8g2bm152r(Bug_for_issue_265.java:32)
-	at com.alibaba.json.bvt.bug.Bug_for_issue_265.test_for_issue_decode(Bug_for_issue_265.java:29)
+	at com.alibaba.json.bvt.bug.Bug_for_issue_265.test_for_issue_decode(Bug_for_issue_265.java:32)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

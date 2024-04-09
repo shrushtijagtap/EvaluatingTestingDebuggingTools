@@ -1,12 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.bug.Bug_for_xiayucai2012
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.024 s <<< FAILURE! -- in com.alibaba.json.bvt.bug.Bug_for_xiayucai2012
-com.alibaba.json.bvt.bug.Bug_for_xiayucai2012.test_for_xiayucai2012 -- Time elapsed: 0.022 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.bug.Bug_for_xiayucai2012
+com.alibaba.json.bvt.bug.Bug_for_xiayucai2012.test_for_xiayucai2012 -- Time elapsed: 0 s <<< ERROR!
 java.text.ParseException: Unparseable date: "0000-00-00 00:00:00"
 	at java.text.DateFormat.parse(DateFormat.java:366)
-	at com.alibaba.json.bvt.bug.Bug_for_xiayucai2012.__CLR4_5_25klnu016tq(Bug_for_xiayucai2012.java:29)
-	at com.alibaba.json.bvt.bug.Bug_for_xiayucai2012.test_for_xiayucai2012(Bug_for_xiayucai2012.java:21)
+	at com.alibaba.json.bvt.bug.Bug_for_xiayucai2012.test_for_xiayucai2012(Bug_for_xiayucai2012.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

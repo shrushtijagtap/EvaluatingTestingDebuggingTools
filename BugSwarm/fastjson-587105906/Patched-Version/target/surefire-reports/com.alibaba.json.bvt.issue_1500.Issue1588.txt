@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.issue_1500.Issue1588
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.003 s <<< FAILURE! -- in com.alibaba.json.bvt.issue_1500.Issue1588
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.issue_1500.Issue1588
 com.alibaba.json.bvt.issue_1500.Issue1588.test_for_issue -- Time elapsed: 0 s <<< ERROR!
 java.lang.NullPointerException
 

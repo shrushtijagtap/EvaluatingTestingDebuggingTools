@@ -1,15 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.array.BeanToArrayTest_long
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.120 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.array.BeanToArrayTest_long
+Tests run: 6, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.array.BeanToArrayTest_long
 com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.__CLR4_5_2flyld31kc8(BeanToArrayTest_long.java:32)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error(BeanToArrayTest_long.java:25)
+	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error(BeanToArrayTest_long.java:32)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -32,14 +31,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_max -- Time elapsed: 0.023 s <<< FAILURE!
+com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_max -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.__CLR4_5_2xo4rj21kck(BeanToArrayTest_long.java:52)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_max(BeanToArrayTest_long.java:45)
+	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_max(BeanToArrayTest_long.java:52)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -62,14 +60,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_min -- Time elapsed: 0.020 s <<< FAILURE!
+com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_min -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.__CLR4_5_2pto6181kcq(BeanToArrayTest_long.java:62)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_min(BeanToArrayTest_long.java:55)
+	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_min(BeanToArrayTest_long.java:62)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -92,14 +89,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_2 -- Time elapsed: 0.027 s <<< FAILURE!
+com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_2 -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.__CLR4_5_269wgd01kce(BeanToArrayTest_long.java:42)
-	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_2(BeanToArrayTest_long.java:35)
+	at com.alibaba.json.bvt.parser.array.BeanToArrayTest_long.test_long_error_2(BeanToArrayTest_long.java:42)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

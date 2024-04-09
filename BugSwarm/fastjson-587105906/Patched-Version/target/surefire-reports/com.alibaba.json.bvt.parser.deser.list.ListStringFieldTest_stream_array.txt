@@ -1,15 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array
 -------------------------------------------------------------------------------
-Tests run: 19, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0.132 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array
-com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnull -- Time elapsed: 0.014 s <<< FAILURE!
+Tests run: 19, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array
+com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnull -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.__CLR4_5_2gu03681o65(ListStringFieldTest_stream_array.java:205)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnull(ListStringFieldTest_stream_array.java:194)
+	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnull(ListStringFieldTest_stream_array.java:205)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -32,14 +31,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fn -- Time elapsed: 0.007 s <<< FAILURE!
+com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fn -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.__CLR4_5_2yvwqb71o5e(ListStringFieldTest_stream_array.java:162)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fn(ListStringFieldTest_stream_array.java:151)
+	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fn(ListStringFieldTest_stream_array.java:162)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -62,14 +60,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnul -- Time elapsed: 0.004 s <<< FAILURE!
+com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnul -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.__CLR4_5_23f60ba1o5w(ListStringFieldTest_stream_array.java:190)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnul(ListStringFieldTest_stream_array.java:179)
+	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnul(ListStringFieldTest_stream_array.java:190)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -92,14 +89,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnu -- Time elapsed: 0.005 s <<< FAILURE!
+com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnu -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.__CLR4_5_27kkea81o5n(ListStringFieldTest_stream_array.java:176)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnu(ListStringFieldTest_stream_array.java:165)
+	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_fnu(ListStringFieldTest_stream_array.java:176)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -122,14 +118,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_0 -- Time elapsed: 0.009 s <<< FAILURE!
+com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_0 -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.__CLR4_5_2f0chxv1o45(ListStringFieldTest_stream_array.java:91)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_0(ListStringFieldTest_stream_array.java:80)
+	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_0(ListStringFieldTest_stream_array.java:91)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -152,14 +147,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_1 -- Time elapsed: 0.009 s <<< FAILURE!
+com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_1 -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.__CLR4_5_2i9cgqc1o6n(ListStringFieldTest_stream_array.java:233)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_1(ListStringFieldTest_stream_array.java:222)
+	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error_1(ListStringFieldTest_stream_array.java:233)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -182,14 +176,13 @@ java.lang.AssertionError
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error -- Time elapsed: 0.005 s <<< FAILURE!
+com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.__CLR4_5_2vbot1a1o3w(ListStringFieldTest_stream_array.java:77)
-	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error(ListStringFieldTest_stream_array.java:66)
+	at com.alibaba.json.bvt.parser.deser.list.ListStringFieldTest_stream_array.test_error(ListStringFieldTest_stream_array.java:77)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

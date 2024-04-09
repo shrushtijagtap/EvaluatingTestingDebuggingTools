@@ -1,15 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.alibaba.json.bvt.parser.error.ParseErrorTest_9
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.error.ParseErrorTest_9
-com.alibaba.json.bvt.parser.error.ParseErrorTest_9.test_for_error_4 -- Time elapsed: 0.002 s <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.alibaba.json.bvt.parser.error.ParseErrorTest_9
+com.alibaba.json.bvt.parser.error.ParseErrorTest_9.test_for_error_4 -- Time elapsed: 0 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertNotNull(Assert.java:712)
 	at org.junit.Assert.assertNotNull(Assert.java:722)
-	at com.alibaba.json.bvt.parser.error.ParseErrorTest_9.__CLR4_5_2ns5lnj1okk(ParseErrorTest_9.java:49)
-	at com.alibaba.json.bvt.parser.error.ParseErrorTest_9.test_for_error_4(ParseErrorTest_9.java:42)
+	at com.alibaba.json.bvt.parser.error.ParseErrorTest_9.test_for_error_4(ParseErrorTest_9.java:49)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

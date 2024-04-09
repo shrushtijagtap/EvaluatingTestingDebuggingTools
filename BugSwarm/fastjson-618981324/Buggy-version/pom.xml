@@ -93,11 +93,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.codehaus.plexus</groupId>
@@ -418,11 +418,9 @@
             <systemPath>${project.basedir}/../../evosuite-standalone-runtime-1.2.0.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>org.evosuite</groupId>
-            <artifactId>evosuite-standalone-runtime</artifactId>
-            <version>1.2.0</version> <!-- Or the version you prefer -->
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../../evosuite-standalone-runtime-1.2.0.jar</systemPath>
+            <groupId>org.openclover</groupId>
+            <artifactId>clover-maven-plugin</artifactId>
+            <version>4.5.2</version>
         </dependency>
 
         <dependency>
@@ -661,11 +659,6 @@
 							</execution>
 						</executions>
 					</plugin>
-                    <plugin>
-                       <groupId>org.openclover</groupId>
-                       <artifactId>clover-maven-plugin</artifactId>
-                       <version>4.5.2</version>
-                    </plugin>
 				</plugins>
 			</build>
 		</profile>
