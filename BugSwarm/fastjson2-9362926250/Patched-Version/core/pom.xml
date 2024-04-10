@@ -68,6 +68,7 @@
             <url>https://github.com/VictorZeng</url>
         </developer>
         <developer>
+        <developer>
             <id>kraity</id>
             <name>陆之岇</name>
             <email>kat(at)krait.cn</email>
@@ -80,6 +81,14 @@
     </developers>
 
     <dependencies>
+        <!-- Evosuite -->
+        <dependency>
+            <groupId>org.evosuite</groupId>
+            <artifactId>evosuite-standalone-runtime</artifactId>
+            <version>1.2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../../../evosuite-standalone-runtime-1.2.0.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>

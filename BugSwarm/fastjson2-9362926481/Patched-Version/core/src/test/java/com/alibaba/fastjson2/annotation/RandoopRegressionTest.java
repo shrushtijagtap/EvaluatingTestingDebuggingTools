@@ -1,8 +1,10 @@
+package com.alibaba.fastjson2.annotation;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ RegressionTest0.class })
-public class RegressionTest {
+@Suite.SuiteClasses({ RandoopRegressionTest0.class })
+public class RandoopRegressionTest {
 }
 
